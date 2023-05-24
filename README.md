@@ -8,4 +8,4 @@ My portfolio
 - suport to multiples languages
 - replace px por rem
 - configure domain mikaio.dev
-- react or next?
+- react or next? RUST?????????? BLAZING FAST

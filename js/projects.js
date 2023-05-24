@@ -1,6 +1,5 @@
 function loadProjects() {
-  
-  fetch("projects/projects.json")
+  fetch("content/projects/projects.json")
     .then((response) => response.json())
     .then((data) => {
       const projectsContainer = document.getElementById("projects-cards");

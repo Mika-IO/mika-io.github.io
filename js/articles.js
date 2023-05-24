@@ -1,7 +1,7 @@
 // JavaScript
 function loadArticles() {
   // Ler o arquivo JSON (substitua "caminho/do/arquivo.json" pelo caminho correto)
-  fetch("articles/articles.json")
+  fetch("content/articles/articles.json")
     .then((response) => response.json())
     .then((data) => {
       const articlesContainer = document.getElementById("articles-cards");
