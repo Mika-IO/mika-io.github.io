@@ -1,5 +1,9 @@
 # Playing with d3.js
 
+### Download csv
+
+    python3 download_csv.py
+
 ### Pre processor
 
 #### Monthly data
