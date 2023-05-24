@@ -32,7 +32,13 @@ function typeWriter(elementId, words, speed, eraseEffect) {
   type();
 }
 
-typeWriter("mikaio", ["Software developer", "Father", "Learner", "AI Enthusiast"], 150, true);
+typeWriter(
+  "mikaio",
+  ["Software developer", "Father", "Learner", "AI Enthusiast"],
+  150,
+  true
+);
 typeWriter("link-projects", ["Projects"], 200, false);
 typeWriter("link-articles", ["Articles"], 128, false);
 typeWriter("link-contact", ["Contact"], 190, false);
+typeWriter("link-resume", ["Resume"], 190, false);
