@@ -4,15 +4,17 @@ My portfolio
 
 ### TODO features:
 
-- improve input system to articles and projects
-- suport to multiples languages
-- replace px por rem
-- configure domain mikaio.dev
-- react or next? RUST yew?????????? BLAZING FAST
+- Improve input system to articles and projects
+- Suport to multiples languages
+- Replace px por rem
+- Configure domain mikaio.dev
+- React or next? RUST yew?????????? BLAZING FAST
 
 ### Projects ideas to my portfolio:
 
 - [x] minytools
+- [ ] typing js library
+- [ ] multilang js library
 - [ ] drinkwater
 - [ ] aliceshell
 - [ ] deolho
@@ -20,9 +22,9 @@ My portfolio
 - [ ] karatesoshin
 - [ ] equacciones
 - [ ] chip8emulator
-- [ ] mike
+- [ ] mike assistant
 - [ ] simpleGPT
-- [ ] nonprocrastinator
+- [ ] nonprocrastinator kanban board app
 - [ ] faceDetectModel
 - [ ] polyscript.dev
 - [ ] python2mojo
