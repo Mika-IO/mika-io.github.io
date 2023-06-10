@@ -4,11 +4,10 @@ My portfolio
 
 ### TODO features:
 
-- Improve input system to articles and projects
-- Suport to multiples languages
 - Replace px por rem
-- Configure domain mikaio.dev
-- React or next? RUST yew?????????? BLAZING FAST
+- Configure domain mikaio.dev ✔
+- Migrate to react or next? RUST yew?????????? BLAZING FAST
+- Add multilang
 
 ### Projects ideas to my portfolio:
 

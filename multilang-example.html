@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu Blog</title>
+    <style>
+      /* Estilos CSS */
+      .language-selector {
+        margin-bottom: 10px;
+      }
+
+      .post-content {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="language-selector">
+      <select id="language-select">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="pt">Português</option>
+      </select>
+    </div>
+
+    <div class="post-content" id="post-content">
+      <!-- Conteúdo será preenchido dinamicamente -->
+    </div>
+
+    <script>
+      // Traduções em diferentes idiomas
+      var translations = {
+        en: {
+          title: "Welcome to My Blog",
+          content: "This is a sample blog post in English.",
+        },
+        es: {
+          title: "Bienvenido a Mi Blog",
+          content: "Este es un ejemplo de publicación de blog en español.",
+        },
+        pt: {
+          title: "Bem-vindo ao Meu Blog",
+          content: "Este é um exemplo de postagem de blog em português.",
+        },
+      };
+
+      // Função para atualizar o conteúdo com base no idioma selecionado
+      function updateContent(language) {
+        var contentElement = document.getElementById("post-content");
+        contentElement.innerHTML = `
+                <h1>${translations[language].title}</h1>
+                <p>${translations[language].content}</p>
+            `;
+      }
+
+      // Evento para detectar mudança no seletor de idioma
+      var languageSelect = document.getElementById("language-select");
+      languageSelect.addEventListener("change", function () {
+        var selectedLanguage = languageSelect.value;
+        updateContent(selectedLanguage);
+      });
+
+      // Atualizar o conteúdo inicialmente com base no idioma padrão
+      var defaultLanguage = languageSelect.value;
+      updateContent(defaultLanguage);
+    </script>
+  </body>
+</html>
