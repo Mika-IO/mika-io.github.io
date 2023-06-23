@@ -34,7 +34,7 @@ function typeWriter(elementId, words, speed, eraseEffect) {
 
 typeWriter(
   "mikaio",
-  ["Software developer", "Father", "Learner", "AI Enthusiast"],
+  ["Software developer", "Father", "Pythonist"],
   150,
   true
 );
