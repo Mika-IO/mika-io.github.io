@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiNotion - Rich Text</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Quill.js CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        #editor {
+            min-height: 400px;
+        }
+
+        #noteTitle {
+            color: #333; /* Título escuro para contraste */
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        #noteTitle::placeholder {
+            color: #888; /* Placeholder com cor clara */
+        }
+
+        #editor .ql-editor {
+    color: #000; /* Torna o texto preto para o fundo branco do editor */
+}
+
+
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 h-screen flex ">
+    <!-- Sidebar -->
+    <!-- Sidebar -->
+<div class="w-1/4 bg-gray-800 p-4 flex flex-col">
+    <h2 class="text-lg font-bold mb-4">MiNotion</h2>
+    <ul id="noteList" class="flex-grow overflow-y-auto mb-4">
+        <!-- Lista de Notas será gerada dinamicamente -->
+    </ul>
+    <div class="flex flex-col space-y-2">
+        <button id="newNoteBtn" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600">Nova Nota</button>
+       
+        <button id="deleteBtn" class="bg-red-800 text-white px-4 py-2 rounded-md hover:bg-red-700">Apagar Nota</button>
+        <button id="saveBtn" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-700">Salvar Nota</button>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="w-3/4 bg-gray-100 p-6">
+    <input id="noteTitle" class="w-full text-2xl font-bold mb-4 p-2 bg-gray-100 text-gray-800 border-none" placeholder="Título da Nota" />
+    <div id="editor" class="bg-white p-4 rounded-md shadow-md"></div>
+</div>
+
+
+    <!-- Quill.js -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow',
+            placeholder: 'Escreva sua nota aqui...',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link', 'blockquote', 'code-block'],
+                    ['clean']
+                ]
+            }
+        });
+
+        let currentNoteId = null;
+
+        // Carrega as notas e gera a lista na barra lateral
+        function loadNotes() {
+            const notes = JSON.parse(localStorage.getItem('notes')) || {};
+            const noteList = document.getElementById('noteList');
+            noteList.innerHTML = '';
+            for (let id in notes) {
+                const li = document.createElement('li');
+                li.className = 'p-2 cursor-pointer hover:bg-gray-700 rounded-md';
+                li.textContent = notes[id].title;
+                li.addEventListener('click', () => loadNote(id));
+                noteList.appendChild(li);
+            }
+        }
+
+        // Carregar nota selecionada
+        function loadNote(id) {
+            const notes = JSON.parse(localStorage.getItem('notes')) || {};
+            if (notes[id]) {
+                quill.root.innerHTML = notes[id].content;
+                document.getElementById('noteTitle').value = notes[id].title;
+                currentNoteId = id;
+            }
+        }
+
+        // Salvar nota no localStorage
+        function saveNote() {
+    const title = document.getElementById('noteTitle').value.trim();
+    if (!title) {
+        alert('O título da nota não pode ser vazio.');
+        return;
+    }
+
+    const content = quill.root.innerHTML;
+    const notes = JSON.parse(localStorage.getItem('notes')) || {};
+
+    if (!currentNoteId) {
+        // Gera um ID único para a nova nota
+        currentNoteId = `note-${Date.now()}`;
+    }
+
+    // Atualiza ou cria a nota no objeto
+    notes[currentNoteId] = {
+        title: title,
+        content: content
+    };
+
+    localStorage.setItem('notes', JSON.stringify(notes));
+
+    // Log para verificar se está salvando corretamente
+    console.log('Nota salva:', notes);
+
+    alert('Nota salva com sucesso!');
+    loadNotes(); // Atualiza a lista de notas
+}
+
+
+        // Apagar nota
+        function deleteNote() {
+            if (!currentNoteId) {
+                alert('Selecione uma nota para apagar.');
+                return;
+            }
+
+            const notes = JSON.parse(localStorage.getItem('notes')) || {};
+            delete notes[currentNoteId]; // Remove a nota
+            localStorage.setItem('notes', JSON.stringify(notes));
+
+            quill.root.innerHTML = '';  // Limpa o editor
+            document.getElementById('noteTitle').value = '';  // Limpa o título
+            currentNoteId = null;  // Reseta o ID da nota atual
+
+            alert('Nota apagada com sucesso!');
+            loadNotes();  // Atualiza a lista de notas
+        }
+
+        // Nova nota
+        function newNote() {
+            quill.root.innerHTML = '';  // Limpa o editor
+            document.getElementById('noteTitle').value = '';  // Limpa o título
+            currentNoteId = null;  // Reseta o ID da nota atual
+        }
+
+        // Eventos dos botões
+        document.getElementById('saveBtn').addEventListener('click', saveNote);
+        document.getElementById('deleteBtn').addEventListener('click', deleteNote);
+        document.getElementById('newNoteBtn').addEventListener('click', newNote);
+
+        // Carrega as notas ao carregar a página
+        window.onload = loadNotes;
+    </script>
+
+</body>
+</html>
