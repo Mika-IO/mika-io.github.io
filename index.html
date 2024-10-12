@@ -1,177 +1,196 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>mikaio.dev</title>
-    <meta name="description" content="" />
-    <link id="theme-style" rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/aos.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mikaio - Solo Dev</title>
+        <script src="https://cdn.tailwindcss.com"></script>
 
-  <body>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <div id="particles-js"></div>
-    <main>
-    <!-- home -->
-    <section data-aos="fade-up" class="container" id="home">
-      <button class="theme-button" onclick="changeTheme()" id="theme-toggle">
-        🌙
-      </button>
+        <script>
+            // Configurações do Tailwind para ativar o modo escuro baseado em classe
+            tailwind.config = {
+                darkMode: "class",
+            };
 
-      <!-- create a effect to write ["Software Developer", "Eternal learner", "AI enthusiast", "Crypto enthusiast", "Father"] -->
-      <h2>Hello! My name is <b>Mikaio</b>!</h2>
-      <h2>
-        I'm a <b><span id="mikaio"></span></b>
-      </h2>
-      <br />
+            function toggleDarkMode() {
+                const htmlElement = document.documentElement;
+                htmlElement.classList.toggle("dark"); // Alterna a classe 'dark'
 
-      <div class="python-code">
-        <span class="shell" id="current-time"></span> ~/<span class="shell"
-          >mikaio.dev</span
-        >
-        on <span class="shell">main</span> ◦ Python3.10.9 >>><br /><br />
-        <span class="keyword">print</span>(<span class="string">"Welcome!"</span
-        >)
-        <br />
-        <span class="keyword">print</span>(<span class="string"
-          >"Take a look in my
-          <a id="link-projects" class="session-link" href="#projects"></a
-          >!"</span
-        >)
-        <br />
-        <span class="keyword">print</span>(<span class="string"
-          >"Or read my
-          <a id="link-articles" class="session-link" href="#articles"></a
-          >!"</span
-        >)
-        <br />
-        <span class="keyword">if</span>
-        <span class="var">you_need_a_DEV</span>:
-        <br />
-        &nbsp; &nbsp; <span class="keyword">print</span>(<span class="string"
-          >"Just
-          <a id="link-contact" class="session-link" href="#contact"></a>
-          me!"</span
-        >)
-        <br />
-        &nbsp; &nbsp; <span class="keyword">print</span>(<span class="string"
-          >"Here's my
-          <a
-            id="link-resume"
-            class="session-link"
-            href="/resume.pdf"
-          ></a
-          >!"</span
-        >)
-      </div>
+                // Atualiza o emoji no botão
+                const emoji = document.getElementById("darkModeToggle");
+                emoji.textContent = htmlElement.classList.contains("dark") ? "🌞" : "🌙";
+            }
 
-      <br />
+            // Define o tema como claro por padrão
+            window.onload = () => {
+                document.documentElement.classList.remove("dark"); // Garante que o tema claro seja o padrão
+                document.getElementById("darkModeToggle").textContent = "🌙"; // Emoji inicial
 
-      <h4>My utility belt:</h4>
-      <!-- python -->
-      <img height="24" src="img/python.png" />
-      <!-- django -->
-      <img height="24" src="img/django.png" />
-      <!-- html -->
-      <img height="24" src="img/html.png" />
-      <!-- css -->
-      <img height="24" src="img/css.png" />
-      <!-- javascript -->
-      <img height="24" src="img/javascript.png" />
-      <!-- react -->
-      <img height="24" src="img/react.png" />
-      <!-- rust -->
-      <img height="24" src="img/rust.png" />
-      <!-- rust -->
-      <img height="24" src="img/aws.png" />
-      <br /><br />
-      <a href="#projects">
-        <img src="img/down.svg" />
-      </a>
-    </section>
+                typeEffect(); // Inicia o efeito de escrita
+            };
 
-    <!-- projects -->
-    <section class="txt-center" data-aos="fade-up" id="projects">
-      <h3>Projects</h3>
-      <input
-        id="searchInputProjects"
-        type="text"
-        placeholder="Search projects"
-      />
-      <div id="projects-cards" class="projects-cards"></div>
-      <a href="#articles">
-        <img src="img/down.svg" />
-      </a>
-    </section>
+            // Efeito de escrita
+            const phrases = ["Solo Dev", "Pythonista", "AI enthusiast", "Crypto enthusiast", "Father", "CLT Player"];
+            let phraseIndex = 0;
+            let charIndex = 0;
 
-    <!-- articles -->
-    <section class="txt-center" data-aos="fade-up" id="articles">
-      <h3>Articles</h3>
-      <input
-        id="searchInputArticles"
-        type="text"
-        placeholder="Search articles"
-      />
-      <div id="articles-cards" class="articles-cards"></div>
-      <a href="#contact"><img src="img/down.svg" /></a>
-    </section>
+            function typeEffect() {
+                const typeElement = document.getElementById("typeEffect");
+                const currentPhrase = phrases[phraseIndex];
+                if (charIndex < currentPhrase.length) {
+                    typeElement.textContent += currentPhrase.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeEffect, 100);
+                } else {
+                    setTimeout(() => {
+                        typeElement.textContent = "";
+                        charIndex = 0;
+                        phraseIndex = (phraseIndex + 1) % phrases.length;
+                        typeEffect();
+                    }, 2000);
+                }
+            }
+        </script>
+        <style>
+            iframe {
+                border: 2px solid #4a5568; /* Cor cinza */
+                border-radius: 8px; /* Bordas arredondadas */
+            }
 
-    <section data-aos="fade-up" id="contact">
-      <h3>Contact</h3>
-      <ul>
-        <li><a href="https://github.com/mika-io">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/mikaiofaria/">LinkedIn</a></li>
-        <li><a href="https://twitter.com/mlevanto">Twitter</a></li>
-        <li><a href="https://www.instagram.com/mikaio_faria/">Instagram</a></li>
-      </ul>
-      <a href="#home">Home</a>
-    </section>
-    </main>
-    <script src="js/aos.js"></script>
-    <script src="js/typingEffect.js"></script>
-    <script src="js/articles.js"></script>
-    <script src="js/projects.js"></script>
-    <script src="js/theme.js"></script>
-    <script src="js/clock.js"></script>
-    <script>
-      AOS.init();
-      initTheme();
-      displayTime();
-      particlesJS("particles-js", {
-      particles: {
-        number: {
-          value: 100,
-        },
-        color: {
-          value: "#808080",
-          opacity: 0.7,
-        },
-        shape: {
-          type: "circle",
-        },
-        opacity: {
-          value: 0.6,
-          random: true,
-        },
-        size: {
-          value: 4,
-        },
-        line_linked: {
-          enable: false,
-        },
-        move: {
-          enable: true,
-          speed: 10,
-        },
-        line_linked: {
-          color: "#808080",
-          enable: true,
-          opacity: 0.3,
-        },
-      },
-    });
-    </script>
-  </body>
+            iframe {
+                background-color: white !important;
+            }
+
+            .dark .social-icon {
+                filter: invert(1);
+            }
+        </style>
+        <!-- Google Tag Manager -->
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != "dataLayer" ? "&l=" + l : "";
+                j.async = true;
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, "script", "dataLayer", "GTM-K32KWHQ3");
+        </script>
+        <!-- End Google Tag Manager -->
+    </head>
+    <body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-500">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K32KWHQ3" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <!-- Botão no canto superior direito -->
+        <div class="absolute top-4 right-4">
+            <button id="darkModeToggle" onclick="toggleDarkMode()" class="text-2xl focus:outline-none">
+                🌙
+            </button>
+        </div>
+
+        <!-- Foto de Perfil e Texto -->
+        <div class="flex flex-col items-center mt-10">
+            <img src="https://github.com/mika-io.png" alt="Foto de Perfil" class="w-32 h-32 rounded-full shadow-lg mb-4" />
+            <h1 class="text-4xl">Hello! My name is <span class="font-bold">Mikaio</span>!</h1>
+            <h2 class="text-3xl mt-2 text-center"><span class="font-bold" id="typeEffect"></span></h2>
+
+            <!-- Links Sociais -->
+            <div class="mt-6 text-center">
+                <div class="flex justify-center gap-6">
+                    <a href="https://github.com/mika-io" target="_blank">
+                        <img class="social-icon h-8 w-8" src="img/github.png" alt="GitHub" class="h-8 w-8" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/mikaiofaria/" target="_blank">
+                        <img class="social-icon h-8 w-8" src="img/linkedin.png" alt="LinkedIn" class="h-8 w-8" />
+                    </a>
+                    <a href="https://twitter.com/mlevanto" target="_blank">
+                        <img class="social-icon h-8 w-8" src="img/twitter.png" alt="Twitter" class="h-8 w-8" />
+                    </a>
+                    <a href="https://www.instagram.com/mikaio_faria/" target="_blank">
+                        <img class="social-icon h-8 w-8" src="img/instagram.png" alt="Instagram" class="h-8 w-8" />
+                    </a>
+                    <a href="https://medium.com/@mikaiodev" target="_blank">
+                        <img class="social-icon h-8 w-8" src="img/medium.png" alt="Medium" class="h-8 w-8" />
+                    </a>
+                    <a href="https://www.mikaio.dev/resume.pdf" target="_blank">
+                        <img class="social-icon h-8 w-8" src="img/resume.png" alt="Resume" class="h-8 w-8" />
+                    </a>
+                </div>
+            </div>
+            <div class="relative w-full max-w-5xl mx-auto mt-16">
+                <div class="flex items-center justify-between mb-6">
+                    <!-- Botão Anterior -->
+                    <button onclick="scrollCarousel(-1)" class=" rounded-full p-3">
+                        ◀️
+                    </button>
+
+                    <!-- Título -->
+                    <h2 class="text-2xl font-bold text-center flex-1">My Projects</h2>
+
+                    <!-- Botão Próximo -->
+                    <button onclick="scrollCarousel(1)" class=" rounded-full p-3">
+                        ▶️
+                    </button>
+                </div>
+
+                <!-- Carrossel -->
+                <div id="carousel" class="carousel flex overflow-x-auto gap-6 scroll-smooth snap-x snap-mandatory">
+                    <!-- Os itens serão adicionados dinamicamente aqui -->
+                </div>
+            </div>
+
+            <script>
+                // Array de links para os projetos
+                const projectLinks = [
+                    { url: "https://mikaio.dev/deepcam.online/", title: "Deepcam" },
+                    { url: "https://langmentor-ai.com/", title: "Langmentor AI" },
+                    { url: "https://mikaio.dev/buzypage", title: "Buzypage" },
+                    { url: "https://mikaio.dev/type-effect-js/", title: "Type Effect JS" },
+                    { url: "https://mikaio.dev/pixbitcoin.org/", title: "Pix Bitcoin" },
+                    { url: "https://mikaio.dev/calc-gast/", title: "Money Log" },
+                    { url: "https://mikaio.dev/birth-calc/", title: "Birth Calculation" },
+                ];
+
+                // Função para gerar dinamicamente os itens do slider
+                function generateSliderItems() {
+                    const carousel = document.getElementById("carousel");
+                    projectLinks.forEach((project) => {
+                        const projectDiv = document.createElement("div");
+                        projectDiv.classList.add("relative", "min-w-full", "snap-center");
+
+                        const iframe = document.createElement("iframe");
+                        iframe.src = project.url;
+                        iframe.title = project.title;
+                        iframe.classList.add("w-full", "h-[400px]", "rounded-lg", "shadow-lg", "pointer-events-none");
+                        iframe.setAttribute("frameborder", "0");
+
+                        const linkOverlay = document.createElement("a");
+                        linkOverlay.href = project.url;
+                        linkOverlay.target = "_blank";
+                        linkOverlay.classList.add("absolute", "inset-0");
+
+                        projectDiv.appendChild(iframe);
+                        projectDiv.appendChild(linkOverlay);
+                        carousel.appendChild(projectDiv);
+                    });
+                }
+
+                // Chamar a função para gerar os itens do slider
+                generateSliderItems();
+
+                // Função para rolar o carrossel
+                function scrollCarousel(direction) {
+                    const carousel = document.getElementById("carousel");
+                    const slideWidth = carousel.querySelector("div").offsetWidth;
+                    carousel.scrollBy({
+                        left: direction * slideWidth,
+                        behavior: "smooth",
+                    });
+                }
+            </script>
+        </div>
+    </body>
 </html>
