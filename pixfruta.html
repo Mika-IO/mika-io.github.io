@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máquina da Fruta</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+    .fireworks {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 999;
+    }
+
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        font-size: 3rem;
+        padding: 30px 60px;
+        border-radius: 15px;
+        text-align: center;
+        z-index: 1000;
+        opacity: 0;
+        animation: popupFade 4.5s ease forwards;
+    }
+
+    @keyframes popupFade {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -60%);
+        }
+        50% {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -40%);
+        }
+    }
+
+        .reel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reel {
+    overflow: hidden;
+    width: 120px;
+    height: 400px;  /* Aumentar a altura para exibir todas as frutas sem corte */
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.highlight {
+    background-color: #7c3aed;  /* Roxo brilhante para destaque */
+    border-radius: 8px;
+    font-size: 120px;
+    transition: background-color 0.3s ease;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: pulse 2s infinite;
+}
+
+.pre-highlight {
+    border-radius: 8px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);  /* Tamanho normal */
+    }
+    50% {
+        transform: scale(1.3);  /* Aumenta 30% */
+    }
+}
+@keyframes pulse-btn {
+    0%, 100% {
+        transform: scale(1);  /* Tamanho normal */
+    }
+    50% {
+        transform: scale(1.08);  /* Aumenta 30% */
+    }
+}
+
+
+
+        .reel-inner {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 2s ease-in-out;
+        }
+
+        .reel-inner div {
+            margin: 10px 0;
+            font-size: 80px;
+            text-align: center;
+        }
+
+        .spin-btn {
+            background-color: #7c3aed;
+            color: white;
+            font-weight: bold;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: pulse-btn 1s infinite;
+        }
+        .anime{
+            animation: pulse-btn 1s infinite;
+        }
+
+        .spin-btn:hover {
+            background-color: #6d28d9;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 flex justify-center items-center h-screen">
+
+    <div class="slot-machine p-8 rounded-lg shadow-2xl text-center h-screen w-screen">
+        <h1 class="text-4xl font-bold mb-8 text-purple-700 anime mt-5 mb-3">🎰🍒 Pix Fruta </h1>
+
+        <div class="mt-8 flex justify-center items-center">
+            <div class="flex space-x-12 text-center">
+                <p class="text-xl font-semibold text-gray-700">Win: <span id="winBalance">0</span> 🍒</p>
+                <p class="text-xl font-semibold text-gray-700">Bet: <span id="totalBet">0</span> 🍋</p>
+            </div>
+        </div>
+        
+        <div class="reel-container mb-6 mt-6">
+            <div class="reel">
+                <div class="reel-inner" id="reel1"></div>
+            </div>
+            <div class="reel">
+                <div class="reel-inner" id="reel2"></div>
+            </div>
+            <div class="reel">
+                <div class="reel-inner" id="reel3"></div>
+            </div>
+        </div>
+
+        <button onclick="spin()" class="spin-btn">ROLAR 🔄</button>
+
+        <p id="result" class="mt-6 text-2xl font-semibold text-gray-700"></p>
+       
+        
+        <div class="mt-12 text-center">
+            <button onclick="withdraw()" class="text-lg font-semibold text-purple-700 hover:underline">SAQUE 💸</button>
+        </div>
+        
+        
+    </div>
+
+    <script>
+        const icons = ["🍒", "🍋", "🍉", "🍇", "🍓", "🍊"];
+        const reels = [
+            document.getElementById("reel1"),
+            document.getElementById("reel2"),
+            document.getElementById("reel3")
+        ];
+
+        // Inicializa bobinas com frutas aleatórias
+        window.onload = () => {
+            reels.forEach(reel => preloadReel(reel));
+        };
+        function preloadReel(reel) {
+    let content = "";
+    for (let i = 0; i < 9; i++) {  // Renderizar frutas suficientes para cobrir 3 linhas + extra
+        content += `<div>${icons[Math.floor(Math.random() * icons.length)]}</div>`;
+    }
+    reel.innerHTML = content;
+
+    const reelInner = reel;
+    reelInner.style.transition = "none";
+    reelInner.style.transform = `translateY(-160px)`;  // Ajuste para centralizar 3 frutas visíveis
+}
+
+let winBalance = 0;
+let totalBet = 0;
+
+function spin() {
+    const resultDisplay = document.getElementById("result");
+    let matrix = [[], [], []];
+    let divMatrix = [[], [], []];  
+
+    totalBet += 10;  // Cada jogada adiciona um valor fixo ao total de apostas
+    document.getElementById("totalBet").textContent = totalBet;
+
+    document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+
+    reels.forEach((reel, index) => {
+        const reelInner = reel;
+        let spinResult = [];
+
+        for (let i = 0; i < 36; i++) {  
+            spinResult.push(`<div>${icons[Math.floor(Math.random() * icons.length)]}</div>`);
+        }
+
+        const finalIcons = [
+            icons[Math.floor(Math.random() * icons.length)],
+            icons[Math.floor(Math.random() * icons.length)],
+            icons[Math.floor(Math.random() * icons.length)]
+        ];
+
+        spinResult.push(`<div>${finalIcons[0]}</div>`);
+        spinResult.push(`<div>${finalIcons[1]}</div>`);
+        spinResult.push(`<div>${finalIcons[2]}</div>`);
+
+        reelInner.innerHTML = spinResult.join("");
+
+        const offsetStart = -400;
+        reelInner.style.transition = "none";
+        reelInner.style.transform = `translateY(${offsetStart}px)`;
+
+        const speed = Math.random() * (2 - 1) + 1;
+
+        setTimeout(() => {
+            reelInner.style.transition = `transform ${speed}s ease-in-out`;
+            const offsetEnd = -(reelInner.scrollHeight - 400);  
+            reelInner.style.transform = `translateY(${offsetEnd}px)`;
+        }, 10);
+
+        const visibleIcons = reelInner.querySelectorAll('div');
+        matrix[0].push(visibleIcons[visibleIcons.length - 3].textContent);
+        matrix[1].push(visibleIcons[visibleIcons.length - 2].textContent);
+        matrix[2].push(visibleIcons[visibleIcons.length - 1].textContent);
+
+        divMatrix[0].push(visibleIcons[visibleIcons.length - 3]);
+        divMatrix[1].push(visibleIcons[visibleIcons.length - 2]);
+        divMatrix[2].push(visibleIcons[visibleIcons.length - 1]);
+    });
+
+    setTimeout(() => {
+        const win = checkWin(matrix, divMatrix);
+
+        if (win[0] > 0) {
+            winBalance += win[0] * 50;  // Multiplicador de ganhos
+            document.getElementById("winBalance").textContent = winBalance;
+            resultDisplay.textContent = "🎉 JACKFRUTA! 🎉";
+        } else {
+            resultDisplay.textContent = "Tente de novo!";
+        }
+    }, 2200);
+}
+
+function withdraw() {
+    if (winBalance > 0) {
+        alert(`Você sacou ${winBalance} 🍒!`);
+        winBalance = 0;
+        document.getElementById("winBalance").textContent = winBalance;
+    } else {
+        alert("Sem saldo para saque!");
+    }
+}
+
+
+// Função para destacar as combinações vencedoras
+function highlightWin(elements) {
+    elements.forEach(el => {
+        el.classList.add('highlight');
+    });
+}
+
+function triggerFireworks() {
+        const fireworksContainer = document.createElement('div');
+        fireworksContainer.classList.add('fireworks');
+        document.body.appendChild(fireworksContainer);
+
+        for (let i = 0; i < 30; i++) {
+            const spark = document.createElement('div');
+            spark.classList.add('spark');
+            fireworksContainer.appendChild(spark);
+            animateSpark(spark);
+        }
+
+        setTimeout(() => {
+            fireworksContainer.remove();
+        }, 3000);
+    }
+
+    function showPopup(message) {
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.textContent = message;
+        document.body.appendChild(popup);
+
+        setTimeout(() => {
+            popup.remove();
+        }, 2000);
+    }
+
+    function preHighlightWin(elements) {
+    elements.forEach(el => {
+        el.classList.add('pre-highlight');
+        setTimeout(() => {
+            el.classList.remove('pre-highlight');
+        }, 1500);  // Destaca por 1,5 segundos
+    });
+}
+
+function checkWin(matrix, divMatrix) {
+    let winCount = 0;
+    pre_win = 0;
+
+    // Verifica linhas horizontais para dois iguais
+    for (let i = 0; i < 3; i++) {
+        if (matrix[i][0] === matrix[i][1]) {
+            preHighlightWin([divMatrix[i][0], divMatrix[i][1]]);
+            pre_win++;
+        }
+        if (matrix[i][1] === matrix[i][2]) {
+            preHighlightWin([divMatrix[i][1], divMatrix[i][2]]);
+            pre_win++;
+        }
+    }
+
+    // Verifica colunas verticais para dois iguais
+    for (let i = 0; i < 3; i++) {
+        if (matrix[0][i] === matrix[1][i]) {
+            preHighlightWin([divMatrix[0][i], divMatrix[1][i]]);
+            pre_win++;
+        }
+        if (matrix[1][i] === matrix[2][i]) {
+            preHighlightWin([divMatrix[1][i], divMatrix[2][i]]);
+            pre_win++;
+        }
+    }
+    // Verifica linhas horizontais
+    for (let i = 0; i < 3; i++) {
+        if (matrix[i][0] === matrix[i][1] && matrix[i][1] === matrix[i][2]) {
+            highlightWin([divMatrix[i][0], divMatrix[i][1], divMatrix[i][2]]);
+            winCount++;
+        }
+    }
+
+    // Verifica colunas verticais
+    for (let i = 0; i < 3; i++) {
+        if (matrix[0][i] === matrix[1][i] && matrix[1][i] === matrix[2][i]) {
+            highlightWin([divMatrix[0][i], divMatrix[1][i], divMatrix[2][i]]);
+            winCount++;
+        }
+    }
+
+    // Verifica diagonal principal
+    if (matrix[0][0] === matrix[1][1] && matrix[1][1] === matrix[2][2]) {
+        highlightWin([divMatrix[0][0], divMatrix[1][1], divMatrix[2][2]]);
+        winCount++;
+    }
+
+    // Verifica diagonal secundária
+    if (matrix[0][2] === matrix[1][1] && matrix[1][1] === matrix[2][0]) {
+        highlightWin([divMatrix[0][2], divMatrix[1][1], divMatrix[2][0]]);
+        winCount++;
+    }
+
+    // Exibe mensagem baseada no número de vitórias
+    if (winCount > 0) {
+        let message = "";
+
+        switch (winCount) {
+            case 1:
+                message = "🎉 JACKFRUTA! 🎉";
+                break;
+            case 2:
+                message = "🎉 DUPLO JACKFRUTA! 🎉";
+                break;
+            case 3:
+                message = "🎉 TRIPLO JACKFRUTA! 🎉";
+                break;
+            case 4:
+                message = "🎉 QUÁDRUPLO JACKFRUTA! 🎉";
+                break;
+        }
+        showPopup(message);
+        triggerFireworks();
+    }
+
+    return [winCount, pre_win];
+}
+
+    function animateSpark(spark) {
+        const size = Math.random() * 10 + 5;
+        const duration = Math.random() * 1.5 + 1;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+
+        spark.style.width = `${size}px`;
+        spark.style.height = `${size}px`;
+        spark.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        spark.style.position = 'absolute';
+        spark.style.top = `${y}px`;
+        spark.style.left = `${x}px`;
+        spark.style.borderRadius = '50%';
+        spark.style.transition = `transform ${duration}s ease-out, opacity ${duration}s ease`;
+
+        setTimeout(() => {
+            spark.style.transform = `translate(0px, -500px) scale(2)`;
+            spark.style.opacity = 0;
+        }, 100);
+    }
+
+    </script>
+</body>
+</html>
