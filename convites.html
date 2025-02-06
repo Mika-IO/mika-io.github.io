@@ -110,8 +110,17 @@
 
     // Atualiza data e hora
     document.getElementById("eventDate").addEventListener("input", function () {
-      document.getElementById("previewDate").querySelector("span").textContent =
-        this.value || "Data e Hora";
+        const formattedDate = this.value
+        ? new Intl.DateTimeFormat('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'America/Sao_Paulo' // ajuste conforme necessário
+            }).format(new Date(this.value))
+        : "Data e Hora";
+      document.getElementById("previewDate").querySelector("span").textContent =formattedDate
     });
 
     // Atualiza a Endereço
@@ -122,6 +131,7 @@
 
     // Atualiza a descrição
     document.getElementById("eventDescription").addEventListener("input", function () {
+        
       document.getElementById("previewDescription").textContent =
         this.value || "Descrição do evento...";
     });
@@ -160,16 +170,19 @@
         // Coleta os dados do convite para compor a mensagem
         const title = document.getElementById("eventTitle").value || "Título do Evento";
         const rawDateValue = document.getElementById("eventDate").value;
-        const dateObj = rawDateValue ? new Date(rawDateValue) : null;
-        const formattedDate = dateObj
-          ? dateObj.toLocaleString('pt-BR', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            })
-          : "Data e Hora";
+        const formattedDate = rawDateValue
+        ? new Intl.DateTimeFormat('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'America/Sao_Paulo' // ajuste conforme necessário
+            }).format(new Date(rawDateValue))
+        : "Data e Hora";
+
+
+
         const location = document.getElementById("eventLocation").value || "Endereço";
         const description = document.getElementById("eventDescription").value || "Descrição do evento...";
         const message = `Você foi convidado para o evento "${title}"!\nData e Hora: ${formattedDate}\nLocal: ${location}\n${description}`;
