@@ -91,6 +91,8 @@
             <p id="previewDescription" class="mt-2 text-sm">
               Descrição do evento...
             </p>
+            <p class="text-center text-[10px] mt-10 text-white">criado com <b>mikaio.dev/convites</b></p>
+
           </div>
         </div>
       </div>
@@ -138,43 +140,72 @@
     });
 
     document.getElementById("shareBtn").addEventListener("click", function () {
-    // Coleta os dados do convite
-    const title = document.getElementById("eventTitle").value || "Título do Evento";
-    const rawDateValue = document.getElementById("eventDate").value;
-    const dateObj = rawDateValue ? new Date(rawDateValue) : null;
-    const formattedDate = dateObj
-      ? dateObj.toLocaleString('pt-BR', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        })
-      : "Data e Hora";
-    const location = document.getElementById("eventLocation").value || "Endereço";
-    const description = document.getElementById("eventDescription").value || "Descrição do evento...";
-    const message = `Você foi convidado para o evento "${title}"!\nData e Hora: ${formattedDate}\nLocal: ${location}\n${description}`;
+    // Remove o botão "Pré-visualização", se existir
+    const previewBtn = document.getElementById("previewBtnPreview");
+    if (previewBtn) {
+      previewBtn.remove();
+    }
 
-    // Usa o html2canvas para gerar uma imagem do convite
-    html2canvas(document.getElementById("invitationPreview")).then(function(canvas) {
-      canvas.toBlob(function(blob) {
+    // Remove o border-radius do convite e guarda o valor original (para restaurá-lo, se necessário)
+    const invitationPreview = document.getElementById("invitationPreview");
+    const originalBorderRadius = invitationPreview.style.borderRadius;
+    invitationPreview.style.borderRadius = "0";
+
+    // Gera a imagem do convite com html2canvas
+    html2canvas(invitationPreview).then(function (canvas) {
+      canvas.toBlob(function (blob) {
         // Cria um objeto File a partir do blob gerado
         const file = new File([blob], "convite.png", { type: "image/png" });
-        
-        // Verifica se o navegador suporta compartilhamento de arquivos (Web Share API Level 2)
+
+        // Coleta os dados do convite para compor a mensagem
+        const title = document.getElementById("eventTitle").value || "Título do Evento";
+        const rawDateValue = document.getElementById("eventDate").value;
+        const dateObj = rawDateValue ? new Date(rawDateValue) : null;
+        const formattedDate = dateObj
+          ? dateObj.toLocaleString('pt-BR', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })
+          : "Data e Hora";
+        const location = document.getElementById("eventLocation").value || "Endereço";
+        const description = document.getElementById("eventDescription").value || "Descrição do evento...";
+        const message = `Você foi convidado para o evento "${title}"!\nData e Hora: ${formattedDate}\nLocal: ${location}\n${description}`;
+
+        // Tenta compartilhar usando a Web Share API (com suporte a arquivos)
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           navigator.share({
             files: [file],
             title: title,
             text: message,
           })
-          .then(() => console.log('Compartilhado com sucesso!'))
-          .catch((error) => console.error('Erro ao compartilhar:', error));
+          .then(() => console.log("Compartilhado com sucesso!"))
+          .catch((error) => console.error("Erro ao compartilhar:", error));
         } else {
-          // Fallback: se não for possível compartilhar arquivos, abre o WhatsApp com apenas o texto
-          const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(message);
-          window.open(whatsappUrl, "_blank");
+          // Se não suportar compartilhamento de arquivos, informa o usuário e disponibiliza o botão para download
+          alert("Compartilhamento de imagem não suportado neste dispositivo. Você pode baixar a imagem e compartilhar manualmente.");
+          
+          // Cria (ou atualiza) um botão para download da imagem
+          let downloadBtn = document.getElementById("downloadBtn");
+          if (!downloadBtn) {
+            downloadBtn = document.createElement("button");
+            downloadBtn.id = "downloadBtn";
+            downloadBtn.textContent = "Baixar Imagem do Convite";
+            downloadBtn.className = "mt-4 bg-blue-500 text-white px-4 py-2 rounded";
+            // Insere o botão logo abaixo do convite (ou em outro local desejado)
+            invitationPreview.parentNode.insertBefore(downloadBtn, invitationPreview.nextSibling);
+          }
+          downloadBtn.onclick = function () {
+            const link = document.createElement("a");
+            link.href = canvas.toDataURL("image/png");
+            link.download = "convite.png";
+            link.click();
+          };
         }
+        // (Opcional) Restaura o border-radius original, se necessário
+        invitationPreview.style.borderRadius = originalBorderRadius;
       });
     });
   });
