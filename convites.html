@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criador de Convites</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+</head>
+<body class="min-h-screen bg-gradient-to-b from-red-500 to-purple-500 p-4">
+    <h1 class="text-3xl  text-center font-bold text-white">Gerador de Convites</h1>
+    <p class="text-center text-sm mb-10 text-white">Crie e compartilhe convites de forma simples e elegante!</p>
+  <!-- Container principal -->
+  <div class="max-w-4xl mx-auto">
+    <!-- Layout responsivo: em telas maiores, lado a lado; em mobile, empilhado -->
+    <div class="flex flex-col md:flex-row gap-4">
+      
+      <!-- Área do formulário -->
+      <div class="flex-1 bg-white bg-opacity-20 p-4 rounded-lg shadow-lg">
+        <!-- Botão para adicionar imagem de fundo -->
+        <!-- Importando Font Awesome (caso ainda não esteja incluído no projeto) -->
+
+<div class="mb-4">
+  <label for="bgInput" class="cursor-pointer inline-flex items-center gap-2 bg-white bg-opacity-70 text-black px-4 py-2 rounded shadow-md hover:bg-opacity-70 transition">
+    <!-- Ícone Font Awesome -->
+    <i class="fas fa-image text-lg"></i>
+    Adicionar Fundo
+  </label>
+  <!-- Input file escondido -->
+  <input type="file" id="bgInput" accept="image/*" class="hidden" />
+</div>
+
+
+        <!-- Campos para editar os dados do evento -->
+        <div class="mb-4">
+          <input id="eventTitle" type="text" placeholder="Título do Evento"
+            class="w-full bg-white bg-opacity-70 border border-white rounded p-2 text-black focus:outline-none" />
+        </div>
+        <div class="mb-4">
+            <input id="eventDate" type="datetime-local"
+            class="w-full bg-white bg-opacity-70 border border-white rounded p-2 text-black focus:outline-none" />
+        </div>
+        <div class="mb-4">
+          <input id="eventLocation" type="text" placeholder="Endereço"
+            class="w-full bg-white bg-opacity-70 border border-white rounded p-2 text-black focus:outline-none" />
+        </div>
+        <div class="mb-4">
+          <textarea id="eventDescription" placeholder="Descrição do Evento"
+            class="w-full bg-white bg-opacity-70 border border-white rounded p-2 text-black focus:outline-none"></textarea>
+        </div>
+        <!-- Botão para compartilhar no WhatsApp -->
+        <button id="shareBtn"
+          class="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
+          Compartilhar no WhatsApp
+        </button>
+      </div>
+
+      <!-- Área de preview do convite -->
+      <div class="flex-1">
+        <div id="invitationPreview" class="relative rounded-xl overflow-hidden shadow-lg">
+          <!-- Fundo do convite: será atualizado com a imagem escolhida -->
+          <div id="invitationBackground" class="w-full h-80 bg-cover bg-center"
+            style="background-image: url('https://via.placeholder.com/600x400?text=Fundo+do+Convite');">
+          </div>
+          <!-- Sobreposição para efeito dark -->
+          <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+          <!-- Botões no topo (X e Pré-visualizar) -->
+          <div class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
+            <button id="previewBtnPreview"
+              class="bg-gray-700 bg-opacity-50 text-white px-3 py-1 rounded text-sm">Pré-visualização</button>
+          </div>
+          <!-- Conteúdo do convite -->
+          <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+            <h1 id="previewTitle" class="text-3xl font-bold">Título do Evento</h1>
+            
+            
+            <!-- Substituição dos ícones SVG por FontAwesome -->
+            <p id="previewDate" class="mt-1 flex items-center text-sm">
+                <i class="fas fa-calendar-alt mr-1"></i>
+                <span>Data e Hora</span>
+            </p>
+            <p id="previewLocation" class="mt-1 flex items-center text-sm">
+                <i class="fas fa-map-marker-alt mr-1"></i>
+                <span>Endereço</span>
+            </p>
+            
+            <p id="previewDescription" class="mt-2 text-sm">
+              Descrição do evento...
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Fim da área de preview -->
+    </div>
+  </div>
+
+  <!-- Script para atualizar o preview em tempo real e compartilhar -->
+  <script>
+    // Atualiza o título
+    document.getElementById("eventTitle").addEventListener("input", function () {
+      document.getElementById("previewTitle").textContent =
+        this.value || "Título do Evento";
+    });
+
+    // Atualiza data e hora
+    document.getElementById("eventDate").addEventListener("input", function () {
+      document.getElementById("previewDate").querySelector("span").textContent =
+        this.value || "Data e Hora";
+    });
+
+    // Atualiza a Endereço
+    document.getElementById("eventLocation").addEventListener("input", function () {
+      document.getElementById("previewLocation").querySelector("span").textContent =
+        this.value || "Endereço";
+    });
+
+    // Atualiza a descrição
+    document.getElementById("eventDescription").addEventListener("input", function () {
+      document.getElementById("previewDescription").textContent =
+        this.value || "Descrição do evento...";
+    });
+
+    // Atualiza o fundo do convite com a imagem selecionada
+    document.getElementById("bgInput").addEventListener("change", function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (evt) {
+          document.getElementById("invitationBackground").style.backgroundImage =
+            `url('${evt.target.result}')`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById("shareBtn").addEventListener("click", function () {
+    // Coleta os dados do convite
+    const title = document.getElementById("eventTitle").value || "Título do Evento";
+    const rawDateValue = document.getElementById("eventDate").value;
+    const dateObj = rawDateValue ? new Date(rawDateValue) : null;
+    const formattedDate = dateObj
+      ? dateObj.toLocaleString('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      : "Data e Hora";
+    const location = document.getElementById("eventLocation").value || "Endereço";
+    const description = document.getElementById("eventDescription").value || "Descrição do evento...";
+    const message = `Você foi convidado para o evento "${title}"!\nData e Hora: ${formattedDate}\nLocal: ${location}\n${description}`;
+
+    // Usa o html2canvas para gerar uma imagem do convite
+    html2canvas(document.getElementById("invitationPreview")).then(function(canvas) {
+      canvas.toBlob(function(blob) {
+        // Cria um objeto File a partir do blob gerado
+        const file = new File([blob], "convite.png", { type: "image/png" });
+        
+        // Verifica se o navegador suporta compartilhamento de arquivos (Web Share API Level 2)
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share({
+            files: [file],
+            title: title,
+            text: message,
+          })
+          .then(() => console.log('Compartilhado com sucesso!'))
+          .catch((error) => console.error('Erro ao compartilhar:', error));
+        } else {
+          // Fallback: se não for possível compartilhar arquivos, abre o WhatsApp com apenas o texto
+          const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(message);
+          window.open(whatsappUrl, "_blank");
+        }
+      });
+    });
+  });
+  </script>
+</body>
+</html>
