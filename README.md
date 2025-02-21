@@ -8,6 +8,7 @@ My portfolio
 - Configure domain mikaio.dev ✔
 - Migrate to react or next? RUST yew?????????? BLAZING FAST
 - Add multilang
+            <h2 class="text-sm mt-2 text-center"><span class="text-lg font-bold"> I am </span>["Father", "Developer", "Pythonista", "Mathematical", "AI & Crypto enthusiast"]</h2>
 
 ### Projects ideas to my portfolio:
 
