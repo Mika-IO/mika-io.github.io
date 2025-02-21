@@ -6,20 +6,21 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 # Lista de URLs
 urls = [
-    "https://mikaio.dev/tools/",
-    "https://pixbitcoin.org/",
-    "https://mikaio.dev/pixfruta",
-    "https://mikaio.dev/deepcam.online/",
-    "https://mikaio.dev/birth-calc/",
-    "https://mikaio.dev/calc-gast/",
-    "https://mikaio.dev/type-effect-js/",
-    "https://mikaio.dev/buzypage/",
-    "https://langmentor-ai.com/",
-    "https://mikaio.dev/moedas/",
-    "https://mikaio.dev/verify-credit-card/",
-    "https://mikaio.dev/karate/",
-    "https://mikaio.dev/paper-wallet-generator/",
-    "https://mikaio.dev/llm-in-front/",
+    # "https://mikaio.dev/tools/",
+    # "https://pixbitcoin.org/",
+    # "https://mikaio.dev/pixfruta",
+    # "https://mikaio.dev/deepcam.online/",
+    # "https://mikaio.dev/birth-calc/",
+    # "https://mikaio.dev/calc-gast/",
+    # "https://mikaio.dev/type-effect-js/",
+    # "https://mikaio.dev/buzypage/",
+    # "https://langmentor-ai.com/",
+    # "https://mikaio.dev/moedas/",
+    # "https://mikaio.dev/verify-credit-card/",
+    "https://mikaio.dev/convites.html",
+    # "https://mikaio.dev/karate/",
+    # "https://mikaio.dev/paper-wallet-generator/",
+    # "https://mikaio.dev/llm-in-front/",
 ]
 
 # Criar a pasta imgs se não existir
@@ -38,7 +39,7 @@ def capture_screenshots():
         try:
             driver.get(url)
             time.sleep(2)  # Esperar a página carregar
-            filename = f"proj-imgs/screenshot_{index+1}.png"
+            filename = "proj-imgs/screenshot_12.png" # f"proj-imgs/screenshot_{index+1}.png"
             driver.save_screenshot(filename)
             print(f"Screenshot salva: {filename}")
         except Exception as e:
