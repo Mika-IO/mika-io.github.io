@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miblo — Agência de Marketing</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.22/bundled/lenis.min.js"></script>
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 15s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fafafa;
+    }
+    
+    /* Gradient text animation */
+    @keyframes gradient-pan {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    .animate-gradient {
+      background-size: 200% 200%;
+      animation: gradient-pan 8s ease infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .floating-element {
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.7;
+    }
+    
+    .service-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .portfolio-item {
+      overflow: hidden;
+      border-radius: 20px;
+      position: relative;
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    
+    .portfolio-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      color: white;
+    }
+    
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+    
+    .stat-number {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .stat-number::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #8B5CF6, #EC4899);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s ease;
+    }
+    
+    .stat-item:hover .stat-number::after {
+      transform: scaleX(1);
+    }
+    
+    .wave-divider {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+    }
+    
+    .wave-divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 80px;
+    }
+    
+    .wave-divider .shape-fill {
+      fill: #f3f4f6;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased overflow-x-hidden relative">
+  <!-- Floating decorative elements -->
+  <div class="floating-element w-96 h-96 bg-purple-300 top-10 -left-40 animation-delay-0"></div>
+  <div class="floating-element w-80 h-80 bg-pink-200 bottom-40 -right-20 animation-delay-1000"></div>
+  <div class="floating-element w-64 h-64 bg-indigo-200 top-1/3 right-1/4 animation-delay-2000"></div>
+  
+  <!-- Smooth scroll root -->
+  <div id="root" class="lenis lenis-smooth">
+    <!-- Navbar -->
+    <nav class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-white/90 border-b border-gray-200 transition-all duration-300" id="navbar">
+      <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
+        <a href="#hero" class="text-2xl font-black tracking-tight flex items-center">
+          <span class="mr-2 animate-pulse-slow">✨</span>Miblo
+        </a>
+        <a href="#contact" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white px-5 py-3 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-purple-500/20">
+          <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero" class="min-h-screen flex items-center justify-center text-center px-4 pt-24 relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <video autoplay muted loop class="w-full h-full object-cover opacity-20">
+          <source src="https://assets.codepen.io/3364143/screen-record.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white/50 to-white"></div>
+      </div>
+      
+      <div class="max-w-5xl mx-auto space-y-8 relative z-10">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight animate-gradient bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
+          Marketing de <span class="underline decoration-wavy decoration-pink-500">impacto</span>, resultados brilhantes.
+        </h1>
+        <p class="text-lg md:text-2xl text-gray-600 max-w-2xl mx-auto">
+          Conteúdo que engaja, campanhas que convertêm e visuais que impressionam — tudo em um só lugar.
+        </p>
+        <a href="#contact" class="inline-flex items-center gap-3 bg-gradient-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 text-white px-8 py-4 rounded-full text-lg transition-all transform hover:scale-105 shadow-xl">
+          Começar projeto
+          <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+        </a>
+      </div>
+      
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce w-8 h-12 border-2 border-gray-400 rounded-full flex justify-center">
+        <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-24 px-4 relative overflow-hidden">
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">Nossos Serviços</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Soluções personalizadas para impulsionar sua marca e alcançar resultados excepcionais</p>
+        </div>
+        
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <!-- Card -->
+          <div class="service-card group p-8 bg-white rounded-3xl shadow-lg border border-gray-100">
+            <div class="w-16 h-16 rounded-xl bg-indigo-50 flex items-center justify-center mb-6">
+              <i class="fa-solid fa-pen-nib text-3xl text-indigo-500 group-hover:scale-110 transition-transform"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Marketing de Conteúdo</h3>
+            <p class="text-gray-600">
+              Estratégias que geram autoridade, engajamento e tráfego orgânico.
+            </p>
+          </div>
+          
+          <!-- Card -->
+          <div class="service-card group p-8 bg-white rounded-3xl shadow-lg border border-gray-100">
+            <div class="w-16 h-16 rounded-xl bg-pink-50 flex items-center justify-center mb-6">
+              <i class="fa-solid fa-bullseye text-3xl text-pink-500 group-hover:scale-110 transition-transform"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Tráfego Pago</h3>
+            <p class="text-gray-600">
+              Campanhas de performance otimizadas para ROI máximo.
+            </p>
+          </div>
+          
+          <!-- Card -->
+          <div class="service-card group p-8 bg-white rounded-3xl shadow-lg border border-gray-100">
+            <div class="w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center mb-6">
+              <i class="fa-solid fa-camera-retro text-3xl text-purple-500 group-hover:scale-110 transition-transform"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Foto & Vídeo</h3>
+            <p class="text-gray-600">
+              Produção visual que conta a sua história com qualidade cinemática.
+            </p>
+          </div>
+          
+          <!-- Card -->
+          <div class="service-card group p-8 bg-white rounded-3xl shadow-lg border border-gray-100">
+            <div class="w-16 h-16 rounded-xl bg-blue-50 flex items-center justify-center mb-6">
+              <i class="fa-solid fa-hashtag text-3xl text-blue-500 group-hover:scale-110 transition-transform"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Social Media</h3>
+            <p class="text-gray-600">
+              Gestão de redes que transforma seguidores em verdadeiros fãs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Showcase -->
+    <section id="portfolio" class="py-24 px-4 bg-gray-100 relative overflow-hidden">
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">Portfólio em Destaque</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Alguns dos trabalhos que criamos para nossos clientes</p>
+        </div>
+        
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Item -->
+          <div class="portfolio-item h-80">
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Projeto 1"
+              class="w-full h-full object-cover"
+            />
+            <div class="portfolio-overlay">
+              <div>
+                <h3 class="text-xl font-bold">Campanha de Verão</h3>
+                <p class="text-gray-200">Branding & Social Media</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item -->
+          <div class="portfolio-item h-80">
+            <img
+              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Projeto 2"
+              class="w-full h-full object-cover"
+            />
+            <div class="portfolio-overlay">
+              <div>
+                <h3 class="text-xl font-bold">App Fintech</h3>
+                <p class="text-gray-200">Design & Desenvolvimento</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item -->
+          <div class="portfolio-item h-80">
+            <img
+              src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Projeto 3"
+              class="w-full h-full object-cover"
+            />
+            <div class="portfolio-overlay">
+              <div>
+                <h3 class="text-xl font-bold">Fotografia Corporativa</h3>
+                <p class="text-gray-200">Produção Visual</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item -->
+          <div class="portfolio-item h-80 md:col-span-2">
+            <img
+              src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+              alt="Projeto 4"
+              class="w-full h-full object-cover"
+            />
+            <div class="portfolio-overlay">
+              <div>
+                <h3 class="text-xl font-bold">Estratégia Digital</h3>
+                <p class="text-gray-200">Marketing Integrado</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item -->
+          <div class="portfolio-item h-80">
+            <img
+              src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Projeto 5"
+              class="w-full h-full object-cover"
+            />
+            <div class="portfolio-overlay">
+              <div>
+                <h3 class="text-xl font-bold">Design de Interface</h3>
+                <p class="text-gray-200">UX/UI Design</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Item -->
+          <div class="portfolio-item h-80">
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Projeto 6"
+              class="w-full h-full object-cover"
+            />
+            <div class="portfolio-overlay">
+              <div>
+                <h3 class="text-xl font-bold">Evento Corporativo</h3>
+                <p class="text-gray-200">Produção & Marketing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Wave divider -->
+      <div class="wave-divider">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-24 px-4 relative bg-white">
+      <div class="max-w-5xl mx-auto text-center space-y-6">
+        <h2 class="text-3xl md:text-5xl font-bold">Sobre a Miblo</h2>
+        <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+          Somos uma equipe apaixonada por criatividade e movida por dados. Com uma abordagem centrada no design e focada em performance, ajudamos marcas a contar histórias inesquecíveis e alcançar crescimento real.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-8 pt-8">
+          <div class="stat-item">
+            <span class="text-4xl font-extrabold text-indigo-600 stat-number">+200</span>
+            <p class="text-gray-600">Projetos entregues</p>
+          </div>
+          <div class="stat-item">
+            <span class="text-4xl font-extrabold text-indigo-600 stat-number">97%</span>
+            <p class="text-gray-600">Clientes satisfeitos</p>
+          </div>
+          <div class="stat-item">
+            <span class="text-4xl font-extrabold text-indigo-600 stat-number">5k</span>
+            <p class="text-gray-600">Conteúdos publicados</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Animated decorative elements -->
+      <div class="absolute top-20 right-10 w-16 h-16 rounded-full bg-indigo-100 animate-float"></div>
+      <div class="absolute bottom-40 left-10 w-10 h-10 rounded-full bg-pink-100 animate-float animation-delay-2000"></div>
+      <div class="absolute top-1/3 left-1/4 w-12 h-12 rounded-full bg-purple-100 animate-float animation-delay-3000"></div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="py-24 px-4 bg-gradient-to-r from-gray-900 to-black text-white relative overflow-hidden">
+      <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+        <h2 class="text-3xl md:text-5xl font-bold">
+          Pronto para elevar sua marca?
+        </h2>
+        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+          Fale conosco no WhatsApp e descubra como podemos impulsionar seus resultados com soluções criativas e estratégias eficazes.
+        </p>
+        <a
+          href="https://wa.me/5511999999999?text=Olá+Miblo%2C+gostaria+de+impulsionar+minha+marca"
+          target="_blank"
+          class="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-10 py-5 rounded-full text-xl transition-all transform hover:scale-105 shadow-xl"
+        >
+          <i class="fab fa-whatsapp fa-lg"></i> Falar no WhatsApp
+        </a>
+      </div>
+      
+      <!-- Animated decorative elements -->
+      <div class="absolute top-10 left-1/4 w-32 h-32 rounded-full bg-green-900/20 animate-spin-slow"></div>
+      <div class="absolute bottom-20 right-1/4 w-24 h-24 rounded-full bg-emerald-900/20 animate-spin-slow animation-delay-3000"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-500 text-sm bg-white">
+      © 2025 Miblo. Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <!-- Lenis Init & GSAP Scroll Animations -->
+  <script>
+    // Lenis smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (x) => Math.min(1, 1.001 - Math.pow(2, -10 * x)),
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate service cards
+    gsap.utils.toArray('.service-card').forEach((card, i) => {
+      gsap.fromTo(card, {
+        opacity: 0,
+        y: 50
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 90%',
+        },
+        delay: i * 0.1
+      });
+    });
+    
+    // Animate portfolio items
+    gsap.utils.toArray('.portfolio-item').forEach((item, i) => {
+      gsap.to(item, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 90%',
+        },
+        delay: i * 0.1
+      });
+    });
+    
+    // Animate stats
+    gsap.utils.toArray('.stat-item').forEach((item, i) => {
+      gsap.from(item, {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 90%',
+        },
+        delay: i * 0.2
+      });
+    });
+    
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    ScrollTrigger.create({
+      start: "top -50",
+      end: 99999,
+      onUpdate: (self) => {
+        if (self.direction === -1) {
+          navbar.classList.remove('bg-white/90');
+          navbar.classList.add('bg-white');
+          navbar.classList.add('shadow-md');
+        } else {
+          navbar.classList.add('bg-white/90');
+          navbar.classList.remove('bg-white');
+          navbar.classList.remove('shadow-md');
+        }
+      }
+    });
+    
+    // Floating elements animation
+    gsap.utils.toArray('.floating-element').forEach((el, i) => {
+      gsap.to(el, {
+        y: 30,
+        duration: 3 + i,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    });
+  </script>
+</body>
+</html>
