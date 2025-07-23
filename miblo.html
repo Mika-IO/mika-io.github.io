@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Miblo — Agência de Marketing</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#00e26d', accent: '#6366f1' },
+                    fontFamily: { display: ['"Space Grotesk"', 'sans-serif'], body: ['"Public Sans"', 'sans-serif'] },
+                    animation: {
+                        blob: 'blob 14s infinite',
+                        float: 'float 6s ease-in-out infinite',
+                        floatrev: 'floatrev 6s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0) scale(1)' }, '33%': { transform: 'translate(30px,-50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px,20px) scale(.9)' }, '100%': { transform: 'translate(0) scale(1)' }
+                        },
+                        float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } },
+                        floatrev: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(20px)' } }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Assets -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* papel */
+        body {
+            background: #fffdfb
+        }
+
+        body {
+            background-image: url(http://api.thumbr.it/whitenoise-361x370.png?background=ffffffff&noise=5c5c5c&density=13&opacity=62);
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .03) 0 1px, transparent 1px 4px),
+                radial-gradient(circle, #ffffff 0%, #f6f6f3 100%);
+            mix-blend-mode: multiply
+        }
+
+        /* texto lupa */
+        .word {
+            /* novo  */
+            display: inline-block;
+            /* mantém a palavra inteira */
+        }
+
+        .char {
+            /* já existe – só remover inline-block, se quiser */
+            display: inline-block;
+            /* ← pode deixar, não afeta quebra dentro da .word */
+            transition: transform .25s, color .25s;
+        }
+
+
+        .char.focus {
+            transform: scale(1.6) translateY(-4px);
+            color: #00e26d
+        }
+
+        .char.adj {
+            transform: scale(1.3) translateY(-2px);
+            color: #00e26d
+        }
+
+        /* lente em mídia */
+        .lens-wrap {
+            position: relative;
+            overflow: hidden;
+            cursor: zoom-in
+        }
+
+        .lens-target {
+            transition: transform .25s ease;
+            will-change: transform
+        }
+
+        .lens-wrap:hover .lens-target {
+            transform-origin: var(--mx) var(--my);
+            transform: scale(1.6);
+            clip-path: circle(120px at var(--mx) var(--my))
+        }
+
+        /* filtro */
+        .filter-btn {
+            padding: .5rem 1.3rem;
+            border: 1px solid transparent;
+            border-radius: 9999px;
+            font-weight: 500;
+            transition: .25s
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: #00e26d;
+            background: #00e26d33
+        }
+
+        /* bolha “normal” já existe — só garantir z-index e animação   */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 226, 109, .20);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: auto;
+            z-index: 40;
+        }
+
+        /* fase de crescimento: sem animação de flutuar               */
+        .bubble.pause {
+            animation: none
+        }
+
+        /* explosão ao estourar                                        */
+        @keyframes pop {
+            to {
+                transform: scale(2);
+                opacity: 0
+            }
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 font-body overflow-x-hidden">
+
+    <!-- NAV -->
+    <nav id="navbar" class="fixed inset-x-0 top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 text-2xl font-display font-bold">
+                <span class="animate-pulse ">✨</span><span class="pop-text">MiBlo</span>
+            </a>
+            <ul class="hidden md:flex gap-8 font-medium">
+                <li><a href="#services" class="pop-text hover:text-primary">Serviços</a></li>
+                <li><a href="#portfolio" class="pop-text hover:text-primary">Portfólio</a></li>
+                <li><a href="#about" class="pop-text hover:text-primary">Sobre</a></li>
+            </ul>
+            <a href="https://wa.me/5511999999999" target="_blank"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-semibold hover:scale-110 transition">
+                <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="hero"
+        class="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-white">
+        <!-- esferas -->
+        <!-- camada exclusiva das bolhas dinâmicas -->
+        <div id="bubbleLayer" class="absolute inset-0 pointer-events-none"></div>
+
+        <span
+            class="absolute -top-40 left-1/2 -translate-x-1/2 w-[30rem] h-[30rem] bg-primary/15 rounded-full animate-blob"></span>
+        <span class="absolute bottom-24 left-28 w-48 h-48 bg-primary/20 rounded-full animate-float"></span>
+        <span
+            class="absolute bottom-[-8rem] right-[-6rem] w-72 h-72 bg-accent/15 rounded-full animate-blob animation-delay-2000"></span>
+        <span class="absolute top-32 right-20 w-32 h-32 bg-accent/20 rounded-full animate-floatrev"></span>
+
+        <h1
+            class="text-[clamp(3rem,8vw,6rem)] leading-tight font-display font-bold bg-gradient-to-r from-blue-500 via-green-500 to-accent bg-clip-text text-transparent pop-text">
+            Marketing que <span class="whitespace-nowrap">brilha.</span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-lg md:text-2xl text-gray-600 pop-text">
+            Conteúdo impactante, campanhas que convertem, imagens que contam histórias.
+        </p>
+        <a href="#contact"
+            class="group mt-12 inline-flex items-center gap-4 px-10 py-5 rounded-full bg-primary text-white font-bold text-lg shadow-lg hover:scale-110 transition">
+            Vamos conversar <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+        </a>
+    </header>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-24 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="pop-text text-4xl md:text-5xl font-display font-bold text-center mb-16">Nossos Serviços</h2>
+            <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+                <div class="p-10 rounded-3xl bg-white shadow-md lens-wrap">
+                    <i class="fa-solid fa-pen-nib text-4xl text-primary mb-6"></i>
+                    <h3 class="pop-text font-semibold text-xl mb-2">Marketing de Conteúdo</h3>
+                    <p class="pop-text">Storytelling e SEO que geram autoridade.</p>
+                </div>
+                <div class="p-10 rounded-3xl bg-white shadow-md lens-wrap">
+                    <i class="fa-solid fa-bullseye text-4xl text-primary mb-6"></i>
+                    <h3 class="pop-text font-semibold text-xl mb-2">Tráfego Pago</h3>
+                    <p class="pop-text">Campanhas orientadas a dados para ROI máximo.</p>
+                </div>
+                <div class="p-10 rounded-3xl bg-white shadow-md lens-wrap">
+                    <i class="fa-solid fa-camera-retro text-4xl text-primary mb-6"></i>
+                    <h3 class="pop-text font-semibold text-xl mb-2">Foto &amp; Vídeo</h3>
+                    <p class="pop-text">Produções audiovisuais de alto impacto.</p>
+                </div>
+                <div class="p-10 rounded-3xl bg-white shadow-md lens-wrap">
+                    <i class="fa-solid fa-hashtag text-4xl text-primary mb-6"></i>
+                    <h3 class="pop-text font-semibold text-xl mb-2">Social Media</h3>
+                    <p class="pop-text">Comunidades engajadas e conteúdo viral.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="pop-text text-4xl md:text-5xl font-display font-bold text-center mb-16">Trabalhos Recentes</h2>
+
+            <!-- Filtro -->
+            <div class="flex justify-center gap-6 mb-12">
+                <button data-filter="all" class="filter-btn active pop-text">Tudo</button>
+                <button data-filter="photo" class="filter-btn pop-text">Fotos</button>
+                <button data-filter="video" class="filter-btn pop-text">Vídeos</button>
+            </div>
+
+            <!-- Grade -->
+            <div id="portfolioGrid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- 6 cartões -->
+                <figure class="portfolio-card photo lens-wrap group rounded-3xl shadow-lg overflow-hidden">
+                    <img class="lens-target w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80"
+                        alt="">
+                    <figcaption
+                        class="absolute inset-0 flex items-end p-6 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition">
+                        <h3 class="pop-text">Café & Branding</h3>
+                    </figcaption>
+                </figure>
+
+                <figure class="portfolio-card video lens-wrap group rounded-3xl shadow-lg overflow-hidden">
+                    <video class="lens-target w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source
+                            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+                            type="video/mp4">
+                    </video>
+                    <figcaption
+                        class="absolute inset-0 flex items-end p-6 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition">
+                        <h3 class="pop-text">Tech Startup Reel</h3>
+                    </figcaption>
+                </figure>
+
+                <figure class="portfolio-card photo lens-wrap group rounded-3xl shadow-lg overflow-hidden">
+                    <img class="lens-target w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80"
+                        alt="">
+                    <figcaption
+                        class="absolute inset-0 flex items-end p-6 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition">
+                        <h3 class="pop-text">Fashion Motion</h3>
+                    </figcaption>
+                </figure>
+
+                <figure
+                    class="portfolio-card video lens-wrap group rounded-3xl shadow-lg overflow-hidden md:col-span-2">
+                    <video class="lens-target w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+                    </video>
+                    <figcaption
+                        class="absolute inset-0 flex items-end p-6 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition">
+                        <h3 class="pop-text">Evento Corporativo</h3>
+                    </figcaption>
+                </figure>
+
+                <figure class="portfolio-card photo lens-wrap group rounded-3xl shadow-lg overflow-hidden">
+                    <img class="lens-target w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80"
+                        alt="">
+                    <figcaption
+                        class="absolute inset-0 flex items-end p-6 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition">
+                        <h3 class="pop-text">App Fintech</h3>
+                    </figcaption>
+                </figure>
+
+                <figure class="portfolio-card photo lens-wrap group rounded-3xl shadow-lg overflow-hidden">
+                    <img class="lens-target w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+                        alt="">
+                    <figcaption
+                        class="absolute inset-0 flex items-end p-6 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition">
+                        <h3 class="pop-text">Design de Interface</h3>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 bg-gray-100">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="pop-text text-4xl md:text-5xl font-display font-bold mb-6">Quem Somos</h2>
+                <p class="pop-text text-gray-600 leading-relaxed mb-6">Somos uma equipe apaixonada por criatividade e
+                    movida por dados. Com uma abordagem centrada no
+                    design e focada em performance, ajudamos marcas a contar histórias inesquecíveis e alcançar o seu
+                    público gerando crescimento real.
+                </p>
+                <div class="flex gap-10">
+                    <div>
+                        <p class="pop-text text-3xl font-extrabold text-primary">+200</p><span
+                            class="pop-text text-gray-600">Projetos</span>
+                    </div>
+                    <div>
+                        <p class="pop-text text-3xl font-extrabold text-primary">97%</p><span
+                            class="pop-text text-gray-600">Satisfação</span>
+                    </div>
+                    <div>
+                        <p class="pop-text text-3xl font-extrabold text-primary">5k</p><span
+                            class="pop-text text-gray-600">Conteúdos</span>
+                    </div>
+                </div>
+            </div>
+            <img src="https://aconcaia.com/hubfs/Imported_Blog_Media/os-profissionais-essenciais-em-uma-equipe-de-marketing.jpg"
+                class="rounded-3xl shadow-lg lens-wrap">
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 bg-gradient-to-r from-primary/10 via-primary/5 to-accent/10 text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="pop-text text-4xl md:text-5xl font-display font-bold mb-6">Pronto para levar seu negócio para o
+                próximo nível?</h2>
+            <p class="pop-text text-lg md:text-xl text-gray-700 mb-10">Fale conosco e descubra como impulsionar sua
+                marca.</p>
+            <a href="https://wa.me/5511999999999?text=Olá+Miblo,+quero+impulsionar+minha+marca!" target="_blank"
+                class="inline-flex items-center gap-3 px-12 py-5 rounded-full bg-primary text-white text-xl font-bold shadow-lg hover:scale-110 transition">
+                <i class="fab fa-whatsapp"></i>WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-8 bg-white text-center text-gray-500 text-sm">© 2025 Miblo Marketing</footer>
+
+    <!-- SCRIPT -->
+    <script>
+        /* split every .pop-text into spans */
+        document.querySelectorAll('.pop-text').forEach(node => {
+            const words = node.textContent.split(/(\s+)/);   // preserva os espaços como itens
+            node.textContent = '';
+            words.forEach(w => {
+                if (/\s+/.test(w)) {          // se for apenas espaço, insere espaço normal
+                    node.appendChild(document.createTextNode(w));
+                } else {                      // é palavra -> cria contêiner .word
+                    const wrapper = document.createElement('span');
+                    wrapper.className = 'word';
+                    [...w].forEach(ch => {
+                        const letter = document.createElement('span');
+                        letter.textContent = ch;
+                        letter.className = 'char';
+                        wrapper.appendChild(letter);
+                    });
+                    node.appendChild(wrapper);
+                }
+            });
+        });
+
+
+        /* hover letter + neighbors */
+        function clear(c) { c.classList.remove('focus', 'adj') }
+        document.body.addEventListener('mouseover', e => {
+            if (!e.target.classList.contains('char')) return;
+            document.querySelectorAll('.focus,.adj').forEach(clear);
+            const c = e.target, p = c.previousElementSibling, n = c.nextElementSibling;
+            c.classList.add('focus');
+            if (p && p.classList.contains('char')) p.classList.add('adj');
+            if (n && n.classList.contains('char')) n.classList.add('adj');
+        });
+        document.body.addEventListener('mouseout', e => {
+            if (e.target.classList.contains('char'))
+                document.querySelectorAll('.focus,.adj').forEach(clear);
+        });
+
+        /* GSAP reveals + navbar sombra */
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('section,figure').forEach((el, i) => {
+            gsap.from(el, {
+                opacity: 0, y: 40, duration: .8, ease: 'power3.out',
+                scrollTrigger: { trigger: el, start: 'top 90%' }, delay: i * .05
+            });
+        });
+        ScrollTrigger.create({
+            start: 'top -60', end: 99999,
+            onUpdate: s => navbar.classList.toggle('shadow-md', s.direction === -1)
+        });
+
+        /* filtro portfólio */
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const f = btn.dataset.filter;
+                document.querySelectorAll('.portfolio-card').forEach(c => {
+                    c.style.display = (f === 'all' || c.classList.contains(f)) ? 'block' : 'none';
+                });
+            });
+        });
+
+        /* lente coords */
+        document.querySelectorAll('.lens-wrap').forEach(w => {
+            w.addEventListener('mousemove', e => {
+                const r = w.getBoundingClientRect();
+                w.style.setProperty('--mx', e.clientX - r.left + 'px');
+                w.style.setProperty('--my', e.clientY - r.top + 'px');
+            });
+        });
+        /* ---------------- bolhas que crescem enquanto o mouse está preso ---------------- */
+        const hero = document.getElementById('hero');
+        const layer = document.getElementById('bubbleLayer');
+        let active = null, rafId = null;
+
+        /* cria bolha e começa a crescer -------------------------------------------------- */
+        hero.addEventListener('mousedown', e => {
+            // não criar em cima de outra bolha: nesse caso, apenas estoura
+            if (e.target.classList.contains('bubble')) { explode(e.target); return; }
+
+            const b = document.createElement('span');
+            b.className = 'bubble pause';                // pausa flutuação enquanto cresce
+            b.dataset.cx = e.clientX;                    // fixa ponto de origem
+            b.dataset.cy = e.clientY;
+            layer.appendChild(b);
+            active = b;
+
+            grow();                                      // inicia loop de crescimento
+        });
+
+        /* para de crescer e libera a animação de flutuar --------------------------------- */
+        ['mouseup', 'mouseleave'].forEach(evt => {
+            hero.addEventListener(evt, () => {
+                if (!active) return;
+                cancelAnimationFrame(rafId);
+                active.classList.remove('pause');          // volta à animação “float”
+                // auto-explode após 10 s se não clicarem nela
+                setTimeout(() => active && explode(active), 10000);
+                active = null;
+            });
+        });
+
+        /* estoura clicando direto na bolha ------------------------------------------------ */
+        layer.addEventListener('mousedown', e => {
+            if (e.target.classList.contains('bubble')) explode(e.target);
+        });
+
+        /* ------------------------- helpers ---------------------------------------------- */
+        function grow() {
+            if (!active) { return; }
+            const size = (+active.style.width.replace('px', '') || 20) + 2;   // +2 px por quadro
+            active.style.width = active.style.height = size + 'px';
+
+            // mantém a bolha centrada no ponto de clique
+            const rect = layer.getBoundingClientRect();
+            active.style.left = active.dataset.cx - rect.left - size / 2 + 'px';
+            active.style.top = active.dataset.cy - rect.top - size / 2 + 'px';
+
+            rafId = requestAnimationFrame(grow);
+        }
+
+        function explode(el) {
+            el.style.animation = 'pop .35s forwards';
+            el.addEventListener('animationend', () => el.remove(), { once: true });
+        }
+
+
+    </script>
+</body>
+
+</html>

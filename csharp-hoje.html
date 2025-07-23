@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cuzin Hoje?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/party-js@2.2.0/bundle/party.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center h-screen overflow-hidden">
+
+  <!-- Container principal -->
+  <div class="text-center space-y-8">
+    <h1 class="text-5xl font-extrabold text-gray-800">cuzin hoje??</h1>
+    <div id="btn-container" class="flex justify-center items-center space-x-6 relative z-0">
+      <!-- Sim sempre fixo -->
+      <button id="btn-sim" class="px-8 py-4 bg-green-500 text-white rounded-xl hover:bg-green-600 transition">Sim</button>
+      <!-- Não começa ao lado -->
+      <button id="btn-nao" class="px-8 py-4 bg-red-500 text-white rounded-xl hover:bg-red-600 transition">Não</button>
+    </div>
+  </div>
+
+  <!-- Modal full-screen com z-index alto -->
+  <div id="modal" class="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col items-center justify-center hidden p-4">
+    <p class="text-6xl md:text-7xl font-extrabold text-white mb-8">aí siiim porraaa</p>
+    <img src="https://media.tenor.com/AhTqmaQ6VfoAAAAM/russo-dan%C3%A7a.gif"
+         alt="dança"
+         class="w-64 h-64 md:w-96 md:h-96 rounded-lg shadow-lg mb-8"/>
+    <button id="close-modal"
+            class="mt-4 px-6 py-3 bg-white text-black rounded-full hover:bg-gray-200 transition">
+      Fechar
+    </button>
+  </div>
+
+  <audio id="audio"
+         src="https://us-tuna-sounds-files.voicemod.net/5cb99aab-6b23-49c4-b086-b91464cb43c5-1670983273703.mp3">
+  </audio>
+
+  <script>
+    const btnSim       = document.getElementById('btn-sim');
+    const originalNao  = document.getElementById('btn-nao');
+    const modal        = document.getElementById('modal');
+    const closeModal   = document.getElementById('close-modal');
+    const audio        = document.getElementById('audio');
+    let efeitosIniciados = false;
+
+    function startEfeitos() {
+      if (efeitosIniciados) return;
+      efeitosIniciados = true;
+      setInterval(() => {
+        party.confetti(document.body, {
+          count: party.variation.range(80, 120),
+          spread: 360,
+          size: party.variation.range(1, 2),
+        });
+        party.sparkles(document.body, {
+          count: party.variation.range(30, 50),
+        });
+        party.balloons(document.body, {
+          count: party.variation.range(5, 10),
+        });
+      }, 600);
+    }
+
+    btnSim.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      audio.currentTime = 0;
+      audio.play();
+      startEfeitos();
+    });
+
+    function moveButton(btn) {
+      const { innerWidth: w, innerHeight: h } = window;
+      const bw = btn.offsetWidth, bh = btn.offsetHeight;
+      const x = Math.random() * (w - bw);
+      const y = Math.random() * (h - bh);
+      btn.style.left   = `${x}px`;
+      btn.style.top    = `${y}px`;
+    }
+
+    originalNao.addEventListener('click', () => {
+      // torna o original invisível mas mantém o espaço
+      originalNao.classList.add('invisible');
+      // cria clone com z-index abaixo do modal
+      const clone = originalNao.cloneNode(true);
+      clone.classList.remove('invisible');
+      clone.style.position = 'absolute';
+      clone.style.zIndex   = '10';
+      document.body.appendChild(clone);
+      moveButton(clone);
+      clone.addEventListener('click', () => moveButton(clone));
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      audio.pause();
+    });
+
+    // reposicionar clones se janelar for redimensionada
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('button').forEach(el => {
+        if (el !== btnSim && el !== originalNao && el.style.position === 'absolute') {
+          moveButton(el);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
