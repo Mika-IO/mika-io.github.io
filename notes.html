@@ -121,6 +121,7 @@
             padding: 16px 8px 8px;
             flex: 1;
             overflow-y: auto;
+            min-height: 0;
         }
 
         .sidebar-section::-webkit-scrollbar {
@@ -150,7 +151,6 @@
             cursor: pointer;
             transition: background 0.15s;
             position: relative;
-            group: true;
         }
 
         .note-item:hover {
@@ -242,7 +242,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            min-height: 0;
             background: var(--editor-bg);
             overflow: hidden;
         }
@@ -254,6 +254,7 @@
             padding: 14px 40px;
             border-bottom: 1px solid var(--border);
             gap: 12px;
+            flex-shrink: 0;
         }
 
         .breadcrumb {
@@ -297,21 +298,28 @@
             border-color: rgba(192, 57, 43, 0.3);
         }
 
-        .editor-area {
+        /* THE FIX: editorContent is the scrollable container */
+        #editorContent {
             flex: 1;
+            min-height: 0;
             overflow-y: auto;
-            padding: 60px 120px 80px;
             display: flex;
             flex-direction: column;
         }
 
-        .editor-area::-webkit-scrollbar {
+        #editorContent::-webkit-scrollbar {
             width: 6px;
         }
 
-        .editor-area::-webkit-scrollbar-thumb {
+        #editorContent::-webkit-scrollbar-thumb {
             background: var(--border);
             border-radius: 6px;
+        }
+
+        .editor-area {
+            padding: 60px 120px 80px;
+            display: flex;
+            flex-direction: column;
         }
 
         .note-emoji-picker {
@@ -593,9 +601,10 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
             z-index: 1000;
             display: none;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 4px;
-            width: 260px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            width: 228px;
+            max-width: calc(100vw - 32px);
         }
 
         .emoji-popup.open {
@@ -738,15 +747,13 @@
     <div class="emoji-popup" id="emojiPopup"></div>
 
     <script>
-        // ── DATA ──
-        const EMOJIS = ['📝', '📖', '📚', '💡', '🎯', '🔥', '🔎', '🌟', '💼', '🎨', '🎭', '🎪', '🏠', '🌿', '🌊', '🎵', '💻', '🔬', '📊', '🗺️', '✈️', '🍕', '☕', '🌙', '🌈', '🎉', '💡', '🔑', '💎', '🦋'];
+        const EMOJIS = ['\u{1F4DD}', '\u{1F4D6}', '\u{1F4DA}', '\u{1F4A1}', '\u{1F3AF}', '\u{1F525}', '\u{1F50E}', '\u{1F31F}', '\u{1F4BC}', '\u{1F3A8}', '\u{1F3AD}', '\u{1F3AA}', '\u{1F3E0}', '\u{1F33F}', '\u{1F30A}', '\u{1F3B5}', '\u{1F4BB}', '\u{1F52C}', '\u{1F4CA}', '\u{1F5FA}\uFE0F', '\u{2708}\uFE0F', '\u{1F355}', '\u{2615}', '\u{1F319}', '\u{1F308}', '\u{1F389}', '\u{1F511}', '\u{1F48E}', '\u{1F98B}'];
 
         let notes = JSON.parse(localStorage.getItem('notion_notes') || '[]');
         let currentId = null;
         let saveTimeout = null;
 
         function save() { localStorage.setItem('notion_notes', JSON.stringify(notes)); }
-
         function getNoteById(id) { return notes.find(n => n.id === id); }
 
         function createNote() {
@@ -770,106 +777,93 @@
             if (!confirm('Excluir esta nota?')) return;
             notes = notes.filter(n => n.id !== id);
             save();
-            if (currentId === id) {
-                currentId = null;
-                showEmpty();
-            }
+            if (currentId === id) { currentId = null; showEmpty(); }
             renderSidebar();
         }
 
-        // ── SIDEBAR ──
         function renderSidebar(filter = '') {
             const list = document.getElementById('notesList');
             const filtered = notes.filter(n =>
                 !filter || n.title.toLowerCase().includes(filter) || n.body.toLowerCase().includes(filter)
             );
-
             list.innerHTML = filtered.length ? filtered.map(n => `
-    <div class="note-item ${n.id === currentId ? 'active' : ''}" onclick="openNote('${n.id}')">
-      <span class="note-emoji">${n.emoji}</span>
-      <span class="note-title-sidebar">${n.title || 'Sem título'}</span>
-      <button class="delete-btn" onclick="deleteNote('${n.id}', event)">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
-      </button>
-    </div>
-  `).join('') : `<div style="padding:12px 10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text-faint)">Nenhuma nota encontrada</div>`;
-
+                <div class="note-item ${n.id === currentId ? 'active' : ''}" onclick="openNote('${n.id}')">
+                    <span class="note-emoji">${n.emoji}</span>
+                    <span class="note-title-sidebar">${n.title || 'Sem t\u00edtulo'}</span>
+                    <button class="delete-btn" onclick="deleteNote('${n.id}', event)">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
+                    </button>
+                </div>
+            `).join('') : `<div style="padding:12px 10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text-faint)">Nenhuma nota encontrada</div>`;
             document.getElementById('noteCount').textContent = `${notes.length} ${notes.length === 1 ? 'nota' : 'notas'}`;
         }
 
-        // ── EDITOR ──
         function openNote(id) {
             currentId = id;
             const note = getNoteById(id);
             if (!note) return;
 
             renderSidebar(document.getElementById('searchInput').value);
-            document.getElementById('breadcrumbTitle').textContent = note.title || 'Sem título';
+            document.getElementById('breadcrumbTitle').textContent = note.title || 'Sem t\u00edtulo';
             document.getElementById('exportBtn').style.display = '';
 
             const created = new Date(note.created).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
             const updated = new Date(note.updated).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
 
             document.getElementById('editorContent').innerHTML = `
-    <div class="editor-area">
-      <span class="note-emoji-picker" id="emojiPicker" onclick="openEmojiPicker(event)">${note.emoji}</span>
+                <div class="editor-area">
+                    <span class="note-emoji-picker" id="emojiPicker" onclick="openEmojiPicker(event)">${note.emoji}</span>
+                    <textarea class="note-title-input" id="titleInput" placeholder="Sem t\u00edtulo" rows="1">${note.title}</textarea>
+                    <div class="note-meta">
+                        <div class="meta-item">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            Criado ${created}
+                        </div>
+                        <div class="meta-item">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            Editado ${updated}
+                        </div>
+                        <div class="meta-item" style="flex:1">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                            <div class="tag-input-wrapper" id="tagsWrapper">
+                                ${note.tags.map(t => tagHTML(t)).join('')}
+                                <input class="tag-input" id="tagInput" placeholder="+ tag" onkeydown="handleTagInput(event)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="editor-toolbar">
+                        <button class="toolbar-btn" onclick="fmt('bold')" title="Negrito"><b>B</b></button>
+                        <button class="toolbar-btn" onclick="fmt('italic')" title="It\u00e1lico"><i>I</i></button>
+                        <button class="toolbar-btn" onclick="fmt('underline')" title="Sublinhado"><u>U</u></button>
+                        <button class="toolbar-btn" onclick="fmt('strikeThrough')" title="Tachado"><s>S</s></button>
+                        <button class="toolbar-btn" onclick="fmt('hiliteColor','#fde68a')" title="Destacar">\u{1F58A}</button>
+                        <div class="toolbar-sep"></div>
+                        <button class="toolbar-btn" onclick="fmtBlock('h1')" title="T\u00edtulo 1">H1</button>
+                        <button class="toolbar-btn" onclick="fmtBlock('h2')" title="T\u00edtulo 2">H2</button>
+                        <button class="toolbar-btn" onclick="fmtBlock('h3')" title="T\u00edtulo 3">H3</button>
+                        <div class="toolbar-sep"></div>
+                        <button class="toolbar-btn" onclick="fmt('insertUnorderedList')" title="Lista">\u2022 \u2014</button>
+                        <button class="toolbar-btn" onclick="fmt('insertOrderedList')" title="Lista numerada">1.</button>
+                        <button class="toolbar-btn" onclick="fmtBlock('blockquote')" title="Cita\u00e7\u00e3o">"</button>
+                        <div class="toolbar-sep"></div>
+                        <button class="toolbar-btn" onclick="insertHR()" title="Divisor">\u2014</button>
+                        <button class="toolbar-btn" onclick="insertCode()" title="C\u00f3digo">{ }</button>
+                    </div>
+                    <div class="note-body" id="noteBody" contenteditable="true"
+                        data-placeholder="Comece a escrever..."
+                        oninput="autoSave()"
+                    >${note.body}</div>
+                </div>
+            `;
 
-      <textarea class="note-title-input" id="titleInput" placeholder="Sem título" rows="1">${note.title}</textarea>
-
-      <div class="note-meta">
-        <div class="meta-item">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Criado ${created}
-        </div>
-        <div class="meta-item">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Editado ${updated}
-        </div>
-        <div class="meta-item" style="flex:1">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-          <div class="tag-input-wrapper" id="tagsWrapper">
-            ${note.tags.map(t => tagHTML(t)).join('')}
-            <input class="tag-input" id="tagInput" placeholder="+ tag" onkeydown="handleTagInput(event)">
-          </div>
-        </div>
-      </div>
-
-      <div class="editor-toolbar">
-        <button class="toolbar-btn" onclick="fmt('bold')" title="Negrito"><b>B</b></button>
-        <button class="toolbar-btn" onclick="fmt('italic')" title="Itálico"><i>I</i></button>
-        <button class="toolbar-btn" onclick="fmt('underline')" title="Sublinhado"><u>U</u></button>
-        <button class="toolbar-btn" onclick="fmt('strikeThrough')" title="Tachado"><s>S</s></button>
-        <button class="toolbar-btn" onclick="fmt('hiliteColor','#fde68a')" title="Destacar">🖊</button>
-        <div class="toolbar-sep"></div>
-        <button class="toolbar-btn" onclick="fmtBlock('h1')" title="Título 1">H1</button>
-        <button class="toolbar-btn" onclick="fmtBlock('h2')" title="Título 2">H2</button>
-        <button class="toolbar-btn" onclick="fmtBlock('h3')" title="Título 3">H3</button>
-        <div class="toolbar-sep"></div>
-        <button class="toolbar-btn" onclick="fmt('insertUnorderedList')" title="Lista">• —</button>
-        <button class="toolbar-btn" onclick="fmt('insertOrderedList')" title="Lista numerada">1.</button>
-        <button class="toolbar-btn" onclick="fmtBlock('blockquote')" title="Citação">"</button>
-        <div class="toolbar-sep"></div>
-        <button class="toolbar-btn" onclick="insertHR()" title="Divisor">—</button>
-        <button class="toolbar-btn" onclick="insertCode()" title="Código">{ }</button>
-      </div>
-
-      <div class="note-body" id="noteBody" contenteditable="true"
-        data-placeholder="Comece a escrever ou use / para comandos..."
-        oninput="autoSave()"
-      >${note.body}</div>
-    </div>
-  `;
-
-            // Title auto-resize
             const titleEl = document.getElementById('titleInput');
             autoResize(titleEl);
             titleEl.addEventListener('input', () => { autoResize(titleEl); autoSave(); });
-
             document.getElementById('noteBody').focus();
         }
 
         function tagHTML(t) {
-            return `<span class="tag">${t}<span class="tag-remove" onclick="removeTag('${t}')">×</span></span>`;
+            return `<span class="tag">${t}<span class="tag-remove" onclick="removeTag('${t}')">\u00d7</span></span>`;
         }
 
         function handleTagInput(e) {
@@ -908,21 +902,21 @@
                 if (bodyEl) note.body = bodyEl.innerHTML;
                 note.updated = new Date().toISOString();
                 save();
-                document.getElementById('breadcrumbTitle').textContent = note.title || 'Sem título';
+                document.getElementById('breadcrumbTitle').textContent = note.title || 'Sem t\u00edtulo';
                 renderSidebar(document.getElementById('searchInput').value);
             }, 600);
         }
 
         function showEmpty() {
-            document.getElementById('breadcrumbTitle').textContent = '—';
+            document.getElementById('breadcrumbTitle').textContent = '\u2014';
             document.getElementById('exportBtn').style.display = 'none';
             document.getElementById('editorContent').innerHTML = `
-    <div class="empty-state">
-      <div class="icon">📄</div>
-      <h2>Nenhuma nota selecionada</h2>
-      <p>Crie uma nova nota ou selecione uma existente para começar a escrever.</p>
-    </div>
-  `;
+                <div class="empty-state">
+                    <div class="icon">\u{1F4C4}</div>
+                    <h2>Nenhuma nota selecionada</h2>
+                    <p>Crie uma nova nota ou selecione uma existente para come\u00e7ar a escrever.</p>
+                </div>
+            `;
         }
 
         function autoResize(el) {
@@ -930,7 +924,6 @@
             el.style.height = el.scrollHeight + 'px';
         }
 
-        // ── FORMATTING ──
         function fmt(cmd, val) {
             document.getElementById('noteBody').focus();
             document.execCommand(cmd, false, val || null);
@@ -952,19 +945,22 @@
         function insertCode() {
             document.getElementById('noteBody').focus();
             const sel = window.getSelection().toString();
-            document.execCommand('insertHTML', false, `<code>${sel || 'código'}</code>`);
+            document.execCommand('insertHTML', false, `<code>${sel || 'c\u00f3digo'}</code>`);
             autoSave();
         }
 
-        // ── EMOJI PICKER ──
         function openEmojiPicker(e) {
             const popup = document.getElementById('emojiPopup');
             popup.innerHTML = EMOJIS.map(em => `<span class="emoji-option" onclick="setEmoji('${em}')">${em}</span>`).join('');
             const rect = e.target.getBoundingClientRect();
-            popup.style.left = rect.left + 'px';
             popup.style.top = rect.bottom + 8 + 'px';
+            popup.style.left = rect.left + 'px';
             popup.classList.toggle('open');
-
+            requestAnimationFrame(() => {
+                const pw = popup.offsetWidth;
+                const maxLeft = window.innerWidth - pw - 16;
+                if (rect.left > maxLeft) popup.style.left = Math.max(8, maxLeft) + 'px';
+            });
             setTimeout(() => {
                 document.addEventListener('click', function close(ev) {
                     if (!popup.contains(ev.target) && ev.target.id !== 'emojiPicker') {
@@ -985,11 +981,10 @@
             renderSidebar(document.getElementById('searchInput').value);
         }
 
-        // ── EXPORT ──
         function exportNote() {
             const note = getNoteById(currentId);
             if (!note) return;
-            const content = `${note.emoji} ${note.title || 'Sem título'}\n\n${document.getElementById('noteBody').innerText}`;
+            const content = `${note.emoji} ${note.title || 'Sem t\u00edtulo'}\n\n${document.getElementById('noteBody').innerText}`;
             const blob = new Blob([content], { type: 'text/plain' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
@@ -997,12 +992,10 @@
             a.click();
         }
 
-        // ── SEARCH ──
         document.getElementById('searchInput').addEventListener('input', e => {
             renderSidebar(e.target.value.toLowerCase());
         });
 
-        // ── KEYBOARD SHORTCUTS ──
         document.addEventListener('keydown', e => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
                 e.preventDefault();
@@ -1010,7 +1003,6 @@
             }
         });
 
-        // ── INIT ──
         renderSidebar();
         if (notes.length > 0) openNote(notes[0].id);
     </script>
