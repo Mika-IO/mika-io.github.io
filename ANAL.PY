@@ -14,7 +14,7 @@ st.divider()
 # DEFINA OS CAMINHOS DOS SEUS ARQUIVOS AQUI
 # ==========================================
 caminho_arquivo1 = "PPR_TRIB_sas.tab" 
-caminho_arquivo2 = "PPR_TRIB_sas.tab"
+caminho_arquivo2 = "PPR_TRIB.tab"
 
 # Criação de duas colunas para mostrar as tabelas lado a lado
 col1, col2 = st.columns(2)
