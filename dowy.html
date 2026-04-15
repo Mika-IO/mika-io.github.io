@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dowy — Emagrecimento por Assinatura</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFAF7;--bg-alt:#F0EFEA;--bg-dark:#0F1A12;--bg-card:#FFF;--text:#1A1A1A;--text-light:#6B6B6B;--text-inv:#F0EFEA;--accent:#2D6A4F;--accent-light:#52B788;--accent-glow:#95D5B2;--warm:#E8D5B7;--warm-dark:#C9A96E;--coral:#E07A5F;--radius:20px;--radius-sm:12px;--radius-pill:50px;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',sans-serif;--shadow:0 4px 30px rgba(0,0,0,.06);--shadow-lg:0 20px 60px rgba(0,0,0,.1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes kenBurns{0%{transform:scale(1)}100%{transform:scale(1.08)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.16,1,.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid rgba(0,0,0,.06);transition:all .3s}
+nav.scrolled{padding:10px 40px;box-shadow:0 2px 20px rgba(0,0,0,.08)}
+.nav-logo{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--accent);letter-spacing:-1px;text-decoration:none}.nav-logo span{color:var(--coral)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{text-decoration:none;color:var(--text);font-size:.9rem;font-weight:500;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:10px 24px!important;border-radius:var(--radius-pill)!important;font-weight:600!important;font-size:.85rem!important;transition:all .3s!important;border:none;cursor:pointer}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:#245a42!important;transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,106,79,.3)}
+.nav-mobile{display:none;background:none;border:none;cursor:pointer}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:120px 0}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;margin-top:68px;background:#0a0f0b}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.35;animation:kenBurns 20s ease-in-out infinite alternate}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,26,18,.95) 0%,rgba(15,26,18,.5) 50%,rgba(15,26,18,.8) 100%)}
+.hero .container{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+.hero-content{animation:slideInLeft 1s cubic-bezier(.16,1,.3,1)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(82,183,136,.15);color:var(--accent-light);padding:8px 18px;border-radius:var(--radius-pill);font-size:.8rem;font-weight:600;margin-bottom:28px;letter-spacing:.5px;text-transform:uppercase;backdrop-filter:blur(10px)}
+.hero-badge svg{animation:pulse 2s infinite}
+.hero h1{font-family:var(--font-display);font-size:3.8rem;line-height:1.1;font-weight:700;letter-spacing:-2px;margin-bottom:24px;color:#fff}
+.hero h1 em{font-style:italic;color:var(--accent-light);position:relative}
+.hero h1 em::after{content:'';position:absolute;bottom:4px;left:0;right:0;height:8px;background:var(--accent-glow);opacity:.3;border-radius:4px}
+.hero p{font-size:1.15rem;line-height:1.7;color:rgba(255,255,255,.65);max-width:480px;margin-bottom:36px}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;padding:16px 36px;border-radius:var(--radius-pill);font-size:1rem;font-weight:600;text-decoration:none;transition:all .4s cubic-bezier(.16,1,.3,1);border:none;cursor:pointer;position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);background-size:200% 100%;animation:shimmer 3s infinite}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(45,106,79,.35)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;border:2px solid rgba(255,255,255,.2);border-radius:var(--radius-pill);font-size:1rem;font-weight:500;text-decoration:none;color:#fff;transition:all .3s;background:none;cursor:pointer}
+.btn-secondary:hover{border-color:var(--accent-light);color:var(--accent-light)}
+.hero-visual{animation:slideInRight 1s cubic-bezier(.16,1,.3,1);position:relative}
+.hero-img-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hero-img-card{border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.3);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.hero-img-card:hover{transform:translateY(-6px) scale(1.02)}
+.hero-img-card img{width:100%;height:200px;object-fit:cover;transition:transform .6s}
+.hero-img-card:hover img{transform:scale(1.05)}
+.hero-img-card.tall{grid-row:span 2}
+.hero-img-card.tall img{height:100%;min-height:416px}
+.hero-img-label{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);color:#fff;padding:6px 14px;border-radius:var(--radius-pill);font-size:.75rem;font-weight:600;letter-spacing:.5px}
+.hero-floating-1,.hero-floating-2{position:absolute;background:#fff;border-radius:var(--radius);padding:14px 18px;box-shadow:0 8px 30px rgba(0,0,0,.15);display:flex;align-items:center;gap:12px;font-size:.85rem;font-weight:600;animation:float 5s ease-in-out infinite;z-index:2}
+.hero-floating-1{top:-10px;right:-10px;animation-delay:1s}
+.hero-floating-2{bottom:40px;left:-20px;animation-delay:2.5s}
+.floating-dot{width:10px;height:10px;border-radius:50%;background:var(--accent-light)}
+.floating-dot.coral{background:var(--coral)}
+
+/* Marquee */
+.marquee-section{padding:24px 0;background:var(--bg-alt);overflow:hidden;border-top:1px solid rgba(0,0,0,.04);border-bottom:1px solid rgba(0,0,0,.04)}
+.marquee-track{display:flex;animation:marquee 30s linear infinite;width:max-content}
+.marquee-item{display:flex;align-items:center;gap:12px;padding:0 40px;white-space:nowrap;font-size:.9rem;font-weight:500;color:var(--text-light)}
+.marquee-item svg{color:var(--accent);flex-shrink:0}
+
+/* Video */
+.video-section{background:var(--bg-dark);color:var(--text-inv);overflow:hidden}
+.video-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.video-grid.reverse{grid-template-columns:.9fr 1.1fr}
+.video-wrap{border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;aspect-ratio:16/9;background:#000}
+.video-wrap iframe{width:100%;height:100%;border:0}
+.video-wrap video{width:100%;height:100%;object-fit:cover}
+.video-play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);cursor:pointer;transition:background .3s;z-index:2}
+.video-play-overlay:hover{background:rgba(0,0,0,.15)}
+.video-play-btn{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,0,0,.3);transition:transform .3s}
+.video-play-overlay:hover .video-play-btn{transform:scale(1.1)}
+.video-content h2{font-family:var(--font-display);font-size:2.4rem;line-height:1.15;letter-spacing:-1.5px;margin-bottom:20px}
+.video-content h2 em{font-style:italic;color:var(--accent-light)}
+.video-content p{color:rgba(255,255,255,.6);font-size:1.05rem;line-height:1.7;margin-bottom:28px}
+.video-content .section-label{color:var(--accent-light)}
+.video-features{list-style:none;margin-bottom:32px}
+.video-features li{display:flex;align-items:center;gap:12px;padding:10px 0;font-size:.95rem;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.06)}
+.video-features li svg{color:var(--accent-light);flex-shrink:0}
+
+/* Inline video strip */
+.video-strip{padding:80px 0;background:var(--bg-alt)}
+.video-strip-header{text-align:center;margin-bottom:48px}
+.video-strip-header h2{font-family:var(--font-display);font-size:2.2rem;letter-spacing:-1px;margin-bottom:12px}
+.video-strip-header p{color:var(--text-light);font-size:1rem}
+.video-strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.video-strip-card{border-radius:var(--radius);overflow:hidden;background:var(--bg-card);box-shadow:var(--shadow);transition:all .4s}
+.video-strip-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.video-strip-card .video-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:pointer}
+.video-strip-card .video-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.video-strip-card:hover .video-thumb img{transform:scale(1.05)}
+.video-strip-card .video-thumb .play-sm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);transition:background .3s}
+.video-strip-card:hover .video-thumb .play-sm{background:rgba(0,0,0,.1)}
+.play-sm-btn{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.video-strip-card .video-info{padding:20px 24px}
+.video-strip-card .video-info h4{font-size:1rem;font-weight:700;margin-bottom:6px}
+.video-strip-card .video-info p{font-size:.83rem;color:var(--text-light);line-height:1.5}
+
+/* Before/After */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.ba-images{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ba-img{border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:var(--shadow);transition:all .4s}
+.ba-img:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.ba-img img{width:100%;height:280px;object-fit:cover}
+.ba-label{position:absolute;top:12px;left:12px;background:var(--accent);color:#fff;padding:4px 14px;border-radius:var(--radius-pill);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.ba-label.after{background:var(--coral)}
+.ba-content h2{font-family:var(--font-display);font-size:2.6rem;line-height:1.15;letter-spacing:-1.5px;margin-bottom:20px}
+.ba-content h2 em{font-style:italic;color:var(--accent)}
+.ba-content>p{color:var(--text-light);font-size:1.05rem;line-height:1.7;margin-bottom:32px}
+.ba-stats{display:flex;gap:32px;margin-bottom:32px}
+.ba-stat-num{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--accent)}
+.ba-stat-label{font-size:.82rem;color:var(--text-light)}
+
+/* Steps */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px}
+.step-card{background:var(--bg-card);border-radius:var(--radius);overflow:hidden;transition:all .4s cubic-bezier(.16,1,.3,1);border:1px solid rgba(0,0,0,.04)}
+.step-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.step-img{width:100%;height:160px;object-fit:cover}
+.step-body{padding:28px 24px}
+.step-number{font-family:var(--font-display);font-size:2.4rem;font-weight:700;color:var(--accent-glow);opacity:.4;line-height:1;margin-bottom:12px}
+.step-card h4{font-size:1.05rem;font-weight:700;margin-bottom:10px}
+.step-card p{font-size:.88rem;color:var(--text-light);line-height:1.6}
+.section-header{text-align:center;max-width:640px;margin:0 auto 60px}
+.section-label{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:16px}
+.section-header h2{font-family:var(--font-display);font-size:2.8rem;font-weight:700;line-height:1.15;letter-spacing:-1.5px;margin-bottom:18px}
+.section-header p{font-size:1.1rem;color:var(--text-light);line-height:1.7}
+
+/* Stats */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--accent);border-radius:var(--radius);overflow:hidden}
+.stat-item{padding:48px 32px;text-align:center;position:relative;color:#fff}
+.stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;bottom:20%;width:1px;background:rgba(255,255,255,.15)}
+.stat-number{font-family:var(--font-display);font-size:2.8rem;font-weight:700;margin-bottom:6px}
+.stat-label{font-size:.85rem;opacity:.75}
+
+/* Treatments */
+.treatments-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.treatment-card{background:var(--bg-card);border-radius:var(--radius);overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);border:1px solid rgba(0,0,0,.04)}
+.treatment-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.treatment-card-img{width:100%;height:220px;object-fit:cover}
+.treatment-card-body{padding:32px 28px}
+.treatment-tag{display:inline-block;padding:4px 14px;border-radius:var(--radius-pill);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.treatment-tag.injectable{background:rgba(45,106,79,.1);color:var(--accent)}
+.treatment-tag.oral{background:rgba(224,122,95,.1);color:var(--coral)}
+.treatment-card h3{font-family:var(--font-display);font-size:1.5rem;font-weight:600;margin-bottom:12px}
+.treatment-card-body>p{color:var(--text-light);font-size:.9rem;line-height:1.65;margin-bottom:20px}
+.treatment-features{list-style:none;margin-bottom:24px}
+.treatment-features li{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:.86rem;color:var(--text-light);border-bottom:1px solid rgba(0,0,0,.05)}
+.treatment-features li svg{color:var(--accent);flex-shrink:0}
+.btn-treatment{display:block;text-align:center;padding:13px;border-radius:var(--radius-pill);font-size:.9rem;font-weight:600;text-decoration:none;transition:all .3s;border:2px solid var(--accent);color:var(--accent);background:none;cursor:pointer;width:100%}
+.btn-treatment:hover{background:var(--accent);color:#fff}
+
+/* Doctor */
+.doctor-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.doctor-img-wrap{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg)}
+.doctor-img-wrap img{width:100%;height:500px;object-fit:cover}
+.doctor-img-badge{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-radius:var(--radius-sm);padding:20px 24px;display:flex;align-items:center;gap:16px}
+.doctor-badge-icon{width:48px;height:48px;background:var(--accent);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.doctor-badge-text h4{font-size:.95rem;font-weight:700;margin-bottom:2px}
+.doctor-badge-text p{font-size:.82rem;color:var(--text-light)}
+.doctor-content h2{font-family:var(--font-display);font-size:2.6rem;line-height:1.15;letter-spacing:-1.5px;margin-bottom:20px}
+.doctor-content h2 em{font-style:italic;color:var(--accent)}
+.doctor-content>p{color:var(--text-light);font-size:1.05rem;line-height:1.7;margin-bottom:28px}
+.doctor-list{list-style:none;margin-bottom:32px}
+.doctor-list li{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.95rem;line-height:1.5}
+.doctor-list li svg{color:var(--accent);flex-shrink:0;margin-top:2px}
+
+/* Testimonials */
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testimonial-card{background:var(--bg-card);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:all .4s}
+.testimonial-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.testimonial-img{width:100%;height:200px;object-fit:cover}
+.testimonial-body{padding:28px}
+.testimonial-stars{display:flex;gap:3px;margin-bottom:14px;color:var(--warm-dark)}
+.testimonial-card blockquote{font-size:.93rem;line-height:1.7;color:var(--text-light);margin-bottom:20px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:14px}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.testimonial-avatar img{width:100%;height:100%;object-fit:cover}
+.testimonial-name{font-weight:600;font-size:.9rem}
+.testimonial-meta{font-size:.78rem;color:var(--text-light)}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;max-width:800px;margin-left:auto;margin-right:auto}
+.price-card{background:var(--bg-card);border-radius:var(--radius);padding:44px 36px;border:2px solid rgba(0,0,0,.04);position:relative;transition:all .4s}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.price-card.featured{border-color:var(--accent);background:linear-gradient(180deg,rgba(45,106,79,.03) 0%,var(--bg-card) 100%)}
+.price-popular{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:6px 20px;border-radius:var(--radius-pill);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.price-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.price-card h3{font-family:var(--font-display);font-size:1.35rem;margin-bottom:8px}
+.price-card>.price-desc{font-size:.85rem;color:var(--text-light);margin-bottom:24px;line-height:1.5}
+.price-value{display:flex;align-items:baseline;gap:4px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid rgba(0,0,0,.06)}
+.price-value .currency{font-size:1rem;font-weight:600;color:var(--text-light)}
+.price-value .amount{font-family:var(--font-display);font-size:3rem;font-weight:700;line-height:1}
+.price-value .period{font-size:.85rem;color:var(--text-light)}
+.price-features{list-style:none;margin-bottom:32px}
+.price-features li{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:.88rem;color:var(--text-light)}
+.price-features li svg{color:var(--accent);flex-shrink:0}
+.btn-price{display:block;text-align:center;padding:14px;border-radius:var(--radius-pill);font-size:.95rem;font-weight:600;text-decoration:none;transition:all .3s;width:100%;border:none;cursor:pointer}
+.btn-price.primary{background:var(--accent);color:#fff}
+.btn-price.primary:hover{background:#245a42;transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,106,79,.3)}
+.btn-price.outline{border:2px solid rgba(0,0,0,.1);color:var(--text);background:none}
+.btn-price.outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* FAQ */
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(0,0,0,.06);overflow:hidden}
+.faq-question{display:flex;justify-content:space-between;align-items:center;padding:24px 0;cursor:pointer;background:none;border:none;width:100%;text-align:left;font-size:1.05rem;font-weight:600;font-family:var(--font-body);color:var(--text);transition:color .3s}
+.faq-question:hover{color:var(--accent)}
+.faq-icon{width:32px;height:32px;border-radius:50%;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.faq-item.open .faq-icon{background:var(--accent);color:#fff;transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1)}
+.faq-item.open .faq-answer{max-height:300px}
+.faq-answer p{padding-bottom:24px;font-size:.92rem;color:var(--text-light);line-height:1.7}
+
+/* CTA */
+.cta-section{position:relative;border-radius:var(--radius);overflow:hidden;padding:100px 60px;text-align:center;color:#fff;margin:0 24px 120px}
+.cta-bg{position:absolute;inset:0;z-index:0}
+.cta-bg img{width:100%;height:100%;object-fit:cover}
+.cta-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(45,106,79,.92),rgba(15,26,18,.85))}
+.cta-section h2{font-family:var(--font-display);font-size:2.6rem;font-weight:700;margin-bottom:18px;letter-spacing:-1px;position:relative;z-index:1}
+.cta-section p{font-size:1.1rem;opacity:.85;max-width:520px;margin:0 auto 36px;position:relative;z-index:1;line-height:1.6}
+.btn-cta{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--accent);padding:18px 40px;border-radius:var(--radius-pill);font-size:1.05rem;font-weight:700;text-decoration:none;transition:all .4s;position:relative;z-index:1;border:none;cursor:pointer}
+.btn-cta:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.2)}
+
+/* Footer */
+footer{background:var(--bg-dark);color:var(--text-inv);padding:80px 0 40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:60px}
+.footer-brand .nav-logo{color:#fff}.footer-brand p{color:rgba(255,255,255,.5);font-size:.9rem;line-height:1.7;margin-top:16px;max-width:300px}
+.footer-col h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.footer-col a{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:.9rem;padding:6px 0;transition:color .3s}
+.footer-col a:hover{color:var(--accent-light)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:32px;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:rgba(255,255,255,.35)}
+.footer-disclaimer{max-width:700px;font-size:.75rem;color:rgba(255,255,255,.25);line-height:1.6;margin-top:20px}
+
+/* Responsive */
+@media(max-width:1024px){.hero .container,.ba-grid,.doctor-grid,.video-grid,.video-grid.reverse{grid-template-columns:1fr;gap:40px}.hero h1{font-size:2.8rem}.steps-grid{grid-template-columns:repeat(2,1fr)}.treatments-grid,.testimonials-grid,.video-strip-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}.stats-bar{grid-template-columns:repeat(2,1fr)}.stat-item:nth-child(2)::after{display:none}.pricing-grid{grid-template-columns:1fr;max-width:420px}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){nav{padding:14px 20px}.nav-links{display:none}.nav-mobile{display:block}.hero{min-height:auto;padding:60px 0}.hero h1{font-size:2.2rem;letter-spacing:-1px}.hero p{font-size:1rem}.hero-floating-1,.hero-floating-2{display:none}.hero-img-card.tall img{min-height:250px}.section{padding:80px 0}.section-header h2{font-size:2rem}.steps-grid{grid-template-columns:1fr}.stats-bar{grid-template-columns:1fr;border-radius:var(--radius-sm)}.stat-item::after{display:none!important}.stat-item{padding:28px 24px}.stat-number{font-size:2rem}.ba-images{grid-template-columns:1fr}.cta-section{padding:60px 28px;margin:0 16px 80px}.cta-section h2{font-size:1.8rem}.footer-grid{grid-template-columns:1fr;gap:32px}.footer-bottom{flex-direction:column;gap:12px;text-align:center}.hero-actions{flex-direction:column;align-items:stretch}.doctor-img-wrap img{height:350px}.video-content h2{font-size:1.8rem}.video-strip{padding:60px 0}.video-strip-header h2{font-size:1.6rem}}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">dowy<span>.</span></a>
+  <div class="nav-links">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#tratamentos">Tratamentos</a>
+    <a href="#ciencia">A ciência</a>
+    <a href="#depoimentos">Resultados</a>
+    <a href="#planos">Planos</a>
+    <a href="#faq">FAQ</a>
+    <a href="#comecar" class="nav-cta">Começar agora</a>
+  </div>
+  <button class="nav-mobile" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=80" alt="Fitness lifestyle"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4"/></svg>100% Online · Prescrição Médica</div>
+      <h1>Seu novo corpo começa com um <em>plano</em></h1>
+      <p>Tratamentos por assinatura com acompanhamento médico para emagrecimento. Medicamentos entregues na sua porta, sem filas, sem complicação.</p>
+      <div class="hero-actions">
+        <a href="#planos" class="btn-primary">Quero emagrecer <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 9h8m-3-4l4 4-4 4"/></svg></a>
+        <a href="#como-funciona" class="btn-secondary"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="M9 6v4l2.5 1.5"/></svg>Como funciona</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-grid">
+        <div class="hero-img-card tall"><img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=600&q=80" alt="Pessoa saudável"><div class="hero-img-label">Resultado real</div></div>
+        <div class="hero-img-card"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Alimentação saudável"><div class="hero-img-label">Nutrição</div></div>
+        <div class="hero-img-card"><img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&q=80" alt="Medicamentos"><div class="hero-img-label">Seu tratamento</div></div>
+      </div>
+      <div class="hero-floating-1"><div class="floating-dot"></div><span>Entrega grátis</span></div>
+      <div class="hero-floating-2"><div class="floating-dot coral"></div><span>+12.000 assinantes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-section"><div class="marquee-track">
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Prescrição médica inclusa</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Entrega em todo o Brasil</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Suporte via WhatsApp</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Cancele quando quiser</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Medicamentos originais</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Acompanhamento nutricional</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Prescrição médica inclusa</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Entrega em todo o Brasil</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Suporte via WhatsApp</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Cancele quando quiser</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Medicamentos originais</div>
+  <div class="marquee-item"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg> Acompanhamento nutricional</div>
+</div></div>
+
+<!-- Before/After -->
+<section class="section">
+  <div class="container"><div class="ba-grid">
+    <div class="ba-images reveal">
+      <div class="ba-img"><img src="https://images.unsplash.com/photo-1573879541250-58ae8b322b40?w=600&q=80" alt="Antes"><div class="ba-label">Antes</div></div>
+      <div class="ba-img"><img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=600&q=80" alt="Depois"><div class="ba-label after">Depois</div></div>
+    </div>
+    <div class="ba-content reveal reveal-delay-2">
+      <div class="section-label"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.78 5.22l-4.5 4.5a.75.75 0 01-1.06 0l-2-2a.75.75 0 111.06-1.06L6.75 9.13l3.97-3.97a.75.75 0 111.06 1.06z"/></svg>Transformações reais</div>
+      <h2>Resultados que você pode <em>ver</em></h2>
+      <p>Nossos assinantes perdem em média 15% do peso corporal nos primeiros 6 meses de tratamento, com acompanhamento médico em todas as etapas.</p>
+      <div class="ba-stats"><div><div class="ba-stat-num">-15%</div><div class="ba-stat-label">Peso corporal médio</div></div><div><div class="ba-stat-num">4 sem</div><div class="ba-stat-label">Primeiros resultados</div></div><div><div class="ba-stat-num">97%</div><div class="ba-stat-label">Recomendam</div></div></div>
+      <a href="#planos" class="btn-primary">Quero começar →</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- VIDEO: A ciência -->
+<section class="section video-section" id="ciencia" style="background:var(--bg-dark);color:var(--text-inv)">
+  <div class="container"><div class="video-grid">
+    <div class="video-wrap reveal">
+      <iframe src="https://www.youtube.com/embed/gKfGdV9hXJA?rel=0" title="Como funciona o GLP-1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-content reveal reveal-delay-2">
+      <div class="section-label">A ciência por trás</div>
+      <h2>Como o GLP-1 faz você <em>emagrecer</em></h2>
+      <p>Os agonistas de GLP-1 imitam um hormônio natural do intestino que reduz a fome, aumenta a saciedade e melhora o metabolismo. Assista e entenda como funciona.</p>
+      <ul class="video-features">
+        <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Reduz o apetite de forma natural</li>
+        <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Retarda o esvaziamento gástrico</li>
+        <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Estudos com até 22% de perda de peso</li>
+        <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Benefícios cardiovasculares comprovados</li>
+      </ul>
+    </div>
+  </div></div>
+</section>
+
+<!-- How it Works -->
+<section class="section" id="como-funciona" style="background:var(--bg-alt)">
+  <div class="container">
+    <div class="section-header reveal"><div class="section-label"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 2a1 1 0 110 2 1 1 0 010-2zm2 8H6v-1h1V7H6V6h3v4h1v1z"/></svg>Como funciona</div><h2>Simples, rápido e sem burocracia</h2><p>Em 4 passos você começa seu tratamento personalizado com acompanhamento médico contínuo.</p></div>
+    <div class="steps-grid">
+      <div class="step-card reveal reveal-delay-1"><img class="step-img" src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&q=80" alt="Questionário"><div class="step-body"><div class="step-number">01</div><h4>Questionário online</h4><p>Responda sobre sua saúde, metas e histórico em poucos minutos.</p></div></div>
+      <div class="step-card reveal reveal-delay-2"><img class="step-img" src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=600&q=80" alt="Médico online"><div class="step-body"><div class="step-number">02</div><h4>Avaliação médica</h4><p>Um médico analisa seu perfil e define o melhor tratamento para você.</p></div></div>
+      <div class="step-card reveal reveal-delay-3"><img class="step-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Entrega"><div class="step-body"><div class="step-number">03</div><h4>Receba em casa</h4><p>Seu tratamento chega discretamente na sua porta com frete grátis.</p></div></div>
+      <div class="step-card reveal reveal-delay-4"><img class="step-img" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80" alt="Acompanhamento"><div class="step-body"><div class="step-number">04</div><h4>Acompanhamento</h4><p>Suporte contínuo de saúde via WhatsApp e consultas de retorno.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section style="padding:0 24px;transform:translateY(-50px);position:relative;z-index:2">
+  <div class="container"><div class="stats-bar reveal">
+    <div class="stat-item"><div class="stat-number">12k+</div><div class="stat-label">Assinantes ativos</div></div>
+    <div class="stat-item"><div class="stat-number">97%</div><div class="stat-label">Satisfação</div></div>
+    <div class="stat-item"><div class="stat-number">15%</div><div class="stat-label">Perda média de peso</div></div>
+    <div class="stat-item"><div class="stat-number">48h</div><div class="stat-label">Avaliação médica</div></div>
+  </div></div>
+</section>
+
+<!-- Treatments -->
+<section class="section" id="tratamentos">
+  <div class="container">
+    <div class="section-header reveal"><div class="section-label"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.5 1h-3a.5.5 0 00-.5.5V5H4V1.5a.5.5 0 00-.5-.5h-3a.5.5 0 00-.5.5v13a.5.5 0 00.5.5h3a.5.5 0 00.5-.5V11h6v3.5a.5.5 0 00.5.5h3a.5.5 0 00.5-.5v-13a.5.5 0 00-.5-.5z"/></svg>Tratamentos</div><h2>O medicamento certo para o seu perfil</h2><p>Cada organismo é único. Nossos médicos definem o tratamento ideal após avaliação completa do seu caso.</p></div>
+    <div class="treatments-grid">
+      <div class="treatment-card reveal reveal-delay-1">
+        <img class="treatment-card-img" src="https://images.unsplash.com/photo-1631549916768-4f37b5e34c67?w=600&q=80" alt="Monjaro">
+        <div class="treatment-card-body"><div class="treatment-tag injectable">Injetável</div><h3>Monjaro®</h3><p>Tirzepatida — agonista duplo GLP-1/GIP. Um dos mais eficazes para perda de peso significativa.</p>
+        <ul class="treatment-features"><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Redução de até 22% do peso</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Aplicação semanal</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Controle glicêmico</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Saciedade prolongada</li></ul>
+        <a href="#planos" class="btn-treatment">Ver planos →</a></div>
+      </div>
+      <div class="treatment-card reveal reveal-delay-2">
+        <img class="treatment-card-img" src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600&q=80" alt="Ozempic">
+        <div class="treatment-card-body"><div class="treatment-tag injectable">Injetável</div><h3>Ozempic®</h3><p>Semaglutida — agonista GLP-1 comprovado. Reduz apetite e promove emagrecimento sustentável.</p>
+        <ul class="treatment-features"><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Perda de 15-17% do peso</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Aplicação semanal</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Ampla base científica</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Melhora metabólica</li></ul>
+        <a href="#planos" class="btn-treatment">Ver planos →</a></div>
+      </div>
+      <div class="treatment-card reveal reveal-delay-3">
+        <img class="treatment-card-img" src="https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=600&q=80" alt="Comprimidos">
+        <div class="treatment-card-body"><div class="treatment-tag oral">Via oral</div><h3>Naltrexona + Bupropiona</h3><p>Combinação oral que age no SNC, reduzindo compulsão alimentar e controlando a fome emocional.</p>
+        <ul class="treatment-features"><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Sem agulhas — comprimido</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Controla fome emocional</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Reduz compulsão alimentar</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Opção mais acessível</li></ul>
+        <a href="#planos" class="btn-treatment">Ver planos →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Strip: Entenda mais -->
+<section class="video-strip">
+  <div class="container">
+    <div class="video-strip-header reveal"><div class="section-label"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H1a1 1 0 01-1-1V1zm4 0v14h8V1H4z"/></svg>Aprenda mais</div><h2>Vídeos sobre emagrecimento e saúde</h2><p>Conteúdo educativo para você tomar a melhor decisão sobre seu tratamento.</p></div>
+    <div class="video-strip-grid">
+      <div class="video-strip-card reveal reveal-delay-1">
+        <div class="video-thumb" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/xkWKsJRCDO4?autoplay=1&rel=0\' style=\'width:100%;height:100%;border:0\' allow=\'autoplay;encrypted-media\' allowfullscreen></iframe>'">
+          <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80" alt="Metabolismo">
+          <div class="play-sm"><div class="play-sm-btn"><svg width="20" height="20" fill="var(--accent)" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div></div>
+        </div>
+        <div class="video-info"><h4>Como o metabolismo funciona</h4><p>Entenda por que algumas pessoas emagrecem mais rápido que outras.</p></div>
+      </div>
+      <div class="video-strip-card reveal reveal-delay-2">
+        <div class="video-thumb" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/gKfGdV9hXJA?autoplay=1&rel=0\' style=\'width:100%;height:100%;border:0\' allow=\'autoplay;encrypted-media\' allowfullscreen></iframe>'">
+          <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&q=80" alt="GLP-1">
+          <div class="play-sm"><div class="play-sm-btn"><svg width="20" height="20" fill="var(--accent)" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div></div>
+        </div>
+        <div class="video-info"><h4>O que são os medicamentos GLP-1?</h4><p>A ciência por trás do Ozempic, Monjaro e como eles reduzem a fome.</p></div>
+      </div>
+      <div class="video-strip-card reveal reveal-delay-3">
+        <div class="video-thumb" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/Yb-3po8R_04?autoplay=1&rel=0\' style=\'width:100%;height:100%;border:0\' allow=\'autoplay;encrypted-media\' allowfullscreen></iframe>'">
+          <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80" alt="Alimentação">
+          <div class="play-sm"><div class="play-sm-btn"><svg width="20" height="20" fill="var(--accent)" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div></div>
+        </div>
+        <div class="video-info"><h4>Alimentação e emagrecimento</h4><p>Dicas de nutrição para potencializar resultados do seu tratamento.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Doctor + Video -->
+<section class="section">
+  <div class="container"><div class="doctor-grid">
+    <div class="doctor-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=80" alt="Médico">
+      <div class="doctor-img-badge"><div class="doctor-badge-icon"><svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 11c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4z"/><path d="M20 21v-2c0-2.2-3.6-4-8-4s-8 1.8-8 4v2"/></svg></div><div class="doctor-badge-text"><h4>Equipe médica licenciada</h4><p>Endocrinologistas e nutricionistas</p></div></div>
+    </div>
+    <div class="doctor-content reveal reveal-delay-2">
+      <div class="section-label"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.78 5.22l-4.5 4.5a.75.75 0 01-1.06 0l-2-2a.75.75 0 111.06-1.06L6.75 9.13l3.97-3.97a.75.75 0 111.06 1.06z"/></svg>Acompanhamento profissional</div>
+      <h2>Médicos de verdade cuidando de <em>você</em></h2>
+      <p>Na Dowy cada assinante tem acompanhamento médico real e contínuo — não é só uma receita.</p>
+      <ul class="doctor-list">
+        <li><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg><div><strong>Avaliação completa</strong> — análise do histórico, exames e objetivos antes de qualquer prescrição</div></li>
+        <li><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg><div><strong>Ajustes de dose</strong> — acompanha resultados e ajusta conforme necessário</div></li>
+        <li><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg><div><strong>Suporte 24/7</strong> — fale com nosso time de saúde pelo WhatsApp</div></li>
+      </ul>
+      <a href="#planos" class="btn-primary">Falar com um médico →</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="depoimentos" style="background:var(--bg-alt)">
+  <div class="container">
+    <div class="section-header reveal"><div class="section-label"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.78 5.22l-4.5 4.5a.75.75 0 01-1.06 0l-2-2a.75.75 0 111.06-1.06L6.75 9.13l3.97-3.97a.75.75 0 111.06 1.06z"/></svg>Resultados reais</div><h2>Quem usa Dowy, recomenda</h2><p>Milhares de pessoas já transformaram suas vidas com nossos planos de assinatura.</p></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-delay-1"><img class="testimonial-img" src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=600&q=80" alt="Exercício"><div class="testimonial-body"><div class="testimonial-stars"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg></div><blockquote>"Em 4 meses perdi 18kg. O acompanhamento faz toda diferença, não me senti sozinha em nenhum momento."</blockquote><div class="testimonial-author"><div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt=""></div><div><div class="testimonial-name">Camila M.</div><div class="testimonial-meta">Plano Ozempic · 4 meses</div></div></div></div></div>
+      <div class="testimonial-card reveal reveal-delay-2"><img class="testimonial-img" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="Treino"><div class="testimonial-body"><div class="testimonial-stars"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg></div><blockquote>"O Monjaro mudou minha vida. Já eliminei 22kg em 5 meses e voltei a me sentir confiante."</blockquote><div class="testimonial-author"><div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt=""></div><div><div class="testimonial-name">Fernando A.</div><div class="testimonial-meta">Plano Monjaro · 5 meses</div></div></div></div></div>
+      <div class="testimonial-card reveal reveal-delay-3"><img class="testimonial-img" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Vida ativa"><div class="testimonial-body"><div class="testimonial-stars"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/></svg></div><blockquote>"A Naltrexona + Bupropiona controlou minha compulsão e já eliminei 12kg sem sofrimento."</blockquote><div class="testimonial-author"><div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt=""></div><div><div class="testimonial-name">Juliana L.</div><div class="testimonial-meta">Plano Oral · 3 meses</div></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="planos">
+  <div class="container">
+    <div class="section-header reveal"><div class="section-label"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M11 1H5a2 2 0 00-2 2v10a2 2 0 002 2h6a2 2 0 002-2V3a2 2 0 00-2-2zM5 3h6v2H5V3z"/></svg>Planos de assinatura</div><h2>Escolha o plano ideal para você</h2><p>Sem fidelidade. Cancele quando quiser. Todos incluem prescrição médica e acompanhamento contínuo.</p></div>
+    <div class="pricing-grid">
+      <div class="price-card reveal reveal-delay-1"><div class="price-icon" style="background:rgba(224,122,95,.1);color:var(--coral)"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="14" cy="14" r="6"/><path d="M14 10v4l2 2"/></svg></div><h3>Plano Oral</h3><p class="price-desc">Naltrexona + Bupropiona. Ideal para controle de compulsão alimentar.</p><div class="price-value"><span class="currency">R$</span><span class="amount">297</span><span class="period">/mês</span></div><ul class="price-features"><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Prescrição médica</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Medicamento incluso</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Suporte via WhatsApp</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Entrega mensal grátis</li></ul><button class="btn-price outline">Começar agora</button></div>
+      <div class="price-card featured reveal reveal-delay-2"><div class="price-popular">Mais popular</div><div class="price-icon" style="background:rgba(45,106,79,.1);color:var(--accent)"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="2" width="12" height="24" rx="4"/><path d="M8 18h12M11 22h6"/></svg></div><h3>Plano Injetável</h3><p class="price-desc">Ozempic® ou Monjaro®. Para quem busca resultados máximos.</p><div class="price-value"><span class="currency">R$</span><span class="amount">1.200</span><span class="period">/mês</span></div><ul class="price-features"><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Prescrição médica</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Medicamento original incluso</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Acompanhamento nutricional</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Suporte prioritário 24/7</li><li><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 111.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Entrega mensal grátis</li></ul><button class="btn-price primary">Começar agora</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:var(--bg-alt)">
+  <div class="container">
+    <div class="section-header reveal"><div class="section-label"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM7.25 11.5a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM8 4a2.5 2.5 0 00-2.5 2.5.75.75 0 001.5 0 1 1 0 112 0c0 .42-.27.75-.65.95A2.22 2.22 0 007.25 9.5a.75.75 0 001.5 0c0-.26.13-.5.34-.63A2.5 2.5 0 008 4z"/></svg>Perguntas frequentes</div><h2>Tire suas dúvidas</h2></div>
+    <div class="faq-list">
+      <div class="faq-item reveal"><button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Preciso de receita médica?<div class="faq-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 3v8M3 7h8"/></svg></div></button><div class="faq-answer"><p>Não precisa ter receita prévia. Nossos médicos fazem a avaliação online e prescrevem o tratamento ideal para você.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Os medicamentos são originais?<div class="faq-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 3v8M3 7h8"/></svg></div></button><div class="faq-answer"><p>Sim, todos os medicamentos são originais, registrados na ANVISA e adquiridos em farmácias credenciadas.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Posso cancelar quando quiser?<div class="faq-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 3v8M3 7h8"/></svg></div></button><div class="faq-answer"><p>Sim! Sem fidelidade nem multa. Cancele, pause ou troque de plano a qualquer momento.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Em quanto tempo vejo resultados?<div class="faq-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 3v8M3 7h8"/></svg></div></button><div class="faq-answer"><p>A maioria dos pacientes nota resultados significativos nas primeiras 4 semanas de tratamento.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Como funciona a entrega?<div class="faq-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 3v8M3 7h8"/></svg></div></button><div class="faq-answer"><p>Embalagem discreta, frete grátis para todo o Brasil. Renovação automática e mensal.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="comecar" style="padding:120px 0 0">
+  <div class="cta-section reveal">
+    <div class="cta-bg"><img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1920&q=80" alt="Corrida"></div>
+    <h2>Comece sua transformação hoje</h2>
+    <p>Responda um questionário rápido, receba sua avaliação médica em até 48h e tenha seu tratamento entregue em casa.</p>
+    <a href="#planos" class="btn-cta">Fazer minha avaliação gratuita <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 9h8m-3-4l4 4-4 4"/></svg></a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="#" class="nav-logo">dowy<span>.</span></a><p>Emagrecimento por assinatura com acompanhamento médico, 100% online. Medicamentos originais entregues na sua porta.</p></div>
+      <div class="footer-col"><h4>Tratamentos</h4><a href="#">Ozempic®</a><a href="#">Monjaro®</a><a href="#">Naltrexona + Bupropiona</a></div>
+      <div class="footer-col"><h4>Empresa</h4><a href="#">Como funciona</a><a href="#">Resultados</a><a href="#">Blog</a><a href="#">Especialistas</a></div>
+      <div class="footer-col"><h4>Suporte</h4><a href="#">Central de ajuda</a><a href="#">WhatsApp</a><a href="#">contato@dowy.com.br</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Dowy. Todos os direitos reservados.</span><span>Privacidade · Termos de Uso</span></div>
+    <div class="footer-disclaimer">Os resultados são individuais e cada organismo responde de forma diferente. Os medicamentos mencionados são marcas registradas de seus respectivos fabricantes. A Dowy não é uma farmácia — todos os medicamentos são prescritos por médicos licenciados e dispensados por farmácias credenciadas conforme normas da ANVISA.</div>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+function animateCounter(el,target,suffix=''){const duration=2000,startTime=performance.now(),numTarget=parseFloat(target);function update(now){const progress=Math.min((now-startTime)/duration,1),eased=1-Math.pow(1-progress,3);el.textContent=Math.round(eased*numTarget).toLocaleString('pt-BR')+suffix;if(progress<1)requestAnimationFrame(update)}requestAnimationFrame(update)}
+const statsObserver=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){const items=e.target.querySelectorAll('.stat-number');[{t:12000,s:'+'},{t:97,s:'%'},{t:15,s:'%'},{t:48,s:'h'}].forEach((d,i)=>setTimeout(()=>animateCounter(items[i],d.t,d.s),i*200));statsObserver.unobserve(e.target)}})},{threshold:.5});
+const sb=document.querySelector('.stats-bar');if(sb)statsObserver.observe(sb);
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+</body>
+</html>
