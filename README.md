@@ -1,123 +1,32 @@
 # Mika-IO.github.io
 
-My portfolio
+- Portifolio P
+- Free tools to make money with google ads and magnetic leads 
 
-### TODO features:
+# Programmatic SEO
 
-- Replace px por rem
-- Configure domain mikaio.dev ✔
-- Migrate to react or next? RUST yew?????????? BLAZING FAST
-- Add multilang
-            <h2 class="text-sm mt-2 text-center"><span class="text-lg font-bold"> I am </span>["Father", "Developer", "Pythonista", "Mathematical", "AI & Crypto enthusiast"]</h2>
+Place developer tools in the `tools` folder and include a comprehensive list of ideas for various free tools in `free_tools_ideas.md`. Develop each page in the 10 listed languages. The complete site must include `sitemap.xml`, `robots.txt`, `llm.txt`, JSON-LD, and any other configurations necessary for excellent programmatic SEO. Each page must contain at least 1,000 words of content. Reuse styling across pages and organize directories logically to ensure a clean structure and a sound routing setup.
 
-### Projects ideas to my portfolio:
+Ignore `index.html` and the other HTML files in the root directory; they are separate projects and experiments. Add them to the sitemap, but do not modify them.
 
-- [x] minytools
-- [ ] typing js library
-- [ ] multilang js library
-- [ ] drinkwater
-- [ ] aliceshell
-- [ ] deolho
-- [ ] consultaBrasil
-- [ ] karatesoshin
-- [ ] equacciones
-- [ ] chip8emulator
-- [ ] mike assistant
-- [ ] simpleGPT
-- [ ] nonprocrastinator kanban board app
-- [ ] faceDetectModel
-- [ ] polyscript.dev
-- [ ] python2mojo
+Be very careful with translations so they don't sound robotic or nonsensical.
 
-### Articles ideas:
+High-performance pages, fully optimized for page speed, with impeccable SEO and reusable CSS and JS.
 
--- Python articles --
+Each tool implemented in the 10 languages.
 
-- [ ] List comprehension
-- [ ] Args and Kwargs
-- [ ] Map and Filter
-- [ ] OOP
-- [ ] Inherence
-- [ ] Polimofirms
-- [ ] Dunder methods
-- [ ] Pip
-- [ ] Environments
-- [ ] Async IO
+glossary.html at the root with the list of all pages
 
-- [ ] Decorators
-- [ ] Generators
-- [ ] Context_manager
-- [ ] Metaclasses
-- [ ] Concurrency and parallelism
-- [ ] Multithreading
-- [ ] Unittesting
-- [ ] Package creation
-- [ ] Cython and FFI(Foreign Function Interface)
 
-- [ ] Don't do that in Python
-- [ ] Don't do that in Django
+# Top 10 languages in númber of speakers
 
---- Rust articles ---
-
-- [ ] Variables and Data Types
-- [ ] Functions and Control Flow
-- [ ] Structs and Enums
-- [ ] Pointers and References
-- [ ] Arrays, Slices, and Vectors
-- [ ] Strings and Characters
-- [ ] Conditional Statements
-- [ ] Loops
-- [ ] Match Expressions
-- [ ] Rust's Memory Model
-- [ ] Structs, Enums, and Traits
-- [ ] Generics and Lifetimes
-- [ ] Error Handling
-- [ ] Macros and Metaprogramming
-- [ ] Collections and Data Structures
-- [ ] Functional Programming in Rust
-- [ ] Rust's Standard Library
-- [ ] Asynchronous programming with async/await
-- [ ] Unsafe Rust and working with raw pointers
-- [ ] Advanced error handling with Result, Option, and the ? operator
-- [ ] Concurrency and parallelism with threads and channels
-- [ ] Trait objects and dynamic dispatch
-- [ ] Advanced lifetime management and borrowing
-- [ ] SIMD programming with vector types
-- [ ] Advanced data structures and algorithms
-- [ ] Systems programming with Rust
-
---- ReactJS articles --
-
-- [ ] JavaScript Fundamentals
-- [ ] HTML and CSS
-- [ ] ES6+ Features
-- [ ] React Basics
-- [ ] React Router
-- [ ] React Hooks
-- [ ] Redux (or other state management libraries)
-- [ ] React Context
-- [ ] React Forms
-- [ ] React UI Libraries
-- [ ] React Testing
-- [ ] Build Tools and Bundlers
-- [ ] React Best Practices and Patterns
-- [ ] React Ecosystem
-- [ ] Real-World Project Experience
-
---- React Native articles --
-
-- [ ] Introduction to React Native
-- [ ] Setting up React Native Development Environment
-- [ ] React Native Components and JSX
-- [ ] Styling in React Native
-- [ ] React Native Navigation
-- [ ] Working with APIs in React Native
-- [ ] Handling User Input in React Native
-- [ ] State Management in React Native
-- [ ] React Native Animations and Gestures
-- [ ] React Native UI Libraries and Components
-- [ ] React Native Debugging and Error Handling
-- [ ] React Native Performance Optimization
-- [ ] React Native Deployment and Distribution
-- [ ] React Native Plugins and Native Modules
-- [ ] Building Real-World Apps with React Native
+Inglês
+Chinês Mandarim
+Hindi
+Espanhol
+Francês
+Árabe Padrão
+Bengali
+Português
+Russo
+Urdu

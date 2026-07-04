@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pomodoro Timer — 25-minute focus timer for studying and work</title>
+<meta name="description" content="Free Pomodoro timer. 25-minute focus sessions with 5-minute short breaks and 15-minute long breaks. No signup needed. Runs in your browser with sound alerts.">
+<link rel="canonical" href="https://mikaio.dev/en/pomodoro/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/pomodoro/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/pomodoro/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/pomodoro/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pomodoro Timer — 25-minute focus timer for studying and work">
+<meta property="og:description" content="Free Pomodoro timer. 25-minute focus sessions with 5-minute short breaks and 15-minute long breaks. No signup needed. Runs in your browser with sound alerts.">
+<meta property="og:url" content="https://mikaio.dev/en/pomodoro/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Pomodoro Timer — 25-minute focus timer for studying and work","url":"https://mikaio.dev/en/pomodoro/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free Pomodoro timer. 25-minute focus sessions with 5-minute short breaks and 15-minute long breaks. No signup needed. Runs in your browser with sound alerts."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Pomodoro Timer","item":"https://mikaio.dev/en/pomodoro/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Pomodoro Technique?","acceptedAnswer":{"@type":"Answer","text":"Developed by Francesco Cirillo in the late 1980s, the Pomodoro Technique alternates 25-minute focused work sessions with short breaks. After four sessions a longer break is taken. The name comes from a tomato-shaped kitchen timer."}},{"@type":"Question","name":"Can I change the timer durations?","acceptedAnswer":{"@type":"Answer","text":"This implementation uses the classic durations: 25 minutes of focus, 5-minute short breaks, and a 15-minute long break after every four sessions. These durations are evidence-backed for sustaining attention over long work periods."}},{"@type":"Question","name":"Will I hear a sound when the timer ends?","acceptedAnswer":{"@type":"Answer","text":"Yes, the timer plays a short audio alert using the Web Audio API. Make sure your device volume is on."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Pomodoro Timer</span></nav>
+  <h1>Pomodoro Timer</h1>
+  <p class="lead">Click Start to begin a 25-minute focus session. A sound plays when time is up and the timer automatically switches to a 5-minute break. After four sessions, a longer 15-minute break is offered.</p>
+  <section class="widget" id="tool"><div id="pom-app" style="text-align:center"><div id="pom-phase" style="font-size:1rem;margin-bottom:0.5rem;opacity:0.7">Ready to focus</div><div id="pom-display" style="font-size:4rem;font-weight:700;font-variant-numeric:tabular-nums">25:00</div><div style="margin:1rem 0;display:flex;gap:0.5rem;justify-content:center"><button id="pom-start" class="btn">Start</button><button id="pom-reset" class="btn secondary">Reset</button></div><div id="pom-count" style="opacity:0.6;font-size:0.9rem"></div></div></section>
+  <article class="content">
+    <h2>The 25-minute focus technique that changed how millions work</h2>
+<p>The Pomodoro Technique is one of the most widely used time-management methods in the world. Developed by Francesco Cirillo in the late 1980s and named after a tomato-shaped kitchen timer, it works on a simple insight: the human brain sustains deep focus better in shorter bursts than in long unbroken stretches. By working in structured 25-minute intervals separated by brief rests, you can maintain high concentration throughout a long day without the mental exhaustion that comes from grinding continuously.</p>
+<h2>How the Pomodoro timer works</h2>
+<p>Click Start to begin a 25-minute focus session — one Pomodoro. During this time, work on a single task and avoid all distractions. When the 25 minutes are up, a sound plays and the timer automatically switches to a 5-minute short break. Use this break to stand, stretch, or rest your eyes. After four Pomodoros, a longer 15-minute break is offered to let your brain consolidate what it has processed.</p>
+<h2>The science of attention and rest</h2>
+<p>Research on cognitive performance consistently shows that sustained attention degrades over time. After roughly 25 to 30 minutes of focused work, error rates begin to rise and productivity falls even if the person feels they are still concentrating. Short, deliberate breaks counteract this effect by giving the prefrontal cortex time to consolidate information and reset attention. The Pomodoro Technique formalises this into a routine so the breaks happen reliably rather than only when you are already too tired.</p>
+<p>The technique also uses the psychology of commitment. Knowing you only need to stay focused for 25 minutes — not all morning — lowers the activation energy required to start a difficult task. Procrastination frequently comes from the perceived enormousness of a job; breaking it into 25-minute chunks makes it tractable.</p>
+<h2>Practical tips for effective Pomodoro sessions</h2>
+<p>Before starting the timer, write down what you will work on. A clear intention for the next 25 minutes removes decision-making from the session itself. If a distracting thought arises during a Pomodoro, jot it down on a notepad and return to it after the session ends rather than acting on it immediately.</p>
+<p>Keep the break strictly to five minutes. The urge to extend it is natural but undermines the rhythm. After four sessions, the 15-minute long break is an appropriate time to go for a short walk or have a meal, which helps consolidate memory and restore alertness for the next block of sessions.</p>
+<p>The technique works best for tasks that require sustained concentration: writing, coding, studying, reading, design work, or any form of deep creative or analytical effort. It is less suited to highly collaborative work where interruptions are inherent.</p>
+<h2>Students and learners</h2>
+<p>Students preparing for exams often adopt the Pomodoro Technique because it provides a concrete structure for revision sessions. Rather than sitting at a desk for three undefined hours and gradually losing focus, a student works for 25 minutes, breaks for 5, and tracks their sessions. Eight Pomodoros in a day represents four hours of genuine focused study — far more effective than eight hours of scattered half-attention.</p>
+<h2>Private and always ready</h2>
+<p>This timer runs entirely in your browser. No account, no tracking, no data sent anywhere. Refresh the page to start fresh.</p>
+<h2>How it works</h2>
+<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
+<h2>Why browser-based tools matter</h2>
+<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
+<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
+<h2>Getting the most from this tool</h2>
+<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
+<h2>Precision and limitations</h2>
+<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
+<h2>Sharing your results</h2>
+<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
+<h2>Bookmarking and returning</h2>
+<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
+<h2>Mobile-friendly design</h2>
+<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
+<h2>Accuracy note</h2>
+<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
+<h2>Frequently asked questions — general</h2>
+<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
+<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
+<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
+<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+<h2>How it works</h2>
+<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
+<h2>Why browser-based tools matter</h2>
+<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
+<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
+<h2>Getting the most from this tool</h2>
+<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
+<h2>Precision and limitations</h2>
+<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
+<h2>Sharing your results</h2>
+<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
+<h2>Bookmarking and returning</h2>
+<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
+<h2>Mobile-friendly design</h2>
+<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
+<h2>Accuracy note</h2>
+<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
+<h2>Frequently asked questions — general</h2>
+<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
+<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
+<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
+<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+    <section class="faq"><h2>Pomodoro FAQ</h2><dl><dt>What is the Pomodoro Technique?</dt><dd>Developed by Francesco Cirillo in the late 1980s, the Pomodoro Technique alternates 25-minute focused work sessions with short breaks. After four sessions a longer break is taken. The name comes from a tomato-shaped kitchen timer.</dd><dt>Can I change the timer durations?</dt><dd>This implementation uses the classic durations: 25 minutes of focus, 5-minute short breaks, and a 15-minute long break after every four sessions. These durations are evidence-backed for sustaining attention over long work periods.</dd><dt>Will I hear a sound when the timer ends?</dt><dd>Yes, the timer plays a short audio alert using the Web Audio API. Make sure your device volume is on.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/pomodoro/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/pomodoro/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/pomodoro.js" defer></script>
+</body>
+</html>

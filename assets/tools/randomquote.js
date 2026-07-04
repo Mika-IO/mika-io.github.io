@@ -1,0 +1,67 @@
+(function(){
+  'use strict';
+  var quotes=[
+    {t:'The only way to do great work is to love what you do.',a:'Steve Jobs'},
+    {t:'In the middle of every difficulty lies opportunity.',a:'Albert Einstein'},
+    {t:'It does not matter how slowly you go as long as you do not stop.',a:'Confucius'},
+    {t:'The future belongs to those who believe in the beauty of their dreams.',a:'Eleanor Roosevelt'},
+    {t:'It always seems impossible until it's done.',a:'Nelson Mandela'},
+    {t:'Success is not final, failure is not fatal: it is the courage to continue that counts.',a:'Winston Churchill'},
+    {t:'The only limit to our realization of tomorrow will be our doubts of today.',a:'Franklin D. Roosevelt'},
+    {t:'Do what you can, with what you have, where you are.',a:'Theodore Roosevelt'},
+    {t:'Believe you can and you're halfway there.',a:'Theodore Roosevelt'},
+    {t:'You miss 100% of the shots you don't take.',a:'Wayne Gretzky'},
+    {t:'The best time to plant a tree was 20 years ago. The second best time is now.',a:'Chinese Proverb'},
+    {t:'An investment in knowledge pays the best interest.',a:'Benjamin Franklin'},
+    {t:'Life is what happens when you're busy making other plans.',a:'John Lennon'},
+    {t:'The way to get started is to quit talking and begin doing.',a:'Walt Disney'},
+    {t:'If life were predictable it would cease to be life, and be without flavor.',a:'Eleanor Roosevelt'},
+    {t:'Spread love everywhere you go. Let no one ever come to you without leaving happier.',a:'Mother Teresa'},
+    {t:'When you reach the end of your rope, tie a knot in it and hang on.',a:'Franklin D. Roosevelt'},
+    {t:'Always remember that you are absolutely unique. Just like everyone else.',a:'Margaret Mead'},
+    {t:'Do not go where the path may lead, go instead where there is no path and leave a trail.',a:'Ralph Waldo Emerson'},
+    {t:'You will face many defeats in life, but never let yourself be defeated.',a:'Maya Angelou'},
+    {t:'The greatest glory in living lies not in never falling, but in rising every time we fall.',a:'Nelson Mandela'},
+    {t:'In the end, it's not the years in your life that count. It's the life in your years.',a:'Abraham Lincoln'},
+    {t:'Never let the fear of striking out keep you from playing the game.',a:'Babe Ruth'},
+    {t:'Life is either a daring adventure or nothing at all.',a:'Helen Keller'},
+    {t:'Many of life's failures are people who did not realize how close they were to success when they gave up.',a:'Thomas Edison'},
+    {t:'You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose.',a:'Dr. Seuss'},
+    {t:'If you look at what you have in life, you'll always have more.',a:'Oprah Winfrey'},
+    {t:'If you want to live a happy life, tie it to a goal, not to people or things.',a:'Albert Einstein'},
+    {t:'Never let the fear of striking out keep you from playing the game.',a:'Babe Ruth'},
+    {t:'Money and success don't change people; they merely amplify what is already there.',a:'Will Smith'},
+    {t:'Your time is limited, so don't waste it living someone else's life.',a:'Steve Jobs'},
+    {t:'Not how long, but how well you have lived is the main thing.',a:'Seneca'},
+    {t:'If life were predictable it would cease to be life.',a:'Eleanor Roosevelt'},
+    {t:'Keep your face always toward the sunshine, and shadows will fall behind you.',a:'Walt Whitman'},
+    {t:'The only impossible journey is the one you never begin.',a:'Tony Robbins'},
+    {t:'It is during our darkest moments that we must focus to see the light.',a:'Aristotle'},
+    {t:'Whoever is happy will make others happy too.',a:'Anne Frank'},
+    {t:'Do not let making a living prevent you from making a life.',a:'John Wooden'},
+    {t:'You only live once, but if you do it right, once is enough.',a:'Mae West'},
+    {t:'In this life we cannot do great things. We can only do small things with great love.',a:'Mother Teresa'},
+    {t:'Success usually comes to those who are too busy to be looking for it.',a:'Henry David Thoreau'},
+    {t:'Opportunities don't happen. You create them.',a:'Chris Grosser'},
+    {t:'Try not to become a man of success. Rather become a man of value.',a:'Albert Einstein'},
+    {t:'It is not the strongest of the species that survive, but the one most responsive to change.',a:'Charles Darwin'},
+    {t:'Don't watch the clock; do what it does. Keep going.',a:'Sam Levenson'},
+    {t:'Keep going. Everything you need will come to you at the perfect time.',a:'Unknown'},
+    {t:'Act as if what you do makes a difference. It does.',a:'William James'},
+    {t:'Success is not how high you have climbed, but how you make a positive difference to the world.',a:'Roy T. Bennett'},
+    {t:'When we strive to become better than we are, everything around us becomes better too.',a:'Paulo Coelho'},
+    {t:'Happiness is not something ready made. It comes from your own actions.',a:'Dalai Lama'},
+    {t:'Everything you've ever wanted is on the other side of fear.',a:'George Addair'},
+    {t:'Dream big and dare to fail.',a:'Norman Vaughan'},
+    {t:'You don't have to be great to start, but you have to start to be great.',a:'Zig Ziglar'},
+    {t:'Start where you are. Use what you have. Do what you can.',a:'Arthur Ashe'},
+    {t:'It's not whether you get knocked down, it's whether you get up.',a:'Vince Lombardi'},
+  ];
+  var qEl=document.getElementById('rq-quote'),aEl=document.getElementById('rq-author');
+  var btn=document.getElementById('rq-btn'),copy=document.getElementById('rq-copy');
+  var idx=Math.floor(Math.random()*quotes.length);
+  function show(){var q=quotes[idx];if(qEl)qEl.textContent='"'+q.t+'"';if(aEl)aEl.textContent='— '+q.a;}
+  if(btn)btn.addEventListener('click',function(){idx=Math.floor(Math.random()*quotes.length);show();});
+  if(copy)copy.addEventListener('click',function(){var q=quotes[idx];if(navigator.clipboard)navigator.clipboard.writeText('"'+q.t+'" — '+q.a);});
+  show();
+})();

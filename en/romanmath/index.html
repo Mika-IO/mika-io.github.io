@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roman Numeral Converter — convert numbers to Roman numerals</title>
+<meta name="description" content="Free Roman numeral converter. Convert any number from 1 to 3999 to Roman numerals, or convert Roman numerals back to decimal. Instant and accurate.">
+<link rel="canonical" href="https://mikaio.dev/en/romanmath/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/romanmath/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/romanmath/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/romanmath/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Roman Numeral Converter — convert numbers to Roman numerals">
+<meta property="og:description" content="Free Roman numeral converter. Convert any number from 1 to 3999 to Roman numerals, or convert Roman numerals back to decimal. Instant and accurate.">
+<meta property="og:url" content="https://mikaio.dev/en/romanmath/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Roman Numeral Converter — convert numbers to Roman numerals","url":"https://mikaio.dev/en/romanmath/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free Roman numeral converter. Convert any number from 1 to 3999 to Roman numerals, or convert Roman numerals back to decimal. Instant and accurate."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Roman Numeral Converter","item":"https://mikaio.dev/en/romanmath/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the range for Roman numerals?","acceptedAnswer":{"@type":"Answer","text":"Standard Roman numerals represent numbers from 1 to 3,999. The number 4,000 would require a symbol (M̄) with a bar that is not standard. This calculator supports 1–3,999."}},{"@type":"Question","name":"What are the Roman numeral symbols?","acceptedAnswer":{"@type":"Answer","text":"I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Subtractive notation: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900."}},{"@type":"Question","name":"When are Roman numerals used today?","acceptedAnswer":{"@type":"Answer","text":"Roman numerals appear on clock faces, book chapter headings, movie sequels (Rocky IV), Super Bowl numbers (Super Bowl LVII), year numbers in films and monuments, and outline formatting."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Roman Numeral Converter</span></nav>
+  <h1>Roman Numeral Converter</h1>
+  <p class="lead">Enter a decimal number to convert to Roman numerals, or enter Roman numerals to convert to decimal.</p>
+  <section class="widget" id="tool"><form id="roman-form"><div class="row"><div class="field"><label for="roman-dec">Decimal number</label><input type="number" id="roman-dec" min="1" max="3999" step="1" inputmode="numeric"></div></div><div class="result"><span class="hint">Roman numeral: </span><span class="big" id="roman-out">—</span></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="roman-in">Roman numeral to decimal</label><input type="text" id="roman-in" style="text-transform:uppercase" maxlength="20"></div><div class="result"><span class="hint">Decimal number: </span><span class="big" id="roman-dec-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Convert between decimal numbers and Roman numerals</h2>
+<p>Roman numerals have been used for over two millennia and remain widely encountered today — on clock faces, in film and book titles, at the Super Bowl, in legal documents, and on monuments. This converter works in both directions: enter a decimal number to get its Roman numeral equivalent, or type Roman numerals to convert them back to decimal.</p>
+<h2>The Roman numeral system</h2>
+<p>Roman numerals use seven Latin letters as symbols: I (1), V (5), X (10), L (50), C (100), D (500), and M (1000). Numbers are formed by combining these symbols following two main rules:</p>
+<p><strong>Additive notation</strong>: Symbols are placed from highest to lowest and their values are added. III = 1+1+1 = 3. VIII = 5+1+1+1 = 8. XIII = 10+3 = 13.</p>
+<p><strong>Subtractive notation</strong>: When a smaller value symbol appears before a larger one, it is subtracted. This avoids sequences of four repeated symbols. The subtractive pairs are: IV = 4 (not IIII), IX = 9 (not VIIII), XL = 40, XC = 90, CD = 400, CM = 900.</p>
+<h2>Complete examples</h2>
+<ul>
+<li>MMXXIV = 2000+20+4 = 2024 (the year 2024)</li>
+<li>XLII = 40+2 = 42</li>
+<li>CDXCIX = 400+90+9 = 499</li>
+<li>MCMXCIX = 1000+900+90+9 = 1999</li>
+<li>MMMDCCCLXXXVIII = 3888 (the longest standard Roman numeral)</li>
+</ul>
+<h2>Where Roman numerals appear today</h2>
+<p><strong>Clocks and watches</strong>: Many traditional clock faces use Roman numerals for hours. Note that IV is sometimes written as IIII on clocks for visual symmetry.</p>
+<p><strong>Film and television</strong>: Production years of films and TV shows are often displayed in Roman numerals in end credits. Film sequels frequently use them: Rocky IV, Star Wars Episode IV.</p>
+<p><strong>Sports</strong>: The Super Bowl has been numbered with Roman numerals since Super Bowl V. The Olympics also use Roman numerals for their numbered games.</p>
+<p><strong>Monarchy and papacy</strong>: Rulers with the same name are distinguished by ordinals in Roman numerals: Elizabeth II, Pope John XXIII, Henry VIII.</p>
+<p><strong>Outlines and lists</strong>: Formal outlines (I. II. III. A. B. C. i. ii. iii.) use Roman numerals for major section numbers.</p>
+<p><strong>Architecture and monuments</strong>: Year numbers on cornerstones, monuments, and public buildings are traditionally carved in Roman numerals.</p>
+<h2>Limitations of Roman numerals</h2>
+<p>Roman numerals have no symbol for zero, no way to represent fractions, and no straightforward arithmetic — multiplying two Roman numerals by hand is laborious. This is why the system was gradually replaced by the Hindu-Arabic positional system (the digits 0–9) for calculation purposes.</p>
+<h2>Private and instant</h2>
+<p>The conversion runs in your browser. No data is sent anywhere.</p>
+<h2>How it works</h2>
+<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
+<h2>Why browser-based tools matter</h2>
+<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
+<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
+<h2>Getting the most from this tool</h2>
+<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
+<h2>Precision and limitations</h2>
+<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
+<h2>Sharing your results</h2>
+<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
+<h2>Bookmarking and returning</h2>
+<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
+<h2>Mobile-friendly design</h2>
+<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
+<h2>Accuracy note</h2>
+<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
+<h2>Frequently asked questions — general</h2>
+<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
+<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
+<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
+<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+<h2>How it works</h2>
+<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
+<h2>Why browser-based tools matter</h2>
+<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
+<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
+<h2>Getting the most from this tool</h2>
+<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
+<h2>Precision and limitations</h2>
+<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
+<h2>Sharing your results</h2>
+<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
+<h2>Bookmarking and returning</h2>
+<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
+<h2>Mobile-friendly design</h2>
+<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
+<h2>Accuracy note</h2>
+<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
+<h2>Frequently asked questions — general</h2>
+<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
+<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
+<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
+<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+    <section class="faq"><h2>Roman numerals FAQ</h2><dl><dt>What is the range for Roman numerals?</dt><dd>Standard Roman numerals represent numbers from 1 to 3,999. The number 4,000 would require a symbol (M̄) with a bar that is not standard. This calculator supports 1–3,999.</dd><dt>What are the Roman numeral symbols?</dt><dd>I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Subtractive notation: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900.</dd><dt>When are Roman numerals used today?</dt><dd>Roman numerals appear on clock faces, book chapter headings, movie sequels (Rocky IV), Super Bowl numbers (Super Bowl LVII), year numbers in films and monuments, and outline formatting.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/romanmath/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/romanmath/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/romanmath.js" defer></script>
+</body>
+</html>

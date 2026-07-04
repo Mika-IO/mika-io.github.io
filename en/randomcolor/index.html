@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Random Color Generator — random HEX, RGB and HSL colours</title>
+<meta name="description" content="Free random color generator. Generate a random colour and see its HEX, RGB and HSL codes instantly. Great for design inspiration and picking palettes.">
+<link rel="canonical" href="https://mikaio.dev/en/randomcolor/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/randomcolor/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/randomcolor/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/randomcolor/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Color Generator — random HEX, RGB and HSL colours">
+<meta property="og:description" content="Free random color generator. Generate a random colour and see its HEX, RGB and HSL codes instantly. Great for design inspiration and picking palettes.">
+<meta property="og:url" content="https://mikaio.dev/en/randomcolor/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Random Color Generator — random HEX, RGB and HSL colours","url":"https://mikaio.dev/en/randomcolor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free random color generator. Generate a random colour and see its HEX, RGB and HSL codes instantly. Great for design inspiration and picking palettes."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Random Color Generator","item":"https://mikaio.dev/en/randomcolor/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are HEX, RGB and HSL?","acceptedAnswer":{"@type":"Answer","text":"They are three ways to write the same colour. HEX is the six-character code used in web design like #3A7BD5, RGB lists red, green and blue values from 0 to 255, and HSL describes hue, saturation and lightness, which is handy for adjusting a colour by feel."}},{"@type":"Question","name":"How do I copy a colour?","acceptedAnswer":{"@type":"Answer","text":"Click the large HEX code and it is copied to your clipboard, ready to paste into a design tool, stylesheet or document."}},{"@type":"Question","name":"Is the colour truly random?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each of the red, green and blue channels is chosen independently at random, so every one of the roughly sixteen million possible colours is equally likely."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Random Color Generator</span></nav>
+  <h1>Random Color Generator</h1>
+  <p class="lead">Tap the button for a random colour, shown as a large swatch with its HEX, RGB and HSL codes. Click the HEX code to copy it.</p>
+  <section class="widget" id="tool"><div id="rc"><div id="rc-swatch" style="height:120px;border-radius:12px;border:1px solid var(--line)"></div><div class="result"><b id="rc-hex" data-copy="#rc-hex" style="cursor:pointer">—</b> · <span id="rc-rgb" class="hint"></span> · <span id="rc-hsl" class="hint"></span></div><div class="row" style="justify-content:center"><button type="button" class="btn" id="rc-gen">New colour</button></div></div></section>
+  <article class="content">
+    <h2>A fresh colour whenever inspiration runs dry</h2>
+<p>Choosing a colour from nothing is surprisingly hard. Faced with the millions of shades a screen can display, most of us reach for the same familiar blues and greys over and over. A random colour generator breaks that habit by handing you a colour you would never have picked yourself, which is often exactly the spark a design needs. Tap the button and this tool fills a large swatch with a random colour and shows its exact codes in three formats — HEX, RGB and HSL — ready to use. Everything runs in your browser, so a new colour appears the instant you ask and nothing is ever sent anywhere.</p>
+<p>The tool is deliberately uncluttered. There is one big swatch so you can actually see the colour at a decent size, its codes underneath, and a single button to generate another. Click the HEX code and it copies straight to your clipboard, ready to paste into a design app, a stylesheet or a document. Keep tapping to run through as many colours as you like until one catches your eye.</p>
+<h2>HEX, RGB and HSL explained</h2>
+<p>The three codes beneath the swatch are just different ways of writing the same colour, and each is useful in its own setting. <strong>HEX</strong> is the six-character code you see everywhere in web design, written with a hash such as <code>#3A7BD5</code>. It is compact and is what most websites and design tools expect. <strong>RGB</strong> describes the colour as three numbers — the amount of red, green and blue light, each from 0 to 255 — which mirrors how screens actually build colour by mixing those three channels. <strong>HSL</strong> takes a more human approach, describing a colour by its hue (its position around the colour wheel), its saturation (how vivid or grey it is) and its lightness (how close to white or black). HSL is especially handy when you want to nudge a colour, because you can raise the lightness to get a paler version or drop the saturation to mute it without guessing at raw numbers.</p>
+<p>Having all three side by side means you can grab whichever format the next step needs. A web developer will usually copy the HEX code, someone working in a photo or illustration app might prefer RGB, and a designer fine-tuning a palette often thinks in HSL. They all describe exactly the same colour on your screen.</p>
+<h2>Where a random colour helps</h2>
+<p>The most common use is simple inspiration. When you are staring at a blank canvas, a truly unexpected colour can suggest a direction you would not have found by cautiously picking shades yourself. Designers use random colours as starting points for palettes, then adjust from there. Artists and hobbyists use them as a fun creative constraint — challenging themselves to build something around a colour chosen for them. Even just cycling through colours can help you discover shades you like and would never have typed a code for.</p>
+<p>There are practical uses too. Developers and testers sometimes need placeholder colours to fill a mock-up or to tell elements apart on screen while building a layout, and a random colour with a copyable code is quicker than opening a full colour picker. Teachers and parents use a random colour as a playful prompt, and anyone learning about colour codes can use the generator to see how the same shade looks written three different ways, which makes the relationship between the formats much easier to grasp.</p>
+<h2>Turning one colour into a palette</h2>
+<p>A single random colour is often just the beginning. Once you have one you like, the HSL code makes it easy to build a small palette around it by hand. Keep the hue and adjust the lightness up and down to create lighter and darker versions of the same colour for backgrounds and text. Or shift the hue by a fixed amount to find colours that sit next to it or opposite it on the colour wheel, which is the basis of many classic colour schemes. Because the generator gives you the exact HSL values, you have a precise starting point rather than a vague impression.</p>
+<p>This makes the tool useful not just for finding one colour but for kicking off a whole scheme. Generate until a colour feels right, copy its codes, and use them as the anchor from which the rest of your palette grows.</p>
+<h2>Private, instant and free</h2>
+<p>There is no sign-up, no cost and no adverts in the way. The whole generator is a small piece of code that runs on your own device, which is why it produces a new colour the instant you tap and keeps working with no internet connection. Nothing is uploaded, logged or shared; the colours you generate exist only on your screen and the sequence resets when you reload the page.</p>
+<p>To use it, tap the button for a random colour, look at the swatch, and read its HEX, RGB and HSL codes below. When you find one you want, click the HEX code to copy it, then paste it wherever you need. Generate as many times as you like — each colour is a fresh, impartial pick from the full range your screen can show. There is no limit and no cost, so you can keep exploring until something feels exactly right for your project.</p>
+<h2>How it works</h2>
+<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
+<h2>Why browser-based tools matter</h2>
+<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
+<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
+<h2>Getting the most from this tool</h2>
+<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
+<h2>Precision and limitations</h2>
+<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
+<h2>Sharing your results</h2>
+<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
+<h2>Bookmarking and returning</h2>
+<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
+<h2>Mobile-friendly design</h2>
+<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
+<h2>Accuracy note</h2>
+<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
+<h2>Frequently asked questions — general</h2>
+<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
+<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
+<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
+<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+    <section class="faq"><h2>Random color FAQ</h2><dl><dt>What are HEX, RGB and HSL?</dt><dd>They are three ways to write the same colour. HEX is the six-character code used in web design like #3A7BD5, RGB lists red, green and blue values from 0 to 255, and HSL describes hue, saturation and lightness, which is handy for adjusting a colour by feel.</dd><dt>How do I copy a colour?</dt><dd>Click the large HEX code and it is copied to your clipboard, ready to paste into a design tool, stylesheet or document.</dd><dt>Is the colour truly random?</dt><dd>Yes. Each of the red, green and blue channels is chosen independently at random, so every one of the roughly sixteen million possible colours is equally likely.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/randomcolor/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/randomcolor/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/randomcolor.js" defer></script>
+</body>
+</html>

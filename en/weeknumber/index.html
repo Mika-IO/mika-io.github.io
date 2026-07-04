@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week Number Calculator — what week of the year is it?</title>
+<meta name="description" content="Free week number calculator. Find the ISO week number for any date. See what week of the year it is today or for any date you choose.">
+<link rel="canonical" href="https://mikaio.dev/en/weeknumber/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/weeknumber/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/weeknumber/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/weeknumber/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Week Number Calculator — what week of the year is it?">
+<meta property="og:description" content="Free week number calculator. Find the ISO week number for any date. See what week of the year it is today or for any date you choose.">
+<meta property="og:url" content="https://mikaio.dev/en/weeknumber/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Week Number Calculator — what week of the year is it?","url":"https://mikaio.dev/en/weeknumber/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free week number calculator. Find the ISO week number for any date. See what week of the year it is today or for any date you choose."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Week Number","item":"https://mikaio.dev/en/weeknumber/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the ISO week number?","acceptedAnswer":{"@type":"Answer","text":"ISO 8601 defines a week as starting on Monday. Week 1 is the week that contains the first Thursday of the year, which means the first days of January may belong to week 52 or 53 of the previous year."}},{"@type":"Question","name":"Why does week 1 sometimes start in December?","acceptedAnswer":{"@type":"Answer","text":"Because ISO weeks start on Monday, some years have a Thursday in early January that pushes week 1 to start in late December of the previous year."}},{"@type":"Question","name":"How many weeks are in a year?","acceptedAnswer":{"@type":"Answer","text":"Most years have 52 ISO weeks. Some years have 53 weeks when the year starts or ends on a Thursday."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Week Number</span></nav>
+  <h1>Week Number</h1>
+  <p class="lead">Select a date to see its ISO week number and the date range for that week.</p>
+  <section class="widget" id="tool"><div id="wn-app"><div class="row"><div class="field"><label for="wn-date">Date</label><input type="date" id="wn-date"></div></div><div class="result"><span class="hint">Week number: </span><span class="big" id="wn-week">—</span></div><div id="wn-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>What week of the year is it?</h2>
+<p>Knowing the week number is a common need in project management, payroll, logistics, school scheduling, and any context where people communicate about time in weekly units rather than specific dates. &quot;Let&#39;s meet in week 32&quot; is a perfectly natural way to schedule things once you know which dates week 32 covers. This tool shows you the ISO week number for any date and the Monday-to-Sunday range that week spans.</p>
+<h2>The ISO 8601 week standard</h2>
+<p>The week number shown by this tool follows the ISO 8601 international standard, which is the most widely used definition in business and government. Under ISO 8601, a week always starts on Monday and ends on Sunday. Week 1 is defined as the week that contains the year&#39;s first Thursday. This definition ensures every year has either 52 or 53 complete weeks.</p>
+<p>Because of the Monday-start rule, the first few days of January sometimes fall in week 52 or 53 of the previous year, and the last few days of December sometimes fall in week 1 of the following year. This surprises people who encounter it for the first time but makes perfect logical sense once you understand the definition.</p>
+<h2>Why 52 or 53 weeks?</h2>
+<p>A calendar year has 365 days (366 in a leap year), and 365 divided by 7 gives 52 weeks and one day. That extra day — or two days in a leap year — means the day of the week that January 1 falls on shifts by one or two each year. When this shift causes a Thursday to appear in both early January and late December, the year gets a 53rd week.</p>
+<h2>Uses in business and logistics</h2>
+<p>Supply chain and manufacturing teams often plan in week numbers because they correspond neatly to delivery schedules. &quot;Week 14 delivery&quot; means something specific without having to name the exact dates, and everyone using the same ISO definition is on the same calendar page.</p>
+<p>Payroll systems frequently process runs on weekly cycles and reference them by week number for audit purposes. HR departments track annual leave in weeks. Project managers break Gantt charts into numbered weeks. Financial reporting sometimes uses ISO weeks for consistency across years.</p>
+<h2>School and academic calendars</h2>
+<p>Universities and schools in many European countries number their teaching weeks, so &quot;Week 5 assignments are due&quot; is standard language. Students from countries where week numbers are less common sometimes struggle to translate these communications into actual dates, making a week number calculator especially useful.</p>
+<h2>Finding the current week quickly</h2>
+<p>Open the tool today and it defaults to the current date, showing you immediately what week of the year it is. If you want to know which week a specific date falls in — for planning a meeting, checking a delivery date, or verifying a project milestone — just pick the date and the answer is instant.</p>
+<h2>Private</h2>
+<p>The tool uses only your browser&#39;s local date computation. Nothing is sent to any server.</p>
+<h2>How it works</h2>
+<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
+<h2>Why browser-based tools matter</h2>
+<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
+<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
+<h2>Getting the most from this tool</h2>
+<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
+<h2>Precision and limitations</h2>
+<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
+<h2>Sharing your results</h2>
+<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
+<h2>Bookmarking and returning</h2>
+<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
+<h2>Mobile-friendly design</h2>
+<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
+<h2>Accuracy note</h2>
+<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
+<h2>Frequently asked questions — general</h2>
+<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
+<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
+<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
+<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+<h2>How it works</h2>
+<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
+<h2>Why browser-based tools matter</h2>
+<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
+<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
+<h2>Getting the most from this tool</h2>
+<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
+<h2>Precision and limitations</h2>
+<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
+<h2>Sharing your results</h2>
+<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
+<h2>Bookmarking and returning</h2>
+<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
+<h2>Mobile-friendly design</h2>
+<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
+<h2>Accuracy note</h2>
+<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
+<h2>Frequently asked questions — general</h2>
+<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
+<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
+<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
+<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+    <section class="faq"><h2>Week number FAQ</h2><dl><dt>What is the ISO week number?</dt><dd>ISO 8601 defines a week as starting on Monday. Week 1 is the week that contains the first Thursday of the year, which means the first days of January may belong to week 52 or 53 of the previous year.</dd><dt>Why does week 1 sometimes start in December?</dt><dd>Because ISO weeks start on Monday, some years have a Thursday in early January that pushes week 1 to start in late December of the previous year.</dd><dt>How many weeks are in a year?</dt><dd>Most years have 52 ISO weeks. Some years have 53 weeks when the year starts or ends on a Thursday.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/weeknumber/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/weeknumber/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/weeknumber.js" defer></script>
+</body>
+</html>

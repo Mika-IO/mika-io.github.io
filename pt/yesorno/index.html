@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sim ou Não — um decisor aleatório</title>
+<meta name="description" content="Gerador Sim ou Não grátis. Faça uma pergunta e receba uma resposta aleatória e justa de sim ou não na hora, com placar automático. Funciona no navegador, sem app.">
+<link rel="canonical" href="https://mikaio.dev/pt/yesorno/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/yesorno/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/yesorno/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/yesorno/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sim ou Não — um decisor aleatório">
+<meta property="og:description" content="Gerador Sim ou Não grátis. Faça uma pergunta e receba uma resposta aleatória e justa de sim ou não na hora, com placar automático. Funciona no navegador, sem app.">
+<meta property="og:url" content="https://mikaio.dev/pt/yesorno/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Sim ou Não — um decisor aleatório","url":"https://mikaio.dev/pt/yesorno/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Gerador Sim ou Não grátis. Faça uma pergunta e receba uma resposta aleatória e justa de sim ou não na hora, com placar automático. Funciona no navegador, sem app."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Sim ou Não","item":"https://mikaio.dev/pt/yesorno/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"A resposta é mesmo aleatória?","acceptedAnswer":{"@type":"Answer","text":"Sim. Cada resposta usa o gerador aleatório criptograficamente seguro do seu navegador, dando a sim e não uma chance igual de 50% todas as vezes, sem memória das respostas anteriores."}},{"@type":"Question","name":"Quando devo usar um decisor sim ou não?","acceptedAnswer":{"@type":"Answer","text":"É perfeito para desempatar de verdade, resolver uma escolha trivial rapidamente ou se empurrar a uma decisão quando você fica indo e voltando. A sua reação à resposta muitas vezes revela o que você realmente queria."}},{"@type":"Question","name":"Precisa de internet?","acceptedAnswer":{"@type":"Answer","text":"Não. Depois que a página carrega, tudo roda no seu navegador, então você pode continuar perguntando sem conexão."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Sim ou Não</span></nav>
+  <h1>Sim ou Não</h1>
+  <p class="lead">Pense em uma pergunta e toque no botão para um sim ou não justo e aleatório. Um placar guarda como as respostas caem.</p>
+  <section class="widget" id="tool"><div id="yn" data-yes="Sim" data-no="Não"><div class="result"><span class="big" id="yn-result">Pergunte qualquer coisa</span></div><div class="row" style="justify-content:center"><button type="button" class="btn" id="yn-ask">Fazer a pergunta</button></div><div class="coin-tally"><span>Sim<b id="yn-y">0</b></span><span>Não<b id="yn-n">0</b></span></div></div></section>
+  <article class="content">
+    <h2>Quando você só precisa de uma resposta direta</h2>
+<p>Algumas decisões não merecem um longo debate. Pedir a pizza ou não? Levar o guarda-chuva? Mandar mensagem primeiro? Sair para caminhar mesmo com o céu meio cinzento? Quando uma escolha é realmente equilibrada e o que está em jogo é pequeno, a forma mais rápida de seguir em frente costuma ser deixar o acaso decidir. Esta ferramenta de Sim ou Não faz exatamente isso: pense na sua pergunta, toque no botão, e ela retorna um sim ou não justo e aleatório num instante. Um placar embaixo acompanha como as respostas caíram até agora. Tudo acontece no seu navegador, então a resposta aparece na hora e nada do que você pergunta é registrado ou enviado a lugar algum.</p>
+<p>O design é tão simples quanto a pergunta que ele responde. Há um botão. Aperte-o e um grande &quot;Sim&quot; ou &quot;Não&quot; aparece, colorido de verde ou vermelho para o veredito ser inconfundível num relance. Dois contadores abaixo mostram quantos de cada você recebeu, o que é útil se estiver fazendo uma série de perguntas ou apenas curioso sobre como uma divisão equilibrada se parece ao longo de muitos toques. Não há nada para configurar, nenhuma conta para criar e nenhuma bagunça para distrair você da decisão em questão.</p>
+<h2>Como a resposta é escolhida</h2>
+<p>Cada resposta é produzida pelo gerador de números aleatórios criptograficamente seguro do seu navegador, a mesma fonte confiável de aleatoriedade usada para proteger tarefas sensíveis na internet. Isso significa que cada resposta é genuinamente imprevisível e totalmente independente das anteriores. Sim e não têm cada um exatamente cinquenta por cento de chance, todas as vezes, sem viés para nenhum lado e sem memória do que veio antes. Diferente de folhear os seus próprios pensamentos, onde você pode inconscientemente pender para a resposta que já prefere, a ferramenta não tem preferência alguma.</p>
+<p>Como não tem memória, uma sequência de vários &quot;sim&quot; seguidos não torna o &quot;não&quot; mais provável no próximo toque. Esse é um mal-entendido comum sobre o acaso: as probabilidades voltam ao zero a cada vez. O placar facilita ver isso por conta própria. Em poucas perguntas a divisão pode parecer desigual, com uma resposta disparando na frente, mas conforme você continua perguntando, a fatia de sim e não se aproxima cada vez mais do meio a meio. É uma pequena demonstração prática de como a aleatoriedade se comporta no curto prazo em comparação com o longo prazo.</p>
+<h2>A surpreendente utilidade de deixar ao acaso</h2>
+<p>Entregar uma decisão a uma ferramenta parecida com uma moeda soa frívolo, mas tem um valor psicológico genuíno no qual as pessoas confiam há muito tempo. O truque não é que o acaso faça escolhas melhores do que você — é que, no momento em que a resposta aparece, você percebe como se sente a respeito dela. Se a ferramenta diz &quot;sim&quot; e você sente um lampejo de alívio, essa reação é uma pista forte de que sim era o que você secretamente queria o tempo todo. Se ela diz &quot;não&quot; e você imediatamente quer tocar de novo para um resultado diferente, você acabou de aprender que a resposta importa para você mais do que admitia, e talvez mereça mais do que um toque aleatório.</p>
+<p>Usado assim, um decisor de Sim ou Não é menos um adivinho e mais um espelho. É perfeito para desempatar de verdade quando qualquer opção serve, para se livrar de um vai e vem sem fim sobre algo trivial, ou para adicionar uma pitada de espontaneidade a um dia comum. Ele também resolve disputas amigáveis sem que ninguém sinta que perdeu uma discussão, porque o resultado veio de uma fonte imparcial que ninguém pôde dirigir.</p>
+<h2>Momentos do dia a dia em que ele encaixa</h2>
+<p>As pequenas decisões se acumulam. Qual tarefa encarar primeiro, se vale a sobremesa, se hoje é noite de ficar em casa ou de sair, se manda aquela mensagem um pouco arriscada, qual de dois filmes igualmente bons assistir. Nenhuma delas merece uma planilha, e agonizar sobre elas só drena a energia que você poderia gastar em outra coisa. Um sim ou não rápido e imparcial desfaz o nó e deixa você seguir com a vida.</p>
+<p>Ele é útil em grupo também. Quando uma mesa de amigos não chega a um acordo e ninguém se importa muito, um toque encerra o impasse de forma justa. Pais o usam para fazer pequenas escolhas parecerem um jogo em vez de uma negociação. Professores e facilitadores o usam para decidir quem começa ou se vale tentar uma ideia, mantendo o clima leve. Como a variedade de usos é tão ampla e a barreira tão baixa, muita gente mantém uma ferramenta assim por perto exatamente para esses pequenos momentos.</p>
+<h2>Uma palavra gentil sobre as coisas maiores</h2>
+<p>Para decisões que realmente importam — qualquer uma envolvendo a sua saúde, o seu dinheiro, os seus relacionamentos ou a sua segurança — um sim ou não aleatório não é a ferramenta certa, e ela não finge ser. Essas escolhas merecem reflexão de verdade, boa informação e, às vezes, o conselho de pessoas em quem você confia. Onde a ferramenta brilha é justamente no território oposto: as incontáveis escolhas minúsculas e de baixo risco em que o custo de decidir errado é trivial e o custo de hesitar é o único problema real. Saber com que tipo de decisão você está lidando é parte de usá-la bem.</p>
+<h2>Privado, instantâneo e grátis</h2>
+<p>Não há cadastro, custo nem espera. A ferramenta inteira é um pequeno trecho de código rodando no seu próprio dispositivo, e é por isso que ela responde no instante em que você toca e continua funcionando mesmo sem conexão com a internet. Nada sobre as suas perguntas é enviado, porque você nunca as digita — você simplesmente mantém a pergunta na cabeça e lê o veredito. O placar existe apenas na sua tela e zera sempre que você recarrega a página.</p>
+<p>Para usá-la, pense na sua pergunta, aperte o botão e leia a resposta. Pergunte de novo quantas vezes quiser, olhe os contadores de sim e não sempre que quiser conferir o placar, e recarregue a página para começar do zero. É o decisor mais simples possível, sempre pronto quando você não consegue se decidir.</p>
+    <section class="faq"><h2>Perguntas frequentes do Sim ou Não</h2><dl><dt>A resposta é mesmo aleatória?</dt><dd>Sim. Cada resposta usa o gerador aleatório criptograficamente seguro do seu navegador, dando a sim e não uma chance igual de 50% todas as vezes, sem memória das respostas anteriores.</dd><dt>Quando devo usar um decisor sim ou não?</dt><dd>É perfeito para desempatar de verdade, resolver uma escolha trivial rapidamente ou se empurrar a uma decisão quando você fica indo e voltando. A sua reação à resposta muitas vezes revela o que você realmente queria.</dd><dt>Precisa de internet?</dt><dd>Não. Depois que a página carrega, tudo roda no seu navegador, então você pode continuar perguntando sem conexão.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/yesorno/">English</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/yesorno/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/yesorno.js" defer></script>
+</body>
+</html>

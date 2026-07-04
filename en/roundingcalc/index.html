@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rounding Calculator — round numbers to any decimal place</title>
+<meta name="description" content="Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/en/roundingcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/roundingcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/roundingcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/roundingcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rounding Calculator — round numbers to any decimal place">
+<meta property="og:description" content="Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/en/roundingcalc/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Rounding Calculator — round numbers to any decimal place","url":"https://mikaio.dev/en/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Rounding Calculator","item":"https://mikaio.dev/en/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do the decimal places mean?","acceptedAnswer":{"@type":"Answer","text":"The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred."}},{"@type":"Question","name":"What is the difference between the three methods?","acceptedAnswer":{"@type":"Answer","text":"Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes."}},{"@type":"Question","name":"How are exact halves handled?","acceptedAnswer":{"@type":"Answer","text":"When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Rounding Calculator</span></nav>
+  <h1>Rounding Calculator</h1>
+  <p class="lead">Enter a number and the decimal places you want, then choose to round to nearest, up, or down. The result updates as you type.</p>
+  <section class="widget" id="tool"><form id="rnd"><div class="row"><div class="field"><label for="rnd-num">Number</label><input type="number" id="rnd-num" step="any" inputmode="decimal"></div><div class="field"><label for="rnd-places">Decimal places</label><input type="number" id="rnd-places" value="0" step="1"></div><div class="field"><label for="rnd-mode">Method</label><select id="rnd-mode"><option value="near">Round to nearest</option><option value="up">Round up</option><option value="down">Round down</option></select></div></div><div class="result"><span class="hint">Rounded: </span><span class="big" id="rnd-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Round any number, exactly the way you need</h2>
+<p>Rounding sounds simple until you have to do it carefully. Should 2.675 become 2.68 or 2.67? What does it mean to round to the nearest hundred, or to keep three decimal places? And is &quot;round up&quot; the same as &quot;round to nearest&quot;? Getting these right matters whenever a number needs to be tidied for money, measurements, grades or reporting, and it is easy to slip. This rounding calculator takes the guesswork out. Enter a number, choose how many decimal places you want, pick the rounding method, and it shows the result instantly. Everything runs in your browser, so the answer appears the moment you type and nothing you enter is ever uploaded.</p>
+<p>The tool gives you full control over both how precise the result should be and which direction it should go. That combination — the number of decimal places plus the rounding method — covers essentially every rounding task you are likely to meet, from trimming a price to two decimals to rounding a big figure to the nearest thousand.</p>
+<h2>How to use it</h2>
+<p>Start by entering the number you want to round. Then set the number of decimal places to keep: 2 rounds to hundredths, 1 to tenths, and 0 rounds to a whole number. You can even use a negative value — entering -2, for example, rounds to the nearest hundred, and -3 to the nearest thousand — which is handy for large figures. Finally, choose the method: round to nearest, round up, or round down. The result updates live as you change any of these, so you can compare methods or precisions side by side without pressing anything.</p>
+<p>Because it recalculates instantly, it is easy to explore. Try the same number at zero, one and two decimal places to see how the result changes, or switch between the three methods to see how far apart they can be for a single value.</p>
+<h2>The three rounding methods</h2>
+<p><strong>Round to nearest</strong> is the everyday rounding most people learned in school. It moves the number to whichever allowed value is closer — up if the leftover part is a half or more, down if it is less. It is the right choice when you simply want the tidiest, most accurate representation of a number at a given precision, such as displaying a measurement or an average.</p>
+<p><strong>Round up</strong>, also called taking the ceiling, always moves to the higher value regardless of how close the number is. This is what you want whenever any remainder means you need a whole extra unit: working out how many buses are needed for a group of people, how many tins of paint to buy, or how many pages a document will fill. Even a tiny leftover rounds up, because you cannot buy nine-tenths of a tin.</p>
+<p><strong>Round down</strong>, also called taking the floor, always moves to the lower value. It suits situations where you can only count complete units and any remainder is discarded: how many whole items you can afford within a budget, or how many full boxes a pile of goods will fill. The choice between up and down is not about accuracy but about which way the real-world situation forces you to go.</p>
+<h2>Why the method matters</h2>
+<p>The gap between these methods can be surprisingly large, and choosing the wrong one causes real mistakes. Suppose you need to transport 41 people in vehicles that hold 10 each. Dividing gives 4.1, but rounding to nearest would say 4 vehicles — leaving a person behind. Rounding up correctly gives 5. In money, rounding a price down might quietly lose a fraction of a cent on every transaction, which adds up across thousands of sales. Being deliberate about whether you round to nearest, up or down is often more important than the number of decimal places, because it reflects what the number actually has to do.</p>
+<p>There is also the matter of exact halves, the classic &quot;does 2.5 become 2 or 3?&quot; question. This calculator&#39;s round-to-nearest sends an exact half upward, which is the most widely taught and intuitive rule. If your situation needs a different treatment, you can simply select round up or round down to make the direction explicit rather than relying on the halfway rule.</p>
+<h2>Everyday uses</h2>
+<p>Rounding turns up constantly. Shoppers and cashiers round money to two decimal places. Students round measurements and results to a sensible number of significant figures. Anyone reporting statistics rounds large numbers to the nearest hundred, thousand or million to make them readable. Cooks scale and round quantities, builders round measurements to practical units, and spreadsheet users round to avoid long trailing decimals. Because you control both the precision and the direction, the same tool handles all of these without you having to remember any formulas.</p>
+<h2>Private, instant and free</h2>
+<p>There is no sign-up, no cost and no adverts in the way. The whole calculator is a small piece of code that runs on your own device, which is why it responds the instant you type and keeps working with no internet connection. Nothing you enter is uploaded, stored or shared; the numbers exist only on your screen and disappear when you reload the page.</p>
+<p>To use it, enter your number, set the decimal places, choose a method, and read the rounded result. Change any input at any time and the answer keeps pace, so you can round a single figure or explore how different settings affect the same number as often as you like.</p>
+<h2>How it works</h2>
+<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
+<h2>Why browser-based tools matter</h2>
+<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
+<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
+<h2>Getting the most from this tool</h2>
+<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
+<h2>Precision and limitations</h2>
+<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
+<h2>Sharing your results</h2>
+<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
+<h2>Bookmarking and returning</h2>
+<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
+<h2>Mobile-friendly design</h2>
+<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
+<h2>Accuracy note</h2>
+<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
+<h2>Frequently asked questions — general</h2>
+<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
+<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
+<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
+<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+    <section class="faq"><h2>Rounding calculator FAQ</h2><dl><dt>What do the decimal places mean?</dt><dd>The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred.</dd><dt>What is the difference between the three methods?</dt><dd>Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes.</dd><dt>How are exact halves handled?</dt><dd>When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/roundingcalc/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/roundingcalc.js" defer></script>
+</body>
+</html>
