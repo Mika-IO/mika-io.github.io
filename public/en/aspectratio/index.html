@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aspect Ratio Calculator — Simplify &amp; Scale Any Resolution</title>
+<meta name="description" content="Free aspect ratio calculator. Enter width and height to get the simplified ratio (e.g. 1920×1080 = 16:9) and scale to any new size instantly.">
+<link rel="canonical" href="https://mikaio.dev/en/aspectratio/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/aspectratio/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/aspectratio/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/aspectratio/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/aspectratio/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/aspectratio/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/aspectratio/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/aspectratio/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/aspectratio/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/aspectratio/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/aspectratio/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/aspectratio/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aspect Ratio Calculator — Simplify &amp; Scale Any Resolution">
+<meta property="og:description" content="Free aspect ratio calculator. Enter width and height to get the simplified ratio (e.g. 1920×1080 = 16:9) and scale to any new size instantly.">
+<meta property="og:url" content="https://mikaio.dev/en/aspectratio/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Aspect Ratio Calculator — Simplify & Scale Any Resolution","url":"https://mikaio.dev/en/aspectratio/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free aspect ratio calculator. Enter width and height to get the simplified ratio (e.g. 1920×1080 = 16:9) and scale to any new size instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Aspect Ratio Calculator","item":"https://mikaio.dev/en/aspectratio/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"An aspect ratio is the proportional relationship between a rectangle's width and height, expressed as two numbers separated by a colon, such as 16:9 or 4:3."}},{"@type":"Question","name":"How is the aspect ratio simplified?","acceptedAnswer":{"@type":"Answer","text":"The calculator finds the Greatest Common Divisor (GCD) of the width and height, then divides both values by the GCD to produce the smallest whole-number ratio."}},{"@type":"Question","name":"What does 16:9 mean?","acceptedAnswer":{"@type":"Answer","text":"16:9 means for every 16 units of width there are 9 units of height. It is the standard widescreen format used by HD and 4K TVs, monitors, and video content."}},{"@type":"Question","name":"How do I scale a resolution while keeping the ratio?","acceptedAnswer":{"@type":"Answer","text":"Enter the original width and height to find the ratio, then type a new width in the Scale section. The calculator automatically computes the corresponding height."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/aspectratio/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/aspectratio/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/aspectratio/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/aspectratio/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/aspectratio/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/aspectratio/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/aspectratio/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/aspectratio/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/aspectratio/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/aspectratio/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/aspectratio/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Find and scale any aspect ratio instantly" />
+<meta property="og:description" content="Find and scale any aspect ratio instantly" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/aspectratio/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Find and scale any aspect ratio instantly","description":"Find and scale any aspect ratio instantly","url":"https://example.com/en/aspectratio/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Aspect Ratio Calculator</span></nav>
+  <h1>Aspect Ratio Calculator</h1>
+  <p class="lead">Enter any width and height to instantly see the simplified aspect ratio and scale it to new dimensions.</p>
+  <section class="widget" id="tool"><form id="tool-form" autocomplete="off">
+  <div class="ar-section">
+    <h3 class="ar-section-title">Simplify Ratio</h3>
+    <div class="ar-row">
+      <div class="ar-field">
+        <label for="ar-width">Width</label>
+        <input type="number" id="ar-width" min="1" placeholder="e.g. 1920" />
+      </div>
+      <span class="ar-sep">×</span>
+      <div class="ar-field">
+        <label for="ar-height">Height</label>
+        <input type="number" id="ar-height" min="1" placeholder="e.g. 1080" />
+      </div>
+    </div>
+    <div class="ar-result" id="ar-ratio-result">—</div>
+    <div class="ar-common" id="ar-common-name"></div>
+  </div>
+  <hr class="ar-divider" />
+  <div class="ar-section">
+    <h3 class="ar-section-title">Scale to New Width</h3>
+    <div class="ar-row">
+      <div class="ar-field">
+        <label for="ar-new-width">New Width</label>
+        <input type="number" id="ar-new-width" min="1" placeholder="e.g. 1280" />
+      </div>
+    </div>
+    <div class="ar-result" id="ar-scale-result">—</div>
+  </div>
+</form></section>
+  <article class="content">
+    <h2>Find and scale any aspect ratio instantly</h2>
+<p>An aspect ratio describes the shape of a rectangle — a photo, a screen, a video frame — as a simple relationship between its width and its height, written as two numbers separated by a colon, such as 16:9 or 4:3. This calculator does two related jobs at once: enter any width and height to find the simplified ratio those dimensions represent, and enter a new width to see exactly what height keeps that same shape. Both update instantly as you type, so you can check a resolution or plan a resize in seconds rather than doing the division by hand.</p>
+<h2>How to use it</h2>
+<p>Type a width and height into the first section — these can be pixels, centimetres, inches or any consistent unit, since a ratio is just a proportion and does not care what the underlying unit is. The simplified ratio appears immediately below, along with the common name for that shape if it matches a widely used standard such as 16:9 or 4:3. In the second section, type any new width and the calculator works out the exact height that preserves the original proportions, which is exactly what you need when resizing an image or setting up a new video export without introducing stretching or unwanted cropping.</p>
+<h2>How the simplification works</h2>
+<p>Reducing a ratio like 1920:1080 down to 16:9 uses exactly the same idea as simplifying a fraction: find the greatest common divisor of the two numbers and divide both by it. For 1920 and 1080, the greatest common divisor is 120, and dividing both numbers by 120 gives 16 and 9 — the smallest whole-number pair that describes the same shape. This is why 1920×1080, 1280×720 and 3840×2160 all simplify to the same 16:9 ratio despite being very different actual sizes: they all share the same underlying proportion, just at different scales.</p>
+<h2>Common aspect ratios and where they come from</h2>
+<p><strong>16:9</strong> is the standard widescreen ratio used by virtually all modern televisions, monitors, and streaming video, including full HD (1920×1080) and 4K (3840×2160) resolutions. <strong>4:3</strong> was the standard shape for television and computer monitors before the widescreen era, and it persists in some older content and specific camera formats. <strong>1:1</strong> is a perfect square, associated with classic medium-format photography and square social media posts. <strong>9:16</strong> is the vertical mirror of widescreen, now the standard shape for phone-held video, stories and short-form vertical content. <strong>21:9</strong> is an ultrawide ratio used by cinema and some ultrawide monitors, closely matching the look of a movie theatre screen. <strong>3:2</strong> is a classic 35mm film photography ratio still used by many camera sensors today.</p>
+<h2>Why matching a ratio matters when scaling</h2>
+<p>When you resize an image or a video frame without preserving its aspect ratio, the result looks visibly stretched or squashed — circles become ovals, faces widen or narrow unnaturally. The scale-to-new-width section of this calculator exists specifically to prevent that: by calculating the exact proportional height for any new width, it guarantees the resized version keeps exactly the same shape as the original, just larger or smaller. This is the same calculation that photo editors, video editors and web design tools perform automatically whenever you drag a corner handle while holding a &quot;lock aspect ratio&quot; option, and understanding the maths behind it helps when a tool does not offer that lock or when you need to compute the number yourself for a spec sheet or a piece of code.</p>
+<h2>A worked example</h2>
+<p>Say a photo measures 4000 by 2250 pixels and you want to know its ratio and then resize it to a width of 1600 pixels for a website. First, the greatest common divisor of 4000 and 2250 is 250, so dividing both by 250 gives 16 and 9 — the photo is a 16:9 image, the same shape as a widescreen monitor. To scale it to a width of 1600, multiply the height by the same factor the width changed by: 1600 ÷ 4000 = 0.4, so the new height is 2250 × 0.4 = 900 pixels. The resized 1600×900 image keeps exactly the same 16:9 shape as the original, just smaller — precisely what the second section of this calculator works out for you instantly. This same trick works in reverse too: if you know a target height instead of a target width, dividing that height by the original height gives the same scaling factor, which you can then apply to the width to find the matching value, though this calculator is set up specifically for the width-first case since that is how most cropping and export tools ask for the number, and it is the far more common direction in everyday use.</p>
+<h2>Private and instant</h2>
+<p>The calculation runs entirely in your browser using simple arithmetic, so results appear the instant you type and none of the dimensions you enter are ever sent to a server, logged or shared. It works offline once the page has loaded, ready whenever you need to check a resolution or plan a resize.</p>
+    <section class="faq"><h2>Aspect Ratio FAQ</h2><dl><dt>What is an aspect ratio?</dt><dd>An aspect ratio is the proportional relationship between a rectangle&#39;s width and height, expressed as two numbers separated by a colon, such as 16:9 or 4:3.</dd><dt>How is the aspect ratio simplified?</dt><dd>The calculator finds the Greatest Common Divisor (GCD) of the width and height, then divides both values by the GCD to produce the smallest whole-number ratio.</dd><dt>What does 16:9 mean?</dt><dd>16:9 means for every 16 units of width there are 9 units of height. It is the standard widescreen format used by HD and 4K TVs, monitors, and video content.</dd><dt>How do I scale a resolution while keeping the ratio?</dt><dd>Enter the original width and height to find the ratio, then type a new width in the Scale section. The calculator automatically computes the corresponding height.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/aspectratio/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/aspectratio/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/aspectratio/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/aspectratio/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/aspectratio/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/aspectratio/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/aspectratio/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/aspectratio/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/aspectratio/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/aspectratio/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/aspectratio.js" defer></script>
+</body>
+</html>

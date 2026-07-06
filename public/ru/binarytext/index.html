@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Binary Translator — convert text to binary and back</title>
+<meta name="description" content="Free binary translator. Convert any text to binary code and decode binary back to text, with full Unicode support, instantly and privately in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ru/binarytext/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/binarytext/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/binarytext/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/binarytext/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/binarytext/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/binarytext/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/binarytext/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/binarytext/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/binarytext/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/binarytext/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/binarytext/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/binarytext/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Binary Translator — convert text to binary and back">
+<meta property="og:description" content="Free binary translator. Convert any text to binary code and decode binary back to text, with full Unicode support, instantly and privately in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ru/binarytext/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Binary Translator — convert text to binary and back","url":"https://mikaio.dev/ru/binarytext/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free binary translator. Convert any text to binary code and decode binary back to text, with full Unicode support, instantly and privately in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Binary Translator","item":"https://mikaio.dev/ru/binarytext/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is text turned into binary?","acceptedAnswer":{"@type":"Answer","text":"Each character is encoded as one or more bytes using the UTF-8 standard, and each byte is written as eight binary digits (bits). Groups are separated by spaces so the result is easy to read and to decode again."}},{"@type":"Question","name":"Can it handle accents and emoji?","acceptedAnswer":{"@type":"Answer","text":"Yes. Because it uses UTF-8, letters with accents, non-Latin scripts and emoji are converted correctly into their multi-byte binary form and decoded back without loss."}},{"@type":"Question","name":"To decode, how should the binary be formatted?","acceptedAnswer":{"@type":"Answer","text":"Paste groups of eight bits separated by spaces, such as 01001000 01101001. Extra spaces are ignored, and anything that is not a 0 or 1 group is skipped."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/ru/binarytext/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/binarytext/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/binarytext/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/binarytext/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/binarytext/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/binarytext/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/binarytext/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/binarytext/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/binarytext/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/binarytext/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/binarytext/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Переводите между обычным текстом и чистым двоичным кодом" />
+<meta property="og:description" content="Переводите между обычным текстом и чистым двоичным кодом" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/ru/binarytext/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Переводите между обычным текстом и чистым двоичным кодом","description":"Переводите между обычным текстом и чистым двоичным кодом","url":"https://example.com/ru/binarytext/","inLanguage":"ru"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Binary Translator</span></nav>
+  <h1>Binary Translator</h1>
+  <p class="lead">Type text and tap &#39;To binary&#39; to see its binary code, or paste binary and tap &#39;To text&#39; to decode it. Works with any language.</p>
+  <section class="widget" id="tool"><div id="bin"><div class="field"><label for="bin-input">Text or binary</label><textarea id="bin-input" placeholder="Type text, or paste binary like 01001000…"></textarea></div><div class="cc-btns row"><button type="button" class="btn" data-op="encode">To binary</button><button type="button" class="btn" data-op="decode">To text</button></div><div class="field"><label for="bin-output">Result</label><textarea id="bin-output" readonly></textarea></div><button type="button" class="btn secondary" data-copy="#bin-output" data-copied="Copied!">Copy result</button></div></section>
+  <article class="content">
+    <h2>Переводите между обычным текстом и чистым двоичным кодом</h2>
+<p>В глубине своей каждая буква, цифра, пробел и эмодзи, которые вы набираете, хранятся компьютером как строка единиц и нулей. Это и есть двоичная система — система счисления по основанию 2, на которую в конечном счёте опираются все цифровые устройства. Этот переводчик двоичного кода позволяет свободно переходить между двумя мирами: наберите обычный текст и превратите его в двоичный код, который его представляет, или вставьте поток единиц и нулей и расшифруйте его обратно в читаемый текст. Инструмент работает с любым языком и даже с эмодзи, а вся обработка происходит прямо в браузере, поэтому преобразование мгновенное, и ничто из введённого никуда не отправляется.</p>
+<p>Пользоваться им очень просто. Наберите или вставьте текст в поле, затем нажмите &quot;В двоичный код&quot;, чтобы увидеть двоичную версию, аккуратно разбитую на группы по восемь цифр. Чтобы пойти в обратную сторону, вставьте двоичный код в поле и нажмите &quot;В текст&quot;, чтобы расшифровать его обратно в слова. Кнопка копирования кладёт результат в буфер обмена, готовый для вставки куда угодно.</p>
+<h2>Как текст превращается в двоичный код</h2>
+<p>Компьютеры не хранят буквы напрямую — они хранят числа, и записывают эти числа в двоичном виде. Связь между символом и его числом задаётся кодировкой символов, и современным стандартом здесь служит UTF-8. В UTF-8 обычная латинская буква занимает один байт — восемь бит, то есть восемь двоичных разрядов. Заглавная буква &quot;A&quot;, например, — это число 65, которое в двоичном виде записывается как 01000001. Соедините несколько таких байтов подряд, по одному на символ, — и вы получите двоичное представление целого сообщения. Этот переводчик записывает каждый байт как полную группу из восьми цифр и разделяет группы пробелами — это привычный, легко читаемый способ показать двоичный текст, который к тому же упрощает обратную расшифровку.</p>
+<p>Символы за пределами базового латинского набора — кириллица, буквы с диакритическими знаками, другие алфавиты, символы и эмодзи — требуют больше одного байта, и UTF-8 изящно справляется с этим, используя для них два, три или четыре байта. Переводчик следует тем же правилам, поэтому такие символы корректно преобразуются в несколько восьмибитных групп и безупречно собираются обратно при декодировании. Именно поэтому инструмент одинаково хорошо работает и с сообщением на русском, и со строкой из эмодзи, и с обычным английским текстом.</p>
+<h2>Расшифровка двоичного кода обратно в текст</h2>
+<p>Переход от двоичного кода к тексту обращает процесс вспять. Переводчик читает введённые данные группами по восемь бит, превращает каждую группу обратно в значение байта, а затем интерпретирует последовательность байтов как UTF-8, восстанавливая исходные символы. Чтобы это сработало, двоичный код должен быть организован в виде восьмизначных групп, желательно разделённых пробелами, например 01001000 01101001. Инструмент терпим к лишним пробелам и просто пропускает всё, что не является допустимой группой из единиц и нулей, поэтому случайный посторонний символ не сломает всю расшифровку.</p>
+<p>Эта двусторонняя возможность делает переводчик по-настоящему полезным инструментом, а не просто забавой. Можно закодировать сообщение, поделиться двоичным кодом с кем-то, и этот человек сможет вставить его обратно, чтобы прочитать, — простой низкотехнологичный способ передать записку, которая для непосвящённого выглядит бессмыслицей.</p>
+<h2>Зачем люди переводят текст в двоичный код</h2>
+<p>Самая частая причина — обучение. Именно с двоичной системы начинается изучение того, как устроены компьютеры, и, увидев собственное имя, превращённое в единицы и нули, абстрактная идея вдруг становится осязаемой. Студенты и любопытные новички пользуются подобным переводчиком, чтобы проверить упражнения, исследовать, как разные символы отображаются в разные байтовые последовательности, и выработать интуитивное понимание того, что на самом деле происходит под капотом привычного программного обеспечения. Преподаватели используют его, чтобы наглядно показать кодировку символов, не заставляя весь класс переводить вручную.</p>
+<p>Есть и игровая сторона. Двоичный текст — популярный способ написать секретное сообщение, украсить профиль в стиле &quot;для своих&quot; или создать головоломку для друзей. Поскольку результат — это настоящий текст из единиц и нулей, его можно скопировать в описание профиля, сообщение или комментарий. А тем, кто профессионально работает с компьютерами, возможность быстро взглянуть на двоичное или байтовое представление фрагмента текста иногда пригождается как удобный приём отладки — особенно когда проблему вызывает случайный или невидимый символ.</p>
+<h2>Осознавая масштаб чисел</h2>
+<p>Просмотр текста в двоичном виде — ещё и хороший способ прочувствовать, как накапливается информация. Каждый символ обычного текста превращается в восемь бит, поэтому даже короткое предложение быстро оборачивается длинной вереницей цифр — наглядное напоминание о том, что даже небольшой фрагмент текста скрывает на удивление большое число отдельных единиц и нулей. Это же объясняет, почему размер файлов измеряют именно так: байт — это те самые восемь бит, килобайт — это примерно тысяча таких байтов, и так далее. Переведя несколько слов и посчитав получившиеся группы, можно составить осязаемое представление о масштабе цифровых данных.</p>
+<h2>Двоичный код рядом с другими системами счисления</h2>
+<p>Двоичная система — не единственный способ компактно записать байт данных, и полезно понимать, как она соотносится с соседями. Тот же байт значения 65 (буква &quot;A&quot;), который в двоичном виде выглядит как 01000001, в шестнадцатеричной системе счисления записывается всего двумя знаками — 41, а в восьмеричной — числом 101. Программисты часто предпочитают шестнадцатеричную запись именно потому, что она вчетверо компактнее двоичной при сохранении простого перевода: каждая шестнадцатеричная цифра соответствует ровно четырём двоичным разрядам, поэтому перевести число из одной системы в другую можно почти механически, без деления в столбик. Восьмеричная система, где одна цифра соответствует трём двоичным разрядам, была особенно популярна на заре вычислительной техники и до сих пор встречается, например, в правах доступа к файлам в Unix-подобных системах. Если этот переводчик показывает вам двоичный код, а вы предпочли бы увидеть то же самое значение в шестнадцатеричном виде, достаточно сгруппировать полученные восемь бит по четыре и перевести каждую четвёрку в одну шестнадцатеричную цифру от 0 до F.</p>
+<h2>Приватно, мгновенно и бесплатно</h2>
+<p>Никакой регистрации, никакой платы и никакой рекламы на пути. Весь переводчик — это небольшой кусочек кода, работающий прямо на вашем устройстве, поэтому преобразование происходит в момент нажатия и продолжает работать даже без подключения к интернету. Ничего из введённого не отправляется, не сохраняется и не передаётся куда-либо; ваш текст и его двоичная форма существуют только на экране и исчезают при перезагрузке страницы.</p>
+<p>Чтобы воспользоваться инструментом, наберите или вставьте текст и нажмите &quot;В двоичный код&quot;, либо вставьте двоичный код и нажмите &quot;В текст&quot;. Скопируйте результат кнопкой и переключайтесь туда и обратно сколько угодно раз — переводчик одинаково аккуратно работает с любым языком, символом или эмодзи в обоих направлениях.</p>
+    <section class="faq"><h2>Binary translator FAQ</h2><dl><dt>How is text turned into binary?</dt><dd>Each character is encoded as one or more bytes using the UTF-8 standard, and each byte is written as eight binary digits (bits). Groups are separated by spaces so the result is easy to read and to decode again.</dd><dt>Can it handle accents and emoji?</dt><dd>Yes. Because it uses UTF-8, letters with accents, non-Latin scripts and emoji are converted correctly into their multi-byte binary form and decoded back without loss.</dd><dt>To decode, how should the binary be formatted?</dt><dd>Paste groups of eight bits separated by spaces, such as 01001000 01101001. Extra spaces are ignored, and anything that is not a 0 or 1 group is skipped.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/binarytext/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/binarytext/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/binarytext/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/binarytext/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/binarytext/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/binarytext/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/binarytext/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/binarytext/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/binarytext/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/binarytext/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/binarytext.js" defer></script>
+</body>
+</html>

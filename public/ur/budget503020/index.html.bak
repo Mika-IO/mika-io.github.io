@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>50/30/20 Budget Calculator — needs, wants &amp; savings</title>
+<meta name="description" content="Free 50/30/20 budget rule calculator. Enter your monthly income to instantly see how much to allocate to needs, wants, and savings.">
+<link rel="canonical" href="https://mikaio.dev/ur/budget503020/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/budget503020/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/budget503020/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/budget503020/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/budget503020/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/budget503020/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/budget503020/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/budget503020/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/budget503020/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/budget503020/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/budget503020/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/budget503020/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="50/30/20 Budget Calculator — needs, wants &amp; savings">
+<meta property="og:description" content="Free 50/30/20 budget rule calculator. Enter your monthly income to instantly see how much to allocate to needs, wants, and savings.">
+<meta property="og:url" content="https://mikaio.dev/ur/budget503020/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"50/30/20 Budget Calculator — needs, wants & savings","url":"https://mikaio.dev/ur/budget503020/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free 50/30/20 budget rule calculator. Enter your monthly income to instantly see how much to allocate to needs, wants, and savings."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"50/30/20 Budget Rule Calculator","item":"https://mikaio.dev/ur/budget503020/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the 50/30/20 rule?","acceptedAnswer":{"@type":"Answer","text":"The 50/30/20 rule is a simple budgeting framework: allocate 50% of after-tax income to needs (rent, food, utilities), 30% to wants (dining, entertainment, hobbies), and 20% to savings and debt repayment."}},{"@type":"Question","name":"Who created the 50/30/20 rule?","acceptedAnswer":{"@type":"Answer","text":"The rule was popularized by US Senator Elizabeth Warren and her daughter Amelia Warren Tyagi in their 2005 book 'All Your Worth: The Ultimate Lifetime Money Plan'."}},{"@type":"Question","name":"What counts as a 'need' vs a 'want'?","acceptedAnswer":{"@type":"Answer","text":"Needs are expenses required to live and work: rent/mortgage, groceries, utilities, transportation to work, minimum debt payments, and insurance. Wants are lifestyle upgrades: streaming services, restaurants, vacations, and gym memberships."}},{"@type":"Question","name":"Can I adjust the percentages?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. In high cost-of-living cities, needs may consume 60-70% of income. Adjust the ratios to fit your situation—the goal is awareness and intentional spending, not rigid adherence."}},{"@type":"Question","name":"Does the 20% savings include retirement contributions?","acceptedAnswer":{"@type":"Answer","text":"Yes. The savings category covers emergency fund contributions, 401(k)/IRA contributions, and extra debt payments beyond minimums. Prioritize high-interest debt before investing."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>50/30/20 Budget Rule Calculator</span></nav>
+  <h1>50/30/20 Budget Rule Calculator</h1>
+  <p class="lead">Enter your monthly take-home income to see your recommended budget split: 50% for needs, 30% for wants, and 20% for savings.</p>
+  <section class="widget" id="tool"><form id='b5020-form'><div class='row'><div class='field'><label for='b5020-income'>Monthly take-home income</label><input type='number' id='b5020-income' step='any' min='0' inputmode='decimal'></div></div><div class='result'><span class='hint'>Needs (50%): </span><span class='big' id='b5020-out'>—</span></div><div id='b5020-detail' style='opacity:0.7;font-size:0.9rem;margin-top:0.5rem'></div></form></section>
+  <article class="content">
+    <h2>50/30/20 اصول: ہر آمدنی کے لیے ایک آسان بجٹ فارمولا</h2>
+<p>50/30/20 اصول ذاتی مالیات کے سب سے زیادہ تجویز کیے جانے والے طریقوں میں سے ایک ہے، کیونکہ یہ یاد رکھنے میں اتنا آسان ہے کہ تقریباً ہر آمدنی کی سطح پر لاگو کیا جا سکتا ہے۔ اس کا بنیادی خیال یہ ہے کہ آپ اپنی ماہانہ خالص آمدنی کو تین حصوں میں تقسیم کریں: 50 فیصد ضروریات کے لیے، 30 فیصد خواہشات کے لیے، اور 20 فیصد بچت اور قرض کی ادائیگی کے لیے۔ یہ کیلکولیٹر یہ حساب فوراً کر دیتا ہے تاکہ آپ کا دھیان اصل مسئلے پر رہے — یعنی اس منصوبے پر عمل کرنا۔</p>
+<h2>یہ اصول کہاں سے آیا</h2>
+<p>امریکی سینیٹر الزبتھ وارن، جو سیاست میں آنے سے پہلے دیوالیہ پن کے قانون کی پروفیسر تھیں، نے اپنی بیٹی امیلیا وارن تیاگی کے ساتھ مل کر 2005 میں شائع ہونے والی کتاب <em>All Your Worth</em> میں یہ اصول متعارف کروایا۔ انہوں نے گھریلو اخراجات کے کئی دہائیوں کے ڈیٹا کا تجزیہ کیا اور یہ نتیجہ اخذ کیا کہ جو خاندان اپنی ضروریات کو آمدنی کے 50 فیصد سے کم رکھتے تھے وہ ملازمت جانے، طبی ہنگامی حالات یا طلاق جیسے مالی جھٹکوں کا سامنا کہیں بہتر طریقے سے کر پاتے تھے، بہ نسبت ان کے جو ضروری اخراجات کو بچت پر حاوی ہونے دیتے تھے۔</p>
+<p>اس اصول کی خوبی یہ ہے کہ اسے کسی اسپریڈ شیٹ یا ایک ایک مد کی تفصیلی نگرانی کی ضرورت نہیں۔ بس آپ کو اپنی خالص آمدنی معلوم ہونی چاہیے اور یہ اندازہ ہونا چاہیے کہ آپ کے اخراجات ہر حصے میں فٹ بیٹھتے ہیں یا نہیں۔</p>
+<h2>ضرورت کیا شمار ہوتی ہے؟</h2>
+<p>ضروریات وہ اخراجات ہیں جن پر سمجھوتہ ممکن نہیں — یعنی وہ خرچے جو آپ کی بنیادی زندگی اور روزگار کو چلانے کے لیے لازمی ہیں:</p>
+<ul>
+<li><strong>رہائش</strong>: کرایہ یا مکان کی قسط (اصل رقم + سود + پراپرٹی ٹیکس + بیمہ)</li>
+<li><strong>یوٹیلٹیز</strong>: بجلی، گیس، پانی، انٹرنیٹ (بنیادی پلان)، فون (بنیادی پلان)</li>
+<li><strong>گروسری</strong>: گھر پر پکانے کے لیے خریدا گیا کھانا (ہوٹل کا کھانا نہیں)</li>
+<li><strong>آمد و رفت</strong>: گاڑی کی قسط، بیمہ، ایندھن، کام آنے جانے کے لیے پبلک ٹرانسپورٹ</li>
+<li><strong>قرض کی کم از کم ادائیگی</strong>: کریڈٹ کارڈز، تعلیمی قرضوں اور دیگر قرضوں کی لازمی کم از کم رقم</li>
+<li><strong>بیمہ</strong>: صحت، زندگی اور معذوری کے بیمے کی قسطیں</li>
+<li><strong>بچوں کی دیکھ بھال</strong>: وہ اخراجات جو آپ کے کام کرنے کے لیے ضروری ہیں</li>
+</ul>
+<p>اگر آپ کی ضروریات آمدنی کے 50 فیصد سے تجاوز کر جائیں تو یہ ایک اشارہ ہے کہ نظرثانی کی ضرورت ہے: کیا سستی رہائش مل سکتی ہے، گاڑی کی ری فنانسنگ ہو سکتی ہے، یا بیمے کی قسطیں کم ہو سکتی ہیں؟ نیویارک یا سان فرانسسکو جیسے مہنگے شہروں میں ضروریات اکثر آمدنی کا 60 سے 65 فیصد کھا جاتی ہیں، جس کی وجہ سے فارمولے میں ردوبدل کرنا پڑتا ہے۔</p>
+<h2>خواہش کیا شمار ہوتی ہے؟</h2>
+<p>خواہشات وہ اختیاری اخراجات ہیں جو زندگی کو بہتر بناتے ہیں مگر ناگزیر نہیں ہوتے:</p>
+<ul>
+<li><strong>باہر کھانا اور ٹیک اوے</strong></li>
+<li><strong>تفریح</strong>: اسٹریمنگ سروسز (نیٹ فلکس، اسپاٹیفائی)، فلمیں، کنسرٹ</li>
+<li><strong>سیر و سیاحت اور چھٹیاں</strong></li>
+<li><strong>جم کی رکنیت اور شوق کا سامان</strong></li>
+<li><strong>بنیادی ضرورت سے زیادہ کپڑے</strong></li>
+<li><strong>مہنگے فون پلان اور آلات</strong></li>
+<li><strong>ضرورت سے زیادہ پرآسائش چیزیں</strong> (ضرورت سے بہتر اپارٹمنٹ، ضرورت سے زیادہ نئی گاڑی)</li>
+</ul>
+<p>ضرورت اور خواہش کے درمیان لکیر دھندلی بھی ہو سکتی ہے۔ انٹرنیٹ ایک ضرورت ہے، مگر اس پر اضافی اسٹریمنگ بنڈل ایک خواہش ہے۔ بنیادی آمد و رفت ضرورت ہے، مگر جب ایک قابل بھروسہ پرانی گاڑی کافی ہو تو پرآسائش گاڑی لیز پر لینا خواہش کے زمرے میں آتا ہے۔</p>
+<h2>20 فیصد بچت کا حصہ</h2>
+<p>بچت اور قرض کی ادائیگی کا زمرہ طویل مدتی مالی صحت کے لیے سب سے اہم ہے:</p>
+<ol>
+<li><strong>ہنگامی فنڈ</strong>: جارحانہ سرمایہ کاری سے پہلے، اعلیٰ منافع والے بچت اکاؤنٹ میں 3 سے 6 ماہ کے ضروری اخراجات جمع کریں۔</li>
+<li><strong>زیادہ سود والا قرض</strong>: سرمایہ کاری سے پہلے 7-8 فیصد سے زیادہ سالانہ شرح سود والے کریڈٹ کارڈز اور ذاتی قرضے اتاریں — یہ ایک یقینی منافع ہے۔</li>
+<li><strong>ریٹائرمنٹ کی رقم</strong>: ملازمت کے ریٹائرمنٹ فنڈ میں تعاون (خاص طور پر ادارے کی طرف سے ملنے والا میچ حاصل کرنے کے لیے)، اور انفرادی ریٹائرمنٹ اکاؤنٹس۔</li>
+<li><strong>دیگر سرمایہ کاری</strong>: قابلِ ٹیکس بروکریج اکاؤنٹس، پراپرٹی، بچوں کی تعلیم کے لیے بچت۔</li>
+<li><strong>مخصوص بچتی فنڈز</strong>: آنے والے معلوم اخراجات (گاڑی بدلنا، گھر کی مرمت، تہوار) کے لیے ماہانہ بچت۔</li>
+</ol>
+<h2>ایک عملی مثال</h2>
+<p>فرض کریں آپ کی ماہانہ خالص آمدنی 200,000 روپے ہے:</p>
+<p>| زمرہ | فیصد | رقم |</p>
+<p>|---|---|---|</p>
+<p>| ضروریات | 50% | 100,000 |</p>
+<p>| خواہشات | 30% | 60,000 |</p>
+<p>| بچت | 20% | 40,000 |</p>
+<p>آپ کا 100,000 کا ضروریات بجٹ کچھ یوں ہو سکتا ہے: کرایہ 55,000 + یوٹیلٹیز 6,000 + گروسری 14,000 + گاڑی کا بیمہ 5,000 + قرض کی کم از کم قسط 8,000 + فون 3,000 = 91,000۔ آپ حد سے محفوظ فاصلے پر ہیں۔</p>
+<p>آپ کے 60,000 کے خواہشات میں شامل ہو سکتا ہے: اسٹریمنگ سروسز 2,000 + باہر کھانا 16,000 + جم 2,000 + کپڑے 8,000 + ویک اینڈ سرگرمیاں 12,000 + متفرق 20,000۔</p>
+<p>آپ کی 40,000 ماہانہ بچت: 20,000 ریٹائرمنٹ فنڈ + 8,000 ہنگامی فنڈ + 12,000 اضافی قرض کی ادائیگی۔</p>
+<h2>اصول کو اپنی صورتحال کے مطابق ڈھالنا</h2>
+<p>50/30/20 اصول ایک نقطہ آغاز ہے، کوئی سخت حکم نہیں۔ عام تبدیلیوں میں شامل ہیں:</p>
+<ul>
+<li><strong>زیادہ قرض کا بوجھ</strong>: زیادہ سود والے قرض کے خاتمے تک عارضی طور پر 50/20/30 کی طرف منتقل ہوں (خواہشات کم، بچت/قرض زیادہ)۔</li>
+<li><strong>کم آمدنی</strong>: بنیادی ضروریات آمدنی کا 70-80 فیصد لے سکتی ہیں۔ جو بھی بچت ممکن ہو اس پر توجہ دیں — ماہانہ صرف چند ہزار بچانا بھی عادت بناتا ہے۔</li>
+<li><strong>زیادہ آمدنی</strong>: ممکن ہے آپ کی ضروریات اور خواہشات کم فیصد میں ہی پوری ہو جائیں، جس سے 20 فیصد سے زیادہ بچت کی گنجائش نکل آئے۔ یہ ایک اچھا &quot;مسئلہ&quot; ہے۔</li>
+<li><strong>مالی آزادی کے متلاشی</strong>: جو لوگ جلد ریٹائرمنٹ چاہتے ہیں وہ اکثر 50 سے 70 فیصد تک بچت کی شرح رکھتے ہیں، جس سے خواہشات کا حصہ نمایاں طور پر سکڑ جاتا ہے۔</li>
+</ul>
+<h2>ذہنی حساب کتاب کی طاقت</h2>
+<p>رویاتی معاشیات کی تحقیق بتاتی ہے کہ پیسے کو ذہنی خانوں میں تقسیم کرنے سے زیادہ خرچ کرنے کا رجحان کم ہو جاتا ہے۔ جب آپ کو معلوم ہو کہ 60,000 آپ کا خواہشات کا بجٹ ہے تو آپ اس دائرے کے اندر زیادہ سوچ سمجھ کر انتخاب کرتے ہیں۔ 50/30/20 فریم ورک تین بڑے ذہنی خانے بناتا ہے جنہیں تفصیلی لائن آئٹم بجٹنگ کے بغیر بھی آسانی سے ٹریک کیا جا سکتا ہے۔</p>
+<p>اس اصول کو ہفتہ وار پانچ منٹ کے مختصر جائزے کے ساتھ ملائیں: پچھلے ہفتے کے بینک اور کریڈٹ کارڈ لین دین دیکھیں اور ذہنی طور پر ہر ایک کو ضرورت، خواہش یا بچت میں تقسیم کریں۔ یہ ہلکی سی آگاہی مہینے کے آخر میں بجٹ کے جھٹکوں سے بچاتی ہے۔</p>
+<h2>غیر مستقل آمدنی پر اصول کا اطلاق</h2>
+<p>اگر آپ فری لانسر، ٹھیکیدار یا کمیشن پر کام کرنے والے کارکن ہیں جن کی آمدنی بدلتی رہتی ہے، تو فیصد کا حساب اپنی معمول کی سب سے کم آمدنی والے مہینے پر لگائیں۔ زیادہ آمدنی والے مہینوں میں اضافی کمائی زیادہ تر بچت میں ڈالیں۔ اس سے طرزِ زندگی میں بلاوجہ اضافہ روکا جا سکتا ہے اور سست مہینوں کے لیے ایک بفر بھی بنتا ہے۔</p>
+<h2>عام غلطیاں جن سے بچنا چاہیے</h2>
+<ul>
+<li><strong>مجموعی آمدنی کی بجائے خالص آمدنی استعمال نہ کرنا</strong>: فیصد کا حساب ٹیکس اور لازمی کٹوتیوں کے بعد ملنے والی آمدنی پر لگائیں، تنخواہ سے پہلے کی رقم پر نہیں۔</li>
+<li><strong>غیر باقاعدہ اخراجات کو نظرانداز کرنا</strong>: سالانہ اخراجات (بیمے کی قسطیں، گاڑی کی رجسٹریشن، تہواروں کے تحائف) کو 12 پر تقسیم کر کے ماہانہ شمار میں شامل کریں۔</li>
+<li><strong>کم از کم قرض کی ادائیگی کو بچت سمجھنا</strong>: کم از کم رقم ضروریات کے خانے میں آتی ہے۔ صرف کم از کم سے زیادہ کی گئی ادائیگی ہی بچت شمار ہوتی ہے۔</li>
+<li><strong>درجہ بندی میں الجھن</strong>: اگر یہ واضح نہ ہو کہ کوئی خرچ ضرورت ہے یا خواہش، تو کوئی ایک منتخب کریں اور آگے بڑھیں۔ وقت کے ساتھ مستقل مزاجی مکمل درجہ بندی سے زیادہ اہم ہے۔</li>
+</ul>
+<h2>دیگر مددگار اوزار</h2>
+<p>50/30/20 اہداف طے کرنے کے بعد ان اوزاروں سے مزید گہرائی حاصل کریں: ایک <strong>نیٹ ورتھ کیلکولیٹر</strong> یہ بتاتا ہے کہ آیا آپ کی بچت واقعی بڑھتی دولت میں بدل رہی ہے۔ ایک <strong>قرض ادائیگی کیلکولیٹر</strong> دکھاتا ہے کہ بچت کے خانے میں اضافی ادائیگیاں قرض سے آزادی کو کتنا تیز کرتی ہیں۔ اور ایک <strong>ہنگامی فنڈ کیلکولیٹر</strong> بتاتا ہے کہ آپ کا حفاظتی بفر بالکل کتنا بڑا ہونا چاہیے۔</p>
+<h2>رازداری</h2>
+<p>تمام حسابات مکمل طور پر آپ کے براؤزر کے اندر ہوتے ہیں۔ کوئی ڈیٹا کسی سرور کو نہیں بھیجا جاتا۔</p>
+    <section class="faq"><h2>50/30/20 Budget FAQ</h2><dl><dt>What is the 50/30/20 rule?</dt><dd>The 50/30/20 rule is a simple budgeting framework: allocate 50% of after-tax income to needs (rent, food, utilities), 30% to wants (dining, entertainment, hobbies), and 20% to savings and debt repayment.</dd><dt>Who created the 50/30/20 rule?</dt><dd>The rule was popularized by US Senator Elizabeth Warren and her daughter Amelia Warren Tyagi in their 2005 book &#39;All Your Worth: The Ultimate Lifetime Money Plan&#39;.</dd><dt>What counts as a &#39;need&#39; vs a &#39;want&#39;?</dt><dd>Needs are expenses required to live and work: rent/mortgage, groceries, utilities, transportation to work, minimum debt payments, and insurance. Wants are lifestyle upgrades: streaming services, restaurants, vacations, and gym memberships.</dd><dt>Can I adjust the percentages?</dt><dd>Absolutely. In high cost-of-living cities, needs may consume 60-70% of income. Adjust the ratios to fit your situation—the goal is awareness and intentional spending, not rigid adherence.</dd><dt>Does the 20% savings include retirement contributions?</dt><dd>Yes. The savings category covers emergency fund contributions, 401(k)/IRA contributions, and extra debt payments beyond minimums. Prioritize high-interest debt before investing.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/budget503020/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/budget503020/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/budget503020/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/budget503020/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/budget503020/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/budget503020/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/budget503020/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/budget503020/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/budget503020/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/budget503020/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/budget503020.js" defer></script>
+</body>
+</html>

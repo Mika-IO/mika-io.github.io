@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work Days Calculator — count business days between two dates</title>
+<meta name="description" content="Free work days calculator. Count the number of business days (Monday–Friday) between any two dates, excluding weekends. Instant results in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ur/workdays/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/workdays/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/workdays/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/workdays/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/workdays/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Work Days Calculator — count business days between two dates">
+<meta property="og:description" content="Free work days calculator. Count the number of business days (Monday–Friday) between any two dates, excluding weekends. Instant results in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ur/workdays/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Work Days Calculator — count business days between two dates","url":"https://mikaio.dev/ur/workdays/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free work days calculator. Count the number of business days (Monday–Friday) between any two dates, excluding weekends. Instant results in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Work Days Calculator","item":"https://mikaio.dev/ur/workdays/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this include public holidays?","acceptedAnswer":{"@type":"Answer","text":"No. This calculator excludes only weekends (Saturday and Sunday). Public holidays vary by country and cannot be determined automatically without knowing your location."}},{"@type":"Question","name":"Are the start and end dates included?","acceptedAnswer":{"@type":"Answer","text":"Yes, both the start and end dates are included if they fall on a weekday."}},{"@type":"Question","name":"Can I calculate workdays in the past?","acceptedAnswer":{"@type":"Answer","text":"Yes, enter any two dates in any order and the calculator returns the correct count."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/ur/workdays/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/workdays/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/workdays/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/workdays/">
+  <!-- SEO injected -->
+<meta property="og:title" content="دو تاریخوں کے درمیان کاروباری دنوں کی گنتی" />
+<meta property="og:description" content="دو تاریخوں کے درمیان کاروباری دنوں کی گنتی" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/ur/workdays/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"دو تاریخوں کے درمیان کاروباری دنوں کی گنتی","description":"دو تاریخوں کے درمیان کاروباری دنوں کی گنتی","url":"https://example.com/ur/workdays/","inLanguage":"ur"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Work Days Calculator</span></nav>
+  <h1>Work Days Calculator</h1>
+  <p class="lead">Select a start and end date to count the working days between them, excluding weekends.</p>
+  <section class="widget" id="tool"><form id="wd-form"><div class="row"><div class="field"><label for="wd-from">Start date</label><input type="date" id="wd-from"></div><div class="field"><label for="wd-to">End date</label><input type="date" id="wd-to"></div></div><div class="result"><span class="hint">Working days: </span><span class="big" id="wd-out">—</span></div><div id="wd-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>دو تاریخوں کے درمیان کاروباری دنوں کی گنتی</h2>
+<p>ہر دن کام کا دن نہیں ہوتا۔ ہفتہ وار چھٹیاں کاروبار کے تسلسل میں رکاوٹ ڈالتی ہیں، اور دو تاریخوں کے درمیان اصل میں کتنے کاروباری دن موجود ہیں یہ جاننا پراجیکٹ کی منصوبہ بندی، معاہدوں کے انتظام، انوائس کی شرائط، قانونی مہلتوں اور ایچ آر کے حسابات کے لیے بنیادی اہمیت رکھتا ہے۔ یہ کیلکولیٹر کسی بھی ابتدائی اور اختتامی تاریخ کے درمیان پیر سے جمعہ تک کے دن گنتا ہے، ہفتہ اور اتوار کو خارج کرتے ہوئے۔</p>
+<h2>کاروباری دن بمقابلہ کیلنڈر کے دن</h2>
+<p>کیلنڈر کے دن شروع سے آخر تک ہر دن گنتے ہیں، بشمول ہفتہ وار چھٹیاں۔ کاروباری دن (جنہیں ورکنگ ڈے یا ویک ڈے بھی کہا جاتا ہے) ہفتہ اور اتوار کو خارج کرتے ہیں۔ یہ فرق اس وقت اہم ہو جاتا ہے جب:</p>
+<ul>
+<li>کوئی معاہدہ &quot;30 کاروباری دن&quot; کی ترسیل کی مہلت بتاتا ہے — یہ چھ کیلنڈر ہفتے ہیں، نہ کہ 30 دن۔</li>
+<li>کوئی قانونی مہلت کسی واقعے سے 10 کاروباری دن کی ہو — کیلنڈر تاریخ کو غلط سمجھ لینا ایک بڑی غلطی ہو سکتی ہے۔</li>
+<li>کوئی ادائیگی &quot;نیٹ 30 دن&quot; میں واجب الادا ہو — عام طور پر اس کا مطلب 30 کیلنڈر دن ہوتا ہے، مگر کچھ علاقوں میں اسے کاروباری دن سمجھا جاتا ہے۔</li>
+<li>ملازمت ختم کرنے کی نوٹس مدت 2 ہفتے ہو — یہ 10 کاروباری دن بنتے ہیں۔</li>
+</ul>
+<h2>کیلکولیٹر کیسے کام کرتا ہے</h2>
+<p>یہ کیلکولیٹر دونوں تاریخوں کے درمیان ہر دن کا جائزہ لیتا ہے اور صرف انہی دنوں کو شمار کرتا ہے جو پیر، منگل، بدھ، جمعرات یا جمعہ کو پڑتے ہیں۔ اگر ابتدائی اور اختتامی تاریخ دونوں ہی ویک ڈے ہوں تو انہیں بھی گنتی میں شامل کیا جاتا ہے۔ مجموعی نتیجہ کے ساتھ تفصیل بھی دکھائی جاتی ہے: کیلنڈر دن، کاروباری دن اور ہفتہ وار چھٹی کے دن۔</p>
+<h2>پراجیکٹ کی منصوبہ بندی</h2>
+<p>پراجیکٹ منیجرز کاروباری دن کے حسابات مسلسل استعمال کرتے ہیں۔ 20 کاموں پر مشتمل کوئی پراجیکٹ منصوبہ، جس میں ہر کام 2 کاروباری دن لیتا ہو، کم از کم 40 کاروباری دن — یعنی 8 کیلنڈر ہفتوں — پر پھیلتا ہے۔ اضافی وقت، انحصار اور نظرثانی کے چکروں کو شامل کرنے کے لیے یہ جاننا ضروری ہے کہ کسی مقررہ کیلنڈر مدت میں دراصل کتنے کاروباری دن سماتے ہیں۔</p>
+<p>سافٹ ویئر ڈویلپمنٹ میں سپرنٹ کی منصوبہ بندی عام طور پر 2 ہفتوں کے سپرنٹ استعمال کرتی ہے، جن میں 10 کاروباری دن ہوتے ہیں۔ کسی طویل روڈ میپ کے کاروباری دنوں کو جاننا یہ اندازہ لگانے میں مدد دیتا ہے کہ ابھی سے کسی بڑے سنگ میل تک کتنے سپرنٹ سما سکتے ہیں۔</p>
+<h2>انوائس اور ادائیگی کی شرائط</h2>
+<p>نیٹ 30، نیٹ 60 اور نیٹ 90 کی ادائیگی کی شرائط تقریباً ہمیشہ کیلنڈر دنوں میں ہوتی ہیں۔ تاہم کچھ صنعتیں اور معاہدے کاروباری دن استعمال کرتے ہیں، جس سے یہ فرق اہم ہو جاتا ہے۔ پیر کو جاری ہونے والا نیٹ 30 کیلنڈر دن کا انوائس 30 کیلنڈر دن بعد واجب الادا ہوتا ہے، چاہے درمیان میں کتنے ہی ہفتہ وار چھٹیاں کیوں نہ آ جائیں۔ 30 کاروباری دن کی شرط اس سے کہیں بعد ختم ہوتی ہے — چھ کیلنڈر ہفتوں سے زیادہ۔</p>
+<h2>ملازمت اور ایچ آر</h2>
+<p>ملازمت ختم کرنے کی نوٹس مدتیں اکثر ہفتوں یا کاروباری دنوں میں طے کی جاتی ہیں۔ منگل سے شروع ہونے والی 2 ہفتوں کی نوٹس مدت دو ہفتے بعد پیر کو ختم ہوتی ہے — یعنی 10 کاروباری دن۔ سالانہ رخصت کے حقوق اکثر سال بھر کے کاروباری دنوں میں ہوتے ہیں۔ ایچ آر نظام رخصت کی درخواستوں اور منظوریوں کے لیے کاروباری دنوں کا بیلنس ٹریک کرتے ہیں۔</p>
+<h2>عوامی تعطیلات</h2>
+<p>یہ کیلکولیٹر صرف ہفتہ وار چھٹیوں کو خارج کرتا ہے۔ عوامی تعطیلات ملک، خطے، صوبے حتیٰ کہ صنعت کے لحاظ سے بہت مختلف ہوتی ہیں، اور اضافی معلومات کے بغیر خودکار طور پر معلوم نہیں کی جا سکتیں۔ ایسے حسابات کے لیے جن میں مخصوص تعطیلات ضرور خارج ہونی چاہئیں، اس کیلکولیٹر کے نتیجے کو نقطہ آغاز کے طور پر استعمال کریں اور تاریخوں کی حد میں آنے والی متعلقہ تعطیلات کو ہاتھ سے گھٹا لیں۔</p>
+<h2>کیلکولیٹر استعمال کرنے کا طریقہ</h2>
+<p>ایک ابتدائی تاریخ اور ایک اختتامی تاریخ منتخب کریں، اور ان کے درمیان کاروباری دنوں کی کل تعداد فوراً سامنے آ جاتی ہے، ساتھ ہی کیلنڈر دنوں کی گنتی اور اس حد میں آنے والے ہفتہ وار چھٹی کے دنوں کی تعداد بھی دکھائی جاتی ہے۔ چونکہ دونوں اعداد ایک ساتھ اپ ڈیٹ ہوتے ہیں، آپ ایک ہی نظر میں دیکھ سکتے ہیں کہ کسی مقررہ کیلنڈر مدت میں کتنے ہفتہ وار چھٹیاں شامل ہیں — یہ اس وقت کارآمد معلومات ہے جب کوئی مہلت کیلنڈر دنوں میں کشادہ لگے مگر ہفتہ وار چھٹیاں گھٹانے کے بعد تنگ نکلے۔</p>
+<h2>یہ فرق لوگوں کو کیوں الجھا دیتا ہے</h2>
+<p>کاروباری دن اور کیلنڈر دن کے درمیان الجھن معاہدوں اور پراجیکٹ کی منصوبہ بندی میں سب سے عام چھوٹی غلط فہمیوں میں سے ایک ہے، بالکل اسی لیے کہ دونوں کو ایک ہی روزمرہ لفظ &quot;دن&quot; سے بیان کیا جاتا ہے بغیر کسی واضح اشارے کے کہ کون سا مراد ہے۔ &quot;10 دن&quot; کی مہلت ایک جیسی ہی لگتی ہے چاہے اس کا مطلب دس کیلنڈر دن ہو یا دس کاروباری دن، مگر دونوں میں چار دن تک کا فرق ہو سکتا ہے، درمیان میں آنے والی ہفتہ وار چھٹیوں کی تعداد کے مطابق، اور یہی وہ مبہمیت ہے جو اکثر یہ حقیقی تنازعہ پیدا کرتی ہے کہ آیا مہلت واقعی پوری ہوئی یا نہیں۔ معاہدے یا پراجیکٹ منصوبے کو اتنی احتیاط سے پڑھنا کہ کون سا دن مراد ہے واضح ہو جائے، اور اس جیسے کیلکولیٹر کو دونوں کے درمیان تبدیل کرنے کے لیے استعمال کرنا، تنازعہ بننے سے پہلے ہی مبہمیت کو دور کر دیتا ہے۔</p>
+<h2>SLA اور ردعمل کی ضمانتیں</h2>
+<p>سروس لیول ایگریمنٹس اکثر کاروباری دنوں کی ایک مقررہ تعداد کے اندر جواب یا حل کا وعدہ کرتے ہیں — مثلاً &quot;سپورٹ ٹکٹس کا جواب 2 کاروباری دنوں میں دیا جائے گا۔&quot; کیا کوئی SLA واقعی پورا ہوا ہے، اس کا حساب لگانے کے لیے بالکل وہی کاروباری دن کا حساب درکار ہے جو یہ اوزار انجام دیتا ہے: جمعہ کی شام 4 بجے فائل کی گئی ٹکٹ اور پیر کی صبح جواب دی گئی ٹکٹ کو تکنیکی طور پر اگلے ہی کاروباری دن جواب دیا گیا سمجھا جائے گا، اگرچہ تقریباً تین کیلنڈر دن گزر چکے ہوں، اور اس کے برعکس غلط فہمی (یہ فرض کر لینا کہ جمعہ سے پیر کا فاصلہ &quot;1 کاروباری دن&quot; کی SLA کی خلاف ورزی کرتا ہے) صارفین کی غیر ضروری شکایات کا ایک عام ذریعہ ہے۔</p>
+<h2>آخری مہلت سے پیچھے کی طرف حساب لگانا</h2>
+<p>یہ کیلکولیٹر منصوبہ بندی کے مقاصد کے لیے الٹی سمت میں بھی کام کرتا ہے: اگر آپ کو معلوم ہو کہ کوئی ڈلیوری کسی مخصوص تاریخ تک ہونی ہے اور کام میں کتنے کاروباری دن لگیں گے، تو آپ آخری مہلت سے پیچھے گنتی کر کے کام شروع کرنے کی آخری محفوظ تاریخ معلوم کر سکتے ہیں۔ آخری مہلت سے کیلنڈر دن نہیں بلکہ کاروباری دن گھٹانا بالکل وہی چیز ہے جو پراجیکٹ منصوبے کو خاموشی سے یہ فرض کرنے سے روکتی ہے کہ کام ہفتہ وار چھٹیوں میں بھی ہو گا — ایک ایسی غلطی جو ایک آرام دہ دو ہفتے کے شیڈول کو جلد بازی میں بدل دیتی ہے جب کوئی اس میں شامل چار ہفتہ وار چھٹی کے دنوں کا حساب لگاتا ہے۔</p>
+<h2>پراجیکٹ کے بجٹ کے لیے ایک کارآمد عادت</h2>
+<p>کسی کلائنٹ کے لیے پراجیکٹ کا بجٹ بناتے وقت وعدہ کی گئی مہلت کو کیلنڈر دنوں کے بجائے اصل کاروباری دنوں میں تبدیل کرنا اس عام غلطی سے بچاتا ہے جس میں یہ اندازہ کم لگایا جاتا ہے کہ &quot;15 دن کی مہلت&quot; واقعی کتنا کیلنڈر وقت لیتی ہے جب اس کے اندر دو یا تین ہفتہ وار چھٹیاں شمار کی جائیں۔</p>
+<h2>نجی اور فوری</h2>
+<p>تمام حسابات مکمل طور پر آپ کے براؤزر میں چلتے ہیں، اس لیے جیسے ہی آپ اپنی تاریخیں منتخب کرتے ہیں گنتی فوراً سامنے آ جاتی ہے اور آپ کی درج کردہ کوئی بھی تاریخ کبھی کسی سرور کو نہیں بھیجی جاتی، نہ محفوظ کی جاتی ہے اور نہ شیئر کی جاتی ہے۔</p>
+    <section class="faq"><h2>Work days FAQ</h2><dl><dt>Does this include public holidays?</dt><dd>No. This calculator excludes only weekends (Saturday and Sunday). Public holidays vary by country and cannot be determined automatically without knowing your location.</dd><dt>Are the start and end dates included?</dt><dd>Yes, both the start and end dates are included if they fall on a weekday.</dd><dt>Can I calculate workdays in the past?</dt><dd>Yes, enter any two dates in any order and the calculator returns the correct count.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/workdays/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/workdays.js" defer></script>
+</body>
+</html>

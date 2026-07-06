@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Binary to Decimal Converter — Number Base Converter (2, 8, 10, 16)</title>
+<meta name="description" content="Convert numbers between binary, octal, decimal, and hexadecimal instantly. Free online base converter with instant results.">
+<link rel="canonical" href="https://mikaio.dev/es/bintodec/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/bintodec/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/bintodec/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/bintodec/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/bintodec/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/bintodec/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/bintodec/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/bintodec/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/bintodec/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/bintodec/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/bintodec/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Binary to Decimal Converter — Number Base Converter (2, 8, 10, 16)">
+<meta property="og:description" content="Convert numbers between binary, octal, decimal, and hexadecimal instantly. Free online base converter with instant results.">
+<meta property="og:url" content="https://mikaio.dev/es/bintodec/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Binary to Decimal Converter — Number Base Converter (2, 8, 10, 16)","url":"https://mikaio.dev/es/bintodec/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Convert numbers between binary, octal, decimal, and hexadecimal instantly. Free online base converter with instant results."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Number Base Converter","item":"https://mikaio.dev/es/bintodec/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is binary (base 2)?","acceptedAnswer":{"@type":"Answer","text":"Binary uses only the digits 0 and 1. Each position represents a power of 2. It is the fundamental language of computers since transistors have two states: on (1) and off (0). For example, 1010 in binary equals 10 in decimal."}},{"@type":"Question","name":"What is hexadecimal (base 16)?","acceptedAnswer":{"@type":"Answer","text":"Hexadecimal uses digits 0–9 and letters A–F (representing 10–15). One hex digit represents exactly 4 binary digits (bits), making hex a compact way to write binary. For example, FF in hex equals 255 in decimal."}},{"@type":"Question","name":"What is octal (base 8)?","acceptedAnswer":{"@type":"Answer","text":"Octal uses digits 0–7. One octal digit represents exactly 3 binary digits. Octal was widely used in early computing systems and is still used in Unix/Linux file permissions (e.g., chmod 755)."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/es/bintodec/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/bintodec/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/bintodec/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/bintodec/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/bintodec/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/bintodec/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/bintodec/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/bintodec/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/bintodec/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/bintodec/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Convierte números entre cualquier base al instante" />
+<meta property="og:description" content="Convierte números entre cualquier base al instante" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/es/bintodec/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Convierte números entre cualquier base al instante","description":"Convierte números entre cualquier base al instante","url":"https://example.com/es/bintodec/","inLanguage":"es"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Number Base Converter</span></nav>
+  <h1>Number Base Converter</h1>
+  <p class="lead">Enter any number and select its base to instantly see it in binary, octal, decimal, and hexadecimal.</p>
+  <section class="widget" id="tool"><div id="bintodec-widget"><div class="field"><label for="bd-input">Number</label><input type="text" id="bd-input" placeholder="e.g. 255" autocomplete="off"></div><div class="field"><label>Source base</label><div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem"><label><input type="radio" name="bd-base" value="2" id="bd-b2"> Binary (2)</label><label><input type="radio" name="bd-base" value="8" id="bd-b8"> Octal (8)</label><label><input type="radio" name="bd-base" value="10" id="bd-b10" checked> Decimal (10)</label><label><input type="radio" name="bd-base" value="16" id="bd-b16"> Hex (16)</label></div></div><div id="bd-results" style="margin-top:1rem;display:grid;gap:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>Convierte números entre cualquier base al instante</h2>
+<p>El conversor de bases numéricas te permite escribir cualquier número en binario (base 2), octal (base 8), decimal (base 10) o hexadecimal (base 16) y ver de inmediato su equivalente en los cuatro sistemas. No hace falta recordar fórmulas de conversión ni hacer cuentas mentales — elige tu base de origen, escribe el número, y la herramienta se encarga del resto en tiempo real.</p>
+<h2>Por qué existen distintas bases numéricas</h2>
+<p>Los humanos contamos de forma natural en base 10 (decimal) porque tenemos diez dedos. Pero los ordenadores no tienen dedos — trabajan con señales eléctricas que están encendidas o apagadas, lo que da lugar a la base 2 (binaria). Otras bases surgieron como atajos prácticos para el binario: la base 8 (octal) agrupa tres dígitos binarios, y la base 16 (hexadecimal) agrupa cuatro, haciendo que las cadenas binarias largas resulten mucho más legibles y manejables para ingenieros e ingenieras.</p>
+<h2>Binario — base 2</h2>
+<p>El binario es la base de la informática digital. Cada valor almacenado en un ordenador, cada instrucción ejecutada por un procesador, cada píxel de una pantalla termina resolviéndose en una secuencia de ceros y unos. A un solo dígito binario se le llama bit. Ocho bits forman un byte. Como los números binarios se alargan rápido —el número decimal 255 necesita ocho dígitos binarios (11111111)—, quienes programan raramente escriben binario en crudo. Prefieren el hexadecimal, mucho más compacto.</p>
+<p>Entender el binario resulta esencial para estudiantes de informática, ingenieros de software y cualquiera que trabaje cerca del hardware. La manipulación de bits —usando operaciones como AND, OR, XOR y NOT— es una técnica habitual en programación de sistemas, criptografía y procesamiento gráfico.</p>
+<h2>Octal — base 8</h2>
+<p>El octal usa los dígitos del 0 al 7. Un dígito octal representa exactamente tres dígitos binarios, así que los grupos de tres bits encajan de forma limpia en un solo dígito octal. Esto hizo que el octal fuera muy conveniente en la época de los mainframes y las minicomputadoras, cuando la memoria solía organizarse en grupos de tres bits.</p>
+<p>Hoy en día, el uso más visible del octal está en los códigos de permisos de archivos de Unix y Linux. Cuando ejecutas <code>chmod 755</code> sobre un archivo, estás fijando permisos con notación octal: 7 (rwx), 5 (r-x), 5 (r-x). Cada dígito codifica tres bits de permiso (lectura, escritura, ejecución) para el propietario, el grupo y el resto de usuarios. Cualquier administrador de sistemas o desarrollador que trabaje con Linux se encuentra con permisos octales a diario.</p>
+<h2>Decimal — base 10</h2>
+<p>El decimal es el sistema numérico cotidiano usado por prácticamente todas las culturas humanas. Utiliza los dígitos del 0 al 9. Cada posición de un número decimal representa una potencia de 10: unidades, decenas, centenas, millares, y así sucesivamente. El decimal es el estándar para las aplicaciones dirigidas a personas — los saldos bancarios, las temperaturas, las distancias y las marcas de tiempo se muestran todas en decimal.</p>
+<p>Dentro de un ordenador, sin embargo, el decimal resulta relativamente costoso. Los procesadores trabajan de forma nativa en binario, así que representar números decimales exige esquemas de codificación como el Decimal Codificado en Binario (BCD) o algoritmos de conversión. Por eso, la mayoría de los cálculos internos usan aritmética binaria, y solo la salida final se convierte a decimal para mostrarla.</p>
+<h2>Hexadecimal — base 16</h2>
+<p>El hexadecimal amplía el conjunto de dígitos más allá del 9 usando las letras de la A a la F para representar del 10 al 15. Un dígito hexadecimal representa exactamente cuatro dígitos binarios (un nibble). Esto hace del hexadecimal una representación extremadamente compacta de los datos binarios. El byte de 8 bits 11111111 en binario se convierte en un simple FF en hexadecimal.</p>
+<p>El hexadecimal está por todas partes en informática y electrónica. Las direcciones de memoria en depuradores, los códigos de color en diseño web (#FF6347 es un tono rojo tomate), las direcciones MAC, los hashes SHA y los listados de bytecode usan todos hexadecimal. Si alguna vez has leído un volcado hexadecimal de un archivo o inspeccionado un paquete de red, ya has trabajado directamente con hexadecimal.</p>
+<h2>Cómo funciona la conversión de bases</h2>
+<p>Convertir un número de cualquier base a decimal es directo: multiplica cada dígito por su base elevada a la potencia de su posición (contando desde la derecha empezando en 0), y luego suma los resultados.</p>
+<p>Por ejemplo, el número binario 1011 se convierte a decimal así:</p>
+<p>1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 8 + 0 + 2 + 1 = 11</p>
+<p>Convertir de decimal a otra base requiere divisiones sucesivas: divide el número entre la base de destino, anota el resto como el siguiente dígito (de derecha a izquierda), y repite con el cociente hasta que el cociente sea cero.</p>
+<p>Por ejemplo, para convertir 11 a binario:</p>
+<p>11 ÷ 2 = 5 con resto 1, 5 ÷ 2 = 2 con resto 1, 2 ÷ 2 = 1 con resto 0, 1 ÷ 2 = 0 con resto 1. Leyendo los restos de abajo hacia arriba: 1011.</p>
+<h2>Aplicaciones en el mundo real</h2>
+<p><strong>Códigos de color:</strong> el diseño web y gráfico depende de los códigos de color hexadecimales. Cada color CSS como #3A86FF son tres pares de dígitos hexadecimales que codifican los canales rojo, verde y azul, cada uno entre 00 (0) y FF (255).</p>
+<p><strong>Direcciones de red:</strong> las direcciones MAC y las direcciones IPv6 se escriben en hexadecimal. Una dirección IPv6 como 2001:0db8:85a3::8a2e:0370:7334 comprime 128 bits en un formato legible por humanos, aunque sea complejo.</p>
+<p><strong>Depuración:</strong> al recorrer código ensamblador o inspeccionar memoria en un depurador, las direcciones y los valores de datos en crudo se muestran en hexadecimal. Saber traducir rápido entre hexadecimal y decimal —o entender que 0xFF = 255— es una habilidad clave para quien programa a bajo nivel.</p>
+<p><strong>Permisos:</strong> los sistemas de archivos de Linux y macOS usan octal para los permisos. Entender que 644 significa que el propietario puede leer y escribir (4+2=6), mientras que el grupo y los demás solo pueden leer (4), resulta esencial para la administración de servidores.</p>
+<h2>Trucos para convertir de cabeza</h2>
+<p>Con práctica, ciertas conversiones se vuelven automáticas:</p>
+<ul>
+<li>Binario 1111 = Hex F = Decimal 15</li>
+<li>Binario 1000 = Hex 8 = Decimal 8</li>
+<li>Hex FF = Decimal 255 = Binario 11111111</li>
+<li>Hex 10 = Decimal 16 = Binario 10000</li>
+</ul>
+<p>Un atajo útil: divide un número binario en grupos de 4 dígitos desde la derecha y convierte cada grupo a un dígito hexadecimal por separado. Para 11111100, divídelo en 1111 y 1100 → F y C → FC en hexadecimal.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todos los cálculos se ejecutan enteramente en tu navegador. No se envía ningún dato a ningún servidor. La conversión ocurre localmente usando los métodos nativos de JavaScript parseInt y toString, muy fiables para enteros dentro del rango seguro de JavaScript (hasta 2^53 − 1).</p>
+<h2>Preguntas frecuentes</h2>
+<p><strong>¿Es gratis esta herramienta?</strong> Sí, totalmente gratis, sin necesidad de registro ni suscripción.</p>
+<p><strong>¿Funciona sin conexión?</strong> Una vez cargada la página, la herramienta funciona por completo sin conexión a internet.</p>
+<p><strong>¿Puedo usarla desde el móvil?</strong> Sí. La herramienta está optimizada para móviles y funciona en iOS y Android.</p>
+<p><strong>¿Cuál es el número más grande que admite?</strong> La herramienta funciona con precisión hasta el límite de enteros seguros de JavaScript (Number.MAX_SAFE_INTEGER = 9.007.199.254.740.991 en decimal).</p>
+    <section class="faq"><h2>Number base converter FAQ</h2><dl><dt>What is binary (base 2)?</dt><dd>Binary uses only the digits 0 and 1. Each position represents a power of 2. It is the fundamental language of computers since transistors have two states: on (1) and off (0). For example, 1010 in binary equals 10 in decimal.</dd><dt>What is hexadecimal (base 16)?</dt><dd>Hexadecimal uses digits 0–9 and letters A–F (representing 10–15). One hex digit represents exactly 4 binary digits (bits), making hex a compact way to write binary. For example, FF in hex equals 255 in decimal.</dd><dt>What is octal (base 8)?</dt><dd>Octal uses digits 0–7. One octal digit represents exactly 3 binary digits. Octal was widely used in early computing systems and is still used in Unix/Linux file permissions (e.g., chmod 755).</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/bintodec/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/bintodec/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/bintodec/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/bintodec/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/bintodec/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/bintodec/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/bintodec/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/bintodec/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/bintodec/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/bintodec.js" defer></script>
+</body>
+</html>

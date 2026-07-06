@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideal Weight Calculator — healthy weight range for your height</title>
+<meta name="description" content="Free ideal weight calculator. Find the healthy weight range for your height and sex using the BMI method and the Robinson, Miller, and Devine formulas.">
+<link rel="canonical" href="https://mikaio.dev/fr/idealweightcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/idealweightcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/idealweightcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/idealweightcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/idealweightcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/idealweightcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/idealweightcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/idealweightcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ideal Weight Calculator — healthy weight range for your height">
+<meta property="og:description" content="Free ideal weight calculator. Find the healthy weight range for your height and sex using the BMI method and the Robinson, Miller, and Devine formulas.">
+<meta property="og:url" content="https://mikaio.dev/fr/idealweightcalc/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Ideal Weight Calculator — healthy weight range for your height","url":"https://mikaio.dev/fr/idealweightcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free ideal weight calculator. Find the healthy weight range for your height and sex using the BMI method and the Robinson, Miller, and Devine formulas."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Ideal Weight Calculator","item":"https://mikaio.dev/fr/idealweightcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which formula is best?","acceptedAnswer":{"@type":"Answer","text":"No single formula is definitively best. The BMI-based range (18.5–24.9) is the most widely used clinical standard. The Robinson, Devine, and Miller formulas give single-point estimates based on height alone, which are useful as rough references."}},{"@type":"Question","name":"Does muscle mass affect this?","acceptedAnswer":{"@type":"Answer","text":"Yes. BMI and height-based formulas do not distinguish between muscle and fat. A heavily muscled athlete may fall in the \"overweight\" BMI range despite having very low body fat."}},{"@type":"Question","name":"Is there an ideal weight I should target?","acceptedAnswer":{"@type":"Answer","text":"Ideal weight ranges are statistical averages for disease risk, not personal targets. Body weight goals should be discussed with a healthcare provider considering your full health profile."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Ideal Weight Calculator</span></nav>
+  <h1>Ideal Weight Calculator</h1>
+  <p class="lead">Enter your height and sex to see the healthy weight range and ideal weight estimates from multiple formulas.</p>
+  <section class="widget" id="tool"><form id="iw-form"><div class="row"><div class="field"><label for="iw-height">Height</label><input type="number" id="iw-height" step="any" min="50" inputmode="decimal"></div><div class="field"><label for="iw-hunit">Unit</label><select id="iw-hunit"><option value="cm">cm</option><option value="in">in</option></select></div><div class="field"><label for="iw-sex">Sex</label><select id="iw-sex"><option value="m">Male</option><option value="f">Female</option></select></div></div><div class="result"><span class="hint">Healthy weight range (BMI 18.5–24.9): </span><span class="big" id="iw-out">—</span></div><div id="iw-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Trouvez la fourchette de poids santé pour votre taille</h2>
+<p>Le poids santé s&#39;exprime souvent sous forme de fourchette plutôt que d&#39;un chiffre unique, car de nombreux facteurs autres que le poids déterminent la santé. Ce calculateur affiche la fourchette de poids santé basée sur l&#39;IMC (IMC 18,5-24,9) pour votre taille, accompagnée d&#39;estimations issues de trois formules scientifiques : Robinson (1983), Devine (1974) et Miller (1983).</p>
+<h2>Pourquoi une fourchette vaut mieux qu&#39;un chiffre unique</h2>
+<p>Présenter une fourchette plutôt qu&#39;un objectif unique est un choix délibéré : cela reflète la véritable incertitude scientifique qui existe à traduire la seule taille en une recommandation de santé, et cela évite la fausse précision qui laisserait croire qu&#39;un kilogramme précis est significativement plus sain qu&#39;un kilogramme de part et d&#39;autre. Une fourchette s&#39;accorde aussi bien mieux avec la façon dont les corps varient réellement — la carrure, la masse musculaire et la morphologie diffèrent énormément entre deux personnes de taille identique, et une fourchette raisonnable tient bien mieux compte de cette variation qu&#39;un chiffre unique prétendant s&#39;appliquer également à tout le monde.</p>
+<h2>La fourchette basée sur l&#39;IMC</h2>
+<p>L&#39;Indice de Masse Corporelle (IMC) se calcule comme le poids en kilogrammes divisé par le carré de la taille en mètres. L&#39;Organisation mondiale de la santé définit les tranches d&#39;IMC suivantes :</p>
+<ul>
+<li>Moins de 18,5 : insuffisance pondérale</li>
+<li>18,5-24,9 : poids normal/santé</li>
+<li>25,0-29,9 : surpoids</li>
+<li>30,0 et plus : obésité</li>
+</ul>
+<p>Pour une taille donnée, la fourchette de poids santé correspond à l&#39;ensemble des poids qui produisent un IMC compris entre 18,5 et 24,9. Par exemple, une personne mesurant 170 cm a une fourchette santé d&#39;environ 53,5 à 72,0 kg.</p>
+<h2>Un exemple chiffré</h2>
+<p>Prenons une femme mesurant 165 cm. En convertissant vers les unités impériales qu&#39;utilisent les formules classiques, cela correspond à 5 pieds et environ 5 pouces. Selon la fourchette basée sur l&#39;IMC, son poids santé s&#39;étend d&#39;environ 50,4 à 67,8 kg. La formule de Robinson estime 49 + 1,7 × 5 = 57,5 kg. La formule de Devine estime 45,5 + 2,3 × 5 = 57 kg. La formule de Miller estime 53,1 + 1,36 × 5 = 59,9 kg. Les trois estimations chiffrées se regroupent étroitement et se situent confortablement dans la fourchette plus large basée sur l&#39;IMC, ce qui reflète généralement la façon dont ces chiffres se rapportent les uns aux autres : les formules nommées convergent typiquement vers une valeur quelque part au milieu de la fourchette santé plus large, plutôt qu&#39;à l&#39;un ou l&#39;autre extrême.</p>
+<h2>D&#39;autres formules de poids idéal</h2>
+<p>La fourchette basée sur l&#39;IMC donne un intervalle de poids sains, mais plusieurs formules ont été développées pour estimer un « poids idéal » unique pour une taille donnée :</p>
+<p><strong>Formule de Robinson (1983)</strong> : pour les hommes : 52 kg + 1,9 kg par pouce au-delà de 5 pieds. Pour les femmes : 49 kg + 1,7 kg par pouce au-delà de 5 pieds.</p>
+<p><strong>Formule de Devine (1974)</strong> : pour les hommes : 50 kg + 2,3 kg par pouce au-delà de 5 pieds. Pour les femmes : 45,5 kg + 2,3 kg par pouce au-delà de 5 pieds. Développée à l&#39;origine pour le dosage de médicaments en contexte clinique.</p>
+<p><strong>Formule de Miller (1983)</strong> : pour les hommes : 56,2 kg + 1,41 kg par pouce au-delà de 5 pieds. Pour les femmes : 53,1 kg + 1,36 kg par pouce au-delà de 5 pieds.</p>
+<p>Ces formules donnent toutes des résultats légèrement différents, car elles ont été établies à partir de jeux de données de populations différentes, en utilisant des méthodes statistiques différentes.</p>
+<h2>Les limites des mesures de santé basées sur le poids</h2>
+<p>L&#39;IMC et les formules de poids idéal présentent des limites bien connues :</p>
+<ul>
+<li>Ils ne tiennent pas compte de la composition corporelle (muscle contre graisse)</li>
+<li>Ils ont été établis principalement à partir de populations européennes blanches et peuvent être moins précis pour d&#39;autres groupes ethniques</li>
+<li>Ils ne distinguent pas la répartition de la graisse (la graisse abdominale est plus nocive que la graisse ailleurs)</li>
+<li>Ils sont moins pertinents pour les enfants, les personnes âgées et les athlètes</li>
+</ul>
+<p>D&#39;autres mesures, comme le tour de taille, le rapport taille-hauteur et le pourcentage de masse grasse, offrent une image plus complète de l&#39;état de santé.</p>
+<h2>Comment utiliser le calculateur</h2>
+<p>Saisissez votre taille et votre sexe, et le calculateur affiche la fourchette de poids santé basée sur l&#39;IMC pour cette taille, accompagnée des estimations chiffrées des formules de Robinson, Devine et Miller. Plutôt que de traiter un seul chiffre comme un objectif strict, utilisez l&#39;étendue couverte par les quatre estimations comme un repère approximatif de la fourchette que cliniciens et chercheurs ont historiquement jugée raisonnable pour une personne de votre taille, et mettez cela en balance avec votre propre composition corporelle, votre niveau d&#39;activité et votre ressenti réel.</p>
+<h2>Pourquoi les formules ne s&#39;accordent pas entre elles</h2>
+<p>Chacune des trois formules nommées a été construite en ajustant une relation linéaire simple à un jeu de données précis de son époque, et ces jeux de données différaient par les populations échantillonnées, l&#39;époque de leur collecte, et les méthodes statistiques utilisées pour ajuster la droite. La formule de Devine, en particulier, a été créée pour un usage clinique très spécifique — estimer un poids corporel raisonnable pour calculer des doses de médicaments — plutôt que comme un objectif de bien-être général, ce qui vaut la peine d&#39;être gardé à l&#39;esprit avant de traiter son résultat comme un objectif personnel. Aucune des trois formules n&#39;est plus « correcte » que les autres dans l&#39;absolu ; elles représentent simplement différentes tentatives historiques face au même problème d&#39;estimation approximative, ce qui explique précisément pourquoi observer la fourchette qu&#39;elles produisent collectivement est plus informatif que de se focaliser sur l&#39;une d&#39;elles en particulier.</p>
+<h2>Utiliser le résultat avec discernement</h2>
+<p>Considérez tout chiffre issu de ce calculateur comme une donnée parmi d&#39;autres, non comme un verdict. La santé d&#39;une personne dépend de bien plus qu&#39;un simple chiffre de poids idéal, notamment sa masse musculaire, son tour de taille, sa condition physique, ses antécédents familiaux et son ressenti au quotidien. Si votre poids se situe hors de la fourchette indiquée ici, cela mérite un examen plus approfondi plutôt qu&#39;une inquiétude, et une discussion avec un médecin capable d&#39;évaluer le tableau complet vous en apprendra toujours plus qu&#39;une formule seule, peu importe le nombre de décimales qu&#39;elle produit.</p>
+<h2>Privé et instantané</h2>
+<p>Tous les calculs s&#39;exécutent entièrement dans votre navigateur, si bien que les résultats apparaissent instantanément, et qu&#39;aucune information personnelle sur votre taille, votre poids ou votre sexe n&#39;est jamais envoyée à un serveur, enregistrée ou partagée.</p>
+    <section class="faq"><h2>Ideal weight FAQ</h2><dl><dt>Which formula is best?</dt><dd>No single formula is definitively best. The BMI-based range (18.5–24.9) is the most widely used clinical standard. The Robinson, Devine, and Miller formulas give single-point estimates based on height alone, which are useful as rough references.</dd><dt>Does muscle mass affect this?</dt><dd>Yes. BMI and height-based formulas do not distinguish between muscle and fat. A heavily muscled athlete may fall in the &quot;overweight&quot; BMI range despite having very low body fat.</dd><dt>Is there an ideal weight I should target?</dt><dd>Ideal weight ranges are statistical averages for disease risk, not personal targets. Body weight goals should be discussed with a healthcare provider considering your full health profile.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/idealweightcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/idealweightcalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/idealweightcalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/idealweightcalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/idealweightcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/idealweightcalc/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/idealweightcalc.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>शब्द गणक — शब्द, वर्ण और पढ़ने का समय गिनें</title>
+<meta name="description" content="मुफ़्त लाइव शब्द गणक। पाठ चिपकाएँ या टाइप करें और अपने ब्राउज़र में तुरंत शब्द, वर्ण, वाक्य, अनुच्छेद और अनुमानित पढ़ने का समय गिनें।">
+<link rel="canonical" href="https://mikaio.dev/hi/wordcount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/wordcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/wordcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/wordcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/wordcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/wordcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/wordcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/wordcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/wordcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/wordcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/wordcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/wordcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="शब्द गणक — शब्द, वर्ण और पढ़ने का समय गिनें">
+<meta property="og:description" content="मुफ़्त लाइव शब्द गणक। पाठ चिपकाएँ या टाइप करें और अपने ब्राउज़र में तुरंत शब्द, वर्ण, वाक्य, अनुच्छेद और अनुमानित पढ़ने का समय गिनें।">
+<meta property="og:url" content="https://mikaio.dev/hi/wordcount/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"शब्द गणक — शब्द, वर्ण और पढ़ने का समय गिनें","url":"https://mikaio.dev/hi/wordcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त लाइव शब्द गणक। पाठ चिपकाएँ या टाइप करें और अपने ब्राउज़र में तुरंत शब्द, वर्ण, वाक्य, अनुच्छेद और अनुमानित पढ़ने का समय गिनें।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"शब्द गणक","item":"https://mikaio.dev/hi/wordcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"पढ़ने का समय कैसे अनुमानित होता है?","acceptedAnswer":{"@type":"Answer","text":"पढ़ने का समय एक वयस्क की औसत गति लगभग 200 शब्द प्रति मिनट मानता है और कम से कम एक मिनट तक ऊपर की ओर पूर्णांकित करता है। तेज़ या धीमे पाठक उसी अनुसार समायोजित करें।"}},{"@type":"Question","name":"बिना रिक्त स्थान वाली भाषाओं में शब्द कैसे गिने जाते हैं?","acceptedAnswer":{"@type":"Answer","text":"चीनी और जापानी जैसी लिपियों में, जो शब्दों को रिक्त स्थान से अलग नहीं करतीं, हर वर्ण एक इकाई के रूप में गिना जाता है, जो इन भाषाओं के लंबाई मापने के तरीके के काफ़ी क़रीब है।"}},{"@type":"Question","name":"क्या मेरा पाठ कहीं संग्रहीत होता है?","acceptedAnswer":{"@type":"Answer","text":"नहीं। सारी गिनती आपके टाइप करते समय आपके ब्राउज़र में होती है। आपका पाठ कभी किसी सर्वर पर नहीं भेजा जाता, न सहेजा जाता और न साझा किया जाता है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>शब्द गणक</span></nav>
+  <h1>शब्द गणक</h1>
+  <p class="lead">नीचे अपना पाठ टाइप करें या चिपकाएँ। शब्द, वर्ण, वाक्य, अनुच्छेद और पढ़ने का समय आपके लिखते ही लाइव अपडेट होते हैं — कुछ भी अपलोड नहीं होता।</p>
+  <section class="widget" id="tool"><div id="wc"><textarea id="wc-input" placeholder="यहाँ टाइप करना शुरू करें या अपना पाठ चिपकाएँ…" aria-label="यहाँ टाइप करना शुरू करें या अपना पाठ चिपकाएँ…"></textarea><div class="wc-stats"><div class="result"><span class="big" id="wc-words">0</span><span class="hint">शब्द</span></div><div class="result"><span class="big" id="wc-characters">0</span><span class="hint">वर्ण</span></div><div class="result"><span class="big" id="wc-nospace">0</span><span class="hint">वर्ण (बिना रिक्त स्थान)</span></div><div class="result"><span class="big" id="wc-sentences">0</span><span class="hint">वाक्य</span></div><div class="result"><span class="big" id="wc-paragraphs">0</span><span class="hint">अनुच्छेद</span></div><div class="result"><span class="big" id="wc-reading">0</span><span class="hint">पढ़ने का समय (मिनट)</span></div></div></div></section>
+  <article class="content">
+    <h2>एक शब्द गणक जो आपके साथ चलता है</h2>
+<p>यह शब्द गणक आपके टाइप करते या चिपकाते ही उसी क्षण आपके पाठ को मापता है। दबाने के लिए कोई बटन नहीं और कोई प्रतीक्षा नहीं: जैसे ही बॉक्स में कोई वर्ण आता है, उसके बगल की गिनती ताज़ा हो जाती है। यह एक साथ छह चीज़ें ट्रैक करता है — शब्द, वर्ण, बिना रिक्त स्थान वाले वर्ण, वाक्य, अनुच्छेद और अनुमानित पढ़ने का समय — जिससे आपको किसी लेखन की पूरी तस्वीर एक ही नज़र में मिल जाती है। सब कुछ आपके ब्राउज़र के भीतर चलता है, यानी यह तेज़ है, ऑफ़लाइन काम करता है और आपका पाठ कभी कहीं नहीं भेजता।</p>
+<p>शब्द गिनना तब तक मामूली लगता है जब तक आपको किसी असली कारण से एक सटीक संख्या की सचमुच ज़रूरत न पड़े। छात्रों के निबंधों की सीमाएँ सख़्त होती हैं। नौकरी खोजने वाले अपने कवर लेटर को एक पन्ने तक छोटा करते हैं। कंटेंट लेखक खोज में दिखने के लिए लक्ष्य लंबाई तक पहुँचते हैं। विज्ञापनदाता टेक्स्ट को एक निश्चित वर्ण-संख्या में समेटते हैं। अनुवादक प्रति शब्द के हिसाब से बिल बनाते हैं। इनमें से हर स्थिति में एक भरोसेमंद, ईमानदार गिनती मायने रखती है, और यही देने के लिए यह उपकरण बना है।</p>
+<h2>हर संख्या का क्या अर्थ है</h2>
+<p><strong>शब्द</strong> वह गिनती है जिसकी अधिकांश लोगों को सबसे अधिक परवाह होती है। यहाँ एक शब्द अक्षरों या अंकों की कोई भी शृंखला है, इसलिए संकुचन और हाइफ़न वाले पद प्रत्येक एक शब्द के रूप में गिने जाते हैं, जैसा अधिकतर संपादक और शिक्षक गिनते हैं।</p>
+<p><strong>वर्ण</strong> बॉक्स के हर एक वर्ण को गिनता है, जिसमें रिक्त स्थान, पंक्ति-विराम और विराम-चिह्न शामिल हैं। जब किसी फ़ॉर्म में सख़्त वर्ण-सीमा हो, तो यही संख्या मायने रखती है।</p>
+<p><strong>बिना रिक्त स्थान वाले वर्ण</strong> रिक्त स्थान हटाकर केवल दिखने वाले चिह्न गिनता है। कुछ प्लेटफ़ॉर्म और डिज़ाइन आवश्यकताएँ लंबाई इसी तरह मापती हैं, इसलिए दोनों आँकड़े साथ-साथ रखना सुविधाजनक है।</p>
+<p><strong>वाक्य</strong> उस विराम-चिह्न को खोजता है जो सामान्यतः वाक्य समाप्त करता है — पूर्ण विराम, प्रश्नवाचक और विस्मयादिबोधक चिह्न, तथा अन्य लिपियों के उनके समकक्ष भी। यह व्याकरणिक निर्णय के बजाय एक अच्छा अनुमान है, क्योंकि संक्षिप्ताक्षर और असामान्य विराम-चिह्न कभी-कभी किसी भी स्वचालित गणक को धोखा दे सकते हैं।</p>
+<p><strong>अनुच्छेद</strong> एक ख़ाली पंक्ति से अलग किए गए पाठ-खंडों को गिनता है। यह इस बात को दर्शाता है कि अनुच्छेद आमतौर पर कैसे रखे जाते हैं, और बिखरी हुई ख़ाली पंक्तियों को अनदेखा करता है ताकि संख्या समझदार बनी रहे।</p>
+<p><strong>पढ़ने का समय</strong> आपकी शब्द-गिनती को इस अनुमान में बदलता है कि आरामदायक गति से पाठ पढ़ने में कितना समय लगेगा। यह लगभग दो सौ शब्द प्रति मिनट मानता है — वयस्क पठन के लिए व्यापक रूप से प्रयुक्त औसत — और किसी भी शब्द वाले पाठ के लिए कभी एक मिनट से कम नहीं दिखाता।</p>
+<h2>लेखक अपनी गिनती पर नज़र क्यों रखते हैं</h2>
+<p>लंबाई केवल औपचारिकता नहीं है; यह तय करती है कि कोई रचना कैसे ग्रहण की जाती है। बहुत छोटा ब्लॉग पोस्ट पतला-सा लग सकता है और खोज परिणामों में कम ही अच्छा स्थान पाता है, जबकि भटकती हुई रचना बात आने से पहले ही पाठक खो देती है। शैक्षणिक कार्यों में सीमाएँ अक्सर ठीक इसलिए होती हैं क्योंकि संक्षिप्त तर्क उसी कौशल का हिस्सा है जिसका मूल्यांकन हो रहा है, और सीमा पार करना अंक गँवा सकता है। सोशल प्लेटफ़ॉर्म पर सख़्त वर्ण-सीमाएँ तय करती हैं कि आपका संदेश पोस्ट होगा या नहीं, इसलिए भेजने से पहले अपनी सटीक गिनती जान लेना झुँझलाहट से बचाता है।</p>
+<p>पढ़ने का समय भी उतना ही महत्वपूर्ण हो गया है। कई वेबसाइटें अब लेख के शीर्ष पर एक अनुमान दिखाती हैं क्योंकि पाठक जानना चाहते हैं कि वे किसमें उतर रहे हैं। &quot;तीन मिनट का पठन&quot; का वादा करने वाला न्यूज़लेटर एक अपेक्षा गढ़ता है, और उसे निभाना विश्वास बनाता है। वक्ता इसी तर्क को उल्टा लगाते हैं, मंच पर चढ़ने से पहले ही जाँच लेते हैं कि स्क्रिप्ट किसी समय-खंड में समा जाती है या नहीं।</p>
+<h2>लक्ष्य लंबाई तक पहुँचने के सुझाव</h2>
+<p>यदि आप अपनी सीमा से आगे हैं, तो सबसे तेज़ कटौती आमतौर पर उन शब्दों को हटाने से आती है जो कुछ नहीं जोड़ते। &quot;के उद्देश्य से&quot;, &quot;यह तथ्य कि&quot; और &quot;इस समय&quot; जैसे भराव-वाक्यांश लगभग हमेशा बिना अर्थ खोए छोटे किए या हटाए जा सकते हैं। लंबे वाक्य अक्सर विभाजित किए जा सकते हैं, और &quot;बहुत&quot;, &quot;सचमुच&quot; और &quot;मूलतः&quot; जैसे शब्द लेखन को मज़बूत करने के बजाय कमज़ोर करते हैं। काट-छाँट करते हुए गिनती को गिरते देखना तुरंत बताता है कि क्या काम कर रहा है।</p>
+<p>यदि आप लक्ष्य से नीचे हैं, तो भराव के प्रलोभन का विरोध करें। इसके बजाय ऐसी जगहें खोजें जहाँ कोई विचार कहा तो गया पर उसका समर्थन नहीं हुआ: एक उदाहरण, एक संक्षिप्त व्याख्या या एक ठोस विवरण असली लंबाई जोड़ेगा और लेखन को बेहतर बनाएगा, जबकि ख़ाली भराव केवल उसे लंबा करता है। गणक यहाँ भी मदद करता है, आपको ठीक-ठीक दिखाकर कि कोई नया वाक्य या अनुच्छेद कितना योगदान देता है।</p>
+<h2>भाषाओं के आर-पार गिनती</h2>
+<p>हर भाषा एक जैसे नहीं गिनी जाती। अंग्रेज़ी, स्पेनिश, फ़्रेंच और अधिकतर यूरोपीय भाषाएँ शब्दों को रिक्त स्थान से अलग करती हैं, इसलिए उन्हें गिनना सीधा है। चीनी और जापानी, हालाँकि, शब्दों के बीच रिक्त स्थान नहीं रखतीं, और उन भाषाओं के पाठक आमतौर पर पाठ को वर्णों की संख्या से मापते हैं। यह गणक इसे अपने आप सँभालता है: रिक्त स्थान से अलग होने वाली भाषाओं के लिए यह शब्दों को सामान्य तरीके से गिनता है, और वर्ण-आधारित लिपियों के लिए हर वर्ण को एक इकाई मानता है, ऐसा आँकड़ा देकर जो उस भाषा में लंबाई की असली अनुभूति को दर्शाता है।</p>
+<p>यही लचीलापन उपकरण को मिश्रित पाठ के लिए भी उपयोगी बनाता है, जैसे कोई हिंदी लेख जो किसी चीनी वाक्यांश को उद्धृत करता हो, या ऐसे नोट जो भाषाओं के बीच बदलते हों। चूँकि गिनती के नियम वास्तव में मौजूद वर्णों के अनुसार ढल जाते हैं, कुल संख्याएँ तब भी सार्थक रहती हैं जब कोई दस्तावेज़ किसी एक भाषा में न लिखा हो।</p>
+<h2>बनावट से ही निजी</h2>
+<p>पाठ अक्सर निजी या गोपनीय होता है — इस्तीफ़े की चिट्ठी का मसौदा, एक अप्रकाशित अध्याय, किसी ग्राहक का ब्रीफ़, एक चिकित्सकीय नोट। कई ऑनलाइन गणक आपके चिपकाए हर हिस्से को संसाधित करने के लिए सर्वर पर अपलोड कर देते हैं, जो संवेदनशील सामग्री के लिए ठीक नहीं। यह उपकरण इसके उलट करता है। सारी गिनती एक छोटे कोड-टुकड़े द्वारा होती है जो पूरी तरह आपके डिवाइस पर चलता है, इसलिए आपके शब्द कभी पृष्ठ नहीं छोड़ते। आप इंटरनेट से भी अलग हो सकते हैं और यह ठीक वैसे ही काम करता रहेगा।</p>
+<p>इसका उपयोग करने के लिए, बस बॉक्स में क्लिक करके लिखना शुरू करें, या जो पाठ आपके पास पहले से है उसे चिपकाएँ। छह आँकड़े लगातार अपडेट होते हैं, इसलिए आप किसी सीमा की ओर अपनी प्रगति वास्तविक समय में देख सकते हैं, आवश्यकतानुसार काट-छाँट या विस्तार कर सकते हैं, और तैयार पाठ को जब चाहें वापस कॉपी कर सकते हैं।</p>
+    <section class="faq"><h2>शब्द गणक से जुड़े सामान्य प्रश्न</h2><dl><dt>पढ़ने का समय कैसे अनुमानित होता है?</dt><dd>पढ़ने का समय एक वयस्क की औसत गति लगभग 200 शब्द प्रति मिनट मानता है और कम से कम एक मिनट तक ऊपर की ओर पूर्णांकित करता है। तेज़ या धीमे पाठक उसी अनुसार समायोजित करें।</dd><dt>बिना रिक्त स्थान वाली भाषाओं में शब्द कैसे गिने जाते हैं?</dt><dd>चीनी और जापानी जैसी लिपियों में, जो शब्दों को रिक्त स्थान से अलग नहीं करतीं, हर वर्ण एक इकाई के रूप में गिना जाता है, जो इन भाषाओं के लंबाई मापने के तरीके के काफ़ी क़रीब है।</dd><dt>क्या मेरा पाठ कहीं संग्रहीत होता है?</dt><dd>नहीं। सारी गिनती आपके टाइप करते समय आपके ब्राउज़र में होती है। आपका पाठ कभी किसी सर्वर पर नहीं भेजा जाता, न सहेजा जाता और न साझा किया जाता है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wordcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wordcount/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/wordcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wordcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/wordcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wordcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/wordcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wordcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wordcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wordcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/glossary.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/wordcount.js" defer></script>
+</body>
+</html>

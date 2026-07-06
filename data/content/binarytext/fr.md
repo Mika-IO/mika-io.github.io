@@ -1,0 +1,33 @@
+## Passez du texte courant au binaire pur, et inversement
+
+Au fond, chaque lettre, chiffre, espace ou émoji que vous tapez est stocké par un ordinateur sous la forme d'une suite de zéros et de uns. C'est le binaire — le système numérique en base 2 qu'utilisent en définitive tous les appareils numériques. Ce traducteur binaire vous permet de passer librement d'un monde à l'autre : tapez du texte ordinaire et transformez-le en code binaire qui le représente, ou collez un flux de zéros et de uns pour le décoder en texte lisible. Il fonctionne avec n'importe quelle langue et même avec les émojis, et tout se déroule dans votre navigateur, ce qui rend la conversion instantanée sans que rien de ce que vous saisissez ne soit jamais envoyé où que ce soit.
+
+Son utilisation est très simple. Tapez ou collez votre texte dans la zone prévue, puis appuyez sur « Vers binaire » pour voir apparaître la version binaire en dessous, joliment regroupée en blocs de huit chiffres. Pour faire le chemin inverse, collez du code binaire dans la zone et appuyez sur « Vers texte » pour le décoder en mots. Le bouton de copie place le résultat dans votre presse-papiers, prêt à être collé où vous en avez besoin.
+
+## Comment le texte devient du binaire
+
+Les ordinateurs ne stockent pas directement des lettres ; ils stockent des nombres, et ils écrivent ces nombres en binaire. Le lien entre un caractère et son nombre est fixé par un encodage de caractères, dont la norme moderne s'appelle UTF-8. En UTF-8, une lettre courante de l'alphabet latin de base occupe un seul octet — huit bits, soit huit chiffres binaires. La lettre majuscule « A », par exemple, correspond au nombre 65, qui s'écrit 01000001 en binaire. Enchaînez plusieurs de ces octets, un par caractère, et vous obtenez la représentation binaire d'un message entier. Ce traducteur écrit chaque octet sous la forme d'un groupe complet de huit chiffres et sépare les groupes par des espaces, ce qui est la manière habituelle et lisible d'afficher du texte en binaire et facilite grandement son décodage ultérieur.
+
+Les caractères qui dépassent l'alphabet latin de base — lettres accentuées comme le é ou le ç, autres alphabets, symboles et émojis — nécessitent plus d'un octet, et l'UTF-8 gère cela avec élégance en utilisant deux, trois ou quatre octets selon les cas. Le traducteur suit exactement les mêmes règles, si bien que ces caractères sont convertis correctement en plusieurs groupes de huit bits et parfaitement reconstitués lors du décodage. C'est pourquoi l'outil fonctionne tout aussi bien pour un message en français, avec ses accents et sa cédille, que pour une ligne d'émojis ou un texte en anglais simple.
+
+## Décoder du binaire pour retrouver du texte
+
+Passer du binaire au texte inverse le processus. Le traducteur lit votre saisie par groupes de huit bits, transforme chaque groupe en sa valeur d'octet, puis interprète la séquence d'octets comme de l'UTF-8 pour reconstruire les caractères d'origine. Pour que cela fonctionne, le binaire doit être organisé en groupes de huit chiffres, idéalement séparés par des espaces, comme 01001000 01101001. L'outil se montre tolérant face aux espaces superflus, et ignore simplement tout ce qui ne constitue pas un groupe valide de zéros et de uns, si bien qu'un caractère isolé ne fait pas échouer tout le décodage.
+
+Cette capacité à fonctionner dans les deux sens rend le traducteur réellement utile, et pas seulement amusant. Vous pouvez encoder un message, partager le binaire avec quelqu'un, et cette personne peut le coller à son tour pour le lire — une façon simple et peu technologique de faire passer une note qui ressemble à du charabia pour quiconque ne sait pas qu'il s'agit en réalité de texte.
+
+## Pourquoi convertir du texte en binaire
+
+La raison la plus fréquente reste l'apprentissage. Le binaire est le point de départ de l'étude du fonctionnement des ordinateurs, et voir son propre prénom transformé en zéros et en uns rend soudain concrète une notion abstraite. Étudiants et curieux débutants utilisent un traducteur comme celui-ci pour vérifier des exercices, explorer comment différents caractères correspondent à différents motifs d'octets, et se forger une intuition de ce qui se passe réellement sous le capot des logiciels qu'ils utilisent chaque jour. Certains enseignants s'en servent pour illustrer l'encodage des caractères sans demander à toute une classe de faire la conversion à la main.
+
+Il existe aussi un aspect ludique. Le texte binaire est une façon populaire d'écrire des messages secrets, de décorer un profil geek, ou de créer une énigme à résoudre entre amis. Comme le résultat reste du texte à part entière, composé de zéros et de uns, il peut être copié dans une bio, un message ou un commentaire. Et pour quiconque travaille avec l'informatique au quotidien, pouvoir jeter un coup d'œil au binaire ou aux valeurs d'octets d'un morceau de texte est parfois une astuce de débogage pratique, en particulier lorsqu'un caractère invisible ou parasite provoque un problème.
+
+## Comprendre les chiffres
+
+Voir du texte en binaire est aussi une bonne manière d'apprécier comment l'information s'accumule. Chaque caractère de texte courant devient huit bits, si bien qu'une courte phrase se transforme rapidement en une longue rangée de chiffres — un rappel saisissant que même une petite quantité de texte représente un nombre surprenant de zéros et de uns individuels sous le capot. Cela explique aussi pourquoi les tailles de fichiers se mesurent comme elles le sont : un octet correspond à ces huit bits, un kilo-octet vaut environ mille d'entre eux, et ainsi de suite. Convertir quelques mots et compter les groupes donne une idée bien concrète de l'échelle des données numériques.
+
+## Privé, instantané et gratuit
+
+Pas d'inscription, aucun coût, aucune publicité qui vienne s'interposer. Le traducteur tient tout entier dans un petit morceau de code qui s'exécute sur votre propre appareil, ce qui explique pourquoi il convertit à l'instant même où vous appuyez sur un bouton et continue de fonctionner sans connexion internet. Rien de ce que vous saisissez n'est envoyé, stocké ni partagé ; votre texte et sa forme binaire n'existent que sur votre écran et disparaissent dès que vous rechargez la page.
+
+Pour l'utiliser, tapez ou collez votre texte et appuyez sur « Vers binaire », ou collez du binaire et appuyez sur « Vers texte ». Copiez le résultat avec le bouton prévu, et alternez entre les deux sens aussi souvent que vous le souhaitez — le traducteur gère proprement n'importe quelle langue, n'importe quel symbole et n'importe quel émoji, dans les deux directions.

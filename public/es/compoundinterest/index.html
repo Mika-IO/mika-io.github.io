@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compound Interest Calculator — watch your investment grow</title>
+<meta name="description" content="Free compound interest calculator. Enter a principal, interest rate, and time period to see how compound interest grows your investment. Monthly, quarterly, or annual compounding.">
+<link rel="canonical" href="https://mikaio.dev/es/compoundinterest/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/compoundinterest/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/compoundinterest/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/compoundinterest/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/compoundinterest/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/compoundinterest/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/compoundinterest/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/compoundinterest/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/compoundinterest/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compound Interest Calculator — watch your investment grow">
+<meta property="og:description" content="Free compound interest calculator. Enter a principal, interest rate, and time period to see how compound interest grows your investment. Monthly, quarterly, or annual compounding.">
+<meta property="og:url" content="https://mikaio.dev/es/compoundinterest/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Compound Interest Calculator — watch your investment grow","url":"https://mikaio.dev/es/compoundinterest/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Free compound interest calculator. Enter a principal, interest rate, and time period to see how compound interest grows your investment. Monthly, quarterly, or annual compounding."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Compound Interest Calculator","item":"https://mikaio.dev/es/compoundinterest/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is compound interest?","acceptedAnswer":{"@type":"Answer","text":"Compound interest means interest is calculated on both the original principal and the accumulated interest from previous periods. This causes the balance to grow exponentially rather than linearly."}},{"@type":"Question","name":"What is the compound interest formula?","acceptedAnswer":{"@type":"Answer","text":"A = P × (1 + r/n)^(n×t), where P is principal, r is annual rate (decimal), n is compounding frequency per year, and t is years."}},{"@type":"Question","name":"How does compounding frequency affect the result?","acceptedAnswer":{"@type":"Answer","text":"More frequent compounding produces slightly higher returns. Monthly compounding earns more than annual compounding at the same rate, but the difference diminishes as compounding becomes more frequent."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/es/compoundinterest/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/compoundinterest/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/compoundinterest/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/compoundinterest/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/compoundinterest/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/compoundinterest/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/compoundinterest/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/compoundinterest/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/compoundinterest/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/compoundinterest/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Mira crecer tu inversión con el interés compuesto" />
+<meta property="og:description" content="Mira crecer tu inversión con el interés compuesto" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/es/compoundinterest/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Mira crecer tu inversión con el interés compuesto","description":"Mira crecer tu inversión con el interés compuesto","url":"https://example.com/es/compoundinterest/","inLanguage":"es"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Compound Interest Calculator</span></nav>
+  <h1>Compound Interest Calculator</h1>
+  <p class="lead">Enter the principal, interest rate, number of years, and compounding frequency to see the future value.</p>
+  <section class="widget" id="tool"><form id="ci-form"><div class="row"><div class="field"><label for="ci-principal">Principal (initial amount)</label><input type="number" id="ci-principal" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="ci-rate">Annual interest rate %</label><input type="number" id="ci-rate" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="ci-years">Years</label><input type="number" id="ci-years" step="1" min="0" inputmode="numeric"></div><div class="field"><label for="ci-freq">Compounding</label><select id="ci-freq"><option value="1">Annually</option><option value="2">Semi-annually</option><option value="4">Quarterly</option><option value="12" selected>Monthly</option><option value="365">Daily</option></select></div></div><div class="result"><span class="hint">Future value: </span><span class="big" id="ci-out">—</span></div><div id="ci-interest" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Mira crecer tu inversión con el interés compuesto</h2>
+<p>El interés compuesto es una de las fuerzas más poderosas de las finanzas personales. A Albert Einstein se le atribuye a menudo, aunque de forma apócrifa, haberlo llamado la octava maravilla del mundo: &quot;Quien lo entiende, lo gana; quien no, lo paga.&quot; Esta calculadora te muestra exactamente cómo crece cualquier cantidad inicial con el tiempo a una tasa de interés dada, con la frecuencia de capitalización que elijas.</p>
+<h2>Qué es el interés compuesto</h2>
+<p>Con el interés simple, ganas una cantidad fija de interés en cada período, calculada únicamente sobre el capital original. Con el interés compuesto, ganas interés sobre el capital más sobre todos los intereses acumulados previamente. Esto hace que los saldos crezcan de forma exponencial en lugar de lineal.</p>
+<p>Ejemplo: invierte 1.000 al 10% de interés anual.</p>
+<ul>
+<li>Interés simple después de 10 años: 1.000 + (100 × 10) = 2.000</li>
+<li>Interés compuesto (anual) después de 10 años: 1.000 × 1,10^10 = 2.593,74</li>
+</ul>
+<p>La diferencia, 593,74, es el crecimiento extra que aporta la capitalización. En períodos más largos, esa diferencia se vuelve enorme. Al 10% durante 30 años, el resultado compuesto es 17.449 frente a los 4.000 del interés simple.</p>
+<h2>La fórmula del interés compuesto</h2>
+<p>A = P × (1 + r/n)^(n×t)</p>
+<p>Donde:</p>
+<ul>
+<li>A = valor futuro</li>
+<li>P = capital (cantidad inicial)</li>
+<li>r = tasa de interés anual en forma decimal (5% = 0,05)</li>
+<li>n = número de períodos de capitalización al año</li>
+<li>t = tiempo en años</li>
+</ul>
+<h2>El efecto de la frecuencia de capitalización</h2>
+<p>Cuanto más a menudo se capitaliza el interés, más ganas — pero la diferencia entre capitalización mensual y diaria es pequeña. A una tasa anual del 10% sobre 10.000 durante 10 años:</p>
+<ul>
+<li>Capitalización anual: 25.937</li>
+<li>Capitalización mensual: 27.070</li>
+<li>Capitalización diaria: 27.179</li>
+</ul>
+<p>El salto de capitalización anual a mensual es notable; de mensual a diaria es modesto.</p>
+<h2>La regla del 72</h2>
+<p>Una forma rápida de estimar cuánto tarda el dinero en duplicarse: divide 72 entre la tasa de interés anual. Al 6%, el dinero se duplica en aproximadamente 72/6 = 12 años. Al 9%, tarda 8 años. Esta aproximación resulta sorprendentemente precisa para tasas entre el 2% y el 20%.</p>
+<h2>Aplicaciones en el mundo real</h2>
+<p><strong>Cuentas de ahorro y depósitos a plazo</strong>: la mayoría de los bancos capitalizan el interés de forma mensual o diaria. Una cuenta de ahorro al 4,5% TAE con capitalización mensual sobre 10.000 crece hasta 10.450 al cabo de un año.</p>
+<p><strong>Cuentas de jubilación</strong>: los largos horizontes temporales de la inversión para la jubilación amplifican drásticamente el efecto de la capitalización. Empezar a los 25 años en lugar de a los 35, con las mismas aportaciones y rendimientos, puede resultar en un fondo de jubilación de 2 a 3 veces mayor, simplemente por esa década extra de capitalización.</p>
+<p><strong>Deudas</strong>: el interés compuesto también juega en tu contra con las deudas. Las tarjetas de crédito suelen cobrar entre un 15% y un 30% de TAE capitalizado diariamente. Un saldo de 5.000 pagado solo con el mínimo puede crecer hasta 8.000-10.000 antes de saldarse por completo.</p>
+<p><strong>Hipotecas</strong>: las hipotecas usan interés compuesto calculado mensualmente. Las primeras cuotas de una hipoteca a 30 años son en su mayoría intereses porque el capital pendiente es alto; a medida que el capital disminuye, una porción mayor de cada cuota va al principal.</p>
+<h2>Cómo usar la calculadora</h2>
+<p>Introduce tu cantidad inicial, la tasa de interés anual, con qué frecuencia se capitaliza el interés, y el número de años que planeas dejar el dinero invertido. El valor futuro aparece de inmediato, junto con el total de intereses ganados, y cada cifra se recalcula al instante mientras ajustas cualquier dato, lo que facilita comparar cómo cambiaría el resultado con una tasa más alta, un horizonte más largo, o una capitalización más frecuente.</p>
+<h2>Capitalización negativa: la deuda</h2>
+<p>El mismo crecimiento exponencial que hace crecer las inversiones también hace crecer las deudas si se dejan sin pagar, que es el lado menos agradable del interés compuesto. La deuda de tarjeta de crédito suele llevar una tasa anual de entre el 15% y el 30%, capitalizada diariamente, y un saldo en el que solo se paga el mínimo puede tardar quince años o más en saldarse, terminando por costar mucho más en intereses que la compra original. Pasar el saldo de una tarjeta de crédito por esta misma calculadora, tratando la tasa como una tasa de crecimiento sobre lo que debes en lugar de sobre lo que ahorras, es una forma reveladora de ver exactamente por qué pagar rápido una deuda de interés alto es una de las decisiones financieras de mayor valor disponibles para la mayoría de las personas.</p>
+<h2>Inflación y rendimientos reales</h2>
+<p>Al evaluar inversiones, conviene distinguir entre el rendimiento nominal (la tasa declarada) y el rendimiento real (ajustado por la inflación). Si una inversión rinde un 8% anual pero la inflación es del 3%, el rendimiento real es de aproximadamente un 5% (exactamente: (1,08/1,03) − 1 = 4,85%). Usar rendimientos reales hace que el cálculo del valor futuro tenga un significado directo en poder adquisitivo de hoy, mientras que usar rendimientos nominales exige descontar después el resultado por la inflación acumulada para entender qué podrá comprar realmente.</p>
+<h2>El efecto de las comisiones en la capitalización</h2>
+<p>Las comisiones de inversión reducen drásticamente el crecimiento compuesto con el tiempo, mucho más de lo que sugiere su pequeño porcentaje anual. Una comisión anual del 1% sobre un fondo con un rendimiento bruto del 7% reduce el rendimiento neto anual a aproximadamente un 6%. En una inversión de 100.000 a lo largo de 30 años, crecer al 7% alcanza unos 761.000, mientras que crecer al 6% alcanza solo unos 574.000 — esa comisión aparentemente modesta del 1% cuesta aproximadamente 187.000 en capitalización perdida a lo largo de tres décadas, porque la comisión se descuenta cada año y, por tanto, se capitaliza en tu contra exactamente igual que los rendimientos se capitalizan a tu favor.</p>
+<h2>Capitalización con ventajas fiscales</h2>
+<p>En muchos países, las cuentas de jubilación con ventajas fiscales permiten que la capitalización ocurra sin el desgaste anual del impuesto sobre las ganancias, lo que aumenta de forma significativa la acumulación de patrimonio a largo plazo en comparación con una cuenta sujeta a impuestos equivalente. Como los impuestos sobre las ganancias de inversión reducirían de otro modo la cantidad disponible para seguir capitalizando cada año, proteger ese crecimiento de la tributación anual es una de las formas más fiables y de menor esfuerzo de mejorar el resultado de la capitalización a largo plazo sin asumir ningún riesgo de inversión adicional.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todos los cálculos se ejecutan enteramente en tu navegador usando la fórmula estándar del interés compuesto, así que los resultados se actualizan al instante mientras ajustas cualquier dato y ninguna cifra financiera que introduzcas se envía jamás a un servidor, se registra ni se comparte.</p>
+    <section class="faq"><h2>Compound interest FAQ</h2><dl><dt>What is compound interest?</dt><dd>Compound interest means interest is calculated on both the original principal and the accumulated interest from previous periods. This causes the balance to grow exponentially rather than linearly.</dd><dt>What is the compound interest formula?</dt><dd>A = P × (1 + r/n)^(n×t), where P is principal, r is annual rate (decimal), n is compounding frequency per year, and t is years.</dd><dt>How does compounding frequency affect the result?</dt><dd>More frequent compounding produces slightly higher returns. Monthly compounding earns more than annual compounding at the same rate, but the difference diminishes as compounding becomes more frequent.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/compoundinterest/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/compoundinterest/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/compoundinterest/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/compoundinterest/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/compoundinterest/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/compoundinterest/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/compoundinterest/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/compoundinterest.js" defer></script>
+</body>
+</html>

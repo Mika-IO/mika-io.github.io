@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contador de Caracteres — conte caracteres, palavras e linhas</title>
+<meta name="description" content="Contador de caracteres gratuito. Conte caracteres (com e sem espaços), palavras, frases, parágrafos e linhas em qualquer texto.">
+<link rel="canonical" href="https://mikaio.dev/pt/charcount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/charcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/charcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/charcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/charcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/charcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/charcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/charcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/charcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/charcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/charcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contador de Caracteres — conte caracteres, palavras e linhas">
+<meta property="og:description" content="Contador de caracteres gratuito. Conte caracteres (com e sem espaços), palavras, frases, parágrafos e linhas em qualquer texto.">
+<meta property="og:url" content="https://mikaio.dev/pt/charcount/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Contador de Caracteres — conte caracteres, palavras e linhas","url":"https://mikaio.dev/pt/charcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Contador de caracteres gratuito. Conte caracteres (com e sem espaços), palavras, frases, parágrafos e linhas em qualquer texto."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Contador de Caracteres","item":"https://mikaio.dev/pt/charcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"A contagem de caracteres inclui espaços?","acceptedAnswer":{"@type":"Answer","text":"Ambas as contagens são mostradas: total de caracteres (incluindo espaços) e caracteres excluindo espaços."}},{"@type":"Question","name":"Como as frases são contadas?","acceptedAnswer":{"@type":"Answer","text":"As frases são contadas pelo número de caracteres de ponto final, exclamação ou interrogação seguidos de espaço ou fim do texto."}},{"@type":"Question","name":"Qual a diferença entre linhas e parágrafos?","acceptedAnswer":{"@type":"Answer","text":"As linhas são delimitadas por caracteres de nova linha. Os parágrafos são grupos de linhas separados por uma ou mais linhas em branco."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Contador de Caracteres</span></nav>
+  <h1>Contador de Caracteres</h1>
+  <p class="lead">Digite ou cole seu texto abaixo para contar caracteres, palavras, frases, parágrafos e linhas.</p>
+  <section class="widget" id="tool"><div id="cc2-app"><textarea id="cc2-text" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Digite ou cole texto aqui…"></textarea><div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">Caracteres</div><div class="big" id="cc2-chars">0</div></div><div><div class="hint">Sem espaços</div><div class="big" id="cc2-nosp">0</div></div><div><div class="hint">Palavras</div><div class="big" id="cc2-words">0</div></div><div><div class="hint">Linhas</div><div class="big" id="cc2-lines">0</div></div><div><div class="hint">Frases</div><div class="big" id="cc2-sents">0</div></div><div><div class="hint">Parágrafos</div><div class="big" id="cc2-paras">0</div></div></div></div></section>
+  <article class="content">
+    <h2>Conte caracteres, palavras, frases e mais</h2>
+<p>Um contador de caracteres é uma ferramenta essencial para quem escreve dentro de restrições — postagens de redes sociais com limites de caracteres, meta descrições, mensagens SMS, bios ou qualquer outro formulário com comprimento máximo. Esta ferramenta conta caracteres com e sem espaços, palavras, frases, parágrafos e linhas conforme você digita, atualizando instantaneamente a cada tecla pressionada.</p>
+<h2>Por que existem limites de caracteres</h2>
+<p>Diferentes plataformas impõem diferentes limites de caracteres por boas razões:</p>
+<p><strong>Twitter/X</strong>: 280 caracteres por post. Originalmente 140 caracteres (uma mensagem SMS), dobrado em 2017. O limite incentiva comunicação concisa e mantém a timeline navegável.</p>
+<p><strong>Legendas do Instagram</strong>: até 2.200 caracteres, mas só os primeiros 125 aparecem antes do corte &quot;mais&quot;. A maior parte do engajamento vem de legendas curtas.</p>
+<p><strong>Meta descrições (SEO)</strong>: o Google normalmente exibe 155–160 caracteres. Escreva descrições nesse comprimento para evitar corte nos resultados de busca.</p>
+<p><strong>Mensagens SMS</strong>: um SMS padrão tem 160 caracteres na codificação GSM. Mensagens mais longas são divididas em várias partes e remontadas pelo aparelho receptor.</p>
+<p><strong>Títulos do LinkedIn</strong>: 220 caracteres. Bio do LinkedIn: 2.600 caracteres.</p>
+<p><strong>Linhas de assunto de e-mail</strong>: a melhor prática é usar menos de 60 caracteres para evitar corte em clientes de e-mail móveis.</p>
+<h2>Metodologia de contagem</h2>
+<p><strong>Caracteres com espaços</strong>: todo caractere, incluindo espaço, nova linha e tabulação, conta.</p>
+<p><strong>Caracteres sem espaços</strong>: todos os caracteres de espaço em branco são removidos antes da contagem, útil ao comparar com limites que contam apenas caracteres visíveis.</p>
+<p><strong>Palavras</strong>: o texto é dividido por espaço em branco. Espaços consecutivos contam como um único separador.</p>
+<p><strong>Frases</strong>: contadas pela pontuação terminal (ponto, exclamação ou interrogação) seguida de espaço em branco ou fim do texto.</p>
+<p><strong>Parágrafos</strong>: blocos de texto separados por uma ou mais linhas em branco.</p>
+<p><strong>Linhas</strong>: total de caracteres de nova linha mais um.</p>
+<h2>Escrevendo de forma eficiente dentro de limites</h2>
+<p>Quando você tem um limite de caracteres, cada palavra e sinal de pontuação importa. Técnicas úteis de compressão incluem usar voz ativa (mais curta que a passiva), substituir expressões longas por versões curtas, cortar adjetivos redundantes, usar numerais em vez de números por extenso e abreviar quando o contexto deixa claro o significado.</p>
+<h2>Limites de caracteres por plataforma</h2>
+<p><strong>Twitter/X</strong>: 280 caracteres por tweet. URLs são automaticamente encurtadas e contam como 23 caracteres independentemente do tamanho real. Imagens, vídeos e enquetes não contam para o limite.</p>
+<p><strong>LinkedIn</strong>: títulos 220 caracteres, seção sobre 2.600 caracteres, posts 3.000 caracteres, comentários 1.250 caracteres.</p>
+<p><strong>Instagram</strong>: legendas 2.200 caracteres (só os primeiros ~125 visíveis sem expandir), bio 150 caracteres, nome de usuário 30 caracteres.</p>
+<p><strong>Facebook</strong>: posts 63.206 caracteres, comentários 8.000 caracteres, descrições de página 255 caracteres.</p>
+<p><strong>YouTube</strong>: títulos de vídeo 100 caracteres (70 recomendado para evitar corte), descrições 5.000 caracteres (primeiros 157 visíveis nos resultados de busca).</p>
+<h2>Terminologia tipográfica</h2>
+<p><strong>Caractere</strong>: qualquer unidade única em um sistema de escrita — uma letra, dígito, espaço, sinal de pontuação ou símbolo especial. No Unicode, cada caractere tem um ponto de código único.</p>
+<p><strong>Glifo</strong>: a representação visual de um caractere em uma fonte específica. Um único caractere pode ter vários glifos (regular, negrito, itálico).</p>
+<p><strong>Token</strong>: em processamento de linguagem natural, um token é tipicamente uma palavra ou subunidade de palavra usada por modelos de linguagem. O GPT-4 usa aproximadamente 750 palavras = 1.000 tokens como conversão aproximada, por isso um contador de caracteres é um bom substituto para estimar o uso de tokens antes de colar um texto em uma ferramenta de IA com limite de contexto.</p>
+<h2>Caracteres em diferentes sistemas de escrita</h2>
+<p>A lógica de contagem varia por script. Em scripts latinos (português, inglês, espanhol, francês), um caractere é aproximadamente uma letra, dígito ou sinal de pontuação, e os limites de palavra são marcados por espaços. Em chinês e japonês, cada ideograma normalmente conta como um caractere em vez de ser agrupado em palavras separadas por espaço, então um limite de &quot;280 caracteres&quot; em um tweet em chinês carrega muito mais informação do que um em português. Esta ferramenta conta pontos de código Unicode de forma consistente em todos esses casos.</p>
+<h2>Por que os limites de caracteres não desaparecem</h2>
+<p>Seria de se esperar que limites de caracteres perdessem relevância conforme a largura de banda e o armazenamento ficam mais baratos, mas eles persistem por razões que não têm nada a ver com custo técnico: um limite curto força concisão editorial (por que o Twitter mantém 280 caracteres mesmo tendo capacidade de sobra para mais), garante compatibilidade entre sistemas antigos e novos (por que o SMS ainda usa 160 caracteres décadas depois da tecnologia permitir mensagens muito maiores), e molda como o conteúdo aparece em uma tela pequena (por que o Google trunca meta descrições em torno de 155-160 caracteres, já que é aproximadamente quanto texto cabe em duas linhas de resultado de busca em um celular). Entender a razão por trás de cada limite ajuda a escrever para ele de propósito, em vez de simplesmente cortar um texto até ele caber.</p>
+<h2>Contagem em tempo real enquanto você edita</h2>
+<p>Ver a contagem mudar a cada tecla pressionada, em vez de precisar clicar em um botão &quot;contar&quot;, muda a forma como você edita: cortar uma frase e ver o número cair imediatamente cria um ciclo de retroalimentação instantâneo que torna muito mais fácil aparar um texto até um limite exato, palavra por palavra, sem precisar recontar manualmente depois de cada mudança.</p>
+<h2>Privado e instantâneo</h2>
+<p>O contador roda no seu navegador usando métodos de string e expressões regulares do JavaScript aplicados ao texto enquanto você digita. Nenhum texto que você digita é transmitido a um servidor, armazenado ou registrado — atualize a página e ele desaparece.</p>
+    <section class="faq"><h2>Perguntas frequentes do contador de caracteres</h2><dl><dt>A contagem de caracteres inclui espaços?</dt><dd>Ambas as contagens são mostradas: total de caracteres (incluindo espaços) e caracteres excluindo espaços.</dd><dt>Como as frases são contadas?</dt><dd>As frases são contadas pelo número de caracteres de ponto final, exclamação ou interrogação seguidos de espaço ou fim do texto.</dd><dt>Qual a diferença entre linhas e parágrafos?</dt><dd>As linhas são delimitadas por caracteres de nova linha. Os parágrafos são grupos de linhas separados por uma ou mais linhas em branco.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/charcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/charcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/charcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/charcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/charcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/charcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/charcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/charcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/charcount/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/charcount.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Currency Converter — convert between 30+ currencies</title>
+<meta name="description" content="Free currency converter with approximate exchange rates. Convert USD, EUR, GBP, JPY, BRL, and 30+ more currencies instantly in your browser.">
+<link rel="canonical" href="https://mikaio.dev/fr/currencyconverter/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/currencyconverter/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/currencyconverter/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/currencyconverter/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/currencyconverter/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/currencyconverter/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/currencyconverter/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/currencyconverter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Currency Converter — convert between 30+ currencies">
+<meta property="og:description" content="Free currency converter with approximate exchange rates. Convert USD, EUR, GBP, JPY, BRL, and 30+ more currencies instantly in your browser.">
+<meta property="og:url" content="https://mikaio.dev/fr/currencyconverter/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Currency Converter — convert between 30+ currencies","url":"https://mikaio.dev/fr/currencyconverter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free currency converter with approximate exchange rates. Convert USD, EUR, GBP, JPY, BRL, and 30+ more currencies instantly in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Currency Converter","item":"https://mikaio.dev/fr/currencyconverter/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are these live rates?","acceptedAnswer":{"@type":"Answer","text":"No. This tool uses approximate static reference rates for demonstration purposes. For real financial transactions always use a live rate from a bank, broker, or dedicated currency service."}},{"@type":"Question","name":"Which currencies are supported?","acceptedAnswer":{"@type":"Answer","text":"The tool includes 30+ commonly traded currencies: USD, EUR, GBP, JPY, CAD, AUD, CHF, CNY, INR, BRL, MXN, and more."}},{"@type":"Question","name":"How are exchange rates calculated?","acceptedAnswer":{"@type":"Answer","text":"All rates are relative to USD. To convert EUR to GBP, the tool first converts EUR to USD then USD to GBP using the stored rate table."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Currency Converter</span></nav>
+  <h1>Currency Converter</h1>
+  <p class="lead">Enter an amount and select currencies to convert. Rates are approximate reference values.</p>
+  <section class="widget" id="tool"><div id="cc-app"><p style="opacity:0.6;font-size:0.85rem;margin-bottom:0.75rem">Rates shown are approximate static reference values for educational use.</p><div class="row"><div class="field"><label for="cc-amount">Amount</label><input type="number" id="cc-amount" value="1" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="cc-from">From</label><select id="cc-from"></select></div><div class="field"><label for="cc-to">To</label><select id="cc-to"></select></div></div><div class="result"><span class="hint">Result: </span><span class="big" id="cc-out">—</span></div><div id="cc-note2" style="opacity:0.55;font-size:0.8rem;margin-top:0.5rem">Exchange rates fluctuate constantly. Use a bank or financial service for live rates.</div></div></section>
+  <article class="content">
+    <h2>Convertissez entre plus de 40 devises mondiales</h2>
+<p>La conversion de devises devient nécessaire chaque fois que vous voyagez à l&#39;étranger, achetez sur un site international, recevez un paiement dans une monnaie étrangère, ou comparez des prix entre pays. Ce convertisseur regroupe plus de 40 devises du monde entier et affiche instantanément un montant converti estimé dès que vous saisissez une valeur.</p>
+<h2>Une précision importante sur les taux</h2>
+<p>Les taux de change utilisés dans cet outil sont des valeurs de référence statiques et approximatives. Elles sont utiles pour obtenir une estimation grossière d&#39;une équivalence entre devises, mais ne doivent pas servir de base à une véritable transaction financière. Les taux de change fluctuent en permanence en fonction de la conjoncture économique, des taux d&#39;intérêt, des événements politiques et du sentiment de marché. Pour un transfert d&#39;argent réel, utilisez toujours un taux en temps réel fourni par votre banque, un courtier en devises, ou un service spécialisé de transfert d&#39;argent.</p>
+<h2>Les principales paires de devises</h2>
+<p>Le marché des changes (forex) est le plus grand marché financier au monde, avec plus de 7 000 milliards de dollars échangés chaque jour. Les paires de devises se cotent avec une devise de base et une devise de cotation. Les paires les plus échangées comprennent :</p>
+<ul>
+<li><strong>EUR/USD</strong> : euro contre dollar américain — la paire la plus échangée au monde</li>
+<li><strong>USD/JPY</strong> : dollar américain contre yen japonais — la deuxième paire la plus échangée</li>
+<li><strong>GBP/USD</strong> : livre sterling contre dollar américain — surnommée « Cable » chez les traders</li>
+<li><strong>USD/CHF</strong> : dollar américain contre franc suisse — la réputation de stabilité de la Suisse fait du franc une valeur refuge</li>
+<li><strong>AUD/USD</strong> : dollar australien contre dollar américain — fortement influencée par les cours des matières premières</li>
+<li><strong>USD/CAD</strong> : dollar américain contre dollar canadien — également liée aux matières premières en raison des exportations pétrolières du Canada</li>
+<li><strong>USD/CNY</strong> : dollar américain contre yuan chinois — une paire de plus en plus centrale à mesure que l&#39;économie chinoise se développe</li>
+</ul>
+<h2>Comprendre les taux de change</h2>
+<p>Un taux de change indique combien vous obtenez d&#39;une devise pour une unité d&#39;une autre. USD/EUR = 0,92 signifie qu&#39;1 dollar achète 0,92 euro. EUR/USD = 1,09 signifie qu&#39;1 euro achète 1,09 dollar.</p>
+<p>Les taux évoluent sous l&#39;effet de nombreux facteurs : écarts d&#39;inflation entre pays, décisions de taux d&#39;intérêt des banques centrales, balances commerciales, stabilité politique, et flux spéculatifs.</p>
+<h2>Symboles et codes de devises</h2>
+<p>Chaque devise possède un code ISO 4217 de trois lettres. Les deux premières lettres représentent généralement le pays (ou la région pour l&#39;euro), et la troisième représente le nom de la devise :</p>
+<ul>
+<li>USD = dollar des États-Unis</li>
+<li>EUR = euro (Union européenne)</li>
+<li>GBP = livre sterling (Grande-Bretagne)</li>
+<li>BRL = réal brésilien</li>
+<li>JPY = yen japonais</li>
+<li>CHF = franc suisse</li>
+<li>CAD = dollar canadien</li>
+</ul>
+<h2>Le marché des changes en détail</h2>
+<p>Le marché des changes (forex ou FX) est le plus grand marché financier au monde par volume d&#39;échanges, avec environ 7 500 milliards de dollars échangés quotidiennement en 2022. Il fonctionne 24 heures sur 24, 5 jours par semaine, à travers les grandes places financières : Londres, New York, Tokyo, Singapour et Hong Kong.</p>
+<h2>Comment les taux de change se déterminent</h2>
+<p>Sur un marché libre, les taux de change se fixent par l&#39;offre et la demande. Quand davantage de personnes veulent acheter une devise (la demande augmente), son prix exprimé dans d&#39;autres devises augmente. Les principaux facteurs qui influencent ces mouvements comprennent :</p>
+<p><strong>Les taux d&#39;intérêt</strong> : les pays offrant des taux d&#39;intérêt plus élevés ont tendance à attirer des capitaux étrangers, ce qui augmente la demande pour leur devise.</p>
+<p><strong>L&#39;inflation</strong> : les pays à faible inflation voient généralement leur monnaie s&#39;apprécier, car le pouvoir d&#39;achat s&#39;érode plus lentement.</p>
+<p><strong>Les balances commerciales</strong> : les pays qui exportent plus qu&#39;ils n&#39;importent reçoivent des paiements nets dans leur propre devise, ce qui soutient sa valeur.</p>
+<p><strong>La stabilité politique</strong> : l&#39;incertitude politique tend à affaiblir une devise, les investisseurs cherchant des alternatives plus sûres.</p>
+<p><strong>La spéculation</strong> : les mouvements à court terme des devises sont souvent portés par des traders anticipant des évolutions futures plutôt que par des facteurs fondamentaux.</p>
+<h2>L&#39;écart entre cours acheteur et vendeur</h2>
+<p>Dans le trading professionnel des changes, les devises sont cotées avec un cours acheteur (ce qu&#39;un acheteur paiera) et un cours vendeur (ce qu&#39;un vendeur recevra). La différence constitue le spread, qui représente le profit du courtier. Les particuliers paient généralement un spread plus large que les institutionnels.</p>
+<h2>Parités fixes et flottement géré</h2>
+<p>Toutes les devises ne flottent pas librement. Certaines sont arrimées à une autre devise (comme le dirham des Émirats arabes unis et le riyal saoudien, arrimés au dollar américain) ou gérées à l&#39;intérieur d&#39;une bande de fluctuation. La Chine a longtemps géré étroitement le yuan par rapport au dollar, même si cette politique a évolué vers davantage de flexibilité au fil du temps.</p>
+<h2>Privé et instantané</h2>
+<p>Toutes les conversions utilisent des taux de référence statiques stockés localement dans votre navigateur. Aucune donnée n&#39;est envoyée où que ce soit.</p>
+    <section class="faq"><h2>Currency converter FAQ</h2><dl><dt>Are these live rates?</dt><dd>No. This tool uses approximate static reference rates for demonstration purposes. For real financial transactions always use a live rate from a bank, broker, or dedicated currency service.</dd><dt>Which currencies are supported?</dt><dd>The tool includes 30+ commonly traded currencies: USD, EUR, GBP, JPY, CAD, AUD, CHF, CNY, INR, BRL, MXN, and more.</dd><dt>How are exchange rates calculated?</dt><dd>All rates are relative to USD. To convert EUR to GBP, the tool first converts EUR to USD then USD to GBP using the stored rate table.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/currencyconverter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/currencyconverter/">中文</a></li><li><a hreflang="es" lang="es" href="/es/currencyconverter/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/currencyconverter/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/currencyconverter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/currencyconverter/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/currencyconverter.js" defer></script>
+</body>
+</html>

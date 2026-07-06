@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Time Calculator — add and subtract hours, minutes and seconds</title>
+<meta name="description" content="Free time calculator. Add or subtract hours, minutes, and seconds easily. Great for calculating total work hours, travel times, and durations.">
+<link rel="canonical" href="https://mikaio.dev/en/timecalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/timecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/timecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/timecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Time Calculator — add and subtract hours, minutes and seconds">
+<meta property="og:description" content="Free time calculator. Add or subtract hours, minutes, and seconds easily. Great for calculating total work hours, travel times, and durations.">
+<meta property="og:url" content="https://mikaio.dev/en/timecalc/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Time Calculator — add and subtract hours, minutes and seconds","url":"https://mikaio.dev/en/timecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free time calculator. Add or subtract hours, minutes, and seconds easily. Great for calculating total work hours, travel times, and durations."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Time Calculator","item":"https://mikaio.dev/en/timecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I enter more than 24 hours?","acceptedAnswer":{"@type":"Answer","text":"Yes. The hours field accepts any positive integer, so you can calculate total hours worked across multiple days."}},{"@type":"Question","name":"What if the result is negative?","acceptedAnswer":{"@type":"Answer","text":"If subtracting gives a negative result, the calculator shows it prefixed with a minus sign."}},{"@type":"Question","name":"How do I calculate total work hours?","acceptedAnswer":{"@type":"Answer","text":"Enter your start time as Time A (hours from midnight, e.g. 9h 0m for 9 AM), your end time as Time B, and choose subtract. The result is your hours worked."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Time Calculator</span></nav>
+  <h1>Time Calculator</h1>
+  <p class="lead">Enter two time durations and choose to add or subtract them.</p>
+  <section class="widget" id="tool"><form id="tc-form"><div class="row"><div class="field"><label for="tc-h1">Time A</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h1" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m1" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s1" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div><div class="field" style="align-self:flex-end;padding-bottom:0.5rem"><select id="tc-op"><option value="+">+</option><option value="-">−</option></select></div><div class="field"><label for="tc-h2">Time B</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h2" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m2" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s2" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div></div><div class="result"><span class="hint">Result: </span><span class="big" id="tc-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Add and subtract time durations easily</h2>
+<p>Adding or subtracting time seems simple until you hit the arithmetic. Hours, minutes, and seconds use a base-60 system rather than base-10, which means the usual mental arithmetic does not apply directly. Adding 2 hours 45 minutes to 1 hour 30 minutes gives 4 hours 15 minutes, not 4:75. This calculator handles the conversion automatically — enter the hours, minutes, and seconds for each duration, choose add or subtract, and the correctly formatted result appears instantly.</p>
+<h2>Common uses for a time calculator</h2>
+<p><strong>Total work hours</strong>: If you worked from 8:30 AM to 12:15 PM and then from 1:00 PM to 5:45 PM, add the two sessions to get your total. Enter 3 hours 45 minutes for the morning and 4 hours 45 minutes for the afternoon; the total is 8 hours 30 minutes.</p>
+<p><strong>Travel time</strong>: Adding driving, walking, and transit segments into a total journey time is a frequent use. Three separate legs of 45 minutes, 20 minutes, and 1 hour 10 minutes sum to 2 hours 15 minutes.</p>
+<p><strong>Project tracking</strong>: Summing the time spent on different tasks across a day or week gives total billable hours. Freelancers and contractors often track time in hours and minutes and need to sum multiple entries.</p>
+<p><strong>Sports and competition</strong>: Comparing lap times, summing stage times in a race, or calculating how much time a competitor needs to make up.</p>
+<p><strong>Cooking</strong>: Multiple dishes with different cooking times starting at different points can be tracked by adding elapsed times.</p>
+<h2>The base-60 system</h2>
+<p>Time uses sexagesimal (base-60) arithmetic, inherited from ancient Babylonian mathematics. There are 60 seconds in a minute and 60 minutes in an hour, so carrying from seconds to minutes happens at 60, not at 100. This is why simple decimal addition produces wrong results for time: 45 minutes + 30 minutes = 75 minutes = 1 hour 15 minutes, not 0.75 hours.</p>
+<p>The calculator converts all inputs to total seconds, performs the arithmetic in seconds, then converts back to hours, minutes, and seconds for display. This approach handles all carrying and borrowing correctly regardless of the values entered.</p>
+<h2>Negative results</h2>
+<p>When subtracting, if Time A is less than Time B the result is negative — for example, if you subtract 3 hours from 1 hour you get minus 2 hours. The calculator displays the absolute value with a minus sign prefix. This can be useful for understanding how much time you are over a budget or target.</p>
+<h2>Hours beyond 24</h2>
+<p>Unlike a clock, the hours field accepts any non-negative integer, so you can work with durations of 48 hours, 100 hours, or more. This is useful for multi-day project tracking, total marathon split times, or any other large-scale time arithmetic.</p>
+<h2>How to use the calculator</h2>
+<p>Enter the hours, minutes and seconds for your first duration, choose whether to add or subtract, then enter the second duration the same way. The result appears immediately in correctly carried hours, minutes and seconds — you never need to manually work out that 75 minutes should display as 1 hour 15 minutes, since the calculator always normalises the result for you.</p>
+<h2>Why simple addition goes wrong</h2>
+<p>The root of the confusion is that a duration like &quot;1 hour 45 minutes&quot; is not really the number 1.45 — it is 1 hour plus 45 out of 60 minutes, a mixed-base value that decimal arithmetic was never designed to handle directly. If you tried to add 1:45 and 0:30 by simply adding the digits, you would get 1:75, which is not a valid time at all. The calculator sidesteps this entirely by converting everything to a single unit — total seconds — doing the addition or subtraction as ordinary arithmetic on that one number, and only converting back to hours, minutes and seconds for the final display. This &quot;convert to one unit, calculate, convert back&quot; pattern is the standard, reliable way to handle any base-60 arithmetic correctly, and it is exactly what happens behind the scenes every time you press calculate.</p>
+<h2>Sports and cooking</h2>
+<p>Comparing lap times, summing stage times across a multi-stage race, or working out how much time a competitor needs to make up over the remaining distance are all common uses in sport. In the kitchen, tracking several dishes with different cooking times that started at different points is easier when you can add and subtract elapsed durations directly rather than watching several separate timers and doing the arithmetic in your head.</p>
+<h2>Total work hours, worked through</h2>
+<p>If you worked from 8:30 AM to 12:15 PM and then again from 1:00 PM to 5:45 PM, working out your total hours for the day means adding two separate durations: 3 hours 45 minutes for the morning session and 4 hours 45 minutes for the afternoon session. Added together that comes to 8 hours 30 minutes, not the 8:90 you would get from careless decimal addition. Freelancers, contractors and anyone billing by the hour run this exact calculation regularly, often summing several such sessions across a week to arrive at a total for an invoice, and small arithmetic slips compound quickly when done by hand across many entries.</p>
+<h2>Private and instant</h2>
+<p>All calculations run entirely in your browser, converting to total seconds and back for correctly carried results, so nothing you enter is ever sent to a server, logged or shared. It works offline once loaded and keeps no record of any duration you calculate.</p>
+    <section class="faq"><h2>Time calculator FAQ</h2><dl><dt>Can I enter more than 24 hours?</dt><dd>Yes. The hours field accepts any positive integer, so you can calculate total hours worked across multiple days.</dd><dt>What if the result is negative?</dt><dd>If subtracting gives a negative result, the calculator shows it prefixed with a minus sign.</dd><dt>How do I calculate total work hours?</dt><dd>Enter your start time as Time A (hours from midnight, e.g. 9h 0m for 9 AM), your end time as Time B, and choose subtract. The result is your hours worked.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/timecalc/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/timecalc.js" defer></script>
+</body>
+</html>

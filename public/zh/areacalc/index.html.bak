@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Area Calculator — calculate area of any shape</title>
+<meta name="description" content="Free area calculator. Calculate the area of rectangles, circles, triangles, squares, and trapezoids. Enter dimensions and get the area instantly in your browser.">
+<link rel="canonical" href="https://mikaio.dev/zh/areacalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/areacalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/areacalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/areacalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/areacalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/areacalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/areacalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/areacalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/areacalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/areacalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/areacalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/areacalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Area Calculator — calculate area of any shape">
+<meta property="og:description" content="Free area calculator. Calculate the area of rectangles, circles, triangles, squares, and trapezoids. Enter dimensions and get the area instantly in your browser.">
+<meta property="og:url" content="https://mikaio.dev/zh/areacalc/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Area Calculator — calculate area of any shape","url":"https://mikaio.dev/zh/areacalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free area calculator. Calculate the area of rectangles, circles, triangles, squares, and trapezoids. Enter dimensions and get the area instantly in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Area Calculator","item":"https://mikaio.dev/zh/areacalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What units are used?","acceptedAnswer":{"@type":"Answer","text":"The area is in square units of whatever unit you enter. If you enter dimensions in metres, the area is in square metres (m²). In feet, it is in square feet (ft²)."}},{"@type":"Question","name":"How is the circle area calculated?","acceptedAnswer":{"@type":"Answer","text":"Area = π × r². Enter the radius (half the diameter) to get the area."}},{"@type":"Question","name":"How is the triangle area calculated?","acceptedAnswer":{"@type":"Answer","text":"Area = ½ × base × height, where height is the perpendicular height from the base to the opposite vertex."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Area Calculator</span></nav>
+  <h1>Area Calculator</h1>
+  <p class="lead">Select a shape, enter the dimensions, and see the area calculated instantly.</p>
+  <section class="widget" id="tool"><div id="area-app"><div class="field"><label for="area-shape">Shape</label><select id="area-shape"><option value="rect">Rectangle</option><option value="circle">Circle</option><option value="triangle">Triangle</option><option value="square">Square</option><option value="trapezoid">Trapezoid</option></select></div><div id="area-inputs" class="row" style="margin-top:1rem"></div><div class="result"><span class="hint">Area: </span><span class="big" id="area-out">—</span></div></div></section>
+  <article class="content">
+    <h2>计算常见图形的面积</h2>
+<p>面积是数学、工程、建筑和日常生活里最基础的度量之一。不管是计算一面墙要刷多少涂料,一个房间要铺多少地板,一块布料够不够裁剪一件衣服,还是解一道几何题,都离不开面积计算。这个计算器可以立即处理五种常见图形:矩形、圆形、三角形、正方形和梯形。</p>
+<h2>矩形</h2>
+<p>矩形的面积等于长乘以宽:A = l × w。一个宽5米、长4米的房间,面积就是20平方米。矩形面积公式是绝大多数装修和室内设计计算的基础。</p>
+<h2>圆形</h2>
+<p>圆的面积等于圆周率乘以半径的平方:A = π × r²。半径是直径的一半。一个直径6米的圆形花园,半径是3米,面积约为π × 9 ≈ 28.27平方米。圆的面积随半径呈平方增长——半径翻倍,面积会变成原来的四倍。</p>
+<h2>三角形</h2>
+<p>三角形的面积等于底乘以对应高再除以二:A = ½ × b × h。这里的高必须是从底边到对顶点的垂直距离,而不是斜边的长度。一个两条直角边分别为3和4的直角三角形,面积是½ × 3 × 4 = 6平方单位。</p>
+<h2>正方形</h2>
+<p>正方形的面积等于边长的平方:A = s²,这其实是矩形公式的特例。边长10厘米的正方形,面积是100平方厘米,也就是0.01平方米。</p>
+<h2>梯形</h2>
+<p>梯形有两条互相平行的边,叫做上底和下底。它的面积等于上底与下底之和的一半,再乘以两底之间的垂直高度:A = ½ × (a + b) × h。</p>
+<h2>单位换算</h2>
+<p>面积的单位永远是长度单位的平方:如果长度用米,面积就是平方米;用英尺,面积就是平方英尺。换算关系是:1平方米 = 10.764平方英尺,1平方英尺 = 0.0929平方米。</p>
+<h2>实际应用</h2>
+<p><strong>铺地板</strong>:量出房间的长和宽算出面积,再多预留10%到15%用于裁切损耗。</p>
+<p><strong>刷涂料</strong>:一升涂料大约能覆盖10到12平方米。用墙面总面积除以这个覆盖率,就能算出需要多少升涂料。</p>
+<p><strong>土地与房产</strong>:大多数国家用平方米计量土地,美国等则用平方英尺。1公顷 = 10000平方米;1英亩 = 43560平方英尺 ≈ 4047平方米。</p>
+<p><strong>裁布与缝纫</strong>:裁剪样片时按面积估算需要多少布料。</p>
+<p><strong>农业</strong>:田地大小、单位面积产量、灌溉规划都要用到面积计算。</p>
+<h2>面积单位之间的换算</h2>
+<p>同一块面积可以用许多不同单位表达:1平方米等于10000平方厘米,也等于1000000平方毫米;1平方英尺等于144平方英寸;1平方码等于9平方英尺;1英亩等于43560平方英尺,约合4046.86平方米;1公顷等于10000平方米,约合2.471英亩;1平方公里等于100公顷;1平方英里等于640英亩,约合2.590平方公里。记住其中几个换算关系,遇到不熟悉的单位算出来的结果时就能大致判断是否合理。</p>
+<h2>不规则图形的面积</h2>
+<p>真实的房间和空间很少是标准的矩形。计算不规则空间的面积,可以把它拆分成矩形、三角形等简单图形,用这个计算器分别算出每一部分的面积,再把结果加总——过程中要记得减去柱子、支柱等不铺地面的空洞部分。这种&quot;化整为零&quot;的思路几乎能应付所有真实的户型图,即便计算器本身一次只能算一种规整图形。</p>
+<h2>常见的面积计算错误</h2>
+<p>最常见的错误是中途混用单位——一面墙用米量,另一面墙用英尺量,然后把两个数字直接相加,当成同一单位。第二个常见错误是把三角形斜边的长度当成高来用,这样算出来的面积总是偏大,因为只要这条边不是直角边对应的高,斜边一定比垂直高度长。第三个错误是忘了图形每条边都翻倍时,面积会变成原来的四倍而不是两倍,因为面积是随长度的平方增长的——这个误区常常让人严重低估一个&quot;大一倍&quot;的房间到底要多用多少涂料或地板材料。</p>
+<h2>没有卷尺时如何估算面积</h2>
+<p>如果手头没有精确的测量工具,几个大致的参照物能帮你判断估算是否靠谱:一扇标准门大约2平方米,一个停车位大约12到15平方米,一张A4纸大约0.06平方米。把陌生的空间和这些熟悉的参照面积比一比,往往就能在酿成大问题之前——比如材料订多了或订少了——发现测量或单位上的失误。</p>
+<h2>选择合适的图形</h2>
+<p>如果一个空间跟这五种图形都不完全吻合,可以选一个最接近的图形近似计算,接受由此产生的小误差,或者把空间拆成两个以上的基本图形分别计算再相加——也就是前面提到的组合图形技巧。这两种做法都比随口猜一个数字要靠谱得多。</p>
+<h2>私密且即时</h2>
+<p>所有计算都完全在你的浏览器中完成,调整任意尺寸时结果都会立即更新,你输入的任何数据都不会被发送到服务器、记录或分享。</p>
+    <section class="faq"><h2>Area calculator FAQ</h2><dl><dt>What units are used?</dt><dd>The area is in square units of whatever unit you enter. If you enter dimensions in metres, the area is in square metres (m²). In feet, it is in square feet (ft²).</dd><dt>How is the circle area calculated?</dt><dd>Area = π × r². Enter the radius (half the diameter) to get the area.</dd><dt>How is the triangle area calculated?</dt><dd>Area = ½ × base × height, where height is the perpendicular height from the base to the opposite vertex.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/areacalc/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/areacalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/areacalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/areacalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/areacalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/areacalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/areacalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/areacalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/areacalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/areacalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/areacalc.js" defer></script>
+</body>
+</html>

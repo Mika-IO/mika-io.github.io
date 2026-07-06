@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Calculator — basic arithmetic calculator</title>
+<meta name="description" content="Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/hi/basiccalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/basiccalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/basiccalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/basiccalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/basiccalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/basiccalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/basiccalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/basiccalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/basiccalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/basiccalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/basiccalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/basiccalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online Calculator — basic arithmetic calculator">
+<meta property="og:description" content="Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/hi/basiccalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Online Calculator — basic arithmetic calculator","url":"https://mikaio.dev/hi/basiccalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"Online Basic Calculator","item":"https://mikaio.dev/hi/basiccalc/"}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/hi/basiccalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/basiccalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/basiccalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/basiccalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/basiccalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/basiccalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/basiccalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/basiccalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/basiccalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/basiccalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/basiccalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="एक साफ़-सुथरा, तेज़ बेसिक कैलकुलेटर" />
+<meta property="og:description" content="एक साफ़-सुथरा, तेज़ बेसिक कैलकुलेटर" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/hi/basiccalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"एक साफ़-सुथरा, तेज़ बेसिक कैलकुलेटर","description":"एक साफ़-सुथरा, तेज़ बेसिक कैलकुलेटर","url":"https://example.com/hi/basiccalc/","inLanguage":"hi"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>Online Basic Calculator</span></nav>
+  <h1>Online Basic Calculator</h1>
+  <p class="lead">Use the buttons or your keyboard to perform calculations.</p>
+  <section class="widget" id="tool"><div id="bc-app"><div id="bc-display" style="text-align:right;font-size:1.8rem;padding:0.75rem 1rem;border-radius:0.5rem;background:rgba(255,255,255,0.06);min-height:2.5rem;word-break:break-all;min-width:0">0</div><div id="bc-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.35rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>एक साफ़-सुथरा, तेज़ बेसिक कैलकुलेटर</h2>
+<p>एक बुनियादी अंकगणित कैलकुलेटर चार मूल संक्रियाओं — जोड़, घटाव, गुणा और भाग — के साथ-साथ प्रतिशत और समूहन के लिए कोष्ठक (parentheses) भी संभालता है। यह कैलकुलेटर सीधे आपके ब्राउज़र में काम करता है, बिना किसी इंस्टॉलेशन, बिना विज्ञापन और बिना किसी ट्रैकिंग के।</p>
+<h2>कीबोर्ड शॉर्टकट</h2>
+<p>यह कैलकुलेटर क्लिक जितना ही आपके कीबोर्ड पर भी प्रतिक्रिया देता है:</p>
+<ul>
+<li>अंक: 0–9 और दशमलव बिंदु</li>
+<li>जोड़: +</li>
+<li>घटाव: -</li>
+<li>गुणा: * (× के रूप में दिखता है)</li>
+<li>भाग: / (÷ के रूप में दिखता है)</li>
+<li>बराबर: Enter या =</li>
+<li>साफ़ करें: Escape</li>
+<li>आख़िरी अक्षर मिटाएँ: Backspace</li>
+</ul>
+<h2>संक्रियाओं का क्रम</h2>
+<p>यह कैलकुलेटर एक्सप्रेशन को गणित के मानक क्रम में हल करता है: पहले कोष्ठक, फिर घातांक (बेसिक मोड में उपलब्ध नहीं), फिर बाएँ से दाएँ गुणा-भाग, और फिर बाएँ से दाएँ जोड़-घटाव (जिसे PEMDAS / BODMAS / BIDMAS कहा जाता है)।</p>
+<p>बिना कोष्ठक के: 2 + 3 × 4 = 14 होता है, 20 नहीं, क्योंकि गुणा जोड़ से पहले होता है।</p>
+<p>कोष्ठक के साथ: (2 + 3) × 4 = 20 होता है, क्योंकि कोष्ठक में बंद जोड़ पहले हल होता है।</p>
+<h2>फ़्लोटिंग-पॉइंट अंकगणित</h2>
+<p>कंप्यूटर संख्याओं को बाइनरी फ़्लोटिंग-पॉइंट फ़ॉर्मेट (IEEE 754 डबल प्रिसिज़न) में स्टोर करते हैं। ज़्यादातर दशमलव भिन्नों को बाइनरी में बिल्कुल सटीक तरीक़े से नहीं दिखाया जा सकता, जिससे कभी-कभी छोटी-मोटी राउंडिंग गलतियाँ हो जाती हैं। सबसे मशहूर उदाहरण है 0.1 + 0.2, जो कच्चे IEEE 754 अंकगणित में 0.30000000000000004 बनकर आता है। यह कोई बग नहीं बल्कि बेस-दस भिन्नों को बेस-दो में दिखाने की एक अंतर्निहित सीमा है। यह कैलकुलेटर नतीजों को 10 सार्थक दशमलव अंकों तक राउंड करके ज़्यादातर फ़्लोटिंग-पॉइंट शोर छुपा देता है।</p>
+<h2>प्रतिशत की संक्रिया</h2>
+<p>% कुंजी मौजूदा वैल्यू को 100 से भाग देती है। यह झटपट प्रतिशत निकालने के काम आता है: 200 का 15% पता करने के लिए, 200 × 15% = 30 टाइप करें।</p>
+<h2>अंकगणित का इतिहास</h2>
+<p>पहला यांत्रिक कैलकुलेटर विल्हेम शिकार्ड ने 1623 में बनाया था, जिसे बाद में ब्लेज़ पास्कल (पास्कलीन, 1642) और गॉटफ्रीड लाइबनिट्स ने और बेहतर किया। इलेक्ट्रॉनिक कैलकुलेटर 1970 के दशक में आम उपभोक्ताओं के लिए सस्ते उत्पाद बन गए। जेब में रखने लायक़ साइंटिफ़िक कैलकुलेटर की शुरुआत HP और Texas Instruments ने की। आज हर डिवाइस में कैलकुलेटर बना-बनाया आता है, फिर भी कीबोर्ड सपोर्ट वाला एक साफ़-सुथरा, ख़ास इसी काम के लिए बना वेब कैलकुलेटर सचमुच काम का बना रहता है।</p>
+<h2>कैलकुलेटर का इतिहास ज़रा विस्तार से</h2>
+<p>यांत्रिक कैलकुलेटर विल्हेम शिकार्ड ने 1623 में बनाया था। ब्लेज़ पास्कल ने 1642 में पास्कलीन बनाई, और गॉटफ्रीड विल्हेम लाइबनिट्स ने लगभग 1672 में स्टेप्ड रेकनर डिज़ाइन किया। ये शुरुआती मशीनें जोड़-घटाव, गुणा-भाग कर सकती थीं लेकिन इनके लिए काफ़ी यांत्रिक मेहनत लगती थी, और सत्रहवीं सदी से लेकर 1970 के दशक तक स्लाइड रूल ही रोज़मर्रा का एनालॉग गणना-सहायक बना रहा। इलेक्ट्रॉनिक कैलकुलेटर 1960 और 1970 के दशक के शुरुआत में सामने आए, और पहला असली पॉकेट कैलकुलेटर, बुसिकॉम LE-120A, 1971 में लॉन्च हुआ। इसके फ़ौरन बाद Texas Instruments और Hewlett-Packard ने साइंटिफ़िक कैलकुलेटर का नेतृत्व किया, और 1970 के दशक के मध्य तक कैलकुलेटर महंगे बिज़नेस उपकरण की बजाय किफ़ायती उपभोक्ता उत्पाद बन चुके थे।</p>
+<h2>फ़्लोटिंग-पॉइंट अंकगणित की गहराई से समझ</h2>
+<p>कंप्यूटर संख्याओं को दशमलव की बजाय बाइनरी में दिखाते हैं, लेकिन जिन भिन्नों के बारे में हम आम तौर पर दस के आधार में सोचते हैं, उनमें से ज़्यादातर को दो के आधार में बिल्कुल सटीक ढंग से नहीं दिखाया जा सकता। दशमलव में 0.1, उदाहरण के लिए, बाइनरी में एक अनंत रूप से दोहराने वाली भिन्न है, और IEEE 754 स्टैंडर्ड — जो यह तय करता है कि कंप्यूटर इन अनुमानों को कैसे स्टोर करें — को किसी न किसी बिंदु पर राउंड करना ही पड़ता है। इसका दिखने वाला असर यह है कि 0.1 + 0.2 कच्चे IEEE 754 अंकगणित में साफ़ 0.3 की बजाय 0.30000000000000004 निकलता है — यह कोई ख़राबी नहीं बल्कि दस के आधार वाली भिन्नों को दो के आधार में दिखाने की एक बुनियादी सीमा है। यह कैलकुलेटर दिखाए गए नतीजों को राउंड करके ज़्यादातर ऐसा दिखने वाला शोर हटा देता है, हालाँकि वित्तीय या वैज्ञानिक काम के लिए सचमुच सटीक दशमलव अंकगणित के लिए अभी भी ख़ास लाइब्रेरी चाहिए होती हैं जो सटीक दशमलव प्रतिनिधित्व के लिए ही बनी हों।</p>
+<h2>गणना में होने वाली आम गलतियाँ</h2>
+<p>कुछ आदतें रोज़मर्रा की ज़्यादातर अंकगणितीय गलतियों की वजह बनती हैं। संक्रियाओं का क्रम भूल जाना सबसे आम है: बिना कोष्ठक के, <code>2 + 3 × 4</code> का हल 14 होता है, 20 नहीं, क्योंकि गुणा जोड़ से पहले काम करता है — अगर आपको सचमुच 20 चाहिए था तो <code>(2 + 3) × 4</code> लिखना ज़रूरी है। चिह्न की गलतियाँ दूसरी सबसे आम हैं: किसी ऋणात्मक संख्या को घटाना उसके धनात्मक रूप को जोड़ने जैसा ही है, तो <code>10 − (−5)</code> बराबर होता है 15 के — यह नतीजा तेज़ी से काम करने वालों को अक्सर उलझा देता है। तीसरी है प्रतिशत को लेकर भ्रम: 20% की बढ़त के बाद 20% की गिरावट आपको मूल संख्या पर वापस नहीं लाती, क्योंकि दूसरा प्रतिशत एक अलग (बड़े) आधार पर गिना जाता है — 100 में 20% बढ़ने पर 120 बनता है, और 120 में 20% घटने पर 96 बनता है, 100 नहीं।</p>
+<h2>कैलकुलेटर बनाम मानसिक गणना</h2>
+<p>एक अंक से ज़्यादा वाले किसी भी जोड़-गुणा के लिए, ख़ासकर जब दशमलव, प्रतिशत या कई चरणों वाले एक्सप्रेशन शामिल हों, तब कैलकुलेटर सबसे तेज़ और सबसे भरोसेमंद रहता है — हर अतिरिक्त अंक के साथ मानसिक गुणा में गलती की दर तेज़ी से बढ़ती है। फिर भी झटपट अंदाज़े और जाँच के लिए मानसिक गणना का अपना महत्व है: 297 × 4 को लगभग 300 × 4 = 1200 तक गोल करना आपको कैलकुलेटर में हुई किसी टाइपो को तुरंत पकड़ने देता है अगर असली जवाब बहुत अलग आ जाए। दोनों तरीक़े एक-दूसरे के प्रतिद्वंद्वी नहीं बल्कि पूरक हैं — बड़ी गलतियाँ पकड़ने के लिए अंदाज़ा लगाइए और सटीक आँकड़े के लिए कैलकुलेटर इस्तेमाल कीजिए।</p>
+<h2>एक अलग कैलकुलेटर पेज अब भी क्यों काम का है</h2>
+<p>हर फ़ोन और कंप्यूटर में पहले से एक कैलकुलेटर ऐप होता है, तो यह पूछना वाजिब है कि वेब-आधारित कैलकुलेटर आख़िर किस काम का। असली जवाब है रुकावट: जब आप पहले से ब्राउज़र में कोई पेज पढ़ रहे हों — दाम तुलना कर रहे हों, किसी रेसिपी की जाँच कर रहे हों, किसी दूसरे टैब में स्प्रेडशीट देख रहे हों — तो एक अलग नेटिव ऐप खोलना आपका फ़्लो तोड़ देता है, जबकि एक कैलकुलेटर जो सिर्फ़ एक और ब्राउज़र टैब भर दूर है, उस तक पहुँचने में कुछ भी अतिरिक्त ख़र्च नहीं होता। यह किसी भी ब्राउज़र वाले डिवाइस पर, ऑपरेटिंग सिस्टम चाहे जो भी हो, तुरंत उपलब्ध रहता है, बिना इंस्टॉलेशन और बिना कोई अनुमति दिए।</p>
+<h2>साइंटिफ़िक कैलकुलेटर कब चुनें</h2>
+<p>यह कैलकुलेटर चार बुनियादी संक्रियाओं के साथ प्रतिशत और कोष्ठक संभालता है, जो रोज़मर्रा के ज़्यादातर अंकगणित के लिए काफ़ी है। अगर आपके काम में त्रिकोणमिति, लघुगणक, साधारण वर्ग से आगे के घातांक, या सांख्यिकीय फ़ंक्शन शामिल हों, तो आपको इसकी जगह एक साइंटिफ़िक कैलकुलेटर चाहिए — इन्हें बार-बार बेसिक संक्रियाएँ दोहराकर हल करने की कोशिश करना धीमा और गलती-प्रवण है, उस काम के लिए बने टूल के मुक़ाबले।</p>
+<h2>एक झटपट जाँच की आदत</h2>
+<p>किसी नतीजे पर भरोसा करने से पहले जिस पर आप आगे कोई काम करने वाले हैं — बिल बाँटना, सामान का ऑर्डर देना — पहले एक मोटा मानसिक अंदाज़ा लगा लेना और उसे कैलकुलेटर के नतीजे से मिलाना फ़ायदेमंद रहता है। अगर दोनों में बहुत फ़र्क़ हो, तो शायद आपने कोई नंबर या ऑपरेटर ग़लत टाइप कर दिया है, और ग़लत आँकड़े पर काम करने से पहले इसे पकड़ लेना हर बार उन कुछ अतिरिक्त सेकंड के लायक़ है।</p>
+<h2>रोज़मर्रा में हिसाब-किताब से आगे इस्तेमाल</h2>
+<p>ख़रीदारी जोड़ने और बिल बाँटने के अलावा, यह कैलकुलेटर किसी रेसिपी का हिसाब झटपट जाँचने, सामग्री के अनुपात को समायोजित करने, या कैश बंद करने से पहले बाक़ी पैसे की जाँच करने में भी अच्छा काम आता है — ऐसी कोई भी रोज़मर्रा की स्थिति जहाँ पूरी स्प्रेडशीट खोलना ज़्यादती होगी।</p>
+<h2>किसी भी डिवाइस पर काम करता है</h2>
+<p>चूँकि यह कैलकुलेटर पूरी तरह ब्राउज़र के भीतर चलता है, यह फ़ोन, टैबलेट या डेस्कटॉप कंप्यूटर — तीनों पर एक जैसे तरीक़े से काम करता है, हर प्लेटफ़ॉर्म के लिए अलग वर्ज़न इंस्टॉल करने की ज़रूरत के बिना, और लेआउट उपलब्ध स्क्रीन साइज़ के हिसाब से अपने-आप ढल जाता है — फ़ोन पर टच के लिए बड़े बटन से लेकर डेस्कटॉप पर पूरे कीबोर्ड सपोर्ट तक।</p>
+<h2>प्राइवेट और तुरंत</h2>
+<p>सारी गणना पूरी तरह आपके ब्राउज़र में जावास्क्रिप्ट की नेटिव अंकगणितीय संक्रियाओं से होती है, इसलिए नतीजे तुरंत दिखते हैं और आपके डाले गए किसी भी नंबर को कभी कहीं भेजा, लॉग या साझा नहीं किया जाता।</p>
+    
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/basiccalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/basiccalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/basiccalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/basiccalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/basiccalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/basiccalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/basiccalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/basiccalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/basiccalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/basiccalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/glossary.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/basiccalc.js" defer></script>
+</body>
+</html>

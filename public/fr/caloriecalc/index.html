@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calorie Calculator — calories per food item</title>
+<meta name="description" content="Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.">
+<link rel="canonical" href="https://mikaio.dev/fr/caloriecalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/caloriecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/caloriecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/caloriecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/caloriecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/caloriecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/caloriecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/caloriecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/caloriecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/caloriecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/caloriecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/caloriecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calorie Calculator — calories per food item">
+<meta property="og:description" content="Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.">
+<meta property="og:url" content="https://mikaio.dev/fr/caloriecalc/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calorie Calculator — calories per food item","url":"https://mikaio.dev/fr/caloriecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Food Calorie Calculator","item":"https://mikaio.dev/fr/caloriecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate are these values?","acceptedAnswer":{"@type":"Answer","text":"Values are approximate and based on typical nutritional data. Actual calories vary with variety, cooking method, and preparation. Use a verified nutrition database or food packaging for precise values."}},{"@type":"Question","name":"Per 100g vs per serving?","acceptedAnswer":{"@type":"Answer","text":"Enter 100 in the quantity field for the per-100g value. Enter your actual portion size to see the calories for that portion."}},{"@type":"Question","name":"Are these raw or cooked values?","acceptedAnswer":{"@type":"Answer","text":"Most values are for raw weight unless noted. Cooked foods typically change in water content, which changes the calorie density per gram."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/fr/caloriecalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/caloriecalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/caloriecalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/caloriecalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/caloriecalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/caloriecalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/caloriecalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/caloriecalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/caloriecalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/caloriecalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/caloriecalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Comptez les calories de n'importe quel aliment" />
+<meta property="og:description" content="Comptez les calories de n'importe quel aliment" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/fr/caloriecalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Comptez les calories de n'importe quel aliment","description":"Comptez les calories de n'importe quel aliment","url":"https://example.com/fr/caloriecalc/","inLanguage":"fr"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Food Calorie Calculator</span></nav>
+  <h1>Food Calorie Calculator</h1>
+  <p class="lead">Type a food name and quantity to see the estimated calorie count. Based on approximate values per 100g.</p>
+  <section class="widget" id="tool"><form id="cal-form"><div class="row"><div class="field"><label for="cal-food">Food name</label><input type="text" id="cal-food" placeholder="e.g. banana, rice, chicken" list="cal-list"><datalist id="cal-list"></datalist></div><div class="field"><label for="cal-qty">Amount</label><input type="number" id="cal-qty" value="100" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="cal-unit">Unit</label><select id="cal-unit"><option value="g">g</option><option value="oz">oz</option></select></div></div><div class="result"><span class="hint">Approximate calories: </span><span class="big" id="cal-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Comptez les calories de n&#39;importe quel aliment</h2>
+<p>Le comptage des calories reste l&#39;une des méthodes les plus répandues pour suivre son alimentation et gérer son poids. Connaître la teneur calorique approximative des aliments courants aide à faire des choix éclairés sur ce que l&#39;on mange et en quelle quantité. Cet outil fournit des valeurs caloriques approximatives pour plus de 60 aliments courants, à partir de données nutritionnelles de référence.</p>
+<h2>Comment utiliser cet outil</h2>
+<p>Parcourez la liste ou recherchez un aliment pour voir sa teneur calorique approximative par portion habituelle et pour 100 grammes, ce qui permet de comparer facilement des aliments sur une base équitable, quelle que soit la manière dont ils sont habituellement servis. C&#39;est particulièrement utile pour repérer des aliments qui paraissent modestes en une seule portion mais qui affichent, une fois comparés gramme pour gramme à une alternative, une densité calorique bien plus élevée que prévu.</p>
+<h2>Que sont les calories ?</h2>
+<p>Une calorie (kcal ou kilocalorie) est une unité d&#39;énergie. En nutrition, le mot « calorie » désigne en réalité une kilocalorie — la quantité d&#39;énergie nécessaire pour élever la température d&#39;un kilogramme d&#39;eau d&#39;un degré Celsius. Votre corps brûle des calories pour toutes ses activités : respirer, réfléchir, bouger et digérer.</p>
+<h2>Densité calorique par groupe alimentaire</h2>
+<p>Les aliments présentent des densités caloriques très différentes pour 100 grammes :</p>
+<p><strong>Très peu calorique (moins de 50 kcal/100g)</strong> : la plupart des légumes non féculents — laitue (15), concombre (15), épinard (23), tomate (18), brocoli (34), fraise (32)</p>
+<p><strong>Peu calorique (50 à 100 kcal/100g)</strong> : la plupart des fruits, produits laitiers — pomme (52), banane (89), orange (47), lait (61), pomme de terre (77), œuf (155 — plus élevé mais faible par unité)</p>
+<p><strong>Calorie moyenne (100 à 200 kcal/100g)</strong> : céréales cuites, viandes maigres — riz (130), blanc de poulet (165), saumon (208), pâtes (131)</p>
+<p><strong>Assez calorique (200 à 400 kcal/100g)</strong> : fromage, pain, viandes grasses — pain (265), bœuf (250), chocolat noir (600)</p>
+<p><strong>Très calorique (plus de 400 kcal/100g)</strong> : huiles, fruits à coque, sucres — huile d&#39;olive (884), amandes (579), beurre de cacahuète (588), sucre (387)</p>
+<h2>Lire les étiquettes nutritionnelles</h2>
+<p>Les aliments emballés, dans la plupart des pays, doivent afficher les informations nutritionnelles pour 100 g et pour une portion. La valeur pour 100 g facilite la comparaison entre produits. La valeur par portion indique combien de calories contient une portion typique, même si la taille de portion définie sur l&#39;étiquette est souvent plus petite que ce que les gens consomment réellement.</p>
+<h2>Macronutriments et apport calorique</h2>
+<p>Chaque macronutriment fournit un nombre précis de calories par gramme :</p>
+<ul>
+<li>Glucides : 4 kcal par gramme</li>
+<li>Protéines : 4 kcal par gramme</li>
+<li>Lipides : 9 kcal par gramme</li>
+<li>Alcool : 7 kcal par gramme</li>
+</ul>
+<p>C&#39;est pourquoi les aliments riches en matières grasses ont une densité calorique élevée — les lipides contiennent plus du double de calories par gramme comparé aux glucides ou aux protéines.</p>
+<h2>Pourquoi le même nombre de calories peut sembler différent</h2>
+<p>Deux aliments affichant un nombre de calories identique n&#39;influencent pas nécessairement la faim, l&#39;énergie ou la santé de la même façon. Un aliment riche en fibres et en protéines rassasie généralement beaucoup plus par calorie qu&#39;un aliment riche en sucre raffiné et en matières grasses, car les fibres et les protéines ralentissent toutes deux la digestion et déclenchent des signaux de satiété plus forts. C&#39;est l&#39;une des raisons pour lesquelles le principe « calories ingérées, calories dépensées » est vrai en tant que principe d&#39;équilibre énergétique, mais incomplet en tant que conseil alimentaire pratique — la composition de ces calories détermine à quel point il est facile ou difficile de tenir un objectif d&#39;apport jour après jour.</p>
+<h2>Les bases de la gestion du poids</h2>
+<p>Le principe fondamental de la gestion du poids : consommer plus de calories que l&#39;on n&#39;en dépense entraîne une prise de poids ; en consommer moins entraîne une perte de poids. Un kilogramme de graisse corporelle représente environ 7 700 kcal. Un déficit quotidien de 500 kcal entraîne une perte d&#39;environ 0,5 kg de graisse par semaine.</p>
+<h2>Étiquettes alimentaires et bases de données nutritionnelles</h2>
+<p>Les valeurs caloriques de cet outil sont des références approximatives. La teneur réelle en calories peut varier selon la variété précise d&#39;un aliment, son degré de maturité ou sa teneur en matières grasses, son mode de préparation, et la partie de l&#39;aliment utilisée. Parmi les bases de données nutritionnelles officielles offrant des informations plus détaillées figurent la table Ciqual de l&#39;ANSES en France, référence publique la plus complète pour les aliments consommés localement ; la base USDA FoodData Central aux États-Unis, l&#39;une des plus exhaustives au monde avec des milliers d&#39;aliments y compris des produits de marque ; et des tables équivalentes existent dans la plupart des autres pays francophones.</p>
+<h2>L&#39;équilibre des macronutriments au-delà des calories</h2>
+<p>Si l&#39;apport calorique total détermine la variation de poids, la composition en macronutriments d&#39;une alimentation influence aussi d&#39;autres résultats de santé. L&#39;apport en protéines affecte la préservation de la masse musculaire pendant une perte de poids, la satiété et la composition corporelle. La qualité des graisses, saturées ou insaturées, affecte la santé cardiovasculaire. La qualité des glucides, y compris l&#39;indice glycémique et la teneur en fibres, affecte le contrôle de la glycémie et la santé intestinale — ce qui explique pourquoi deux régimes au même nombre total de calories peuvent avoir des effets bien différents sur le ressenti d&#39;une personne et sur l&#39;évolution de sa composition corporelle dans le temps.</p>
+<h2>Les fibres : le macronutriment sans calorie</h2>
+<p>Les fibres alimentaires sont techniquement des glucides, mais elles ne sont pas digestibles par les enzymes humaines, si bien qu&#39;elles n&#39;apportent essentiellement aucune calorie, bien qu&#39;elles comptent dans le total de glucides affiché sur une étiquette nutritionnelle. Les fibres issues des légumes, légumineuses, céréales complètes et fruits apportent du volume qui augmente la satiété, nourrissent les bonnes bactéries intestinales, ralentissent l&#39;absorption du glucose et réduisent le risque de maladie cardiovasculaire. Les régimes riches en fibres sont associés à des risques plus faibles de diabète de type 2, de cancer du côlon et de maladies cardiaques, ce qui explique en partie pourquoi les recommandations nutritionnelles favorisent généralement les aliments entiers par rapport aux aliments raffinés, même quand les chiffres caloriques semblent similaires sur le papier.</p>
+<h2>Les calories de l&#39;alcool</h2>
+<p>L&#39;alcool contient 7 kcal par gramme, plus que les glucides ou les protéines mais moins que les lipides. Une consommation standard contenant environ 14 grammes d&#39;alcool pur apporte à elle seule près de 100 kcal, avant même de compter les éventuels mélanges, et la bière, le vin et les spiritueux varient considérablement en teneur calorique totale en raison des différences de degré d&#39;alcool et de sucre résiduel. C&#39;est une source de calories souvent sous-estimée lorsqu&#39;on suit son alimentation, car les boissons alcoolisées sont mentalement classées dans les « boissons » plutôt que dans la « nourriture », alors qu&#39;elles représentent un coût calorique bien réel.</p>
+<h2>Privé et instantané</h2>
+<p>Tous les calculs s&#39;exécutent entièrement dans votre navigateur, si bien que les résultats apparaissent instantanément et qu&#39;aucune donnée sur ce que vous mangez ou buvez n&#39;est jamais envoyée à un serveur, enregistrée ou partagée.</p>
+    <section class="faq"><h2>Calorie calculator FAQ</h2><dl><dt>How accurate are these values?</dt><dd>Values are approximate and based on typical nutritional data. Actual calories vary with variety, cooking method, and preparation. Use a verified nutrition database or food packaging for precise values.</dd><dt>Per 100g vs per serving?</dt><dd>Enter 100 in the quantity field for the per-100g value. Enter your actual portion size to see the calories for that portion.</dd><dt>Are these raw or cooked values?</dt><dd>Most values are for raw weight unless noted. Cooked foods typically change in water content, which changes the calorie density per gram.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/caloriecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/caloriecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/caloriecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/caloriecalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/caloriecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/caloriecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/caloriecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/caloriecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/caloriecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/caloriecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/caloriecalc.js" defer></script>
+</body>
+</html>

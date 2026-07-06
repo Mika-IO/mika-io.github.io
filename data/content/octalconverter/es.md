@@ -1,0 +1,29 @@
+## Convierte entre binario, octal, decimal y hexadecimal
+
+Los ordenadores representan fundamentalmente todo en binario —secuencias de unos y ceros—, pero el binario resulta tedioso de leer y escribir para las personas, así que se usan otras bases numéricas como abreviatura más práctica. El octal (base 8) y el hexadecimal (base 16) son las dos más habituales, elegidas precisamente porque se convierten desde y hacia el binario de forma limpia y mecánica. Esta herramienta convierte cualquier número que introduzcas, en cualquiera de las cuatro bases habituales, a todas las demás a la vez. Elige la base en la que está escrita tu entrada, escribe el valor, y todas las representaciones aparecen de inmediato.
+
+## Cómo usar el conversor
+
+Resulta especialmente práctico para estudiantes que trabajan en ejercicios de bases numéricas, para desarrolladores que depuran un valor que apareció en un archivo de registro en hexadecimal pero necesitan comprobarlo en decimal, o para cualquiera con curiosidad sobre cómo se ve un número concreto escrito en otra base.
+
+Selecciona en el menú desplegable la base en la que está escrito tu número de entrada —decimal, binario, octal o hexadecimal—, luego escribe el valor en el campo y pulsa convertir. Las cuatro representaciones aparecen juntas: binaria, octal, decimal y hexadecimal, así que puedes leer la que realmente necesites sin un paso adicional. La entrada hexadecimal acepta tanto mayúsculas como minúsculas para los dígitos de la A a la F, y el resultado siempre se muestra en mayúsculas para mayor claridad.
+
+## Por qué existen el octal y el hexadecimal
+
+Los números binarios se alargan muy rápido —el número decimal 255 son 11111111 en binario, ocho dígitos para un número bastante modesto—, lo que los hace propensos a errores al leerlos, escribirlos y compararlos a simple vista. El octal y el hexadecimal existen para resolver exactamente este problema, porque ambas bases son potencias de dos: 8 es 2³ y 16 es 2⁴. Esto significa que cada dígito octal corresponde exactamente a tres dígitos binarios, y cada dígito hexadecimal corresponde exactamente a cuatro, así que convertir entre binario y cualquiera de ellos es un simple ejercicio de agrupación en lugar de aritmética genuina. Agrupar 11111111 en conjuntos de tres desde la derecha da 11 111 111, que es 3, 7, 7 en octal — 377. Agrupar el mismo número en conjuntos de cuatro da 1111 1111, que es F, F en hexadecimal — FF.
+
+## Convertir de decimal a otra base a mano
+
+Para convertir un número decimal a otra base sin calculadora, divide repetidamente entre la base de destino y anota los restos. Convirtiendo 255 a octal: 255 ÷ 8 = 31 resto 7; 31 ÷ 8 = 3 resto 7; 3 ÷ 8 = 0 resto 3. Leyendo los restos desde la última división hasta la primera se obtiene 377. El mismo proceso convierte a cualquier base — divide repetidamente entre 2 para binario, entre 16 para hexadecimal— y esta herramienta realiza exactamente este cálculo al instante para las tres bases de destino a la vez.
+
+## Dónde se usa realmente cada base
+
+El binario es el idioma nativo de la lógica digital y se usa directamente al hablar de operaciones a nivel de bits, indicadores (flags) y comportamiento de hardware de bajo nivel. El octal fue históricamente importante en los primeros tiempos de la informática, sobre todo en sistemas donde el tamaño de palabra era un múltiplo de tres bits, y todavía aparece hoy en la notación de permisos de archivos de Unix y Linux, donde un permiso como 755 describe los bits de lectura, escritura y ejecución para el propietario, el grupo y el resto en una forma octal compacta. El hexadecimal es, con diferencia, el más común de los dos en el software moderno, y aparece en códigos de color para diseño web (#FF5733), direcciones de memoria, códigos de error, y como una forma compacta de mostrar datos de bytes en crudo en herramientas de depuración, porque su relación de cuatro bits por dígito con el binario hace que la conversión a simple vista sea relativamente sencilla con algo de práctica.
+
+## Un ejemplo resuelto en las cuatro bases
+
+Toma el número decimal 100. En binario, es 1100100 — obtenido dividiendo repetidamente entre 2 y leyendo los restos de abajo hacia arriba. En octal, agrupando esos dígitos binarios en conjuntos de tres desde la derecha (1 100 100) se obtiene 1, 4, 4, así que 100 en decimal es 144 en octal. En hexadecimal, agrupando en conjuntos de cuatro (0110 0100) se obtiene 6 y 4, así que 100 en decimal es 64 en hexadecimal. Pasar 100 por este conversor con decimal seleccionado como base de entrada confirma las tres representaciones a la vez, lo cual es una buena forma de ganar confianza en el método de agrupación antes de confiar en él para un número más grande, donde comprobarlo a mano resultaría tedioso. El sentido inverso funciona de forma idéntica: pega un valor binario, octal o hexadecimal, selecciona la base de entrada correspondiente, y la herramienta obtiene las otras tres representaciones, incluido el valor decimal, usando las mismas reglas de agrupación y valor posicional aplicadas al revés. Esto la hace igual de útil sea cual sea la dirección en la que se encuentre tu número original, sin necesidad de recordar qué fórmula de conversión se aplica a qué par de bases, ni de mantener en la cabeza cuatro conjuntos distintos de reglas de división y agrupación.
+
+## Privado e instantáneo
+
+La conversión se ejecuta enteramente en tu navegador usando aritmética de enteros estándar, así que los resultados aparecen en el instante en que pulsas convertir y ningún valor que introduzcas se envía jamás a un servidor, se registra ni se comparte. Funciona sin conexión una vez cargada la página, lista para cuando surja un problema de conversión de bases en tus estudios, tu trabajo de depuración o tu curiosidad, sin cuenta, sin coste y sin límite de cuántos números conviertes, uno tras otro, durante todo el tiempo que lo necesites.

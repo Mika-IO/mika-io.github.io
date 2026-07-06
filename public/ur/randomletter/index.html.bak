@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Random Letter Generator — pick a random letter of the alphabet</title>
+<meta name="description" content="Free random letter generator. Pick one or many random letters from A to Z, in uppercase, lowercase or mixed case, instantly and fairly in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ur/randomletter/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/randomletter/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/randomletter/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/randomletter/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/randomletter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Letter Generator — pick a random letter of the alphabet">
+<meta property="og:description" content="Free random letter generator. Pick one or many random letters from A to Z, in uppercase, lowercase or mixed case, instantly and fairly in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ur/randomletter/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Random Letter Generator — pick a random letter of the alphabet","url":"https://mikaio.dev/ur/randomletter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free random letter generator. Pick one or many random letters from A to Z, in uppercase, lowercase or mixed case, instantly and fairly in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Random Letter Generator","item":"https://mikaio.dev/ur/randomletter/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is every letter equally likely?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each letter is chosen with your browser's cryptographically secure random generator, so all 26 letters of the alphabet have an equal chance and the results cannot be predicted."}},{"@type":"Question","name":"What can a random letter be used for?","acceptedAnswer":{"@type":"Answer","text":"It is great for word games and warm-ups where you need a starting letter, for brainstorming prompts, for teaching the alphabet, and for choosing categories or teams by letter."}},{"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. The generator runs entirely in your browser, so once the page has loaded no connection is needed."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Random Letter Generator</span></nav>
+  <h1>Random Letter Generator</h1>
+  <p class="lead">Choose how many letters you want and the case, then generate a fair, random pick from A to Z.</p>
+  <section class="widget" id="tool"><form id="rl-form"><div class="row"><div class="field"><label for="rl-count">How many</label><input type="number" id="rl-count" value="1" min="1" step="1"></div><div class="field"><label for="rl-case">Case</label><select id="rl-case"><option value="upper">UPPERCASE</option><option value="lower">lowercase</option><option value="mixed">Mixed</option></select></div></div><button class="btn" type="submit">Pick letters</button><div class="result"><span class="big" id="rl-out">—</span></div></form></section>
+  <article class="content">
+    <h2>ایک ٹیپ میں حروفِ تہجی کا کوئی رینڈم حرف چنیں</h2>
+<p>کبھی کبھار آپ کو ایک حرف کی ضرورت ہوتی ہے، اور شرط یہ ہوتی ہے کہ اسے کسی نے جان بوجھ کر نہ چنا ہو۔ شاید آپ ایسا لفظوں کا کھیل کھیل رہے ہیں جو کسی رینڈم حرف سے شروع ہوتا ہے، کلاس روم کی کوئی سرگرمی چلا رہے ہیں، ہر بار ایک نئے حرف سے آئیڈیاز پر برین اسٹارمنگ کر رہے ہیں، یا کسی پارٹی گیم کے لیے کیٹگریز نکال رہے ہیں۔ یہ رینڈم لیٹر جنریٹر بالکل یہی دیتا ہے: طے کریں کتنے حروف چاہییں اور وہ بڑے (capital)، چھوٹے (lowercase) یا ملے جلے ہوں، پھر بٹن دبائیں تاکہ A سے Z تک سے ایک منصفانہ انتخاب سامنے آئے۔ سب کچھ آپ کے براؤزر میں چلتا ہے، اس لیے نتیجہ فوراً سامنے آتا ہے اور کہیں کچھ بھیجا نہیں جاتا۔</p>
+<p>یہ ٹول جان بوجھ کر سادہ رکھا گیا ہے۔ حروف کی تعداد طے کریں، حالت (case) چنیں، اور جنریٹ کریں۔ ایک اکیلا حرف ان کھیلوں کے لیے بہترین ہے جنہیں صرف ایک نقطۂ آغاز چاہیے، جبکہ بڑا بیچ ایک ساتھ کئی کیٹگریز نکالنے، ایک مختصر رینڈم اسٹرنگ بنانے، یا کسی گروپ کے لیے سوالات تیار کرنے کے کام آتا ہے۔ ہر بار دبانے پر بالکل نیا انتخاب ملتا ہے، تو جب تک آپ کو مطلوبہ چیز نہ مل جائے تب تک دباتے رہیں۔</p>
+<h2>حروف کیسے چنے جاتے ہیں</h2>
+<p>ہر حرف آپ کے براؤزر کے کرپٹوگرافک طور پر محفوظ رینڈم نمبر جنریٹر سے آتا ہے، وہی قابلِ اعتماد ذریعہ جو آن لائن حساس کاموں کو تحفظ دینے کے لیے استعمال ہوتا ہے۔ اس کا مطلب یہ ہے کہ حروفِ تہجی کے چھبیسوں حروف کے سامنے آنے کا امکان بالکل برابر ہوتا ہے، نتائج واقعی غیر متوقع ہوتے ہیں، اور کوئی بھی — خود آپ بھی نہیں — نتیجے کو ذرا بھی اپنی طرف نہیں موڑ سکتا۔ جب آپ ایک ساتھ کئی حروف مانگتے ہیں، تو ہر ایک الگ سے چنا جاتا ہے، اس لیے حروف دہرائے بھی جا سکتے ہیں، بالکل ویسے جیسے کسی تھیلے سے ٹائلیں نکال کر ہر بار واپس رکھ دی جائیں۔</p>
+<p>چونکہ ہر انتخاب آزاد ہوتا ہے، ایک ہی حرف کا لگاتار آنا یا حروفِ تہجی کے کسی ایک سرے کے قریب جمع ہو جانا، تھوڑی تعداد کے نکالنے میں بالکل معمول کی بات ہے۔ ایک بڑا بیچ بنائیں تو حروف پورے حروفِ تہجی میں پھیلے نظر آئیں گے، اور جتنا زیادہ نکالیں گے تقسیم اتنی ہی برابر ہوتی جائے گی۔ نہ کوئی چھپا ہوا پیٹرن ہے اور نہ پچھلے انتخابات کی کوئی یادداشت؛ ہر ٹیپ بالکل نئے سرے سے شروع ہوتا ہے۔</p>
+<h2>رینڈم حرف کہاں مددگار ثابت ہوتا ہے</h2>
+<p>لفظوں کے کھیل اس کا کلاسیکی استعمال ہیں۔ بہت سے مقبول کھیل، خواہ وہ کیٹگری لکھنے والا گیم ہو یا کلاس روم کی چند منٹ کی وارم اپ سرگرمی، رینڈم حرف چن کر شروع ہوتے ہیں جس سے ہر جواب شروع ہونا چاہیے۔ ایک منصفانہ جنریٹر اس بحث کو ختم کر دیتا ہے کہ حرف کس نے چنا اور کھیل کو رواں رکھتا ہے۔ اساتذہ رینڈم حروف کو حروفِ تہجی کی مشق، الفاظ کی مشقوں یا طلبہ کو کوئی کام تفویض کرنے کے لیے استعمال کرتے ہیں، بغیر خود کو دہرائے یا کسی کی طرف داری کیے۔</p>
+<p>کھیلوں اور تعلیم کے علاوہ، رینڈم حروف تخلیقی سوچ اور برین اسٹارمنگ کے لیے بھی مفید ہیں۔ کوئی حرف چن کر خود کو چیلنج دینا کہ اس سے شروع ہونے والے آئیڈیاز، نام یا الفاظ سوچیں، کسی رکاوٹ سے نکلنے کا ایک آسان طریقہ ہے۔ لکھاری کرداروں یا مقامات کے نام رکھنے کے لیے اسے استعمال کرتے ہیں، کوئز ماسٹرز راؤنڈز بنانے کے لیے، اور کوئی بھی جو کوئی سرگرمی منظم کر رہا ہو لوگوں یا موضوعات کو حروف کے ذریعے گروپوں میں تقسیم کرنے کے لیے استعمال کر سکتا ہے۔ چونکہ آپ ایک ساتھ کئی حروف بنا سکتے ہیں، یہ ضرورت پڑنے پر ایک مختصر رینڈم اسٹرنگ کا فوری ذریعہ بھی بن جاتا ہے۔</p>
+<h2>بڑے، چھوٹے یا ملے جلے حروف</h2>
+<p>حالت (case) کا آپشن نتیجے کو آپ کے مقصد کے مطابق ڈھال دیتا ہے۔ بڑے حروف نمایاں اور واضح ہوتے ہیں، جو کھیلوں، فلیش کارڈز اور ہر اس چیز کے لیے موزوں ہیں جسے کمرے کے دوسرے کونے سے ایک نظر میں پڑھنا ہو۔ چھوٹے حروف عام تحریر اور ان حالات کے لیے موزوں ہیں جہاں بڑے حروف بے جوڑ لگیں۔ ملا جلا آپشن ہر حرف کی حالت کو الگ الگ رینڈم طریقے سے بدلتا ہے، جو تب مفید ہے جب آپ کو ایک اسٹرنگ جیسا نتیجہ یا محض تھوڑی زیادہ گونا گونی چاہیے۔ آپ جو بھی چنیں، بنیادی انتخاب چھبیس حروف کے درمیان وہی منصفانہ انتخاب رہتا ہے — صرف اسٹائل بدلتا ہے۔</p>
+<h2>منصفانہ اس طرح جیسے کوئی انسان نہیں ہو سکتا</h2>
+<p>یہ سمجھنا اہم ہے کہ ایسا ٹول کسی سے &quot;بس ایک حرف بتا دو&quot; کہنے سے بہتر کیوں ہے۔ جب لوگ اپنے ذہن میں کوئی حرف رینڈم چننے کی کوشش کرتے ہیں تو وہ حیرت انگیز طور پر پیش گوئی کے قابل ہوتے ہیں۔ کچھ حروف — اکثر حروفِ تہجی کے شروع کے حروف، یا S، T اور M جیسے عام پہلے حروف — ضرورت سے کہیں زیادہ آتے ہیں، جبکہ Q، X اور Z جیسے مشکل حروف تقریباً کبھی نہیں چنے جاتے۔ لوگ لاشعوری طور پر اپنے پچھلے کہے ہوئے حرف کو دہرانے سے بھی گریز کرتے ہیں۔ نتیجہ ایسا انتخاب بنتا ہے جو رینڈم محسوس ہوتا ہے مگر خاموشی سے متعصب ہوتا ہے، جو ایسے کھیل میں فرق ڈال سکتا ہے جہاں کچھ حروف باقیوں سے کہیں زیادہ مشکل ہوں۔</p>
+<p>ایک محفوظ جنریٹر میں یہ کوئی بھی کمزوری موجود نہیں۔ یہ آپ کو Q یا Z اتنی ہی خوشی سے دیتا ہے جتنا A یا E، اور کبھی بھی مسلسل دو بار وہی حرف دینے سے نہیں ہچکچاتا۔ لفظوں کے کھیلوں کے لیے یہ دراصل مزے کا حصہ ہے، کیونکہ کبھی کبھار یہ ایک واقعی مشکل حرف دے دیتا ہے جسے ایک انسانی جج شاید خاموشی سے چھوڑ دیتا۔ اگر آپ خود فرق دیکھنا چاہیں، تو کسی دوست سے کہیں بیس &quot;رینڈم&quot; حروف بولے، پھر یہاں بیس حروف بنائیں — انسانی فہرست تقریباً ہمیشہ چند پسندیدہ حروف پر ٹکی رہے گی، جبکہ بنایا گیا فہرست پورے حروفِ تہجی میں آزادانہ گھومے گا۔</p>
+<h2>نجی، فوری اور مفت</h2>
+<p>نہ کوئی سائن اپ ہے، نہ کوئی قیمت اور نہ راستے میں کوئی اشتہار۔ پورا جنریٹر کوڈ کا ایک چھوٹا سا ٹکڑا ہے جو آپ کے اپنے آلے پر چلتا ہے، یہی وجہ ہے کہ یہ ٹیپ کرتے ہی جواب دیتا ہے اور بغیر انٹرنیٹ کنکشن کے بھی کام کرتا رہتا ہے — کلاس روم یا گیم نائٹ کے لیے مفید جہاں سگنل غیر یقینی ہو۔ آپ کا بنایا ہوا کچھ بھی اپ لوڈ، ریکارڈ یا شیئر نہیں ہوتا؛ حروف صرف آپ کی اسکرین پر موجود ہوتے ہیں اور صفحہ ری لوڈ کرنے پر غائب ہو جاتے ہیں۔</p>
+<p>اسے استعمال کرنے کے لیے، طے کریں کتنے حروف چاہییں، حالت چنیں، اور بٹن دبائیں۔ جتنی بار چاہیں دوبارہ جنریٹ کریں — ہر بار دبانے پر A سے Z تک کا ایک تازہ، غیر جانبدار انتخاب ملتا ہے جس پر آپ ہر بار انصاف کا بھروسا کر سکتے ہیں۔ کسی کھیل، سبق یا تخلیقی تحریک کے لمحے میں تھوڑی منصفانہ بے ترتیبی لانے کا یہ سب سے آسان طریقہ ہے۔</p>
+    <section class="faq"><h2>Random letter FAQ</h2><dl><dt>Is every letter equally likely?</dt><dd>Yes. Each letter is chosen with your browser&#39;s cryptographically secure random generator, so all 26 letters of the alphabet have an equal chance and the results cannot be predicted.</dd><dt>What can a random letter be used for?</dt><dd>It is great for word games and warm-ups where you need a starting letter, for brainstorming prompts, for teaching the alphabet, and for choosing categories or teams by letter.</dd><dt>Does it work offline?</dt><dd>Yes. The generator runs entirely in your browser, so once the page has loaded no connection is needed.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/randomletter/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/randomletter/">Português</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/randomletter/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/randomletter.js" defer></script>
+</body>
+</html>

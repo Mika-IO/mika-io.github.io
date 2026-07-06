@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LCM Calculator — Least Common Multiple of multiple numbers</title>
+<meta name="description" content="Free LCM calculator. Find the Least Common Multiple (LCM) of any set of numbers. Also shows the GCD. Instant results in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ur/lcmcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/lcmcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/lcmcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/lcmcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/lcmcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/lcmcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/lcmcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/lcmcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/lcmcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LCM Calculator — Least Common Multiple of multiple numbers">
+<meta property="og:description" content="Free LCM calculator. Find the Least Common Multiple (LCM) of any set of numbers. Also shows the GCD. Instant results in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ur/lcmcalc/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"LCM Calculator — Least Common Multiple of multiple numbers","url":"https://mikaio.dev/ur/lcmcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free LCM calculator. Find the Least Common Multiple (LCM) of any set of numbers. Also shows the GCD. Instant results in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"LCM Calculator","item":"https://mikaio.dev/ur/lcmcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Least Common Multiple?","acceptedAnswer":{"@type":"Answer","text":"The LCM of a set of numbers is the smallest positive integer that is divisible by all of them. For example, the LCM of 4 and 6 is 12, because 12 is the smallest number divisible by both 4 and 6."}},{"@type":"Question","name":"What is it used for?","acceptedAnswer":{"@type":"Answer","text":"LCM is used when adding fractions with different denominators — find the LCM of the denominators to get the common denominator. It also appears in scheduling problems where events repeat at different intervals."}},{"@type":"Question","name":"What is the difference between LCM and GCD?","acceptedAnswer":{"@type":"Answer","text":"GCD (Greatest Common Divisor) is the largest number that divides all given numbers. LCM is the smallest number divisible by all of them. They are related: LCM(a,b) = a×b / GCD(a,b)."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>LCM Calculator</span></nav>
+  <h1>LCM Calculator</h1>
+  <p class="lead">Enter two or more numbers separated by commas to find their Least Common Multiple.</p>
+  <section class="widget" id="tool"><form id="lcm-form"><div class="field"><label for="lcm-nums">Numbers (comma-separated)</label><input type="text" id="lcm-nums" placeholder="e.g. 12, 18, 24" inputmode="numeric"></div><div class="result"><span class="hint">LCM: </span><span class="big" id="lcm-out">—</span></div><div id="lcm-gcd-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>کم ترین مشترک عدد مضاعف (LCM) کیلکولیٹر</h2>
+<p>کسی بھی مجموعۂ اعداد کا کم ترین مشترک عدد مضاعف، جسے مختصراً LCM کہا جاتا ہے، وہ سب سے چھوٹا مثبت عدد ہے جو دیے گئے تمام اعداد پر بغیر کسی باقی کے پوری طرح تقسیم ہو جائے۔ اردو میں اسے بعض اوقات &quot;کمترین مشترک مضاعف&quot; بھی کہا جاتا ہے۔ کوما لگا کر دو یا اس سے زیادہ اعداد درج کریں اور نتیجہ فوراً سامنے آ جائے گا، ساتھ ہی بونس کے طور پر بڑا مشترک قاسم (GCD) بھی دکھایا جائے گا جس کی مدد سے یہ حساب لگایا گیا۔</p>
+<h2>تعریف اور چند مثالیں</h2>
+<p>کسی سیٹ کا LCM دراصل وہ سب سے چھوٹا عدد ہوتا ہے جس میں سیٹ کا ہر ایک نمبر بغیر باقی کے پوری طرح سما جائے۔ مثلاً 4 اور 6 کا LCM بارہ ہے، کیونکہ 12 کو 4 سے تقسیم کریں تو جواب 3 آتا ہے اور 6 سے تقسیم کریں تو 2، اور اس سے چھوٹا کوئی عدد دونوں پر پورا نہیں اترتا۔ 3 اور 5 کا LCM پندرہ ہے، اس لیے کہ یہ دونوں ہم عدد (coprime) ہیں یعنی ان میں کوئی مشترک عامل نہیں، لہٰذا ان کا LCM محض ان کا حاصل ضرب ہی بن جاتا ہے۔ تین اعداد 12، 18 اور 24 کا LCM 72 نکلتا ہے — یعنی وہ سب سے چھوٹا عدد جو تینوں پر برابر تقسیم ہو جائے۔</p>
+<h2>LCM نکالنے کا طریقہ کار</h2>
+<p>سب سے کارآمد طریقہ LCM اور GCD کے آپس کے رشتے پر مبنی ہے: LCM(a, b) برابر ہے |a × b| تقسیم بر GCD(a, b) کے۔ دو سے زیادہ اعداد ہوں تو یہ حساب جوڑوں میں کیا جاتا ہے، یعنی پہلے دو اعداد کا LCM نکالیں، پھر اس نتیجے اور تیسرے عدد کا LCM نکالیں، اور یوں سلسلہ آگے بڑھتا رہتا ہے۔ GCD نکالنے کے لیے اقلیدسی الگورتھم (Euclidean algorithm) استعمال ہوتا ہے، جس میں بڑے عدد کو چھوٹے عدد پر تقسیم کیا جاتا ہے اور باقی بچ جانے والے حصے کو دوبارہ تقسیم کے عمل میں لایا جاتا ہے، یہاں تک کہ باقی صفر رہ جائے۔ آخری غیر صفر باقی ہی دراصل GCD ہوتا ہے۔</p>
+<h2>مختلف اعشاریے (denominators) والے کسور جمع کرنا</h2>
+<p>روزمرہ زندگی میں LCM کا سب سے عام استعمال کسور (fractions) کی جمع میں ہوتا ہے۔ فرض کریں آپ کو 1/4 اور 1/6 جمع کرنے ہیں تو دونوں کا ایک مشترک اعشاریہ درکار ہوگا۔ چار اور چھ کا LCM بارہ ہے، اس لیے 1/4 دراصل 3/12 اور 1/6 دراصل 2/12 بن جاتا ہے، جن کا مجموعہ 5/12 نکلتا ہے۔ LCM استعمال کرنے سے جواب پہلے ہی سے سب سے سادہ شکل میں مل جاتا ہے، جبکہ کوئی اور مشترک مضاعف (مثلاً 24) استعمال کریں تو جواب کو بعد میں مزید سادہ کرنا پڑتا ہے۔</p>
+<h2>شیڈول اور دہرائے جانے والے چکر</h2>
+<p>LCM اکثر ایسے مسائل میں نظر آتا ہے جہاں مختلف وقفوں پر چیزیں دہرائی جاتی ہیں۔ فرض کریں بس A ہر 12 منٹ بعد چلتی ہے اور بس B ہر 18 منٹ بعد، اور دونوں صبح آٹھ بجے ایک ساتھ روانہ ہوتی ہیں — تو وہ دوبارہ ایک ساتھ کب روانہ ہوں گی؟ 12 اور 18 کا LCM چھتیس ہے، لہٰذا اگلی بار دونوں 8:36 پر ایک ساتھ روانہ ہوں گی۔ اسی طرح مشینوں کے پرزوں (گیئرز) میں دانتوں کی تعداد ایسی ہوتی ہے کہ LCM ہی بتاتا ہے وہی دانت دوبارہ کب ملیں گے، اور مختلف رفتار سے چلنے والی مشینوں والی پیداواری لائنیں بھی ہم آہنگی کا نقطہ ڈھونڈنے کے لیے LCM ہی استعمال کرتی ہیں۔</p>
+<h2>فضلے کے بغیر خریداری</h2>
+<p>LCM ایک بالکل عملی خریداری کے مسئلے کو بھی حل کرتا ہے: اگر ساسیج دس دس کے پیک میں آتے ہوں اور بَن آٹھ آٹھ کے پیک میں، تو کتنے پیک خریدنے چاہئیں کہ نہ ساسیج بچے نہ بَن؟ جواب وہی سب سے چھوٹا عدد ہے جس پر دس اور آٹھ دونوں پوری طرح تقسیم ہو جائیں، یعنی LCM(10, 8) = 40 — یعنی چار پیک ساسیج اور پانچ پیک بَن خریدنے پڑیں گے۔ یہی صورتحال، اور اس کی گنتی سے باہر تبدیلیاں، ہر اس وقت سامنے آتی ہیں جب آپ مختلف مقدار کے پیکٹوں میں بکنے والی دو چیزوں کو برابر کرنا چاہتے ہوں۔</p>
+<h2>موسیقی کا نظریہ</h2>
+<p>موسیقی میں LCM یہ طے کرتا ہے کہ تال کے پیٹرن کب دہرائے جائیں گے۔ اگر ایک دھن تین دھڑکنوں پر چل رہی ہو اور دوسری چار پر، تو دونوں کی مضبوط دھڑکنیں دوبارہ ملنے میں LCM(3, 4) یعنی بارہ دھڑکنیں لگیں گی — یہی پولی رِدھمک (polyrhythmic) موسیقی کی بنیاد ہے۔</p>
+<h2>کیلکولیٹر استعمال کرنے کا طریقہ</h2>
+<p>کوما سے الگ کیے گئے دو یا زیادہ اعداد درج کریں اور LCM فوراً ظاہر ہو جائے گا، ساتھ ہی وہ GCD بھی جس سے یہ حساب لگایا گیا۔ نہ کچھ جمع کروانا ہے، نہ اعداد کی تعداد کی کوئی حد ہے — کیلکولیٹر پردے کے پیچھے پورے سیٹ کو جوڑوں میں تقسیم کر کے حل کرتا ہے، اس لیے پانچ چھ اعداد کی فہرست بھی اتنی ہی آسانی سے سنبھالی جاتی ہے جتنی دو اعداد کی۔ کسی بھی عدد کو بدلتے ہی نتیجہ فوراً اپ ڈیٹ ہو جاتا ہے، جس سے یہ دیکھنا آسان ہو جاتا ہے کہ سیٹ میں ایک اور عدد شامل کرنے سے LCM کیسے بدلتا ہے۔</p>
+<h2>LCM اور GCD ایک ہی سکے کے دو رخ کیوں ہیں</h2>
+<p>کم ترین مشترک عدد مضاعف اور بڑا مشترک قاسم دراصل دو اعداد کے آپس کے تعلق کے دو مخالف سرے بیان کرتے ہیں، اور خوبصورت مساوات LCM(a, b) × GCD(a, b) = a × b انہیں براہ راست جوڑ دیتی ہے۔ آسان الفاظ میں، GCD وہ سب کچھ نکال دیتا ہے جو دو اعداد میں مشترک ہے، جبکہ LCM وہ سب سے چھوٹا عدد ہوتا ہے جو دونوں اعداد کی ضرورت پوری کرنے کے لیے کافی بڑا ہو۔ چونکہ اقلیدسی الگورتھم سے GCD نکالنا بڑے اعداد کے لیے بھی نہایت تیز رفتار ہے، اور GCD معلوم ہونے کے بعد LCM کے فارمولے کو صرف ایک اضافی ضرب اور ایک تقسیم درکار ہوتی ہے، اس لیے یہ بالواسطہ راستہ براہ راست مضاعفوں کو تلاش کرنے سے کہیں زیادہ تیز ہے، خاص طور پر جب اعداد بڑے ہوتے جائیں۔</p>
+<h2>قدم بہ قدم ایک حل شدہ مثال</h2>
+<p>LCM(21, 6) لیجیے۔ پہلے GCD نکالیں: 21 = 3×6 + 3، پھر 6 = 2×3 + 0، لہٰذا GCD(21, 6) = 3۔ اب فارمولا لگائیں: LCM(21, 6) = (21 × 6) ÷ 3 = 126 ÷ 3 = 42۔ اسے براہ راست جانچا بھی جا سکتا ہے — 42 ÷ 21 = 2 اور 42 ÷ 6 = 7، دونوں مکمل اعداد ہیں، اور اس سے چھوٹا کوئی مثبت عدد اکیس اور چھ دونوں پر پورا نہیں اترتا۔ یہی دو قدمی عمل — پہلے GCD، پھر ایک ضرب اور ایک تقسیم — بالکل وہی ہے جو کیلکولیٹر آپ کے سامنے آنے والے نتائج کے پیچھے آناً فاناً انجام دیتا ہے۔</p>
+<h2>کسور اور شیڈول سے ہٹ کر روزمرہ صورتحال</h2>
+<p>LCM ایسی صورتحال میں بھی خاموشی سے نمودار ہوتا ہے جنہیں لوگ عام طور پر ریاضی کا مسئلہ نہیں سمجھتے۔ کسی ترکیب کو اس طرح بڑھانا کہ دو اجزا، جو مختلف پیک سائز میں آتے ہوں، پوری تعداد میں استعمال ہو جائیں؛ مختلف تعداد والے ڈبوں سے یکساں تحفے کے تھیلے بنانا؛ یا یہ معلوم کرنا کہ دو مختلف دورانیے والے راؤنڈز پر مبنی کوئی کھیل دوبارہ کب شروع سے ملے گا — یہ سب دراصل بھیس بدلے ہوئے LCM کے مسئلے ہیں۔ جب بھی آپ کو ایسی سب سے چھوٹی مقدار، وقت یا گنتی چاہیے جو دو یا زیادہ دہرائی جانے والی شرطوں کو بیک وقت پورا کرے، سمجھ لیجیے آپ دراصل LCM ہی ڈھونڈ رہے ہیں۔</p>
+<h2>نجی اور فوری</h2>
+<p>تمام حساب کتاب اقلیدسی الگورتھم کے ذریعے مکمل طور پر آپ کے براؤزر کے اندر ہوتا ہے، اس لیے آپ جو کچھ بھی درج کریں وہ کبھی اپ لوڈ، محفوظ یا شیئر نہیں ہوتا۔ نتیجہ ٹائپ کرتے ہی سامنے آ جاتا ہے، صفحہ ایک بار لوڈ ہونے کے بعد یہ آف لائن بھی کام کرتا رہتا ہے، اور ٹیب بند یا ری لوڈ کرتے ہی ہر عدد ہمیشہ کے لیے مٹ جاتا ہے۔</p>
+    <section class="faq"><h2>LCM calculator FAQ</h2><dl><dt>What is the Least Common Multiple?</dt><dd>The LCM of a set of numbers is the smallest positive integer that is divisible by all of them. For example, the LCM of 4 and 6 is 12, because 12 is the smallest number divisible by both 4 and 6.</dd><dt>What is it used for?</dt><dd>LCM is used when adding fractions with different denominators — find the LCM of the denominators to get the common denominator. It also appears in scheduling problems where events repeat at different intervals.</dd><dt>What is the difference between LCM and GCD?</dt><dd>GCD (Greatest Common Divisor) is the largest number that divides all given numbers. LCM is the smallest number divisible by all of them. They are related: LCM(a,b) = a×b / GCD(a,b).</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/lcmcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/lcmcalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/lcmcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/lcmcalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/lcmcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/lcmcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/lcmcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/lcmcalc.js" defer></script>
+</body>
+</html>

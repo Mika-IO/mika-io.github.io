@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prime Number Checker — is this number prime?</title>
+<meta name="description" content="Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization.">
+<link rel="canonical" href="https://mikaio.dev/zh/primechecker/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/primechecker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/primechecker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/primechecker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/primechecker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/primechecker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prime Number Checker — is this number prime?">
+<meta property="og:description" content="Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization.">
+<meta property="og:url" content="https://mikaio.dev/zh/primechecker/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Prime Number Checker — is this number prime?","url":"https://mikaio.dev/zh/primechecker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Prime Number Checker","item":"https://mikaio.dev/zh/primechecker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a prime number?","acceptedAnswer":{"@type":"Answer","text":"A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by modern convention."}},{"@type":"Question","name":"What is prime factorization?","acceptedAnswer":{"@type":"Answer","text":"Every integer greater than 1 can be expressed as a product of prime numbers in exactly one way (the Fundamental Theorem of Arithmetic). For example, 60 = 2 × 2 × 3 × 5."}},{"@type":"Question","name":"How large a number can I check?","acceptedAnswer":{"@type":"Answer","text":"The tool works efficiently for numbers up to about 10 million using trial division. Very large numbers may take a moment to process."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/zh/primechecker/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/primechecker/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/primechecker/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/primechecker/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/primechecker/">
+  <!-- SEO injected -->
+<meta property="og:title" content="这个数字是质数吗" />
+<meta property="og:description" content="质数是数学里最基础的概念之一——一个大于1的正整数,除了1和它本身之外,不能被任何其他数字整除。判断一个给定的数字是不是质数,是一个让数学家们着迷了几千年的问题,而且在现代密码学里依然具有实际意义。这个工具能对你输入的任意数字瞬间给出答案,同时展示完整的因数列表和质因数分解。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/zh/primechecker/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"这个数字是质数吗","description":"质数是数学里最基础的概念之一——一个大于1的正整数,除了1和它本身之外,不能被任何其他数字整除。判断一个给定的数字是不是质数,是一个让数学家们着迷了几千年的问题,而且在现代密码学里依然具有实际意义。这个工具能对你输入的任意数字瞬间给出答案,同时展示完整的因数列表和质因数分解。","url":"https://example.com/zh/primechecker/","inLanguage":"zh"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Prime Number Checker</span></nav>
+  <h1>Prime Number Checker</h1>
+  <p class="lead">Enter a positive integer to check if it is prime and see its divisors and prime factorization.</p>
+  <section class="widget" id="tool"><form id="prime-form"><div class="row"><div class="field"><label for="prime-n">Number</label><input type="number" id="prime-n" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="big" id="prime-out">—</span></div><div id="prime-factors" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>这个数字是质数吗</h2>
+<p>质数是数学里最基础的概念之一——一个大于1的正整数,除了1和它本身之外,不能被任何其他数字整除。判断一个给定的数字是不是质数,是一个让数学家们着迷了几千年的问题,而且在现代密码学里依然具有实际意义。这个工具能对你输入的任意数字瞬间给出答案,同时展示完整的因数列表和质因数分解。</p>
+<h2>什么样的数字是质数</h2>
+<p>定义很简单:一个正整数如果只能被1和它本身整除,它就是质数。7是质数,因为它只能被1和7整除;8不是质数,因为它还能被2和4整除。1是个特殊情况:按照现代数学的约定,1不算质数,因为把它算进去会破坏质因数分解的唯一性。</p>
+<p>最开始的几个质数是2、3、5、7、11、13、17、19、23、29、31、37、41、43、47。注意2是唯一的偶数质数,因为其他所有偶数都能被2整除。</p>
+<h2>更大规模的质数检测</h2>
+<p>这个工具使用的试除法,对几百万以内的数字效果很好,但面对真正巨大的、动辄几百位数字的现实密码学应用,试除法就变得不切实际了。对这些场合,数学家和计算机科学家会使用概率性的质数检测方法,比如米勒-拉宾检测法,它没法百分之百保证一个数字一定是质数,但能以一个小到在实践中可以忽略不计的错误概率排除合数——事实上,这个错误概率比同一次计算过程中发生硬件故障的概率还要小。先理解试除法,是欣赏这些更快的概率性方法为什么会被需要的正确起点。</p>
+<h2>质因数分解</h2>
+<p>算术基本定理指出:任何大于1的整数,都能唯一地(不考虑因子顺序)表示成若干个质数的乘积,这就叫质因数分解。举例来说:12 = 2 × 2 × 3,写作2² × 3;360 = 2³ × 3² × 5。求一个数字的质因数分解,意味着把它拆解成质数的组成部分,这能揭示出它的数学结构。</p>
+<h2>质数为什么重要</h2>
+<p>质数是所有整数的构成基石——每一个合数(非质数)都能由若干质数相乘构造出来。这让质数成为数论——研究整数性质的数学分支——的核心。</p>
+<p>在现代计算机领域,把大数分解成质因数的困难程度,正是RSA加密的基础,而RSA加密保护着互联网上大部分的加密通信。两个大质数相乘生成一个公钥,而在事先不知道这两个质数的情况下,把这个乘积反过来分解回它们的质因数,对于足够大的数字来说,在计算上是不可行的。</p>
+<h2>检测原理</h2>
+<p>这个工具使用试除法:测试这个数字能否被从2到它平方根之间的任意整数整除。如果存在这样的因数,这个数字就是合数,工具会记录下它的因数;如果不存在,这个数字就是质数。以平方根为界是合理的,因为如果一个数n有一个大于√n的因数,它必然也有一个对应的小于√n的因数,所以只需要检查到平方根为止就够了。</p>
+<h2>一个快速实例</h2>
+<p>以91为例。它是奇数,不能被3整除(9+1=10,不是3的倍数),也不以0或5结尾,所以这些简单明显的检验都暗示它可能是质数——但检查能否被7整除会发现91 ÷ 7恰好等于13,所以91实际上是合数,质因数分解是7 × 13。这是一个经典的例子,说明&quot;看起来不能被任何明显的数整除&quot;并不等于&quot;它就是质数&quot;:唯一可靠的确认方式,就是检查到平方根为止的每一个候选因数,而这正是这个工具自动、瞬间完成的工作。</p>
+<h2>日常用途</h2>
+<p>尽管质数在密码学和数论里有深远的数学意义,但在日常生活中,它也常出现在谜题、教学练习和编程挑战里。学习整除性、因数和倍数的学生,经常需要检验质数并求出因数分解,作为算术练习的一部分。</p>
+<h2>使用方法</h2>
+<p>在框里输入任意正整数,结果会立刻显示出来:这个数字是不是质数,如果不是,还会给出它完整的因数列表,以及分解成一个个质数幂次的质因数分解。对日常使用来说,能检验的数字大小基本没有实际限制,因为这个工具使用的试除法,对几百万甚至更大的数字都能几乎瞬间处理完。</p>
+<h2>质数是无穷无尽的</h2>
+<p>欧几里得在两千多年前就证明了:不存在最大的质数——这份列表会永远延续下去。他的证明是一段优美的古老逻辑:假设只存在有限多个质数,把它们全部乘在一起,再加1。这个新数字不可能被原列表中的任何质数整除,因为除以其中任何一个都必然余1,所以这个新数字要么本身就是质数,要么它有某个不在这份&quot;完整&quot;列表里的质因数——不管是哪种情况,都和&quot;列表是完整的&quot;这个假设相矛盾。这个不需要任何高深数学知识的优雅论证,至今仍是数学史上最负盛名的证明之一。</p>
+<h2>私密且即时</h2>
+<p>计算完全在你的浏览器中完成,输入即刻出结果,你输入的任何数字都不会被发送到任何服务器、记录或分享。</p>
+    <section class="faq"><h2>Prime checker FAQ</h2><dl><dt>What is a prime number?</dt><dd>A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by modern convention.</dd><dt>What is prime factorization?</dt><dd>Every integer greater than 1 can be expressed as a product of prime numbers in exactly one way (the Fundamental Theorem of Arithmetic). For example, 60 = 2 × 2 × 3 × 5.</dd><dt>How large a number can I check?</dt><dd>The tool works efficiently for numbers up to about 10 million using trial division. Very large numbers may take a moment to process.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/primechecker/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/primechecker/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/primechecker.js" defer></script>
+</body>
+</html>

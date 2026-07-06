@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LCM Calculator — Least Common Multiple of multiple numbers</title>
+<meta name="description" content="Free LCM calculator. Find the Least Common Multiple (LCM) of any set of numbers. Also shows the GCD. Instant results in your browser.">
+<link rel="canonical" href="https://mikaio.dev/es/lcmcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/lcmcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/lcmcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/lcmcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/lcmcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/lcmcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/lcmcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/lcmcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/lcmcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LCM Calculator — Least Common Multiple of multiple numbers">
+<meta property="og:description" content="Free LCM calculator. Find the Least Common Multiple (LCM) of any set of numbers. Also shows the GCD. Instant results in your browser.">
+<meta property="og:url" content="https://mikaio.dev/es/lcmcalc/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"LCM Calculator — Least Common Multiple of multiple numbers","url":"https://mikaio.dev/es/lcmcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Free LCM calculator. Find the Least Common Multiple (LCM) of any set of numbers. Also shows the GCD. Instant results in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"LCM Calculator","item":"https://mikaio.dev/es/lcmcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Least Common Multiple?","acceptedAnswer":{"@type":"Answer","text":"The LCM of a set of numbers is the smallest positive integer that is divisible by all of them. For example, the LCM of 4 and 6 is 12, because 12 is the smallest number divisible by both 4 and 6."}},{"@type":"Question","name":"What is it used for?","acceptedAnswer":{"@type":"Answer","text":"LCM is used when adding fractions with different denominators — find the LCM of the denominators to get the common denominator. It also appears in scheduling problems where events repeat at different intervals."}},{"@type":"Question","name":"What is the difference between LCM and GCD?","acceptedAnswer":{"@type":"Answer","text":"GCD (Greatest Common Divisor) is the largest number that divides all given numbers. LCM is the smallest number divisible by all of them. They are related: LCM(a,b) = a×b / GCD(a,b)."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/es/lcmcalc/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/lcmcalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/lcmcalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/lcmcalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/lcmcalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/lcmcalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/lcmcalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/lcmcalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Encuentra el Mínimo Común Múltiplo de cualquier conjunto de números" />
+<meta property="og:description" content="Encuentra el Mínimo Común Múltiplo de cualquier conjunto de números" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/es/lcmcalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Encuentra el Mínimo Común Múltiplo de cualquier conjunto de números","description":"Encuentra el Mínimo Común Múltiplo de cualquier conjunto de números","url":"https://example.com/es/lcmcalc/","inLanguage":"es"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>LCM Calculator</span></nav>
+  <h1>LCM Calculator</h1>
+  <p class="lead">Enter two or more numbers separated by commas to find their Least Common Multiple.</p>
+  <section class="widget" id="tool"><form id="lcm-form"><div class="field"><label for="lcm-nums">Numbers (comma-separated)</label><input type="text" id="lcm-nums" placeholder="e.g. 12, 18, 24" inputmode="numeric"></div><div class="result"><span class="hint">LCM: </span><span class="big" id="lcm-out">—</span></div><div id="lcm-gcd-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Encuentra el Mínimo Común Múltiplo de cualquier conjunto de números</h2>
+<p>El Mínimo Común Múltiplo (m.c.m.) es el menor número entero positivo que es divisible exactamente por todos los números de un conjunto dado. Introduce dos o más números separados por comas y el m.c.m. aparece al instante, junto con el Máximo Común Divisor (MCD) como propina.</p>
+<h2>Definición y ejemplos</h2>
+<p>El m.c.m. de un conjunto de números es el número más pequeño en el que todos ellos dividen sin dejar resto.</p>
+<ul>
+<li>m.c.m.(4, 6) = 12 — porque 12 ÷ 4 = 3 y 12 ÷ 6 = 2, y ningún número menor funciona para los dos.</li>
+<li>m.c.m.(3, 5) = 15 — porque 3 y 5 son coprimos (no comparten factores comunes), su m.c.m. es simplemente su producto.</li>
+<li>m.c.m.(12, 18, 24) = 72 — el número más pequeño divisible por los tres.</li>
+</ul>
+<h2>Cómo se calcula el m.c.m.</h2>
+<p>El método más eficiente usa la relación entre el m.c.m. y el MCD: m.c.m.(a, b) = |a × b| / MCD(a, b). Para más de dos números, el m.c.m. se calcula por parejas: m.c.m.(a, b, c) = m.c.m.(m.c.m.(a, b), c).</p>
+<p>El MCD se calcula usando el algoritmo de Euclides, que divide repetidamente el número mayor entre el menor y toma el resto hasta que el resto es cero. El último resto distinto de cero es el MCD.</p>
+<h2>Sumar fracciones con distinto denominador</h2>
+<p>La aplicación cotidiana más común del m.c.m. está en la aritmética de fracciones. Para sumar 1/4 y 1/6, necesitas un denominador común. El m.c.m. de 4 y 6 es 12, así que: 1/4 = 3/12 y 1/6 = 2/12, dando 5/12. Usar el m.c.m. da directamente la forma más reducida, mientras que usar cualquier otro múltiplo común (como 24) da un resultado que todavía necesita simplificarse.</p>
+<h2>Horarios y ciclos</h2>
+<p>El m.c.m. aparece en problemas de programación de horarios en los que eventos se repiten a intervalos distintos. Si el autobús A pasa cada 12 minutos y el autobús B cada 18 minutos, y ambos salen a las 8:00, ¿cuándo volverán a salir juntos? m.c.m.(12, 18) = 36, así que vuelven a coincidir a las 8:36.</p>
+<p>De forma parecida, los engranajes de los sistemas mecánicos tienen números de dientes cuyo m.c.m. determina cuándo se vuelven a encontrar los mismos dientes. Las líneas de producción con máquinas que funcionan con tiempos de ciclo distintos usan el m.c.m. para encontrar puntos de sincronización.</p>
+<h2>Abastecerse sin desperdicio</h2>
+<p>El m.c.m. también resuelve un problema de compras muy concreto: si las salchichas vienen en paquetes de 10 y los panes en paquetes de 8, ¿cuántos paquetes de cada uno necesitas comprar para acabar con exactamente el mismo número de salchichas y de panes, sin que sobre ninguno? La respuesta es el número más pequeño en el que dividen exactamente tanto el 10 como el 8, que es m.c.m.(10, 8) = 40 — así que comprarías 4 paquetes de salchichas y 5 paquetes de panes. Este mismo escenario, y sus incontables variaciones con cualquier par de paquetes de tamaños distintos, aparece siempre que intentas emparejar dos cosas que se venden en cantidades diferentes.</p>
+<h2>Teoría musical</h2>
+<p>En música, el m.c.m. determina cuándo se repiten los patrones rítmicos. Un patrón de 3 tiempos tocado contra un patrón de 4 tiempos crea un ciclo de m.c.m.(3, 4) = 12 tiempos antes de que los tiempos fuertes vuelvan a coincidir. Esta es la base de la música polirrítmica.</p>
+<h2>Cómo usar la calculadora</h2>
+<p>Introduce dos o más números separados por comas y el m.c.m. aparece al instante, junto con el MCD usado para calcularlo. No hay nada que enviar ni límite alguno de cuántos números puedes listar — la calculadora reduce todo el conjunto por parejas por debajo, así que una lista de cinco o seis números se gestiona con la misma facilidad que un par. Cambiar cualquier número actualiza el resultado de inmediato, lo que facilita explorar cómo cambia el m.c.m. al añadir un número más a un conjunto.</p>
+<h2>Por qué el m.c.m. y el MCD son dos caras de la misma moneda</h2>
+<p>El Mínimo Común Múltiplo y el Máximo Común Divisor describen los extremos opuestos de una misma relación entre dos números, y la elegante identidad m.c.m.(a, b) × MCD(a, b) = a × b los conecta directamente. De forma intuitiva, el MCD extrae todo lo que dos números tienen en común, mientras que el m.c.m. es el número más pequeño lo bastante grande para contener todo lo que ambos números necesitan. Como calcular un MCD mediante el algoritmo de Euclides es rápido incluso para números grandes, y la fórmula del m.c.m. solo necesita una multiplicación y una división adicionales una vez conocido el MCD, esta ruta indirecta es mucho más rápida que buscar múltiplos directamente, sobre todo a medida que los números crecen.</p>
+<h2>Un ejemplo resuelto paso a paso</h2>
+<p>Toma m.c.m.(21, 6). Primero halla el MCD: 21 = 3×6 + 3, luego 6 = 2×3 + 0, así que MCD(21, 6) = 3. Después aplica la fórmula: m.c.m.(21, 6) = (21 × 6) / 3 = 126 / 3 = 42. Puedes comprobarlo directamente — 42 ÷ 21 = 2 y 42 ÷ 6 = 7, ambos números enteros, y ningún número positivo menor divide exactamente tanto a 21 como a 6. Este proceso de dos pasos, primero el MCD y luego una única multiplicación y división, es exactamente lo que la calculadora realiza al instante detrás de los resultados que ves.</p>
+<h2>Situaciones cotidianas más allá de fracciones y horarios</h2>
+<p>El m.c.m. aparece discretamente en situaciones que la gente no siempre etiqueta como un problema matemático. Escalar una receta que necesita cantidades enteras de dos ingredientes vendidos en tamaños de paquete distintos, preparar bolsitas de regalo idénticas con artículos que vienen en cajas de cantidades diferentes, o calcular cuántas rondas de un juego con dos duraciones distintas vuelven a coincidir al principio — todo esto son problemas de m.c.m. disfrazados. Siempre que necesites la cantidad, el tiempo o el recuento más pequeño que satisfaga dos o más requisitos que se repiten a la vez, el m.c.m. es el número que buscas.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todos los cálculos se ejecutan enteramente en tu navegador usando el algoritmo de Euclides, así que nada de lo que introduzcas se sube, se registra ni se comparte jamás. El resultado aparece en el instante en que escribes, funciona sin conexión una vez cargada la página, y cada número desaparece en cuanto cierras o recargas la pestaña.</p>
+    <section class="faq"><h2>LCM calculator FAQ</h2><dl><dt>What is the Least Common Multiple?</dt><dd>The LCM of a set of numbers is the smallest positive integer that is divisible by all of them. For example, the LCM of 4 and 6 is 12, because 12 is the smallest number divisible by both 4 and 6.</dd><dt>What is it used for?</dt><dd>LCM is used when adding fractions with different denominators — find the LCM of the denominators to get the common denominator. It also appears in scheduling problems where events repeat at different intervals.</dd><dt>What is the difference between LCM and GCD?</dt><dd>GCD (Greatest Common Divisor) is the largest number that divides all given numbers. LCM is the smallest number divisible by all of them. They are related: LCM(a,b) = a×b / GCD(a,b).</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/lcmcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/lcmcalc/">中文</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/lcmcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/lcmcalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/lcmcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/lcmcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/lcmcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/lcmcalc.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coin Flip — flip a virtual coin online (heads or tails)</title>
+<meta name="description" content="Free online coin flip. Tap to flip a fair virtual coin and get heads or tails instantly, with a running tally. Works in your browser, no app needed.">
+<link rel="canonical" href="https://mikaio.dev/en/cointoss/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/cointoss/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/cointoss/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/cointoss/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/cointoss/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/cointoss/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/cointoss/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/cointoss/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/cointoss/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coin Flip — flip a virtual coin online (heads or tails)">
+<meta property="og:description" content="Free online coin flip. Tap to flip a fair virtual coin and get heads or tails instantly, with a running tally. Works in your browser, no app needed.">
+<meta property="og:url" content="https://mikaio.dev/en/cointoss/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Coin Flip — flip a virtual coin online (heads or tails)","url":"https://mikaio.dev/en/cointoss/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free online coin flip. Tap to flip a fair virtual coin and get heads or tails instantly, with a running tally. Works in your browser, no app needed."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Coin Flip","item":"https://mikaio.dev/en/cointoss/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the coin flip really fair?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each flip uses your browser's cryptographically secure random generator, giving heads and tails an equal 50% chance every single time, with no memory of previous flips."}},{"@type":"Question","name":"Why use an online coin instead of a real one?","acceptedAnswer":{"@type":"Answer","text":"A virtual coin is always in your pocket, cannot land on its edge or roll away, and keeps an automatic tally, which is handy for settling decisions or running many flips quickly."}},{"@type":"Question","name":"Does it need the internet?","acceptedAnswer":{"@type":"Answer","text":"No. Once the page has loaded it runs entirely in your browser, so you can keep flipping even with no connection."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Coin Flip</span></nav>
+  <h1>Coin Flip</h1>
+  <p class="lead">Tap the button to flip a fair virtual coin. Heads or tails is decided by your device&#39;s secure random generator, and a tally keeps score.</p>
+  <section class="widget" id="tool"><div id="coin" data-heads="Heads" data-tails="Tails" data-flipping="Flipping…"><div class="coin-face" id="coin-face" aria-hidden="true">🪙</div><div class="result"><span class="big" id="coin-result">Ready</span></div><div class="row" style="justify-content:center"><button type="button" class="btn" id="coin-flip">Flip the coin</button></div><div class="coin-tally"><span>Heads<b id="coin-h">0</b></span><span>Tails<b id="coin-t">0</b></span></div></div></section>
+  <article class="content">
+    <h2>Flip a coin without ever reaching into your pocket</h2>
+<p>Tossing a coin is the oldest fair way to make a two-way decision. For thousands of years people have trusted a spinning piece of metal to settle a choice precisely because nobody can control how it lands. This online coin flip brings that same simple fairness to your screen. Tap the button, watch the coin spin, and it comes up heads or tails with an equal chance each time. There is nothing to install, no coin to find down the back of the sofa, and a running tally keeps score so you can see how a long series of flips turns out.</p>
+<p>The tool is deliberately simple. One button flips the coin, the result appears in large letters, and two counters below track how many heads and how many tails you have had so far. You can flip once to settle a quick argument, or keep tapping to run dozens of flips in a row, which is a surprisingly good way to see probability in action.</p>
+<h2>How the result is decided</h2>
+<p>Every flip is generated by your browser&#39;s built-in cryptographically secure random number generator, the same kind of randomness used to protect sensitive operations online. That means each toss is genuinely unpredictable and completely independent of the ones before it. Heads and tails each have an exact fifty per cent chance, every single time, with no bias and no memory. Unlike a real coin, which can be very slightly weighted by its design or influenced by how it is thrown, the virtual coin is as close to perfectly fair as you can get.</p>
+<p>Because the coin has no memory, a streak of several heads in a row does not make tails &quot;due&quot; on the next flip. This is one of the most common misunderstandings about chance. The coin does not know or care what happened a moment ago; the odds reset to fifty-fifty on every toss. The tally below the coin makes this easy to explore for yourself: over a handful of flips the split can look lopsided, but as the number of flips grows, the share of heads and tails tends to drift closer and closer to even.</p>
+<h2>When a coin flip is exactly what you need</h2>
+<p>A coin toss shines whenever a decision is genuinely balanced and you just need a fair, quick way to break the tie. Choosing who goes first in a game, deciding which of two restaurants to visit, splitting a chore, or picking a side in a friendly bet are all classic uses. Sports have relied on the toss for generations to decide kick-off or ends, and the appeal is the same: both people accept the outcome because neither could influence it.</p>
+<p>A virtual coin has a few advantages over the real thing. It is always with you on your phone or computer, it can never land on its edge or roll under the fridge, and it removes any suspicion that someone caught it and flipped it over. The automatic tally is genuinely useful too. If you need a best-of-three or best-of-five, the counters do the bookkeeping for you, and if you are using flips to make a random selection, you can run as many as you like without losing count.</p>
+<h2>A friendly way to understand probability</h2>
+<p>Beyond settling decisions, a coin flip is one of the best hands-on introductions to how chance works. Teachers and parents use it to show that a fifty-fifty event does not produce a tidy, alternating pattern in the short run. Flip ten times and you might get seven heads; that is completely normal and does not mean the coin is broken. Keep going to a hundred or a thousand flips, though, and the proportion settles down near half. Watching the two counters climb is a memorable illustration of what statisticians call the law of large numbers, without a single equation.</p>
+<p>You can also use the coin to make choices among more than two options by assigning meanings to sequences. Two flips give four equally likely outcomes, three flips give eight, and so on, which is enough to fairly pick from a small list. It is a neat reminder that a humble two-sided coin can, with a little cleverness, stand in for a many-sided die.</p>
+<p>The tally is also a gentle lesson in patience. Early on, one side can leap ahead and stay there for a while, which feels as if the coin is favouring it. Give it enough flips, though, and that early lead is quietly swallowed up as both counts grow. Nothing corrects the imbalance on purpose; it simply matters less and less as the total rises. Seeing that happen with your own taps is far more convincing than being told the odds are even.</p>
+<h2>Private, instant and always free</h2>
+<p>There is no account to create, no advert-riddled wait and no cost. The whole coin lives in a tiny piece of code that runs on your own device, so it reacts the instant you tap and keeps working even if your connection drops. Nothing about your flips is uploaded or recorded anywhere; the tally exists only on your screen and resets when you reload the page.</p>
+<p>To use it, simply tap the flip button and read the result. Flip again as many times as you like, glance at the heads and tails counters whenever you want to check the running score, and reload the page whenever you want to start a fresh tally. It is the same fair fifty-fifty decision humans have trusted for centuries, now always within reach.</p>
+    <section class="faq"><h2>Coin flip FAQ</h2><dl><dt>Is the coin flip really fair?</dt><dd>Yes. Each flip uses your browser&#39;s cryptographically secure random generator, giving heads and tails an equal 50% chance every single time, with no memory of previous flips.</dd><dt>Why use an online coin instead of a real one?</dt><dd>A virtual coin is always in your pocket, cannot land on its edge or roll away, and keeps an automatic tally, which is handy for settling decisions or running many flips quickly.</dd><dt>Does it need the internet?</dt><dd>No. Once the page has loaded it runs entirely in your browser, so you can keep flipping even with no connection.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/cointoss/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/cointoss/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/cointoss/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/cointoss/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/cointoss/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/cointoss/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/cointoss/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/cointoss.js" defer></script>
+</body>
+</html>

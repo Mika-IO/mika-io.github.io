@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>عدّاد الكلمات — احسب الكلمات والحروف ووقت القراءة</title>
+<meta name="description" content="عدّاد كلمات مجاني وفوري. الصق نصاً أو اكتبه لحساب الكلمات والحروف والجمل والفقرات ووقت القراءة المقدّر فوراً داخل متصفحك.">
+<link rel="canonical" href="https://mikaio.dev/ar/wordcount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/wordcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/wordcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/wordcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/wordcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/wordcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/wordcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/wordcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/wordcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/wordcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/wordcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/wordcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="عدّاد الكلمات — احسب الكلمات والحروف ووقت القراءة">
+<meta property="og:description" content="عدّاد كلمات مجاني وفوري. الصق نصاً أو اكتبه لحساب الكلمات والحروف والجمل والفقرات ووقت القراءة المقدّر فوراً داخل متصفحك.">
+<meta property="og:url" content="https://mikaio.dev/ar/wordcount/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"عدّاد الكلمات — احسب الكلمات والحروف ووقت القراءة","url":"https://mikaio.dev/ar/wordcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"عدّاد كلمات مجاني وفوري. الصق نصاً أو اكتبه لحساب الكلمات والحروف والجمل والفقرات ووقت القراءة المقدّر فوراً داخل متصفحك."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"عدّاد الكلمات","item":"https://mikaio.dev/ar/wordcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"كيف يُقدَّر وقت القراءة؟","acceptedAnswer":{"@type":"Answer","text":"يفترض وقت القراءة سرعة متوسطة لبالغ تبلغ نحو 200 كلمة في الدقيقة، ويقرّب إلى دقيقة واحدة على الأقل. وعلى القارئ الأسرع أو الأبطأ أن يعدّل تبعاً لذلك."}},{"@type":"Question","name":"كيف تُحسب الكلمات في اللغات التي لا تستخدم مسافات؟","acceptedAnswer":{"@type":"Answer","text":"في الكتابات مثل الصينية واليابانية التي لا تفصل الكلمات بمسافات، يُحسب كل حرف كوحدة واحدة، وهو ما يقارب طريقة قياس الطول في تلك اللغات."}},{"@type":"Question","name":"هل يُخزَّن نصي في أي مكان؟","acceptedAnswer":{"@type":"Answer","text":"لا. يتم كل العدّ داخل متصفحك أثناء كتابتك. ولا يُرسَل نصك إلى خادم ولا يُحفَظ ولا يُشارَك أبداً."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>عدّاد الكلمات</span></nav>
+  <h1>عدّاد الكلمات</h1>
+  <p class="lead">اكتب نصك أو الصقه في الأسفل. تتحدّث الكلمات والحروف والجمل والفقرات ووقت القراءة مباشرةً أثناء كتابتك — ولا يُرفع أي شيء.</p>
+  <section class="widget" id="tool"><div id="wc"><textarea id="wc-input" placeholder="ابدأ الكتابة أو الصق نصك هنا…" aria-label="ابدأ الكتابة أو الصق نصك هنا…"></textarea><div class="wc-stats"><div class="result"><span class="big" id="wc-words">0</span><span class="hint">الكلمات</span></div><div class="result"><span class="big" id="wc-characters">0</span><span class="hint">الحروف</span></div><div class="result"><span class="big" id="wc-nospace">0</span><span class="hint">الحروف (بلا مسافات)</span></div><div class="result"><span class="big" id="wc-sentences">0</span><span class="hint">الجمل</span></div><div class="result"><span class="big" id="wc-paragraphs">0</span><span class="hint">الفقرات</span></div><div class="result"><span class="big" id="wc-reading">0</span><span class="hint">وقت القراءة (دقيقة)</span></div></div></div></section>
+  <article class="content">
+    <h2>عدّاد كلمات يواكب سرعتك</h2>
+<p>يقيس عدّاد الكلمات هذا نصك في اللحظة التي تكتبه أو تلصقه فيها. لا زرّ للضغط ولا انتظار: بمجرد ظهور حرف في الصندوق تتحدّث الأعداد المجاورة له. يتتبّع ست قيم في آنٍ واحد — الكلمات والحروف والحروف بلا مسافات والجمل والفقرات ووقت قراءة مقدَّر — فتحصل على صورة كاملة للنص بنظرة واحدة. كل شيء يعمل داخل متصفحك، ما يعني أنه سريع، ويعمل دون اتصال، ولا يرسل نصك إلى أي مكان أبداً.</p>
+<p>يبدو عدّ الكلمات أمراً تافهاً حتى تحتاج فعلاً إلى رقم دقيق لسبب حقيقي. للطلاب مقالات بحدود صارمة. ويقلّص الباحثون عن عمل خطاب التقديم إلى صفحة واحدة. ويبلغ كتّاب المحتوى أطوالاً مستهدفة من أجل الظهور في البحث. ويحشر المعلنون النص في عدد ثابت من الحروف. ويحاسب المترجمون بالكلمة. في كل حالة من هذه الحالات يهمّ عدٌّ موثوق وأمين، وهو بالضبط ما صُمّمت هذه الأداة لتمنحك إياه.</p>
+<h2>ماذا يعني كل رقم</h2>
+<p><strong>الكلمات</strong> هو العدّ الذي يهتم به معظم الناس أكثر من غيره. الكلمة هنا هي أي سلسلة من الأحرف أو الأرقام، لذا تُعامَل الاختصارات والمصطلحات الموصولة بشرطة كلٌّ منها ككلمة واحدة، تماماً كما يعدّها معظم المحرّرين والمعلمين.</p>
+<p><strong>الحروف</strong> يعدّ كل حرف في الصندوق، بما في ذلك المسافات وفواصل الأسطر وعلامات الترقيم. هذا هو الرقم الذي يهمّ حين يفرض نموذج حدّاً صارماً للحروف.</p>
+<p><strong>الحروف بلا مسافات</strong> يزيل الفراغات ويعدّ العلامات المرئية فقط. بعض المنصّات ومواصفات التصميم تقيس الطول بهذه الطريقة، فمن المفيد أن يكون الرقمان جنباً إلى جنب.</p>
+<p><strong>الجمل</strong> يبحث عن علامات الترقيم التي تُنهي الجملة عادةً — النقاط وعلامات الاستفهام والتعجّب، بما في ذلك ما يقابلها في كتابات أخرى. إنه تقدير جيّد أكثر منه حكماً نحوياً، لأن الاختصارات والترقيم غير المعتاد قد يخدعان أحياناً أي عدّاد آلي.</p>
+<p><strong>الفقرات</strong> يعدّ كتل النص المفصولة بسطر فارغ. يعكس هذا الطريقة المعتادة لتنسيق الفقرات، ويتجاهل الأسطر الفارغة المتناثرة كي يبقى الرقم معقولاً.</p>
+<p><strong>وقت القراءة</strong> يحوّل عدد كلماتك إلى تقدير للوقت اللازم لقراءة النص بوتيرة مريحة. يفترض نحو مئتي كلمة في الدقيقة، وهو متوسط شائع الاستخدام لقراءة البالغين، ولا يعرض أبداً أقل من دقيقة واحدة لنصٍّ يحوي أي كلمات.</p>
+<h2>لماذا يراقب الكتّاب عدّهم</h2>
+<p>الطول ليس مجرد شكليّة؛ بل يشكّل كيفية استقبال النص. المقال القصير جداً قد يبدو هزيلاً ونادراً ما يتصدّر نتائج البحث، بينما المقال المستطرد يفقد قرّاءه قبل أن تصل الفكرة. كثيراً ما تأتي الواجبات الأكاديمية بحدود لأن الحجّة الموجزة جزء من المهارة التي تُقيَّم، وتجاوزها قد يكلّف درجات. وعلى منصّات التواصل، تحدّد الأسقف الصارمة للحروف ما إذا كانت رسالتك ستُنشر أصلاً، فمعرفة عدّك الدقيق قبل الإرسال توفّر عليك الإحباط.</p>
+<p>وصار وقت القراءة لا يقلّ أهمية. تعرض مواقع كثيرة الآن تقديراً في صدر المقال لأن القرّاء يحبون معرفة ما يُقبلون عليه. النشرة التي تعِد بـ«قراءة من ثلاث دقائق» تصنع توقّعاً، والوفاء به يبني الثقة. ويستخدم المتحدّثون المنطق نفسه بالعكس، فيتحقّقون من أن النصّ يتّسع لفترة زمنية قبل أن يصعدوا إلى المنصّة.</p>
+<h2>نصائح لبلوغ طول مستهدف</h2>
+<p>إن تجاوزت حدّك، فأسرع الاقتطاعات تأتي عادةً من حذف كلمات لا تضيف شيئاً. عبارات الحشو مثل «من أجل أن» و«حقيقة أن» و«في هذه اللحظة» يمكن دائماً تقريباً اختصارها أو حذفها دون فقد المعنى. الجمل الطويلة كثيراً ما يمكن تقسيمها، والكلمات مثل «جداً» و«فعلاً» و«أساساً» تميل إلى إضعاف الكتابة لا تقويتها. ورؤية العدّ يهبط أثناء التشذيب تمنحك ردّاً فورياً عمّا ينجح.</p>
+<p>وإن كنت دون هدفك، فقاوم إغراء الحشو. ابحث بدلاً من ذلك عن مواضع طُرحت فيها فكرة دون سند: مثال أو شرح قصير أو تفصيل ملموس سيضيف طولاً حقيقياً ويجعل الكتابة أفضل، أما الحشو الفارغ فيطيلها فحسب. والعدّاد يساعد هنا أيضاً، إذ يُريك بالضبط كم تسهم به جملة أو فقرة جديدة.</p>
+<h2>العدّ عبر اللغات</h2>
+<p>ليست كل لغة تُعدّ بالطريقة نفسها. الإنجليزية والإسبانية والفرنسية ومعظم اللغات الأوروبية تفصل الكلمات بمسافات، فعدّها بسيط. أما الصينية واليابانية فلا تضعان مسافات بين الكلمات، ويقيس قرّاء تينك اللغتين النص عادةً بعدد الحروف. تعالج هذه الأداة ذلك تلقائياً: فللّغات المفصولة بمسافات تعدّ الكلمات بالطريقة المعتادة، وللكتابات القائمة على الحروف تعدّ كل حرف كوحدة، فتعطي رقماً يعكس كيف يُدرَك الطول فعلاً في تلك اللغة.</p>
+<p>هذه المرونة نفسها تجعل الأداة مفيدة للنصوص المختلطة، كمقال عربي يقتبس عبارة صينية، أو ملاحظات تتنقّل بين اللغات. ولأن قواعد العدّ تتكيّف مع الحروف الموجودة فعلاً، تبقى المجاميع ذات معنى حتى حين لا يكون المستند مكتوباً بلغة واحدة.</p>
+<h2>خاص بحكم التصميم</h2>
+<p>كثيراً ما يكون النص شخصياً أو سرّياً — مسوّدة خطاب استقالة، فصل غير منشور، موجز عميل، ملاحظة طبية. كثير من العدّادات على الإنترنت ترفع ما تلصقه إلى خادم لمعالجته، وهو ما لا يناسب المواد الحساسة. تتّبع هذه الأداة النهج المعاكس. فكل العدّ يجريه جزء صغير من الشيفرة يعمل بالكامل على جهازك، فلا تغادر كلماتك الصفحة أبداً. بل يمكنك قطع الاتصال بالإنترنت وستظل تعمل على النحو نفسه تماماً.</p>
+<p>لاستخدامها، انقر داخل الصندوق وابدأ الكتابة، أو الصق نصاً لديك مسبقاً. تتحدّث الإحصاءات الست باستمرار، فتستطيع متابعة تقدّمك نحو حدٍّ ما لحظياً، والتشذيب أو التوسيع حسب الحاجة، ونسخ نصك المكتمل متى شئت.</p>
+<p>وتجعل هذه السرعة الفورية الأداة مناسبة لأنواع كثيرة من العمل. فالطالب يراقب حدّ المقال وهو يكتب بدل أن يفاجأ في النهاية. والمترجم يتحقّق من عدد الكلمات قبل أن يسعّر مهمة جديدة. وكاتب المحتوى يوازن بين الطول الكافي لتغطية الموضوع والإيجاز الذي يبقي القارئ منتبهاً. وحتى في الرسائل والمنشورات القصيرة، تساعدك رؤية الحروف تتناقص على صياغة جملة تقول ما تريد ضمن المساحة المتاحة تماماً. وفي كل هذه الحالات، الفكرة نفسها: قياس واضح وفوري يحرّرك لتركّز على المعنى بدل العدّ اليدوي.</p>
+    <section class="faq"><h2>أسئلة شائعة عن عدّاد الكلمات</h2><dl><dt>كيف يُقدَّر وقت القراءة؟</dt><dd>يفترض وقت القراءة سرعة متوسطة لبالغ تبلغ نحو 200 كلمة في الدقيقة، ويقرّب إلى دقيقة واحدة على الأقل. وعلى القارئ الأسرع أو الأبطأ أن يعدّل تبعاً لذلك.</dd><dt>كيف تُحسب الكلمات في اللغات التي لا تستخدم مسافات؟</dt><dd>في الكتابات مثل الصينية واليابانية التي لا تفصل الكلمات بمسافات، يُحسب كل حرف كوحدة واحدة، وهو ما يقارب طريقة قياس الطول في تلك اللغات.</dd><dt>هل يُخزَّن نصي في أي مكان؟</dt><dd>لا. يتم كل العدّ داخل متصفحك أثناء كتابتك. ولا يُرسَل نصك إلى خادم ولا يُحفَظ ولا يُشارَك أبداً.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wordcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wordcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wordcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wordcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/wordcount/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/wordcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/wordcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wordcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wordcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wordcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/glossary.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/wordcount.js" defer></script>
+</body>
+</html>

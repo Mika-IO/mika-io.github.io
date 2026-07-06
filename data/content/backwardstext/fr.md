@@ -1,0 +1,35 @@
+## Retournez n'importe quel texte en un instant
+
+Inverser un texte est l'un de ces petits tours qui se révèlent bien plus utiles qu'on ne le pense de prime abord. Que vous vouliez écrire un message secret qui ne se lit normalement que dans un miroir, imaginer un pseudo original, résoudre un jeu de mots, ou vérifier si une phrase est un palindrome, retourner l'ordre des caractères est le point de départ. Ce générateur de texte à l'envers fait ce travail dès que vous tapez, et il va plus loin que la plupart des outils similaires : en plus d'inverser les lettres une à une, il peut inverser l'ordre des mots entiers ou retourner une liste de lignes du bas vers le haut. Tout se passe dans votre navigateur, si bien que le résultat s'affiche instantanément et que rien de ce que vous saisissez n'est jamais envoyé où que ce soit.
+
+Son utilisation ne pourrait pas être plus simple. Tapez ou collez votre texte dans la première zone, et la version inversée apparaît aussitôt dans la seconde, mise à jour à chaque frappe. Trois boutons vous laissent choisir précisément ce que doit signifier « à l'envers », et un bouton de copie place le résultat fini dans votre presse-papiers, prêt à être collé où vous le souhaitez. Il n'y a aucune limite de longueur, vous pouvez donc inverser un simple mot ou une page entière avec la même facilité.
+
+## Les trois façons d'inverser un texte
+
+**Inverser les lettres** retourne chaque caractère de votre texte, si bien que « bonjour le monde » devient « ednom el ruojnob ». C'est l'effet classique d'écriture en miroir, celui que la plupart des gens ont en tête en parlant de « texte à l'envers ». C'est le mode à utiliser pour les messages secrets, pour résoudre des jeux de type anagramme, ou pour cette écriture retournée et espiègle qui attire l'œil dans une bio ou une légende de publication.
+
+**Inverser l'ordre des mots** conserve chaque mot correctement orthographié, mais range les mots dans la séquence opposée, transformant « le renard brun rapide » en « rapide brun renard le ». Pratique quand vous voulez mélanger une phrase, expérimenter un autre ordre de mots, ou produire un certain effet poétique ou comique sans transformer les mots eux-mêmes en charabia.
+
+**Inverser l'ordre des lignes** retourne un bloc de texte de sorte que la dernière ligne devienne la première. C'est réellement pratique pour des tâches du quotidien : inverser une liste chronologique pour que l'entrée la plus récente se retrouve en haut, remettre à l'endroit un journal classé du bas vers le haut, ou tout simplement retourner n'importe quelle liste sans avoir à la retaper. Comme le traitement se fait ligne par ligne, les mots et les lettres à l'intérieur de chaque ligne restent exactement tels que vous les avez écrits.
+
+## À quoi sert un texte inversé
+
+La raison la plus courante pour laquelle on utilise un inverseur de texte, c'est tout simplement le jeu et la curiosité. L'écriture inversée intrigue, si bien qu'on la retrouve dans des pseudos de réseaux sociaux, des noms de joueurs, des légendes et des messages complices entre amis. Écrire une courte phrase à l'envers et demander à quelqu'un de la déchiffrer, ou de la tenir devant un miroir, reste un petit jeu simple qui fait toujours son effet. Certaines personnes se servent de l'inversion des lettres comme d'une forme légère de camouflage, pour rédiger une note qui n'est pas censée se lire d'un simple coup d'œil.
+
+Il existe aussi des usages bien plus pratiques. Les amateurs de jeux de mots et de casse-têtes utilisent l'inversion des lettres pour tester des palindromes — des mots ou des phrases qui se lisent de la même façon dans les deux sens, comme « radar », « kayak », « ressasser », ou la célèbre phrase attribuée à Ésope : « Ésope reste ici et se repose ». Comparer un texte original à sa version inversée permet de vérifier ces curiosités en un instant. Les rédacteurs et les correcteurs utilisent l'inversion de l'ordre des mots ou des lignes pour réorganiser rapidement un texte. Quiconque manipule des listes, des journaux ou des données exportées a parfois besoin d'inverser l'ordre des lignes, et le faire ici prend une seconde plutôt que le travail fastidieux de couper-coller chaque ligne à la main.
+
+## Attention aux caractères
+
+Inverser un texte semble trivial, mais il est étonnamment facile de s'y prendre mal. Une approche naïve qui retourne une chaîne caractère par caractère peut casser des caractères modernes qui sont en réalité composés de plusieurs éléments internes — de nombreux émojis, certaines lettres accentuées et divers symboles sont stockés sous la forme de plusieurs unités internes, et les découper en plein milieu produit des carrés cassés ou du charabia. Cet outil inverse le texte par caractères entiers, tels qu'un lecteur les reconnaîtrait, de sorte qu'un émoji reste un émoji complet et qu'une lettre accentuée comme « é » reste intacte au lieu de se disloquer entre son accent et sa lettre de base.
+
+Cette précaution garantit que l'inverseur se comporte correctement quelles que soient les langues et les systèmes d'écriture. Un texte contenant des accents, des émojis, de la ponctuation et des alphabets mélangés s'inverse proprement. Gardez toutefois en tête qu'inverser les lettres d'un texte écrit dans une écriture allant de droite à gauche, comme l'arabe ou l'hébreu, change son affichage puisque ces écritures se lisent déjà dans le sens opposé ; l'outil retourne malgré tout fidèlement l'ordre interne des caractères, ce qui est exactement ce que l'on recherche pour un jeu ou un effet visuel.
+
+## Un clin d'œil aux palindromes en français
+
+Le français regorge de palindromes amusants, du plus court — « ici », « été », « radar » — aux phrases entières comme « engagea la gamin, un ami la gageant » ou le fameux « Ésope reste ici et se repose ». Composer votre propre phrase et vérifier avec cet outil si elle se lit identiquement à l'envers est un petit jeu ludique que les amateurs de mots pratiquent depuis toujours, bien avant l'existence des ordinateurs, à la seule différence que la vérification prend maintenant une fraction de seconde au lieu de plusieurs minutes de relecture attentive.
+
+## Privé, instantané et gratuit
+
+Aucune inscription, aucun coût, aucune attente. L'inverseur tient tout entier dans un petit morceau de code qui s'exécute sur votre propre appareil, ce qui explique pourquoi il se met à jour à l'instant même où vous tapez et continue de fonctionner sans connexion internet. Rien de ce que vous collez n'est envoyé, stocké ni partagé, ce qui rend l'outil sûr même pour des notes privées ou des messages que vous préférez garder pour vous.
+
+Pour commencer, tapez ou collez votre texte dans la première zone et regardez la version inversée apparaître en dessous. Appuyez sur les boutons pour basculer entre l'inversion des lettres, des mots ou des lignes jusqu'à obtenir l'effet recherché, puis utilisez le bouton de copie pour récupérer le résultat. Modifiez le texte à tout moment, le résultat suit instantanément, ce qui vous laisse toute liberté d'expérimenter jusqu'à ce que le rendu corresponde exactement à ce que vous aviez imaginé.

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Days Between Dates Calculator — how many days between two dates</title>
+<meta name="description" content="Free days between dates calculator. Find exactly how many days, weeks, and months are between any two dates. Works instantly in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ru/daysbetween/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/daysbetween/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/daysbetween/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/daysbetween/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/daysbetween/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/daysbetween/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/daysbetween/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/daysbetween/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/daysbetween/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Days Between Dates Calculator — how many days between two dates">
+<meta property="og:description" content="Free days between dates calculator. Find exactly how many days, weeks, and months are between any two dates. Works instantly in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ru/daysbetween/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Days Between Dates Calculator — how many days between two dates","url":"https://mikaio.dev/ru/daysbetween/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free days between dates calculator. Find exactly how many days, weeks, and months are between any two dates. Works instantly in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Days Between Dates","item":"https://mikaio.dev/ru/daysbetween/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the calculator include both the start and end dates?","acceptedAnswer":{"@type":"Answer","text":"The result counts the number of days from the start date up to but not including the end date, which is the most common convention for date differences. To include both days, add one to the result."}},{"@type":"Question","name":"Can I calculate days in the past?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can enter any two dates in any order. The calculator always returns the absolute number of days between the two dates."}},{"@type":"Question","name":"What about leap years?","acceptedAnswer":{"@type":"Answer","text":"Leap years are handled automatically. February 29 is a valid date when available and the extra day is counted correctly in any date range spanning a leap year."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Days Between Dates</span></nav>
+  <h1>Days Between Dates</h1>
+  <p class="lead">Select a start date and an end date to see how many days are between them. The result also shows the equivalent in weeks and months.</p>
+  <section class="widget" id="tool"><form id="db-form"><div class="row"><div class="field"><label for="db-from">Start date</label><input type="date" id="db-from"></div><div class="field"><label for="db-to">End date</label><input type="date" id="db-to"></div></div><div class="result"><span class="hint">Days between: </span><span class="big" id="db-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Узнайте точное количество дней между любыми двумя датами</h2>
+<p>Арифметика дат на удивление неудобна для вычислений в уме. Подсчёт от какой-то даты в прошлом до сегодняшнего дня или от сегодня до будущей даты требует помнить, сколько дней в каждом месяце, является ли год високосным, и переносить остаток через границы месяцев и лет. Этот калькулятор делает всё это мгновенно. Введите две даты — и сразу увидите число дней между ними вместе с эквивалентом в неделях и месяцах.</p>
+<h2>Как этим пользоваться</h2>
+<p>Кликните или нажмите в поле начальной даты и выберите дату в календаре, либо введите её в формате, ожидаемом вашим браузером. Сделайте то же самое для конечной даты. Число дней появится сразу же, без нажатия каких-либо кнопок. Даты можно вводить в любом порядке — если начальная дата окажется позже конечной, калькулятор всё равно вернёт корректное положительное число.</p>
+<h2>Распространённые варианты использования</h2>
+<p>Подсчёт дней между датами постоянно возникает в повседневной жизни. Сколько дней до отпуска? Сколько дней прошло с важного события? Сколько времени осталось до дедлайна? Сколько дней растёт растение, заживает рана или длится проект?</p>
+<p>В бизнесе разницу между датами используют для расчёта сроков оплаты счетов, условий платежа, продолжительности контрактов и графиков проектов. Тридцатидневный срок оплаты по счёту от 3 мая заканчивается 2 июня. Девяностодневный пробный период, начавшийся 1 января, заканчивается 1 апреля в невисокосный год. Правильность таких расчётов важна для договоров и соблюдения регламентов.</p>
+<p>Юридический и финансовый контекст часто требует точного подсчёта дней. Проценты по займу нередко рассчитываются на ежедневной основе, поэтому число дней между выдачей средств и погашением напрямую влияет на сумму начисленных процентов. Регуляторные сроки часто задаются как число календарных дней от какого-то события-триггера, и просрочка даже на один день может иметь последствия.</p>
+<h2>Разница между календарными и рабочими днями</h2>
+<p>Этот калькулятор считает календарные дни — все дни, включая выходные и государственные праздники. Если нужно посчитать только рабочие дни (с понедельника по пятницу, без праздников), это уже другой расчёт. Календарные дни — правильная мера для большинства целей: периода полураспада лекарств, расчёта возраста, прошедшего времени в целом и юридических сроков, которые говорят &quot;30 дней&quot;, не уточняя рабочие они или нет.</p>
+<h2>Недели и месяцы как альтернативные единицы</h2>
+<p>Калькулятор также показывает эквивалент в неделях и десятичных месяцах. Недели — точное целочисленное деление числа дней, там где это применимо. Значение в месяцах приблизительное, поскольку месяцы отличаются по длине от 28 до 31 дня. Для большинства целей &quot;примерно 3,2 месяца&quot; — удобный способ понять промежуток в 97 дней, но для чего-либо, требующего точного числа месяцев, сверяйтесь напрямую с календарём.</p>
+<h2>Юридическая и финансовая точность</h2>
+<p>Помимо повседневного планирования, точный подсчёт дней несёт реальный юридический и финансовый вес. &quot;Уведомление за 30 дней&quot;, прописанное в договоре аренды или трудовом договоре, обычно означает ровно 30 календарных дней, и ошибка даже на один день в любую сторону может повлиять на то, было ли уведомление подано правомерно. Сроки исковой давности, периоды &quot;охлаждения&quot; для потребительских покупок и гарантийные окна часто определяются как точное число дней от события-триггера, и ошибка в подсчёте — забытый високосный день или неверный переход через границу месяца — может иметь последствия, выходящие далеко за рамки простого неудобства. Подсчёт дней в этом калькуляторе точен для любого диапазона, сколь угодно далеко отстоящих друг от друга дат, поскольку он основан на настоящей арифметике дат, а не на приближении.</p>
+<h2>Учёт високосных лет</h2>
+<p>Калькулятор использует стандартное правило григорианского календаря для високосных лет: год, делящийся на 4, — високосный, за исключением &quot;вековых&quot; годов, которые должны делиться ещё и на 400. Это значит, что 2000 год был високосным, а 1900-й — нет. Каждое 29 февраля корректно учитывается в любом диапазоне дат.</p>
+<h2>Недели и месяцы подробнее</h2>
+<p>Помимо самого числа дней, калькулятор также показывает эквивалентный промежуток в неделях и десятичных месяцах, поскольку разные задачи требуют разных единиц измерения. О сроках проекта часто проще рассуждать в неделях — &quot;этот спринт длится 3 недели&quot; звучит естественнее, чем &quot;этот спринт длится 21 день&quot;, хотя это одно и то же. Значение в месяцах неизбежно приблизительное, поскольку месяцы варьируются от 28 до 31 дня, так что &quot;примерно 3,2 месяца&quot; для промежутка в 97 дней — это полезная оценка, а не точный подсчёт; для всего, что требует точного числа календарных месяцев, самый надёжный способ — свериться напрямую с календарём.</p>
+<h2>Разобранный пример</h2>
+<p>Предположим, вы хотите узнать, сколько дней осталось до дедлайна 15 числа следующего месяца, считая от сегодняшнего дня. Вместо того чтобы считать на пальцах оставшиеся дни этого месяца и прибавлять дни следующего, просто введите сегодняшнюю дату как начальную, а дедлайн — как конечную, и точное число — корректно учитывающее разную длину месяцев и любой високосный год между ними — появится мгновенно. Тот же подход одинаково хорошо работает и при взгляде назад: введя прошедшую дату как начальную, а сегодняшний день как конечную, вы точно узнаете, сколько времени назад что-то произошло, — в днях, неделях и месяцах одновременно.</p>
+<h2>Приватно и мгновенно</h2>
+<p>Никакие данные никуда не отправляются. Расчёт выполняется полностью в вашем браузере с использованием Date API JavaScript — той же системы, которую использует любой современный сайт и приложение для работы с датами, — поэтому результат появляется мгновенно, а каждая введённая вами дата удаляется в тот момент, когда вы закрываете или перезагружаете страницу.</p>
+    <section class="faq"><h2>Days between dates FAQ</h2><dl><dt>Does the calculator include both the start and end dates?</dt><dd>The result counts the number of days from the start date up to but not including the end date, which is the most common convention for date differences. To include both days, add one to the result.</dd><dt>Can I calculate days in the past?</dt><dd>Yes, you can enter any two dates in any order. The calculator always returns the absolute number of days between the two dates.</dd><dt>What about leap years?</dt><dd>Leap years are handled automatically. February 29 is a valid date when available and the extra day is counted correctly in any date range spanning a leap year.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/daysbetween/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/daysbetween/">中文</a></li><li><a hreflang="es" lang="es" href="/es/daysbetween/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/daysbetween/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/daysbetween/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/daysbetween/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/daysbetween/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/daysbetween.js" defer></script>
+</body>
+</html>

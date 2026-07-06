@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Formatter — format and validate JSON online</title>
+<meta name="description" content="Free JSON formatter and validator. Paste JSON to format it with proper indentation, minify it, or check it for errors. Works in your browser instantly.">
+<link rel="canonical" href="https://mikaio.dev/en/jsonformatter/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/jsonformatter/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/jsonformatter/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/jsonformatter/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/jsonformatter/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/jsonformatter/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/jsonformatter/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/jsonformatter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON Formatter — format and validate JSON online">
+<meta property="og:description" content="Free JSON formatter and validator. Paste JSON to format it with proper indentation, minify it, or check it for errors. Works in your browser instantly.">
+<meta property="og:url" content="https://mikaio.dev/en/jsonformatter/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Formatter — format and validate JSON online","url":"https://mikaio.dev/en/jsonformatter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free JSON formatter and validator. Paste JSON to format it with proper indentation, minify it, or check it for errors. Works in your browser instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"JSON Formatter & Validator","item":"https://mikaio.dev/en/jsonformatter/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is JSON?","acceptedAnswer":{"@type":"Answer","text":"JSON (JavaScript Object Notation) is a lightweight data interchange format. It uses human-readable text to represent data objects consisting of key-value pairs and arrays."}},{"@type":"Question","name":"What does \"format\" do?","acceptedAnswer":{"@type":"Answer","text":"Formatting (also called \"pretty-printing\") adds proper indentation and newlines to make JSON human-readable. Minifying removes all whitespace to produce the smallest possible valid JSON string."}},{"@type":"Question","name":"Does the validator fix errors?","acceptedAnswer":{"@type":"Answer","text":"No. The tool parses the JSON and reports the error if it is invalid. Fixing the error is left to the user."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>JSON Formatter &amp; Validator</span></nav>
+  <h1>JSON Formatter &amp; Validator</h1>
+  <p class="lead">Paste your JSON in the box below and click Format to pretty-print it, or Minify to compress it.</p>
+  <section class="widget" id="tool"><div id="jf-app"><textarea id="jf-in" rows="6" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.85rem;font-family:monospace" placeholder="Paste JSON here…"></textarea><div style="display:flex;gap:0.5rem;margin-top:0.5rem"><button id="jf-fmt" class="btn">Format</button><button id="jf-min" class="btn secondary">Minify</button><button id="jf-copy" class="btn secondary">Copy</button></div><div id="jf-err" style="color:#f87171;font-size:0.85rem;margin-top:0.5rem"></div><pre id="jf-out" style="background:rgba(255,255,255,0.04);border-radius:0.5rem;padding:0.75rem;margin-top:0.5rem;overflow:auto;font-size:0.82rem;max-height:300px;white-space:pre-wrap;word-break:break-word"></pre></div></section>
+  <article class="content">
+    <h2>Format, validate, and minify JSON instantly</h2>
+<p>JSON (JavaScript Object Notation) is the standard data interchange format for web APIs, configuration files, and data storage. When you receive raw or compact JSON from an API response or a debugging tool, formatting it makes it human-readable in seconds. When you need to transmit JSON efficiently, minifying removes all unnecessary whitespace.</p>
+<h2>How to use the tool</h2>
+<p>Paste JSON into the input box, then choose format to see it neatly indented and readable, or minify to strip out every unnecessary space and line break for the smallest possible size. If the JSON contains an error, the tool reports what went wrong rather than failing silently, which is usually the fastest way to spot a stray comma or a missing bracket buried in a large block pasted from a log file or an API response.</p>
+<h2>What is JSON?</h2>
+<p>JSON is a text-based data format that represents structured data as key-value pairs (objects) and ordered lists (arrays). It was derived from JavaScript object syntax but is language-independent — virtually every programming language has a JSON parser.</p>
+<p>A valid JSON document is one of: an object, an array, a string, a number, a boolean (true or false), or null.</p>
+<p>Example of valid JSON:</p>
+<p>{</p>
+<p>&quot;name&quot;: &quot;Alice&quot;,</p>
+<p>&quot;age&quot;: 30,</p>
+<p>&quot;scores&quot;: [95, 87, 91],</p>
+<p>&quot;active&quot;: true</p>
+<p>}</p>
+<h2>JSON vs XML</h2>
+<p>JSON largely replaced XML as the dominant data interchange format on the web because it is more compact, easier to read, and maps naturally to the data structures of most programming languages (objects and arrays).</p>
+<h2>Nested structures at a glance</h2>
+<p>The real value of formatting shows up once objects and arrays start nesting inside one another several levels deep, which is common in real API responses. A deeply nested, minified blob of JSON is nearly impossible to trace by eye — matching an opening brace to its correct closing brace several lines away is exactly the kind of tedious, error-prone task a computer does far better than a human. Formatted JSON with consistent indentation turns that same structure into something you can follow visually, level by level, which is why almost every developer tool that displays JSON, from browser dev tools to API clients, formats it by default rather than showing the raw, compact string a server actually sent.</p>
+<h2>Pretty-printing (formatting)</h2>
+<p>A &quot;minified&quot; JSON string contains no unnecessary whitespace:</p>
+<p>{&quot;name&quot;:&quot;Alice&quot;,&quot;age&quot;:30,&quot;scores&quot;:[95,87,91],&quot;active&quot;:true}</p>
+<p>While valid, this is difficult to read. &quot;Pretty-printing&quot; or &quot;formatting&quot; adds indentation and newlines:</p>
+<p>Each level of nesting is indented by 2 or 4 spaces. This makes deeply nested structures easy to navigate visually.</p>
+<h2>A brief history of JSON&#39;s rise</h2>
+<p>JSON was popularised in the early 2000s by Douglas Crockford, who documented and named a data format he noticed was already implicit in JavaScript&#39;s own object literal syntax, rather than inventing something entirely new. Its timing coincided with the growth of AJAX-driven web applications that needed a lightweight way to exchange data between browser and server without a full page reload, and its close resemblance to native JavaScript objects meant browsers could parse it almost for free. That combination of simplicity and good timing is largely why JSON overtook the more verbose XML as the default choice for web APIs within about a decade.</p>
+<h2>JSON in web development</h2>
+<p>Web APIs overwhelmingly use JSON for request and response bodies. The browser&#39;s fetch() API and XMLHttpRequest both handle JSON natively. Server-side languages parse JSON using built-in libraries: json in Python, JSON.parse in JavaScript, json_decode in PHP, Gson/Jackson in Java.</p>
+<h2>Why formatting and minifying serve different purposes</h2>
+<p>These two operations exist because JSON is read by two very different audiences. Formatted, indented JSON is for humans: a developer inspecting an API response, debugging a configuration file, or reviewing data during development benefits enormously from clear indentation that makes the structure of nested objects and arrays visible at a glance. Minified JSON is for machines: stripping every unnecessary space and line break reduces the number of bytes that need to be transmitted over a network or stored on disk, which matters when a JSON payload is sent thousands or millions of times a day between servers. Neither form is more &quot;correct&quot; than the other — they simply optimise for different readers, and a good workflow moves between the two depending on whether a human or a machine is doing the reading at that moment.</p>
+<h2>Common JSON errors and how to spot them</h2>
+<p>A trailing comma after the last item in an object or array is one of the most frequent errors, since it is valid in JavaScript object literals but explicitly disallowed in JSON. Property names must always be double-quoted strings — unquoted keys and single-quoted strings are both invalid, even though both are legal in JavaScript. Comments are not supported at all in standard JSON, so a configuration file with helpful inline comments (like the JSONC format VS Code uses for its settings) technically is not valid JSON and requires a special-purpose parser. Because JSON&#39;s grammar is intentionally stricter than JavaScript&#39;s, copying a JavaScript object literal directly into a JSON field is a very common source of the syntax errors this tool helps you catch.</p>
+<h2>Validating before you trust the data</h2>
+<p>Beyond making JSON readable, this tool also validates it, which matters because a single misplaced character can make an otherwise-correct-looking block of JSON completely unparsable. Rather than manually scanning hundreds of lines for a missing comma or an unclosed bracket, pasting the text in and letting the parser report exactly where it failed turns a tedious visual search into an instant, precise answer, which is especially valuable when debugging a configuration file or an API response that a program refuses to accept.</p>
+<h2>Private and instant</h2>
+<p>All processing runs entirely in your browser, so formatting and minifying happen instantly and no JSON you paste is ever sent anywhere, logged or shared, and it works offline once the page has loaded.</p>
+    <section class="faq"><h2>JSON formatter FAQ</h2><dl><dt>What is JSON?</dt><dd>JSON (JavaScript Object Notation) is a lightweight data interchange format. It uses human-readable text to represent data objects consisting of key-value pairs and arrays.</dd><dt>What does &quot;format&quot; do?</dt><dd>Formatting (also called &quot;pretty-printing&quot;) adds proper indentation and newlines to make JSON human-readable. Minifying removes all whitespace to produce the smallest possible valid JSON string.</dd><dt>Does the validator fix errors?</dt><dd>No. The tool parses the JSON and reports the error if it is invalid. Fixing the error is left to the user.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/jsonformatter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/jsonformatter/">中文</a></li><li><a hreflang="es" lang="es" href="/es/jsonformatter/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/jsonformatter/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/jsonformatter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/jsonformatter/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/jsonformatter.js" defer></script>
+</body>
+</html>

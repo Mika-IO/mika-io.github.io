@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Gradient Generator — create beautiful CSS gradients</title>
+<meta name="description" content="Free CSS gradient generator. Create linear and radial gradients with any colors and instantly get the CSS code. No signup needed.">
+<link rel="canonical" href="https://mikaio.dev/ru/gradientgen/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gradientgen/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gradientgen/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gradientgen/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gradientgen/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gradientgen/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gradientgen/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gradientgen/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSS Gradient Generator — create beautiful CSS gradients">
+<meta property="og:description" content="Free CSS gradient generator. Create linear and radial gradients with any colors and instantly get the CSS code. No signup needed.">
+<meta property="og:url" content="https://mikaio.dev/ru/gradientgen/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"CSS Gradient Generator — create beautiful CSS gradients","url":"https://mikaio.dev/ru/gradientgen/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free CSS gradient generator. Create linear and radial gradients with any colors and instantly get the CSS code. No signup needed."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"CSS Gradient Generator","item":"https://mikaio.dev/ru/gradientgen/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a CSS gradient?","acceptedAnswer":{"@type":"Answer","text":"A CSS gradient is a smooth transition between two or more colors, defined using CSS's background or background-image property without any image file."}},{"@type":"Question","name":"What is the difference between linear and radial?","acceptedAnswer":{"@type":"Answer","text":"A linear gradient transitions in a straight line at a given angle. A radial gradient radiates outward from a center point in circular or elliptical shapes."}},{"@type":"Question","name":"Can I use more than two colors?","acceptedAnswer":{"@type":"Answer","text":"Yes, CSS supports multiple color stops. This generator uses two colors; for more complex gradients, add additional color stops manually in the CSS code."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/ru/gradientgen/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/gradientgen/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/gradientgen/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/gradientgen/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/gradientgen/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/gradientgen/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/gradientgen/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Создавайте эффектные CSS-градиенты без всяких дизайнерских программ" />
+<meta property="og:description" content="Создавайте эффектные CSS-градиенты без всяких дизайнерских программ" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/ru/gradientgen/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Создавайте эффектные CSS-градиенты без всяких дизайнерских программ","description":"Создавайте эффектные CSS-градиенты без всяких дизайнерских программ","url":"https://example.com/ru/gradientgen/","inLanguage":"ru"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>CSS Gradient Generator</span></nav>
+  <h1>CSS Gradient Generator</h1>
+  <p class="lead">Pick two colors, choose the gradient type and angle, and copy the CSS code for your project.</p>
+  <section class="widget" id="tool"><div id="grad-app"><div class="row"><div class="field"><label for="grad-c1">Color 1</label><input type="color" id="grad-c1" value="#667eea" style="width:60px;height:44px;border:none;background:none;cursor:pointer"></div><div class="field"><label for="grad-c2">Color 2</label><input type="color" id="grad-c2" value="#764ba2" style="width:60px;height:44px;border:none;background:none;cursor:pointer"></div><div class="field"><label for="grad-type">Type</label><select id="grad-type"><option value="linear">Linear</option><option value="radial">Radial</option></select></div><div class="field"><label for="grad-angle">Angle (°)</label><input type="number" id="grad-angle" value="135" min="0" max="360" step="1"></div></div><div id="grad-preview" style="height:120px;border-radius:0.75rem;margin-top:1rem;background:linear-gradient(135deg,#667eea,#764ba2)"></div><div id="grad-css" style="margin-top:0.75rem;font-family:monospace;font-size:0.85rem;padding:0.5rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);word-break:break-all"></div><button id="grad-copy" class="btn secondary" style="margin-top:0.5rem">Copy CSS</button></div></section>
+  <article class="content">
+    <h2>Создавайте эффектные CSS-градиенты без всяких дизайнерских программ</h2>
+<p>Градиенты — один из самых эффективных способов добавить визуальную глубину и современный вид сайту. CSS-градиенты не требуют файлов изображений и загружаются мгновенно, поскольку генерируются самим браузером. Этот генератор позволяет собрать градиент визуально, выбрав цвета и настроив угол, а затем скопировать точный CSS-код, который нужен для его использования.</p>
+<h2>Виды CSS-градиентов</h2>
+<p><strong>Линейные градиенты</strong> переходят по прямой линии от одного цвета к другому. Угол задаёт направление: 0° — снизу вверх, 90° — слева направо, 180° — сверху вниз, 270° — справа налево. Самые распространённые углы в дизайне — 135° (по диагонали) и 90° (по горизонтали). Допустим любой угол от 0° до 360°.</p>
+<p>CSS: linear-gradient(135deg, #667eea, #764ba2)</p>
+<p><strong>Радиальные градиенты</strong> расходятся наружу из центральной точки в форме круга или эллипса. Они полезны для эффектов подсветки, состояний наведения на кнопки и центрированных фокусных элементов.</p>
+<p>CSS: radial-gradient(circle, #667eea, #764ba2)</p>
+<h2>Поддержка градиентов в любом современном браузере</h2>
+<p>Линейные и радиальные градиенты поддерживаются во всех современных браузерах без каких-либо вендорных префиксов. Старые версии Safari и Chrome когда-то требовали префикс -webkit- для корректного отображения градиентов — это наследие ранних дней, когда синтаксис CSS-градиентов ещё стандартизировался, — но уже много лет ни один браузер массового использования этого не требует, так что простой, беспрефиксный синтаксис, который выдаёт этот генератор, работает везде без изменений.</p>
+<h2>Добавление дополнительных цветовых точек</h2>
+<p>Генератор использует два цвета, но CSS-градиенты поддерживают любое количество цветовых точек в любой позиции. Чтобы добавить третий цвет посередине:</p>
+<p>linear-gradient(135deg, #667eea 0%, #ff6b6b 50%, #764ba2 100%)</p>
+<p>Можно также задать точки на конкретных процентах, чтобы управлять тем, где именно происходят переходы:</p>
+<p>linear-gradient(90deg, #000000 0%, #000000 50%, #ff0000 50%, #ff0000 100%)</p>
+<p>Это создаёт резкое разделение вместо плавного градиента — полезно для определённых дизайнерских эффектов.</p>
+<h2>Популярные палитры градиентов</h2>
+<p>Несколько любимых многими сочетаний градиента:</p>
+<ul>
+<li><strong>Океан</strong>: #2193b0 → #6dd5ed</li>
+<li><strong>Закат</strong>: #FF512F → #DD2476</li>
+<li><strong>Лес</strong>: #134E5E → #71B280</li>
+<li><strong>Фиолетовая мечта</strong>: #667eea → #764ba2</li>
+<li><strong>Огонь</strong>: #f7971e → #ffd200</li>
+<li><strong>Ночное небо</strong>: #0f0c29 → #302b63 → #24243e</li>
+</ul>
+<h2>Использование градиентов в CSS</h2>
+<p>Сокращённое свойство background или свойство background-image принимают функции градиента напрямую:</p>
+<p>.header {</p>
+<p>background: linear-gradient(135deg, #667eea, #764ba2);</p>
+<p>}</p>
+<p>Градиенты также можно применять к тексту, границам и слоям-масками, используя продвинутые техники CSS.</p>
+<h2>Сочетание градиентов с изображениями</h2>
+<p>CSS позволяет комбинировать градиент с фоновым изображением, используя несколько слоёв фона:</p>
+<p>.hero {</p>
+<p>background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(&#39;photo.jpg&#39;) center/cover;</p>
+<p>}</p>
+<p>Это накладывает полупрозрачный тёмный градиент поверх изображения, улучшая читаемость текста в героических секциях (hero) сайта.</p>
+<h2>Как пользоваться генератором</h2>
+<p>Выберите два цвета с помощью выбора цвета, настройте ползунок угла, чтобы задать направление перехода, — и предпросмотр обновляется вживую, так что вы видите, как именно выглядит градиент, ещё до того, как использовать его где-либо. Когда результат устроит, скопируйте сгенерированный CSS-код одним кликом и вставьте его прямо в вашу таблицу стилей — здесь нет ни этапа экспорта, ни изображения для скачивания, ни какого-либо процесса сборки.</p>
+<h2>Почему CSS-градиенты лучше градиентов-изображений</h2>
+<p>До того как CSS-градиенты стали хорошо поддерживаться, дизайнерам приходилось экспортировать градиент как файл изображения PNG или JPEG, чтобы использовать его на сайте, — это добавляло лишний файл для загрузки, увеличивало вес страницы и выглядело размыто или полосато на экранах с высоким разрешением, если только изображение не было тщательно экспортировано в большом размере. CSS-градиент вычисляется самим браузером на том разрешении, которое требует экран, поэтому он всегда идеально чёткий, масштабируется до любого размера без дополнительного файла и может быть изменён мгновенно правкой нескольких символов кода вместо повторного экспорта изображения. Именно поэтому практически любой современный сайт использует CSS-градиенты, а не файлы изображений, для подобного эффекта.</p>
+<h2>Выбор цветов, которые хорошо сочетаются</h2>
+<p>Градиент выглядит выверенным, когда два цвета разделяют некую визуальную логику, а не сталкиваются произвольно. Надёжный распространённый приём — выбрать два цвета, близких друг к другу на цветовом круге (аналоговую пару, например синий, переходящий в фиолетовый), для спокойного, целостного ощущения, либо два цвета, расположенных примерно напротив друг друга (комплементарную пару, например оранжевый в синий), для более смелого, контрастного вида. Сохранение примерно одинаковой светлоты у обоих цветов обычно даёт более плавный на вид переход, тогда как большая разница в светлоте — например, тёмно-синий, переходящий в бледно-жёлтый, — создаёт более драматичный, энергичный градиент. Экспериментировать прямо в живом предпросмотре быстрее, чем рассуждать о теории цвета абстрактно, поскольку вы сразу видите, работает ли сочетание для вашего конкретного дизайна.</p>
+<h2>Градиенты на тексте и других элементах</h2>
+<p>Помимо простых фонов, градиенты можно применять к самому тексту, используя сочетание <code>background-clip: text</code> и прозрачного цвета текста, — популярный эффект для заголовков и логотипов, которым нужна яркая, привлекающая внимание обработка без обращения к файлу изображения. Тот же базовый синтаксис градиента работает и на границах, и его можно комбинировать с CSS-масками для более сложных эффектов формы, хотя эти техники требуют чуть больше сопутствующего CSS, чем простой градиент фона. Получив понравившийся градиент в этом генераторе, стоит помнить, что те же самые цветовые точки можно повторно использовать в нескольких таких разных эффектах ради визуально целостного дизайна.</p>
+<h2>Приватно и мгновенно</h2>
+<p>Всё работает полностью в вашем браузере, поэтому предпросмотр обновляется мгновенно при изменении цветов или угла, а всё, что касается спроектированного вами градиента, никогда не отправляется на сервер, не логируется и не передаётся кому-либо ещё.</p>
+    <section class="faq"><h2>Gradient generator FAQ</h2><dl><dt>What is a CSS gradient?</dt><dd>A CSS gradient is a smooth transition between two or more colors, defined using CSS&#39;s background or background-image property without any image file.</dd><dt>What is the difference between linear and radial?</dt><dd>A linear gradient transitions in a straight line at a given angle. A radial gradient radiates outward from a center point in circular or elliptical shapes.</dd><dt>Can I use more than two colors?</dt><dd>Yes, CSS supports multiple color stops. This generator uses two colors; for more complex gradients, add additional color stops manually in the CSS code.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gradientgen/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gradientgen/">中文</a></li><li><a hreflang="es" lang="es" href="/es/gradientgen/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gradientgen/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/gradientgen/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/gradientgen/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/gradientgen.js" defer></script>
+</body>
+</html>

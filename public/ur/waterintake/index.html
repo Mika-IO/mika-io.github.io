@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Water Intake Calculator — how much water should you drink daily?</title>
+<meta name="description" content="Free water intake calculator. Find out exactly how much water you should drink each day based on your body weight and activity level. Instant results in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ur/waterintake/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/waterintake/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/waterintake/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/waterintake/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/waterintake/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Water Intake Calculator — how much water should you drink daily?">
+<meta property="og:description" content="Free water intake calculator. Find out exactly how much water you should drink each day based on your body weight and activity level. Instant results in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ur/waterintake/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Water Intake Calculator — how much water should you drink daily?","url":"https://mikaio.dev/ur/waterintake/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free water intake calculator. Find out exactly how much water you should drink each day based on your body weight and activity level. Instant results in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Daily Water Intake Calculator","item":"https://mikaio.dev/ur/waterintake/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is the water intake calculated?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses approximately 35 ml per kilogram of body weight as a baseline, then adjusts upward for activity level. Athletes and highly active people typically need significantly more because of sweat losses."}},{"@type":"Question","name":"Does coffee or tea count?","acceptedAnswer":{"@type":"Answer","text":"Despite being mild diuretics, research shows that habitual consumption of caffeinated drinks still contributes to daily fluid intake. However, plain water is the most efficient way to stay hydrated."}},{"@type":"Question","name":"Should I drink more in hot weather?","acceptedAnswer":{"@type":"Answer","text":"Yes. The calculator gives a baseline recommendation for normal conditions. In hot weather, during illness with fever, or at high altitude, your hydration needs increase. Drink to thirst and pay attention to urine colour — pale yellow is ideal."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/ur/waterintake/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/waterintake/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/waterintake/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/waterintake/">
+  <!-- SEO injected -->
+<meta property="og:title" content="آپ کو روزانہ کتنا پانی پینا چاہیے؟" />
+<meta property="og:description" content="آپ کو روزانہ کتنا پانی پینا چاہیے؟" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/ur/waterintake/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"آپ کو روزانہ کتنا پانی پینا چاہیے؟","description":"آپ کو روزانہ کتنا پانی پینا چاہیے؟","url":"https://example.com/ur/waterintake/","inLanguage":"ur"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Daily Water Intake Calculator</span></nav>
+  <h1>Daily Water Intake Calculator</h1>
+  <p class="lead">Enter your weight and activity level to see your recommended daily water intake.</p>
+  <section class="widget" id="tool"><form id="water-form"><div class="row"><div class="field"><label for="water-weight">Body weight</label><input type="number" id="water-weight" step="any" min="1" inputmode="decimal"></div><div class="field"><label for="water-unit">Unit</label><select id="water-unit"><option value="kg">kg</option><option value="lb">lb</option></select></div><div class="field"><label for="water-activity">Activity level</label><select id="water-activity"><option value="low">Sedentary (office work)</option><option value="mod">Moderately active</option><option value="high">Very active / athlete</option></select></div></div><div class="result"><span class="hint">Daily water intake: </span><span class="big" id="water-out">—</span></div></form></section>
+  <article class="content">
+    <h2>آپ کو روزانہ کتنا پانی پینا چاہیے؟</h2>
+<p>پانی سب سے زیادہ ضروری غذائی جزو ہے۔ آپ کے جسم کا ہر خلیہ، ہر نسیج اور ہر عضو ٹھیک طرح کام کرنے کے لیے پانی پر انحصار کرتا ہے۔ یہ پسینے کے ذریعے جسمانی درجہ حرارت کو قابو میں رکھتا ہے، خون کی نالیوں میں غذائی اجزاء اور آکسیجن پہنچاتا ہے، پیشاب کے ذریعے فاضل مادے خارج کرتا ہے، جوڑوں کو نرم رکھتا ہے اور اعضاء کو فعال رکھتا ہے۔ اس کے باوجود بہت سے لوگ مسلسل اپنے جسم کی ضرورت سے کم پانی پیتے ہیں، اکثر انہیں اس کا احساس تک نہیں ہوتا۔</p>
+<p>یہ کیلکولیٹر آپ کے جسمانی وزن اور سرگرمی کی سطح کی بنیاد پر روزانہ پانی کی ذاتی نوعیت کی سفارش دیتا ہے۔ نتیجہ ایک بنیادی رہنما اصول ہے — ہر فرد کی ضرورت موسم، خوراک، صحت کی حالت اور بہت سے دیگر عوامل کے مطابق مختلف ہوتی ہے — مگر یہ آپ کو کام کرنے کے لیے ایک ٹھوس ہدف دیتا ہے۔</p>
+<h2>یہ سفارش کیسے حساب کی جاتی ہے</h2>
+<p>روزانہ پانی کی ضرورت کا اندازہ لگانے کا سب سے زیادہ استعمال ہونے والا فارمولا جسمانی وزن پر مبنی ہے۔ ماہرین غذائیت اور کھیلوں کی طب کے پیشہ ور افراد عام طور پر بیٹھے رہنے والے طرز زندگی والے بالغ افراد کے لیے تقریباً 35 ملی لیٹر فی کلوگرام جسمانی وزن یومیہ کی رہنمائی دیتے ہیں۔ یہ 70 کلوگرام وزن رکھنے والے شخص کے لیے تقریباً 2.4 لیٹر کے برابر بنتا ہے۔</p>
+<p>جسمانی وزن کے بعد سرگرمی کی سطح سب سے بڑا متغیر ہے۔ ہلکی ورزش بھی پسینے کے ذریعے پانی کے ضیاع میں اضافہ کرتی ہے، اور شدت اور ماحولیاتی درجہ حرارت کے لحاظ سے تیز ورزش کے ہر گھنٹے میں 0.5 سے 2 لیٹر تک پانی ضائع ہو سکتا ہے۔ یہ کیلکولیٹر معتدل اور بہت زیادہ سرگرم افراد کے لیے سفارش کو اوپر کی طرف ایڈجسٹ کرتا ہے تاکہ اس ضیاع کی تلافی ہو سکے۔</p>
+<h2>&quot;روزانہ 8 گلاس پانی&quot; کا مفروضہ</h2>
+<p>یہ عام مشورہ کہ &quot;روزانہ 8 گلاس پانی پیو&quot; ایک آسان کیا ہوا اصول ہے جو معتدل آب و ہوا میں اوسط بالغ شخص کے لیے کسی حد تک ٹھیک کام کرتا ہے، مگر یہ کسی خاص سائنسی ثبوت پر مبنی نہیں اور انفرادی فرق کو نظر انداز کرتا ہے۔ ایک ٹھنڈے موسم میں دفتری کام کرنے والی نحیف عورت کی ضرورت گرم موسم میں باہر مشقت کرنے والے تنومند مرد سے بالکل مختلف ہوتی ہے۔ جسمانی وزن پر مبنی سفارشات کہیں زیادہ درست ہوتی ہیں۔</p>
+<h2>ایک عملی مثال</h2>
+<p>فرض کریں 70 کلوگرام وزن رکھنے والا ایک بالغ شخص بیٹھے رہنے والا طرز زندگی رکھتا ہے۔ تقریباً 35 ملی لیٹر فی کلوگرام کے حساب سے بنیادی سفارش تقریباً 2.45 لیٹر یومیہ بنتی ہے، جو اوسط بالغ کے لیے عام طور پر بتائے جانے والے 2.4 لیٹر کے قریب ہے۔ اگر یہی شخص زیادہ تر دنوں میں ایک گھنٹہ معتدل شدت کی ورزش شامل کر لے، تو کیلکولیٹر اس سیشن کے دوران پسینے سے ضائع ہونے والے اضافی سیال کی تلافی کے لیے ہدف کو اوپر کی طرف ایڈجسٹ کر دیتا ہے، جو شدت، دورانیے اور ماحول کی گرمی کے مطابق آسانی سے کئی سو ملی لیٹر سے ایک لیٹر تک بڑھ سکتا ہے۔ یہی وجہ ہے کہ &quot;آٹھ گلاس&quot; جیسا ایک ہی مقررہ عدد بہت مختلف لوگوں کے لیے کارآمد ثابت نہیں ہوتا: صحیح ہدف بڑی حد تک جسمانی حجم اور اس دن کی اصل سرگرمی پر منحصر ہوتا ہے، نہ کہ کسی سب کے لیے یکساں اصول پر۔</p>
+<h2>پیاس ہمیشہ قابل بھروسہ نہیں</h2>
+<p>بہت سے لوگ زیادہ تر وقت ہلکی پانی کی کمی کا شکار رہتے ہیں اور انہیں پیاس محسوس نہیں ہوتی کیونکہ پیاس کا نظام دائمی ہلکی پانی کی کمی کا عادی ہو جاتا ہے۔ خاص طور پر بزرگ افراد میں پیاس کا احساس کمزور ہو جاتا ہے اور انہیں جان بوجھ کر پانی پینے کی عادت ڈالنی پڑتی ہے۔ ایک عملی طریقہ پیشاب کے رنگ کو دیکھنا ہے: ہلکا زرد رنگ اچھی ہائیڈریشن ظاہر کرتا ہے، گہرا زرد یا کہربائی رنگ پانی کی کمی کی علامت ہے، اور تقریباً بے رنگ پیشاب زیادہ پانی پینے کی نشاندہی کر سکتا ہے۔</p>
+<h2>خوراک میں موجود پانی</h2>
+<p>روزانہ پانی کی مقدار کا ایک بڑا حصہ مشروبات کے بجائے خوراک سے آتا ہے۔ پھلوں اور سبزیوں میں پانی کی مقدار زیادہ ہوتی ہے — کھیرا اور تربوز 95 فیصد سے زیادہ پانی پر مشتمل ہوتے ہیں، جبکہ زیادہ تر پھل 80 سے 90 فیصد تک پانی رکھتے ہیں۔ تازہ پھلوں اور سبزیوں سے بھرپور خوراک ہائیڈریشن میں نمایاں کردار ادا کرتی ہے۔ اس کیلکولیٹر کی سفارش تمام ذرائع سے حاصل ہونے والے مجموعی سیال کی مقدار سے متعلق ہے، اس لیے اگر آپ اندازہ لگا سکیں تو خوراک سے آنے والا حصہ گھٹا سکتے ہیں۔</p>
+<h2>کب زیادہ پانی پینا چاہیے</h2>
+<ul>
+<li><strong>گرم موسم</strong>: آرام دہ درجہ حرارت سے ہر ایک درجہ زیادہ گرمی پسینے کے ذریعے ضیاع بڑھاتی ہے۔</li>
+<li><strong>ورزش</strong>: جسمانی سرگرمی سے پہلے، دوران اور بعد میں پانی پیئیں۔</li>
+<li><strong>بیماری</strong>: بخار، قے اور اسہال سب سیال کے ضیاع کو بہت بڑھا دیتے ہیں۔</li>
+<li><strong>حمل اور دودھ پلانا</strong>: دونوں پانی کی ضرورت میں نمایاں اضافہ کرتے ہیں۔</li>
+<li><strong>بلندی والے علاقے</strong>: بلندی پر جسم سانس لینے کی رفتار بڑھا دیتا ہے، جس سے نمی کا ضیاع بھی بڑھتا ہے۔</li>
+</ul>
+<h2>کیلکولیٹر استعمال کرنے کا طریقہ</h2>
+<p>اپنا جسمانی وزن درج کریں اور اپنی معمول کی سرگرمی کی سطح منتخب کریں، اور روزانہ سیال کا ہدف فوراً سامنے آ جاتا ہے، جو ان لوگوں کے لیے اوپر کی طرف ایڈجسٹ ہوتا ہے جو باقاعدگی سے ورزش کرتے ہیں تاکہ پسینے کے ذریعے اضافی ضیاع کا حساب رکھا جا سکے۔ اس عدد کو ایک سخت نسخہ نہیں بلکہ ایک معقول ابتدائی نقطہ سمجھیں، اور اسے موسم، صحت کی حالت یا مخصوص طبی مشورے کے مطابق مزید ایڈجسٹ کریں، کیونکہ یہ کیلکولیٹر آپ کے انفرادی حالات کو نہیں جان سکتا۔</p>
+<h2>بغیر جنون کے عادت بنانا</h2>
+<p>زیادہ تر لوگوں کے لیے روزانہ پانی کے ہدف تک پہنچنا درست پیمائش کے بجائے چند قابل بھروسہ عادات بنانے پر منحصر ہے: دن بھر ہاتھ کے قریب پانی کی بوتل رکھنا، ہر کھانے کے ساتھ ایک گلاس پینا، اور ورزش سے پہلے اور بعد پانی تیار رکھنا بجائے اس کے کہ صرف اس وقت پانی کی طرف بڑھا جائے جب پیاس واضح طور پر محسوس ہونے لگے۔ اس جیسے کیلکولیٹر سے حاصل کردہ ایک اندازاً ہدف سب سے زیادہ کارآمد اس وقت ہوتا ہے جب اسے کبھی کبھار جانچنے کے معیار کے طور پر استعمال کیا جائے — یہ موازنہ کرتے ہوئے کہ عام دن میں آپ نے واقعی کتنا پانی پیا — نہ کہ ہر روز ملی لیٹر تک درست حساب رکھنے کی چیز کے طور پر۔</p>
+<h2>علامات جو بتاتی ہیں کہ ہدف بدلنے کی ضرورت ہے</h2>
+<p>پیشاب کے رنگ کے علاوہ چند اور روزمرہ اشارے بتاتے ہیں کہ آپ کی موجودہ مقدار جسم کی ضرورت سے میل نہیں کھا رہی: مسلسل سردرد یا تھکاوٹ جو زیادہ پانی پینے کے بعد بہتر ہو جائے، غیر معمولی طور پر گہرا یا کم پیشاب آنا، دن بھر بار بار خشک منہ یا ہونٹ، یا پانی پینے کے تھوڑی دیر بعد ہی دوبارہ پیاس محسوس ہونا۔ ان میں سے کوئی بھی علامت اکیلے تشخیصی نہیں، مگر اس کیلکولیٹر کے معقول بنیادی ہدف کے ساتھ ملا کر دیکھی جائیں تو یہ آپ کو ایک عملی اور کم محنت والا طریقہ دیتی ہیں کہ آپ محسوس کر سکیں جب آپ کی مقدار کسی دن جسم کی اصل ضرورت سے کم رہ گئی ہو۔</p>
+<h2>نجی اور فوری</h2>
+<p>یہ حساب مکمل طور پر آپ کے براؤزر میں چلتا ہے، اس لیے سفارش فوراً سامنے آ جاتی ہے اور آپ کے وزن یا سرگرمی سے متعلق کوئی بھی ذاتی معلومات کبھی کسی سرور کو نہیں بھیجی جاتیں، نہ محفوظ کی جاتی ہیں اور نہ شیئر کی جاتی ہیں۔ ایک بار لوڈ ہو جانے کے بعد یہ بغیر انٹرنیٹ کے بھی کام کرتا ہے اور وزٹس کے درمیان آپ کی درج کردہ کسی بھی معلومات کی کوئی تاریخ محفوظ نہیں رکھتا، اس لیے آپ جتنی بار چاہیں مکمل رازداری کے ساتھ اپنا ہدف چیک کر سکتے ہیں۔</p>
+    <section class="faq"><h2>Water intake FAQ</h2><dl><dt>How is the water intake calculated?</dt><dd>The calculator uses approximately 35 ml per kilogram of body weight as a baseline, then adjusts upward for activity level. Athletes and highly active people typically need significantly more because of sweat losses.</dd><dt>Does coffee or tea count?</dt><dd>Despite being mild diuretics, research shows that habitual consumption of caffeinated drinks still contributes to daily fluid intake. However, plain water is the most efficient way to stay hydrated.</dd><dt>Should I drink more in hot weather?</dt><dd>Yes. The calculator gives a baseline recommendation for normal conditions. In hot weather, during illness with fever, or at high altitude, your hydration needs increase. Drink to thirst and pay attention to urine colour — pale yellow is ideal.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/waterintake/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/waterintake/">Português</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/waterintake/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/waterintake.js" defer></script>
+</body>
+</html>

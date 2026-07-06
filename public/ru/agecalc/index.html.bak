@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Age Calculator — your exact age in years, months and days</title>
+<meta name="description" content="Free age calculator. Enter your date of birth to see your exact age in years, months and days, your total days lived, and a countdown to your next birthday.">
+<link rel="canonical" href="https://mikaio.dev/ru/agecalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/agecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/agecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/agecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/agecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/agecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/agecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/agecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/agecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/agecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/agecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/agecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Age Calculator — your exact age in years, months and days">
+<meta property="og:description" content="Free age calculator. Enter your date of birth to see your exact age in years, months and days, your total days lived, and a countdown to your next birthday.">
+<meta property="og:url" content="https://mikaio.dev/ru/agecalc/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator — your exact age in years, months and days","url":"https://mikaio.dev/ru/agecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free age calculator. Enter your date of birth to see your exact age in years, months and days, your total days lived, and a countdown to your next birthday."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Age Calculator","item":"https://mikaio.dev/ru/agecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is my exact age worked out?","acceptedAnswer":{"@type":"Answer","text":"The calculator counts the full years from your birth date to the reference date, then the remaining whole months, then the leftover days, adjusting for the differing lengths of each month so the result is exact."}},{"@type":"Question","name":"Can I find my age on a past or future date?","acceptedAnswer":{"@type":"Answer","text":"Yes. Leave the second date blank to use today, or set it to any date to see how old you were, or will be, on that day."}},{"@type":"Question","name":"Is my date of birth stored?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation runs entirely in your browser, so the dates you enter are never uploaded, saved or shared."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Age Calculator</span></nav>
+  <h1>Age Calculator</h1>
+  <p class="lead">Enter your date of birth to see your exact age in years, months and days. Leave the second date blank for today, or set it to age at any date.</p>
+  <section class="widget" id="tool"><form id="age" data-years="years" data-months="months" data-days="days" data-totaldays="days lived in total" data-nextbday="Next birthday" data-dayssuffix="days away"><div class="row"><div class="field"><label for="age-dob">Date of birth</label><input type="date" id="age-dob"></div><div class="field"><label for="age-at">Age at date (optional)</label><input type="date" id="age-at"></div></div><div class="result" id="age-out" hidden><span class="big" id="age-main">—</span><span id="age-total" class="hint"></span><br><span id="age-next" class="hint"></span></div></form></section>
+  <article class="content">
+    <h2>Узнайте свой точный возраст — вплоть до дня</h2>
+<p>Сказать, сколько вам лет, никакого труда не составляет. А вот стоит копнуть чуть глубже — узнать возраст в месяцах и днях, посчитать, сколько дней вы прожили на свете, или выяснить, сколько вам исполнится в конкретную дату в будущем, — и в уме такие вычисления внезапно превращаются в головоломку. Месяцы разной длины, високосные годы подкидывают лишний день в февраль, а считать всё это вручную — занятие муторное и подверженное ошибкам. Этот калькулятор возраста берёт всю рутину на себя. Введите дату рождения — и сразу увидите точный возраст в годах, месяцах и днях, общее количество прожитых дней и обратный отсчёт до следующего дня рождения. Всё считается прямо в браузере, поэтому ответ появляется мгновенно, а введённые даты никуда не отправляются.</p>
+<p>Пользоваться калькулятором проще некуда. Укажите дату рождения в первом поле — и результат появится сразу же, исходя из сегодняшнего дня. Если нужно узнать возраст на какую-то другую дату — прошлую или будущую, — заполните и второе поле: калькулятор посчитает разницу между двумя датами вместо привязки к сегодняшнему дню. Оставите второе поле пустым — используется текущая дата.</p>
+<h2>Что показывает калькулятор</h2>
+<p>Главный результат — это точный возраст, разложенный на три составляющие: полные годы, оставшиеся целые месяцы и, наконец, дни. Именно так люди обычно и понимают &quot;точный возраст&quot;, и это куда информативнее, чем просто число лет — особенно если речь о младенцах и маленьких детях, где месяцы и дни имеют огромное значение, или о важных датах, когда хочется знать точно, сколько времени прошло.</p>
+<p>Ниже указано общее число прожитых дней. Эта одна крупная цифра — забавный и немного неожиданный способ увидеть свою жизнь в днях, а не в годах, и она пригождается всякий раз, когда в какой-нибудь форме или расчёте требуется указать возраст именно в днях. И наконец, калькулятор сообщает, сколько дней осталось до следующего дня рождения — приятный маленький отсчёт, если вы готовитесь к празднику или просто любопытствуете.</p>
+<h2>Как считается точный возраст</h2>
+<p>Вычислить точный возраст сложнее, чем просто вычесть один год из другого. Калькулятор отталкивается от даты рождения и сначала считает, сколько полных лет прошло до нужной даты. Затем — сколько целых месяцев сверх этого, и наконец — сколько дней осталось. Самое хитрое место — именно дни: поскольку месяцы бывают от 28 до 31 дня, калькулятор при необходимости &quot;занимает&quot; нужное число дней у предыдущего месяца, если число месяца в дате рождения ещё не наступило в текущем месяце. Благодаря этому результат всегда точен, а не основан на предположении, что все месяцы одинаковой длины.</p>
+<p>Високосные годы учитываются автоматически. Человек, родившийся 29 февраля, будет посчитан корректно, а поскольку общее число прожитых дней — это реальное количество дней между двумя датами, каждый прожитый високосный день тоже входит в подсчёт. Именно поэтому число прожитых дней — самая надёжная из трёх цифр: это просто настоящее расстояние между датой рождения и датой отсчёта, без каких-либо округлений.</p>
+<h2>Зачем это может понадобиться</h2>
+<p>Причин для точного расчёта возраста куда больше, чем кажется на первый взгляд. Родители следят за возрастом младенца в неделях и месяцах ради прививок, осмотров и этапов развития, где формулировка &quot;один год&quot; звучит слишком расплывчато. Официальные документы — для виз, пенсий, страховок и медицинских карт — иногда требуют точного возраста или расчёта разницы между датами, и ошибиться там нельзя. Те, кто планирует дни рождения и годовщины, любят знать точный отсчёт, а тем, кто отмечает круглую дату вроде десятитысячного дня жизни, нужна именно цифра общего числа дней, чтобы вычислить нужный день.</p>
+<p>Это ещё и просто интересно. Увидеть свою жизнь, выраженную числом дней, узнать, сколько лет было исторической личности в определённый момент, или сравнить точный возраст двух людей — из таких маленьких любопытств и рождаются подобные инструменты, а ответ находится за секунду. Поскольку вторую дату можно задать произвольно, вы можете заглянуть в любую точку своего прошлого или будущего.</p>
+<h2>Как использовать вторую дату</h2>
+<p>Необязательное второе поле даты превращает простой калькулятор возраста в гибкий инструмент для вычисления разницы между датами. Обычно вы оставляете его пустым, и калькулятор использует сегодняшний день, показывая ваш текущий возраст. Но задав его, можно ответить на вопросы вроде &quot;сколько мне было лет, когда была сделана эта фотография?&quot;, &quot;сколько мне исполнится к началу следующего учебного года?&quot; или &quot;сколько мне будет ровно в эту будущую дату?&quot;. Калькулятор всегда считает от более ранней даты к более поздней, так что пока дата рождения — самая ранняя из двух, всё работает именно так, как и ожидается.</p>
+<p>Это делает инструмент полезным далеко не только для расчёта собственного возраста. Задайте любую более раннюю дату как &quot;дату рождения&quot;, а любую более позднюю — как дату отсчёта, и вы получите точный расчёт времени между ними в годах, месяцах и днях, плюс общее число дней — удобно, чтобы прикинуть продолжительность чего угодно: проекта, отношений или подписки на сервис.</p>
+<h2>Полночь, часовой пояс и что считается &quot;сегодня&quot;</h2>
+<p>Дата &quot;сегодня&quot;, от которой калькулятор отсчитывает возраст, берётся из системных часов и часового пояса вашего собственного устройства, а не с какого-то удалённого сервера. Это важная деталь: если вы путешествуете и меняете часовой пояс, или если открыть страницу за несколько минут до полуночи, а обновить её сразу после, &quot;сегодняшняя&quot; дата может смениться прямо у вас на глазах, и итоговый возраст в днях увеличится ровно на единицу. Это не ошибка расчёта, а естественное следствие того, что понятие &quot;день&quot; всегда привязано к конкретному часовому поясу — человек, родившийся в Москве в 23:50, и человек, родившийся пятью минутами позже во Владивостоке, могут формально &quot;отмечать&quot; смену суток в разное календарное время относительно друг друга. Для подавляющего большинства повседневных задач эта тонкость незаметна, но стоит держать её в уме, если вы считаете возраст с точностью до дня для официального документа или сверяете расчёт с другим источником, который может использовать иной часовой пояс в качестве точки отсчёта.</p>
+<h2>Круглые даты и особые числа дней</h2>
+<p>Многие используют именно цифру общего числа прожитых дней, чтобы отследить приближение красивой круглой даты — пятитысячного, десятитысячного или двадцатитысячного дня жизни. Поскольку это единственное число в выдаче калькулятора растёт линейно и предсказуемо, легко прикинуть, сколько дней осталось до следующего &quot;круглого&quot; рубежа: возьмите ближайшее круглое число сверху и вычтите текущее значение. Некоторые семьи и пары нарочно отмечают такие даты как маленький повод для праздника — это работает и для собственного возраста, и для длительности отношений или брака, если задать дату знакомства как &quot;дату рождения&quot; во втором сценарии использования.</p>
+<h2>Приватно, мгновенно и бесплатно</h2>
+<p>Никакой регистрации, никакой платы и никакой рекламы на пути. Весь калькулятор — это небольшой кусочек кода, который работает прямо на вашем устройстве, поэтому он отвечает в тот же момент, как вы выбрали дату, и продолжает работать даже без подключения к интернету. Введённые вами даты, включая дату рождения, никогда никуда не отправляются, не сохраняются и не передаются третьим лицам — они существуют только на экране и исчезают при перезагрузке страницы.</p>
+<p>Чтобы воспользоваться калькулятором, укажите дату рождения, при желании задайте вторую дату — и получите точный возраст, общее число прожитых дней и отсчёт до следующего дня рождения. Меняйте любую из дат в любой момент — все цифры обновятся мгновенно, так что можно исследовать любой возраст на любой день сколько угодно раз.</p>
+    <section class="faq"><h2>Age calculator FAQ</h2><dl><dt>How is my exact age worked out?</dt><dd>The calculator counts the full years from your birth date to the reference date, then the remaining whole months, then the leftover days, adjusting for the differing lengths of each month so the result is exact.</dd><dt>Can I find my age on a past or future date?</dt><dd>Yes. Leave the second date blank to use today, or set it to any date to see how old you were, or will be, on that day.</dd><dt>Is my date of birth stored?</dt><dd>No. The calculation runs entirely in your browser, so the dates you enter are never uploaded, saved or shared.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/agecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/agecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/agecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/agecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/agecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/agecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/agecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/agecalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/agecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/agecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/agecalc.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palindrome Checker — is your word or phrase a palindrome?</title>
+<meta name="description" content="Free palindrome checker. Instantly test whether a word, phrase or number reads the same forwards and backwards, ignoring case, spaces and punctuation.">
+<link rel="canonical" href="https://mikaio.dev/zh/palindromocheck/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/palindromocheck/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/palindromocheck/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/palindromocheck/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/palindromocheck/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Palindrome Checker — is your word or phrase a palindrome?">
+<meta property="og:description" content="Free palindrome checker. Instantly test whether a word, phrase or number reads the same forwards and backwards, ignoring case, spaces and punctuation.">
+<meta property="og:url" content="https://mikaio.dev/zh/palindromocheck/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Palindrome Checker — is your word or phrase a palindrome?","url":"https://mikaio.dev/zh/palindromocheck/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free palindrome checker. Instantly test whether a word, phrase or number reads the same forwards and backwards, ignoring case, spaces and punctuation."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Palindrome Checker","item":"https://mikaio.dev/zh/palindromocheck/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a palindrome?","acceptedAnswer":{"@type":"Answer","text":"A palindrome is a word, phrase, number or sequence that reads the same forwards and backwards, such as 'level', 'race car' or 'A man, a plan, a canal: Panama'."}},{"@type":"Question","name":"Does it count spaces and punctuation?","acceptedAnswer":{"@type":"Answer","text":"No. The checker ignores capital letters, spaces and punctuation, so 'Was it a car or a cat I saw?' is correctly recognised as a palindrome. It compares only the letters and digits."}},{"@type":"Question","name":"Is my text sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The check happens instantly in your browser, so nothing you type is uploaded, stored or shared."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Palindrome Checker</span></nav>
+  <h1>Palindrome Checker</h1>
+  <p class="lead">Type a word, phrase or number and find out instantly whether it is a palindrome. Spaces, capitals and punctuation are ignored.</p>
+  <section class="widget" id="tool"><div id="pal" data-yes="It&#39;s a palindrome!" data-no="Not a palindrome" data-empty="Waiting for text"><div class="field"><label for="pal-input">Word or phrase</label><textarea id="pal-input" placeholder="Type something like &#39;race car&#39;…"></textarea></div><div class="result"><span class="big" id="pal-out">—</span></div></div></section>
+  <article class="content">
+    <h2>立刻查出一段文字是不是回文</h2>
+<p>回文是指正着读和倒着读完全一样的词语或句子,比如中文里的&quot;上海自来水来自海上&quot;&quot;能上能下&quot;,英文里的&quot;level&quot;或&quot;race car&quot;。这是语言里最令人愉悦的小怪癖之一,发现一句好的回文,感觉就像找到了一个隐藏的规律。但要手动判断一句较长的话是不是真正的回文,其实相当麻烦——你得先去掉空格和标点,忽略大小写(如果是英文),然后从两头往中间比对每一个字符,还不能数漏。这个检测工具会在你打字的同时立刻替你完成这一切。输入一个词、一句话,甚至一串数字,它会马上告诉你是不是回文。所有处理都在浏览器里完成,结果即时,输入的内容不会被上传。</p>
+<p>不需要点击任何按钮,也不用做任何设置。你在框里打字的同时,工具会持续检查你的文字,给出清晰的结果:是回文就显示绿色确认,不是就显示红色提示。这种实时反馈让你可以轻松地做实验、微调一句话,或者挨个测试一串候选词句。</p>
+<h2>检测原理</h2>
+<p>回文检测巧妙的地方在于决定&quot;该比较什么&quot;。没有人会因为&quot;Race car&quot;里有个大写R和中间的空格,就说它不是回文,所以一个好的检测工具会忽略掉所有不是字母或数字的内容。这个工具会先去掉空格、标点和其他符号,把所有英文字母转成小写,只留下最核心的字母和数字;对中文这类没有大小写区分的文字来说,这一步反而更简单,因为不用处理任何大小写转换问题。清理干净后,工具只需要把这串字符和它自身的反转结果做比较:如果两者完全一致,那就是回文。</p>
+<p>这也是为什么&quot;上海自来水来自海上&quot;这样中间带着标点习惯、乍看不像回文的句子,能被正确识别出来。把这句话去掉多余符号后原样比对,正读反读完全一样。因为只关注文字和数字本身,这个检测工具的判断方式,恰好符合人们对回文的自然直觉,而不会被格式细节绊倒。</p>
+<h2>单词、短语和数字</h2>
+<p>回文有好几种形态,这个工具都能处理。最简单的是本身正反读一样的单个词,中文里像&quot;我为我&quot;这种结构工整的短语,或者英文里的&quot;civic&quot;&quot;kayak&quot;&quot;rotor&quot;。还有一类是句子级别的回文,整句话在忽略空格和标点之后正反读一致,英文经典例子是&quot;Was it a car or a cat I saw?&quot;。数字同样可以是回文:1221和90109反过来读还是一样,回文数在趣味数学和解谜游戏里经常出现。因为这个检测工具同时处理字母和数字,不管是数字回文还是文字回文,它都同样好用。</p>
+<p>你也可以用它来测试&quot;差一点&quot;的情况。输入一句你觉得很接近回文的话,红色或绿色的即时结果会告诉你,一个小小的改动——换一个词,或者去掉一个字——是否就能让它变成真正的回文。这把创作回文时的反复试错,变成了一件既快速又好玩的事。</p>
+<h2>回文为什么既有趣又有用</h2>
+<p>大多数人第一次接触回文,是把它当作一种文字游戏,而这也正是它的魅力所在。它出现在谜题、脑筋急转弯、填字游戏和文字游戏里,构造一句既长又有意义的回文,是写作者们几个世纪以来一直乐此不疲的创造力挑战。老师用它让拼写和阅读变得更有趣,因为倒着读一个词会逼着你仔细去看每一个字母。孩子们常常会发现自己的名字或者一些短词恰好就是回文,这是一种小小的惊喜。</p>
+<p>除了乐趣之外,回文的概念也出现在更严肃的场合。在计算机科学里,判断一个序列是否为回文,是教会初学者如何从列表两端进行比较的经典入门练习。在生物学里,DNA中的回文序列在遗传物质的读取和剪切方式上具有真正的意义。你在这里测试的日常版本,其实和它们是同一个核心概念——一种正读反读都一样的对称性——这也是这个概念如此令人满足的部分原因。</p>
+<h2>私密、即时且免费</h2>
+<p>不需要注册,不收费,也没有广告打扰。整个检测工具是一小段运行在你自己设备上的代码,这也是它能一打字就响应、断网也照常工作的原因。你输入的任何内容都不会被上传、存储或分享,文字只存在于你的屏幕上,刷新页面就消失了。</p>
+<p>使用时,直接在框里输入或粘贴一个词、一句话或一串数字,读出结果。因为空格、大小写和标点都会被忽略,你可以按原样输入文字,放心相信给出的答案。随时修改文字,结果都会即时更新,想测试多少个词句都可以,尽情地去寻找回文。不管你是在和朋友争论一句话到底算不算回文,还是在检验自己写的回文,或者单纯对某个词感到好奇,答案都只有一眼之遥。</p>
+    <section class="faq"><h2>Palindrome checker FAQ</h2><dl><dt>What is a palindrome?</dt><dd>A palindrome is a word, phrase, number or sequence that reads the same forwards and backwards, such as &#39;level&#39;, &#39;race car&#39; or &#39;A man, a plan, a canal: Panama&#39;.</dd><dt>Does it count spaces and punctuation?</dt><dd>No. The checker ignores capital letters, spaces and punctuation, so &#39;Was it a car or a cat I saw?&#39; is correctly recognised as a palindrome. It compares only the letters and digits.</dd><dt>Is my text sent anywhere?</dt><dd>No. The check happens instantly in your browser, so nothing you type is uploaded, stored or shared.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/palindromocheck/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/palindromocheck/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/palindromocheck/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/palindromocheck.js" defer></script>
+</body>
+</html>

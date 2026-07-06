@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calorie Calculator — calories per food item</title>
+<meta name="description" content="Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.">
+<link rel="canonical" href="https://mikaio.dev/zh/caloriecalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/caloriecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/caloriecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/caloriecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/caloriecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/caloriecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/caloriecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/caloriecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/caloriecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/caloriecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/caloriecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/caloriecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calorie Calculator — calories per food item">
+<meta property="og:description" content="Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.">
+<meta property="og:url" content="https://mikaio.dev/zh/caloriecalc/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calorie Calculator — calories per food item","url":"https://mikaio.dev/zh/caloriecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Food Calorie Calculator","item":"https://mikaio.dev/zh/caloriecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate are these values?","acceptedAnswer":{"@type":"Answer","text":"Values are approximate and based on typical nutritional data. Actual calories vary with variety, cooking method, and preparation. Use a verified nutrition database or food packaging for precise values."}},{"@type":"Question","name":"Per 100g vs per serving?","acceptedAnswer":{"@type":"Answer","text":"Enter 100 in the quantity field for the per-100g value. Enter your actual portion size to see the calories for that portion."}},{"@type":"Question","name":"Are these raw or cooked values?","acceptedAnswer":{"@type":"Answer","text":"Most values are for raw weight unless noted. Cooked foods typically change in water content, which changes the calorie density per gram."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Food Calorie Calculator</span></nav>
+  <h1>Food Calorie Calculator</h1>
+  <p class="lead">Type a food name and quantity to see the estimated calorie count. Based on approximate values per 100g.</p>
+  <section class="widget" id="tool"><form id="cal-form"><div class="row"><div class="field"><label for="cal-food">Food name</label><input type="text" id="cal-food" placeholder="e.g. banana, rice, chicken" list="cal-list"><datalist id="cal-list"></datalist></div><div class="field"><label for="cal-qty">Amount</label><input type="number" id="cal-qty" value="100" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="cal-unit">Unit</label><select id="cal-unit"><option value="g">g</option><option value="oz">oz</option></select></div></div><div class="result"><span class="hint">Approximate calories: </span><span class="big" id="cal-out">—</span></div></form></section>
+  <article class="content">
+    <h2>查询任意食物的热量</h2>
+<p>计算卡路里是饮食管理和体重控制中最常用的方法之一。了解常见食物的大致热量,能帮你更明智地决定吃什么、吃多少。这个工具收录了60多种常见食物的大致热量数据,基于标准营养参考资料整理而成。</p>
+<h2>使用方法</h2>
+<p>浏览或搜索某种食物,就能看到它每份典型分量以及每100克的大致热量,这样即使不同食物平时的计量方式不一样,也能放在同一个基准上比较。这对发现&quot;看起来分量不大、但按克数一比却热量惊人&quot;的食物特别有用。</p>
+<h2>什么是卡路里</h2>
+<p>卡路里(千卡)是能量的计量单位。在营养学语境里,&quot;卡路里&quot;通常指的就是千卡——把1公斤水加热1摄氏度所需要的能量。身体的一切活动都要消耗热量:呼吸、思考、运动,以及消化食物本身。</p>
+<h2>不同食物的热量密度</h2>
+<p>按每100克计算,不同食物的热量密度差别很大:</p>
+<p><strong>极低热量(每100克低于50千卡)</strong>:大多数非淀粉类蔬菜——生菜(15)、黄瓜(15)、菠菜(23)、番茄(18)、西兰花(34)、草莓(32)</p>
+<p><strong>低热量(每100克50到100千卡)</strong>:大多数水果、乳制品——苹果(52)、香蕉(89)、橙子(47)、牛奶(61)、土豆(77)、鸡蛋(155,单个体积小但密度偏高)</p>
+<p><strong>中等热量(每100克100到200千卡)</strong>:煮熟的谷物、瘦肉——米饭(130)、鸡胸肉(165)、三文鱼(208)、意大利面(131)</p>
+<p><strong>高热量(每100克200到400千卡)</strong>:奶酪、面包、肥肉——面包(265)、牛肉(250)、黑巧克力(600)</p>
+<p><strong>极高热量(每100克400千卡以上)</strong>:食用油、坚果、糖——橄榄油(884)、杏仁(579)、花生酱(588)、白糖(387)</p>
+<h2>怎么看营养标签</h2>
+<p>大多数国家规定包装食品必须标示每100克和每份的营养信息。每100克的数值方便在不同产品之间做比较;每份的数值则告诉你一份典型分量含多少热量,不过标签上定义的&quot;一份&quot;往往比实际吃下去的量要小。</p>
+<h2>三大营养素与热量的关系</h2>
+<p>每一种宏量营养素每克提供的热量是固定的:</p>
+<ul>
+<li>碳水化合物:每克4千卡</li>
+<li>蛋白质:每克4千卡</li>
+<li>脂肪:每克9千卡</li>
+<li>酒精:每克7千卡</li>
+</ul>
+<p>这也是为什么高脂肪食物热量密度高——脂肪每克提供的热量是碳水或蛋白质的两倍还多。</p>
+<h2>为什么同样的热量数字感受不一样</h2>
+<p>两种热量相同的食物,对饥饿感、精力和健康的影响未必一样。富含膳食纤维和蛋白质的食物,通常比富含精制糖和脂肪的食物更抗饿,因为纤维和蛋白质都会延缓消化速度,触发更强的饱腹感信号。这也是为什么&quot;摄入热量等于消耗热量&quot;作为能量平衡原理是对的,但作为实际饮食建议却并不完整——这些热量具体来自哪里,直接决定了长期坚持某个摄入目标有多容易或多困难。</p>
+<h2>体重管理的基本原理</h2>
+<p>体重管理的基本原理很朴素:摄入的热量超过消耗的热量,体重就会增加;反之则会减少。大约7700千卡相当于1公斤体脂肪。每天保持500千卡的热量缺口,大约每周能减掉0.5公斤脂肪。</p>
+<h2>食品标签与营养数据库</h2>
+<p>本工具中的热量数值是近似的参考值。实际热量会因食物的具体品种、成熟度或脂肪含量、烹饪方式以及所用部位而有所不同。更详细的官方营养数据库包括美国的USDA FoodData Central——这是目前公开可查、收录食物种类最全面的数据库之一,涵盖数千种食物包括品牌产品;英国的ONS食物成分表;澳大利亚食物成分数据库;以及巴西的食物成分表(Tabela Brasileira de Composição de Alimentos)。</p>
+<h2>营养素比例的重要性不止于热量</h2>
+<p>虽然总热量摄入决定体重变化,但饮食的营养素构成也会影响其他健康结果。蛋白质摄入量影响减重期间肌肉量的保留、饱腹感和身体成分;脂肪的品质,也就是饱和脂肪与不饱和脂肪的比例,影响心血管健康;碳水化合物的品质,包括血糖生成指数和纤维含量,影响血糖控制和肠道健康——这也是为什么两份总热量完全相同的饮食,对人的感觉和身体成分变化的长期影响可能截然不同。</p>
+<h2>膳食纤维:几乎零热量的营养素</h2>
+<p>膳食纤维本质上属于碳水化合物,但人体的消化酶无法分解它,所以尽管它会计入营养标签上的碳水化合物总克数,实际提供的热量却接近于零。来自蔬菜、豆类、全谷物和水果的纤维能增加饱腹感、喂养有益的肠道菌群、延缓葡萄糖吸收,并降低心血管疾病风险。高纤维饮食与更低的2型糖尿病、结肠癌和心脏病风险相关联,这也是营养指南通常更推荐天然食物而非精加工食品的原因之一,即便两者纸面上的热量数字看起来相近。</p>
+<h2>酒精的热量</h2>
+<p>酒精每克提供7千卡的热量,比碳水化合物或蛋白质高,但比脂肪低。一杯含约14克酒精的标准饮品,光是酒精本身就提供大约100千卡热量,还没算上调酒用的饮料;啤酒、葡萄酒和烈酒因为酒精度和残糖含量不同,总热量差别很大。这是记录饮食时经常被低估的热量来源,因为人们往往把酒精饮品归到&quot;饮料&quot;而不是&quot;食物&quot;的心理分类里,尽管它确实带来实实在在的热量负担。</p>
+<h2>私密且即时</h2>
+<p>所有计算都完全在你的浏览器中完成,结果即时呈现,你吃了什么、喝了什么的任何数据都不会被发送到服务器、记录或分享。</p>
+    <section class="faq"><h2>Calorie calculator FAQ</h2><dl><dt>How accurate are these values?</dt><dd>Values are approximate and based on typical nutritional data. Actual calories vary with variety, cooking method, and preparation. Use a verified nutrition database or food packaging for precise values.</dd><dt>Per 100g vs per serving?</dt><dd>Enter 100 in the quantity field for the per-100g value. Enter your actual portion size to see the calories for that portion.</dd><dt>Are these raw or cooked values?</dt><dd>Most values are for raw weight unless noted. Cooked foods typically change in water content, which changes the calorie density per gram.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/caloriecalc/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/caloriecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/caloriecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/caloriecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/caloriecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/caloriecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/caloriecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/caloriecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/caloriecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/caloriecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/caloriecalc.js" defer></script>
+</body>
+</html>

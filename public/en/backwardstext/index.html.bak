@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backwards Text Generator — reverse text, words or lines</title>
+<meta name="description" content="Free backwards text generator. Instantly reverse the letters, the word order or the line order of any text in your browser, then copy the result.">
+<link rel="canonical" href="https://mikaio.dev/en/backwardstext/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/backwardstext/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/backwardstext/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/backwardstext/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/backwardstext/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/backwardstext/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/backwardstext/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/backwardstext/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/backwardstext/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/backwardstext/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/backwardstext/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/backwardstext/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Backwards Text Generator — reverse text, words or lines">
+<meta property="og:description" content="Free backwards text generator. Instantly reverse the letters, the word order or the line order of any text in your browser, then copy the result.">
+<meta property="og:url" content="https://mikaio.dev/en/backwardstext/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Backwards Text Generator — reverse text, words or lines","url":"https://mikaio.dev/en/backwardstext/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free backwards text generator. Instantly reverse the letters, the word order or the line order of any text in your browser, then copy the result."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Backwards Text Generator","item":"https://mikaio.dev/en/backwardstext/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between the three modes?","acceptedAnswer":{"@type":"Answer","text":"Reverse letters flips every character so 'hello' becomes 'olleh'. Reverse word order keeps each word intact but puts them in the opposite sequence. Reverse line order flips a list or block from bottom to top."}},{"@type":"Question","name":"Will emoji and accented letters break?","acceptedAnswer":{"@type":"Answer","text":"No. The tool reverses text by whole characters, so emoji, accented letters and other symbols stay intact rather than being split apart."}},{"@type":"Question","name":"Is my text uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Reversing happens instantly in your browser, so nothing you type is sent to a server, saved or shared."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Backwards Text Generator</span></nav>
+  <h1>Backwards Text Generator</h1>
+  <p class="lead">Type or paste text and it is reversed as you go. Switch between reversing letters, words or lines, then copy the result.</p>
+  <section class="widget" id="tool"><div id="bw"><div class="field"><label for="bw-input">Your text</label><textarea id="bw-input" placeholder="Type or paste text to reverse…"></textarea></div><div class="cc-btns row"><button type="button" class="btn" data-mode="chars" aria-pressed="true">Reverse letters</button><button type="button" class="btn" data-mode="words" aria-pressed="false">Reverse word order</button><button type="button" class="btn" data-mode="lines" aria-pressed="false">Reverse line order</button></div><div class="field"><label for="bw-output">Reversed text</label><textarea id="bw-output" readonly></textarea></div><button type="button" class="btn secondary" data-copy="#bw-output" data-copied="Copied!">Copy result</button></div></section>
+  <article class="content">
+    <h2>Turn any text back to front in an instant</h2>
+<p>Reversing text is one of those small tricks that turns out to be useful far more often than you would expect. Whether you want to write a secret message that reads normally only in a mirror, create a quirky username, solve a word puzzle, or check whether a phrase is a palindrome, flipping the order of the characters is the starting point. This backwards text generator does it the moment you type, and it goes further than most: as well as reversing the individual letters, it can reverse the order of whole words or flip a list of lines from bottom to top. Everything happens in your browser, so the result appears instantly and nothing you enter is ever uploaded.</p>
+<p>Using it could not be simpler. Type or paste your text into the first box and the reversed version appears in the second box straight away, updating with every keystroke. Three buttons let you choose exactly what &quot;backwards&quot; should mean, and a copy button places the finished result on your clipboard ready to paste wherever you need it. There is no limit on length, so you can reverse a single word or a whole page just as easily.</p>
+<h2>The three ways to reverse</h2>
+<p><strong>Reverse letters</strong> flips every character in your text, so &quot;hello world&quot; becomes &quot;dlrow olleh&quot;. This is the classic mirror-writing effect and the one most people mean by &quot;backwards text&quot;. It is the mode you want for secret messages, for solving anagram-style puzzles, and for the playful reversed writing that looks striking in a bio or a caption.</p>
+<p><strong>Reverse word order</strong> keeps each word spelled correctly but arranges the words in the opposite sequence, turning &quot;the quick brown fox&quot; into &quot;fox brown quick the&quot;. This is handy when you want to shuffle a sentence around, experiment with word order, or create a certain poetic or comic effect without turning the words themselves into gibberish.</p>
+<p><strong>Reverse line order</strong> flips a block of text so the last line becomes the first. It is genuinely practical for everyday tasks: reversing a chronological list so the newest entry sits on top, turning a bottom-to-top log the right way up, or simply flipping any list without retyping it. Because it works line by line, the words and letters within each line stay exactly as you wrote them.</p>
+<h2>Where reversed text comes in handy</h2>
+<p>The most common reason people reach for a text reverser is fun and curiosity. Reversed writing looks intriguing, so it turns up in social media names, gaming handles, captions and playful messages between friends. Writing a short phrase backwards and asking someone to decode it, or to hold it up to a mirror, is a simple little game that always gets a reaction. Some people use letter reversal as a light form of obfuscation, making a note that is not meant to be read at a glance.</p>
+<p>There are practical uses too. Word-game and puzzle fans use letter reversal to test palindromes — words or phrases that read the same forwards and backwards, like &quot;level&quot; or &quot;never odd or even&quot; — by comparing the original with its reverse. Writers and editors use word-order and line-order reversal to rearrange text quickly. Anyone working with lists, logs or exported data sometimes needs to flip the order of lines, and doing it here takes a second instead of the tedious job of cutting and pasting each line by hand.</p>
+<h2>Careful with characters</h2>
+<p>Reversing text sounds trivial, but it is surprisingly easy to get wrong. A naive approach that flips a string character by character can split modern characters that are actually made of several pieces — many emoji, some accented letters and various symbols are stored as more than one underlying unit, and chopping through them produces broken squares or nonsense. This tool reverses text by whole characters as a reader would recognise them, so an emoji stays a whole emoji and an accented letter such as &quot;é&quot; stays intact rather than falling apart into its accent and its base letter.</p>
+<p>That care means the reverser behaves sensibly across languages and scripts. Text with accents, emoji, punctuation and mixed alphabets all reverse cleanly. Bear in mind that reversing the letters of text written in a right-to-left script, such as Arabic or Hebrew, will change how it displays, since those scripts already run in the opposite direction; the tool still flips the underlying character order faithfully, which is exactly what you want for puzzles and effects.</p>
+<h2>Private, instant and free</h2>
+<p>There is no sign-up, no cost and no waiting. The whole reverser is a small piece of code that runs on your own device, which is why it updates the instant you type and keeps working with no internet connection. Nothing you paste is sent anywhere, stored or shared, so it is safe to use even with private notes or messages you would rather keep to yourself.</p>
+<p>To get started, type or paste your text into the first box and watch the reversed version appear below. Tap the buttons to switch between reversing letters, words or lines until you get the effect you are after, then use the copy button to grab the result. Change the text at any time and the output keeps pace, so you can experiment freely until it looks exactly right. Nothing is permanent here, and there is no limit on how many times you can try, so feel free to keep tweaking your wording and switching modes until the reversed text reads precisely the way you imagined.</p>
+    <section class="faq"><h2>Backwards text FAQ</h2><dl><dt>What is the difference between the three modes?</dt><dd>Reverse letters flips every character so &#39;hello&#39; becomes &#39;olleh&#39;. Reverse word order keeps each word intact but puts them in the opposite sequence. Reverse line order flips a list or block from bottom to top.</dd><dt>Will emoji and accented letters break?</dt><dd>No. The tool reverses text by whole characters, so emoji, accented letters and other symbols stay intact rather than being split apart.</dd><dt>Is my text uploaded?</dt><dd>No. Reversing happens instantly in your browser, so nothing you type is sent to a server, saved or shared.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/backwardstext/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/backwardstext/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/backwardstext/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/backwardstext/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/backwardstext/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/backwardstext/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/backwardstext/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/backwardstext/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/backwardstext/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/backwardstext/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/backwardstext.js" defer></script>
+</body>
+</html>

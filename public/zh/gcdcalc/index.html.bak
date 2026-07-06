@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GCD Calculator — Greatest Common Divisor of multiple numbers</title>
+<meta name="description" content="Free GCD calculator. Find the Greatest Common Divisor (GCD/GCF/HCF) of any set of numbers. Also shows the LCM. Instant results in your browser.">
+<link rel="canonical" href="https://mikaio.dev/zh/gcdcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gcdcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gcdcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gcdcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gcdcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gcdcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gcdcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gcdcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GCD Calculator — Greatest Common Divisor of multiple numbers">
+<meta property="og:description" content="Free GCD calculator. Find the Greatest Common Divisor (GCD/GCF/HCF) of any set of numbers. Also shows the LCM. Instant results in your browser.">
+<meta property="og:url" content="https://mikaio.dev/zh/gcdcalc/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"GCD Calculator — Greatest Common Divisor of multiple numbers","url":"https://mikaio.dev/zh/gcdcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free GCD calculator. Find the Greatest Common Divisor (GCD/GCF/HCF) of any set of numbers. Also shows the LCM. Instant results in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"GCD Calculator","item":"https://mikaio.dev/zh/gcdcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the GCD?","acceptedAnswer":{"@type":"Answer","text":"The Greatest Common Divisor (GCD), also called Greatest Common Factor (GCF) or Highest Common Factor (HCF), is the largest positive integer that divides all given numbers without a remainder. GCD(12, 18) = 6."}},{"@type":"Question","name":"What is GCD used for?","acceptedAnswer":{"@type":"Answer","text":"GCD is used to simplify fractions — divide numerator and denominator by their GCD. It is also used in cryptography, computer science algorithms, and determining the pitch of gear teeth in engineering."}},{"@type":"Question","name":"What if the numbers share no common factor?","acceptedAnswer":{"@type":"Answer","text":"If two numbers share no common factor other than 1, their GCD is 1 and they are called coprime or relatively prime."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>GCD Calculator</span></nav>
+  <h1>GCD Calculator</h1>
+  <p class="lead">Enter two or more numbers separated by commas to find their Greatest Common Divisor.</p>
+  <section class="widget" id="tool"><form id="gcd-form"><div class="field"><label for="gcd-nums">Numbers (comma-separated)</label><input type="text" id="gcd-nums" placeholder="e.g. 48, 36, 24" inputmode="numeric"></div><div class="result"><span class="hint">GCD: </span><span class="big" id="gcd-out">—</span></div><div id="gcd-lcm-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>求任意几个数的最大公约数</h2>
+<p>最大公约数(GCD),也叫最大公因数,是能同时整除所有给定数字、且不留余数的最大整数。输入两个或更多用逗号隔开的数字,计算器就会用辗转相除法立刻算出结果。</p>
+<h2>定义与例子</h2>
+<ul>
+<li>GCD(12, 18) = 6——因为6是同时能整除12和18的最大数字。</li>
+<li>GCD(48, 36, 24) = 12——能同时整除这三个数的最大数字。</li>
+<li>GCD(7, 13) = 1——这两个数互质(除了1以外没有公因数)。</li>
+</ul>
+<h2>辗转相除法</h2>
+<p>计算最大公约数最著名的方法是辗转相除法,由欧几里得约在公元前300年的《几何原本》中记载。这个算法的原理是:GCD(a, b) = GCD(b, a mod b),不断重复直到b等于0。举例来说:GCD(48, 36) → GCD(36, 12) → GCD(12, 0) = 12。</p>
+<h2>化简分数</h2>
+<p>最大公约数在日常生活中最常见的用途就是把分数化简到最简形式。要化简48/72,先算出GCD(48, 72) = 24,再用24分别去除分子和分母:2/3。这个结果已经彻底化简,因为分子和分母现在互质了。</p>
+<h2>密码学</h2>
+<p>保护大部分互联网通信安全的RSA加密算法,其根基就是涉及最大公约数和互质数的数论。RSA密钥生成算法需要选取两个大质数,这两个质数彼此互质,和它们的乘积也互质。</p>
+<h2>把东西分成相等的组</h2>
+<p>最大公约数一个很实际的用途,是把不同数量的物品分成尽可能多的、完全相同的组,而且不留剩余。假设你有48个苹果和36个橙子,想用光所有水果、不留剩余地做出完全一样的果篮,能做出的最大篮数就是GCD(48, 36) = 12篮,每篮装4个苹果和3个橙子。同样的道理也适用于把布料或木材裁成等长的若干段、把不同大小房间里的椅子排成相等的行数,或者把一笔预算按最大的相等份额分给各个部门。</p>
+<h2>工程应用</h2>
+<p>在机械工程里,两个齿轮齿数的最大公约数决定了同一对齿相遇的频率。如果齿轮A有48个齿,齿轮B有36个齿,GCD(48, 36) = 12,意味着齿轮A每转过12个齿,就会和齿轮B的每12个齿重新啮合一次。</p>
+<h2>使用方法</h2>
+<p>在输入框里用逗号隔开输入你的数字——可以是两个,也可以是任意多个。点击计算,整组数字的最大公约数会立刻显示出来,同时给出辗转相除的每一步过程,让你清楚地看到答案是怎么得出来的,而不是一个黑箱结果。只输入一个数字,或者输入的数字除了1以外没有公因数,工具都能妥善处理:后一种情况会直接报告最大公约数为1,说明这些数字互质。</p>
+<h2>为什么辗转相除法如此高效</h2>
+<p>在欧几里得的方法出现之前,求最大公约数意味着要列出每个数的所有因数,再挑出它们共有的最大那个——数字小的时候还行得通,数字一大就慢得没法用。辗转相除法则是反复用较大数除以较小数所得的余数替换较大数,让问题的规模迅速缩小。对任何现实大小的两个数,通常不到五十步就能算完,这也是为什么它至今仍是标准教学方法,也是几乎每个计算器、表格函数和编程语言库里计算最大公约数时内置的算法。</p>
+<h2>推广到两个以上的数字</h2>
+<p>当你输入三个或更多数字时,计算器并不需要一个全新的算法——它只是反复应用两个数的情形。整个列表的最大公约数,等于前两个数的最大公约数再和第三个数求最大公约数,依此类推:GCD(a, b, c) = GCD(GCD(a, b), c)。这是成立的,因为任何能同时整除a、b、c的数,必然能整除其中任意两个数的最大公约数,所以两两化简的过程不会丢失任何信息。这很好地说明了一个简单的基础模块——两个数的最大公约数——是如何干净利落地扩展到处理任意长的列表的。</p>
+<h2>互质数,以及最大公约数为1说明了什么</h2>
+<p>当计算器报告最大公约数是1时,你输入的这些数字被称为互质数,或者说彼此互素,意思是它们没有大于1的公因数,即便每个数字自身可能有很多因数。比如8和15是互质的,尽管8 = 2×2×2,15 = 3×5——它们只是没有共享任何相同的质数因子。互质性在数论和密码学里随处可见,因为许多算法都依赖于选取那些保证不共享隐藏公共结构的数字。</p>
+<h2>一步步演示一个例子</h2>
+<p>看一看辗转相除法求GCD(48, 18)的过程。首先,48 = 2×18 + 12,问题变成GCD(18, 12);接着,18 = 1×12 + 6,变成GCD(12, 6);最后,12 = 2×6 + 0,余数归零,最后一个非零余数6就是最大公约数。算法的每一步都能快速缩小涉及的数字规模,这正是为什么即便面对非常大的数字,它也只需要寥寥几步就能算完,而列出所有因数的方法则会随着数字增大而急剧变慢。</p>
+<h2>私密且即时</h2>
+<p>所有计算都完全在你的浏览器中使用辗转相除法完成,输入即刻出结果,你输入的任何数字都不会被发送到服务器、记录或分享。页面加载完成后即可离线使用,每次计算在关闭或刷新标签页的瞬间就会被丢弃。</p>
+    <section class="faq"><h2>GCD calculator FAQ</h2><dl><dt>What is the GCD?</dt><dd>The Greatest Common Divisor (GCD), also called Greatest Common Factor (GCF) or Highest Common Factor (HCF), is the largest positive integer that divides all given numbers without a remainder. GCD(12, 18) = 6.</dd><dt>What is GCD used for?</dt><dd>GCD is used to simplify fractions — divide numerator and denominator by their GCD. It is also used in cryptography, computer science algorithms, and determining the pitch of gear teeth in engineering.</dd><dt>What if the numbers share no common factor?</dt><dd>If two numbers share no common factor other than 1, their GCD is 1 and they are called coprime or relatively prime.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/gcdcalc.js" defer></script>
+</body>
+</html>

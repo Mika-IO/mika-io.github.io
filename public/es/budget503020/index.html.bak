@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>50/30/20 Budget Calculator — needs, wants &amp; savings</title>
+<meta name="description" content="Free 50/30/20 budget rule calculator. Enter your monthly income to instantly see how much to allocate to needs, wants, and savings.">
+<link rel="canonical" href="https://mikaio.dev/es/budget503020/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/budget503020/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/budget503020/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/budget503020/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/budget503020/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/budget503020/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/budget503020/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/budget503020/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/budget503020/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/budget503020/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/budget503020/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/budget503020/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="50/30/20 Budget Calculator — needs, wants &amp; savings">
+<meta property="og:description" content="Free 50/30/20 budget rule calculator. Enter your monthly income to instantly see how much to allocate to needs, wants, and savings.">
+<meta property="og:url" content="https://mikaio.dev/es/budget503020/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"50/30/20 Budget Calculator — needs, wants & savings","url":"https://mikaio.dev/es/budget503020/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Free 50/30/20 budget rule calculator. Enter your monthly income to instantly see how much to allocate to needs, wants, and savings."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"50/30/20 Budget Rule Calculator","item":"https://mikaio.dev/es/budget503020/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the 50/30/20 rule?","acceptedAnswer":{"@type":"Answer","text":"The 50/30/20 rule is a simple budgeting framework: allocate 50% of after-tax income to needs (rent, food, utilities), 30% to wants (dining, entertainment, hobbies), and 20% to savings and debt repayment."}},{"@type":"Question","name":"Who created the 50/30/20 rule?","acceptedAnswer":{"@type":"Answer","text":"The rule was popularized by US Senator Elizabeth Warren and her daughter Amelia Warren Tyagi in their 2005 book 'All Your Worth: The Ultimate Lifetime Money Plan'."}},{"@type":"Question","name":"What counts as a 'need' vs a 'want'?","acceptedAnswer":{"@type":"Answer","text":"Needs are expenses required to live and work: rent/mortgage, groceries, utilities, transportation to work, minimum debt payments, and insurance. Wants are lifestyle upgrades: streaming services, restaurants, vacations, and gym memberships."}},{"@type":"Question","name":"Can I adjust the percentages?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. In high cost-of-living cities, needs may consume 60-70% of income. Adjust the ratios to fit your situation—the goal is awareness and intentional spending, not rigid adherence."}},{"@type":"Question","name":"Does the 20% savings include retirement contributions?","acceptedAnswer":{"@type":"Answer","text":"Yes. The savings category covers emergency fund contributions, 401(k)/IRA contributions, and extra debt payments beyond minimums. Prioritize high-interest debt before investing."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>50/30/20 Budget Rule Calculator</span></nav>
+  <h1>50/30/20 Budget Rule Calculator</h1>
+  <p class="lead">Enter your monthly take-home income to see your recommended budget split: 50% for needs, 30% for wants, and 20% for savings.</p>
+  <section class="widget" id="tool"><form id='b5020-form'><div class='row'><div class='field'><label for='b5020-income'>Monthly take-home income</label><input type='number' id='b5020-income' step='any' min='0' inputmode='decimal'></div></div><div class='result'><span class='hint'>Needs (50%): </span><span class='big' id='b5020-out'>—</span></div><div id='b5020-detail' style='opacity:0.7;font-size:0.9rem;margin-top:0.5rem'></div></form></section>
+  <article class="content">
+    <h2>La regla 50/30/20: un marco sencillo para cualquier presupuesto</h2>
+<p>La regla 50/30/20 es uno de los marcos de finanzas personales más recomendados precisamente porque es lo bastante simple como para recordarlo, pero lo bastante flexible como para aplicarlo a casi cualquier nivel de ingresos. En esencia, divide tus ingresos mensuales después de impuestos en tres grandes categorías: 50% para necesidades, 30% para deseos, y 20% para ahorro y pago de deudas. Esta calculadora hace las cuentas al instante para que puedas centrarte en lo que de verdad importa: llevarlo a la práctica.</p>
+<h2>De dónde viene la regla</h2>
+<p>La senadora estadounidense Elizabeth Warren, profesora de derecho concursal antes de dedicarse a la política, y su hija Amelia Warren Tyagi presentaron el marco 50/30/20 en su libro de 2005 <em>All Your Worth: The Ultimate Lifetime Money Plan</em>. Warren y Tyagi analizaron décadas de datos de gasto familiar y concluyeron que las familias que mantenían sus necesidades por debajo del 50% de sus ingresos eran mucho más resistentes ante imprevistos financieros —pérdida de empleo, emergencias médicas, divorcio— que aquellas que dejaban que los gastos esenciales se comieran todo el margen de ahorro.</p>
+<p>La elegancia de la regla es que no exige ninguna hoja de cálculo ni un seguimiento categoría por categoría. Solo necesitas conocer tus ingresos después de impuestos y comprobar si tu gasto encaja dentro de cada bloque.</p>
+<h2>Qué cuenta como necesidad</h2>
+<p>Las necesidades son gastos innegociables — costes que debes pagar para mantener tu nivel de vida básico y tu capacidad de trabajar:</p>
+<ul>
+<li><strong>Vivienda</strong>: alquiler o cuota de la hipoteca (capital + intereses + impuestos + seguro)</li>
+<li><strong>Suministros</strong>: electricidad, gas, agua, internet (plan básico), teléfono (plan básico)</li>
+<li><strong>Alimentación</strong>: comida comprada para cocinar en casa (no para comer fuera)</li>
+<li><strong>Transporte</strong>: cuota del coche, seguro, combustible, transporte público para ir al trabajo</li>
+<li><strong>Pagos mínimos de deuda</strong>: el mínimo exigido en tarjetas de crédito, préstamos estudiantiles y otras deudas</li>
+<li><strong>Seguros</strong>: primas de seguro médico, de vida e invalidez</li>
+<li><strong>Cuidado infantil</strong>: gastos necesarios para que puedas trabajar</li>
+</ul>
+<p>Si tus necesidades superan el 50% de tus ingresos, es una señal para replantearte las cosas: ¿puedes encontrar una vivienda más barata, refinanciar el coche o reducir las primas del seguro? En ciudades con un coste de vida elevado, las necesidades suelen consumir entre un 60% y un 65% de los ingresos, lo que exige adaptar el marco.</p>
+<h2>Qué cuenta como deseo</h2>
+<p>Los deseos son gastos discrecionales — cosas que mejoran tu calidad de vida pero que no son estrictamente necesarias:</p>
+<ul>
+<li><strong>Comer fuera y comida para llevar</strong></li>
+<li><strong>Entretenimiento</strong>: servicios de streaming (Netflix, Spotify), cine, conciertos</li>
+<li><strong>Viajes y vacaciones</strong></li>
+<li><strong>Suscripciones al gimnasio y material para aficiones</strong></li>
+<li><strong>Ropa más allá de lo básico</strong></li>
+<li><strong>Planes de teléfono y dispositivos mejorados</strong></li>
+<li><strong>Versiones más caras de cosas que podrías tener más baratas</strong> (un piso más bonito del que necesitas, un coche más nuevo del que hace falta)</li>
+</ul>
+<p>La línea entre necesidades y deseos puede difuminarse. Internet es una necesidad; un paquete adicional de streaming encima es un deseo. El transporte básico es una necesidad; alquilar un vehículo de lujo cuando bastaría un coche de segunda mano fiable es un deseo.</p>
+<h2>El bloque del 20% de ahorro</h2>
+<p>La categoría de ahorro y pago de deudas es la más importante para la salud financiera a largo plazo:</p>
+<ol>
+<li><strong>Fondo de emergencia</strong>: acumula entre 3 y 6 meses de gastos esenciales en una cuenta de ahorro de alto rendimiento antes de invertir de forma agresiva.</li>
+<li><strong>Deuda de interés alto</strong>: paga las tarjetas de crédito y los préstamos personales por encima del 7-8% de TAE antes de invertir — es un retorno garantizado.</li>
+<li><strong>Aportaciones a la jubilación</strong>: planes de pensiones (especialmente si tu empresa iguala tu aportación), cuentas de ahorro individuales para la jubilación.</li>
+<li><strong>Otras inversiones</strong>: cuentas de inversión sujetas a impuestos, bienes raíces, planes de ahorro para estudios.</li>
+<li><strong>Fondos hundidos</strong>: ahorrar cada mes para gastos futuros conocidos (cambio de coche, reparaciones del hogar, vacaciones).</li>
+</ol>
+<h2>Un ejemplo resuelto</h2>
+<p>Supongamos que tu salario neto mensual es de 3.000 euros:</p>
+<p>| Categoría | % | Cantidad |</p>
+<p>|---|---|---|</p>
+<p>| Necesidades | 50% | 1.500 € |</p>
+<p>| Deseos | 30% | 900 € |</p>
+<p>| Ahorro | 20% | 600 € |</p>
+<p>Tu presupuesto de 1.500 € para necesidades podría verse así: alquiler 850 € + suministros 90 € + comida 220 € + seguro del coche 70 € + pago mínimo del préstamo 120 € + teléfono 50 € = 1.400 €. Estás con margen de sobra.</p>
+<p>Tus 900 € de deseos podrían cubrir: streaming 30 € + comer fuera 250 € + gimnasio 30 € + ropa 120 € + planes de fin de semana 200 € + varios 270 €.</p>
+<p>Tu ahorro mensual de 600 €: 300 € al plan de pensiones + 150 € al fondo de emergencia + 150 € de pago extra al préstamo estudiantil.</p>
+<h2>Cómo adaptar la regla a tu situación</h2>
+<p>La regla 50/30/20 es un punto de partida, no un mandamiento. Variaciones habituales:</p>
+<ul>
+<li><strong>Carga alta de deuda</strong>: pasa temporalmente a un 50/20/30 (más para ahorro y deuda, menos para deseos) hasta eliminar la deuda de interés alto.</li>
+<li><strong>Ingresos bajos</strong>: las necesidades básicas pueden consumir entre un 70% y un 80% de los ingresos. Céntrate en cualquier excedente, por pequeño que sea — incluso ahorrar 50 € al mes crea el hábito.</li>
+<li><strong>Ingresos altos</strong>: puede que descubras que tus necesidades y deseos caben fácilmente en porcentajes más pequeños, dejando más de un 20% para el ahorro. Es un buen problema que tener.</li>
+<li><strong>Quien busca la independencia financiera</strong>: quienes persiguen la independencia financiera suelen apuntar a tasas de ahorro del 50% al 70%, comprimiendo drásticamente la categoría de deseos.</li>
+</ul>
+<h2>El poder psicológico de los bloques</h2>
+<p>La investigación en economía conductual muestra que agrupar el dinero en cuentas mentales reduce el gasto excesivo. Cuando sabes que 900 € son tu presupuesto de deseos, tomas decisiones más deliberadas dentro de ese margen. El marco 50/30/20 crea tres grandes cuentas mentales fáciles de seguir sin necesidad de un presupuesto detallado línea por línea.</p>
+<p>Combina la regla con una revisión semanal de cinco minutos: repasa los movimientos de tu banco y tu tarjeta de crédito de la última semana y asigna mentalmente cada uno a necesidades, deseos o ahorro. Esta atención ligera evita sustos de presupuesto a final de mes.</p>
+<h2>Aplicar la regla a ingresos irregulares</h2>
+<p>Si trabajas por cuenta propia, como autónomo o con ingresos variables por comisión, aplica los porcentajes sobre una base conservadora (tu mes típico más bajo). En los meses de mayores ingresos, destina el excedente sobre todo al ahorro. Esto evita la inflación del estilo de vida y crea un colchón para las épocas más flojas.</p>
+<h2>Errores comunes que conviene evitar</h2>
+<ul>
+<li><strong>Usar el ingreso bruto en lugar del neto</strong>: aplica los porcentajes sobre el salario que recibes después de impuestos y deducciones obligatorias, no sobre el salario bruto.</li>
+<li><strong>Ignorar los gastos irregulares</strong>: los gastos anuales (primas de seguro, impuestos del vehículo, regalos navideños) deben dividirse entre 12 e incluirse mensualmente.</li>
+<li><strong>Tratar los pagos mínimos de deuda como ahorro</strong>: los mínimos pertenecen al bloque de necesidades. Solo los pagos adicionales por encima del mínimo cuentan como ahorro.</li>
+<li><strong>Parálisis por categorización rígida</strong>: si no estás seguro de si algo es una necesidad o un deseo, elige una opción y sigue adelante. La constancia a lo largo del tiempo importa más que una categorización perfecta.</li>
+</ul>
+<h2>Herramientas que complementan esta calculadora</h2>
+<p>Después de fijar tus objetivos 50/30/20, estas herramientas te ayudan a profundizar:</p>
+<ul>
+<li>Una <strong>calculadora de patrimonio neto</strong> hace seguimiento de si tu ahorro se está traduciendo en un crecimiento real de tu riqueza.</li>
+<li>Una <strong>calculadora de pago de deudas</strong> muestra cuánto aceleran tu libertad financiera los pagos extra dentro del bloque de ahorro.</li>
+<li>Una <strong>calculadora de fondo de emergencia</strong> te dice exactamente qué tamaño necesita tener tu colchón.</li>
+</ul>
+<h2>Privacidad</h2>
+<p>Todos los cálculos ocurren enteramente en tu navegador. No se envía ningún dato a ningún servidor.</p>
+    <section class="faq"><h2>50/30/20 Budget FAQ</h2><dl><dt>What is the 50/30/20 rule?</dt><dd>The 50/30/20 rule is a simple budgeting framework: allocate 50% of after-tax income to needs (rent, food, utilities), 30% to wants (dining, entertainment, hobbies), and 20% to savings and debt repayment.</dd><dt>Who created the 50/30/20 rule?</dt><dd>The rule was popularized by US Senator Elizabeth Warren and her daughter Amelia Warren Tyagi in their 2005 book &#39;All Your Worth: The Ultimate Lifetime Money Plan&#39;.</dd><dt>What counts as a &#39;need&#39; vs a &#39;want&#39;?</dt><dd>Needs are expenses required to live and work: rent/mortgage, groceries, utilities, transportation to work, minimum debt payments, and insurance. Wants are lifestyle upgrades: streaming services, restaurants, vacations, and gym memberships.</dd><dt>Can I adjust the percentages?</dt><dd>Absolutely. In high cost-of-living cities, needs may consume 60-70% of income. Adjust the ratios to fit your situation—the goal is awareness and intentional spending, not rigid adherence.</dd><dt>Does the 20% savings include retirement contributions?</dt><dd>Yes. The savings category covers emergency fund contributions, 401(k)/IRA contributions, and extra debt payments beyond minimums. Prioritize high-interest debt before investing.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/budget503020/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/budget503020/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/budget503020/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/budget503020/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/budget503020/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/budget503020/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/budget503020/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/budget503020/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/budget503020/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/budget503020/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/budget503020.js" defer></script>
+</body>
+</html>

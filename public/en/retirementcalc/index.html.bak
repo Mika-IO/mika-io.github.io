@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retirement Calculator — how much will you save?</title>
+<meta name="description" content="Free retirement calculator. Estimate your retirement savings based on monthly contributions, expected return, and years to retirement.">
+<link rel="canonical" href="https://mikaio.dev/en/retirementcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/retirementcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/retirementcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/retirementcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/retirementcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Retirement Calculator — how much will you save?">
+<meta property="og:description" content="Free retirement calculator. Estimate your retirement savings based on monthly contributions, expected return, and years to retirement.">
+<meta property="og:url" content="https://mikaio.dev/en/retirementcalc/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Retirement Calculator — how much will you save?","url":"https://mikaio.dev/en/retirementcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free retirement calculator. Estimate your retirement savings based on monthly contributions, expected return, and years to retirement."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Retirement Savings Calculator","item":"https://mikaio.dev/en/retirementcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What interest rate should I use?","acceptedAnswer":{"@type":"Answer","text":"Historical stock market returns average around 7% annually after inflation. For a conservative estimate use 5–6%; for a more optimistic estimate use 8–10%."}},{"@type":"Question","name":"Does this include employer match?","acceptedAnswer":{"@type":"Answer","text":"No. Add your employer match to your monthly contribution amount to include it."}},{"@type":"Question","name":"What about inflation?","acceptedAnswer":{"@type":"Answer","text":"Using 7% assumes returns after inflation (real returns). If you use nominal returns (e.g. 10%), the purchasing power of the result will be lower."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Retirement Savings Calculator</span></nav>
+  <h1>Retirement Savings Calculator</h1>
+  <p class="lead">Enter your age, target retirement age, monthly savings, and expected return to estimate your retirement fund.</p>
+  <section class="widget" id="tool"><form id="rc-form"><div class="row"><div class="field"><label for="rc-age">Current age</label><input type="number" id="rc-age" value="30" min="1" max="100" step="1" inputmode="numeric"></div><div class="field"><label for="rc-retire">Retirement age</label><input type="number" id="rc-retire" value="65" min="1" max="100" step="1" inputmode="numeric"></div><div class="field"><label for="rc-save">Monthly savings</label><input type="number" id="rc-save" value="500" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="rc-rate">Annual return %</label><input type="number" id="rc-rate" value="7" step="any" min="0" inputmode="decimal"></div></div><div class="result"><span class="hint">Estimated savings at retirement: </span><span class="big" id="rc-out">—</span></div><div id="rc-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Estimate how much you&#39;ll have when you retire</h2>
+<p>Retirement planning starts with a simple question: if I save a certain amount each month, how much will I have when I stop working? This calculator gives you that number based on your current age, your target retirement age, your monthly savings, and the expected annual return on your investments.</p>
+<h2>How the calculation works</h2>
+<p>The formula for the future value of a regular monthly contribution is:</p>
+<p>FV = PMT × [(1 + r)^n − 1] / r</p>
+<p>Where PMT is the monthly payment, r is the monthly interest rate (annual rate ÷ 12), and n is the total number of months (years × 12).</p>
+<p>This is the standard future value of an annuity formula. It assumes you make consistent monthly contributions and that returns compound monthly.</p>
+<h2>The power of time</h2>
+<p>Time is the most important variable in retirement savings. Starting earlier has a dramatically larger effect than increasing contributions later.</p>
+<p>Example: Saving $500/month at 7% annual return:</p>
+<ul>
+<li>Starting at age 25 (40 years): $1,327,000</li>
+<li>Starting at age 35 (30 years): $600,000</li>
+<li>Starting at age 45 (20 years): $247,000</li>
+</ul>
+<p>The person who starts at 25 accumulates more than twice as much as the person who starts at 35, despite only contributing for 10 more years.</p>
+<h2>What interest rate to use</h2>
+<p>The choice of expected return significantly affects the result:</p>
+<ul>
+<li>5%: conservative estimate, appropriate for a bond-heavy portfolio</li>
+<li>7%: the traditional rule of thumb for a diversified stock-and-bond portfolio (real, inflation-adjusted return)</li>
+<li>10%: approximate historical nominal US stock market return (before inflation)</li>
+</ul>
+<p>Using real returns (after inflation) makes the result easier to interpret in today&#39;s dollars. Using nominal returns requires discounting the result for future inflation.</p>
+<h2>What this calculator does not account for</h2>
+<p>This projection assumes a constant monthly contribution and a constant annual return, which is a simplification of real life. It does not model market volatility year to year, changes to your contribution amount over time, taxes on withdrawals, or additional income sources such as a state pension. Treat the result as a useful, order-of-magnitude estimate for planning purposes rather than a guaranteed outcome, and revisit the numbers periodically as your actual savings rate and investment returns become clearer over the years ahead.</p>
+<h2>Improving your retirement outcome</h2>
+<p>Several levers increase retirement savings:</p>
+<ul>
+<li><strong>Start earlier</strong>: Every year earlier has a compounding effect.</li>
+<li><strong>Save more</strong>: Even small increases compound significantly over decades.</li>
+<li><strong>Optimize asset allocation</strong>: Higher equity allocation historically produces higher long-term returns, with higher short-term volatility.</li>
+<li><strong>Reduce fees</strong>: Investment fees of 1–2% per year reduce retirement wealth by 20–40% over 30 years.</li>
+<li><strong>Tax-advantaged accounts</strong>: 401(k), IRA, Roth IRA (US), ISA (UK), and similar accounts shelter growth from taxes.</li>
+</ul>
+<h2>How much do you need to retire?</h2>
+<p>A common rule of thumb is the 4% rule: you can sustainably withdraw 4% of your portfolio per year without running out of money over a 30-year retirement. So to spend $40,000 per year you need $1,000,000 saved. To spend $60,000 per year you need $1,500,000.</p>
+<p>Use this calculator to estimate what you will have, then compare it to the 4% rule target for your desired annual spending.</p>
+<h2>How to use the calculator</h2>
+<p>Enter your current age, your target retirement age, how much you plan to save each month, and the annual return rate you expect from your investments. The projected balance at retirement appears immediately, and every figure recalculates the instant you change any input, which makes it simple to test how retiring five years later, saving a little more each month, or assuming a more conservative return would shift your outcome.</p>
+<h2>Why compounding rewards patience</h2>
+<p>The future-value formula behind this calculator is a compound interest calculation, and compounding is powerful precisely because each month&#39;s returns are calculated not just on your original contributions but on all the growth those contributions have already produced. In the early years of saving, this effect is barely noticeable — most of the balance is still your own contributions. But by the later decades of a long saving horizon, the accumulated growth itself starts generating more growth than your monthly contributions do, which is exactly why starting a decade earlier tends to matter more than saving twice as much per month starting later. There is no way to manufacture those extra years after the fact, which is the single strongest argument for starting to save as early as possible, even with a small amount.</p>
+<h2>Adjusting your plan as circumstances change</h2>
+<p>Few people set a savings amount once and leave it untouched for forty years — incomes rise, priorities shift, and a plan is only useful if it is revisited periodically. Because every field in this calculator recalculates instantly, it works well as a check-in tool: run your numbers once a year with your current age, current monthly contribution and a realistic return assumption, and compare the new projection with the previous year&#39;s. A small raise redirected entirely into retirement savings, or a decision to push the target retirement age back by a couple of years, both show up immediately as a changed final balance, which makes the trade-offs involved in each decision concrete rather than abstract.</p>
+<h2>Private and instant</h2>
+<p>All calculations run entirely in your browser using the standard future-value-of-an-annuity formula, so projections update instantly as you adjust any input and no financial figures you enter are ever sent to a server, logged or shared.</p>
+    <section class="faq"><h2>Retirement calculator FAQ</h2><dl><dt>What interest rate should I use?</dt><dd>Historical stock market returns average around 7% annually after inflation. For a conservative estimate use 5–6%; for a more optimistic estimate use 8–10%.</dd><dt>Does this include employer match?</dt><dd>No. Add your employer match to your monthly contribution amount to include it.</dd><dt>What about inflation?</dt><dd>Using 7% assumes returns after inflation (real returns). If you use nominal returns (e.g. 10%), the purchasing power of the result will be lower.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/retirementcalc/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/retirementcalc/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/retirementcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/retirementcalc.js" defer></script>
+</body>
+</html>

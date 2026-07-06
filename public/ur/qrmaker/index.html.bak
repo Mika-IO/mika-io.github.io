@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR Code Generator — create QR codes for any URL or text</title>
+<meta name="description" content="Free QR code generator. Create a QR code for any URL, text, WiFi password, or contact information. Download as PNG. Works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ur/qrmaker/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/qrmaker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/qrmaker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/qrmaker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/qrmaker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/qrmaker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="QR Code Generator — create QR codes for any URL or text">
+<meta property="og:description" content="Free QR code generator. Create a QR code for any URL, text, WiFi password, or contact information. Download as PNG. Works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ur/qrmaker/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"QR Code Generator — create QR codes for any URL or text","url":"https://mikaio.dev/ur/qrmaker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free QR code generator. Create a QR code for any URL, text, WiFi password, or contact information. Download as PNG. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"QR Code Generator","item":"https://mikaio.dev/ur/qrmaker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can a QR code contain?","acceptedAnswer":{"@type":"Answer","text":"A QR code can encode any text: URLs, email addresses, phone numbers, WiFi credentials, vCard contacts, plain text, or any other string. Smartphones read all of these directly with their cameras."}},{"@type":"Question","name":"How do I download the QR code?","acceptedAnswer":{"@type":"Answer","text":"Click or tap the generated QR code image to download it as a PNG file. You can then use it in print materials, presentations, or share it digitally."}},{"@type":"Question","name":"Is the QR code generated on my device?","acceptedAnswer":{"@type":"Answer","text":"Yes. The QR code is generated entirely in your browser using a JavaScript QR code library. No text you enter is sent to any server."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>QR Code Generator</span></nav>
+  <h1>QR Code Generator</h1>
+  <p class="lead">Type or paste any text or URL and the QR code is generated instantly. Click the image to download it.</p>
+  <section class="widget" id="tool"><div id="qr-app"><div class="field"><label for="qr-text">Text or URL</label><textarea id="qr-text" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="https://example.com"></textarea></div><div class="row"><div class="field"><label for="qr-size">Size</label><select id="qr-size"><option value="200">200 px</option><option value="300" selected>300 px</option><option value="400">400 px</option></select></div></div><div id="qr-out" style="margin-top:1rem;min-height:100px;display:flex;flex-direction:column;align-items:flex-start;gap:0.75rem"></div></div></section>
+  <article class="content">
+    <h2>کسی بھی چیز کے لیے فوری QR کوڈ بنائیں</h2>
+<p>QR کوڈ ہر جگہ نظر آتے ہیں: ریسٹورنٹ کے مینیو، پروڈکٹ کی پیکنگ، بزنس کارڈ، ایونٹ کے ٹکٹ، پوسٹر اور دکانوں کے سائن بورڈز پر۔ یہ حقیقی اور ڈیجیٹل دنیا کے درمیان پل کا کام کرتے ہیں، جس سے اسمارٹ فون رکھنے والا کوئی بھی شخص پرنٹ شدہ کوڈ اسکین کر کے فوراً کوئی ویب سائٹ کھول سکتا ہے، کوئی رابطہ محفوظ کر سکتا ہے، وائی فائی سے جڑ سکتا ہے، یا کسی اور ڈیجیٹل وسیلے تک رسائی حاصل کر سکتا ہے۔ یہ جنریٹر کسی بھی متن یا لنک کے لیے آپ کے براؤزر میں براہِ راست QR کوڈ بناتا ہے، بغیر کسی سائن اپ یا واٹر مارک کے۔</p>
+<h2>QR کوڈ کیا کچھ محفوظ کر سکتا ہے</h2>
+<p>QR کوڈ (Quick Response کوڈ) ایک دو رخی بارکوڈ ہے جو کسی بھی متن کو انکوڈ کر سکتا ہے۔ عام استعمالات میں شامل ہیں:</p>
+<p><strong>ویب لنک</strong>: سب سے عام استعمال۔ کسی بھی ویب پتے کو انکوڈ کیا جا سکتا ہے اور اسکین کرنے پر یہ فوراً موبائل کے براؤزر میں کھل جاتا ہے۔ پرنٹ شدہ مارکیٹنگ میٹیریل، بزنس کارڈ یا پوسٹر کے لیے بہترین، جہاں لمبا لنک ٹائپ کرنا وقت کا ضیاع ہوتا۔</p>
+<p><strong>وائی فائی کی تفصیلات</strong>: خاص طور پر بنی ہوئی ایک اسٹرنگ وائی فائی نیٹ ورک کا نام (SSID) اور پاس ورڈ محفوظ کر سکتی ہے۔ مہمان کوڈ اسکین کرتے ہیں اور ان کا آلہ خودکار طور پر جڑ جاتا ہے — کچھ بھی ٹائپ کرنے کی ضرورت نہیں۔ فارمیٹ یہ ہے: WIFI:S:NetworkName;T:WPA;P:password;;</p>
+<p><strong>رابطے کی معلومات (vCard)</strong>: vCard فارمیٹ نام، فون نمبر، ای میل اور پتے سمیت مکمل رابطہ محفوظ کرتا ہے۔ اسکین کرنے پر یہ سیدھا فون کی کانٹیکٹ لسٹ میں شامل ہو جاتا ہے۔</p>
+<p><strong>ای میل اور SMS</strong>: آپ mailto: یا sms: لنک انکوڈ کر سکتے ہیں جو متعلقہ ایپ کو پہلے سے بھرے ہوئے پتے کے ساتھ کھول دے۔</p>
+<p><strong>سادہ متن</strong>: QR کوڈ کوئی بھی سادہ تحریری پیغام رکھ سکتا ہے، جو اسکین کے فوراً بعد بغیر کوئی ایپ کھولے دکھایا جاتا ہے۔</p>
+<p><strong>ایپ اسٹور کے لنک</strong>: ایپل ایپ اسٹور یا گوگل پلے پر کسی ایپ کا لنک دینے سے صارف بغیر تلاش کیے سیدھا ڈاؤن لوڈ صفحے پر پہنچ سکتا ہے۔</p>
+<h2>QR کوڈ کیسے کام کرتا ہے</h2>
+<p>ایک QR کوڈ ڈیٹا کو سیاہ اور سفید مربعوں کے ایک جال میں محفوظ کرتا ہے۔ یہ مربعے ایک خاص انکوڈنگ طریقے سے بائنری ڈیٹا کو ظاہر کرتے ہیں۔ ساتھ ہی غلطی کی درستگی (error correction) کا ڈیٹا بھی شامل ہوتا ہے، جس کی وجہ سے کوڈ کامیابی سے اسکین ہو سکتا ہے چاہے اس کی سطح کا 30 فیصد تک حصہ خراب یا چھپا ہوا ہو۔ یہی وجہ ہے کہ کبھی کبھار آپ درمیان میں لوگو رکھے ہوئے QR کوڈ دیکھتے ہیں — لوگو ڈیٹا کے کچھ حصے کو ڈھانپ لیتا ہے، مگر غلطی کی درستگی والا ڈیٹا باقی حصے کو دوبارہ بنانے دیتا ہے۔</p>
+<p>اسمارٹ فون کیمروں میں iOS اور Android دونوں کے ڈیفالٹ کیمرا ایپ میں پہلے سے QR کوڈ پڑھنے کی صلاحیت موجود ہوتی ہے۔ کیمرہ کوڈ کی طرف کریں تو بغیر کسی الگ ایپ کے ایک نوٹیفیکیشن یا لنک نظر آ جاتا ہے۔</p>
+<h2>QR کوڈ سادہ لنک سے بہتر کیوں ہے</h2>
+<p>پوسٹر یا پرنٹ شدہ صفحے پر لکھا ہوا کوئی URL موبائل میں ہاتھ سے ٹائپ کرنا سست اور غلطی کا خطرہ رکھتا ہے، خاص طور پر جب وہ لمبا اور ٹریکنگ پیرامیٹرز سے بھرا ہو، تو QR کوڈ کا مقصد ہی یہی ہے کہ یہ سارا مرحلہ مکمل طور پر ختم کر دے — کیمرہ سیدھا کریں اور منزل بغیر ایک بھی حرف ٹائپ کیے کھل جاتی ہے۔ یہی وجہ ہے کہ QR کوڈ زیادہ تر جسمانی، آف لائن ماحول میں پائے جاتے ہیں: ریسٹورنٹ کی میز، کانفرنس کا بیج، پروڈکٹ کا لیبل، سائن بورڈ — کوئی بھی جگہ جہاں انسان کسی حقیقی چیز کے سامنے کھڑا ہو اور ڈیجیٹل وسیلے تک پہنچنے کا تیز ترین راستہ دو سیکنڈ کا کیمرہ اسکین ہو، نہ کہ ایسا ویب پتہ احتیاط سے ٹائپ کرنا جسے دیکھا تو جا سکتا ہے مگر کلک نہیں کیا جا سکتا۔</p>
+<h2>پرنٹ ریزولوشن اور سائز</h2>
+<p>پرنٹ شدہ میٹیریل کے لیے، بڑا QR کوڈ زیادہ قابلِ بھروسا طریقے سے اسکین ہوتا ہے۔ عمومی اصول کے طور پر، 10 سینٹی میٹر (4 انچ) کے فاصلے سے اسکین کیے جانے والے کوڈ کی کم از کم پیمائش تقریباً 1 سینٹی میٹر (0.4 انچ) ہونی چاہیے۔ ایک میٹر یا اس سے زیادہ فاصلے سے اسکین ہونے والے پوسٹر یا سائن بورڈ کے لیے، کوڈ کافی بڑا ہونا چاہیے — کم از کم 5 سے 10 سینٹی میٹر۔ اس جنریٹر میں دیے گئے 300px اور 400px کے آپشن ڈیجیٹل استعمال اور بنیادی پرنٹ کے لیے موزوں ہیں؛ بڑے سائز کی اعلیٰ معیار کی پرنٹنگ کے لیے ویکٹر فارمیٹ والے QR کوڈ کو ترجیح دی جاتی ہے۔</p>
+<h2>جنریٹر کیسے استعمال کریں</h2>
+<p>جو متن، لنک، وائی فائی تفصیلات یا رابطہ معلومات آپ انکوڈ کرنا چاہتے ہیں وہ ٹائپ کریں یا پیسٹ کریں، اور QR کوڈ فوراً پیش منظر میں نظر آ جاتا ہے، جو آپ کے ترمیم کرتے ہی خود بخود اپڈیٹ ہوتا رہتا ہے۔ کوڈ کا استعمال جس طرح ہونا ہے اس کے مطابق سائز چنیں — اسکرین یا بزنس کارڈ کے لیے چھوٹا، پوسٹر یا دور سے اسکین ہونے والی چیز کے لیے بڑا — اور تیار شدہ تصویر ایک کلک سے ڈاؤن لوڈ کریں۔</p>
+<h2>غلطی کی درستگی اور کچھ QR کوڈز میں لوگو کیوں ہوتا ہے</h2>
+<p>ہر QR کوڈ اپنے اصل مواد کے ساتھ غلطی کی درستگی کا ڈیٹا بھی رکھتا ہے، جو کوڈ کو خراب، گندا یا چھپے ہونے کے باوجود قابلِ اسکین رکھنے کی سہولت دیتا ہے۔ منتخب کردہ غلطی کی درستگی کی سطح کے مطابق، ایک QR کوڈ عام طور پر اپنی سطح کے 7 سے 30 فیصد تک ناقابلِ پڑھ حصے کو برداشت کر کے بھی درست طریقے سے اسکین ہو سکتا ہے۔ یہی وجہ ہے کہ کبھی کبھار آپ درمیان میں لوگو رکھے ہوئے QR کوڈ دیکھتے ہیں: لوگو ڈیٹا کے حصے کو ڈھانپتا ہے، مگر بلٹ اِن غلطی کی درستگی باقی بچے ہوئے حصے سے کھوئی ہوئی معلومات دوبارہ تعمیر کر لیتی ہے، تو کوڈ اس وقت تک کام کرتا رہتا ہے جب تک ڈھکا ہوا حصہ منتخب سطح کی برداشت کے اندر رہے۔</p>
+<h2>ای میل، SMS اور ایپ اسٹور کے لنک</h2>
+<p>صرف سادہ URL اور وائی فائی تفصیلات کے علاوہ، ایک QR کوڈ mailto: لنک بھی انکوڈ کر سکتا ہے، جو صارف کی ای میل ایپ کو پہلے سے بھرے پتے کے ساتھ کھول دیتا ہے، یا sms: لنک جو کسی خاص نمبر کو پہلے سے پتہ لکھا ہوا پیغام کھول دے، دونوں ہی وصول کنندہ کو کچھ ٹائپ کرنے سے بچا دیتے ہیں۔ ایپل ایپ اسٹور یا گوگل پلے پر کسی ایپ کے صفحے کا لنک دینا ایک اور عام استعمال ہے، جس سے کوئی شخص پوسٹر یا پیکنگ پرچے کو اسکین کر کے بغیر نام سے تلاش کیے سیدھا ڈاؤن لوڈ کے صفحے پر پہنچ سکتا ہے۔</p>
+<h2>رازداری</h2>
+<p>یہ جنریٹر مکمل طور پر آپ کے براؤزر میں، ایک کلائنٹ سائیڈ جاوا اسکرپٹ لائبریری کی مدد سے QR کوڈ بناتا ہے، اس لیے آپ کا لکھا ہوا متن کبھی کسی سرور کو نہیں بھیجا جاتا، نہ ریکارڈ ہوتا ہے اور نہ شیئر ہوتا ہے، اور صفحہ ایک بار لوڈ ہونے کے بعد آپ اسے آف لائن بھی استعمال کر سکتے ہیں۔</p>
+    <section class="faq"><h2>QR code FAQ</h2><dl><dt>What can a QR code contain?</dt><dd>A QR code can encode any text: URLs, email addresses, phone numbers, WiFi credentials, vCard contacts, plain text, or any other string. Smartphones read all of these directly with their cameras.</dd><dt>How do I download the QR code?</dt><dd>Click or tap the generated QR code image to download it as a PNG file. You can then use it in print materials, presentations, or share it digitally.</dd><dt>Is the QR code generated on my device?</dt><dd>Yes. The QR code is generated entirely in your browser using a JavaScript QR code library. No text you enter is sent to any server.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/qrmaker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/qrmaker/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/qrmaker/">Português</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/qrmaker/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/qrmaker.js" defer></script>
+</body>
+</html>

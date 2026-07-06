@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day of Week Calculator — what day of the week was any date?</title>
+<meta name="description" content="Free day of week calculator. Find out what day of the week any date falls on. Check birthdays, historical dates, or any future date instantly.">
+<link rel="canonical" href="https://mikaio.dev/es/dayofweek/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/dayofweek/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/dayofweek/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/dayofweek/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/dayofweek/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/dayofweek/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/dayofweek/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/dayofweek/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/dayofweek/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Day of Week Calculator — what day of the week was any date?">
+<meta property="og:description" content="Free day of week calculator. Find out what day of the week any date falls on. Check birthdays, historical dates, or any future date instantly.">
+<meta property="og:url" content="https://mikaio.dev/es/dayofweek/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Day of Week Calculator — what day of the week was any date?","url":"https://mikaio.dev/es/dayofweek/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Free day of week calculator. Find out what day of the week any date falls on. Check birthdays, historical dates, or any future date instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Day of the Week","item":"https://mikaio.dev/es/dayofweek/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What day of the week was I born?","acceptedAnswer":{"@type":"Answer","text":"Enter your birthday and the calculator shows the day of the week."}},{"@type":"Question","name":"How far back can I go?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses JavaScript's Date object, which reliably handles dates from the year 100 CE onward in the Gregorian calendar."}},{"@type":"Question","name":"Why is January 1, 2000 useful to know?","acceptedAnswer":{"@type":"Answer","text":"January 1, 2000 was a Saturday. Y2K was on a weekend, which reduced the immediate disruption."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/es/dayofweek/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/dayofweek/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/dayofweek/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/dayofweek/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/dayofweek/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/dayofweek/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/dayofweek/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/dayofweek/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/dayofweek/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Descubre en qué día de la semana cae cualquier fecha" />
+<meta property="og:description" content="Descubre en qué día de la semana cae cualquier fecha" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/es/dayofweek/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Descubre en qué día de la semana cae cualquier fecha","description":"Descubre en qué día de la semana cae cualquier fecha","url":"https://example.com/es/dayofweek/","inLanguage":"es"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Day of the Week</span></nav>
+  <h1>Day of the Week</h1>
+  <p class="lead">Enter any date to find out which day of the week it falls on.</p>
+  <section class="widget" id="tool"><form id="dow-form"><div class="row"><div class="field"><label for="dow-date">Date</label><input type="date" id="dow-date"></div></div><div class="result"><span class="big" id="dow-out">—</span></div><div id="dow-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Descubre en qué día de la semana cae cualquier fecha</h2>
+<p>Saber en qué día de la semana cae una fecha concreta resulta útil para un abanico sorprendente de propósitos: comprobar en qué día de la semana naciste, averiguar el día de un acontecimiento histórico importante, verificar en qué día cae una reunión o una festividad futura, o resolver preguntas de trivial. Introduce cualquier fecha y el día de la semana aparece al instante.</p>
+<h2>Cómo funciona el cálculo del día de la semana</h2>
+<p>El día de la semana de cualquier fecha puede determinarse mediante una fórmula llamada congruencia de Zeller o el algoritmo del &quot;Doomsday&quot;, ambos basados en aritmética modular. El objeto Date de JavaScript que usa esta calculadora aplica automáticamente las reglas del calendario gregoriano, dando resultados precisos para cualquier fecha dentro de la era del calendario gregoriano.</p>
+<h2>Curiosidades históricas</h2>
+<p>Varias fechas históricamente significativas tienen propiedades interesantes en cuanto a su día de la semana:</p>
+<ul>
+<li><strong>1 de enero de 2000</strong> (el efecto Y2K): sábado — el temido fallo informático llegó en fin de semana, lo que redujo la interrupción inmediata en la actividad empresarial.</li>
+<li><strong>12 de octubre de 1492</strong> (llegada de Colón a América): viernes.</li>
+<li><strong>9 de noviembre de 1989</strong> (caída del Muro de Berlín): jueves.</li>
+<li><strong>11 de septiembre de 2001</strong>: martes — los atentados contra el World Trade Center ocurrieron un martes por la mañana.</li>
+<li><strong>25 de diciembre de 2025</strong> (Navidad): jueves.</li>
+</ul>
+<h2>Curiosidad sobre el cumpleaños</h2>
+<p>Mucha gente siente curiosidad por saber en qué día de la semana nació. Este cálculo solo necesita la fecha de nacimiento. Los cumpleaños de personajes célebres revelan patrones interesantes — Albert Einstein nació un viernes (14 de marzo de 1879), y William Shakespeare nació y murió en un 23 de abril que cayó en martes (1564) y miércoles (1616) respectivamente.</p>
+<h2>El día de la semana para planificar</h2>
+<p>Saber el día de la semana de una fecha futura ayuda en la planificación práctica: confirmar que un evento programado no cae en fin de semana, comprobar en qué día de la semana cae una festividad (un festivo en lunes crea un puente), o verificar el día de la semana de una cita para un visado, la reserva de un vuelo, o el plazo de un contrato.</p>
+<h2>El calendario gregoriano y otros sistemas</h2>
+<p>El calendario gregoriano se introdujo en 1582 por el papa Gregorio XIII como una reforma del calendario juliano. Distintos países lo adoptaron en momentos diferentes — España y buena parte de los países católicos lo adoptaron ese mismo año 1582, mientras que Rusia no lo hizo hasta 1918. Las fechas anteriores a la adopción del calendario gregoriano por un país técnicamente caen bajo el calendario juliano, donde la misma fecha corresponde a un día de la semana distinto. Esta calculadora usa el calendario gregoriano proléptico —las reglas gregorianas aplicadas de forma consistente hacia atrás en el tiempo—, que es el enfoque estándar para los cálculos de fechas históricas.</p>
+<h2>Cómo usar la herramienta</h2>
+<p>Elige cualquier fecha en el campo correspondiente, pasada o futura, y el día de la semana aparece inmediatamente debajo. No hay ningún botón aparte que pulsar — cambiar la fecha recalcula el resultado al instante, así que puedes recorrer rápidamente un rango de fechas, como comprobar cada aniversario de un evento durante los próximos diez años, o retroceder para revisar una serie de fechas históricas una tras otra.</p>
+<h2>Un truco para calcularlo de cabeza</h2>
+<p>La regla del &quot;Doomsday&quot;, popularizada por el matemático John Conway, es un atajo mental para averiguar el día de la semana de cualquier fecha sin necesidad de una calculadora. Funciona memorizando el &quot;día del juicio final&quot; de cada año —un día de la semana en el que caen siempre varias fechas fáciles de recordar, como el 4/4, el 6/6, el 8/8, el 10/10 y el 12/12— y contando después hacia delante o hacia atrás desde la más cercana de esas fechas hasta la fecha que te interesa. Hace falta algo de práctica para usarlo con rapidez, pero es un truco de fiesta genuinamente impresionante una vez aprendido, y esta calculadora te ofrece una manera sencilla de comprobar tus cuentas mentales frente a una respuesta garantizada.</p>
+<h2>Por qué la misma fecha puede caer en un día de la semana distinto según el año</h2>
+<p>Como un año normal tiene 365 días —que no es múltiplo de 7—, el día de la semana en que cae cualquier fecha fija (como tu cumpleaños) avanza un día cada año, y dos días si de por medio hay un año bisiesto, ya que el día extra de febrero desplaza todo lo que viene después un paso más. Por eso un cumpleaños pasa de caer en martes un año a caer en miércoles al siguiente, y luego salta a viernes tras cruzarse con un año bisiesto. A lo largo de un período suficientemente largo, el patrón se repite: cualquier fecha vuelve al mismo día de la semana tras un ciclo de 28 años bajo el espaciado tradicional de estilo juliano de los años bisiestos, aunque las excepciones de siglo del calendario gregoriano a veces alargan ligeramente ese ciclo.</p>
+<h2>Cómo comprobar una fecha sin ordenador</h2>
+<p>Si alguna vez necesitas verificar un día de la semana sin ningún dispositivo a mano, merece la pena aprender bien el método &quot;Doomsday&quot;. Cada año tiene un único día &quot;doomsday&quot;, y una lista corta de fechas ancla fáciles de recordar —4/4, 6/6, 8/8, 10/10, 12/12, y también 9/5 y 5/9, 7/11 y 11/7— caen siempre en él dentro de ese año. Una vez que sabes el &quot;doomsday&quot; del año, cuentas hacia delante o hacia atrás en semanas completas desde la fecha ancla más cercana hasta llegar a la fecha que realmente te importa, ya que avanzar exactamente siete días nunca cambia el día de la semana. Con práctica, quien aprende este truco puede decir el día de la semana de casi cualquier fecha en un par de segundos, y esta calculadora es el lugar perfecto para comprobar tu respuesta al instante frente a un resultado garantizado.</p>
+<h2>Privado e instantáneo</h2>
+<p>El cálculo usa el objeto Date integrado de JavaScript, ejecutándose enteramente en tu navegador y aplicando las reglas del calendario gregoriano de forma automática, así que el resultado aparece en el instante en que eliges una fecha y nada de lo que introduces se envía jamás a un servidor, se registra ni se comparte.</p>
+    <section class="faq"><h2>Day of week FAQ</h2><dl><dt>What day of the week was I born?</dt><dd>Enter your birthday and the calculator shows the day of the week.</dd><dt>How far back can I go?</dt><dd>The calculator uses JavaScript&#39;s Date object, which reliably handles dates from the year 100 CE onward in the Gregorian calendar.</dd><dt>Why is January 1, 2000 useful to know?</dt><dd>January 1, 2000 was a Saturday. Y2K was on a weekend, which reduced the immediate disruption.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/dayofweek/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/dayofweek/">中文</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/dayofweek/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/dayofweek/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/dayofweek/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/dayofweek/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/dayofweek/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/dayofweek.js" defer></script>
+</body>
+</html>
