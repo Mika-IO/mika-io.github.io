@@ -106,6 +106,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Unix Timestamp Converter — convert epoch time to date","url":"https://mikaio.dev/en/unixepoch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free Unix timestamp converter. Convert Unix epoch time to a human-readable date and time, or convert any date back to a Unix timestamp. Works instantly in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Unix Timestamp Converter","item":"https://mikaio.dev/en/unixepoch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp is a number that represents the number of seconds elapsed since January 1, 1970, at 00:00:00 UTC (the Unix epoch). It is used universally in computing to represent points in time without timezone ambiguity."}},{"@type":"Question","name":"What is the year 2038 problem?","acceptedAnswer":{"@type":"Answer","text":"Older systems that store Unix timestamps as 32-bit signed integers can only represent dates up to January 19, 2038. Modern 64-bit systems do not have this limitation."}},{"@type":"Question","name":"How do I convert milliseconds?","acceptedAnswer":{"@type":"Answer","text":"Some systems use milliseconds instead of seconds. Divide the millisecond timestamp by 1000 to convert it to seconds before entering it here."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/unixepoch/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/unixepoch/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/unixepoch/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Convert Unix timestamps to human-readable dates" />
+<meta property="og:description" content="Convert Unix timestamps to human-readable dates" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/unixepoch/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Convert Unix timestamps to human-readable dates","description":"Convert Unix timestamps to human-readable dates","url":"https://example.com/en/unixepoch/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
 </head>
 <body>
 <header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
@@ -131,52 +143,18 @@ textarea{min-height:120px;resize:vertical}
 <p>Early Unix systems stored timestamps as 32-bit signed integers, which can hold values up to 2,147,483,647. That maximum value corresponds to January 19, 2038 at 03:14:07 UTC. Systems that store timestamps in 32-bit integers will overflow on that date, a problem sometimes called Y2K38. Modern 64-bit systems can store timestamps far beyond the year 292 billion, making this a problem only for legacy software that has not been updated.</p>
 <h2>Common uses</h2>
 <p>Timestamps appear in log files, database records, API responses, cache headers, cryptographic certificates, and countless other contexts. Converting them to readable dates helps with debugging, data analysis, compliance auditing, and any situation where you need to understand when something happened.</p>
+<h2>Why 1970 was chosen as the starting point</h2>
+<p>The choice of January 1, 1970 was essentially a practical one rather than a meaningful date in itself. Unix was being developed in the late 1960s and early 1970s at Bell Labs, and the designers needed a reference point recent enough to keep the numbers manageable but early enough to cover the operating system&#39;s likely lifetime. Rounding to the start of 1970 was simply convenient. Decades later, that arbitrary choice has become deeply embedded: it underlies how nearly every programming language, database and operating system represents time internally, even though most programmers never need to think about it directly.</p>
+<h2>Reading a timestamp without a converter</h2>
+<p>With a little practice you can sanity-check a timestamp in your head. Dividing by 31,536,000 (the number of seconds in an ordinary year) gives a rough number of years since 1970 — a ten-digit timestamp starting with 1.7 corresponds to roughly the year 2023, for instance, since 1970 plus about 53-54 years lands there. This rough mental estimate is a useful way to spot an obviously wrong timestamp, such as one that is off by a factor of 1000 because it was actually in milliseconds, before you even reach for a calculator.</p>
+<h2>Negative timestamps</h2>
+<p>Because a Unix timestamp is simply a signed count of seconds from the epoch, dates before January 1, 1970 are represented as negative numbers rather than being unsupported. A timestamp of -86400, for example, represents exactly one day before the epoch: December 31, 1969. This converter handles negative values the same way as positive ones, which is useful for working with historical records or data that predates the computing era but is still stored in Unix-timestamp form.</p>
+<h2>Why timestamps are timezone-agnostic</h2>
+<p>The single biggest advantage of storing a moment as a Unix timestamp rather than a formatted date string is that it sidesteps timezones entirely during storage and calculation. A timestamp represents exactly one physical instant, and only gets translated into a local calendar date and clock time at the moment it is displayed to a person. This is why databases, APIs and log files overwhelmingly store timestamps rather than pre-formatted local dates: two servers in different timezones can compare, sort and calculate differences between timestamps with complete confidence, and only need to convert to a human-readable local time at the very last step, exactly as this converter does when it shows both the UTC and your local equivalent side by side.</p>
+<h2>Debugging with timestamps</h2>
+<p>Developers reach for a converter like this constantly while debugging. A server error log stamped with 1700000000 is meaningless at a glance, but converting it instantly tells you whether the error happened during business hours, overnight, or at the exact moment a deployment went out — often the single fastest way to correlate a bug report with the change that caused it. API responses, database audit columns and cache expiry headers all commonly store timestamps rather than formatted dates for the same reason storage engines prefer them: a plain number sorts, compares and calculates correctly with no locale or format ambiguity, and only needs translating into a human-friendly date at the final display step, which is exactly the job this tool does.</p>
 <h2>Private</h2>
-<p>Everything runs in your browser. No data is sent anywhere.</p>
-<h2>How it works</h2>
-<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
-<h2>Why browser-based tools matter</h2>
-<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
-<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
-<h2>Getting the most from this tool</h2>
-<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
-<h2>Precision and limitations</h2>
-<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
-<h2>Sharing your results</h2>
-<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
-<h2>Bookmarking and returning</h2>
-<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
-<h2>Mobile-friendly design</h2>
-<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
-<h2>Accuracy note</h2>
-<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
-<h2>Frequently asked questions — general</h2>
-<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
-<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
-<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
-<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
-<h2>How it works</h2>
-<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
-<h2>Why browser-based tools matter</h2>
-<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
-<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
-<h2>Getting the most from this tool</h2>
-<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
-<h2>Precision and limitations</h2>
-<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
-<h2>Sharing your results</h2>
-<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
-<h2>Bookmarking and returning</h2>
-<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
-<h2>Mobile-friendly design</h2>
-<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
-<h2>Accuracy note</h2>
-<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
-<h2>Frequently asked questions — general</h2>
-<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
-<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
-<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
-<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+<p>Everything runs in your browser using JavaScript&#39;s built-in Date object, so the conversion is instant in both directions and no timestamp or date you enter is ever sent to a server, logged or shared.</p>
     <section class="faq"><h2>Unix timestamp FAQ</h2><dl><dt>What is a Unix timestamp?</dt><dd>A Unix timestamp is a number that represents the number of seconds elapsed since January 1, 1970, at 00:00:00 UTC (the Unix epoch). It is used universally in computing to represent points in time without timezone ambiguity.</dd><dt>What is the year 2038 problem?</dt><dd>Older systems that store Unix timestamps as 32-bit signed integers can only represent dates up to January 19, 2038. Modern 64-bit systems do not have this limitation.</dd><dt>How do I convert milliseconds?</dt><dd>Some systems use milliseconds instead of seconds. Divide the millisecond timestamp by 1000 to convert it to seconds before entering it here.</dd></dl></section>
   </article>
   <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/unixepoch/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li></ul></nav>

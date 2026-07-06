@@ -106,6 +106,20 @@ textarea{min-height:120px;resize:vertical}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Ferramenta de Diff de Texto — compare dois textos","url":"https://mikaio.dev/pt/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Ferramenta de diff de texto gratuita. Compare dois textos e destaque as diferenças entre eles. Encontre palavras adicionadas, removidas e alteradas na hora."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Ferramenta de Diff de Texto","item":"https://mikaio.dev/pt/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como o diff funciona?","acceptedAnswer":{"@type":"Answer","text":"A ferramenta compara os dois textos palavra por palavra. Palavras presentes em B mas não em A são mostradas em verde (adicionadas). Palavras em A mas não em B são mostradas em vermelho (removidas)."}},{"@type":"Question","name":"É um diff real como git diff?","acceptedAnswer":{"@type":"Answer","text":"Este é um diff simples no nível de palavras para comparação rápida. Para diffs no nível de caracteres ou linhas como usados em programação, ferramentas dedicadas como git diff são mais apropriadas."}},{"@type":"Question","name":"Meu texto é armazenado?","acceptedAnswer":{"@type":"Answer","text":"Não. A comparação roda inteiramente no seu navegador. Nada é enviado a nenhum servidor."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/textdiff/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/textdiff/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/textdiff/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/textdiff/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/textdiff/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Compare dois textos e encontre as diferenças" />
+<meta property="og:description" content="Compare dois textos e encontre as diferenças" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/textdiff/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Compare dois textos e encontre as diferenças","description":"Compare dois textos e encontre as diferenças","url":"https://example.com/pt/textdiff/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
 </head>
 <body>
 <header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
@@ -127,52 +141,26 @@ textarea{min-height:120px;resize:vertical}
 <p><strong>Revisões de documentos</strong>: Quando um colaborador devolve um documento revisado, veja rapidamente exatamente quais palavras ou frases mudaram.</p>
 <p><strong>Revisão de contratos</strong>: Profissionais jurídicos usam diff para rastrear alterações entre versões de contratos.</p>
 <p><strong>Revisão acadêmica</strong>: Compare um primeiro rascunho a um rascunho revisado para verificar se as edições pretendidas foram feitas corretamente.</p>
+<h2>Limitações do diff no nível de palavras</h2>
+<p>Esta ferramenta compara palavras sem entender semântica. Uma frase inteiramente reescrita com o mesmo significado aparecerá totalmente como excluída e adicionada. A comparação também não distingue formatação, maiúsculas ou pontuação dentro das palavras a menos que façam parte do token da palavra — &quot;Olá&quot; e &quot;olá&quot; são tratadas como palavras diferentes.</p>
+<h2>Como usar a ferramenta</h2>
+<p>Cole o texto original na primeira caixa e a versão revisada na segunda, e a comparação aparece imediatamente abaixo, com exclusões riscadas em vermelho e adições destacadas em verde. Não há botão para acionar a comparação — ela se atualiza ao vivo, então você pode colar uma nova versão a qualquer momento e ver imediatamente como ela difere da anterior.</p>
+<h2>Por que comparação por palavra, não por caractere</h2>
+<p>Uma ferramenta de diff poderia teoricamente comparar caractere por caractere em vez de palavra por palavra, mas essa abordagem produz resultados tecnicamente precisos e praticamente inúteis: corrigir um único erro de digitação no meio de uma frase longa mostraria quase toda a frase restante como alterada, porque cada caractere depois da correção muda de posição. Comparar no nível de palavra faz uma única palavra corrigida aparecer como uma exclusão e uma adição, enquanto tudo o mais na frase que não mudou de fato fica corretamente intocado.</p>
+<h2>Lendo um diff com eficiência</h2>
+<p>Ao revisar uma comparação longa, ajuda escanear aglomerados de cor em vez de ler cada palavra: um aglomerado apertado de vermelho e verde lado a lado geralmente indica uma reformulação pequena, enquanto um trecho longo e ininterrupto de uma única cor indica uma passagem genuinamente nova ou excluída, e não apenas uma edição. Ficar confortável com esse escaneamento de padrões é o que permite a editores experientes e revisores jurídicos processar um redline de várias páginas em poucos minutos, em vez de reler o documento inteiro linha por linha.</p>
+<h2>Ferramentas de diff em código vs em prosa</h2>
+<p>Programadores usam ferramentas de diff baseadas em linha, como o git diff, constantemente, e vale entender por que um diff no nível de palavra como este é uma ferramenta diferente e complementar, não um substituto. Código-fonte é naturalmente organizado em linhas discretas, então comparar linha por linha é a granularidade certa — uma linha alterada é uma unidade de lógica alterada. Prosa não tem esse tipo de limite natural de linha; uma única frase pode quebrar em várias linhas dependendo da largura da janela, e a unidade significativa de mudança é a palavra ou a frase, não onde uma linha por acaso quebra. É exatamente por isso que comparar prosa exige uma abordagem no nível de palavra em vez de reaproveitar uma ferramenta de diff orientada a código e baseada em linha.</p>
+<h2>Casos de uso na revisão de traduções</h2>
+<p>Tradutores e revisores bilíngues às vezes usam um diff de palavras para comparar duas versões da tradução do mesmo texto original — por exemplo, a versão de um tradutor humano contra uma tradução automática, ou duas revisões sucessivas do mesmo parágrafo — para localizar rapidamente exatamente onde as escolhas de palavra divergem, sem precisar reler o parágrafo inteiro em busca da diferença.</p>
+<h2>Uma checagem rápida antes de confiar em um diff</h2>
+<p>Antes de confiar em um resultado de diff para algo importante — um documento jurídico, um trabalho corrigido — cole uma pequena mudança conhecida nas duas caixas primeiro e confirme que a ferramenta destaca exatamente essa mudança e nada mais, da mesma forma que você testaria uma balança de cozinha nova com um peso conhecido antes de confiar nela para uma receita.</p>
+<h2>Comparando versões de contratos ao longo do tempo</h2>
+<p>Quando um contrato passa por várias rodadas de negociação, é fácil perder de vista exatamente o que mudou entre a versão que você enviou e a que voltou da outra parte. Colar as duas versões nesta ferramenta revela imediatamente cada cláusula alterada, sem precisar confiar apenas em anotações manuais ou na memória de qual parágrafo foi editado por último.</p>
+<h2>Verificando um copiar-colar</h2>
+<p>Depois de copiar um trecho de texto de uma fonte para outra, colar ambas as versões aqui confirma em segundos que nada foi cortado ou alterado sem querer no processo, algo que revisar visualmente linha por linha facilmente deixaria passar em um texto longo.</p>
 <h2>Privado e instantâneo</h2>
-<p>Todas as comparações rodam no seu navegador. Nenhum texto é enviado a nenhum servidor.</p>
-<h2>Como funciona</h2>
-<p>Esta ferramenta roda inteiramente no seu navegador usando tecnologias web padrão. Nenhum dado que você inserir é enviado, armazenado ou transmitido. O cálculo ou transformação acontece localmente no seu dispositivo, então os resultados aparecem instantaneamente sem nenhuma viagem de rede.</p>
-<h2>Por que ferramentas baseadas em navegador importam</h2>
-<p>Ferramentas online que rodam no navegador oferecem várias vantagens sobre equivalentes do lado do servidor. Primeiro, são mais rápidas — não há atraso aguardando uma resposta de rede. Segundo, são mais privadas — seus dados nunca saem do seu dispositivo. Terceiro, funcionam offline uma vez que a página é carregada.</p>
-<p>A privacidade é cada vez mais importante para dados pessoais e profissionais. Com ferramentas baseadas em navegador, números sensíveis — valores financeiros, medidas de saúde, texto pessoal — permanecem na sua máquina.</p>
-<h2>Tirando o máximo desta ferramenta</h2>
-<p>Leia a seção de perguntas frequentes abaixo para respostas às perguntas comuns sobre como esta ferramenta específica funciona. Para cálculos, verifique o resultado tentando um exemplo que você já conhece a resposta antes de confiar nele para decisões importantes.</p>
-<h2>Precisão e limitações</h2>
-<p>Os cálculos baseados em navegador usam aritmética de ponto flutuante IEEE 754 de 64 bits do JavaScript. Para a maioria dos fins cotidianos, isso é mais do que suficiente — preciso em aproximadamente 15 dígitos decimais significativos.</p>
-<h2>Compartilhando seus resultados</h2>
-<p>Os resultados podem ser copiados do display e colados em qualquer lugar — uma planilha, um documento, um e-mail ou uma mensagem de chat. Não é necessário login nem conta.</p>
-<h2>Favoritar e retornar</h2>
-<p>Adicione esta página aos favoritos para retornar rapidamente. Como a ferramenta roda no seu navegador e não requer autenticação, ela está sempre pronta instantaneamente quando você abre o favorito.</p>
-<h2>Design responsivo</h2>
-<p>Esta ferramenta é projetada para funcionar em telefones, tablets e desktops. O layout se ajusta automaticamente para telas menores.</p>
-<h2>Nota de precisão</h2>
-<p>Os resultados desta ferramenta são calculados usando fórmulas matemáticas padrão ou dados de referência. Destinam-se a fins informativos e educacionais.</p>
-<h2>Perguntas frequentes — gerais</h2>
-<p><strong>Esta ferramenta é gratuita?</strong> Sim, completamente gratuita, para sempre. Sem assinatura, sem período de teste, sem cadastro.</p>
-<p><strong>Funciona sem internet?</strong> Uma vez carregada a página, a funcionalidade da ferramenta roda no seu navegador. Uma conexão de rede só é necessária para o carregamento inicial da página.</p>
-<p><strong>Posso usá-la no meu telefone?</strong> Sim. A ferramenta é otimizada para dispositivos móveis e testada tanto no iOS quanto no Android.</p>
-<p><strong>Quão atualizados são os dados?</strong> Os dados de referência, como fatores de conversão, constantes de fórmulas e tabelas de consulta, refletem valores padrão na última atualização da ferramenta.</p>
-<h2>Como funciona</h2>
-<p>Esta ferramenta roda inteiramente no seu navegador usando tecnologias web padrão. Nenhum dado que você inserir é enviado, armazenado ou transmitido. O cálculo ou transformação acontece localmente no seu dispositivo, então os resultados aparecem instantaneamente sem nenhuma viagem de rede.</p>
-<h2>Por que ferramentas baseadas em navegador importam</h2>
-<p>Ferramentas online que rodam no navegador oferecem várias vantagens sobre equivalentes do lado do servidor. Primeiro, são mais rápidas — não há atraso aguardando uma resposta de rede. Segundo, são mais privadas — seus dados nunca saem do seu dispositivo. Terceiro, funcionam offline uma vez que a página é carregada.</p>
-<p>A privacidade é cada vez mais importante para dados pessoais e profissionais. Com ferramentas baseadas em navegador, números sensíveis — valores financeiros, medidas de saúde, texto pessoal — permanecem na sua máquina.</p>
-<h2>Tirando o máximo desta ferramenta</h2>
-<p>Leia a seção de perguntas frequentes abaixo para respostas às perguntas comuns sobre como esta ferramenta específica funciona. Para cálculos, verifique o resultado tentando um exemplo que você já conhece a resposta antes de confiar nele para decisões importantes.</p>
-<h2>Precisão e limitações</h2>
-<p>Os cálculos baseados em navegador usam aritmética de ponto flutuante IEEE 754 de 64 bits do JavaScript. Para a maioria dos fins cotidianos, isso é mais do que suficiente — preciso em aproximadamente 15 dígitos decimais significativos.</p>
-<h2>Compartilhando seus resultados</h2>
-<p>Os resultados podem ser copiados do display e colados em qualquer lugar — uma planilha, um documento, um e-mail ou uma mensagem de chat. Não é necessário login nem conta.</p>
-<h2>Favoritar e retornar</h2>
-<p>Adicione esta página aos favoritos para retornar rapidamente. Como a ferramenta roda no seu navegador e não requer autenticação, ela está sempre pronta instantaneamente quando você abre o favorito.</p>
-<h2>Design responsivo</h2>
-<p>Esta ferramenta é projetada para funcionar em telefones, tablets e desktops. O layout se ajusta automaticamente para telas menores.</p>
-<h2>Nota de precisão</h2>
-<p>Os resultados desta ferramenta são calculados usando fórmulas matemáticas padrão ou dados de referência. Destinam-se a fins informativos e educacionais.</p>
-<h2>Perguntas frequentes — gerais</h2>
-<p><strong>Esta ferramenta é gratuita?</strong> Sim, completamente gratuita, para sempre. Sem assinatura, sem período de teste, sem cadastro.</p>
-<p><strong>Funciona sem internet?</strong> Uma vez carregada a página, a funcionalidade da ferramenta roda no seu navegador. Uma conexão de rede só é necessária para o carregamento inicial da página.</p>
-<p><strong>Posso usá-la no meu telefone?</strong> Sim. A ferramenta é otimizada para dispositivos móveis e testada tanto no iOS quanto no Android.</p>
-<p><strong>Quão atualizados são os dados?</strong> Os dados de referência, como fatores de conversão, constantes de fórmulas e tabelas de consulta, refletem valores padrão na última atualização da ferramenta.</p>
+<p>Todas as comparações rodam inteiramente no seu navegador usando o algoritmo de Subsequência Comum Mais Longa, então os resultados aparecem na hora e nenhum texto que você cola é enviado a nenhum servidor, registrado ou compartilhado.</p>
     <section class="faq"><h2>Perguntas frequentes do diff de texto</h2><dl><dt>Como o diff funciona?</dt><dd>A ferramenta compara os dois textos palavra por palavra. Palavras presentes em B mas não em A são mostradas em verde (adicionadas). Palavras em A mas não em B são mostradas em vermelho (removidas).</dd><dt>É um diff real como git diff?</dt><dd>Este é um diff simples no nível de palavras para comparação rápida. Para diffs no nível de caracteres ou linhas como usados em programação, ferramentas dedicadas como git diff são mais apropriadas.</dd><dt>Meu texto é armazenado?</dt><dd>Não. A comparação roda inteiramente no seu navegador. Nada é enviado a nenhum servidor.</dd></dl></section>
   </article>
   <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/textdiff/">Português</a></li></ul></nav>

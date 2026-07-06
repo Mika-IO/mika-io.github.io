@@ -7,7 +7,9 @@
 <meta name="description" content="Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization.">
 <link rel="canonical" href="https://mikaio.dev/en/primechecker/">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/primechecker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/primechecker/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/primechecker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/primechecker/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/primechecker/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Prime Number Checker — is this number prime?">
@@ -106,6 +108,20 @@ textarea{min-height:120px;resize:vertical}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Prime Number Checker — is this number prime?","url":"https://mikaio.dev/en/primechecker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Prime Number Checker","item":"https://mikaio.dev/en/primechecker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a prime number?","acceptedAnswer":{"@type":"Answer","text":"A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by modern convention."}},{"@type":"Question","name":"What is prime factorization?","acceptedAnswer":{"@type":"Answer","text":"Every integer greater than 1 can be expressed as a product of prime numbers in exactly one way (the Fundamental Theorem of Arithmetic). For example, 60 = 2 × 2 × 3 × 5."}},{"@type":"Question","name":"How large a number can I check?","acceptedAnswer":{"@type":"Answer","text":"The tool works efficiently for numbers up to about 10 million using trial division. Very large numbers may take a moment to process."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/primechecker/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/primechecker/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/primechecker/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/primechecker/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/primechecker/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Is this number prime?" />
+<meta property="og:description" content="Is this number prime?" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/primechecker/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Is this number prime?","description":"Is this number prime?","url":"https://example.com/en/primechecker/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
 </head>
 <body>
 <header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
@@ -123,6 +139,8 @@ textarea{min-height:120px;resize:vertical}
 <h2>What makes a number prime?</h2>
 <p>The definition is simple: a positive integer is prime if its only positive divisors are 1 and itself. The number 7 is prime because it can only be divided evenly by 1 and 7. The number 8 is not prime — it is also divisible by 2 and 4. The number 1 is a special case: by modern mathematical convention it is not considered prime, because including it would break the uniqueness of prime factorization.</p>
 <p>The first few primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47. Note that 2 is the only even prime number, because every other even number is divisible by 2.</p>
+<h2>Primality testing at larger scales</h2>
+<p>Trial division, the method this tool uses, works perfectly well for numbers up to the millions but becomes impractical for the truly enormous numbers used in real-world cryptography, which can run to hundreds of digits. For those, mathematicians and computer scientists use probabilistic primality tests, such as the Miller-Rabin test, which cannot guarantee a number is prime with absolute certainty but can rule out compositeness with a probability of error so small it is considered negligible in practice — smaller, in fact, than the chance of a hardware error occurring during the same calculation. Understanding trial division first is the right foundation before appreciating why these faster, probabilistic methods were needed at all.</p>
 <h2>Prime factorization</h2>
 <p>The Fundamental Theorem of Arithmetic states that every integer greater than 1 can be expressed as a product of prime numbers in exactly one way, up to the order of the factors. This is called the prime factorization. For example: 12 = 2 × 2 × 3, written as 2² × 3. The number 360 = 2³ × 3² × 5. Finding the prime factorization of a number means breaking it down into its prime components, which reveals its mathematical structure.</p>
 <h2>Why primes matter</h2>
@@ -130,57 +148,19 @@ textarea{min-height:120px;resize:vertical}
 <p>In modern computing, the difficulty of factoring large numbers into their prime components is the foundation of RSA encryption, which secures most of the internet&#39;s encrypted communications. Two large primes are multiplied together to create a public key. Factoring that product back into its primes — without knowing them in advance — is computationally infeasible for sufficiently large numbers.</p>
 <h2>How the check works</h2>
 <p>The tool uses trial division: it tests whether the number is divisible by any integer from 2 up to the square root of the number. If any such divisor exists, the number is composite and the tool records its factors. If none exist, the number is prime. The square root limit works because if a number n has a factor larger than √n, it must also have a corresponding factor smaller than √n, so we can stop at the square root.</p>
+<h2>A quick worked example</h2>
+<p>Take the number 91. It is odd, not divisible by 3 (9+1=10, not a multiple of 3), and does not end in 0 or 5, so the small, obvious tests all suggest it might be prime — but checking division by 7 reveals 91 ÷ 7 = 13 exactly, so 91 is actually composite, with prime factorization 7 × 13. This is a classic example used to illustrate why &quot;it doesn&#39;t look divisible by anything obvious&quot; is not the same as &quot;it is prime&quot;: the only reliable way to know for certain is to check every candidate divisor up to the square root, exactly what this tool does automatically and instantly.</p>
 <h2>Everyday uses</h2>
 <p>While the deep mathematical importance of primes is in cryptography and number theory, everyday uses include puzzles, educational exercises, and programming challenges. Students learning about divisibility, factors, and multiples frequently need to check primality and find factorizations as part of arithmetic exercises.</p>
+<h2>How to use the checker</h2>
+<p>Type any positive integer into the box and the result appears immediately: whether the number is prime, and if not, its complete list of divisors and its prime factorization broken down into individual prime powers. There is no practical limit on the size of number you can check for everyday use, since the trial-division method this tool uses handles numbers well into the millions and beyond almost instantly.</p>
+<h2>Primes are infinite</h2>
+<p>Euclid proved over two thousand years ago that there is no largest prime number — the list goes on forever. His proof is a beautiful piece of ancient logic: assume for a moment that there were only finitely many primes, multiply them all together, and add one. The resulting number cannot be divided evenly by any prime on the original list, since dividing by any of them always leaves a remainder of one, so either this new number is itself prime, or it has some other prime factor that was missing from the supposedly complete list — either way, contradicting the assumption that the list was complete. This elegant argument, requiring no advanced mathematics at all, remains one of the most celebrated proofs in the history of the subject.</p>
 <h2>Private and instant</h2>
-<p>The calculation runs in your browser. No number you enter is sent to any server.</p>
-<h2>How it works</h2>
-<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
-<h2>Why browser-based tools matter</h2>
-<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
-<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
-<h2>Getting the most from this tool</h2>
-<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
-<h2>Precision and limitations</h2>
-<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
-<h2>Sharing your results</h2>
-<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
-<h2>Bookmarking and returning</h2>
-<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
-<h2>Mobile-friendly design</h2>
-<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
-<h2>Accuracy note</h2>
-<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
-<h2>Frequently asked questions — general</h2>
-<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
-<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
-<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
-<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
-<h2>How it works</h2>
-<p>This tool runs entirely in your browser using standard web technologies. No data you enter is uploaded, stored, or transmitted. The calculation or transformation happens locally on your device, so results appear instantly without any network round-trip.</p>
-<h2>Why browser-based tools matter</h2>
-<p>Online tools that run in the browser offer several advantages over server-side equivalents. First, they are faster — there is no delay waiting for a network response. Second, they are more private — your data never leaves your device. Third, they work offline once the page is loaded.</p>
-<p>Privacy is increasingly important for personal and professional data. With browser-based tools, sensitive numbers — financial figures, health measurements, personal text — stay on your machine.</p>
-<h2>Getting the most from this tool</h2>
-<p>Read the FAQ section below for answers to common questions about how this specific tool works. For calculations, double-check the result by trying an example you know the answer to before relying on it for important decisions.</p>
-<h2>Precision and limitations</h2>
-<p>Browser-based calculations use JavaScript&#39;s 64-bit IEEE 754 floating-point arithmetic. For most everyday purposes this is more than sufficient — accurate to approximately 15 significant decimal digits. For highly sensitive scientific or financial calculations requiring exact decimal arithmetic, specialised software may be preferable.</p>
-<h2>Sharing your results</h2>
-<p>Results can be copied from the display and pasted anywhere — a spreadsheet, a document, an email, or a chat message. There is no login required and no account needed; just use the tool and copy what you need.</p>
-<h2>Bookmarking and returning</h2>
-<p>Bookmark this page to return to it quickly. Because the tool runs in your browser and requires no authentication, it is always ready instantly when you open the bookmark.</p>
-<h2>Mobile-friendly design</h2>
-<p>This tool is designed to work on phones, tablets, and desktops. The layout adjusts automatically for smaller screens. On mobile devices, numeric inputs use the numeric keyboard to make entry easy.</p>
-<h2>Accuracy note</h2>
-<p>Results from this tool are calculated using standard mathematical formulas or reference data. They are intended for informational and educational purposes. For decisions with significant financial, medical, or legal consequences, always verify results with a qualified professional.</p>
-<h2>Frequently asked questions — general</h2>
-<p><strong>Is this tool free?</strong> Yes, completely free, forever. No subscription, no trial period, no signup.</p>
-<p><strong>Does it work without internet?</strong> Once the page has loaded, the tool functionality runs in your browser. A network connection is only needed for the initial page load.</p>
-<p><strong>Can I use it on my phone?</strong> Yes. The tool is mobile-optimised and tested on both iOS and Android.</p>
-<p><strong>How current is the data?</strong> Reference data such as conversion factors, formula constants, and lookup tables reflect standard values as of the tool&#39;s last update.</p>
+<p>The calculation runs entirely in your browser, so the result appears the instant you type and no number you enter is ever sent to any server, logged or shared.</p>
     <section class="faq"><h2>Prime checker FAQ</h2><dl><dt>What is a prime number?</dt><dd>A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by modern convention.</dd><dt>What is prime factorization?</dt><dd>Every integer greater than 1 can be expressed as a product of prime numbers in exactly one way (the Fundamental Theorem of Arithmetic). For example, 60 = 2 × 2 × 3 × 5.</dd><dt>How large a number can I check?</dt><dd>The tool works efficiently for numbers up to about 10 million using trial division. Very large numbers may take a moment to process.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/primechecker/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/primechecker/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
   <p><a href="/glossary.html">All tools</a></p></footer>
