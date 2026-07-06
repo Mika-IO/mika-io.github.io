@@ -4,6 +4,16 @@ on:
   push:
     branches: [ main ]
 
+# Grant token permissions so workflow can push to gh-pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
