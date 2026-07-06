@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paint Calculator — how much paint do you need?</title>
+<meta name="description" content="Free paint calculator. Enter your wall dimensions, number of coats, and paint coverage to calculate exactly how many litres of paint you need.">
+<link rel="canonical" href="https://mikaio.dev/es/paintcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/paintcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/paintcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/paintcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/paintcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/paintcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/paintcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/paintcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Paint Calculator — how much paint do you need?">
+<meta property="og:description" content="Free paint calculator. Enter your wall dimensions, number of coats, and paint coverage to calculate exactly how many litres of paint you need.">
+<meta property="og:url" content="https://mikaio.dev/es/paintcalc/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Paint Calculator — how much paint do you need?","url":"https://mikaio.dev/es/paintcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Free paint calculator. Enter your wall dimensions, number of coats, and paint coverage to calculate exactly how many litres of paint you need."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Paint Calculator","item":"https://mikaio.dev/es/paintcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What coverage rate should I use?","acceptedAnswer":{"@type":"Answer","text":"Most standard interior wall paint covers 10–12 m² per litre for the first coat. Premium paints may cover more. Check the paint tin for the manufacturer's stated coverage."}},{"@type":"Question","name":"Should I add extra for wastage?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add 10–15% for offcuts, spills, and touch-ups. The calculator gives the theoretical minimum; real use is always slightly more."}},{"@type":"Question","name":"What about doors and windows?","acceptedAnswer":{"@type":"Answer","text":"Subtract the area of doors and windows from the total wall area before entering it, or simply use the result as a slight over-estimate which provides useful buffer."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Paint Calculator</span></nav>
+  <h1>Paint Calculator</h1>
+  <p class="lead">Enter wall dimensions, number of walls, coats, and paint coverage rate to see how much paint you need.</p>
+  <section class="widget" id="tool"><form id="paint-form"><div class="row"><div class="field"><label for="paint-w">Width</label><input type="number" id="paint-w" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="paint-h">Height</label><input type="number" id="paint-h" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="paint-unit">Unit</label><select id="paint-unit"><option value="m">m</option><option value="ft">ft</option></select></div><div class="field"><label for="paint-walls">Number of walls</label><input type="number" id="paint-walls" step="1" min="1" value="1" inputmode="numeric"></div><div class="field"><label for="paint-coats">Coats</label><input type="number" id="paint-coats" step="1" min="1" value="2" inputmode="numeric"></div><div class="field"><label for="paint-cov">Coverage (m²/litre)</label><input type="number" id="paint-cov" step="any" min="0" value="10" inputmode="decimal"></div></div><div class="result"><span class="hint">Paint needed: </span><span class="big" id="paint-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Calcula exactamente cuánta pintura necesitas</h2>
+<p>Comprar poca pintura significa un viaje frustrante a mitad de proyecto a la ferretería, y no hay ninguna garantía de que el nuevo lote combine perfectamente en color. Comprar de más desperdicia dinero y crea problemas de eliminación. Esta calculadora de pintura te da la cantidad correcta que comprar para cualquier proyecto de pintura teniendo en cuenta el tamaño de la pared, el número de manos y el rendimiento de tu pintura.</p>
+<h2>Cómo funciona el cálculo</h2>
+<p>La fórmula es directa: área total = ancho × alto × número de paredes. Pintura necesaria = área total × número de manos ÷ rendimiento por litro. Una pintura interior estándar cubre entre 10 y 12 m² por litro y por mano. La mayoría de las habitaciones necesitan dos manos para un acabado de aspecto profesional.</p>
+<p>Ejemplo: una habitación con 4 paredes, cada una de 4 metros de ancho y 2,5 metros de alto, que necesita 2 manos de pintura que cubre 10 m² por litro:</p>
+<ul>
+<li>Área total = 4 × (4 × 2,5) = 40 m²</li>
+<li>Pintura necesaria = 40 × 2 ÷ 10 = 8 litros</li>
+</ul>
+<h2>Un ejemplo resuelto, ampliado</h2>
+<p>Toma la misma habitación del ejemplo anterior —cuatro paredes, cada una de 4 metros de ancho y 2,5 metros de alto, que necesitan dos manos— pero ahora cambia de una pintura plástica estándar que cubre 10 metros cuadrados por litro a una premium que cubre 14 metros cuadrados por litro. El área total de pared se mantiene en 40 metros cuadrados en ambos casos, pero la pintura necesaria baja de 40 × 2 ÷ 10 = 8 litros a 40 × 2 ÷ 14 ≈ 5,7 litros, un ahorro de más de dos litros solo por elegir un producto con mejor rendimiento. Si ese ahorro justifica el precio más alto por litro de la pintura premium es un cálculo que esta herramienta te facilita comprobar directamente, en lugar de adivinarlo.</p>
+<h2>Rendimientos según el tipo de pintura</h2>
+<p>El rendimiento varía significativamente según el tipo y la calidad de la pintura:</p>
+<ul>
+<li><strong>Pintura plástica interior económica</strong>: 8–10 m² por litro</li>
+<li><strong>Pintura plástica interior estándar</strong>: 10–12 m² por litro</li>
+<li><strong>Pintura plástica interior premium</strong>: 12–14 m² por litro</li>
+<li><strong>Pintura para exterior</strong>: 8–12 m² por litro (menor porque las superficies suelen ser menos lisas)</li>
+<li><strong>Imprimación/sellador</strong>: 10–12 m² por litro</li>
+<li><strong>Esmalte/barniz (carpintería)</strong>: 16–20 m² por litro (la superficie lisa absorbe menos)</li>
+</ul>
+<p>Comprueba siempre el rendimiento indicado por el fabricante en el bote de pintura, ya que es la cifra más fiable para ese producto concreto.</p>
+<h2>Número de manos</h2>
+<p>Para la mayoría de los proyectos de pintado de paredes, dos manos dan el mejor resultado. Una sola mano puede no dar una cobertura completa y uniforme — puedes ver el color original o la imprimación en zonas finas. A veces hacen falta tres manos al pasar de un color muy oscuro a uno muy claro, o al aplicar un rojo o un amarillo (colores con una opacidad notoriamente baja).</p>
+<p>Los techos suelen necesitar una mano con pintura específica para techos (formulada para alta cobertura y resistencia al goteo) o dos manos para un aspecto bien fresco y luminoso.</p>
+<h2>Cómo tener en cuenta puertas, ventanas y desperdicio</h2>
+<p>La calculadora calcula el área bruta de pared sin restar los huecos. Para fines de planificación, suele ser aceptable usar el área bruta y tratar la pintura extra como margen para:</p>
+<ul>
+<li>Huecos (puertas y ventanas) que no se pintarán con la pintura de pared</li>
+<li>Desperdicio al cargar el rodillo o la brocha</li>
+<li>Salpicaduras y goteos</li>
+<li>Trabajos de retoque</li>
+</ul>
+<p>Si quieres un cálculo más preciso, mide las áreas de tus puertas y ventanas y réstalas antes de introducir las dimensiones de la pared.</p>
+<h2>Elegir las cantidades de pintura</h2>
+<p>La pintura suele venderse en botes de 1 litro, 2,5 litros, 5 litros y 10 litros. Redondea siempre al siguiente tamaño de bote disponible. Por ejemplo, si el cálculo muestra 8,2 litros, compra dos botes de 5 litros (10 litros en total) en lugar de un bote de 5 litros y cuatro de 1 litro, que sale más caro por litro. La pintura sobrante puede guardarse para retoques si se cierra bien.</p>
+<h2>Cómo usar la calculadora</h2>
+<p>Introduce el ancho y el alto de cada pared, o un tamaño medio de pared y el número de paredes, junto con cuántas manos piensas aplicar y el rendimiento indicado de tu pintura. El total de litros necesarios aparece de inmediato, y ajustar cualquier valor lo recalcula al instante, lo que facilita comparar cómo cambiaría lo que necesitas comprar al pasar de una pintura económica a una premium con mejor rendimiento.</p>
+<h2>Por qué importa redondear al siguiente tamaño de bote</h2>
+<p>Como la pintura se vende en tamaños de bote fijos y no por el litro exacto, la respuesta práctica a &quot;cuánto necesito&quot; siempre es el siguiente tamaño de bote por encima de la cifra calculada, no la cifra en sí. Comprar un bote de 5 litros y uno de 1 litro para cubrir una necesidad de 8,2 litros, por ejemplo, suele ser tanto más caro por litro como más derrochador que simplemente comprar dos botes de 5 litros, ya que los botes más grandes casi siempre ofrecen un mejor precio por litro y la pintura sobrante resulta genuinamente útil para retoques futuros si se guarda correctamente. Tratar el resultado de la calculadora como un mínimo y no como un objetivo exacto, redondeando con generosidad, evita el error más común al comprar pintura: quedarse sin pintura con una pared por terminar y no poder igualar exactamente el tono de un lote ya abierto y parcialmente usado.</p>
+<h2>Techos y superficies sin pintar previamente</h2>
+<p>Las paredes de pladur nuevo, el enlucido fresco o la madera sin tratar absorben la pintura de forma distinta a una pared ya pintada, y suelen exigir una mano de imprimación antes de que las manos de acabado cuenten de verdad para la cobertura final. La imprimación tiene su propio rendimiento, típicamente similar al de la pintura normal, y debe sumarse como una mano adicional al calcular el total de litros necesarios para un proyecto sobre superficie nueva, algo fácil de olvidar cuando solo se presupuesta la pintura de acabado.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todos los cálculos se ejecutan enteramente en tu navegador, así que el resultado se actualiza al instante mientras ajustas cualquier dato y ninguna medida que introduzcas se envía jamás a un servidor, se registra ni se comparte, y funciona sin conexión una vez cargada la página, lista para cuando estés de pie en el pasillo de pinturas intentando decidir cuántos botes llevarte.</p>
+    <section class="faq"><h2>Paint calculator FAQ</h2><dl><dt>What coverage rate should I use?</dt><dd>Most standard interior wall paint covers 10–12 m² per litre for the first coat. Premium paints may cover more. Check the paint tin for the manufacturer&#39;s stated coverage.</dd><dt>Should I add extra for wastage?</dt><dd>Yes. Add 10–15% for offcuts, spills, and touch-ups. The calculator gives the theoretical minimum; real use is always slightly more.</dd><dt>What about doors and windows?</dt><dd>Subtract the area of doors and windows from the total wall area before entering it, or simply use the result as a slight over-estimate which provides useful buffer.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/paintcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/paintcalc/">中文</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/paintcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/paintcalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/paintcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/paintcalc/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/paintcalc.js" defer></script>
+</body>
+</html>

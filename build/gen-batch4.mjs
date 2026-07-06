@@ -18,7 +18,7 @@ function write(rel, content) {
 function mkTool({ slug, category, icon, widget, en, pt, js }) {
   console.log(`\n[${slug}]`);
   write(`data/tools/${slug}.json`, JSON.stringify({ slug, category, icon, script: `${slug}.js`, widget, strings: { en, pt } }, null, 2));
-  write(`assets/tools/${slug}.js`, js);
+  write(`public/assets/tools/${slug}.js`, js);
   write(`data/content/${slug}/en.md`, en._content);
   write(`data/content/${slug}/pt.md`, pt._content);
 }
@@ -570,7 +570,7 @@ Tudo roda no navegador. O texto do seu tweet nunca é enviado para nenhum servid
 `);
 
 // aspectratio - js, en, pt missing
-write('assets/tools/aspectratio.js', `(function () {
+write('public/assets/tools/aspectratio.js', `(function () {
   'use strict';
   function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
   function upd() {

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Discount Calculator — final sale price and how much you save</title>
+<meta name="description" content="Free discount calculator. Enter the original price and the discount percentage to instantly see the final sale price and exactly how much you save.">
+<link rel="canonical" href="https://mikaio.dev/hi/discountcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/discountcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/discountcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/discountcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/discountcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/discountcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/discountcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/discountcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/discountcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/discountcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Discount Calculator — final sale price and how much you save">
+<meta property="og:description" content="Free discount calculator. Enter the original price and the discount percentage to instantly see the final sale price and exactly how much you save.">
+<meta property="og:url" content="https://mikaio.dev/hi/discountcalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Discount Calculator — final sale price and how much you save","url":"https://mikaio.dev/hi/discountcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"Free discount calculator. Enter the original price and the discount percentage to instantly see the final sale price and exactly how much you save."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"Discount Calculator","item":"https://mikaio.dev/hi/discountcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is a discount calculated?","acceptedAnswer":{"@type":"Answer","text":"Multiply the original price by the discount percentage divided by one hundred to get the amount saved, then subtract that from the price. For example, 30% off a 50 item saves 15, leaving 35."}},{"@type":"Question","name":"How do I combine two discounts?","acceptedAnswer":{"@type":"Answer","text":"Stacked discounts apply one after another, not added together. A 20% then 10% discount is not 30% off — take 20% off first, then 10% off the reduced price, which works out slightly less than 30%."}},{"@type":"Question","name":"Is anything I enter saved?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation runs entirely in your browser, so the prices you type are never uploaded, stored or shared."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>Discount Calculator</span></nav>
+  <h1>Discount Calculator</h1>
+  <p class="lead">Enter the original price and the discount percentage to see the final price and the amount you save, updated as you type.</p>
+  <section class="widget" id="tool"><form id="disc"><div class="row"><div class="field"><label for="disc-price">Original price</label><input type="number" id="disc-price" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="disc-pct">Discount %</label><input type="number" id="disc-pct" step="any" min="0" inputmode="decimal"></div></div><div class="result"><span class="hint">Final price: </span><span class="big" id="disc-final">—</span></div><div class="result"><span class="hint">You save: </span><b id="disc-saved">—</b></div></form></section>
+  <article class="content">
+    <h2>ख़रीदने से पहले असली दाम देखें</h2>
+<p>कोई छूट तभी मायने रखती है जब आपको पता हो कि आपको असल में कितने पैसे चुकाने हैं। टैग पर &quot;40% छूट&quot; पढ़ने में शानदार लगता है, लेकिन जो नंबर असल में मायने रखता है वह है कि आपके बटुए से कितना पैसा निकलेगा, और इसे दिमाग़ में हिसाब लगाना — ख़ासकर ₹4,790 जैसे अटपटे दाम और 35% जैसी अजीब छूट के साथ — बिल्कुल वही झटपट हिसाब है जिसमें ग़लती होना आसान है। यह डिस्काउंट कैलकुलेटर यह काम आपके लिए तुरंत कर देता है। असली दाम और छूट का प्रतिशत डालें, और यह टाइप करते ही अंतिम बिक्री दाम के साथ-साथ आपकी बचत की सटीक रक़म दिखा देता है। सब कुछ आपके ब्राउज़र में होता है, तो यह तुरंत, प्राइवेट है और किसी ऐसी दुकान में भी काम करता है जहाँ सिग्नल न हो।</p>
+<p>यह टूल जान-बूझकर सीधा-सादा है: दो बॉक्स और दो साफ़ नतीजे। न कोई बटन दबाना है, न कुछ रीसेट करना है, क्योंकि आपके बदलते ही नंबर ज़िंदा (live) दोबारा गिन लिए जाते हैं। इससे किसी डील की तुलना करना आसान हो जाता है — एक ऑफ़र टाइप करें, अंतिम दाम नोट करें, फिर छूट बदलकर देखें कि कोई बेहतर या बुरी डील कैसी बैठती है।</p>
+<h2>इसे इस्तेमाल कैसे करें</h2>
+<p>पहले बॉक्स में सामान का असली, पूरा दाम डालें। फिर दूसरे बॉक्स में छूट का प्रतिशत टाइप करें — बस नंबर, तो &quot;25% छूट&quot; वाली सेल सिर्फ़ 25 है। कैलकुलेटर तुरंत दो चीज़ें दिखाता है: छूट के बाद आप असल में जो अंतिम दाम चुकाएँगे, और असली दाम के मुक़ाबले आप जितने पैसे बचाते हैं। अगर कोई दुकान प्रतिशत की बजाय बचत की रक़म का विज्ञापन करती है, तो भी आप कोई प्रतिशत आज़माकर और यह देखकर उनका हिसाब जाँच सकते हैं कि बची हुई रक़म मेल खाती है या नहीं।</p>
+<p>चूँकि यह तुरंत अपडेट होता है, यह कैलकुलेटर मौक़े पर ख़रीदारी के लिए एकदम सही है। छूट वाले कपड़ों की रैक या कम दाम वाले सामान की शेल्फ़ के सामने खड़े होकर, आप हर दाम और छूट को एक सेकंड में डालकर बिल काउंटर तक पहुँचने से पहले ही ठीक-ठीक जान सकते हैं कि आप क्या ख़रीद रहे हैं।</p>
+<h2>छूट की गणना कैसे होती है</h2>
+<p>कोई छूट किसी दाम से घटाया गया एक प्रतिशत है, तो इसके हिसाब में दो क़दम हैं। पहले आप दाम को प्रतिशत भाग सौ से गुणा करके छूट की रक़म निकालते हैं। ₹5,000 की चीज़ पर 30% छूट के लिए, यह ₹5,000 × 0.30 = ₹1,500 होगी। फिर आप वह बचत असली दाम से घटाकर पता लगाते हैं कि आपको क्या चुकाना है: ₹5,000 − ₹1,500 = ₹3,500। कैलकुलेटर दोनों क़दम एक साथ करता है, यही वजह है कि यह अंतिम दाम और बचत दोनों साथ-साथ दिखा सकता है।</p>
+<p>एक झटपट मानसिक तरीक़ा यह है कि पहले दस प्रतिशत निकाल लें — दशमलव बिंदु को एक स्थान बाईं ओर खिसका दें — और वहाँ से आगे बढ़ें। ₹5,000 का दस प्रतिशत ₹500 है, तो 30% उसका तीन गुना है, यानी ₹1,500। एक नज़र में किसी डील को परखने का यह एक काम का तरीक़ा है, जबकि कैलकुलेटर आपको वे उलझे हुए दशमलव समेत सटीक आँकड़ा देता है।</p>
+<h2>एक-के-ऊपर-एक छूट का जाल</h2>
+<p>ख़रीदारों की सबसे आम गलती है प्रतिशतों को जोड़ देना। अगर कोई दुकान 20% छूट देती है और फिर बिल काउंटर पर एक और 10% अतिरिक्त छूट देती है, तो यह सोचना लुभावना है कि आपको 30% छूट मिल रही है — लेकिन ऐसा नहीं है। एक-के-ऊपर-एक छूट एक के बाद एक लागू होती हैं, हर एक पिछली छूट के बाद बचे दाम पर। ₹10,000 की चीज़ पर 20% छूट लें और आपके पास ₹8,000 बचते हैं; उस ₹8,000 पर आगे 10% छूट लें और आप और ₹800 बचाते हैं, जिससे ₹7,200 बचता है। यह कुल मिलाकर 28% की छूट है, 30% की नहीं। क्रम से अंतिम जवाब नहीं बदलता, लेकिन दोनों प्रतिशत कभी सीधे जुड़ते नहीं।</p>
+<p>आप इस कैलकुलेटर का इस्तेमाल एक-के-ऊपर-एक छूट को सही ढंग से हल करने के लिए कर सकते हैं। पहली छूट लगाएँ, अंतिम दाम नोट करें, फिर उस दाम को वापस असली-दाम वाले बॉक्स में डालें और दूसरी छूट लगाएँ। अंतिम नतीजा असली दाम है, और इसकी शुरुआती दाम से तुलना करना आपको बताती है कि असली मिलाकर बचत कितनी है — जो हमेशा दोनों प्रतिशतों को जोड़ने से थोड़ी कम होती है।</p>
+<h2>दुकानों से आगे</h2>
+<p>यही गणना दुकानों की बिक्री से कहीं आगे भी काम की है। कोई भी जो प्रतिशत में कटौती दे या पाए, इसे इस्तेमाल कर सकता है: कोई सप्लायर जो ट्रेड डिस्काउंट दे रहा हो, कोई फ़्रीलांसर जो अपने कोट में से एक प्रतिशत कम कर रहा हो, कोई मकान मालिक जो किराया एक तय प्रतिशत से घटा रहा हो, या कोई छात्र जो प्रतिशत-आधारित स्कॉलरशिप जाँच रहा हो। जहाँ भी किसी शुरुआती रक़म से कोई प्रतिशत घटता हो, यह टूल आपको घटा हुआ आँकड़ा और कटौती का आकार — दोनों बताता है। चूँकि नंबर पूरी तरह आपके नियंत्रण में हैं, यह सिर्फ़ ख़रीदारी की बजाय किसी भी स्थिति के लिए एक आम &quot;प्रतिशत घटाओ&quot; कैलकुलेटर की तरह भी काम करता है।</p>
+<h2>प्राइवेट, तुरंत और मुफ़्त</h2>
+<p>न कोई साइन-अप है, न कोई लागत, न रास्ते में कोई विज्ञापन। पूरा कैलकुलेटर एक छोटा-सा कोड है जो आपकी अपनी डिवाइस पर चलता है, यही वजह है कि यह टाइप करते ही तुरंत जवाब देता है और बिना इंटरनेट कनेक्शन के भी काम करता रहता है — किसी व्यस्त दुकान में सचमुच काम का। आपका डाला हुआ कोई भी दाम अपलोड, लॉग या साझा नहीं किया जाता; वे सिर्फ़ आपकी स्क्रीन पर मौजूद रहते हैं और पेज रीलोड करते ही ग़ायब हो जाते हैं।</p>
+<p>इसे इस्तेमाल करने के लिए, असली दाम और छूट का प्रतिशत डालें, और अंतिम दाम व अपनी बचत पढ़ लें। किसी भी समय कोई भी नंबर बदलें और नतीजे उसी रफ़्तार से साथ चलते हैं, तो आप सेकंडों में एक डील जाँच सकते हैं या कई डील की तुलना कर सकते हैं और ख़रीदने का फ़ैसला लेने से पहले हमेशा असली दाम जान सकते हैं। असली दाम को लेकर एक साफ़ दिमाग़ किसी ऐसे टैग से सबसे अच्छा बचाव है जो बड़ी बचत का वादा करता है लेकिन छोटी बचत देता है, और इसे जाँचने में बस एक पल लगता है।</p>
+    <section class="faq"><h2>Discount calculator FAQ</h2><dl><dt>How is a discount calculated?</dt><dd>Multiply the original price by the discount percentage divided by one hundred to get the amount saved, then subtract that from the price. For example, 30% off a 50 item saves 15, leaving 35.</dd><dt>How do I combine two discounts?</dt><dd>Stacked discounts apply one after another, not added together. A 20% then 10% discount is not 30% off — take 20% off first, then 10% off the reduced price, which works out slightly less than 30%.</dd><dt>Is anything I enter saved?</dt><dd>No. The calculation runs entirely in your browser, so the prices you type are never uploaded, stored or shared.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/discountcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/discountcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/discountcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/discountcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/discountcalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/discountcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/discountcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/discountcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/glossary.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/discountcalc.js" defer></script>
+</body>
+</html>

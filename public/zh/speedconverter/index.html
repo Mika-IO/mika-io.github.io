@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speed Converter — m/s, km/h, mph, knots, Mach</title>
+<meta name="description" content="Free speed converter. Convert between metres per second, kilometres per hour, miles per hour, knots, and Mach number instantly.">
+<link rel="canonical" href="https://mikaio.dev/zh/speedconverter/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/speedconverter/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/speedconverter/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/speedconverter/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/speedconverter/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/speedconverter/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/speedconverter/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/speedconverter/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/speedconverter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Speed Converter — m/s, km/h, mph, knots, Mach">
+<meta property="og:description" content="Free speed converter. Convert between metres per second, kilometres per hour, miles per hour, knots, and Mach number instantly.">
+<meta property="og:url" content="https://mikaio.dev/zh/speedconverter/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Speed Converter — m/s, km/h, mph, knots, Mach","url":"https://mikaio.dev/zh/speedconverter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free speed converter. Convert between metres per second, kilometres per hour, miles per hour, knots, and Mach number instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Speed Converter","item":"https://mikaio.dev/zh/speedconverter/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Mach 1?","acceptedAnswer":{"@type":"Answer","text":"Mach 1 is the speed of sound, which varies with air temperature and density. At sea level at 20°C, Mach 1 ≈ 343 m/s ≈ 1,235 km/h ≈ 767 mph."}},{"@type":"Question","name":"What are knots used for?","acceptedAnswer":{"@type":"Answer","text":"Knots are used in aviation and maritime navigation. One knot equals one nautical mile per hour (1.852 km/h)."}},{"@type":"Question","name":"What is the speed of light?","acceptedAnswer":{"@type":"Answer","text":"The speed of light in a vacuum is 299,792,458 m/s ≈ 1,079,252,849 km/h. This cannot be converted to Mach in any meaningful way as it is independent of medium."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Speed Converter</span></nav>
+  <h1>Speed Converter</h1>
+  <p class="lead">Enter a speed and select the unit to see conversions to all other speed units.</p>
+  <section class="widget" id="tool"><form id="sp-form"><div class="row"><div class="field"><label for="sp-val">Speed</label><input type="number" id="sp-val" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="sp-from">Unit</label><select id="sp-from"><option value="ms">m/s</option><option value="kmh">km/h</option><option value="mph">mph</option><option value="knot">knots</option><option value="mach">Mach</option></select></div></div><div class="result"><div style="display:flex;gap:1.5rem;flex-wrap:wrap"><div><div class="hint">m/s</div><div class="big" id="sp-ms">—</div></div><div><div class="hint">km/h</div><div class="big" id="sp-kmh">—</div></div><div><div class="hint">mph</div><div class="big" id="sp-mph">—</div></div><div><div class="hint">knots</div><div class="big" id="sp-knot">—</div></div><div><div class="hint">Mach</div><div class="big" id="sp-mach">—</div></div></div></div></form></section>
+  <article class="content">
+    <h2>在所有主要速度单位之间转换</h2>
+<p>速度的表示取决于场景：在公制国家驾车用公里/小时，美国使用英里/小时，航空和航海导航用节，物理学用米/秒，超音速飞机用马赫数。本转换器同时处理这五种单位——在任意一个单位中输入速度，其他四个即时更新。</p>
+<h2>速度单位详解</h2>
+<p><strong>米每秒（m/s）</strong>：国际单位制中的基本速度单位。用于物理学、工程学和科学领域。一个人步行的速度约为 1.4 m/s；一辆以 100 km/h 行驶的汽车约为 27.8 m/s，而一名短跑选手全力冲刺时可以短暂超过 10 m/s，在看到换算之前，很多人不会意识到这有多快。</p>
+<p><strong>公里每小时（km/h）</strong>：大多数国家中最常用的车辆速度单位，也写作 kph。公制国家的标准高速公路限速范围为 80-130 km/h。</p>
+<p><strong>英里每小时（mph）</strong>：用于美国、英国和少数其他国家的车辆速度。60 mph 约等于 96.6 km/h；100 mph 约等于 160.9 km/h。</p>
+<p><strong>节（kn）</strong>：1 节等于每小时 1 海里。1 海里等于 1,852 米（1 分纬度的长度）。节在航空和航海导航中通用，因为它们与经纬度导航直接相关。一架商业客机的巡航速度约为 450-500 节。</p>
+<p><strong>马赫数（Mach）</strong>：物体速度与当地音速的比值。马赫 1 就是音速（在海平面 20°C 条件下约 343 m/s）。马赫数会随高度变化，因为音速随温度降低而降低。在 35,000 英尺（巡航高度），马赫 1 约等于 295 m/s，约等于 1,062 km/h。</p>
+<h2>日常参照点</h2>
+<p>一个人快步走的速度约为 1.4 m/s，大约 5 km/h。一般自行车通勤的巡航速度约为 20 km/h，约 12 mph。公路驾驶速度在大多数公制国家集中在 100 到 130 km/h 之间，在使用英制单位的地方则为 60 到 80 mph。一架商业喷气机的巡航速度约为 900 km/h，接近 490 节。记住这些参照点，可以更容易地一眼判断一个换算结果是否合理——如果换算出的速度与那种交通方式的日常参照点偏差太大，值得再检查一下到底选择了哪个单位。</p>
+<h2>音障与超音速飞行</h2>
+<p>超过马赫 1 的飞机在做超音速飞行。音障不是一道物理墙壁——而是一个可压缩性效应区域，在飞机周围形成冲击波。首次确认的超音速飞行由查克·叶格于 1947 年 10 月 14 日驾驶贝尔 X-1 飞机完成，速度为马赫 1.06。</p>
+<p>协和客机以马赫 2.04（约 2,179 km/h）巡航，是有史以来最快的商业客机。现代战斗机可达马赫 2-3。SR-71 黑鸟侦察机保持着有人驾驶吸气式飞行器的速度纪录：马赫 3.3。</p>
+<h2>如何使用本转换器</h2>
+<p>在五个字段中的任何一个输入速度，其余四个立即更新，你再也不需要记住换算系数或去翻另一个计算器。当一个场景中的数据——以节报告的风速、以 mph 标示的汽车极速、以马赫给出的飞机巡航速度——需要转换为你日常使用的单位来理解时，这一点特别有用。</p>
+<h2>为什么航空和航海使用节</h2>
+<p>节在航空和航海导航中沿用至今，有一个非常实际的原因，根植于海上定位方式。1 海里被定义为 1 分纬度的长度，这意味着 1 节的速度可以直接而简单地对应船舶或飞机在海图上穿越纬度线的速度——这一关系使得推算导航计算远比先换算成公里或英里再计算简单得多。这种历史上的便利性已经超越了催生它的帆船时代，节至今仍是全球海事和航空领域的标准单位。</p>
+<h2>马赫数是相对的，不是绝对的</h2>
+<p>与本转换器中的其他四个单位不同，马赫不是一个固定的速度——它是物体速度与当地音速的比值，而音速本身取决于空气温度，进而取决于高度。在海平面一个温暖的日子里，马赫 1 约为 343 米每秒，但在巡航高度，空气冷得多，音速降低到约 295 米每秒，这意味着同一架以真正恒定的真实空速飞行的飞机，在高空的马赫数会比在海平面时更高。本转换器使用标准海平面参考值进行马赫换算，这是最常引用的数值，但值得知道的是，精确的马赫数始终取决于测量时刻的周围空气温度。</p>
+<h2>隐私与即时性</h2>
+<p>所有换算完全在浏览器中运行，结果在你输入的瞬间更新，你输入的任何速度值都不会被发送到服务器、记录或共享。加载完成后即可离线使用，不保留任何转换记录。</p>
+    <section class="faq"><h2>Speed converter FAQ</h2><dl><dt>What is Mach 1?</dt><dd>Mach 1 is the speed of sound, which varies with air temperature and density. At sea level at 20°C, Mach 1 ≈ 343 m/s ≈ 1,235 km/h ≈ 767 mph.</dd><dt>What are knots used for?</dt><dd>Knots are used in aviation and maritime navigation. One knot equals one nautical mile per hour (1.852 km/h).</dd><dt>What is the speed of light?</dt><dd>The speed of light in a vacuum is 299,792,458 m/s ≈ 1,079,252,849 km/h. This cannot be converted to Mach in any meaningful way as it is independent of medium.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/speedconverter/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/speedconverter/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/speedconverter/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/speedconverter/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/speedconverter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/speedconverter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/speedconverter/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/speedconverter.js" defer></script>
+</body>
+</html>

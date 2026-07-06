@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Picker — get HEX, RGB, and HSL color codes</title>
+<meta name="description" content="Free color picker. Select any color and instantly get its HEX, RGB, and HSL codes. Copy with one click. Works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ur/colorpicker/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/colorpicker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/colorpicker/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/colorpicker/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/colorpicker/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/colorpicker/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/colorpicker/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/colorpicker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/colorpicker/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/colorpicker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/colorpicker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/colorpicker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Color Picker — get HEX, RGB, and HSL color codes">
+<meta property="og:description" content="Free color picker. Select any color and instantly get its HEX, RGB, and HSL codes. Copy with one click. Works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ur/colorpicker/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Color Picker — get HEX, RGB, and HSL color codes","url":"https://mikaio.dev/ur/colorpicker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free color picker. Select any color and instantly get its HEX, RGB, and HSL codes. Copy with one click. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Color Picker","item":"https://mikaio.dev/ur/colorpicker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are HEX, RGB, and HSL?","acceptedAnswer":{"@type":"Answer","text":"HEX is a six-digit hexadecimal code like #ff5733. RGB specifies red, green, and blue channels from 0 to 255. HSL specifies hue (0-360°), saturation (%), and lightness (%). All three represent the same color differently."}},{"@type":"Question","name":"Which format should I use?","acceptedAnswer":{"@type":"Answer","text":"HEX is most common in web design and CSS. RGB is used in programming and image editing. HSL is intuitive for humans because hue is easy to understand and adjust."}},{"@type":"Question","name":"Can I enter a specific color code?","acceptedAnswer":{"@type":"Answer","text":"Use the color picker to select visually. For entering a specific HEX or RGB value precisely, use your browser's color input directly — click it and type the value."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Color Picker</span></nav>
+  <h1>Color Picker</h1>
+  <p class="lead">Click the color swatch to open the color picker. The HEX, RGB, and HSL codes update instantly.</p>
+  <section class="widget" id="tool"><div id="cp-app"><div class="row"><div class="field"><label for="cp-color">Pick a color</label><input type="color" id="cp-color" value="#4f8ef7" style="width:80px;height:48px;border:none;background:none;cursor:pointer"></div></div><div id="cp-results" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">HEX</div><div class="big" id="cp-hex">#4f8ef7</div></div><div><div class="hint">RGB</div><div class="big" id="cp-rgb">—</div></div><div><div class="hint">HSL</div><div class="big" id="cp-hsl">—</div></div></div><div id="cp-swatch" style="margin-top:1rem;height:60px;border-radius:0.5rem;background:#4f8ef7"></div><button id="cp-copy-hex" class="btn secondary" style="margin-top:0.5rem">Copy HEX</button></div></section>
+  <article class="content">
+    <h2>کوئی بھی رنگ چنیں اور فوراً اس کا کوڈ حاصل کریں</h2>
+<p>رنگ کے کوڈز ویب ڈیزائن، گرافک ڈیزائن اور پروگرامنگ میں ہر جگہ نظر آتے ہیں۔ جب آپ کوئی ایسا رنگ دیکھیں جسے استعمال یا دوبارہ بنانا چاہیں، تو آپ کو اس کا کوڈ چاہیے ہوتا ہے — چاہے وہ CSS کے لیے HEX قدر ہو، فوٹوشاپ کے لیے RGB تینوں اقدار ہوں، یا پروگرام کے ذریعے رنگ ترتیب دینے کے لیے HSL وضاحت ہو۔ یہ ٹول آپ کے چنے ہوئے کسی بھی رنگ کے لیے یہ تینوں فارمیٹس ایک ساتھ فراہم کرتا ہے۔</p>
+<h2>رنگ کوڈ کے تین فارمیٹس</h2>
+<p><strong>HEX (ہیکسا ڈیسیمل)</strong>: ویب ڈیویلپمنٹ میں سب سے زیادہ استعمال ہونے والا فارمیٹ۔ 0-9 اور A-F کے چھ حروف کی ایک لڑی، آگے ہیش کی علامت لگی ہوئی۔ ہر جوڑا حروف ایک رنگ چینل کی نمائندگی کرتا ہے: #RRGGBB۔ مثلاً #FF5733 میں زیادہ سے زیادہ سرخ (FF = 255)، درمیانہ سبز (57 = 87) اور کم نیلا (33 = 51) ہے۔ HEX کوڈز کو مختصر انداز میں بھی لکھا جا سکتا ہے جب ہر جوڑے کے دونوں حروف یکساں ہوں: #FF5500 بن جاتا ہے #F50۔</p>
+<p><strong>RGB (سرخ، سبز، نیلا)</strong>: ہر رنگ چینل کو 0 (کچھ نہیں) سے 255 (زیادہ سے زیادہ) تک ایک عدد کی صورت بتاتا ہے۔ یہ ڈیجیٹل اسکرینز کا اصلی فارمیٹ ہے، جو سرخ، سبز اور نیلی روشنی خارج کرتی ہیں۔ rgb(255, 87, 51) وہی رنگ ہے جو #FF5733 ہے۔ RGB اقدار CSS، جاوا اسکرپٹ، پائتھون اور زیادہ تر امیج ایڈیٹنگ سافٹ ویئر میں استعمال ہوتی ہیں۔</p>
+<p><strong>HSL (رنگت، سنترپتی، روشنی)</strong>: زیادہ انسان دوست فارمیٹ۔ رنگت (hue) خالص رنگ کو ایک رنگ چکر پر 0° سے 360° کے زاویے کے طور پر بیان کرتی ہے: 0° = سرخ، 120° = سبز، 240° = نیلا۔ سنترپتی (saturation) بتاتی ہے کہ رنگ کتنا شوخ یا مدھم ہے (0% = مدھم/سرمئی، 100% = مکمل شوخ)۔ روشنی (lightness) بتاتی ہے کہ رنگ کتنا ہلکا یا گہرا ہے (0% = کالا، 100% = سفید، 50% = &quot;معمول&quot; کا مکمل شوخ رنگ)۔ HSL کسی رنگ کو باقاعدہ انداز میں ایڈجسٹ کرنے کے لیے بہترین ہے: روشنی بڑھا کر ہلکے رنگ (tints) بنائیں، کم کر کے گہرے رنگ (shades) بنائیں۔</p>
+<h2>پکر استعمال کرنے کا طریقہ</h2>
+<p>رنگ کے نمونے پر کلک یا تھپکی دیں تاکہ آپ کے براؤزر کا اپنا رنگ پکر کھل جائے، بصری طور پر کوئی رنگ چنیں یا کوئی جانی پہچانی قدر ٹائپ کریں، اور HEX، RGB اور HSL کوڈز سب فوراً ساتھ ساتھ تازہ ہو جاتے ہیں، جو کسی بھی ٹول یا کوڈ میں کاپی کرنے کے لیے تیار ہیں۔ چونکہ یہ پکر کسی مخصوص انٹرفیس کی بجائے براؤزر کا اپنا built-in انٹرفیس استعمال کرتا ہے، یہ عین اسی طرح برتاؤ کرتا ہے جیسا آپ توقع رکھتے ہیں اور مختلف آلات پر قابلِ اعتماد طریقے سے کام کرتا ہے۔</p>
+<h2>کون سا فارمیٹ کب استعمال کریں</h2>
+<p><strong>CSS اور ویب ڈیزائن</strong>: HEX اور RGB دونوں وسیع پیمانے پر سپورٹڈ ہیں، مگر HSL کو تیزی سے ترجیح دی جا رہی ہے کیونکہ اسے ایڈجسٹ کرنا نہایت آسان ہے۔ کسی رنگ کو 10 فیصد ہلکا کرنا HSL میں آسان ہے؛ RGB میں اس کے لیے نئی چینل اقدار کا حساب لگانا پڑتا ہے۔</p>
+<p><strong>پرنٹ ڈیزائن</strong>: پرنٹ عموماً CMYK (سیان، مجنٹا، پیلا، کالا) استعمال کرتا ہے، جسے یہ ٹول احاطہ نہیں کرتا۔ ڈیجیٹل سے پرنٹ تبدیلی کے لیے ایڈوبی الیسٹریٹر جیسا پیشہ ورانہ سافٹ ویئر استعمال کریں۔</p>
+<p><strong>پروگرامنگ</strong>: RGB زیادہ تر گرافکس لائبریریوں کا اصلی فارمیٹ ہے۔ HSL اس وقت کارآمد ہے جب آپ پروگرام کے ذریعے رنگ پیلیٹس بنانا چاہیں۔</p>
+<h2>رنگ کے نظریے کی بنیادی باتیں</h2>
+<p>رنگوں کو سمجھنا اس ٹول کو زیادہ مؤثر طریقے سے استعمال کرنے میں مدد دیتا ہے:</p>
+<p><strong>تکمیلی رنگ</strong>: رنگت کے چکر پر ایک دوسرے کے بالکل مخالف رنگ (180° کے فاصلے پر) زیادہ سے زیادہ تضاد پیدا کرتے ہیں۔ سرخ (0°) اور سیان (180°)۔</p>
+<p><strong>مشابہ رنگ</strong>: رنگت کے چکر پر ملحقہ رنگ (30 سے 60 درجے کے فاصلے پر) ہم آہنگ، کم تضاد والے پیلیٹس بناتے ہیں۔</p>
+<p><strong>سہ رخی رنگ</strong>: تین رنگ 120 درجے کے یکساں فاصلے پر شوخ، متوازن سکیمیں بناتے ہیں۔</p>
+<p><strong>ہلکے اور گہرے رنگ</strong>: ہلکے رنگ (tints) بنانے کے لیے HSL روشنی کو 50% سے اوپر بڑھائیں۔ گہرے رنگ (shades) کے لیے اسے 50% سے نیچے کم کریں۔</p>
+<h2>رسائی (accessibility) اور تضاد</h2>
+<p>ویب رسائی کے معیارات متن اور پس منظر کے رنگوں کے درمیان کافی تضاد کا تقاضا کرتے ہیں۔ WCAG 2.1 رہنما اصول عام متن کے لیے کم از کم 4.5:1 اور بڑے متن کے لیے 3:1 تضاد کا تناسب مقرر کرتے ہیں۔ رسائی جانچنے کے لیے اس پکر سے حاصل کردہ رنگ کوڈز کو کسی مخصوص کنٹراسٹ چیکر میں استعمال کریں۔</p>
+<h2>ڈیزائن کے لیے رنگ کی ہم آہنگیاں</h2>
+<p>پہلے بیان کیے گئے بنیادی جوڑوں سے آگے، ڈیزائن کے کام میں کچھ اور امتزاج بھی عام ہیں۔ ایک ہم رنگ (monochromatic) سکیم ایک ہی رنگت کے مختلف گہرے، ہلکے اور درمیانے درجے استعمال کرتی ہے، جو رنگت اور سنترپتی کو ثابت رکھتے ہوئے صرف HSL روشنی بدل کر بنائی جاتی ہے — بغیر رنگوں کے ٹکراؤ کے خطرے کے ایک مربوط پیلیٹ بنانے کا قابلِ اعتماد طریقہ۔ ایک split-complementary سکیم ایک بنیادی رنگ اور اس کے تکمیلی رنگ کے دونوں ملحقہ رنگ لیتی ہے، جو سیدھی تکمیلی جوڑی جتنا بصری تضاد دیتی ہے مگر زیادہ نرم، باریک احساس کے ساتھ۔</p>
+<h2>ویب رسائی اور رنگ کا تضاد</h2>
+<p>Web Content Accessibility Guidelines پڑھنے کے قابل متن کے لیے تضاد کے تناسب کی وضاحت کرتی ہیں: AA معیار عام متن کے لیے کم از کم 4.5:1 اور بڑے متن (18 پوائنٹ یا اس سے بڑا، یا 14 پوائنٹ بولڈ) کے لیے 3:1 کا تقاضا کرتا ہے، جبکہ زیادہ سخت AAA معیار بالترتیب 7:1 اور 4.5:1 کا تقاضا کرتا ہے۔ متن اور پس منظر کے درمیان زیادہ تضاد کمزور بینائی رکھنے والے ہر شخص کے لیے اہم ہے، اور خاص طور پر تقریباً 8 فیصد مردوں اور 0.5 فیصد خواتین کے لیے جنہیں کسی نہ کسی قسم کا رنگ اندھا پن ہے، جن کے لیے کچھ رنگوں کے جوڑے، جو اکثر لوگوں کو الگ الگ نظر آتے ہیں، تقریباً یکساں دکھائی دے سکتے ہیں۔</p>
+<h2>نامزد CSS رنگ</h2>
+<p>CSS میں 147 نامزد رنگ متعین ہیں جو براہِ راست ہیکس یا RGB قدر کی جگہ استعمال کیے جا سکتے ہیں، عام ناموں جیسے سرخ، نیلے اور کالے سے لے کر زیادہ انوکھے ناموں جیسے cornflowerblue، papayawhip اور rebeccapurple تک — آخری الذکر 2014ء میں ریبیکا مائیر کی یاد میں رکھا گیا، جو CSS ڈیویلپر ایرک مائیر کی بیٹی تھیں۔ اس ٹول سے کوئی رنگ چن کر اسے قریب ترین نامزد CSS رنگ سے موازنہ کرنا یہ دیکھنے کا فوری طریقہ ہے کہ آپ کے ذہن میں موجود شیڈ کے لیے پہلے سے کوئی معیاری نام موجود ہے یا نہیں۔</p>
+<h2>نجی اور فوری</h2>
+<p>رنگ پکر مکمل طور پر آپ کے براؤزر میں براؤزر کے اپنے built-in رنگ ان پٹ کے ذریعے چلتا ہے، اس لیے نتائج فوراً سامنے آتے ہیں اور آپ کا چنا ہوا کوئی بھی رنگ کبھی کسی سرور کو نہیں بھیجا جاتا، محفوظ نہیں کیا جاتا اور نہ ہی بانٹا جاتا ہے۔</p>
+    <section class="faq"><h2>Color picker FAQ</h2><dl><dt>What are HEX, RGB, and HSL?</dt><dd>HEX is a six-digit hexadecimal code like #ff5733. RGB specifies red, green, and blue channels from 0 to 255. HSL specifies hue (0-360°), saturation (%), and lightness (%). All three represent the same color differently.</dd><dt>Which format should I use?</dt><dd>HEX is most common in web design and CSS. RGB is used in programming and image editing. HSL is intuitive for humans because hue is easy to understand and adjust.</dd><dt>Can I enter a specific color code?</dt><dd>Use the color picker to select visually. For entering a specific HEX or RGB value precisely, use your browser&#39;s color input directly — click it and type the value.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/colorpicker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/colorpicker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/colorpicker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/colorpicker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/colorpicker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/colorpicker/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/colorpicker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/colorpicker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/colorpicker/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/colorpicker/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/colorpicker.js" defer></script>
+</body>
+</html>

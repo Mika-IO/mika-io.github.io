@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Generates all remaining tool files: data/tools/*.json, data/content/*/{en,pt}.md, assets/tools/*.js
+// Generates all remaining tool files: data/tools/*.json, data/content/*/{en,pt}.md, public/assets/tools/*.js
 // Run: node build/gen-tools.mjs
 import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -2362,12 +2362,12 @@ for (const tool of TOOLS) {
   };
   write(jsonPath, JSON.stringify(jsonData, null, 2) + '\n');
 
-  // 2. assets/tools/{slug}.js
+  // 2. public/assets/tools/{slug}.js
   if (tool.script) {
     const jsSlug = tool.script.replace('.js', '');
     const jsContent = JS[jsSlug];
     if (jsContent) {
-      write(`assets/tools/${tool.script}`, jsContent + '\n');
+      write(`public/assets/tools/${tool.script}`, jsContent + '\n');
     }
   }
 

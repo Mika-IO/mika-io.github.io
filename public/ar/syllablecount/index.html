@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllable Counter — count syllables in any word or text</title>
+<meta name="description" content="Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing.">
+<link rel="canonical" href="https://mikaio.dev/ar/syllablecount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/syllablecount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/syllablecount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/syllablecount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/syllablecount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/syllablecount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/syllablecount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Syllable Counter — count syllables in any word or text">
+<meta property="og:description" content="Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing.">
+<meta property="og:url" content="https://mikaio.dev/ar/syllablecount/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Syllable Counter — count syllables in any word or text","url":"https://mikaio.dev/ar/syllablecount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"Syllable Counter","item":"https://mikaio.dev/ar/syllablecount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the syllable count work?","acceptedAnswer":{"@type":"Answer","text":"The tool estimates syllables using common English phonetic rules: counting vowel groups, applying exceptions for silent-e and common suffixes. It is an estimate and may differ slightly from a dictionary for unusual words."}},{"@type":"Question","name":"What is a syllable?","acceptedAnswer":{"@type":"Answer","text":"A syllable is a unit of pronunciation containing a single vowel sound. The word \"cat\" has one syllable; \"water\" has two (wa-ter); \"education\" has five (ed-u-ca-tion)."}},{"@type":"Question","name":"Is this good for haiku?","acceptedAnswer":{"@type":"Answer","text":"Yes. A traditional haiku has 5-7-5 syllables across three lines. Write each line separately and check the count."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>Syllable Counter</span></nav>
+  <h1>Syllable Counter</h1>
+  <p class="lead">Type or paste text to count syllables and words. Useful for haiku, sonnets, song lyrics, and meter checking.</p>
+  <section class="widget" id="tool"><div id="syl-app"><textarea id="syl-text" rows="4" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Type or paste English text here…"></textarea><div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">Syllables</div><div class="big" id="syl-count">0</div></div><div><div class="hint">Words</div><div class="big" id="syl-words">0</div></div></div></div></section>
+  <article class="content">
+    <h2>عدّد المقاطع الصوتية في أي نص</h2>
+<p>يعد عد المقاطع الصوتية أمراً ضرورياً لكل من يعمل مع الشعر الموزون أو كلمات الأغاني أو أي شكل من أشكال الكتابة حيث يهم الإيقاع. يتطلب شعر الهايكو بالضبط 5-7-5 مقطعا صوتيا عبر ثلاثة أسطر. تتبع السوناتات أنماطاً إيقاعية محددة. تلائم كلمات الأغاني المقاطع مع الإيقاعات الموسيقية. تقدر هذه الأداة عدد المقاطع لأي نص إنجليزي فوراً، حتى تتمكن من التركيز على الكلمات بدلاً من العد.</p>
+<h2>ما هو المقطع الصوتي؟</h2>
+<p>المقطع الصوتي هو وحدة نطق تنظم حول صوت حرف علة واحد. يمكن تقسيم كل كلمة إلى مقاطع:</p>
+<ul>
+<li>&quot;cat&quot; → مقطع واحد (cat)</li>
+<li>&quot;water&quot; → مقطعان (wa-ter)</li>
+<li>&quot;beautiful&quot; → ثلاثة مقاطع (beau-ti-ful)</li>
+<li>&quot;education&quot; → خمسة مقاطع (ed-u-ca-tion)</li>
+<li>&quot;unimaginable&quot; → ستة مقاطع (un-i-mag-i-na-ble)</li>
+</ul>
+<p>يعتمد عدد المقاطع في الكلمة على عدد أصوات حروف العلة المميزة — وليس عدد حروف العلة المكتوبة. فكلمة &quot;bake&quot; تحتوي على حرفي علة (a و e) ولكن صوت علة واحد فقط، مما يجعلها مقطعاً واحداً.</p>
+<h2>كيف يعمل العداد</h2>
+<p>تستخدم الأداة قواعد صوتية إنجليزية شائعة لتقدير المقاطع:</p>
+<ol>
+<li>عد مجموعات حروف العلة المتجاورة (كل مجموعة تمثل تقريباً مقطعاً واحداً)</li>
+<li>الطرح لحرف e الصامت في نهاية الكلمات (مثلاً &quot;cake&quot; مقطع واحد وليس مقطعين)</li>
+<li>الطرح للواحق شائعة مثل &quot;-ed&quot; التي غالباً ما تكون صامتة</li>
+<li>ضمان مقطع واحد على الأقل لكل كلمة</li>
+</ol>
+<p>هذه الطريقة تقريب جيد لمعظم الكلمات الإنجليزية الشائعة. قد يُحسب بعض الكلمات غير المنتظمة والأسماء الخاصة بشكل مختلف قليلاً عن نطقها المعجمي.</p>
+<h2>الاستخدامات في الكتابة الإبداعية</h2>
+<p><strong>الهايكو:</strong> شكل شعري ياباني نُقل تقليدياً إلى الإنجليزية كشعر من ثلاثة أسطر بنمط 5-7-5 مقطعاً. يتطلب شكل الهايكو عد مقاطع دقيق؛ تجعل هذه الأداة من السهل التحقق من كل سطر.</p>
+<p><strong>الوزن الخماسي التفعيلي:</strong> الوزن المفضل لدى شكسبير يحتوي على 10 مقاطع في كل سطر بنمط غير مشدد-مشدَّد (da-DUM مكررة خمس مرات). عد المقاطع هو الخطوة الأولى للتحقق مما إذا كان السطر يناسب الوزن.</p>
+<p><strong>كلمات الأغاني:</strong> كل مقطع يقابل نبضة أو نغمة. يعد كاتبو الأغاني المقاطع لضمان ملاءمة الكلمات للحن. البيت الذي يُغنّى بشكل جيد له مقاطع موزعة بالتساوي عبر النبضات الموسيقية.</p>
+<p><strong>الخمسات (Limericks):</strong> يحتوي نظام القافية AABBA على أسطر من 8-8-5-5-8 مقاطع في الشكل التقليدي.</p>
+<p><strong>الراب والهيب هوب:</strong> يتعلق التدفق في الراب إلى حد كبير بكثافة المقاطع ونمطها. يعمد العديد من المغنين إلى حشو مقاطع أكثر في البيت الواحد لتأثير يُسمى القافية متعددة المقاطع أو الإيقاع المزدوج.</p>
+<h2>التحقق من الوزن في الشعر</h2>
+<p>يقسم الوزن الإنجليزي الكلاسيكي المقاطع إلى مشددة (/) وغير مشددة (u). الأنماط الأكثر شيوعاً هي:</p>
+<ul>
+<li><strong>الطambo:</strong> uU (غير مشدد-مشدَّد)، كما في &quot;to BE, or NOT to BE&quot;</li>
+<li><strong>الطROCHAIC:</strong> Uu (مشدَّد-غير مشدد)، كما في &quot;TI-ger, TI-ger, BURN-ing BRIGHT&quot;</li>
+<li><strong>الدكتيلي:</strong> Uuu (مشدَّد-غير مشدد-غير مشدد)</li>
+<li><strong>الأنابستي:</strong> uuU (غير مشدد-غير مشدد-مشدَّد)</li>
+</ul>
+<p>عد المقاطع هو الشرط الأساسي الضروري لتحليل أي من هذه الأنماط.</p>
+<h2>كيفية استخدام العداد</h2>
+<p>اكتب أو الصق أي نص إنجليزي في المربع وسيتحدث إجمالي عدد المقاطع فوراً أسفله، بالإضافة إلى تفصيل لكل كلمة عندما تحتاج إلى التحقق من سطر معين بدلاً من مقطع كامل. هذه المراجعة المباشرة هي بالضبط ما تريده عند صياغة نص بنمط صارم مثل الهايكو، حيث يعني تحويل سطر واحد من ستة مقاطع إلى خمسة تحريراً كلمة بكلمة ومراقبة العدد في الوقت الفعلي بدلاً من العد على الأصابع بعد كل تغيير.</p>
+<h2>لماذا العد التلقائي صعب فعلاً</h2>
+<p>الإملاء الإنجليزي دليل غير موثوق به بشكل مشهور للنطق، وهذا بالضبط سبب عدم إمكانية عد المقاطع بمجرد عد حروف العلة. تتآمر الحروف الصامتة والأزواج التي يصوت فيها حرفا علة معاً كصوت واحد والكلمات المستعارة من لغات أخرى ذات اصطلاحات إملائية خاصة لجعل العلاقة بين الإملاء وعدد المقاطع غير متسقة. النهج القائم على القواعد الذي تستخدمه هذه الأداة — عد مجموعات حروف العلة ثم التعديل للنهايات الصامتة واللواحق الشائعة — يصيب الغالبية العظمى من الكلمات الإنجليزية اليومية، لكن حفنة من الكلمات غير المعتادة والأسماء والمصطلحات المستعارة قد تختلف قليلاً عن عدد المقاطع الرسمي في القاموس، وذلك ببساطة لأن لا مجموعة صغيرة من القواعد يمكنها التقاط كل استثناء تراكب في الإنجليزية عبر ألف عام من الاستعارة من لغات أخرى.</p>
+<h2>المقاطع وصيغ قابلية القراءة</h2>
+<p>ما وراء الشعر، يعد المقاطع مدخلاً رئيسياً للعديد من صيغ قابلية القراءة المعروفة. تستخدم صيغ flesch-Kincaid لقراءة سهلة ومستوى الصف الدراسي متوسط المقاطع لكل كلمة جنباً إلى جنب مع متوسط طول الجملة لتقدير مدى صعوبة قراءة المقطع — فالنص ذو الكلمات متعددة المقاطع يحصل على درجة أصعب، مما يتتبع الحدس بأن كلمة &quot;استخدم&quot; تُقرأ أصعب من &quot;استعمل&quot; رغم أن كلتيهما تعنيان الشيء نفسه. غالباً ما يتحقق الكتاب الذين يستهدفون مستوى قراءة معين، مثل المحتوى لجمهور عام أو جمهور شاب، من المقاطع ذات المقاطع الكثيرة ويبسطون اختيار words حيث يرتفع عدد المقاطع.</p>
+<h2>عد المقاطع بالأذن مقابل بالقاعدة</h2>
+<p>لا تزال أكثر طريقة موثوقة لعد المقاطع في كلمة غير مألوفة هي نطقها بصوت عالٍ والشعور أين يسقط فكك أو يتوقف نفسك — كل لحظة من هذه تمثل تقريباً مقطعاً واحداً. تقريب النهج القائم على القواعد مثل الذي تستخدمه هذه الأداة نفس الحدس من خلال عد مجموعات حروف العلة، والذي يعمل بشكل صحيح للغالبية العظمى من الكلمات الإنجليزية لكنه يختلف أحياناً مع النسخة المنطوقة للاستعارات أو الأسماء غير المعتادة، إذ لا يمكن لأي مجموعة ثابتة من قواعد الإملاء التقاط كل غرابة في النطق الإنجليزي بشكل كامل.</p>
+<h2>خصوصية وفورية</h2>
+<p>يعمل العداد بالكامل في متصفحك، لذا تحدث.Results فوراً أثناء الكتابة ولا يُرسَل أي نص تدخله إلى أي مكان أو يُسجَّل أو يُشارك.</p>
+    <section class="faq"><h2>Syllable counter FAQ</h2><dl><dt>How does the syllable count work?</dt><dd>The tool estimates syllables using common English phonetic rules: counting vowel groups, applying exceptions for silent-e and common suffixes. It is an estimate and may differ slightly from a dictionary for unusual words.</dd><dt>What is a syllable?</dt><dd>A syllable is a unit of pronunciation containing a single vowel sound. The word &quot;cat&quot; has one syllable; &quot;water&quot; has two (wa-ter); &quot;education&quot; has five (ed-u-ca-tion).</dd><dt>Is this good for haiku?</dt><dd>Yes. A traditional haiku has 5-7-5 syllables across three lines. Write each line separately and check the count.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/glossary.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/syllablecount.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stopwatch Online — free browser stopwatch with lap times</title>
+<meta name="description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ar/stopwatch/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/stopwatch/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/stopwatch/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/stopwatch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/stopwatch/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/stopwatch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/stopwatch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stopwatch Online — free browser stopwatch with lap times">
+<meta property="og:description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ar/stopwatch/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch Online — free browser stopwatch with lap times","url":"https://mikaio.dev/ar/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"Stopwatch","item":"https://mikaio.dev/ar/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate is the browser stopwatch?","acceptedAnswer":{"@type":"Answer","text":"The stopwatch uses the browser's high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device."}},{"@type":"Question","name":"Will it stop if I switch tabs?","acceptedAnswer":{"@type":"Answer","text":"Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results."}},{"@type":"Question","name":"Can I use this on a mobile phone?","acceptedAnswer":{"@type":"Answer","text":"Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>Stopwatch</span></nav>
+  <h1>Stopwatch</h1>
+  <p class="lead">Press Start to begin timing. Press Lap to record split times without stopping. Press Reset to clear everything.</p>
+  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">Start</button><button id="sw-lap" class="btn secondary" disabled>Lap</button><button id="sw-reset" class="btn secondary" disabled>Reset</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
+  <article class="content">
+    <h2>ساعة إيقاف دقيقة في متصفحك مباشرة</h2>
+<p>كان قياس الوقت بدقة يعني في السابق حمل ساعة إيقاف مخصصة. الآن يمكن لأي جهاز بمتصفح أن يخدم هذا الغرض. تعمل ساعة الإيقاف الإلكترونية هذه بالكامل في متصفحك باستخدام مؤقت عالي الدقة، وتسجل أوقات اللفات، وتعرض الوقت المنقضي بالدقائق والثواني وأجزاء الثانية. لا يوجد شيء للتنزيل أو التثبيت.</p>
+<h2>كيفية استخدامها</h2>
+<p>اضغط زر البدء لبدء计时. يعرض العداد الوقت بشكل متصاعد بالدقائق والثواني وأجزاء الثانية. أثناء تشغيل ساعة الإيقاف، اضغط على زر اللفة لتسجيل الوقت المنقضي الحالي كنتيجة جزئية. تتراكم قائمة اللفات أسفل الشاشة مع ترقيم كل نتيجة جزئية حتى تتمكن من مقارنتها. اضغط على زر الإيقاف لإيقاف ساعة الإيقاف مؤقتاً دون فقدان الوقت المنقضي أو سجلات اللفات. اضغط البدء مرة أخرى للمتابعة من حيث توقفت. اضغط إعادة الضبط لمسح كل شيء والعودة إلى الصفر.</p>
+<h2>الدقة ومؤقتات المتصفح</h2>
+<p>توفر المتصفحات الحديثة مؤقتاً عالي الدقة من خلال واجهة برمجة الأداء (Performance API)، والتي تقيس الوقت بأجزاء من الألفية. هذا أدق بكثير من دقة الألفية الواحدة في طريقة Date.now() القديمة. عملياً، يكون المؤقت دقيقاً إلى أقل بكثير من ألفية على معظم الأجهزة، وهو أكثر من كافٍ لتوقيت الرياضات أو الطبخ أو العروض التقديمية أو أي استخدام يومي. للتوقيت المعتمد رسمياً في المسابقات، استخدم دائماً جهاز توقيت معتمداً.</p>
+<p>من القيود الجديرة بالمعرفة: إذا انتقلت إلى علامة تبويب مختلفة في المتصفح، فقد تُبطئ المتصفحات جافاسكريبت في الخلفية لتوفير الموارد. هذا قد يجعل ساعة الإيقاف تتأخر قليلاً عن الوقت المنقضي الحقيقي. احتفظ بعلامة تبويب ساعة الإيقاف في المقدمة لأفضل دقة.</p>
+<h2>الاستخدامات الشائعة</h2>
+<p>يستخدم الرياضيون ساعة إيقاف لتوقيت الجري ولفات السباحة وفترات ركوب الدراجات أو أي تمرين متكرر حيث يهم مقارنة النتائج الجزئية. يساعد تسجيل اللفات في معرفة ما إذا كنت تحافظ على السرعة أو تتحسن أو تتراجع. يقيّم المدربون عدة رياضيين بالتتابع ويقارنون النتائج.</p>
+<p>في المطبخ، ساعة الإيقاف أكثر مرونة من مؤقت العد التنازلي عندما تتعامل مع أطباق متعددة يحتاج كل منها وقتاً مختلفاً. تبدأ بتوقيت كل طبق عند وضعه وتسجل وقت اللفة لمعرفة كم طهى كل منها.</p>
+<p>تستفيد العروض التقديمية والخطب من مؤقت جاري. معرفة أنك عند أربع دقائق وثلاثين ثانية بالضبط تساعدك في الحكم على ما إذا كنت ستوسع قسماً أو تختصره لتحقيق الطول المستهدف.</p>
+<p>يقدر العلماء والطلاب الذين يوقّتون التجارب وظيفة اللفة، التي تسجل نقطة بيانات دون الحاجة إلى إعادة تشغيل المؤقت للتجربة التالية.</p>
+<h2>لمسية ولوحة مفاتيح</h2>
+<p>تعمل أزرار البدء واللفة وإعادة الضبط بنقرات الماوس وسمات الأصابع. يتكيف التخطيط بسلاسة على الهواتف والأجهزة اللوحية.</p>
+<h2>لماذا ساعة إيقاف المتصفح دقيقة فعلاً</h2>
+<p>من الجدير فهم سبب الثقة بأداة مجانية تعمل في صفحة ويب لأي شيء يتجاوز التوقيت العارض. توفر المتصفحات الحديثة مؤقتاً عالي الدقة من خلال واجهة برمجة الأداء، مختلف عن طريقة Date.now() الأقدم والأقل دقة، قادر على قياس الوقت بأجزاء من الألفية بدلاً من الملي ثانية الكاملة. عملياً هذا يعني أن المؤقت ينحرف بأقل بكثير من ملي ثانية على مدار جلسة توقيت عادية، وهو أكثر من كافٍ للرياضة والطبخ والعروض التقديمية والعمل المختبري — والتحذير الوحيد هو أن المتصفحات تُبطئ عمداً جافاسكريبت الذي يعمل في علامة تبويب خلفية لتوفير البطارية والمعالج، لذا فإن إبقاء علامة تبويب ساعة الإيقاف نشطة وفي المقدمة هو العادة الوحيدة التي تحافظ على دقتها.</p>
+<h2>أوقات اللفات مقابل الأوقات الجزئية</h2>
+<p>يميز المهتمون بالتوقيت أحياناً بين &quot;وقت اللفة&quot; (مدة ذلك المقطع فقط، مستقلة عن غيرها) و&quot;الوقت الجزئي&quot; (الوقت المنقضي التراكمي عند نقطة التفتيش تلك منذ البداية). تسجل هذه الأداة الأوقات الجزئية — كل وقت مسجل هو إجمالي الوقت المنقضي لحظة ضغطك على زر اللفة — وهو العرف الأكثر شيوعاً في التوقيت العام ويطابق ما يتوقعه معظم الناس عندما ينظرون إلى ساعة إيقاف تعمل. إذا كنت بحاجة إلى مدد اللفات الفردية بدلاً من الأوقات الجزئية التراكمية، اطرح كل وقت مسجل من الذي قبله.</p>
+<h2>ساعة الإيقاف مقابل مؤقت الهاتف المدمج</h2>
+<p>يأتي كل هاتف ذكي حديث مع تطبيق ساعة إيقاف، لذا من المشروع التساؤل عن سبب価値 استخدام ساعة مبنية على المتصفح بدلاً من ذلك. الإجابة الصادقة هي الراحة وليس الدقة الأعلى: على حاسوب مشترك أو أثناء مكالمة فيديو أو ضمن سير عمل يعيش بالفعل في علامة تبويب متصفح، الوصول إلى صفحة ويب أسرع من فتح هاتف والبحث عن التطبيق الصحيح، ودقة التوقيت الأساسية من واجهة برمجة الأداء قابلة للمقارنة بما يحققه التطبيق الأصلي لأي استخدام يومي غير تنافسي.</p>
+<h2>توقيت أنشطة متعددة</h2>
+<p>تتطلب بعض المواقف تتبع أكثر من شيء في وقت واحد — عدة أطباق تُطهى بأوقات بداية مختلفة، أو عدة مراحل تتابع في سباق. نظراً لأن ساعة الإيقاف هذه تحتفظ بإجمالي جاري واحد بالإضافة إلى قائمة اللفات، فإن النهج العملي للأنشطة المتعددة المتزامنة هو فتح الأداة في علامات تبويب متصفح منفصلة، واحدة لكل نشاط، تبدأ كل منها بشكل مستقل لحظة بدء نشاطها الخاص.</p>
+<h2>إعادة الضبط أثناء الجلسة</h2>
+<p>إذا ضغطت على زر إعادة الضبط بالخطأ قبل حفظ أوقات اللفات التي كنت بحاجة إليها، فلا يوجد تراجع — يعود العداد إلى الصفر فوراً. لأي جلسة يهم فيها سجل اللفات فعلاً، يجدر تدوين الأوقات الجزئية الرئيسية أثناء حدوثها بدلاً من الاعتماد فقط على القائمة التي على الشاشة حتى النهاية.</p>
+<h2>خصوصية ومتاحة دائماً</h2>
+<p>لا تُرسَل أي بيانات إلى أي مكان، وتعمل ساعة الإيقاف بالكامل في متصفحك، وتعمل دون اتصال بمجرد تحميل الصفحة، ولا تتطلب أي حساب — أعد تحميل الصفحة في أي وقت لإعادة ضبط كل شيء إلى الصفر.</p>
+    <section class="faq"><h2>Stopwatch FAQ</h2><dl><dt>How accurate is the browser stopwatch?</dt><dd>The stopwatch uses the browser&#39;s high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device.</dd><dt>Will it stop if I switch tabs?</dt><dd>Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results.</dd><dt>Can I use this on a mobile phone?</dt><dd>Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/glossary.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/stopwatch.js" defer></script>
+</body>
+</html>

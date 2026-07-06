@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roman Numeral Converter — convert numbers to Roman numerals</title>
+<meta name="description" content="Free Roman numeral converter. Convert any number from 1 to 3999 to Roman numerals, or convert Roman numerals back to decimal. Instant and accurate.">
+<link rel="canonical" href="https://mikaio.dev/ar/romanmath/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/romanmath/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/romanmath/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/romanmath/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/romanmath/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/romanmath/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/romanmath/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/romanmath/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/romanmath/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Roman Numeral Converter — convert numbers to Roman numerals">
+<meta property="og:description" content="Free Roman numeral converter. Convert any number from 1 to 3999 to Roman numerals, or convert Roman numerals back to decimal. Instant and accurate.">
+<meta property="og:url" content="https://mikaio.dev/ar/romanmath/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Roman Numeral Converter — convert numbers to Roman numerals","url":"https://mikaio.dev/ar/romanmath/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"Free Roman numeral converter. Convert any number from 1 to 3999 to Roman numerals, or convert Roman numerals back to decimal. Instant and accurate."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"Roman Numeral Converter","item":"https://mikaio.dev/ar/romanmath/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the range for Roman numerals?","acceptedAnswer":{"@type":"Answer","text":"Standard Roman numerals represent numbers from 1 to 3,999. The number 4,000 would require a symbol (M̄) with a bar that is not standard. This calculator supports 1–3,999."}},{"@type":"Question","name":"What are the Roman numeral symbols?","acceptedAnswer":{"@type":"Answer","text":"I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Subtractive notation: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900."}},{"@type":"Question","name":"When are Roman numerals used today?","acceptedAnswer":{"@type":"Answer","text":"Roman numerals appear on clock faces, book chapter headings, movie sequels (Rocky IV), Super Bowl numbers (Super Bowl LVII), year numbers in films and monuments, and outline formatting."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>Roman Numeral Converter</span></nav>
+  <h1>Roman Numeral Converter</h1>
+  <p class="lead">Enter a decimal number to convert to Roman numerals, or enter Roman numerals to convert to decimal.</p>
+  <section class="widget" id="tool"><form id="roman-form"><div class="row"><div class="field"><label for="roman-dec">Decimal number</label><input type="number" id="roman-dec" min="1" max="3999" step="1" inputmode="numeric"></div></div><div class="result"><span class="hint">Roman numeral: </span><span class="big" id="roman-out">—</span></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="roman-in">Roman numeral to decimal</label><input type="text" id="roman-in" style="text-transform:uppercase" maxlength="20"></div><div class="result"><span class="hint">Decimal number: </span><span class="big" id="roman-dec-out">—</span></div></form></section>
+  <article class="content">
+    <h2>التحويل بين الأرقام العشرية والأرقام الرومانية</h2>
+<p>استُخدمت الأرقام الرومانية لأكثر من ألفي عام ولا تزال منتشرة على نطاق واسع حتى اليوم — على واجهات الساعات وفي عناوين الأفلام والكتب وفي حدث &quot;سوبر بول&quot; وفي الوثائق القانونية وعلى المعالم الأثرية. تعمل أداة التحويل هذه في كلا الاتجاهين: أدخل رقماً عشرياً للحصول على مقابله الروماني، أو اكتب أرقاماً رومانية لتحويلها عائداً إلى النظام العشري.</p>
+<h2>نظام الترقيم الروماني</h2>
+<p>تستخدم الأرقام الرومانية سبعة حروف لاتينية كرموز: I (يساوي 1) وV (يساوي 5) وX (يساوي 10) وL (يساوي 50) وC (يساوي 100) وD (يساوي 500) وM (يساوي 1000). تتكون الأرقام من خلال الجمع بين هذه الرموز وفقاً لقاعدتين رئيستين:</p>
+<p><strong>التمثيل الجمعي:</strong> تُرتَّب الرموز من الأعلى إلى الأقل قيمة وتُجمع قيمها. فمثلاً III = 1+1+1 = 3. وVIII = 5+1+1+1 = 8. وXIII = 10+3 = 13.</p>
+<p><strong>التمثيل الطرحي:</strong> عندما يظهر رمز ذا قيمة أصغر قبل رمز ذا قيمة أكبر، يطرح من قيمته. وهذا يتجنب تكرار الرمز أربع مرات. الأزواج الطرحية هي: IV = 4 (وليس IIII)، IX = 9 (وليس VIIII)، XL = 40، XC = 90، CD = 400، CM = 900.</p>
+<h2>أمثلة كاملة</h2>
+<p>MMXXIV = 2000+20+4 = 2024 (السنة الميلادية 2024).</p>
+<p>XLII = 40+2 = 42.</p>
+<p>CDXCIX = 400+90+9 = 499.</p>
+<p>MCMXCIX = 1000+900+90+9 = 1999.</p>
+<p>MMMDCCCLXXXVIII = 3888 (أطول رقم روماني قياسي).</p>
+<h2>أين تظهر الأرقام الرومانية اليوم</h2>
+<p><strong>الساعات وساعات اليد:</strong> لا تزال العديد من واجهات الساعات التقليدية تستخدم الأرقام الرومانية للساعات. وتجدر الإشارة إلى أن IV تُكتب أحياناً على شكل IIII على الساعات لتحقيق التناظر البصري مع الرقم VIII.</p>
+<p><strong>السينما والتلفزيون:</strong> تُعرض سنوات إنتاج الأفلام والبرامج التلفزيونية غالباً بالأرقام الرومانية في شارات النهاية. كما تستخدمها أجزاء الأفلام المتسلسلة بشكل متكرر مثل &quot;روكي IV&quot; و&quot;حرب النجوم الجزء الرابع&quot;.</p>
+<p><strong>الرياضة:</strong> يُرقَّم حدث &quot;سوبر بول&quot; بالأرقام الرومانية منذ &quot;سوبر بول V&quot;. كما تستخدم الأولمبياد الأرقام الرومانية في ألعابها المرقمة.</p>
+<p><strong>الملكية والبابوية:</strong> يُميَّز الحكام الذين يحملون الاسم نفسه بأرقام ترتيبية رومانية مثل إليزابيث الثانية والبابا يوحنا الثالث والعشرون وهنري الثامن.</p>
+<p><strong>الخطوط التفصيلية والقوائم:</strong> تستخدم الخطوط التفصيلية الرسمية الأرقام الرومانية لأرقام الأقسام الرئيسة.</p>
+<p><strong>العمارة والمعالم:</strong> تُحفَر أرقام السنوات على أحجار الأساس والمعالم والمباني العامة تقليدياً بالأرقام الرومانية.</p>
+<h2>ملاحظة حول الأشكال غير القياسية</h2>
+<p>لا يتبع كل رقم روماني تصادفه القواعد الطرحية الصارمة التي تستخدمها أداة التحويل هذه. تاريخياً، لم يكن الرومان أنفسهم متسقين دائماً، ولا يزال بإمكانك أن ترى IIII بدلاً من IV على بعض واجهات الساعات محض تحقيق التوازن البصري مقابل VIII، أو أشكال الجمع فقط في النقوش القديمة. تتبع هذه الأداة الاصطلاح الحديث القياسي — الذي يُدرَّس في المدارس ويُستخدم في النشر وشارات الأفلام والوثائق الرسمية — والذي يفضل دائماً أقصر شكل طرحي. إذا كتبت شكلاً غير قياسي مثل IIII، فاعتبر أي نتيجة غير متوقعة دليلاً على أن الإدخال لم يكن بالشكل القياسي وليس خطأً في التحويل ذاته.</p>
+<h2>محدودية الأرقام الرومانية</h2>
+<p>لا يمتلك النظام الروماني رمزاً للصفر، ولا طريقة لتمثيل الكسور، ولا حساباً مباشرة سهلاً — فضرب رقمين رومانيين يدوياً أمر شاق. ولهذا استُبدل النظام تدريجياً بالنظام الموضعي الهندوسي العربي (الأرقام من 0 إلى 9) لأغراض الحساب.</p>
+<h2>كيفية استخدام المحوّل</h2>
+<p>اكتب رقماً عشرياً في الحقل الأول لترى شكله الروماني يظهر فوراً، أو اكتب أرقاماً رومانية في الحقل الثاني لتحويلها عائداً إلى رقم عشري. كلا الاتجاهين يتحدث مباشرةً أثناء الكتابة، مما يتيح لك التنقل بحرية — أدخل 1999 لترى MCMXCIX تظهر، ثم عدّلها قليلاً وشاهد القيمة العشرية تتغير لتطابق التعديل. يقبل المحوّل الأرقام الرومانية القياسية بالتمثيل الطرحي والتي تغطي كل عدد صحيح من 1 حتى 3999 وهو الحد العملي التقليدي للنظام الكلاسيكي.</p>
+<h2>تحويل العشري إلى الروماني خطوة بخطوة</h2>
+<p>يعمل التحويل من خلال مطابقة أكبر قيمة رومانية ممكنة بشكل متكرر مع ما تبقى من الرقم، ثم طرحها والمتابعة. بالنسبة للرقم 1994: أكبر قيمة تتناسب هي 1000 (M)، يتبقى 994؛ ثم تتناسب 900 (CM)، يتبقى 94؛ ثم تتناسب 90 (XC)، يتبقى 4؛ ثم تتناسب 4 (IV)، يتبقى 0. عند قراءة الرموز بالترتيب نحصل على MCMXCIV. هذا النهج الجشع — الأكبر أولاً — ينتج دائماً الشكل القياسي الصحيح لأن النظام الروماني صُمِّم بحيث لا يمكن لأي مجموعة أصغر من الرموز أن تمثل القيمة نفسها بشكل أكثر إيجازاً.</p>
+<h2>تحويل الروماني إلى العشري خطوة بخطوة</h2>
+<p>في الاتجاه المعاكس، يقرأ المحوّل الرقم الروماني من اليسار إلى اليمين ويضيف قيمة كل رمز، إلا إذا أتبع الرمز برمز أكبر، وفي هذه الحالة يطرح منه بدلاً من ذلك. بالنسبة لـ MCMXCIV: يتبع M (1000) الحرف C الأصغر، لذا يُضاف 1000؛ يتبع C (100) الحرف M الأكبر، لذا يُطرح 100؛ يُضاف M (1000)؛ يتبع X (10) الحرف C الأكبر، لذا يُطرح 10؛ يُضاف C (100)؛ يتبع I (1) الحرف V الأكبر، لذا يُطرح 1؛ يُضاف V (5). جمع 1000 − 100 + 1000 − 10 + 100 − 1 + 5 يعطي 1994، مطابقاً للرقم الأصلي تماماً.</p>
+<h2>لماذا لا توجد سنة صفر ولا صفر روماني</h2>
+<p>من الأمور المثيرة للاهتمام أن النظام الروماني لا يحتوي على رمز للصفر على الإطلاق — فالمفهوم لم يكن قد أُضفي عليه الطابع الرسمي عندما طُوِّر النظام، وصُمِّمت الأرقام الرومانية محضاً للعد وتسجيل الكميات، وليس لنوع الحساب الموضعي الذي يتيح له الصفر العمل. وهذا أيضاً هو سبب انتقال التقويم التاريخي مباشرة من 1 قبل الميلاد إلى 1 ميلادي دون سنة صفر بينهما، وهي غرابة لا تزال تسبب الارتباك أحياناً عند حساب الفترات الدقيقة بين التواريخ القديمة.</p>
+<h2>خصوصية وفورية</h2>
+<p>يعمل التحويل بالكامل في متكفحك في كلا الاتجاهين، لذا تظهر النتائج لحظة الكتابة ولا تُحمَّل أي أرقام تدخلها أو تُسجَّل أو تُشارك مع أي أحد. وتعمل الأداة دون اتصال بالإنترنت بمجرد تحميل الصفحة.</p>
+    <section class="faq"><h2>Roman numerals FAQ</h2><dl><dt>What is the range for Roman numerals?</dt><dd>Standard Roman numerals represent numbers from 1 to 3,999. The number 4,000 would require a symbol (M̄) with a bar that is not standard. This calculator supports 1–3,999.</dd><dt>What are the Roman numeral symbols?</dt><dd>I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Subtractive notation: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900.</dd><dt>When are Roman numerals used today?</dt><dd>Roman numerals appear on clock faces, book chapter headings, movie sequels (Rocky IV), Super Bowl numbers (Super Bowl LVII), year numbers in films and monuments, and outline formatting.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/romanmath/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/romanmath/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/romanmath/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/romanmath/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/romanmath/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/romanmath/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/romanmath/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/glossary.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/romanmath.js" defer></script>
+</body>
+</html>

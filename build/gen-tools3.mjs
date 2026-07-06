@@ -34,7 +34,7 @@ function mkTool({
     strings: { en: enStrings, pt: ptStrings },
   };
   write(`data/tools/${slug}.json`, JSON.stringify(jsonData, null, 2) + '\n');
-  if (scriptFile && js) write(`assets/tools/${scriptFile}`, js + '\n');
+  if (scriptFile && js) write(`public/assets/tools/${scriptFile}`, js + '\n');
   if (enContent) write(`data/content/${slug}/en.md`, enContent.trimStart() + '\n');
   if (ptContent) write(`data/content/${slug}/pt.md`, ptContent.trimStart() + '\n');
 }

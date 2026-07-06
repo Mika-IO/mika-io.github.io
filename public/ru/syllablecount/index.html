@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllable Counter — count syllables in any word or text</title>
+<meta name="description" content="Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing.">
+<link rel="canonical" href="https://mikaio.dev/ru/syllablecount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/syllablecount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/syllablecount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/syllablecount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/syllablecount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/syllablecount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/syllablecount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Syllable Counter — count syllables in any word or text">
+<meta property="og:description" content="Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing.">
+<meta property="og:url" content="https://mikaio.dev/ru/syllablecount/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Syllable Counter — count syllables in any word or text","url":"https://mikaio.dev/ru/syllablecount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Syllable Counter","item":"https://mikaio.dev/ru/syllablecount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the syllable count work?","acceptedAnswer":{"@type":"Answer","text":"The tool estimates syllables using common English phonetic rules: counting vowel groups, applying exceptions for silent-e and common suffixes. It is an estimate and may differ slightly from a dictionary for unusual words."}},{"@type":"Question","name":"What is a syllable?","acceptedAnswer":{"@type":"Answer","text":"A syllable is a unit of pronunciation containing a single vowel sound. The word \"cat\" has one syllable; \"water\" has two (wa-ter); \"education\" has five (ed-u-ca-tion)."}},{"@type":"Question","name":"Is this good for haiku?","acceptedAnswer":{"@type":"Answer","text":"Yes. A traditional haiku has 5-7-5 syllables across three lines. Write each line separately and check the count."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Syllable Counter</span></nav>
+  <h1>Syllable Counter</h1>
+  <p class="lead">Type or paste text to count syllables and words. Useful for haiku, sonnets, song lyrics, and meter checking.</p>
+  <section class="widget" id="tool"><div id="syl-app"><textarea id="syl-text" rows="4" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Type or paste English text here…"></textarea><div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">Syllables</div><div class="big" id="syl-count">0</div></div><div><div class="hint">Words</div><div class="big" id="syl-words">0</div></div></div></div></section>
+  <article class="content">
+    <h2>Подсчёт слогов в любом тексте</h2>
+<p>Подсчёт слогов важен для всех, кто работает со стихами, имеющими размер, текстами песен или любой формой написания, где имеет значение ритм. Хайку требует ровно 5-7-5 слогов в трёх строках. Сонеты следуют определённым схемам метра. Тексты песен подгоняют слоги к музыкальным ритмам. Этот инструмент мгновенно оценивает количество слогов для любого английского текста, чтобы вы могли сосредоточиться на словах, а не на подсчёте.</p>
+<h2>Что такое слог?</h2>
+<p>Слог — это единица произношения, организованная вокруг одного гласного звука. Каждое слово можно разбить на слоги:</p>
+<ul>
+<li>«cat» → 1 слог (cat)</li>
+<li>«water» → 2 слога (wa-ter)</li>
+<li>«beautiful» → 3 слога (beau-ti-ful)</li>
+<li>«education» → 5 слогов (ed-u-ca-tion)</li>
+<li>«unimaginable» → 6 слогов (un-i-mag-i-na-ble)</li>
+</ul>
+<p>Количество слогов в слове зависит от числа различных гласных звуков, а не от числа гласных букв. Слово «bake» имеет две гласные буквы (a и e), но только один гласный звук, что делает его односложным.</p>
+<h2>Как работает счётчик</h2>
+<p>Инструмент использует распространённые английские фонетические правила для оценки слогов:</p>
+<ol>
+<li>Подсчёт групп соседних гласных (каждая группа примерно равна одному слогу)</li>
+<li>Вычитание для немого e в конце слов (например, «cake» — 1 слог, а не 2)</li>
+<li>Вычитание для распространённых суффиксов, таких как «-ed», которые часто немые</li>
+<li>Обеспечение хотя бы одного слога на слово</li>
+</ol>
+<p>Этот метод даёт хорошее приближение для большинства распространённых английских слов. Некоторые нерегулярные слова и имена собственные могут считаться немного иначе, чем в их словарном произношении.</p>
+<h2>Использование в творческом письме</h2>
+<p><strong>Хайку</strong>: Японская поэтическая форма, традиционно перенесённая в английский как трёхстрочное стихотворение с 5-7-5 слогами. Форма хайку требует тщательного подсчёта слогов; этот инструмент легко проверяет каждую строку.</p>
+<p><strong>Ямбический пентаметр</strong>: Предпочитаемый Шекспиром размер имеет 10 слогов в строке в безударно-ударном ритме (да-ДАМ, повторённое пять раз). Подсчёт слогов — первый шаг к проверке того, подходит ли строка к размеру.</p>
+<p><strong>Тексты песен</strong>: Каждый слог соответствует ритму или ноте. Авторы текстов считают слоги, чтобы слова подходили к мелодии. Куплет, который хорошо поётся, имеет слоги, равномерно распределённые по музыкальным ритмам.</p>
+<p><strong>Лимерики</strong>: Схема рифмовки AABBA имеет строки из 8-8-5-5-8 слогов в традиционной форме.</p>
+<p><strong>Рэп и хип-хоп</strong>: Поток в рэпе во многом зависит от плотности и паттерна слогов. Многие рэперы намеренно упаковывают больше слогов в такт для эффекта, называемого многосложной рифмой или двойным темпом.</p>
+<h2>Проверка метра в поэзии</h2>
+<p>Классический английский метр делит слоги на ударные (/) и безударные (u). Наиболее распространённые паттерны:</p>
+<ul>
+<li><strong>Ямбический</strong>: uU (безударный-ударный), как в «to BE, or NOT to BE»</li>
+<li><strong>Хорейный</strong>: Uu (ударный-безударный), как в «TI-ger, TI-ger, BURN-ing BRIGHT»</li>
+<li><strong>Дактилический</strong>: Uuu (ударный-безударный-безударный)</li>
+<li><strong>Анапестический</strong>: uuU (безударный-безударный-ударный)</li>
+</ul>
+<p>Подсчёт слогов — необходимая предпосылка для анализа любого из этих паттернов.</p>
+<h2>Как пользоваться счётчиком</h2>
+<p>Введите или вставьте любой английский текст в поле, и общее количество слогов немедленно обновится под ним вместе с разбиением по словам, когда вам нужно проверить конкретную строку, а не весь отрывок. Эта мгновенная обратная связь — именно то, что нужно при написании в строгой форме, такой как хайку, где приведение одной строки с шести слогов к пяти означает редактирование слово за словом с наблюдением за счётом в реальном времени, а не подсчёт на пальцах после каждого изменения.</p>
+<h2>Почему автоматический подсчёт действительно сложен</h2>
+<p>Английское правописание — заведомо ненадёжный путеводитель по произношению, что и является причиной, по которой подсчёт слогов не может просто считать гласные буквы. Немые буквы, диграфы, где две гласные дают один звук, и слова, заимствованные из других языков с их собственными соглашениями о правописании — всё это заговор, делающий связь между правописанием и количеством слогов непоследовательной. Основанный на правилах подход, который использует этот инструмент — подсчёт групп гласных с последующей корректировкой для немых окончаний и распространённых суффиксов — правильно справляется с подавляющим большинством повседневных английских слов, но несколько необычных слов, имён и заимствованных терминов могут немного отличаться от официального словарного подсчёта слогов просто потому, что никакой небольшой набор правил не может охватить каждое исключение, которое английский накопил за тысячу лет заимствований из других языков.</p>
+<h2>Слоги и формулы удобочитаемости</h2>
+<p>Помимо поэзии, подсчёт слогов является ключевым входом для нескольких хорошо известных формул удобочитаемости. Формулы Flesch-Kincaid Reading Ease и Grade Level обе используют среднее количество слогов на слово наряду со средней длиной предложения для оценки того, насколько труден отрывок для чтения — текст с большим количеством многосложных слов получает более трудную оценку, примерно соответствуя интуиции, что «utilize» читается труднее, чем «use», хотя оба означают одно и то же. Писатели, стремящиеся к определённому уровню чтения, такие как контент для широкой аудитории или молодой читательской аудитории, часто проверяют отрывки с большим количеством слогов и упрощают выбор слов там, где количество слогов высоко.</p>
+<h2>Подсчёт слогов на слух против подсчёта по правилам</h2>
+<p>Самый надёжный способ подсчитать слоги в незнакомом слове — всё ещё произнести его вслух и почувствовать, где ваша челюсть опускается или дыхание делает паузу — каждый из этих моментов отмечает примерно один слог. Основанные на правилах подходы, подобные тому, что использует этот инструмент, аппроксимируют ту же интуицию через подсчёт групп гласных, что работает правильно для подавляющего большинства английских слов, но иногда расходится с устной версией для необычных заимствований или имён, поскольку никакой фиксированный набор правил правописания не охватывает идеально каждую причуду английского произношения.</p>
+<h2>Конфиденциальность и мгновенная работа</h2>
+<p>Счётчик полностью работает в вашем браузере, поэтому результаты обновляются мгновенно по мере ввода, и никакой введённый вами текст никогда никуда не отправляется, не регистрируется и не передаётся.</p>
+    <section class="faq"><h2>Syllable counter FAQ</h2><dl><dt>How does the syllable count work?</dt><dd>The tool estimates syllables using common English phonetic rules: counting vowel groups, applying exceptions for silent-e and common suffixes. It is an estimate and may differ slightly from a dictionary for unusual words.</dd><dt>What is a syllable?</dt><dd>A syllable is a unit of pronunciation containing a single vowel sound. The word &quot;cat&quot; has one syllable; &quot;water&quot; has two (wa-ter); &quot;education&quot; has five (ed-u-ca-tion).</dd><dt>Is this good for haiku?</dt><dd>Yes. A traditional haiku has 5-7-5 syllables across three lines. Write each line separately and check the count.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/syllablecount/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/syllablecount.js" defer></script>
+</body>
+</html>

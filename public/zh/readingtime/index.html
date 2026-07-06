@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Time Calculator — how long to read any text</title>
+<meta name="description" content="Free reading time calculator. Paste any text to instantly see the word count, estimated reading time, and estimated speaking time. No signup needed.">
+<link rel="canonical" href="https://mikaio.dev/zh/readingtime/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/readingtime/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/readingtime/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/readingtime/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/readingtime/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/readingtime/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/readingtime/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Reading Time Calculator — how long to read any text">
+<meta property="og:description" content="Free reading time calculator. Paste any text to instantly see the word count, estimated reading time, and estimated speaking time. No signup needed.">
+<meta property="og:url" content="https://mikaio.dev/zh/readingtime/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Reading Time Calculator — how long to read any text","url":"https://mikaio.dev/zh/readingtime/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free reading time calculator. Paste any text to instantly see the word count, estimated reading time, and estimated speaking time. No signup needed."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Reading Time Calculator","item":"https://mikaio.dev/zh/readingtime/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What reading speed does the calculator assume?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses 238 words per minute, which research suggests is the average silent reading speed for adults reading non-technical English prose. The actual speed varies by person, text complexity, and reading purpose."}},{"@type":"Question","name":"What speaking speed is used?","acceptedAnswer":{"@type":"Answer","text":"Speaking time is estimated at 150 words per minute, which is a comfortable natural speaking pace. Presenters and podcasters often target 130–160 WPM for clarity."}},{"@type":"Question","name":"Does it count the words exactly?","acceptedAnswer":{"@type":"Answer","text":"The word count splits on whitespace and filters out empty segments, which is the standard method. It matches most word processors for plain prose. Hyphenated words are counted as one word."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Reading Time Calculator</span></nav>
+  <h1>Reading Time Calculator</h1>
+  <p class="lead">Paste or type your text below. The word count, reading time, and speaking time update instantly.</p>
+  <section class="widget" id="tool"><div id="rt-app"><textarea id="rt-text" rows="8" style="width:100%;box-sizing:border-box;resize:vertical;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Paste or type your text here…"></textarea><div id="rt-results" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">Words</div><div class="big" id="rt-words">0</div></div><div><div class="hint">Reading time</div><div class="big" id="rt-time">0 min</div></div><div><div class="hint">Speaking time</div><div class="big" id="rt-speak">0 min</div></div></div></div></section>
+  <article class="content">
+    <h2>精确知道你的内容需要读多久</h2>
+<p>在发布一篇文章、准备一场演讲,或者估算审阅一份文档要花多长时间之前,了解阅读时长都很有用。读者喜欢提前知道自己要投入多少时间——显示预计阅读时长的博客文章,普遍表现出更高的阅读完成率。演讲者需要知道自己的稿子是否能塞进分配到的时间里。这个工具会根据你的字数,立刻给出阅读时长和朗读时长这两个数字。</p>
+<h2>关于中文阅读速度的说明</h2>
+<p>这个工具最初的速度基准来自英文阅读研究,按每分钟词数计算,而中文的阅读节奏和计量方式跟英文并不完全一样——中文没有像英文那样以空格分词,阅读速度通常按每分钟阅读的汉字数来衡量,而不是&quot;单词数&quot;。多项针对中文读者的研究显示,成年人默读中文的速度大致在每分钟300到500字之间,具体取决于文本的难度和读者的熟练程度,这个区间和英文按词计算出来的阅读时长未必能直接换算,但大致的使用逻辑是相通的:先数出文本的字数,再除以一个合理的每分钟阅读字数,就能得到一个粗略但实用的阅读时长估算。如果你处理的是中英文混排的内容,建议把中文部分按字数、英文部分按词数分别估算,再合并一个大致的总时长。</p>
+<h2>阅读时长是怎么计算的</h2>
+<p>对非专业性的英文散文来说,成年人平均阅读速度大约是每分钟238个单词,这个数字来自对成年人在正常条件下默读速度的研究。实际速度差异很大:一个熟练阅读轻松小说的人可能能达到每分钟350个单词,而一个啃着一部艰深法律条文的法学院学生,阅读速度可能只有每分钟100个单词甚至更低。这个工具给出的估算,对标准内容来说是一个可靠的基准线。</p>
+<p>计算公式很直接:阅读时长(分钟)等于单词数除以238。一篇1000字的英文博客文章大约要读4分钟,一篇2500字的文章大约要读10分钟,一部6万字的小说大约要读250分钟,超过四个小时——这也是为什么按章节推进的阅读进度会让人有实实在在的成就感。</p>
+<h2>朗读时长</h2>
+<p>朗读时长的估算采用每分钟150个单词,这代表一个从容、清晰的演讲节奏。专业演讲者和广播主持人通常把目标定在每分钟130到160个单词之间,因为这个速度既快到能抓住听众的注意力,又慢到足以让人轻松听懂。超过每分钟180个单词的语速开始显得仓促。日常对话的语速通常在每分钟120到180个单词之间,具体因人而异。</p>
+<p>如果你在准备一场演讲、报告或播客文稿,朗读时长能帮你判断内容是否能塞进分配到的时间段里。一个10分钟的时间段大约能容纳1500个单词;一场20分钟、TED风格的演讲,按自然的节奏加上适当的停顿,大约能容纳3000个单词。</p>
+<h2>阅读时长在内容发布中的作用</h2>
+<p>那些在文章旁边标注预计阅读时长的媒体——&quot;5分钟阅读&quot;&quot;12分钟阅读&quot;——这么做是因为读者参与度的研究表明,提前知道需要投入的时间,能降低读者中途放弃阅读的概率。当读者知道自己面对的是一篇3分钟的短文时,他们更愿意坚持读完;而当他们意外发现自己已经深陷在一篇篇幅远超预期的长文里时,这种出乎意料的挫败感可能会让他们直接离开。</p>
+<p>对邮件通讯来说,了解阅读时长有助于把握合适的篇幅。一封需要超过3到4分钟才能读完的邮件,对收件人的注意力提出了不小的要求,完成阅读的比例可能会更低。邮件通常越短越好。</p>
+<h2>字数并不等于质量</h2>
+<p>单纯的字数常常被误用作衡量标准。一篇2000字的文章并不天生就比一篇500字的文章更好——恰当的篇幅,就是把一个话题彻底讲清楚所需要的那个长度,不多不少。话虽如此,出于SEO的考虑,能把一个话题讲透的文章往往篇幅更长,单纯是因为讲透一个话题本身就需要更多内容。阅读时长和字数放在一起看,能帮写作者判断自己是不是已经讲够了。</p>
+<h2>使用方法</h2>
+<p>把文字粘贴进框里,阅读时长和朗读时长这两个数字会立刻显示出来,随着你的编辑实时更新。这让你能实时看到删减带来的效果:砍掉一段拖沓的文字,眼看着估算的数字往下掉,而不用每改一次就把整段文字重新粘贴到一个单独的计数工具里。</p>
+<h2>为什么两种速度都很重要</h2>
+<p>阅读速度每分钟238个单词和朗读速度每分钟150个单词之间的差距,并不是一个错误——它反映的是眼睛处理书面文字和嘴巴发出口语之间真实存在的差异。默读时眼睛可以往前跳跃、略过熟悉的措辞、一眼扫过好几个词;而说话则被&quot;逐个把每个词大声说出来&quot;这个物理节奏所束缚。这正是为什么一篇在脑子里读起来很顺畅的稿子,真正站起来念出来时,常常会比预想的长得多——这个页面上给出的两个估算,正是专门用来在这个问题变成台上的麻烦之前把它揪出来的。</p>
+<h2>根据你实际的受众做调整</h2>
+<p>每分钟238个单词是面向普通非专业英文散文的成年读者的平均值,但你真正的受众读得可能更快或更慢,这取决于你写的是什么内容。艰深的学术写作、法律文本,或者塞满了陌生术语的内容,会明显拖慢大多数读者的速度——有时甚至只有基准速度的一半——因为陌生的词汇和复杂的句子结构,每个词都需要更多的认知加工。反过来,一篇用短句、简单句写成的轻松博客文章,对一个只想抓住要点、快速略读的熟练读者来说,读起来可能比基准速度还快。如果你了解自己的受众,把这个工具给出的估算当作一个起点,再根据你写作内容的专业程度或轻松程度在心里做调整。</p>
+<h2>私密且即时</h2>
+<p>你的文字不会离开浏览器:字数统计和时长计算完全在本地完成,你粘贴的任何内容都不会被上传、存储,也不会被任何服务器分析。</p>
+    <section class="faq"><h2>Reading time FAQ</h2><dl><dt>What reading speed does the calculator assume?</dt><dd>The calculator uses 238 words per minute, which research suggests is the average silent reading speed for adults reading non-technical English prose. The actual speed varies by person, text complexity, and reading purpose.</dd><dt>What speaking speed is used?</dt><dd>Speaking time is estimated at 150 words per minute, which is a comfortable natural speaking pace. Presenters and podcasters often target 130–160 WPM for clarity.</dd><dt>Does it count the words exactly?</dt><dd>The word count splits on whitespace and filters out empty segments, which is the standard method. It matches most word processors for plain prose. Hyphenated words are counted as one word.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/readingtime/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/readingtime.js" defer></script>
+</body>
+</html>

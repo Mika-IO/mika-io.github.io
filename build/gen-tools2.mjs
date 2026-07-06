@@ -1785,7 +1785,7 @@ for (const t of TOOLS) {
 
   // JS widget
   if (t.script && t.jsCode) {
-    write(`assets/tools/${t.script}`, t.jsCode + '\n');
+    write(`public/assets/tools/${t.script}`, t.jsCode + '\n');
   }
 
   // content EN

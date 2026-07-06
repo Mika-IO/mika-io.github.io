@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text Diff Tool — compare two texts side by side</title>
+<meta name="description" content="Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly.">
+<link rel="canonical" href="https://mikaio.dev/zh/textdiff/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textdiff/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/textdiff/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/textdiff/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textdiff/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textdiff/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Text Diff Tool — compare two texts side by side">
+<meta property="og:description" content="Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly.">
+<meta property="og:url" content="https://mikaio.dev/zh/textdiff/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Text Diff Tool — compare two texts side by side","url":"https://mikaio.dev/zh/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Text Diff Tool","item":"https://mikaio.dev/zh/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the diff work?","acceptedAnswer":{"@type":"Answer","text":"The tool compares the two texts word by word. Words present in B but not in A are shown in green (added). Words in A but not in B are shown in red (removed)."}},{"@type":"Question","name":"Is this a real diff like git diff?","acceptedAnswer":{"@type":"Answer","text":"This is a simple word-level diff for quick comparison. For character-level or line-level diffs as used in programming, dedicated tools like git diff or diff(1) are more appropriate."}},{"@type":"Question","name":"Is my text stored?","acceptedAnswer":{"@type":"Answer","text":"No. The comparison runs entirely in your browser. Nothing is sent to any server."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Text Diff Tool</span></nav>
+  <h1>Text Diff Tool</h1>
+  <p class="lead">Paste two versions of a text in the boxes below to see what changed between them.</p>
+  <section class="widget" id="tool"><div id="td-app"><div class="row"><div class="field"><label for="td-a">Original text</label><textarea id="td-a" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Paste original text here…"></textarea></div><div class="field"><label for="td-b">New text</label><textarea id="td-b" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Paste new or revised text here…"></textarea></div></div><div id="td-out" style="margin-top:1rem;font-family:monospace;font-size:0.85rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);white-space:pre-wrap;line-height:1.7"></div></div></section>
+  <article class="content">
+    <h2>比较两段文本，找出差异</h2>
+<p>无论你是在校对修改后的文档、检查合同中的变更、比较两个版本的文章，还是验证复制粘贴是否准确，文本差异对比工具都能通过精确高亮显示变更内容来节省时间。将原始文本粘贴到第一个框中，新版本粘贴到第二个框中，差异会立即被标记出来。</p>
+<h2>词语级差异对比的原理</h2>
+<p>本工具使用最长公共子序列（LCS）算法——也就是 Unix 的 diff 命令和 git diff 背后的同一算法。它找到两段文本中按相同顺序出现的最长词语序列，然后将该序列之外的所有内容标记为新增或删除。</p>
+<p>以红色删除线显示的词语在原文中存在但在新版本中不存在（已删除）。以绿色高亮显示的词语在新版本中存在但在原文中不存在（已新增）。未变更的词语以正常文本显示。</p>
+<h2>文本比较的常见用途</h2>
+<p><strong>文档修订</strong>：当协作者返回修订后的文档时，快速查看到底哪些词语或句子发生了变化，无需通读两个版本。</p>
+<p><strong>合同审查</strong>：法律专业人士使用差异对比来跟踪合同版本之间的变更。&quot;红线稿&quot;或&quot;标注稿&quot;本质上就是应用于法律文本的差异对比。</p>
+<p><strong>学术校对</strong>：将初稿与修改稿进行比较，确认计划的编辑已正确完成且没有引入意外更改。</p>
+<p><strong>代码审查</strong>：虽然代码差异最好由 git diff 之类的工具（逐行操作）处理，但词语级差异对比在审查文档或注释时仍有帮助。</p>
+<p><strong>抄袭检查</strong>：将提交的文本与原文进行比较，以发现改写——保留相同含义但重新排列或替换了词语的情况。</p>
+<p><strong>翻译验证</strong>：将源文本与译本逐词比较以确保完整性（虽然由于自然语言的差异，这种比较是近似的）。</p>
+<h2>词语级差异对比的局限性</h2>
+<p>本工具在不理解语义的前提下比较词语。一个完全重写但含义相同的句子将被显示为完全删除和完全新增。要理解语义相似性，需要自然语言处理工具。</p>
+<p>比较也不区分格式、大小写或词语内部的标点，除非它们是词元的一部分。&quot;Hello&quot;和&quot;hello&quot;被视为不同的词。</p>
+<h2>如何使用本工具</h2>
+<p>将原始文本粘贴到第一个框中，将修改后的版本粘贴到第二个框中，比较结果会立即显示在下方，删除内容以红色删除线标记，新增内容以绿色高亮标记。没有需要点击的触发按钮——它实时更新，你可以随时粘贴新版本并立即看到它与之前的差异。</p>
+<h2>为什么用词语级比较而非字符级</h2>
+<p>差异对比工具理论上可以逐字符比较而非逐词比较，但这种方法产生的结果在技术上准确但实际上毫无用处：修正一个长句中间的一个错别字会让句子中几乎整个后续部分都显示为已更改，因为纠正是之后的每个字符都位移了。而逐词比较意味着一个被修正的词只显示为一个删除和一个新增，句子中其他实际没有变化的内容则保留不变——这对试图理解到底编辑了什么的人来说是更有用的信息，也正是大多数真实编辑和校对任务所关心的粒度。</p>
+<h2>如何高效阅读差异对比结果</h2>
+<p>在审查一份长对比时，扫描颜色集中的区域比逐词阅读更有效：一小簇红色和绿色紧挨着通常意味着小幅改写，而一片连续的单一颜色则表示真正新增或删除的段落，而非编辑。熟练掌握这种模式扫描方法，是有经验的编辑和法律审查人员能够在几分钟内处理多页红线稿而非逐行重读整份文档的原因。</p>
+<h2>软件中的差异对比与散文中的差异对比</h2>
+<p>程序员始终在使用 git diff 这样的逐行差异对比工具，值得理解的是，像本工具这样的词语级差异对比是一个不同的、互补的工具而非替代品。源代码天然组织为离散的行，因此逐行比较是正确的粒度——变更的一行就是一个变更的逻辑单元。散文没有这样的天然行边界；一个句子可能根据窗口宽度跨越多行，有意义的变更单元是词语或短语，而非行在哪里断开。这就是为什么比较散文需要词语级方法而非复用面向代码的逐行差异对比工具。</p>
+<h2>比较翻译草稿</h2>
+<p>双语编辑和翻译人员有时会使用词语级差异对比来比较同一源文本的两个翻译版本——例如，人工翻译稿和机器翻译版本，或者同一段落的两次连续修订——以快速准确地发现用词选择的分歧，而不需要重新通读整段文字去寻找差异。</p>
+<h2>重要使用前的快速验证</h2>
+<p>在将差异对比结果用于重要用途之前——一份法律文件、一次评分作业——先在两个框中粘贴一个小的已知变更，确认工具准确无误地高亮了该变更，就像你会在使用新的厨房秤之前用已知重量测试它一样。</p>
+<h2>隐私与即时性</h2>
+<p>所有比较完全在你的浏览器中使用最长公共子序列算法运行，结果即时出现，你粘贴的任何文本都不会被发送到任何服务器、记录或共享。</p>
+    <section class="faq"><h2>Text diff FAQ</h2><dl><dt>How does the diff work?</dt><dd>The tool compares the two texts word by word. Words present in B but not in A are shown in green (added). Words in A but not in B are shown in red (removed).</dd><dt>Is this a real diff like git diff?</dt><dd>This is a simple word-level diff for quick comparison. For character-level or line-level diffs as used in programming, dedicated tools like git diff or diff(1) are more appropriate.</dd><dt>Is my text stored?</dt><dd>No. The comparison runs entirely in your browser. Nothing is sent to any server.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/textdiff/">中文</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/textdiff.js" defer></script>
+</body>
+</html>
