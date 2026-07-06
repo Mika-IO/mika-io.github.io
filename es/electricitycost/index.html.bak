@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electricity Cost Calculator — how much does your appliance cost to run?</title>
+<meta name="description" content="Free electricity cost calculator. Enter an appliance wattage, hours of use per day, and your electricity rate to see daily, monthly, and annual running costs.">
+<link rel="canonical" href="https://mikaio.dev/es/electricitycost/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/electricitycost/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/electricitycost/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/electricitycost/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/electricitycost/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/electricitycost/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/electricitycost/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/electricitycost/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Electricity Cost Calculator — how much does your appliance cost to run?">
+<meta property="og:description" content="Free electricity cost calculator. Enter an appliance wattage, hours of use per day, and your electricity rate to see daily, monthly, and annual running costs.">
+<meta property="og:url" content="https://mikaio.dev/es/electricitycost/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Electricity Cost Calculator — how much does your appliance cost to run?","url":"https://mikaio.dev/es/electricitycost/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Free electricity cost calculator. Enter an appliance wattage, hours of use per day, and your electricity rate to see daily, monthly, and annual running costs."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Electricity Cost Calculator","item":"https://mikaio.dev/es/electricitycost/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find the wattage of my appliance?","acceptedAnswer":{"@type":"Answer","text":"Check the label on the back or bottom of the appliance, or look it up in the manual. Appliances list their power consumption in watts (W) or kilowatts (kW). Common examples: LED bulb 8–15 W, laptop 30–100 W, refrigerator 100–400 W, air conditioner 1000–3500 W."}},{"@type":"Question","name":"What electricity rate should I use?","acceptedAnswer":{"@type":"Answer","text":"Your electricity rate is on your utility bill, usually expressed as cents or pence per kilowatt-hour (kWh). Rates vary widely by country and provider. The global average is roughly 0.15 USD per kWh, but US rates range from 0.10 to 0.35 and European rates vary even more widely."}},{"@type":"Question","name":"How is the cost calculated?","acceptedAnswer":{"@type":"Answer","text":"Energy consumed in kWh = (watts / 1000) × hours per day. Cost per day = kWh × rate. Monthly cost assumes 30.44 days; annual cost assumes 365 days."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Electricity Cost Calculator</span></nav>
+  <h1>Electricity Cost Calculator</h1>
+  <p class="lead">Enter the appliance wattage, how many hours a day you use it, and your electricity rate per kWh to see the running cost.</p>
+  <section class="widget" id="tool"><form id="elec-form"><div class="row"><div class="field"><label for="elec-watts">Power (watts)</label><input type="number" id="elec-watts" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="elec-hours">Hours used per day</label><input type="number" id="elec-hours" step="any" min="0" max="24" value="8" inputmode="decimal"></div><div class="field"><label for="elec-rate">Electricity rate (per kWh)</label><input type="number" id="elec-rate" step="any" min="0" value="0.15" inputmode="decimal"></div></div><div class="result"><span class="hint">Daily cost: </span><b id="elec-day">—</b> · <span class="hint">Monthly cost: </span><b id="elec-month">—</b> · <span class="hint">Annual cost: </span><span class="big" id="elec-year">—</span></div></form></section>
+  <article class="content">
+    <h2>Descubre cuánto cuesta hacer funcionar cualquier aparato</h2>
+<p>Las facturas de la luz suelen parecer un cargo misterioso hasta que las desglosas al nivel de cada aparato. En cuanto sabes cuántos vatios consume un electrodoméstico y cuántas horas al día funciona, puedes calcular exactamente lo que cuesta. Esta calculadora toma esos tres datos —potencia, horas al día y tu tarifa eléctrica— y te muestra al instante el coste diario, mensual y anual de tenerlo encendido.</p>
+<h2>Entender los kilovatios-hora</h2>
+<p>La electricidad se vende en kilovatios-hora (kWh). Un kilovatio-hora es la energía que consume un aparato de 1.000 vatios funcionando durante una hora, o uno de 100 vatios funcionando durante diez horas. Tu factura de la luz indica un precio por kWh — esta es la tarifa que pagas por cada unidad de energía consumida.</p>
+<p>La fórmula: energía consumida (kWh) = potencia (vatios) ÷ 1000 × horas de uso. Coste = energía (kWh) × tarifa por kWh. Por ejemplo, un radiador eléctrico de 2.000 vatios funcionando 4 horas al día consume 8 kWh diarios. A una tarifa de 0,20 por kWh, eso cuesta 1,60 al día, 48 al mes, y unos 584 al año.</p>
+<h2>Potencias típicas de los electrodomésticos</h2>
+<p>Conocer las potencias habituales te ayuda a priorizar dónde buscar ahorro:</p>
+<ul>
+<li><strong>Bombilla LED</strong>: 8–15 W</li>
+<li><strong>Bombilla de bajo consumo (CFL)</strong>: 15–25 W</li>
+<li><strong>Ordenador portátil</strong>: 30–100 W</li>
+<li><strong>Ordenador de sobremesa + monitor</strong>: 150–350 W</li>
+<li><strong>Frigorífico</strong>: 100–400 W (media de funcionamiento, no pico)</li>
+<li><strong>Lavadora</strong>: 500–2.000 W</li>
+<li><strong>Lavavajillas</strong>: 1.200–2.400 W</li>
+<li><strong>Microondas</strong>: 600–1.200 W</li>
+<li><strong>Horno eléctrico</strong>: 2.000–5.000 W</li>
+<li><strong>Aire acondicionado (unidad de ventana)</strong>: 500–1.500 W</li>
+<li><strong>Aire acondicionado (central, por tonelada)</strong>: 1.200–2.400 W</li>
+<li><strong>Hervidor eléctrico</strong>: 1.500–3.000 W</li>
+<li><strong>Secador de pelo</strong>: 1.000–2.500 W</li>
+<li><strong>Cargador de coche eléctrico (nivel 2)</strong>: 3.300–19.200 W</li>
+</ul>
+<h2>Dónde se gasta más electricidad</h2>
+<p>En la mayoría de los hogares, los mayores consumidores de electricidad son la calefacción y la refrigeración (climatización), el calentamiento de agua, los grandes electrodomésticos de cocina (vitrocerámica u horno eléctrico) y las secadoras. Estos eclipsan la contribución de aparatos electrónicos como televisores, ordenadores y cargadores de teléfono, a los que a menudo se culpa pero que rara vez son significativos en la factura general.</p>
+<p>Un aire acondicionado funcionando 8 horas al día a 1.500 W cuesta aproximadamente 2,16 al día a 0,18 por kWh — unos 65 al mes. Un televisor de 100 W durante 5 horas cuesta 0,09 al día — unos 2,70 al mes. La diferencia de escala ilustra por qué ajustar el termostato ahorra más que apagar luces.</p>
+<h2>Tarifas eléctricas en el mundo</h2>
+<p>Las tarifas eléctricas varían enormemente. En Estados Unidos, la media residencial ronda entre 0,13 y 0,18 por kWh, pero va desde menos de 0,10 en Luisiana hasta más de 0,30 en Hawái y California. En Alemania la tarifa está entre las más altas de Europa, en torno a 0,35 por kWh. En muchos países en desarrollo las tarifas son bastante más bajas, en parte porque la electricidad está subvencionada. Introduce la tarifa de tu factura real para obtener el resultado más preciso.</p>
+<h2>Cómo usar la calculadora</h2>
+<p>Introduce la potencia del aparato —impresa en la mayoría de los dispositivos en una etiqueta o en el manual, o localizable buscando el número de modelo en internet— junto con las horas al día que suele funcionar y tu tarifa eléctrica por kilovatio-hora, tomada de una factura reciente. El coste diario, mensual y anual aparece de inmediato, actualizándose mientras ajustas cualquiera de los tres valores. Probar unos cuantos escenarios hipotéticos, como reducir a la mitad las horas de uso, es una forma rápida de ver exactamente cuánto vale en dinero un cambio de hábito, en lugar de fiarte solo de la intuición.</p>
+<h2>Consumo en espera y cargas fantasma</h2>
+<p>Muchos aparatos siguen consumiendo una pequeña cantidad de energía incluso apagados pero enchufados, un fenómeno a menudo llamado consumo en espera o carga fantasma. Las videoconsolas, los decodificadores, los cargadores de móvil y los electrodomésticos con modo de espera por mando a distancia suelen consumir unos pocos vatios durante todo el día. De forma individual esto parece trivial, pero multiplicado por decenas de aparatos siempre enchufados en un hogar y a lo largo de 24 horas al día, 365 días al año, las cargas fantasma pueden sumar una parte notable de una factura — a menudo se estima entre un 5% y un 10% del consumo eléctrico residencial total. Pasar la potencia en espera de un aparato así por esta calculadora con 24 horas de uso diario revela rápidamente si merece la pena desenchufarlo.</p>
+<h2>Comparar electrodomésticos antes de comprar</h2>
+<p>La misma calculadora resulta útil antes de una compra, no solo después. Dos electrodomésticos parecidos en una tienda pueden mostrar potencias distintas en sus etiquetas energéticas, y pasar la potencia de cada candidato por la calculadora con tus horas de uso esperadas y tu tarifa local convierte un dato abstracto de la ficha técnica en un coste de funcionamiento anual real que puedes comparar directamente con la diferencia de precio entre los dos modelos. Un aparato algo más caro con una potencia de funcionamiento mucho menor a menudo compensa esa diferencia en uno o dos años, algo fácil de perder de vista cuando en la tienda solo se compara el precio de la etiqueta.</p>
+<h2>Cómo leer la etiqueta de potencia de un aparato</h2>
+<p>La mayoría de los electrodomésticos llevan una pequeña placa o etiqueta, a menudo en la parte trasera o inferior, que indica su potencia nominal en vatios. Cuando esa etiqueta solo muestra el voltaje y el amperaje, puedes calcular la potencia multiplicando ambos valores: un aparato de 230 voltios que consume 4 amperios tiene una potencia aproximada de 920 vatios. Ten en cuenta que esta cifra suele ser el consumo máximo o de pico, y que muchos aparatos —sobre todo los que tienen motor o compresor, como frigoríficos y aires acondicionados— pasan buena parte del tiempo funcionando muy por debajo de esa potencia máxima, ciclando entre encendido y apagado para mantener una temperatura constante.</p>
+<h2>Reducir el consumo sin cambiar de aparato</h2>
+<p>Antes de plantearte sustituir un electrodoméstico por uno más eficiente, merece la pena revisar cuántas horas al día realmente funciona, ya que ese segundo factor pesa tanto en el coste final como la propia potencia. Bajar el termostato del aire acondicionado unos pocos grados, programar el calentador de agua para que no funcione durante horas de tarifa alta, o simplemente acordarse de apagar aparatos que no se están usando en ese momento, suelen ahorrar más dinero al año que perseguir el modelo más eficiente del mercado. Esta calculadora hace que comparar esos hábitos sea inmediato: cambia solo las horas de uso y observa cuánto varía el coste anual antes de decidir si vale la pena además invertir en un aparato nuevo.</p>
+<h2>Privado e instantáneo</h2>
+<p>El cálculo se ejecuta enteramente en tu navegador, así que los resultados se actualizan al instante mientras ajustas cualquier valor, y ninguna de las cifras de potencia, uso o tarifa que introduces se envía jamás a un servidor, se registra ni se comparte.</p>
+    <section class="faq"><h2>Electricity cost FAQ</h2><dl><dt>How do I find the wattage of my appliance?</dt><dd>Check the label on the back or bottom of the appliance, or look it up in the manual. Appliances list their power consumption in watts (W) or kilowatts (kW). Common examples: LED bulb 8–15 W, laptop 30–100 W, refrigerator 100–400 W, air conditioner 1000–3500 W.</dd><dt>What electricity rate should I use?</dt><dd>Your electricity rate is on your utility bill, usually expressed as cents or pence per kilowatt-hour (kWh). Rates vary widely by country and provider. The global average is roughly 0.15 USD per kWh, but US rates range from 0.10 to 0.35 and European rates vary even more widely.</dd><dt>How is the cost calculated?</dt><dd>Energy consumed in kWh = (watts / 1000) × hours per day. Cost per day = kWh × rate. Monthly cost assumes 30.44 days; annual cost assumes 365 days.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/electricitycost/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/electricitycost/">中文</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/electricitycost/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/electricitycost/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/electricitycost/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/electricitycost/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/electricitycost.js" defer></script>
+</body>
+</html>

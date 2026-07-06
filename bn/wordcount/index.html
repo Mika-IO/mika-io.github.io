@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>শব্দ গণনা — শব্দ, অক্ষর ও পড়ার সময় গণনা করুন</title>
+<meta name="description" content="ফ্রি লাইভ শব্দ গণনা। টেক্সট পেস্ট করুন বা টাইপ করুন এবং ব্রাউজারেই সঙ্গে সঙ্গে শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও আনুমানিক পড়ার সময় গণনা করুন।">
+<link rel="canonical" href="https://mikaio.dev/bn/wordcount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/wordcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/wordcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/wordcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/wordcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/wordcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/wordcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/wordcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/wordcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/wordcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/wordcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/wordcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="শব্দ গণনা — শব্দ, অক্ষর ও পড়ার সময় গণনা করুন">
+<meta property="og:description" content="ফ্রি লাইভ শব্দ গণনা। টেক্সট পেস্ট করুন বা টাইপ করুন এবং ব্রাউজারেই সঙ্গে সঙ্গে শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও আনুমানিক পড়ার সময় গণনা করুন।">
+<meta property="og:url" content="https://mikaio.dev/bn/wordcount/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"শব্দ গণনা — শব্দ, অক্ষর ও পড়ার সময় গণনা করুন","url":"https://mikaio.dev/bn/wordcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"ফ্রি লাইভ শব্দ গণনা। টেক্সট পেস্ট করুন বা টাইপ করুন এবং ব্রাউজারেই সঙ্গে সঙ্গে শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও আনুমানিক পড়ার সময় গণনা করুন।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"শব্দ গণনা","item":"https://mikaio.dev/bn/wordcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"পড়ার সময় কীভাবে অনুমান করা হয়?","acceptedAnswer":{"@type":"Answer","text":"পড়ার সময় একজন প্রাপ্তবয়স্কের গড় গতি প্রতি মিনিটে প্রায় 200 শব্দ ধরে নেয় এবং অন্তত এক মিনিট পর্যন্ত ঊর্ধ্বমুখী রাউন্ড করে। দ্রুত বা ধীর পাঠকদের সেই অনুযায়ী মানিয়ে নিতে হবে।"}},{"@type":"Question","name":"স্পেসবিহীন ভাষায় শব্দ কীভাবে গোনা হয়?","acceptedAnswer":{"@type":"Answer","text":"চীনা ও জাপানির মতো লিপি, যেগুলো স্পেস দিয়ে শব্দ আলাদা করে না, সেখানে প্রতিটি অক্ষর একটি একক হিসেবে গোনা হয়, যা এসব ভাষার দৈর্ঘ্য মাপার পদ্ধতির কাছাকাছি।"}},{"@type":"Question","name":"আমার টেক্সট কি কোথাও সংরক্ষিত হয়?","acceptedAnswer":{"@type":"Answer","text":"না। সব গণনা আপনি টাইপ করার সময় আপনার ব্রাউজারেই হয়। আপনার টেক্সট কখনও কোনো সার্ভারে পাঠানো, সংরক্ষণ বা শেয়ার করা হয় না।"}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/bn/wordcount/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/wordcount/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/wordcount/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/wordcount/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/wordcount/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/wordcount/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/wordcount/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/wordcount/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/wordcount/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/wordcount/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/wordcount/">
+  <!-- SEO injected -->
+<meta property="og:title" content="একটি শব্দ গণক যা আপনার সঙ্গে তাল মেলায়" />
+<meta property="og:description" content="একটি শব্দ গণক যা আপনার সঙ্গে তাল মেলায়" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/bn/wordcount/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"একটি শব্দ গণক যা আপনার সঙ্গে তাল মেলায়","description":"একটি শব্দ গণক যা আপনার সঙ্গে তাল মেলায়","url":"https://example.com/bn/wordcount/","inLanguage":"bn"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>শব্দ গণনা</span></nav>
+  <h1>শব্দ গণনা</h1>
+  <p class="lead">নিচে আপনার টেক্সট টাইপ করুন বা পেস্ট করুন। শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও পড়ার সময় আপনি লেখার সঙ্গে সঙ্গে লাইভ আপডেট হয় — কিছুই আপলোড হয় না।</p>
+  <section class="widget" id="tool"><div id="wc"><textarea id="wc-input" placeholder="এখানে টাইপ শুরু করুন বা আপনার টেক্সট পেস্ট করুন…" aria-label="এখানে টাইপ শুরু করুন বা আপনার টেক্সট পেস্ট করুন…"></textarea><div class="wc-stats"><div class="result"><span class="big" id="wc-words">0</span><span class="hint">শব্দ</span></div><div class="result"><span class="big" id="wc-characters">0</span><span class="hint">অক্ষর</span></div><div class="result"><span class="big" id="wc-nospace">0</span><span class="hint">অক্ষর (স্পেস ছাড়া)</span></div><div class="result"><span class="big" id="wc-sentences">0</span><span class="hint">বাক্য</span></div><div class="result"><span class="big" id="wc-paragraphs">0</span><span class="hint">অনুচ্ছেদ</span></div><div class="result"><span class="big" id="wc-reading">0</span><span class="hint">পড়ার সময় (মিনিট)</span></div></div></div></section>
+  <article class="content">
+    <h2>একটি শব্দ গণক যা আপনার সঙ্গে তাল মেলায়</h2>
+<p>এই শব্দ গণক আপনি টাইপ বা পেস্ট করার মুহূর্তেই আপনার লেখা মাপে। চাপার মতো কোনো বোতাম নেই, অপেক্ষাও নেই: বাক্সে একটি অক্ষর দেখা দেওয়ামাত্র পাশের গণনা নতুন হয়ে যায়। এটি একসঙ্গে ছয়টি জিনিস ট্র্যাক করে — শব্দ, অক্ষর, স্পেস ছাড়া অক্ষর, বাক্য, অনুচ্ছেদ এবং আনুমানিক পড়ার সময় — ফলে এক নজরেই কোনো লেখার সম্পূর্ণ চিত্র পেয়ে যান। সবকিছু আপনার ব্রাউজারের ভেতরে চলে, অর্থাৎ এটি দ্রুত, অফলাইনে কাজ করে এবং আপনার লেখা কখনও কোথাও পাঠায় না।</p>
+<p>শব্দ গোনা তুচ্ছ মনে হয়, যতক্ষণ না কোনো বাস্তব কারণে সত্যিই একটি সঠিক সংখ্যা দরকার হয়। শিক্ষার্থীদের রচনায় কড়া সীমা থাকে। চাকরিপ্রার্থীরা কভার লেটার এক পৃষ্ঠায় নামিয়ে আনেন। কনটেন্ট লেখকেরা সার্চে দেখা যাওয়ার জন্য লক্ষ্য দৈর্ঘ্যে পৌঁছান। বিজ্ঞাপনদাতারা লেখা একটি নির্দিষ্ট অক্ষর-সংখ্যায় গুঁজে দেন। অনুবাদকেরা শব্দ প্রতি বিল করেন। এর প্রতিটি ক্ষেত্রেই একটি নির্ভরযোগ্য, সৎ গণনা গুরুত্বপূর্ণ, আর ঠিক সেটিই দিতে এই টুলটি বানানো।</p>
+<h2>প্রতিটি সংখ্যার অর্থ কী</h2>
+<p><strong>শব্দ</strong> সেই গণনা যা বেশিরভাগ মানুষ সবচেয়ে বেশি গুরুত্ব দেয়। এখানে একটি শব্দ হলো অক্ষর বা অঙ্কের যেকোনো ধারা, তাই সংকোচন ও হাইফেন-যুক্ত পদগুলো প্রতিটি একটি শব্দ হিসেবে ধরা হয়, যেভাবে বেশিরভাগ সম্পাদক ও শিক্ষক গোনেন।</p>
+<p><strong>অক্ষর</strong> বাক্সের প্রতিটি অক্ষর গোনে, স্পেস, লাইন-বিরতি ও যতিচিহ্ন সহ। কোনো ফর্মে কড়া অক্ষর-সীমা থাকলে এই সংখ্যাটিই গুরুত্বপূর্ণ।</p>
+<p><strong>স্পেস ছাড়া অক্ষর</strong> ফাঁকা জায়গা বাদ দিয়ে কেবল দৃশ্যমান চিহ্ন গোনে। কিছু প্ল্যাটফর্ম ও ডিজাইন-চাহিদা এভাবেই দৈর্ঘ্য মাপে, তাই দুটো সংখ্যা পাশাপাশি থাকা সুবিধাজনক।</p>
+<p><strong>বাক্য</strong> সাধারণত যে যতিচিহ্ন বাক্য শেষ করে তা খোঁজে — দাঁড়ি, প্রশ্নবোধক ও বিস্ময়সূচক চিহ্ন, এবং অন্য লিপির সমতুল্যগুলোও। এটি ব্যাকরণগত রায়ের বদলে একটি ভালো অনুমান, কারণ সংক্ষেপ ও অস্বাভাবিক যতিচিহ্ন মাঝেমধ্যে যেকোনো স্বয়ংক্রিয় গণককে ধোঁকা দিতে পারে।</p>
+<p><strong>অনুচ্ছেদ</strong> একটি ফাঁকা লাইন দিয়ে আলাদা করা টেক্সট-খণ্ড গোনে। এটি অনুচ্ছেদ সাধারণত যেভাবে সাজানো হয় তা প্রতিফলিত করে, এবং ছড়ানো ফাঁকা লাইন উপেক্ষা করে যাতে সংখ্যাটি যুক্তিসংগত থাকে।</p>
+<p><strong>পড়ার সময়</strong> আপনার শব্দ-গণনাকে আরামদায়ক গতিতে লেখাটি পড়তে কত সময় লাগবে তার অনুমানে বদলে দেয়। এটি মিনিটে প্রায় দুইশ শব্দ ধরে নেয় — প্রাপ্তবয়স্কদের পড়ার জন্য বহুল ব্যবহৃত একটি গড় — এবং কোনো শব্দ থাকা লেখার জন্য কখনও এক মিনিটের কম দেখায় না।</p>
+<h2>লেখকেরা কেন নিজেদের গণনায় নজর রাখেন</h2>
+<p>দৈর্ঘ্য কেবল আনুষ্ঠানিকতা নয়; এটি ঠিক করে দেয় একটি লেখা কীভাবে গৃহীত হবে। খুব ছোট ব্লগ পোস্ট পাতলা মনে হতে পারে এবং সার্চ ফলাফলে খুব কমই ভালো অবস্থান পায়, আবার এলোমেলো লম্বা লেখা মূল কথা আসার আগেই পাঠক হারায়। শিক্ষায়তনিক কাজে প্রায়ই সীমা থাকে ঠিক এই কারণে যে সংক্ষিপ্ত যুক্তি মূল্যায়িত দক্ষতারই অংশ, আর সীমা ছাড়ালে নম্বর কাটা যেতে পারে। সোশ্যাল প্ল্যাটফর্মে কড়া অক্ষর-সীমা ঠিক করে আপনার বার্তা আদৌ পোস্ট হবে কি না, তাই পাঠানোর আগে সঠিক সংখ্যা জানা বিরক্তি বাঁচায়।</p>
+<p>পড়ার সময়ও সমান গুরুত্বপূর্ণ হয়ে উঠেছে। অনেক ওয়েবসাইট এখন লেখার শুরুতে একটি অনুমান দেখায়, কারণ পাঠকেরা জানতে চান তাঁরা কীসে ঢুকছেন। &quot;তিন মিনিটের পড়া&quot; প্রতিশ্রুতি দেওয়া নিউজলেটার একটি প্রত্যাশা তৈরি করে, আর তা রক্ষা করা আস্থা গড়ে। বক্তারা এই যুক্তি উল্টো কাজে লাগান, মঞ্চে ওঠার আগেই যাচাই করেন স্ক্রিপ্ট নির্দিষ্ট সময়ে আঁটে কি না।</p>
+<h2>লক্ষ্য দৈর্ঘ্যে পৌঁছানোর কিছু পরামর্শ</h2>
+<p>সীমা পেরিয়ে গেলে দ্রুততম কাটছাঁট সাধারণত আসে এমন শব্দ সরানো থেকে যেগুলো কিছুই যোগ করে না। &quot;উদ্দেশ্যে&quot;, &quot;এই বিষয়টি যে&quot; ও &quot;এই মুহূর্তে&quot;-এর মতো ভরাট বাক্যাংশ প্রায় সবসময়ই অর্থ না হারিয়ে সংক্ষিপ্ত বা বাদ দেওয়া যায়। লম্বা বাক্য প্রায়ই ভাগ করা যায়, আর &quot;খুব&quot;, &quot;সত্যিই&quot; ও &quot;মূলত&quot;-এর মতো শব্দ লেখাকে শক্ত করার বদলে দুর্বল করে। কাটতে কাটতে গণনা কমতে দেখা তৎক্ষণাৎ জানায় কোনটা কাজ করছে।</p>
+<p>লক্ষ্যের নিচে থাকলে ভরাটের প্রলোভন ঠেকান। বরং এমন জায়গা খুঁজুন যেখানে কোনো ভাবনা বলা হয়েছে কিন্তু সমর্থিত হয়নি: একটি উদাহরণ, একটি সংক্ষিপ্ত ব্যাখ্যা বা একটি সুনির্দিষ্ট বিবরণ প্রকৃত দৈর্ঘ্য যোগ করবে এবং লেখাকে উন্নত করবে, যেখানে ফাঁপা ভরাট কেবল লম্বা করে। গণক এখানেও সাহায্য করে, ঠিক কতটা একটি নতুন বাক্য বা অনুচ্ছেদ যোগ করছে তা দেখিয়ে।</p>
+<h2>ভাষার আরপারে গণনা</h2>
+<p>সব ভাষা একইভাবে গোনা হয় না। ইংরেজি, স্প্যানিশ, ফরাসি ও বেশিরভাগ ইউরোপীয় ভাষা শব্দকে স্পেস দিয়ে আলাদা করে, তাই গোনা সহজ। তবে চীনা ও জাপানি শব্দের মাঝে স্পেস রাখে না, আর সেসব ভাষার পাঠক সাধারণত অক্ষরের সংখ্যা দিয়ে লেখা মাপেন। এই গণক তা আপনাআপনি সামলায়: স্পেস-বিভক্ত ভাষার জন্য এটি চিরাচরিত উপায়ে শব্দ গোনে, আর অক্ষরভিত্তিক লিপির জন্য প্রতিটি অক্ষরকে একটি একক ধরে, এমন একটি সংখ্যা দিয়ে যা ওই ভাষায় দৈর্ঘ্যের প্রকৃত অনুভূতিকে প্রতিফলিত করে।</p>
+<p>এই একই নমনীয়তা টুলটিকে মিশ্র লেখার জন্যও উপযোগী করে, যেমন একটি বাংলা প্রবন্ধ যা কোনো চীনা বাক্যাংশ উদ্ধৃত করে, কিংবা ভাষার মাঝে বদলে যাওয়া নোট। যেহেতু গণনার নিয়ম প্রকৃতপক্ষে উপস্থিত অক্ষর অনুযায়ী মানিয়ে নেয়, কোনো নথি একটিমাত্র ভাষায় লেখা না হলেও মোট সংখ্যা অর্থবহ থাকে।</p>
+<h2>নকশাতেই গোপন</h2>
+<p>লেখা প্রায়ই ব্যক্তিগত বা গোপন — পদত্যাগপত্রের খসড়া, একটি অপ্রকাশিত অধ্যায়, কোনো ক্লায়েন্টের ব্রিফ, একটি চিকিৎসা-নোট। অনেক অনলাইন গণক আপনার পেস্ট করা সব সার্ভারে আপলোড করে প্রক্রিয়া করে, যা সংবেদনশীল উপকরণের সঙ্গে বেমানান। এই টুল উল্টোটা করে। সব গণনা করে একটি ছোট কোড-খণ্ড যা সম্পূর্ণভাবে আপনার ডিভাইসে চলে, তাই আপনার শব্দ কখনও পৃষ্ঠা ছাড়ে না। আপনি ইন্টারনেট থেকে বিচ্ছিন্ন হলেও এটি হুবহু একইভাবে কাজ করতে থাকবে।</p>
+<p>ব্যবহার করতে, কেবল বাক্সে ক্লিক করে লেখা শুরু করুন, কিংবা আগে থেকেই থাকা লেখা পেস্ট করুন। ছয়টি পরিসংখ্যান নিরবচ্ছিন্নভাবে আপডেট হয়, তাই আপনি কোনো সীমার দিকে আপনার অগ্রগতি রিয়েল টাইমে দেখতে পারেন, প্রয়োজনমতো কাটতে বা বাড়াতে পারেন, এবং তৈরি লেখা যখন খুশি কপি করে নিতে পারেন।</p>
+    <section class="faq"><h2>শব্দ গণনা সম্পর্কে সাধারণ প্রশ্ন</h2><dl><dt>পড়ার সময় কীভাবে অনুমান করা হয়?</dt><dd>পড়ার সময় একজন প্রাপ্তবয়স্কের গড় গতি প্রতি মিনিটে প্রায় 200 শব্দ ধরে নেয় এবং অন্তত এক মিনিট পর্যন্ত ঊর্ধ্বমুখী রাউন্ড করে। দ্রুত বা ধীর পাঠকদের সেই অনুযায়ী মানিয়ে নিতে হবে।</dd><dt>স্পেসবিহীন ভাষায় শব্দ কীভাবে গোনা হয়?</dt><dd>চীনা ও জাপানির মতো লিপি, যেগুলো স্পেস দিয়ে শব্দ আলাদা করে না, সেখানে প্রতিটি অক্ষর একটি একক হিসেবে গোনা হয়, যা এসব ভাষার দৈর্ঘ্য মাপার পদ্ধতির কাছাকাছি।</dd><dt>আমার টেক্সট কি কোথাও সংরক্ষিত হয়?</dt><dd>না। সব গণনা আপনি টাইপ করার সময় আপনার ব্রাউজারেই হয়। আপনার টেক্সট কখনও কোনো সার্ভারে পাঠানো, সংরক্ষণ বা শেয়ার করা হয় না।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wordcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wordcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wordcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wordcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/wordcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wordcount/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/wordcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wordcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wordcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wordcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/glossary.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/wordcount.js" defer></script>
+</body>
+</html>

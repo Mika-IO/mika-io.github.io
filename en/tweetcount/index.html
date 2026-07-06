@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twitter / X Character Counter — count your tweet length</title>
+<meta name="description" content="Free Twitter/X character counter. Counts tweet length with URL normalisation (each URL = 23 chars). Color-coded limit indicator for the 280-character limit.">
+<link rel="canonical" href="https://mikaio.dev/en/tweetcount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tweetcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tweetcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tweetcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Twitter / X Character Counter — count your tweet length">
+<meta property="og:description" content="Free Twitter/X character counter. Counts tweet length with URL normalisation (each URL = 23 chars). Color-coded limit indicator for the 280-character limit.">
+<meta property="og:url" content="https://mikaio.dev/en/tweetcount/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Twitter / X Character Counter — count your tweet length","url":"https://mikaio.dev/en/tweetcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free Twitter/X character counter. Counts tweet length with URL normalisation (each URL = 23 chars). Color-coded limit indicator for the 280-character limit."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Twitter / X Character Counter","item":"https://mikaio.dev/en/tweetcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does Twitter count URLs as 23 characters?","acceptedAnswer":{"@type":"Answer","text":"Twitter automatically wraps every URL through its t.co shortener, which produces links that are always 23 characters long. So whether your URL is 10 characters or 200 characters, it counts as exactly 23 toward your 280-character limit."}},{"@type":"Question","name":"What is the Twitter / X character limit?","acceptedAnswer":{"@type":"Answer","text":"The standard character limit for a single tweet or X post is 280 characters. Twitter Blue / X Premium subscribers may have access to longer posts (up to 25,000 characters), but the free limit is 280."}},{"@type":"Question","name":"Do emojis count as one character?","acceptedAnswer":{"@type":"Answer","text":"Most standard emojis count as 2 characters in Twitter's counting system because they use Unicode surrogate pairs. This counter uses JavaScript's string length, which may differ slightly from Twitter's exact counting for certain emoji combinations."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/tweetcount/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/tweetcount/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/tweetcount/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Count your post length the way X actually counts it" />
+<meta property="og:description" content="Count your post length the way X actually counts it" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/tweetcount/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Count your post length the way X actually counts it","description":"Count your post length the way X actually counts it","url":"https://example.com/en/tweetcount/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Twitter / X Character Counter</span></nav>
+  <h1>Twitter / X Character Counter</h1>
+  <p class="lead">Type or paste your tweet below. URLs are automatically counted as 23 characters each, matching Twitter&#39;s t.co link-shortening behaviour.</p>
+  <section class="widget" id="tool"><form id="tweet-form"><div class="field"><label for="tweet-text">Tweet / post text</label><textarea id="tweet-text" rows="5" placeholder="What's happening?"></textarea></div><div class="result" id="tweet-out" style="text-align:left"></div></form></section>
+  <article class="content">
+    <h2>Count your post length the way X actually counts it</h2>
+<p>A 280-character limit sounds simple until you start writing and realise emoji, links and certain accented characters do not count the way you would expect. This counter mirrors X&#39;s (formerly Twitter&#39;s) actual counting rules as closely as a browser tool can, including the platform&#39;s distinctive treatment of URLs, so the number you see here matches what you would see in the compose box rather than a naive character count that leaves you guessing whether a post will actually fit.</p>
+<h2>How to use it</h2>
+<p>Type or paste your post into the box and the character count appears immediately below, shown against the 280-character limit with a colour-coded bar that shifts from green through amber and orange to red as you approach and then exceed the limit. Any URL you include is automatically detected and counted as exactly 23 characters, matching the platform&#39;s link-shortening behaviour, regardless of how long the actual link is. The remaining character allowance updates live as you type, so you can trim or expand your wording while watching the number rather than composing blind and checking only at the end.</p>
+<h2>Why URLs always count as 23 characters</h2>
+<p>X automatically wraps every link posted through its system with its own t.co shortening service, and every link, no matter how long or short the original address, becomes a t.co link of exactly the same fixed length. This is why a post containing a link to a short, clean address and a post containing a link to an enormous URL packed with tracking parameters cost the author exactly the same number of characters — 23, currently — against the 280-character budget. This tool replicates that behaviour by detecting URLs in your text and counting each one as 23 characters rather than its literal length, so the count you see here matches what actually happens when you post.</p>
+<h2>Emoji and the surrogate pair quirk</h2>
+<p>Emoji add a genuine wrinkle to character counting because of how they are stored internally. Most modern emoji, particularly newer or more complex ones, are represented using what is called a surrogate pair — two underlying code units rather than one — which means they frequently count as two characters rather than one in systems that measure string length the way JavaScript and many other languages do. X&#39;s own counting system has its own specific rules here that can occasionally diverge slightly from a browser&#39;s native string length calculation for unusual emoji combinations, flag sequences or emoji with modifiers such as skin tone selectors. For the overwhelming majority of everyday posts this difference is invisible, but if you are right at the edge of the limit and using several emoji, it is worth leaving a small buffer rather than trusting the count down to the exact final character.</p>
+<h2>The evolution of the character limit</h2>
+<p>Twitter launched with a 140-character limit, a figure chosen deliberately to fit a tweet plus a username within the 160-character limit of a single SMS text message, since the service was originally designed to work over text messaging as much as the web. The limit doubled to 280 characters in 2017 after data showed that many users, particularly those writing in languages that require more characters to express the same idea, were consistently running out of room. Higher character limits for paying subscribers came later, but the free 280-character limit that this counter measures against remains the standard most posts are written for.</p>
+<h2>Writing tightly within 280 characters</h2>
+<p>Because every character counts against a hard limit, writers who post regularly develop habits for trimming without losing meaning: replacing &quot;because&quot; with &quot;bc&quot; or &quot;&amp;&quot; for &quot;and&quot; only when the tone suits it, cutting filler words that add nothing, and moving a link or a hashtag to the very end so it is the first thing to cut if a final trim is needed. Watching the live count while you write, rather than composing the whole thought first and discovering afterward that it is forty characters too long, makes this kind of tight editing far less frustrating, since you can see exactly how much room a rewording actually saves before committing to it.</p>
+<h2>Threads and multi-post drafts</h2>
+<p>When a single thought does not fit in 280 characters, the usual approach is to split it into a thread of connected posts rather than force everything into one. Drafting a thread elsewhere first and running each planned post through this counter individually is a reliable way to check that every piece of the thread fits comfortably, including a few spare characters for a &quot;1/&quot; style numbering prefix if you use one, before you start posting them one after another, rather than discovering mid-thread that one post needs an awkward last-second trim after you have already started publishing the earlier ones.</p>
+<h2>Private and instant</h2>
+<p>Everything runs in your own browser as you type, so your draft post is never uploaded, logged or shared with anyone, and nothing is saved once you navigate away from the page. It works offline once loaded, ready whenever you need a quick, accurate character check before you post.</p>
+    <section class="faq"><h2>Twitter character counter FAQ</h2><dl><dt>Why does Twitter count URLs as 23 characters?</dt><dd>Twitter automatically wraps every URL through its t.co shortener, which produces links that are always 23 characters long. So whether your URL is 10 characters or 200 characters, it counts as exactly 23 toward your 280-character limit.</dd><dt>What is the Twitter / X character limit?</dt><dd>The standard character limit for a single tweet or X post is 280 characters. Twitter Blue / X Premium subscribers may have access to longer posts (up to 25,000 characters), but the free limit is 280.</dd><dt>Do emojis count as one character?</dt><dd>Most standard emojis count as 2 characters in Twitter&#39;s counting system because they use Unicode surrogate pairs. This counter uses JavaScript&#39;s string length, which may differ slightly from Twitter&#39;s exact counting for certain emoji combinations.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/tweetcount/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/tweetcount.js" defer></script>
+</body>
+</html>

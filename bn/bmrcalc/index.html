@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMR Calculator — Basal Metabolic Rate calories per day</title>
+<meta name="description" content="Free BMR calculator. Calculate your Basal Metabolic Rate — the calories your body burns at rest per day. Uses the Mifflin-St Jeor equation.">
+<link rel="canonical" href="https://mikaio.dev/bn/bmrcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/bmrcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/bmrcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/bmrcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/bmrcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/bmrcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/bmrcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/bmrcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/bmrcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/bmrcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/bmrcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/bmrcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BMR Calculator — Basal Metabolic Rate calories per day">
+<meta property="og:description" content="Free BMR calculator. Calculate your Basal Metabolic Rate — the calories your body burns at rest per day. Uses the Mifflin-St Jeor equation.">
+<meta property="og:url" content="https://mikaio.dev/bn/bmrcalc/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"BMR Calculator — Basal Metabolic Rate calories per day","url":"https://mikaio.dev/bn/bmrcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"Free BMR calculator. Calculate your Basal Metabolic Rate — the calories your body burns at rest per day. Uses the Mifflin-St Jeor equation."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"BMR Calculator","item":"https://mikaio.dev/bn/bmrcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is BMR?","acceptedAnswer":{"@type":"Answer","text":"Basal Metabolic Rate is the number of calories your body burns at complete rest to maintain basic functions: breathing, circulation, cell production, and temperature regulation."}},{"@type":"Question","name":"Which formula is used?","acceptedAnswer":{"@type":"Answer","text":"The Mifflin-St Jeor equation, the most accurate formula for most adults. For men: BMR = 10×weight(kg) + 6.25×height(cm) − 5×age + 5. For women: same but −161 instead of +5."}},{"@type":"Question","name":"How do I use BMR for weight management?","acceptedAnswer":{"@type":"Answer","text":"Multiply your BMR by an activity factor to get your Total Daily Energy Expenditure (TDEE). Eat fewer calories than your TDEE to lose weight, more to gain."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/bn/bmrcalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/bmrcalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/bmrcalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/bmrcalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/bmrcalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/bmrcalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/bmrcalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/bmrcalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/bmrcalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/bmrcalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/bmrcalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="বিশ্রামে থাকা অবস্থায় কত ক্যালোরি পোড়ে তা হিসাব করুন" />
+<meta property="og:description" content="বিশ্রামে থাকা অবস্থায় কত ক্যালোরি পোড়ে তা হিসাব করুন" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/bn/bmrcalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"বিশ্রামে থাকা অবস্থায় কত ক্যালোরি পোড়ে তা হিসাব করুন","description":"বিশ্রামে থাকা অবস্থায় কত ক্যালোরি পোড়ে তা হিসাব করুন","url":"https://example.com/bn/bmrcalc/","inLanguage":"bn"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>BMR Calculator</span></nav>
+  <h1>BMR Calculator</h1>
+  <p class="lead">Enter your weight, height, age, and sex to calculate your Basal Metabolic Rate.</p>
+  <section class="widget" id="tool"><form id="bmr-form"><div class="row"><div class="field"><label for="bmr-weight">Weight</label><input type="number" id="bmr-weight" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="bmr-wunit">Unit</label><select id="bmr-wunit"><option value="kg">kg</option><option value="lb">lb</option></select></div><div class="field"><label for="bmr-height">Height</label><input type="number" id="bmr-height" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="bmr-hunit">Unit</label><select id="bmr-hunit"><option value="cm">cm</option><option value="in">in</option></select></div><div class="field"><label for="bmr-age">Age</label><input type="number" id="bmr-age" step="1" min="1" max="120" inputmode="numeric"></div><div class="field"><label for="bmr-sex">Sex</label><select id="bmr-sex"><option value="m">Male</option><option value="f">Female</option></select></div></div><div class="result"><span class="hint">BMR (calories/day): </span><span class="big" id="bmr-out">—</span></div></form></section>
+  <article class="content">
+    <h2>বিশ্রামে থাকা অবস্থায় কত ক্যালোরি পোড়ে তা হিসাব করুন</h2>
+<p>আপনার বেসাল মেটাবলিক রেট (BMR) হলো সেই পরিমাণ ক্যালোরি, যা আপনার শরীরের সম্পূর্ণ বিশ্রামে থাকা অবস্থায়ও মৌলিক জীবনক্রিয়া চালিয়ে যেতে দরকার হয় — নিঃশ্বাস নেওয়া, হৃৎস্পন্দন চালু রাখা, শরীরের তাপমাত্রা ধরে রাখা, কোষ মেরামত ও উৎপাদন। এটা আসলে সেই ন্যূনতম শক্তি, যা আপনার শরীরের দরকার হতো যদি আপনি সারাদিন একদম নড়াচড়া না করে শুয়ে থাকতেন, আর যেকোনো ক্যালোরি-ভিত্তিক ডায়েট বা ফিটনেস পরিকল্পনার ভিত্তি এটাই।</p>
+<h2>মিফলিন-সেন্ট জিওর সমীকরণ</h2>
+<p>এই ক্যালকুলেটরটি ব্যবহার করে মিফলিন-সেন্ট জিওর সমীকরণ, যা প্রকাশিত হয় ১৯৯০ সালে আর বেশিরভাগ মানুষের জন্য সবচেয়ে সঠিক পূর্বাভাসমূলক BMR সূত্র হিসেবে বিবেচিত। এটা ক্লিনিকাল সেটিংয়ে পুরনো হ্যারিস-বেনেডিক্ট সমীকরণের জায়গা প্রায় দখল করে নিয়েছে।</p>
+<p><strong>পুরুষদের জন্য</strong>: BMR = 10 × ওজন(কেজি) + 6.25 × উচ্চতা(সেমি) − 5 × বয়স + 5</p>
+<p><strong>নারীদের জন্য</strong>: BMR = 10 × ওজন(কেজি) + 6.25 × উচ্চতা(সেমি) − 5 × বয়স − 161</p>
+<p>পুরুষ আর নারীর সমীকরণের মধ্যকার পার্থক্যটা দুই লিঙ্গের মধ্যে গড় লিন বডি মাস (পেশি)-এর পার্থক্য প্রতিফলিত করে, কারণ পেশি টিস্যু ধরে রাখতে চর্বি টিস্যুর চেয়ে বেশি শক্তি দরকার হয়।</p>
+<h2>BMR থেকে দৈনিক ক্যালোরির চাহিদায়</h2>
+<p>BMR আসলে শুরুর বিন্দু মাত্র। আপনার প্রকৃত দৈনিক ক্যালোরির চাহিদা নির্ভর করে আপনার কর্মততপরতার মাত্রার ওপর। আপনার BMR-কে আপনার কর্মততপরতা ফ্যাক্টর দিয়ে গুণ করলে পাওয়া যায় আপনার মোট দৈনিক শক্তি ব্যয় (TDEE):</p>
+<ul>
+<li><strong>নিষ্ক্রিয়</strong> (ডেস্ক-জব, সামান্য ব্যায়াম): BMR × 1.2</li>
+<li><strong>হালকা সক্রিয়</strong> (সপ্তাহে ১-৩ দিন হালকা ব্যায়াম): BMR × 1.375</li>
+<li><strong>মাঝারি সক্রিয়</strong> (সপ্তাহে ৩-৫ দিন ব্যায়াম): BMR × 1.55</li>
+<li><strong>অনেক বেশি সক্রিয়</strong> (সপ্তাহে ৬-৭ দিন কঠোর ব্যায়াম): BMR × 1.725</li>
+<li><strong>অতিরিক্ত সক্রিয়</strong> (শারীরিক পরিশ্রমের চাকরি + কঠোর প্রশিক্ষণ): BMR × 1.9</li>
+</ul>
+<p>৩৫ বছর বয়সী, ১৬৫ সেমি উচ্চতা আর ৬৫ কেজি ওজনের একজন নারীর BMR প্রায় ১,৪১৪ কিলোক্যালরি। সপ্তাহে ৩-৫ দিন ব্যায়াম করলে তার TDEE হবে প্রায় ১,৪১৪ × ১.৫৫ = ২,১৯২ কিলোক্যালরি।</p>
+<h2>ওজন ব্যবস্থাপনায় BMR ব্যবহার</h2>
+<p>ওজন কমাতে: আপনার TDEE-এর চেয়ে কম ক্যালোরি খান। প্রতিদিন ৫০০ কিলোক্যালরির একটা ঘাটতি প্রায় ০.৫ কেজি সাপ্তাহিক ওজন কমায়।</p>
+<p>ওজন বাড়াতে: আপনার TDEE-এর চেয়ে বেশি ক্যালোরি খান। প্রতিদিন ২৫০-৫০০ কিলোক্যালরির উদ্বৃত্ত অতিরিক্ত চর্বি ছাড়াই পেশি গঠনে সহায়তা করে।</p>
+<p>ওজন ধরে রাখতে: আপনার গ্রহণকে আপনার TDEE-এর সাথে মিলিয়ে রাখুন।</p>
+<h2>যেসব বিষয় BMR-কে প্রভাবিত করে</h2>
+<p><strong>পেশির পরিমাণ</strong>: পেশি টিস্যু বিপাকীয়ভাবে সক্রিয় — এটা বিশ্রামেও ক্যালোরি পোড়ায়। যাদের পেশি বেশি, তাদের BMR বেশি। এই কারণেই রেজিস্ট্যান্স ট্রেনিং সময়ের সাথে BMR বাড়িয়ে দেয়।</p>
+<p><strong>বয়স</strong>: ২০ বছর বয়সের পর BMR প্রতি দশকে মোটামুটি ১-২% করে কমে যায়, পেশির পরিমাণ ধীরে ধীরে কমার (সারকোপেনিয়া) কারণে আর অন্যান্য বিপাকীয় পরিবর্তনের কারণে।</p>
+<p><strong>লিঙ্গ</strong>: একই বয়স, উচ্চতা আর ওজনের নারীর তুলনায় পুরুষের BMR সাধারণত বেশি হয়, মূলত বেশি গড় পেশির পরিমাণের কারণে।</p>
+<p><strong>হরমোন</strong>: থাইরয়েড হরমোন বিপাকীয় হার নিয়ন্ত্রণ করে। হাইপোথাইরয়েডিজম (কম সক্রিয় থাইরয়েড) BMR কমিয়ে দেয়; হাইপারথাইরয়েডিজম এটা বাড়িয়ে দেয়।</p>
+<p><strong>শরীরের গঠন</strong>: চর্বি টিস্যুর পেশির চেয়ে কম শক্তি দরকার হয়। একই ওজনের কিন্তু ভিন্ন শরীর-গঠনের দুজন মানুষের BMR ভিন্ন হয়।</p>
+<h2>সীমাবদ্ধতা</h2>
+<p>BMR সূত্রগুলো জনসংখ্যার গড় মান, আর এগুলো প্রতিটা ব্যক্তির জন্য নিখুঁতভাবে সঠিক নাও হতে পারে। প্রকৃত BMR শুধু ইনডাইরেক্ট ক্যালোরিমেট্রি ব্যবহার করে ক্লিনিকাল সেটিংয়েই নির্ভুলভাবে মাপা যায়। এই হিসাবটাকে একটা চূড়ান্ত মান না ধরে একটা দিকনির্দেশনা হিসেবে ব্যবহার করুন, আর ২-৪ সপ্তাহ ধরে বাস্তব ফলাফলের ভিত্তিতে আপনার ক্যালোরি লক্ষ্য সমন্বয় করুন।</p>
+<h2>জীবনকালব্যাপী বেসাল মেটাবলিক রেট</h2>
+<p>জীবনকাল ধরে BMR উল্লেখযোগ্যভাবে বদলায়। শিশুদের শরীরের আকারের তুলনায় BMR অনেক বেশি থাকে, দ্রুত বেড়ে ওঠার শক্তির চাহিদার কারণে। BMR সর্বোচ্চ পর্যায়ে পৌঁছায় তরুণ বয়সে, তারপর ধীরে ধীরে কমতে থাকে — ২০ বছর বয়সের পর প্রতি দশকে মোটামুটি ১-২%। এই পতন মূলত সারকোপেনিয়ার (বয়সজনিত পেশিক্ষয়) কারণে আর অঙ্গের বিপাকীয় কার্যক্রম কমে যাওয়ার কারণে। এর ব্যবহারিক তাৎপর্য হলো, খাদ্যাভ্যাস অপরিবর্তিত থাকলে বয়সের সাথে সাথে ওজন ধরে রাখা ক্রমশ কঠিন হয়ে ওঠে, যে কারণে বয়স বাড়ার সাথে সাথে ডায়েটের পাশাপাশি রেজিস্ট্যান্স ট্রেনিং সুপারিশ করা হয় — এটা পেশির পরিমাণ ধরে রেখে এই পতনকে প্রতিহত করতে সাহায্য করে।</p>
+<h2>ডায়েটের সময় বিপাকীয় অভিযোজন</h2>
+<p>ক্যালোরি গ্রহণ যথেষ্ট পরিমাণে সীমিত করা হলে শরীর BMR কমিয়ে অভিযোজিত হয়, যাকে বলে বিপাকীয় অভিযোজন বা &quot;অ্যাডাপ্টিভ থার্মোজেনেসিস&quot;। এই কারণেই অতি-কম-ক্যালোরির ডায়েট সময়ের সাথে সাথে ক্রমশ কম কার্যকর হয়ে ওঠে: শরীর কম শক্তি ব্যবহার করে আরও বেশি বিপাকীয়ভাবে দক্ষ হয়ে ওঠে, তাই একই ক্যালোরি ঘাটতি শুরুর তুলনায় কম ওজন কমায়। এই অভিযোজনটাই একটা কারণ যে কেন টেকসই ওজন কমানো সাধারণত দিনে প্রায় ৩০০ থেকে ৫০০ কিলোক্যালরির মাঝারি ঘাটতির মাধ্যমে অর্জিত হয়, চরম সীমাবদ্ধতার বদলে, যা একটা আরও শক্তিশালী অভিযোজিত প্রতিক্রিয়া উসকে দেওয়ার প্রবণতা রাখে।</p>
+<h2>খাবারের তাপীয় প্রভাব</h2>
+<p>BMR ছাড়াও, খাওয়াটাই নিজেও ক্যালোরি পোড়ায়। খাবারের তাপীয় প্রভাব হলো পুষ্টি উপাদান হজম, শোষণ আর বিপাক করার শক্তির খরচ। প্রোটিনের তাপীয় প্রভাব সবচেয়ে বেশি, এর ২০ থেকে ৩০ শতাংশ ক্যালোরি প্রক্রিয়াকরণেই পুড়ে যায়, তারপরে কার্বোহাইড্রেট ৫ থেকে ১০ শতাংশ, আর চর্বি ০ থেকে ৩ শতাংশ। এটাই একটা প্রক্রিয়া, যার মাধ্যমে বেশি-প্রোটিনযুক্ত ডায়েট ওজন ব্যবস্থাপনায় সহায়তা করে: প্রোটিন হিসেবে গ্রহণ করা ক্যালোরির একটা অংশ কার্যত সেই প্রোটিন হজম করতেই খরচ হয়ে যায়।</p>
+<h2>ক্লিনিকাল পরিমাপ বনাম পূর্বাভাসমূলক সমীকরণ</h2>
+<p>ক্লিনিকাল বা গবেষণা সেটিংয়ে, BMR সরাসরি ইনডাইরেক্ট ক্যালোরিমেট্রি ব্যবহার করে মাপা হয়, যা অক্সিজেন গ্রহণ আর কার্বন ডাই অক্সাইড উৎপাদন ট্র্যাক করে, যখন বিষয়টি একটা তাপমাত্রা-নিরপেক্ষ পরিবেশে সম্পূর্ণ বিশ্রামে থাকে। এটাই স্বর্ণমান, কিন্তু এর জন্য বিশেষায়িত যন্ত্রপাতি দরকার, যা বেশিরভাগ মানুষের নাগালে কখনোই থাকে না — এই কারণেই মিফলিন-সেন্ট জিওরের মতো পূর্বাভাসমূলক সমীকরণ তৈরি হয়েছে: এগুলো কিছুটা ব্যক্তিগত নির্ভুলতার বিনিময়ে একটা ব্যবহারিক আন্দাজ দেয়, যার জন্য শুধু উচ্চতা, ওজন, বয়স আর লিঙ্গ ছাড়া আর কিছুই দরকার হয় না।</p>
+<h2>ব্যক্তিগত ও তাৎক্ষণিক</h2>
+<p>সব হিসাব সম্পূর্ণভাবে আপনার ব্রাউজারে চলে মিফলিন-সেন্ট জিওর সমীকরণ ব্যবহার করে, তাই আপনি আপনার তথ্য দেওয়ার সাথে সাথেই ফলাফল দেখা যায়, আর আপনার ব্যক্তিগত কোনো তথ্যই কখনো কোনো সার্ভারে পাঠানো, লগ করা বা শেয়ার করা হয় না।</p>
+    <section class="faq"><h2>BMR FAQ</h2><dl><dt>What is BMR?</dt><dd>Basal Metabolic Rate is the number of calories your body burns at complete rest to maintain basic functions: breathing, circulation, cell production, and temperature regulation.</dd><dt>Which formula is used?</dt><dd>The Mifflin-St Jeor equation, the most accurate formula for most adults. For men: BMR = 10×weight(kg) + 6.25×height(cm) − 5×age + 5. For women: same but −161 instead of +5.</dd><dt>How do I use BMR for weight management?</dt><dd>Multiply your BMR by an activity factor to get your Total Daily Energy Expenditure (TDEE). Eat fewer calories than your TDEE to lose weight, more to gain.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/bmrcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/bmrcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/bmrcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/bmrcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/bmrcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/bmrcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/bmrcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/bmrcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/bmrcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/bmrcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/glossary.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/bmrcalc.js" defer></script>
+</body>
+</html>

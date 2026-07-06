@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerador de Texto ao Contrário — inverta letras, palavras ou linhas</title>
+<meta name="description" content="Gerador de texto ao contrário grátis. Inverta na hora as letras, a ordem das palavras ou a ordem das linhas de qualquer texto no navegador, e copie o resultado.">
+<link rel="canonical" href="https://mikaio.dev/pt/backwardstext/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/backwardstext/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/backwardstext/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/backwardstext/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/backwardstext/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/backwardstext/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/backwardstext/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/backwardstext/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/backwardstext/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/backwardstext/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/backwardstext/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/backwardstext/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gerador de Texto ao Contrário — inverta letras, palavras ou linhas">
+<meta property="og:description" content="Gerador de texto ao contrário grátis. Inverta na hora as letras, a ordem das palavras ou a ordem das linhas de qualquer texto no navegador, e copie o resultado.">
+<meta property="og:url" content="https://mikaio.dev/pt/backwardstext/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Texto ao Contrário — inverta letras, palavras ou linhas","url":"https://mikaio.dev/pt/backwardstext/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Gerador de texto ao contrário grátis. Inverta na hora as letras, a ordem das palavras ou a ordem das linhas de qualquer texto no navegador, e copie o resultado."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Gerador de Texto ao Contrário","item":"https://mikaio.dev/pt/backwardstext/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual a diferença entre os três modos?","acceptedAnswer":{"@type":"Answer","text":"Inverter letras vira cada caractere, então 'olá' vira 'álo'. Inverter a ordem das palavras mantém cada palavra intacta mas as coloca na sequência oposta. Inverter a ordem das linhas vira uma lista ou bloco de baixo para cima."}},{"@type":"Question","name":"Emoji e letras acentuadas quebram?","acceptedAnswer":{"@type":"Answer","text":"Não. A ferramenta inverte o texto por caracteres inteiros, então emoji, letras acentuadas e outros símbolos ficam intactos em vez de serem separados."}},{"@type":"Question","name":"Meu texto é enviado?","acceptedAnswer":{"@type":"Answer","text":"Não. A inversão acontece na hora no seu navegador, então nada do que você digita é enviado a um servidor, salvo ou compartilhado."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Gerador de Texto ao Contrário</span></nav>
+  <h1>Gerador de Texto ao Contrário</h1>
+  <p class="lead">Digite ou cole o texto e ele é invertido enquanto você escreve. Alterne entre inverter letras, palavras ou linhas, depois copie o resultado.</p>
+  <section class="widget" id="tool"><div id="bw"><div class="field"><label for="bw-input">Seu texto</label><textarea id="bw-input" placeholder="Digite ou cole o texto para inverter…"></textarea></div><div class="cc-btns row"><button type="button" class="btn" data-mode="chars" aria-pressed="true">Inverter letras</button><button type="button" class="btn" data-mode="words" aria-pressed="false">Inverter ordem das palavras</button><button type="button" class="btn" data-mode="lines" aria-pressed="false">Inverter ordem das linhas</button></div><div class="field"><label for="bw-output">Texto invertido</label><textarea id="bw-output" readonly></textarea></div><button type="button" class="btn secondary" data-copy="#bw-output" data-copied="Copiado!">Copiar resultado</button></div></section>
+  <article class="content">
+    <h2>Vire qualquer texto de trás para frente num instante</h2>
+<p>Inverter texto é um daqueles pequenos truques que se mostram úteis muito mais vezes do que se imagina. Seja para escrever uma mensagem secreta que só se lê normalmente no espelho, criar um nome de usuário curioso, resolver um jogo de palavras ou checar se uma frase é um palíndromo, virar a ordem dos caracteres é o ponto de partida. Este gerador de texto ao contrário faz isso no momento em que você digita, e vai além da maioria: além de inverter as letras individuais, ele pode inverter a ordem de palavras inteiras ou virar uma lista de linhas de baixo para cima. Tudo acontece no seu navegador, então o resultado aparece na hora e nada do que você digita é enviado.</p>
+<p>Usá-lo não poderia ser mais simples. Digite ou cole o seu texto na primeira caixa e a versão invertida aparece na segunda caixa imediatamente, atualizando a cada tecla. Três botões deixam você escolher exatamente o que &quot;ao contrário&quot; deve significar, e um botão de copiar coloca o resultado pronto na área de transferência para colar onde precisar. Não há limite de tamanho, então você inverte uma única palavra ou uma página inteira com a mesma facilidade.</p>
+<h2>As três formas de inverter</h2>
+<p><strong>Inverter letras</strong> vira cada caractere do seu texto, então &quot;olá mundo&quot; se torna &quot;odnum álo&quot;. É o efeito clássico de escrita espelhada e o que a maioria das pessoas quer dizer com &quot;texto ao contrário&quot;. É o modo ideal para mensagens secretas, para resolver quebra-cabeças no estilo anagrama e para a escrita invertida e brincalhona que fica marcante em uma bio ou legenda.</p>
+<p><strong>Inverter ordem das palavras</strong> mantém cada palavra escrita corretamente, mas organiza as palavras na sequência oposta, transformando &quot;a rápida raposa marrom&quot; em &quot;marrom raposa rápida a&quot;. É útil quando você quer embaralhar uma frase, experimentar a ordem das palavras ou criar certo efeito poético ou cômico sem transformar as próprias palavras em algo sem sentido.</p>
+<p><strong>Inverter ordem das linhas</strong> vira um bloco de texto para que a última linha se torne a primeira. É genuinamente prático para tarefas do dia a dia: inverter uma lista cronológica para o item mais novo ficar no topo, colocar um registro de baixo para cima na ordem certa, ou simplesmente virar qualquer lista sem redigitar. Como funciona linha por linha, as palavras e letras dentro de cada linha ficam exatamente como você escreveu.</p>
+<h2>Onde o texto invertido é útil</h2>
+<p>O motivo mais comum de as pessoas recorrerem a um inversor de texto é diversão e curiosidade. A escrita invertida parece intrigante, então aparece em nomes de redes sociais, apelidos de jogos, legendas e mensagens brincalhonas entre amigos. Escrever uma frase curta ao contrário e pedir para alguém decifrá-la, ou levá-la ao espelho, é um joguinho simples que sempre gera reação. Algumas pessoas usam a inversão de letras como uma forma leve de disfarce, fazendo uma anotação que não deve ser lida num relance.</p>
+<p>Há usos práticos também. Fãs de jogos de palavras e quebra-cabeças usam a inversão de letras para testar palíndromos — palavras ou frases que se leem igual de frente para trás, como &quot;arara&quot; ou &quot;socorram-me subi no ônibus em marrocos&quot; — comparando o original com o seu inverso. Escritores e editores usam a inversão de ordem de palavras e de linhas para reorganizar texto rapidamente. Quem trabalha com listas, registros ou dados exportados às vezes precisa virar a ordem das linhas, e fazer isso aqui leva um segundo em vez do trabalho tedioso de recortar e colar cada linha à mão.</p>
+<h2>Cuidado com os caracteres</h2>
+<p>Inverter texto parece trivial, mas é surpreendentemente fácil errar. Uma abordagem ingênua que vira uma string caractere a caractere pode partir caracteres modernos que na verdade são feitos de várias peças — muitos emoji, algumas letras acentuadas e vários símbolos são armazenados como mais de uma unidade interna, e cortá-los ao meio produz quadradinhos quebrados ou algo sem sentido. Esta ferramenta inverte o texto por caracteres inteiros, como um leitor os reconheceria, então um emoji continua um emoji inteiro e uma letra acentuada como &quot;é&quot; fica intacta em vez de se desfazer no acento e na letra base.</p>
+<p>Esse cuidado significa que o inversor se comporta bem entre idiomas e sistemas de escrita. Texto com acentos, emoji, pontuação e alfabetos mistos inverte de forma limpa. Tenha em mente que inverter as letras de um texto escrito em uma escrita da direita para a esquerda, como o árabe ou o hebraico, muda como ele é exibido, já que essas escritas já correm na direção oposta; a ferramenta ainda vira fielmente a ordem interna dos caracteres, que é exatamente o que você quer para quebra-cabeças e efeitos.</p>
+<h2>Privado, instantâneo e grátis</h2>
+<p>Não há cadastro, custo nem espera. O inversor inteiro é um pequeno trecho de código que roda no seu próprio dispositivo, e é por isso que ele atualiza no instante em que você digita e continua funcionando sem conexão com a internet. Nada do que você cola é enviado, guardado ou compartilhado, então é seguro usar até com anotações ou mensagens privadas que você prefere manter só para você.</p>
+<p>Para começar, digite ou cole o seu texto na primeira caixa e veja a versão invertida aparecer abaixo. Toque nos botões para alternar entre inverter letras, palavras ou linhas até obter o efeito desejado, depois use o botão de copiar para pegar o resultado. Mude o texto quando quiser e a saída acompanha, para você experimentar livremente até ficar exatamente do jeito certo.</p>
+    <section class="faq"><h2>Perguntas frequentes do texto ao contrário</h2><dl><dt>Qual a diferença entre os três modos?</dt><dd>Inverter letras vira cada caractere, então &#39;olá&#39; vira &#39;álo&#39;. Inverter a ordem das palavras mantém cada palavra intacta mas as coloca na sequência oposta. Inverter a ordem das linhas vira uma lista ou bloco de baixo para cima.</dd><dt>Emoji e letras acentuadas quebram?</dt><dd>Não. A ferramenta inverte o texto por caracteres inteiros, então emoji, letras acentuadas e outros símbolos ficam intactos em vez de serem separados.</dd><dt>Meu texto é enviado?</dt><dd>Não. A inversão acontece na hora no seu navegador, então nada do que você digita é enviado a um servidor, salvo ou compartilhado.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/backwardstext/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/backwardstext/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/backwardstext/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/backwardstext/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/backwardstext/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/backwardstext/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/backwardstext/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/backwardstext/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/backwardstext/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/backwardstext/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/backwardstext.js" defer></script>
+</body>
+</html>

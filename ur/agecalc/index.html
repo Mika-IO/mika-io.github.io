@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Age Calculator — your exact age in years, months and days</title>
+<meta name="description" content="Free age calculator. Enter your date of birth to see your exact age in years, months and days, your total days lived, and a countdown to your next birthday.">
+<link rel="canonical" href="https://mikaio.dev/ur/agecalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/agecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/agecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/agecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/agecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/agecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/agecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/agecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/agecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/agecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/agecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/agecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Age Calculator — your exact age in years, months and days">
+<meta property="og:description" content="Free age calculator. Enter your date of birth to see your exact age in years, months and days, your total days lived, and a countdown to your next birthday.">
+<meta property="og:url" content="https://mikaio.dev/ur/agecalc/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator — your exact age in years, months and days","url":"https://mikaio.dev/ur/agecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free age calculator. Enter your date of birth to see your exact age in years, months and days, your total days lived, and a countdown to your next birthday."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Age Calculator","item":"https://mikaio.dev/ur/agecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is my exact age worked out?","acceptedAnswer":{"@type":"Answer","text":"The calculator counts the full years from your birth date to the reference date, then the remaining whole months, then the leftover days, adjusting for the differing lengths of each month so the result is exact."}},{"@type":"Question","name":"Can I find my age on a past or future date?","acceptedAnswer":{"@type":"Answer","text":"Yes. Leave the second date blank to use today, or set it to any date to see how old you were, or will be, on that day."}},{"@type":"Question","name":"Is my date of birth stored?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation runs entirely in your browser, so the dates you enter are never uploaded, saved or shared."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/ur/agecalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/agecalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/agecalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/agecalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/agecalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/agecalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/agecalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/agecalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/agecalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/agecalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/agecalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="اپنی عمر دن، مہینے اور سال کے حساب سے جانیں" />
+<meta property="og:description" content="اپنی عمر دن، مہینے اور سال کے حساب سے جانیں" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/ur/agecalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"اپنی عمر دن، مہینے اور سال کے حساب سے جانیں","description":"اپنی عمر دن، مہینے اور سال کے حساب سے جانیں","url":"https://example.com/ur/agecalc/","inLanguage":"ur"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Age Calculator</span></nav>
+  <h1>Age Calculator</h1>
+  <p class="lead">Enter your date of birth to see your exact age in years, months and days. Leave the second date blank for today, or set it to age at any date.</p>
+  <section class="widget" id="tool"><form id="age" data-years="years" data-months="months" data-days="days" data-totaldays="days lived in total" data-nextbday="Next birthday" data-dayssuffix="days away"><div class="row"><div class="field"><label for="age-dob">Date of birth</label><input type="date" id="age-dob"></div><div class="field"><label for="age-at">Age at date (optional)</label><input type="date" id="age-at"></div></div><div class="result" id="age-out" hidden><span class="big" id="age-main">—</span><span id="age-total" class="hint"></span><br><span id="age-next" class="hint"></span></div></form></section>
+  <article class="content">
+    <h2>اپنی عمر دن، مہینے اور سال کے حساب سے جانیں</h2>
+<p>عام طور پر ہم سب کو اپنی عمر سالوں میں فوراً یاد ہوتی ہے، لیکن جیسے ہی کسی زیادہ درست چیز کی ضرورت پڑے — مثلاً مہینوں اور دنوں میں عمر، زندگی کے کل دنوں کی تعداد، یا کسی آنے والی تاریخ پر اپنی عمر معلوم کرنی ہو — تو ذہنی حساب کتاب اچانک الجھا ہوا لگنے لگتا ہے۔ ہر مہینے کے دن مختلف ہوتے ہیں، لیپ سال فروری میں ایک اضافی دن شامل کر دیتا ہے، اور ہاتھ سے یہ گنتی کرنا نہ صرف مشکل بلکہ غلطی کا باعث بھی ہے۔ یہ عمر کیلکولیٹر یہ سارا کام آپ کے لیے فوراً کر دیتا ہے۔ بس اپنی تاریخ پیدائش درج کریں اور یہ آپ کو سال، مہینے اور دن میں آپ کی بالکل درست عمر، اب تک زندہ رہے کل دنوں کی تعداد، اور اگلی سالگرہ تک باقی دنوں کی گنتی دکھا دیتا ہے۔ یہ سب کچھ آپ کے براؤزر کے اندر ہوتا ہے، اس لیے جواب فوراً سامنے آتا ہے اور آپ کی درج کردہ تاریخیں کبھی آپ کے آلے سے باہر نہیں جاتیں۔</p>
+<p>استعمال کرنا بہت آسان ہے۔ پہلے خانے میں اپنی تاریخ پیدائش منتخب کریں اور نتائج آج کی تاریخ کی بنیاد پر فوری طور پر سامنے آ جاتے ہیں۔ اگر آپ کسی اور دن — ماضی یا مستقبل — کی نسبت سے اپنی عمر جاننا چاہتے ہیں تو دوسرا تاریخ والا خانہ بھی بھر دیں، اور کیلکولیٹر ان دونوں تاریخوں کے درمیان کا فاصلہ ناپ لے گا۔ اگر دوسرا خانہ خالی رہنے دیا جائے تو یہ خود بخود آج کی تاریخ استعمال کرتا ہے۔</p>
+<h2>کیلکولیٹر کیا دکھاتا ہے</h2>
+<p>سب سے اہم نتیجہ آپ کی صحیح عمر تین حصوں میں ہے: مکمل سال، پھر بچ جانے والے پورے مہینے، اور آخر میں باقی دن۔ لوگ عام طور پر &quot;صحیح عمر&quot; سے یہی مراد لیتے ہیں، اور یہ صرف سالوں سے کہیں زیادہ معلوماتی ہے — خاص طور پر شیرخوار بچوں اور کم عمر بچوں کے معاملے میں، جہاں مہینے اور دن بہت اہمیت رکھتے ہیں، اور ان مواقع پر جہاں آپ بالکل ٹھیک ٹھیک جاننا چاہتے ہیں کہ کوئی چیز کتنی دور تک پہنچی ہے۔</p>
+<p>اس کے نیچے کیلکولیٹر آپ کو زندگی کے کل دنوں کی تعداد بھی دکھاتا ہے۔ یہ ایک بڑا سا عدد اپنی زندگی کو سالوں کے بجائے دنوں میں دیکھنے کا ایک دلچسپ اور کسی حد تک حیران کن طریقہ ہے، اور جب بھی کسی فارم یا حساب کو دنوں میں عمر درکار ہو تو یہ واقعی کارآمد ثابت ہوتا ہے۔ آخر میں یہ بتاتا ہے کہ آپ کی اگلی سالگرہ میں کتنے دن باقی ہیں — چاہے آپ کوئی جشن منانے کی تیاری کر رہے ہوں یا محض تجسس کی خاطر پوچھ رہے ہوں، یہ چھوٹی سی گنتی کام کی چیز ہے۔</p>
+<h2>صحیح عمر کیسے شمار کی جاتی ہے</h2>
+<p>صحیح عمر نکالنا محض ایک سال کو دوسرے سے گھٹانے سے کہیں زیادہ باریک کام ہے۔ کیلکولیٹر آپ کی تاریخ پیدائش سے شروع ہو کر حوالہ تاریخ تک گزرے مکمل سالوں کو گنتا ہے۔ اس کے بعد یہ بچ جانے والے پورے مہینوں کو، اور آخر میں باقی دنوں کو شمار کرتا ہے۔ اصل پیچیدگی دنوں میں ہے: چونکہ مہینوں کی لمبائی اٹھائیس سے اکتیس دن تک مختلف ہوتی ہے، اس لیے جب بھی مہینے کی وہ تاریخ ابھی نہیں آئی ہوتی جو ضرورت ہے تو کیلکولیٹر پچھلے مہینے سے صحیح تعداد میں دن ادھار لے لیتا ہے، تاکہ گنتی ہمیشہ درست رہے، نہ کہ یہ فرض کر لیا جائے کہ ہر مہینہ برابر لمبا ہے۔</p>
+<p>لیپ سال بھی اس عمل کا خودکار حصہ ہیں۔ انتیس فروری کو پیدا ہونے والے شخص کی عمر بالکل درست شمار کی جاتی ہے، اور چونکہ کل دنوں کی گنتی دونوں تاریخوں کے درمیان اصل فاصلے کے طور پر ماپی جاتی ہے، اس لیے آپ کی زندگی کا ہر لیپ دن بھی اس میں شامل ہوتا ہے۔ یہی وجہ ہے کہ تینوں اعداد میں سے زندگی کے کل دنوں کا عدد سب سے زیادہ پختہ ہے: یہ دراصل آپ کی تاریخ پیدائش اور حوالہ تاریخ کے درمیان کا حقیقی فاصلہ ہے، جس میں کچھ بھی گول کر کے نہیں چھوڑا گیا۔</p>
+<h2>آپ کو اس کی ضرورت کیوں پڑ سکتی ہے</h2>
+<p>صحیح عمر جاننے کی وجوہات آپ کے خیال سے کہیں زیادہ ہیں۔ والدین اپنے بچے کی عمر ہفتوں اور مہینوں میں نشوونما کے مراحل، ویکسینیشن اور معائنوں کے لیے ٹریک کرتے ہیں، جہاں صرف &quot;ایک سال کا&quot; کہنا بہت مبہم ہے۔ سرکاری فارم — ویزے، پنشن، بیمہ اور طبی ریکارڈ کے لیے — بعض اوقات عمر یا کسی درست تاریخی حساب کا تقاضا کرتے ہیں، اور اسے بالکل ٹھیک لکھنا اہم ہوتا ہے۔ سالگرہیں اور سالگرہ کی تقریبات منانے والے لوگ صحیح گنتی جاننا پسند کرتے ہیں، اور جو کوئی کسی خاص &quot;دنوں کی گنتی&quot; کا سنگ میل منانا چاہے، مثلاً دس ہزار دن کی عمر مکمل ہونا، اسے تاریخ معلوم کرنے کے لیے کل دنوں کے عدد کی ضرورت پڑتی ہے۔</p>
+<p>یہ محض دلچسپ بھی ہے۔ اپنی زندگی کو دنوں کی گنتی میں دیکھنا، یا کسی تاریخی شخصیت کی کسی خاص تاریخ پر عمر معلوم کرنا، یا دو افراد کی صحیح عمروں کا موازنہ کرنا — یہ سب چھوٹے چھوٹے تجسس ہیں جن کا جواب یہ ٹول ایک لمحے میں دے دیتا ہے۔ چونکہ آپ دوسری تاریخ آزادانہ طور پر مقرر کر سکتے ہیں، اس لیے آپ اپنے ماضی کے کسی بھی نقطے کو پیچھے مڑ کر یا مستقبل کے کسی بھی نقطے کو آگے دیکھ سکتے ہیں۔</p>
+<h2>دوسری تاریخ کا استعمال</h2>
+<p>اختیاری دوسری تاریخ ہی وہ چیز ہے جو ایک سادہ عمر کیلکولیٹر کو ایک لچکدار تاریخی فرق نکالنے والے ٹول میں بدل دیتی ہے۔ عام طور پر آپ اسے خالی چھوڑ دیتے ہیں اور کیلکولیٹر آج کی تاریخ استعمال کرتا ہے، جس سے آپ کی موجودہ عمر مل جاتی ہے۔ لیکن اسے مقرر کر کے آپ ایسے سوالوں کے جواب پا سکتے ہیں جیسے &quot;یہ تصویر لینے کے وقت میری عمر کیا تھی؟&quot;، &quot;اگلے تعلیمی سال کے آغاز پر میری عمر کیا ہو گی؟&quot;، یا &quot;اس مخصوص مستقبل کی تاریخ پر میری عمر کیا ہو گی؟&quot;۔ کیلکولیٹر ہمیشہ پہلی تاریخ سے دوسری تاریخ تک ناپتا ہے، اس لیے جب تک آپ کی تاریخ پیدائش دونوں میں سے پہلی ہو، یہ بالکل ویسے ہی کام کرتا ہے جیسا آپ توقع رکھتے ہیں۔</p>
+<p>یہی خصوصیت اسے صرف آپ کی اپنی عمر سے کہیں آگے مفید بناتی ہے۔ کسی بھی پہلے کی تاریخ کو &quot;تاریخ پیدائش&quot; اور کسی بھی بعد کی تاریخ کو حوالہ تاریخ کے طور پر مقرر کریں، اور آپ کو ان دونوں کے درمیان سال، مہینے اور دن میں، نیز کل دنوں کی صورت میں، ایک بالکل درست پیمائش مل جاتی ہے — چاہے یہ کسی منصوبے کی مدت جاننی ہو، کسی رشتے کی طوالت یا کسی سبسکرپشن کے دورانیے کا حساب لگانا ہو۔</p>
+<h2>نجی، فوری اور مفت</h2>
+<p>نہ کوئی رجسٹریشن، نہ کوئی قیمت، اور نہ ہی راستے میں کوئی اشتہار۔ پورا کیلکولیٹر ایک چھوٹا سا کوڈ ہے جو آپ کے اپنے آلے پر چلتا ہے، اسی لیے یہ تاریخ منتخب کرتے ہی فوراً جواب دیتا ہے اور بغیر انٹرنیٹ کنکشن کے بھی کام کرتا رہتا ہے۔ آپ کی درج کردہ تاریخیں، بشمول آپ کی تاریخ پیدائش، کبھی اپ لوڈ، محفوظ یا شیئر نہیں کی جاتیں؛ وہ صرف آپ کی اسکرین پر موجود رہتی ہیں اور صفحہ دوبارہ لوڈ ہوتے ہی غائب ہو جاتی ہیں۔</p>
+<p>استعمال کرنے کے لیے، اپنی تاریخ پیدائش منتخب کریں، چاہیں تو دوسری تاریخ بھی مقرر کریں، اور اپنی صحیح عمر، زندگی کے کل دنوں اور اگلی سالگرہ تک باقی گنتی پڑھ لیں۔ کسی بھی وقت کوئی بھی تاریخ بدلیں اور ہر عدد فوراً اپ ڈیٹ ہو جائے گا، تاکہ آپ جتنی بار چاہیں کسی بھی دن کسی بھی عمر کو آزما کر دیکھ سکیں۔</p>
+    <section class="faq"><h2>Age calculator FAQ</h2><dl><dt>How is my exact age worked out?</dt><dd>The calculator counts the full years from your birth date to the reference date, then the remaining whole months, then the leftover days, adjusting for the differing lengths of each month so the result is exact.</dd><dt>Can I find my age on a past or future date?</dt><dd>Yes. Leave the second date blank to use today, or set it to any date to see how old you were, or will be, on that day.</dd><dt>Is my date of birth stored?</dt><dd>No. The calculation runs entirely in your browser, so the dates you enter are never uploaded, saved or shared.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/agecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/agecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/agecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/agecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/agecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/agecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/agecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/agecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/agecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/agecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/agecalc.js" defer></script>
+</body>
+</html>

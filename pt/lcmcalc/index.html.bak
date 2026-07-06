@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de MMC — Mínimo Múltiplo Comum de vários números</title>
+<meta name="description" content="Calculadora de MMC gratuita. Encontre o Mínimo Múltiplo Comum (MMC) de qualquer conjunto de números. Também mostra o MDC.">
+<link rel="canonical" href="https://mikaio.dev/pt/lcmcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/lcmcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/lcmcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/lcmcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/lcmcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/lcmcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/lcmcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/lcmcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/lcmcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de MMC — Mínimo Múltiplo Comum de vários números">
+<meta property="og:description" content="Calculadora de MMC gratuita. Encontre o Mínimo Múltiplo Comum (MMC) de qualquer conjunto de números. Também mostra o MDC.">
+<meta property="og:url" content="https://mikaio.dev/pt/lcmcalc/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de MMC — Mínimo Múltiplo Comum de vários números","url":"https://mikaio.dev/pt/lcmcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de MMC gratuita. Encontre o Mínimo Múltiplo Comum (MMC) de qualquer conjunto de números. Também mostra o MDC."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora de MMC","item":"https://mikaio.dev/pt/lcmcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é o Mínimo Múltiplo Comum?","acceptedAnswer":{"@type":"Answer","text":"O MMC de um conjunto de números é o menor inteiro positivo divisível por todos eles. Por exemplo, o MMC de 4 e 6 é 12, porque 12 é o menor número divisível por 4 e 6."}},{"@type":"Question","name":"Para que é usado?","acceptedAnswer":{"@type":"Answer","text":"O MMC é usado ao somar frações com denominadores diferentes — encontre o MMC dos denominadores para obter o denominador comum. Também aparece em problemas de agendamento onde eventos se repetem em intervalos diferentes."}},{"@type":"Question","name":"Qual a diferença entre MMC e MDC?","acceptedAnswer":{"@type":"Answer","text":"MDC (Máximo Divisor Comum) é o maior número que divide todos os números dados. MMC é o menor número divisível por todos eles. Eles estão relacionados: MMC(a,b) = a×b / MDC(a,b)."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora de MMC</span></nav>
+  <h1>Calculadora de MMC</h1>
+  <p class="lead">Informe dois ou mais números separados por vírgulas para encontrar o Mínimo Múltiplo Comum.</p>
+  <section class="widget" id="tool"><form id="lcm-form"><div class="field"><label for="lcm-nums">Números (separados por vírgula)</label><input type="text" id="lcm-nums" placeholder="ex: 12, 18, 24" inputmode="numeric"></div><div class="result"><span class="hint">LCM: </span><span class="big" id="lcm-out">—</span></div><div id="lcm-gcd-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Encontre o Mínimo Múltiplo Comum de quaisquer números</h2>
+<p>O Mínimo Múltiplo Comum (MMC) é o menor inteiro positivo que é igualmente divisível por todos os números em um determinado conjunto.</p>
+<h2>Definição e exemplos</h2>
+<ul>
+<li>MMC(4, 6) = 12 — porque 12 ÷ 4 = 3 e 12 ÷ 6 = 2, e nenhum número menor funciona para os dois.</li>
+<li>MMC(3, 5) = 15 — porque 3 e 5 são coprimos, seu MMC é simplesmente o produto deles.</li>
+<li>MMC(12, 18, 24) = 72 — o menor número divisível pelos três.</li>
+</ul>
+<h2>Como o MMC é calculado</h2>
+<p>O método mais eficiente usa a relação entre MMC e MDC: MMC(a, b) = |a × b| / MDC(a, b).</p>
+<h2>Somando frações com denominadores diferentes</h2>
+<p>A aplicação cotidiana mais comum do MMC é na aritmética de frações. Para somar 1/4 e 1/6, você precisa de um denominador comum. O MMC de 4 e 6 é 12, então: 1/4 = 3/12 e 1/6 = 2/12, dando 5/12.</p>
+<h2>Agendamento e ciclos</h2>
+<p>O MMC aparece em problemas de agendamento onde eventos se repetem em intervalos diferentes. Se o ônibus A passa a cada 12 minutos e o ônibus B a cada 18 minutos, e ambos partem às 8h00, quando partirão simultaneamente pela próxima vez? MMC(12, 18) = 36, então coincidem às 8h36.</p>
+<h2>Como usar a calculadora</h2>
+<p>Informe dois ou mais números separados por vírgula e o MMC aparece na hora, junto com o MDC usado para calculá-lo. Não há nada para enviar nem limite para quantos números você pode listar — a calculadora reduz o conjunto inteiro em pares por trás dos panos, então uma lista de cinco ou seis números é tratada com a mesma facilidade que um par. Mudar qualquer número atualiza o resultado imediatamente, o que facilita explorar como acrescentar mais um número a um conjunto muda o MMC.</p>
+<h2>Por que MMC e MDC são dois lados da mesma moeda</h2>
+<p>O Mínimo Múltiplo Comum e o Máximo Divisor Comum descrevem extremos opostos da mesma relação entre dois números, e a identidade elegante MMC(a, b) × MDC(a, b) = a × b os conecta diretamente. Intuitivamente, o MDC retira tudo o que dois números têm em comum, enquanto o MMC é o menor número grande o bastante para conter tudo que os dois números precisam. Como calcular um MDC pelo algoritmo de Euclides é rápido mesmo para números grandes, e a fórmula do MMC só precisa de uma multiplicação e uma divisão extras depois que o MDC é conhecido, essa rota indireta é muito mais rápida do que buscar múltiplos diretamente, especialmente conforme os números crescem.</p>
+<h2>Um exemplo resolvido passo a passo</h2>
+<p>Pegue o MMC(21, 6). Primeiro ache o MDC: 21 = 3×6 + 3, depois 6 = 2×3 + 0, então MDC(21, 6) = 3. Depois aplique a fórmula: MMC(21, 6) = (21 × 6) / 3 = 126 / 3 = 42. Você pode conferir isso diretamente — 42 ÷ 21 = 2 e 42 ÷ 6 = 7, ambos números inteiros, e nenhum número positivo menor divide igualmente por 21 e por 6. Esse processo de dois passos, MDC primeiro e depois uma única multiplicação e divisão, é exatamente o que a calculadora executa instantaneamente por trás dos resultados que você vê.</p>
+<h2>Situações do dia a dia além de frações e agendas</h2>
+<p>O MMC aparece discretamente em situações que as pessoas nem sempre rotulam como um problema de matemática. Escalar uma receita que precisa de quantidades inteiras de dois ingredientes vendidos em tamanhos de pacote diferentes, montar sacolinhas idênticas de itens que vêm em caixas com contagens diferentes, ou descobrir quantas rodadas de um jogo com duas durações diferentes voltam a coincidir no início — tudo isso são problemas de MMC disfarçados. Sempre que você precisar da menor quantidade, tempo ou contagem que satisfaça duas ou mais exigências que se repetem ao mesmo tempo, o MMC é o número que você está procurando.</p>
+<h2>Teoria musical</h2>
+<p>Na música, o MMC determina quando padrões rítmicos se repetem. Um padrão de 3 tempos tocado contra um padrão de 4 tempos cria um ciclo de MMC(3, 4) = 12 tempos antes que as batidas fortes coincidam de novo. Essa é a base da música polirrítmica, em que diferentes instrumentos ou vozes tocam ciclos de duração distinta que só voltam a se alinhar exatamente depois de um número de tempos igual ao MMC dos dois ciclos.</p>
+<h2>Abastecendo-se sem desperdício</h2>
+<p>O MMC também resolve um problema de compras bem concreto: se salsichas vêm em pacotes de 10 e os pães vêm em pacotes de 8, quantos pacotes de cada você precisa comprar para acabar com exatamente o mesmo número de salsichas e pães, sem sobrar nenhum? A resposta é o menor número que tanto 10 quanto 8 dividem igualmente, que é MMC(10, 8) = 40 — então você compraria 4 pacotes de salsichas e 5 pacotes de pães. Esse cenário exato, e incontáveis variações dele envolvendo quaisquer dois pacotes de tamanhos diferentes, aparece sempre que você está tentando casar duas coisas vendidas em quantidades diferentes.</p>
+<h2>Privado e instantâneo</h2>
+<p>Todos os cálculos rodam inteiramente no seu navegador usando o algoritmo de Euclides, então nada do que você informa é enviado, registrado ou compartilhado. O resultado aparece no instante em que você digita, funciona offline depois que a página carrega, e todo número desaparece assim que você fecha ou recarrega a aba.</p>
+    <section class="faq"><h2>Perguntas frequentes da calculadora de MMC</h2><dl><dt>O que é o Mínimo Múltiplo Comum?</dt><dd>O MMC de um conjunto de números é o menor inteiro positivo divisível por todos eles. Por exemplo, o MMC de 4 e 6 é 12, porque 12 é o menor número divisível por 4 e 6.</dd><dt>Para que é usado?</dt><dd>O MMC é usado ao somar frações com denominadores diferentes — encontre o MMC dos denominadores para obter o denominador comum. Também aparece em problemas de agendamento onde eventos se repetem em intervalos diferentes.</dd><dt>Qual a diferença entre MMC e MDC?</dt><dd>MDC (Máximo Divisor Comum) é o maior número que divide todos os números dados. MMC é o menor número divisível por todos eles. Eles estão relacionados: MMC(a,b) = a×b / MDC(a,b).</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/lcmcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/lcmcalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/lcmcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/lcmcalc/">Français</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/lcmcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/lcmcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/lcmcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/lcmcalc.js" defer></script>
+</body>
+</html>

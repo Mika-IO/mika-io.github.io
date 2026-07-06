@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stopwatch Online — free browser stopwatch with lap times</title>
+<meta name="description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/en/stopwatch/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/stopwatch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/stopwatch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/stopwatch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stopwatch Online — free browser stopwatch with lap times">
+<meta property="og:description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/en/stopwatch/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch Online — free browser stopwatch with lap times","url":"https://mikaio.dev/en/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Stopwatch","item":"https://mikaio.dev/en/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate is the browser stopwatch?","acceptedAnswer":{"@type":"Answer","text":"The stopwatch uses the browser's high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device."}},{"@type":"Question","name":"Will it stop if I switch tabs?","acceptedAnswer":{"@type":"Answer","text":"Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results."}},{"@type":"Question","name":"Can I use this on a mobile phone?","acceptedAnswer":{"@type":"Answer","text":"Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/stopwatch/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/stopwatch/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/stopwatch/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/stopwatch/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/stopwatch/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/stopwatch/">
+  <!-- SEO injected -->
+<meta property="og:title" content="A precise stopwatch, right in your browser" />
+<meta property="og:description" content="A precise stopwatch, right in your browser" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/stopwatch/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A precise stopwatch, right in your browser","description":"A precise stopwatch, right in your browser","url":"https://example.com/en/stopwatch/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Stopwatch</span></nav>
+  <h1>Stopwatch</h1>
+  <p class="lead">Press Start to begin timing. Press Lap to record split times without stopping. Press Reset to clear everything.</p>
+  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">Start</button><button id="sw-lap" class="btn secondary" disabled>Lap</button><button id="sw-reset" class="btn secondary" disabled>Reset</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
+  <article class="content">
+    <h2>A precise stopwatch, right in your browser</h2>
+<p>Timing something accurately used to mean carrying a dedicated stopwatch. Now any device with a browser can serve that purpose. This online stopwatch runs entirely in your browser using a high-resolution timer, records lap times, and displays elapsed time in minutes, seconds, and milliseconds. There is nothing to download or install.</p>
+<h2>How to use it</h2>
+<p>Press the Start button to begin timing. The display counts up in real time showing minutes, seconds, and thousandths of a second. While the stopwatch is running, press Lap to record the current elapsed time as a split. The lap list accumulates below the display, numbering each split so you can compare them. Press Stop to pause the stopwatch without losing the elapsed time or lap records. Press Start again to continue from where you paused. Press Reset to clear everything and return to zero.</p>
+<h2>Precision and browser timers</h2>
+<p>Modern browsers expose a high-resolution timer through the Performance API, which measures time in fractions of a millisecond. This is far more precise than the one-millisecond resolution of the older Date.now() method. In practice, the timer is accurate to well under a millisecond on most devices, which is more than adequate for sports timing, cooking, presentations, or any everyday use. For legally certified timing in competitions, always use an approved timing device.</p>
+<p>One limitation worth knowing: if you switch to a different browser tab, browsers may throttle JavaScript in the background to save resources. This could cause the stopwatch to fall slightly behind real elapsed time. Keep the stopwatch tab in focus for best accuracy.</p>
+<h2>Common uses</h2>
+<p>Athletes use a stopwatch to time runs, swim laps, cycling intervals, or any repetitive exercise where comparing splits matters. Lap recording helps you see whether you are maintaining pace, improving, or fading. Coaches time multiple athletes sequentially and compare results.</p>
+<p>In the kitchen a stopwatch is more flexible than a countdown timer when you are juggling multiple dishes that each need a different amount of time. You start timing each dish when it goes in and note the lap time to know how long each has been cooking.</p>
+<p>Presentations and speeches benefit from a running timer. Knowing you are at exactly four minutes thirty seconds helps you judge whether to expand or condense a section to hit your target length.</p>
+<p>Scientists and students timing experiments appreciate the lap function, which records a data point without having to restart the timer for the next trial.</p>
+<h2>Touch and keyboard friendly</h2>
+<p>The Start, Lap, and Reset buttons work with mouse clicks and finger taps. The layout scales cleanly on phones and tablets.</p>
+<h2>Why a browser stopwatch is genuinely precise</h2>
+<p>It is worth understanding why a free tool running in a web page can be trusted for anything beyond casual timing. Modern browsers expose a high-resolution timer through the Performance API, distinct from the older, coarser Date.now() method, capable of measuring time in fractions of a millisecond rather than whole milliseconds. In practice this means the timer drifts by well under a millisecond over the course of an ordinary timing session, which is more than sufficient for sport, cooking, presentations and lab work — the one caveat being that browsers deliberately slow down JavaScript running in a background tab to save battery and CPU, so keeping the stopwatch tab active and in focus is the one habit that preserves its accuracy.</p>
+<h2>Lap times vs split times</h2>
+<p>Timing enthusiasts sometimes distinguish between a &quot;lap time&quot; (the duration of just that segment, independent of the others) and a &quot;split time&quot; (the cumulative elapsed time at that checkpoint since the start). This tool records splits — each recorded time is the total elapsed time at the moment you pressed Lap — which is the more common convention in casual timing and matches what most people expect when they glance at a running stopwatch. If you need individual lap durations rather than cumulative splits, subtract each recorded time from the one before it.</p>
+<h2>Stopwatch vs a phone&#39;s built-in timer</h2>
+<p>Every modern smartphone ships with a stopwatch app, so it is fair to ask why a browser-based one is worth using instead. The honest answer is convenience rather than superior accuracy: on a shared computer, during a video call, or embedded in a workflow that already lives in a browser tab, reaching for a web page is faster than unlocking a phone and finding the right app, and the underlying timing precision from the Performance API is comparable to what a native app achieves for any everyday, non-competition use.</p>
+<h2>Timing multiple activities</h2>
+<p>Some situations call for tracking more than one thing at once — several dishes cooking with different start times, or several relay legs in a race. Since this stopwatch keeps a single running total plus a lap list, the practical approach for multiple simultaneous activities is to open the tool in separate browser tabs, one per activity, each starting independently at the moment its own activity begins.</p>
+<h2>Resetting mid-session</h2>
+<p>If you accidentally press Reset before saving the lap times you needed, there is no undo — the count returns to zero immediately. For any session where the lap history genuinely matters, it is worth noting down key splits as they happen rather than relying solely on the on-screen list surviving until the very end.</p>
+<h2>Private and always available</h2>
+<p>No data is sent anywhere, the stopwatch runs entirely in your browser, works offline once the page has loaded, and requires no account — reload the page at any time to reset everything back to zero.</p>
+    <section class="faq"><h2>Stopwatch FAQ</h2><dl><dt>How accurate is the browser stopwatch?</dt><dd>The stopwatch uses the browser&#39;s high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device.</dd><dt>Will it stop if I switch tabs?</dt><dd>Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results.</dd><dt>Can I use this on a mobile phone?</dt><dd>Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/stopwatch/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/stopwatch.js" defer></script>
+</body>
+</html>

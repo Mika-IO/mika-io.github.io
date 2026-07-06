@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Area Calculator — calculate area of any shape</title>
+<meta name="description" content="Free area calculator. Calculate the area of rectangles, circles, triangles, squares, and trapezoids. Enter dimensions and get the area instantly in your browser.">
+<link rel="canonical" href="https://mikaio.dev/es/areacalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/areacalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/areacalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/areacalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/areacalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/areacalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/areacalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/areacalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/areacalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/areacalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/areacalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/areacalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Area Calculator — calculate area of any shape">
+<meta property="og:description" content="Free area calculator. Calculate the area of rectangles, circles, triangles, squares, and trapezoids. Enter dimensions and get the area instantly in your browser.">
+<meta property="og:url" content="https://mikaio.dev/es/areacalc/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Area Calculator — calculate area of any shape","url":"https://mikaio.dev/es/areacalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Free area calculator. Calculate the area of rectangles, circles, triangles, squares, and trapezoids. Enter dimensions and get the area instantly in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Area Calculator","item":"https://mikaio.dev/es/areacalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What units are used?","acceptedAnswer":{"@type":"Answer","text":"The area is in square units of whatever unit you enter. If you enter dimensions in metres, the area is in square metres (m²). In feet, it is in square feet (ft²)."}},{"@type":"Question","name":"How is the circle area calculated?","acceptedAnswer":{"@type":"Answer","text":"Area = π × r². Enter the radius (half the diameter) to get the area."}},{"@type":"Question","name":"How is the triangle area calculated?","acceptedAnswer":{"@type":"Answer","text":"Area = ½ × base × height, where height is the perpendicular height from the base to the opposite vertex."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/es/areacalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/areacalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/areacalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/areacalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/areacalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/areacalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/areacalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/areacalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/areacalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/areacalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/areacalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Calcula el área de cualquier figura común" />
+<meta property="og:description" content="Calcula el área de cualquier figura común" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/es/areacalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Calcula el área de cualquier figura común","description":"Calcula el área de cualquier figura común","url":"https://example.com/es/areacalc/","inLanguage":"es"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Area Calculator</span></nav>
+  <h1>Area Calculator</h1>
+  <p class="lead">Select a shape, enter the dimensions, and see the area calculated instantly.</p>
+  <section class="widget" id="tool"><div id="area-app"><div class="field"><label for="area-shape">Shape</label><select id="area-shape"><option value="rect">Rectangle</option><option value="circle">Circle</option><option value="triangle">Triangle</option><option value="square">Square</option><option value="trapezoid">Trapezoid</option></select></div><div id="area-inputs" class="row" style="margin-top:1rem"></div><div class="result"><span class="hint">Area: </span><span class="big" id="area-out">—</span></div></div></section>
+  <article class="content">
+    <h2>Calcula el área de cualquier figura común</h2>
+<p>El área es una de las medidas más básicas en matemáticas, ingeniería, construcción y vida cotidiana. Ya sea para calcular cuánta pintura cubre una pared, cuánto suelo necesitas para una habitación, cuánta tela hay en un patrón de costura o para resolver un problema de geometría, calcular el área resulta imprescindible. Esta calculadora resuelve al instante cinco figuras habituales: rectángulo, círculo, triángulo, cuadrado y trapecio.</p>
+<h2>Rectángulo</h2>
+<p>El área de un rectángulo es el largo multiplicado por el ancho: A = l × a. Una habitación de 5 metros de ancho por 4 metros de largo tiene un área de 20 metros cuadrados. El área del rectángulo es la base de la mayoría de los cálculos de construcción y diseño de interiores.</p>
+<h2>Círculo</h2>
+<p>El área de un círculo es pi multiplicado por el radio al cuadrado: A = π × r². El radio equivale a la mitad del diámetro. Un jardín circular con un diámetro de 6 metros tiene un radio de 3 metros y un área de π × 9 ≈ 28,27 metros cuadrados. En un círculo, el área crece de forma cuadrática con el radio: si duplicas el radio, el área se multiplica por cuatro.</p>
+<h2>Triángulo</h2>
+<p>El área de un triángulo es la mitad de la base multiplicada por la altura perpendicular: A = ½ × b × h. La altura debe ser la distancia perpendicular desde la base hasta el vértice opuesto, no la longitud de un lado inclinado. Un triángulo rectángulo con catetos de 3 y 4 tiene un área de ½ × 3 × 4 = 6 unidades cuadradas.</p>
+<h2>Cuadrado</h2>
+<p>El área de un cuadrado es el lado al cuadrado: A = l². Es un caso particular de la fórmula del rectángulo. Un cuadrado de 10 centímetros de lado tiene un área de 100 cm² = 0,01 m².</p>
+<h2>Trapecio</h2>
+<p>Un trapecio tiene dos lados paralelos llamados bases. Su área es la mitad de la suma de esos lados paralelos multiplicada por la altura perpendicular entre ellos: A = ½ × (a + b) × h.</p>
+<h2>Unidades</h2>
+<p>El área siempre se expresa en unidades cuadradas: si las dimensiones están en metros, el área queda en m²; si están en pies, en ft². Para convertir: 1 m² = 10,764 ft². 1 ft² = 0,0929 m².</p>
+<h2>Aplicaciones prácticas</h2>
+<p><strong>Suelos y pavimentos</strong>: mide el largo y el ancho de una habitación para obtener el área. Añade entre un 10% y un 15% de margen para el desperdicio de los cortes.</p>
+<p><strong>Rendimiento de la pintura</strong>: un litro de pintura cubre aproximadamente entre 10 y 12 m². Divide el área total de la pared entre el rendimiento para saber cuántos litros necesitas.</p>
+<p><strong>Terrenos y bienes raíces</strong>: los terrenos se miden en metros cuadrados (en la mayoría de los países) o en pies cuadrados (en Estados Unidos). 1 hectárea = 10.000 m². 1 acre = 43.560 ft² ≈ 4.047 m².</p>
+<p><strong>Tela y costura</strong>: las piezas de un patrón se miden por área para calcular la cantidad de tela necesaria.</p>
+<p><strong>Agricultura</strong>: el tamaño de las parcelas, el rendimiento de la cosecha por área y la planificación del riego dependen todos de cálculos de área.</p>
+<h2>Cómo convertir entre unidades de área</h2>
+<p>Una misma superficie física puede expresarse en muchas unidades distintas: 1 metro cuadrado equivale a 10.000 centímetros cuadrados o 1.000.000 de milímetros cuadrados; 1 pie cuadrado equivale a 144 pulgadas cuadradas; 1 yarda cuadrada equivale a 9 pies cuadrados; 1 acre equivale a 43.560 pies cuadrados, o unos 4.046,86 m²; 1 hectárea equivale a 10.000 m², o unos 2,471 acres; 1 kilómetro cuadrado equivale a 100 hectáreas; y 1 milla cuadrada equivale a 640 acres, o unos 2,590 km². Tener presentes algunas de estas equivalencias facilita mucho comprobar de un vistazo si un resultado expresado en una unidad poco habitual tiene sentido.</p>
+<h2>Área de figuras compuestas</h2>
+<p>Las habitaciones y espacios reales rara vez son rectángulos perfectos. Para calcular el área de un espacio irregular, divídelo en figuras simples como rectángulos y triángulos, calcula cada área por separado con esta calculadora, y suma los resultados — restando cualquier hueco o vacío, como columnas, pilares u otras zonas sin suelo, a medida que avanzas. Este enfoque de dividir y sumar resuelve prácticamente cualquier plano real, aunque la calculadora en sí solo trabaje con una figura limpia a la vez.</p>
+<h2>Errores comunes al calcular áreas</h2>
+<p>El error más frecuente es mezclar unidades a mitad de cálculo — medir una pared en metros y otra en pies, y luego sumar ambas áreas como si fueran la misma unidad. Un segundo error habitual es usar la longitud del lado inclinado de un triángulo en lugar de su altura perpendicular, lo que siempre sobreestima el área real, ya que el lado inclinado es más largo que la distancia perpendicular salvo que el triángulo sea rectángulo con ese lado como altura. Un tercer error es olvidar que duplicar todas las dimensiones de una figura cuadruplica su área en lugar de duplicarla, puesto que el área escala con el cuadrado de las dimensiones lineales — un despiste que lleva a subestimar seriamente cuánta más pintura o cuánto más suelo necesita en realidad una habitación &quot;el doble de grande&quot;.</p>
+<h2>Cómo estimar un área sin cinta métrica</h2>
+<p>Cuando no tienes una medida exacta a mano, unas cuantas referencias aproximadas ayudan a comprobar un cálculo a ojo: una puerta estándar mide unos 2 metros cuadrados, una plaza de aparcamiento ronda entre 12 y 15 metros cuadrados, y una hoja de papel A4 tiene aproximadamente 0,06 metros cuadrados. Comparar un espacio desconocido con alguna de estas referencias familiares suele bastar para detectar un error de medida o de unidad antes de que provoque un problema real, como encargar mucho menos o mucho más material del necesario.</p>
+<h2>Cómo elegir la figura correcta</h2>
+<p>Si un espacio no coincide exactamente con ninguna de las cinco figuras, elige la aproximación más cercana y acepta el pequeño margen de error, o bien divide el espacio en dos o más de estas figuras básicas y suma los resultados — la técnica de figuras compuestas que hemos visto antes. Cualquiera de los dos caminos es mejor que limitarse a adivinar un número directamente.</p>
+<h2>Precisión de la medida original</h2>
+<p>Conviene recordar que el resultado de esta calculadora es tan preciso como las medidas que introduzcas — si el ancho de una habitación se midió con un margen de error de 5 centímetros, el área calculada arrastra ese mismo error, amplificado por el hecho de que el área implica multiplicar dos medidas, cada una con su propio margen. Para proyectos donde la precisión importa de verdad, como comprar el material justo para cubrir toda una superficie, mide dos veces y quédate con la medida más consistente.</p>
+<h2>Cómo comprobar el resultado de cabeza</h2>
+<p>Antes de fiarte de un resultado importante, conviene hacer una cuenta mental aproximada como comprobación: redondea las dimensiones a números fáciles, multiplica, y compara ese resultado con lo que muestra la calculadora. Si ambas cifras están en el mismo orden de magnitud, es poco probable que haya un error de escritura en los datos que introdujiste.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todos los cálculos se ejecutan enteramente en tu navegador, así que el resultado se actualiza al instante mientras ajustas cualquier dimensión, y ninguna de las medidas que introduces se envía nunca a un servidor, se registra ni se comparte con nadie.</p>
+    <section class="faq"><h2>Area calculator FAQ</h2><dl><dt>What units are used?</dt><dd>The area is in square units of whatever unit you enter. If you enter dimensions in metres, the area is in square metres (m²). In feet, it is in square feet (ft²).</dd><dt>How is the circle area calculated?</dt><dd>Area = π × r². Enter the radius (half the diameter) to get the area.</dd><dt>How is the triangle area calculated?</dt><dd>Area = ½ × base × height, where height is the perpendicular height from the base to the opposite vertex.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/areacalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/areacalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/areacalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/areacalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/areacalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/areacalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/areacalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/areacalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/areacalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/areacalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/areacalc.js" defer></script>
+</body>
+</html>

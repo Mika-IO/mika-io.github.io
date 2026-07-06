@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de MDC — Máximo Divisor Comum de vários números</title>
+<meta name="description" content="Calculadora de MDC gratuita. Encontre o Máximo Divisor Comum (MDC) de qualquer conjunto de números. Também mostra o MMC.">
+<link rel="canonical" href="https://mikaio.dev/pt/gcdcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gcdcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gcdcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gcdcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gcdcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gcdcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gcdcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gcdcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de MDC — Máximo Divisor Comum de vários números">
+<meta property="og:description" content="Calculadora de MDC gratuita. Encontre o Máximo Divisor Comum (MDC) de qualquer conjunto de números. Também mostra o MMC.">
+<meta property="og:url" content="https://mikaio.dev/pt/gcdcalc/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de MDC — Máximo Divisor Comum de vários números","url":"https://mikaio.dev/pt/gcdcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de MDC gratuita. Encontre o Máximo Divisor Comum (MDC) de qualquer conjunto de números. Também mostra o MMC."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora de MDC","item":"https://mikaio.dev/pt/gcdcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é o MDC?","acceptedAnswer":{"@type":"Answer","text":"O Máximo Divisor Comum (MDC) é o maior inteiro positivo que divide todos os números dados sem resto. MDC(12, 18) = 6."}},{"@type":"Question","name":"Para que é usado o MDC?","acceptedAnswer":{"@type":"Answer","text":"O MDC é usado para simplificar frações — divida o numerador e o denominador pelo MDC. Também é usado em criptografia, algoritmos de ciência da computação e na engenharia."}},{"@type":"Question","name":"E se os números não compartilharem nenhum fator comum?","acceptedAnswer":{"@type":"Answer","text":"Se dois números não compartilham nenhum fator comum além de 1, seu MDC é 1 e são chamados de coprimos ou primos entre si."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/gcdcalc/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/gcdcalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/gcdcalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/gcdcalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/gcdcalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/gcdcalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/gcdcalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Encontre o Máximo Divisor Comum de quaisquer números" />
+<meta property="og:description" content="Encontre o Máximo Divisor Comum de quaisquer números" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/gcdcalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Encontre o Máximo Divisor Comum de quaisquer números","description":"Encontre o Máximo Divisor Comum de quaisquer números","url":"https://example.com/pt/gcdcalc/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora de MDC</span></nav>
+  <h1>Calculadora de MDC</h1>
+  <p class="lead">Informe dois ou mais números separados por vírgulas para encontrar o Máximo Divisor Comum.</p>
+  <section class="widget" id="tool"><form id="gcd-form"><div class="field"><label for="gcd-nums">Números (separados por vírgula)</label><input type="text" id="gcd-nums" placeholder="ex: 48, 36, 24" inputmode="numeric"></div><div class="result"><span class="hint">GCD: </span><span class="big" id="gcd-out">—</span></div><div id="gcd-lcm-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Encontre o Máximo Divisor Comum de quaisquer números</h2>
+<p>O Máximo Divisor Comum (MDC) é o maior número que divide todos os números dados sem deixar resto.</p>
+<h2>Definição e exemplos</h2>
+<ul>
+<li>MDC(12, 18) = 6 — porque 6 é o maior número que divide tanto 12 quanto 18.</li>
+<li>MDC(48, 36, 24) = 12 — o maior número que divide os três.</li>
+<li>MDC(7, 13) = 1 — esses são coprimos (nenhum fator comum além de 1).</li>
+</ul>
+<h2>O algoritmo de Euclides</h2>
+<p>O método mais famoso para computar o MDC é o algoritmo de Euclides, descrito por Euclides por volta de 300 aC em seus Elementos. O algoritmo afirma que MDC(a, b) = MDC(b, a mod b), e repete até b = 0.</p>
+<h2>Dividindo coisas em grupos iguais</h2>
+<p>Um uso bem prático do MDC é dividir coleções de tamanhos diferentes no maior número possível de grupos idênticos sem sobrar nada. Se você tem 48 maçãs e 36 laranjas e quer montar cestas de frutas idênticas usando toda a fruta sem sobras, o maior número de cestas que você pode montar é MDC(48, 36) = 12, cada uma com 4 maçãs e 3 laranjas. Essa mesma lógica se aplica a cortar comprimentos de tecido ou madeira em pedaços iguais, organizar cadeiras em fileiras iguais em salas de tamanhos diferentes, ou dividir um orçamento entre departamentos nas maiores parcelas iguais possíveis.</p>
+<h2>Simplificando frações</h2>
+<p>O uso cotidiano mais comum do MDC é simplificar frações para termos mínimos. Para simplificar 48/72, compute MDC(48, 72) = 24, então divida os dois por 24: 2/3.</p>
+<h2>Como usar a calculadora</h2>
+<p>Digite os seus números na caixa separados por vírgula — dois números, ou quantos quiser. Aperte calcular e o MDC do conjunto inteiro aparece imediatamente, junto com a redução passo a passo pelo algoritmo de Euclides, para você ver exatamente como a resposta foi alcançada em vez de tratá-la como uma caixa-preta. Informar um único número, ou números que não compartilham nenhum fator além de 1, é tratado com naturalidade: a ferramenta simplesmente reporta um MDC de 1 nesse segundo caso, confirmando que os números são coprimos.</p>
+<h2>Por que o algoritmo de Euclides é tão eficiente</h2>
+<p>Antes do método de Euclides, achar um MDC significava listar todos os fatores de cada número e escolher o maior que tinham em comum — funcional para números pequenos, mas desesperadamente lento para números grandes. O algoritmo de Euclides, em vez disso, substitui repetidamente o número maior pelo resto da divisão dele pelo menor, encolhendo o problema rapidamente. Para dois números de qualquer tamanho realista, ele tipicamente termina em bem menos de cinquenta passos, e é por isso que continua sendo o método padrão ensinado hoje e o que está embutido em praticamente toda calculadora, função de planilha e biblioteca de linguagem de programação que computa um MDC.</p>
+<h2>Estendendo para mais de dois números</h2>
+<p>Quando você informa três ou mais números, a calculadora não precisa de um algoritmo novo — ela simplesmente aplica o caso de dois números repetidamente. O MDC de uma lista inteira é igual ao MDC dos dois primeiros números combinado com o terceiro, e assim por diante: MDC(a, b, c) = MDC(MDC(a, b), c). Isso funciona porque qualquer número que divida a, b e c precisa dividir primeiro o MDC de qualquer par deles, então reduzir a lista dois de cada vez nunca perde informação. É uma boa ilustração de como um bloco simples de construção — o MDC de dois números — se estende de forma limpa para lidar com uma lista de tamanho qualquer.</p>
+<h2>Números coprimos e o que um MDC de 1 revela</h2>
+<p>Quando a calculadora reporta um MDC de 1, os números que você informou são chamados de coprimos, ou primos entre si, o que significa que não compartilham nenhum fator maior que 1, mesmo que cada um individualmente tenha muitos fatores. Por exemplo, 8 e 15 são coprimos mesmo que 8 = 2×2×2 e 15 = 3×5 — eles simplesmente não compartilham nenhum dos mesmos blocos primos de construção. A coprimalidade aparece constantemente em teoria dos números e criptografia, porque muitos algoritmos dependem de escolher números garantidamente livres de estrutura comum oculta.</p>
+<h2>Engenharia</h2>
+<p>Na engenharia mecânica, o MDC das quantidades de dentes em duas engrenagens determina com que frequência o mesmo par de dentes se encontra. Se a engrenagem A tem 48 dentes e a engrenagem B tem 36 dentes, MDC(48, 36) = 12, significando que a cada 12 dentes na engrenagem A se encaixam com cada 12 dentes na engrenagem B. Esse cálculo importa para prever o desgaste — os mesmos dois dentes se tocando repetidamente concentra o desgaste nesses pontos específicos, então os engenheiros às vezes escolhem contagens de dentes coprimas de propósito para distribuir o desgaste de forma mais uniforme.</p>
+<h2>Um exemplo passo a passo</h2>
+<p>Veja o algoritmo de Euclides em ação para MDC(48, 18). Primeiro, 48 = 2×18 + 12, então o problema vira MDC(18, 12). Depois, 18 = 1×12 + 6, então vira MDC(12, 6). Por fim, 12 = 2×6 + 0, então o resto chega a zero e o último resto não nulo, 6, é o MDC. Cada passo do algoritmo reduz os números envolvidos rapidamente, o que é exatamente por que ele termina em poucos passos mesmo para números muito grandes, ao contrário de listar todos os fatores, que fica lento rapidamente conforme os números crescem.</p>
+<h2>Privado e instantâneo</h2>
+<p>Todos os cálculos rodam inteiramente no seu navegador usando o algoritmo de Euclides, então o resultado aparece no instante em que você digita e nenhum número que você informa é enviado a um servidor, registrado ou compartilhado. Funciona offline depois que a página carrega, e todo cálculo é descartado assim que você fecha ou recarrega a aba.</p>
+    <section class="faq"><h2>Perguntas frequentes da calculadora de MDC</h2><dl><dt>O que é o MDC?</dt><dd>O Máximo Divisor Comum (MDC) é o maior inteiro positivo que divide todos os números dados sem resto. MDC(12, 18) = 6.</dd><dt>Para que é usado o MDC?</dt><dd>O MDC é usado para simplificar frações — divida o numerador e o denominador pelo MDC. Também é usado em criptografia, algoritmos de ciência da computação e na engenharia.</dd><dt>E se os números não compartilharem nenhum fator comum?</dt><dd>Se dois números não compartilham nenhum fator comum além de 1, seu MDC é 1 e são chamados de coprimos ou primos entre si.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/gcdcalc.js" defer></script>
+</body>
+</html>

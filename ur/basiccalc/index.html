@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Calculator — basic arithmetic calculator</title>
+<meta name="description" content="Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ur/basiccalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/basiccalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/basiccalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/basiccalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/basiccalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/basiccalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/basiccalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/basiccalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/basiccalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/basiccalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/basiccalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/basiccalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online Calculator — basic arithmetic calculator">
+<meta property="og:description" content="Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ur/basiccalc/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Online Calculator — basic arithmetic calculator","url":"https://mikaio.dev/ur/basiccalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Online Basic Calculator","item":"https://mikaio.dev/ur/basiccalc/"}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/ur/basiccalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/basiccalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/basiccalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/basiccalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/basiccalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/basiccalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/basiccalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/basiccalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/basiccalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/basiccalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/basiccalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="صاف ستھرا، تیز رفتار بنیادی کیلکولیٹر" />
+<meta property="og:description" content="صاف ستھرا، تیز رفتار بنیادی کیلکولیٹر" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/ur/basiccalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"صاف ستھرا، تیز رفتار بنیادی کیلکولیٹر","description":"صاف ستھرا، تیز رفتار بنیادی کیلکولیٹر","url":"https://example.com/ur/basiccalc/","inLanguage":"ur"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Online Basic Calculator</span></nav>
+  <h1>Online Basic Calculator</h1>
+  <p class="lead">Use the buttons or your keyboard to perform calculations.</p>
+  <section class="widget" id="tool"><div id="bc-app"><div id="bc-display" style="text-align:right;font-size:1.8rem;padding:0.75rem 1rem;border-radius:0.5rem;background:rgba(255,255,255,0.06);min-height:2.5rem;word-break:break-all;min-width:0">0</div><div id="bc-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.35rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>صاف ستھرا، تیز رفتار بنیادی کیلکولیٹر</h2>
+<p>بنیادی حسابی کیلکولیٹر چار بنیادی عملیات — جمع، تفریق، ضرب اور تقسیم — کے ساتھ ساتھ فیصد اور گروپ بندی کے لیے قوسین کا بھی خیال رکھتا ہے۔ یہ کیلکولیٹر آپ کے براؤزر میں براہِ راست کام کرتا ہے، نہ کوئی انسٹالیشن، نہ اشتہارات، اور نہ ہی کوئی نگرانی۔</p>
+<h2>کی بورڈ شارٹ کٹس</h2>
+<p>کیلکولیٹر کلک کے ساتھ ساتھ کی بورڈ پر بھی جواب دیتا ہے۔</p>
+<ul>
+<li>ہندسے: 0 تا 9 اور اعشاریہ نقطہ</li>
+<li>جمع: +</li>
+<li>تفریق: -</li>
+<li>ضرب: * (جو × کی صورت دکھتا ہے)</li>
+<li>تقسیم: / (جو ÷ کی صورت دکھتا ہے)</li>
+<li>برابر: Enter یا =</li>
+<li>صاف کرنا: Escape</li>
+<li>آخری حرف مٹانا: Backspace</li>
+</ul>
+<h2>عملیات کی ترتیب</h2>
+<p>کیلکولیٹر اظہاریوں (expressions) کو معیاری ریاضیاتی ترتیب میں حل کرتا ہے: پہلے قوسین، پھر توانائیاں (بنیادی موڈ میں یہ سہولت شامل نہیں)، پھر ضرب اور تقسیم بائیں سے دائیں، پھر جمع اور تفریق بائیں سے دائیں (اسی اصول کو PEMDAS یا BODMAS کہا جاتا ہے)۔</p>
+<p>قوسین کے بغیر: 2 + 3 × 4 = 14 (نہ کہ 20)، کیونکہ ضرب جمع سے پہلے ہوتی ہے۔</p>
+<p>قوسین کے ساتھ: (2 + 3) × 4 = 20، کیونکہ قوسین کے اندر کی جمع پہلے ہوتی ہے۔</p>
+<h2>اعشاریہ کی ریاضی</h2>
+<p>کمپیوٹر ہندسوں کو بائنری فلوٹنگ پوائنٹ فارمیٹ میں محفوظ کرتے ہیں (IEEE 754 ڈبل پریسیژن)۔ زیادہ تر اعشاریہ کسر بائنری میں عین درست انداز میں ظاہر نہیں ہو سکتی، جس سے کبھی کبھار معمولی گول کاری کی غلطیاں پیدا ہوتی ہیں۔ اس کی کلاسیکی مثال 0.1 + 0.2 = 0.30000000000000004 ہے، جو خام IEEE 754 ریاضی میں سامنے آتی ہے۔ یہ کیلکولیٹر نتائج کو 10 اہم اعشاریہ ہندسوں تک گول کر کے زیادہ تر اس شور کو چھپا دیتا ہے۔</p>
+<h2>فیصد کی عملیات</h2>
+<p>% والی کلید موجودہ قدر کو 100 سے تقسیم کر دیتی ہے۔ یہ فوری فیصد کے حساب کے لیے کارآمد ہے: 200 کا 15 فیصد جاننے کے لیے، 200 × 15% = 30 درج کریں۔</p>
+<h2>حسابی مشینوں کی تاریخ</h2>
+<p>مکینیکل کیلکولیٹر 1623ء میں ولہیلم شکارڈ نے ایجاد کیا، جسے بعد میں بلیز پاسکل (پاسکالین، 1642ء) اور گوٹفرائیڈ لائبنز نے مزید بہتر بنایا۔ الیکٹرانک کیلکولیٹرز 1970ء کی دہائی میں سستے صارفی مصنوعات بن گئے۔ جیب میں سمانے والا سائنسی کیلکولیٹر HP اور ٹیکساس انسٹرومنٹس کی پیشرو کاوش تھی۔ آج ہر آلے میں کیلکولیٹر پہلے سے موجود ہوتا ہے، مگر ایک صاف ستھرا، مقصد کے مطابق بنایا گیا ویب کیلکولیٹر جس میں کی بورڈ کی سہولت بھی ہو، اب بھی حقیقی معنوں میں کارآمد ہے۔</p>
+<p>بلیز پاسکل نے 1642ء میں پاسکالین بنائی، اور گوٹفرائیڈ ولہیلم لائبنز نے تقریباً 1672ء میں اسٹیپڈ ریکنر ڈیزائن کیا۔ یہ ابتدائی مشینیں جمع، تفریق، ضرب اور تقسیم کر سکتی تھیں مگر ان کے لیے کافی مکینیکل محنت درکار تھی، اور سترہویں صدی سے لے کر 1970ء کی دہائی تک سلائیڈ رول ہی روزمرہ کے حسابی کام کا اینالاگ سہارا رہا۔ الیکٹرانک کیلکولیٹرز 1960ء اور 1970ء کی ابتدائی دہائیوں میں سامنے آئے، اور پہلا حقیقی جیبی کیلکولیٹر، بوسیکوم LE-120A، 1971ء میں متعارف ہوا۔ ٹیکساس انسٹرومنٹس اور ہیولٹ پیکارڈ نے اس کے فوراً بعد سائنسی کیلکولیٹر کی پیشوائی کی، اور 1970ء کی دہائی کے وسط تک کیلکولیٹرز مہنگے کاروباری آلات کے بجائے سستی صارفی اشیاء بن چکے تھے۔</p>
+<h2>عام حسابی غلطیاں</h2>
+<p>روزمرہ کی زیادہ تر حسابی غلطیوں کی وضاحت چند عادات سے ہو جاتی ہے۔ عملیات کی ترتیب بھول جانا سب سے عام ہے: بغیر قوسین کے <code>2 + 3 × 4</code> کا نتیجہ 14 ہے، نہ کہ 20، کیونکہ ضرب کا تعلق جمع سے زیادہ مضبوط ہوتا ہے — اگر آپ واقعی 20 چاہتے ہیں تو <code>(2 + 3) × 4</code> لکھنا ہو گا۔ علامتوں کی غلطی دوسری سب سے عام غلطی ہے: کسی منفی عدد کو تفریق کرنا اس کے مثبت ہم منصب کو جمع کرنے کے برابر ہے، چنانچہ <code>10 − (−5)</code> برابر ہے 15 کے، ایک ایسا نتیجہ جو تیز رفتار کام کرنے والوں کو الجھا دیتا ہے۔ فیصد کی الجھن تیسرے نمبر پر ہے: 20 فیصد اضافے کے بعد 20 فیصد کمی آپ کو اصل عدد پر واپس نہیں لے جاتی، کیونکہ دوسرا فیصد ایک مختلف (بڑی) بنیاد پر حساب ہوتا ہے — 100 میں 20 فیصد اضافہ 120 بنتا ہے، اور 120 میں 20 فیصد کمی 96 بنتی ہے، نہ کہ 100۔</p>
+<h2>کیلکولیٹر بمقابلہ ذہنی حساب</h2>
+<p>آسان یک ہندسی جمع سے آگے کسی بھی چیز کے لیے کیلکولیٹر سب سے تیز اور قابلِ اعتماد ہے، خاص طور پر جب اعشاریہ، فیصد یا کئی مراحل والے اظہاریے شامل ہوں — کثیر ہندسوں کی ضرب کا ذہنی خطرہ ہر اضافی ہندسے کے ساتھ تیزی سے بڑھتا ہے۔ ذہنی حساب پھر بھی فوری اندازوں اور جانچ پڑتال کے لیے اپنی جگہ رکھتا ہے: 297 × 4 کو تقریباً 300 × 4 = 1200 تک گول کرنا آپ کو کیلکولیٹر کی ٹائپنگ غلطی فوراً پکڑنے دیتا ہے اگر اصل جواب بالکل مختلف نکل آئے۔ دونوں طریقے ایک دوسرے کے حریف نہیں بلکہ معاون ہیں — بڑی غلطیاں پکڑنے کے لیے اندازہ لگائیں اور عین درست عدد کے لیے کیلکولیٹر استعمال کریں۔</p>
+<h2>ایک مخصوص کیلکولیٹر صفحہ اب بھی کیوں اہم ہے</h2>
+<p>ہر فون اور کمپیوٹر میں پہلے ہی کیلکولیٹر ایپ موجود ہوتی ہے، اس لیے یہ سوال جائز ہے کہ ویب پر مبنی کیلکولیٹر کس کام کا۔ ایماندارانہ جواب ہے: رکاوٹ۔ جب آپ پہلے ہی براؤزر میں کوئی صفحہ پڑھ رہے ہوں — قیمتوں کا موازنہ، کوئی نسخہ چیک کرنا، دوسرے ٹیب میں اسپریڈشیٹ دیکھنا — ایک الگ نیٹو ایپ کھولنا آپ کا سلسلہ توڑ دیتا ہے، جبکہ ایک ایسا کیلکولیٹر جو محض ایک اور براؤزر ٹیب دور ہو، اس تک پہنچنے میں کوئی اضافی محنت نہیں لگتی۔ یہ کسی بھی آپریٹنگ سسٹم والے براؤزر رکھنے والے آلے پر فوری دستیاب ہے، بغیر انسٹالیشن اور بغیر کسی اجازت مانگے۔</p>
+<h2>سائنسی کیلکولیٹر کب استعمال کریں</h2>
+<p>یہ کیلکولیٹر چار بنیادی عملیات کے ساتھ فیصد اور قوسین کا احاطہ کرتا ہے، جو روزمرہ کی زیادہ تر ریاضی کے لیے کافی ہے۔ اگر آپ کے کام میں مثلثیات، لوگارتھم، سادہ مربع سے آگے کی توانائیاں، یا شماریاتی فنکشنز شامل ہوں، تو آپ کو اس کی بجائے سائنسی کیلکولیٹر درکار ہو گا — انہیں بار بار بنیادی عملیات دہرا کر تخمینہ لگانا اس مقصد کے لیے بنائے گئے ٹول کے مقابلے میں سست اور غلطی کا شکار ہوتا ہے۔</p>
+<h2>فوری جانچ کی عادت</h2>
+<p>کوئی بھی نتیجہ جس پر آپ عمل کرنے والے ہوں — بل تقسیم کرنا، سامان کا آرڈر دینا — اس پر بھروسہ کرنے سے پہلے پہلے ایک موٹا موٹا ذہنی اندازہ لگا کر اسے کیلکولیٹر کے دکھائے گئے نتیجے سے موازنہ کرنا مددگار ہوتا ہے۔ اگر دونوں میں بہت فرق ہو تو ممکن ہے آپ نے کوئی عدد یا علامت غلط ٹائپ کر دی ہو، اور غلط عدد پر عمل کرنے سے پہلے یہ پکڑ لینا ہر بار چند اضافی سیکنڈ خرچ کرنے کے قابل ہے۔</p>
+<h2>نجی اور فوری</h2>
+<p>تمام حساب کتاب آپ کے براؤزر کے اندر جاوا اسکرپٹ کے اپنے حسابی عملگروں سے مکمل طور پر ہوتا ہے، اس لیے نتائج فوراً سامنے آتے ہیں اور آپ کے درج کردہ کوئی بھی ہندسے کبھی کہیں بھیجے، محفوظ یا بانٹے نہیں جاتے۔</p>
+    
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/basiccalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/basiccalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/basiccalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/basiccalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/basiccalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/basiccalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/basiccalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/basiccalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/basiccalc/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/basiccalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/basiccalc.js" defer></script>
+</body>
+</html>

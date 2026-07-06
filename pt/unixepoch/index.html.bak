@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversor de Unix Timestamp — converta tempo epoch para data</title>
+<meta name="description" content="Conversor de Unix timestamp gratuito. Converta tempo epoch Unix para data e hora legível, ou converta qualquer data de volta para Unix timestamp. Funciona na hora no seu navegador.">
+<link rel="canonical" href="https://mikaio.dev/pt/unixepoch/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/unixepoch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/unixepoch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/unixepoch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Conversor de Unix Timestamp — converta tempo epoch para data">
+<meta property="og:description" content="Conversor de Unix timestamp gratuito. Converta tempo epoch Unix para data e hora legível, ou converta qualquer data de volta para Unix timestamp. Funciona na hora no seu navegador.">
+<meta property="og:url" content="https://mikaio.dev/pt/unixepoch/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Conversor de Unix Timestamp — converta tempo epoch para data","url":"https://mikaio.dev/pt/unixepoch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Conversor de Unix timestamp gratuito. Converta tempo epoch Unix para data e hora legível, ou converta qualquer data de volta para Unix timestamp. Funciona na hora no seu navegador."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Conversor de Unix Timestamp","item":"https://mikaio.dev/pt/unixepoch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é um Unix timestamp?","acceptedAnswer":{"@type":"Answer","text":"Um Unix timestamp é um número que representa o número de segundos decorridos desde 1° de janeiro de 1970, às 00:00:00 UTC (o epoch Unix). É usado universalmente em computação para representar pontos no tempo sem ambiguidade de fuso horário."}},{"@type":"Question","name":"O que é o problema do ano 2038?","acceptedAnswer":{"@type":"Answer","text":"Sistemas mais antigos que armazenam Unix timestamps como inteiros de 32 bits com sinal só conseguem representar datas até 19 de janeiro de 2038. Sistemas modernos de 64 bits não têm essa limitação."}},{"@type":"Question","name":"Como converto milissegundos?","acceptedAnswer":{"@type":"Answer","text":"Alguns sistemas usam milissegundos em vez de segundos. Divida o timestamp em milissegundos por 1000 para convertê-lo para segundos antes de digitá-lo aqui."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Conversor de Unix Timestamp</span></nav>
+  <h1>Conversor de Unix Timestamp</h1>
+  <p class="lead">Informe um Unix timestamp para convertê-lo para uma data legível, ou escolha uma data para convertê-la para um Unix timestamp.</p>
+  <section class="widget" id="tool"><div id="ue-app"><div class="row"><div class="field"><label for="ue-ts">Unix timestamp (segundos)</label><input type="number" id="ue-ts" placeholder="e.g. 1700000000" inputmode="numeric"></div></div><div class="result"><span class="hint">Data e hora UTC: </span><b id="ue-utc">—</b></div><div class="result"><span class="hint">Seu horário local: </span><b id="ue-local">—</b></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="ue-dt">Converter data para timestamp</label><input type="datetime-local" id="ue-dt"></div><div class="result"><span class="hint">Unix timestamp: </span><span class="big" id="ue-tsout">—</span></div></div></section>
+  <article class="content">
+    <h2>Converta Unix timestamps para datas legíveis por humanos</h2>
+<p>Desenvolvedores, administradores de banco de dados e qualquer pessoa que trabalhe com arquivos de log ou APIs regularmente encontra Unix timestamps — números longos como 1700000000 que representam um momento no tempo. Sem um conversor, esses números são sem sentido para a maioria das pessoas. Esta ferramenta converte qualquer Unix timestamp instantaneamente para uma data e hora legível, e também converte qualquer data de volta para seu Unix timestamp.</p>
+<h2>O que é um Unix timestamp?</h2>
+<p>Um Unix timestamp conta o número de segundos decorridos desde meia-noite em 1° de janeiro de 1970, Tempo Universal Coordenado (UTC). Esse momento, chamado de epoch Unix, foi escolhido como ponto de referência quando os sistemas operacionais Unix estavam sendo desenvolvidos. A beleza dos Unix timestamps é que eles são independentes de fuso horário. Um timestamp representa exatamente o mesmo momento no tempo independentemente de onde no mundo você esteja.</p>
+<h2>Milissegundos versus segundos</h2>
+<p>Alguns sistemas, particularmente navegadores web e aplicações JavaScript, usam milissegundos em vez de segundos para seus timestamps. Uma chamada JavaScript Date.now() retorna algo como 1700000000000 — um número cerca de 1000 vezes maior que o Unix timestamp equivalente em segundos. Se o número que você tem tem cerca de treze dígitos, provavelmente está em milissegundos: divida por 1000 e informe o resultado.</p>
+<h2>Usos comuns</h2>
+<p>Timestamps aparecem em arquivos de log, registros de banco de dados, respostas de API, cabeçalhos de cache, certificados criptográficos e inúmeros outros contextos. Convertê-los para datas legíveis ajuda com depuração, análise de dados, auditoria de conformidade e qualquer situação em que você precisa entender quando algo aconteceu.</p>
+<h2>Como usar o conversor</h2>
+<p>Para converter um timestamp em data, cole o número do timestamp no campo de cima. A data e hora em UTC e o equivalente no seu horário local aparecem imediatamente. Para converter uma data em timestamp, use o seletor de data na seção de baixo e o timestamp correspondente aparece na hora.</p>
+<h2>Por que 1970 foi escolhido como ponto de partida</h2>
+<p>A escolha de 1º de janeiro de 1970 foi essencialmente prática, e não uma data com significado em si. O Unix estava sendo desenvolvido no fim dos anos 1960 e início dos anos 1970 no Bell Labs, e os projetistas precisavam de um ponto de referência recente o bastante para manter os números administráveis, mas cedo o bastante para cobrir a vida útil provável do sistema operacional. Arredondar para o início de 1970 foi simplesmente conveniente. Décadas depois, essa escolha arbitrária ficou profundamente embutida: ela sustenta como quase toda linguagem de programação, banco de dados e sistema operacional representa o tempo internamente, mesmo que a maioria dos programadores nunca precise pensar nisso diretamente.</p>
+<h2>O problema do ano 2038</h2>
+<p>Sistemas Unix antigos armazenavam timestamps como inteiros de 32 bits com sinal, que conseguem guardar valores até 2.147.483.647. Esse valor máximo corresponde a 19 de janeiro de 2038 às 03:14:07 UTC. Sistemas que armazenam timestamps em inteiros de 32 bits vão estourar nessa data, um problema às vezes chamado de Y2K38. Sistemas modernos de 64 bits conseguem armazenar timestamps muito além do ano 292 bilhões, tornando isso um problema só para software legado que não foi atualizado.</p>
+<h2>Timestamps negativos</h2>
+<p>Como um Unix timestamp é simplesmente uma contagem com sinal de segundos a partir do epoch, datas anteriores a 1º de janeiro de 1970 são representadas como números negativos em vez de não serem suportadas. Um timestamp de -86400, por exemplo, representa exatamente um dia antes do epoch: 31 de dezembro de 1969. Este conversor trata valores negativos da mesma forma que os positivos, o que é útil para trabalhar com registros históricos ou dados anteriores à era da computação, mas ainda armazenados em formato de Unix timestamp.</p>
+<h2>Por que timestamps são independentes de fuso horário</h2>
+<p>A maior vantagem de armazenar um momento como um Unix timestamp em vez de uma string de data formatada é que isso contorna os fusos horários por completo durante o armazenamento e o cálculo. Um timestamp representa exatamente um instante físico, e só é traduzido para uma data de calendário local e hora do relógio no momento em que é exibido para uma pessoa. É por isso que bancos de dados, APIs e arquivos de log armazenam timestamps de forma esmagadora em vez de datas locais já formatadas: dois servidores em fusos horários diferentes podem comparar, ordenar e calcular diferenças entre timestamps com total confiança, e só precisam converter para um horário local legível no último passo, exatamente como este conversor faz ao mostrar o UTC e o seu equivalente local lado a lado.</p>
+<h2>Depurando com timestamps</h2>
+<p>Desenvolvedores recorrem a um conversor como este o tempo todo enquanto depuram. Um log de erro de servidor marcado com 1700000000 não significa nada de relance, mas convertê-lo na hora diz se o erro aconteceu em horário comercial, durante a madrugada, ou no exato momento em que uma implantação foi publicada — muitas vezes a forma mais rápida de relacionar um relato de bug com a mudança que o causou. Respostas de API, colunas de auditoria de banco de dados e cabeçalhos de expiração de cache comumente armazenam timestamps em vez de datas formatadas pelo mesmo motivo que os mecanismos de armazenamento os preferem: um número simples ordena, compara e calcula corretamente sem nenhuma ambiguidade de idioma ou formato, e só precisa ser traduzido para uma data amigável ao ser humano no passo final de exibição, que é exatamente o trabalho que esta ferramenta faz.</p>
+<h2>Privado</h2>
+<p>Tudo roda no seu navegador usando o objeto Date embutido do JavaScript, então a conversão é instantânea nas duas direções e nenhum timestamp ou data que você informa é enviado a um servidor, registrado ou compartilhado.</p>
+    <section class="faq"><h2>Perguntas frequentes de Unix timestamp</h2><dl><dt>O que é um Unix timestamp?</dt><dd>Um Unix timestamp é um número que representa o número de segundos decorridos desde 1° de janeiro de 1970, às 00:00:00 UTC (o epoch Unix). É usado universalmente em computação para representar pontos no tempo sem ambiguidade de fuso horário.</dd><dt>O que é o problema do ano 2038?</dt><dd>Sistemas mais antigos que armazenam Unix timestamps como inteiros de 32 bits com sinal só conseguem representar datas até 19 de janeiro de 2038. Sistemas modernos de 64 bits não têm essa limitação.</dd><dt>Como converto milissegundos?</dt><dd>Alguns sistemas usam milissegundos em vez de segundos. Divida o timestamp em milissegundos por 1000 para convertê-lo para segundos antes de digitá-lo aqui.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/unixepoch/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/unixepoch.js" defer></script>
+</body>
+</html>

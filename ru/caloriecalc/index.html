@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calorie Calculator — calories per food item</title>
+<meta name="description" content="Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.">
+<link rel="canonical" href="https://mikaio.dev/ru/caloriecalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/caloriecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/caloriecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/caloriecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/caloriecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/caloriecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/caloriecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/caloriecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/caloriecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/caloriecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/caloriecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/caloriecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calorie Calculator — calories per food item">
+<meta property="og:description" content="Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.">
+<meta property="og:url" content="https://mikaio.dev/ru/caloriecalc/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calorie Calculator — calories per food item","url":"https://mikaio.dev/ru/caloriecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Food Calorie Calculator","item":"https://mikaio.dev/ru/caloriecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate are these values?","acceptedAnswer":{"@type":"Answer","text":"Values are approximate and based on typical nutritional data. Actual calories vary with variety, cooking method, and preparation. Use a verified nutrition database or food packaging for precise values."}},{"@type":"Question","name":"Per 100g vs per serving?","acceptedAnswer":{"@type":"Answer","text":"Enter 100 in the quantity field for the per-100g value. Enter your actual portion size to see the calories for that portion."}},{"@type":"Question","name":"Are these raw or cooked values?","acceptedAnswer":{"@type":"Answer","text":"Most values are for raw weight unless noted. Cooked foods typically change in water content, which changes the calorie density per gram."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/ru/caloriecalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/caloriecalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/caloriecalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/caloriecalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/caloriecalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/caloriecalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/caloriecalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/caloriecalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/caloriecalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/caloriecalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/caloriecalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Узнайте калорийность любого продукта" />
+<meta property="og:description" content="Узнайте калорийность любого продукта" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/ru/caloriecalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Узнайте калорийность любого продукта","description":"Узнайте калорийность любого продукта","url":"https://example.com/ru/caloriecalc/","inLanguage":"ru"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Food Calorie Calculator</span></nav>
+  <h1>Food Calorie Calculator</h1>
+  <p class="lead">Type a food name and quantity to see the estimated calorie count. Based on approximate values per 100g.</p>
+  <section class="widget" id="tool"><form id="cal-form"><div class="row"><div class="field"><label for="cal-food">Food name</label><input type="text" id="cal-food" placeholder="e.g. banana, rice, chicken" list="cal-list"><datalist id="cal-list"></datalist></div><div class="field"><label for="cal-qty">Amount</label><input type="number" id="cal-qty" value="100" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="cal-unit">Unit</label><select id="cal-unit"><option value="g">g</option><option value="oz">oz</option></select></div></div><div class="result"><span class="hint">Approximate calories: </span><span class="big" id="cal-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Узнайте калорийность любого продукта</h2>
+<p>Подсчёт калорий — один из самых распространённых подходов к контролю питания и управлению весом. Знание примерной калорийности привычных продуктов помогает делать осознанный выбор того, что и сколько есть. Этот инструмент даёт приблизительные значения калорийности для более чем 60 распространённых продуктов на основе стандартных справочных данных о питании.</p>
+<h2>Как пользоваться инструментом</h2>
+<p>Найдите нужный продукт через поиск или пролистав список, чтобы увидеть его примерную калорийность на типичную порцию и на 100 граммов — это позволяет сравнивать продукты на равных условиях независимо от того, как их обычно порционируют. Это особенно полезно, чтобы заметить продукты, которые выглядят скромно в одной порции, но при сравнении грамм к грамму с альтернативой оказываются намного калорийнее, чем ожидалось.</p>
+<h2>Что такое калории</h2>
+<p>Калория (ккал, или килокалория) — это единица измерения энергии. В контексте питания под &quot;калориями&quot; обычно подразумевают именно килокалории — количество энергии, необходимое, чтобы нагреть 1 килограмм воды на 1 градус Цельсия. Ваш организм тратит калории на любую деятельность: дыхание, мышление, движение и переваривание пищи.</p>
+<h2>Калорийность по группам продуктов</h2>
+<p>Разные продукты сильно различаются по калорийности на 100 граммов:</p>
+<p><strong>Очень низкая калорийность (менее 50 ккал/100 г)</strong>: большинство некрахмалистых овощей — салат-латук (15), огурец (15), шпинат (23), помидор (18), брокколи (34), клубника (32)</p>
+<p><strong>Низкая калорийность (50–100 ккал/100 г)</strong>: большинство фруктов, молочные продукты — яблоко (52), банан (89), апельсин (47), молоко (61), картофель (77), яйцо (155 — выше, но небольшое по весу штуки)</p>
+<p><strong>Средняя калорийность (100–200 ккал/100 г)</strong>: варёные крупы, нежирное мясо — рис (130), куриная грудка (165), лосось (208), паста (131)</p>
+<p><strong>Высокая калорийность (200–400 ккал/100 г)</strong>: сыр, хлеб, жирное мясо — хлеб (265), говядина (250), тёмный шоколад (600)</p>
+<p><strong>Очень высокая калорийность (400+ ккал/100 г)</strong>: масла, орехи, сахар — оливковое масло (884), миндаль (579), арахисовая паста (588), сахар (387)</p>
+<h2>Как читать этикетки с пищевой ценностью</h2>
+<p>В большинстве стран упакованные продукты обязаны указывать пищевую ценность на 100 г и на порцию. Значение на 100 г упрощает сравнение между продуктами. Значение на порцию показывает, сколько калорий содержит типичная порция, хотя размеры порций, указанные на этикетках, часто меньше того, что люди реально съедают за раз.</p>
+<h2>Макронутриенты и их вклад в калорийность</h2>
+<p>Каждый макронутриент даёт определённое число калорий на грамм:</p>
+<ul>
+<li>Углеводы: 4 ккал на грамм</li>
+<li>Белок: 4 ккал на грамм</li>
+<li>Жир: 9 ккал на грамм</li>
+<li>Алкоголь: 7 ккал на грамм</li>
+</ul>
+<p>Именно поэтому продукты с высоким содержанием жира так калорийны — жир содержит более чем вдвое больше калорий на грамм, чем углеводы или белок.</p>
+<h2>Почему одинаковая калорийность может ощущаться по-разному</h2>
+<p>Два продукта с одинаковой калорийностью не обязательно одинаково влияют на чувство голода, уровень энергии или здоровье. Продукт с высоким содержанием клетчатки и белка обычно насыщает намного сильнее в расчёте на калорию, чем продукт с высоким содержанием рафинированного сахара и жира, поскольку и клетчатка, и белок замедляют переваривание и вызывают более сильные сигналы насыщения. Это одна из причин, почему принцип &quot;калории пришли — калории потрачены&quot; верен как принцип энергетического баланса, но недостаточен как практический совет по питанию — состав этих калорий определяет, насколько легко или трудно придерживаться заданной нормы изо дня в день.</p>
+<h2>Основы управления весом</h2>
+<p>Фундаментальный принцип управления весом: если есть больше калорий, чем вы тратите, вес растёт; если меньше — вес снижается. Один килограмм жировой ткани содержит примерно 7700 ккал. Ежедневный дефицит в 500 ккал даёт примерно 0,5 кг потери жира в неделю.</p>
+<h2>Продуктовые этикетки и базы данных о питании</h2>
+<p>Значения калорийности в этом инструменте — приблизительные справочные величины. Реальная калорийность может отличаться в зависимости от конкретного сорта продукта, его зрелости или жирности, способа приготовления и того, какая именно часть продукта используется. Официальные базы данных о питании с более подробной информацией включают USDA FoodData Central в США — самую полную общедоступную базу с тысячами продуктов, включая товары конкретных брендов; таблицы состава продуктов Росстата и профильных научных институтов питания в России и других странах СНГ; а также аналогичные официальные таблицы, которые ведут органы здравоохранения в разных странах мира.</p>
+<h2>Баланс макронутриентов помимо калорий</h2>
+<p>Хотя именно общее количество потребляемых калорий определяет изменение веса, состав макронутриентов в рационе влияет и на другие показатели здоровья. Потребление белка влияет на сохранение мышечной массы при похудении, на насыщение и на состав тела. Качество жиров — насыщенные они или ненасыщенные — влияет на здоровье сердечно-сосудистой системы. Качество углеводов, включая гликемический индекс и содержание клетчатки, влияет на контроль уровня глюкозы в крови и здоровье кишечника — поэтому два рациона с одинаковой общей калорийностью могут довольно по-разному влиять на самочувствие человека и изменение состава его тела со временем.</p>
+<h2>Клетчатка: макронутриент с нулевой калорийностью</h2>
+<p>Пищевые волокна технически относятся к углеводам, но не перевариваются человеческими ферментами, поэтому дают практически ноль калорий, хотя и учитываются в общем количестве углеводов на этикетке пищевой ценности. Клетчатка из овощей, бобовых, цельнозерновых продуктов и фруктов создаёт объём, повышающий чувство сытости, питает полезные кишечные бактерии, замедляет всасывание глюкозы и снижает риск сердечно-сосудистых заболеваний. Рационы с высоким содержанием клетчатки связаны с более низким риском диабета 2 типа, рака толстой кишки и болезней сердца — отчасти поэтому рекомендации по питанию, как правило, отдают предпочтение цельным продуктам перед переработанными, даже если калорийность на бумаге выглядит похожей.</p>
+<h2>Калории из алкоголя</h2>
+<p>Алкоголь содержит 7 ккал на грамм — больше, чем углеводы или белок, но меньше, чем жир. Стандартная порция напитка, содержащая около 14 граммов чистого алкоголя, даёт примерно 100 ккал только за счёт самого алкоголя, ещё до учёта каких-либо добавок, а пиво, вино и крепкие напитки заметно различаются по общей калорийности из-за разницы в крепости и содержании остаточного сахара. Это часто недооцениваемый источник калорий при подсчёте потребления, поскольку алкогольные напитки в голове обычно проходят по категории &quot;напитки&quot;, а не &quot;еда&quot;, хотя несут вполне реальную калорийную нагрузку.</p>
+<h2>Приватно и мгновенно</h2>
+<p>Все расчёты выполняются полностью в вашем браузере, поэтому результаты появляются мгновенно, а никакие данные о том, что вы едите или пьёте, никогда не отправляются на сервер, не логируются и не передаются кому-либо ещё.</p>
+    <section class="faq"><h2>Calorie calculator FAQ</h2><dl><dt>How accurate are these values?</dt><dd>Values are approximate and based on typical nutritional data. Actual calories vary with variety, cooking method, and preparation. Use a verified nutrition database or food packaging for precise values.</dd><dt>Per 100g vs per serving?</dt><dd>Enter 100 in the quantity field for the per-100g value. Enter your actual portion size to see the calories for that portion.</dd><dt>Are these raw or cooked values?</dt><dd>Most values are for raw weight unless noted. Cooked foods typically change in water content, which changes the calorie density per gram.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/caloriecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/caloriecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/caloriecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/caloriecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/caloriecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/caloriecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/caloriecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/caloriecalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/caloriecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/caloriecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/caloriecalc.js" defer></script>
+</body>
+</html>

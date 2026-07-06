@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leap Year Calculator — is this year a leap year?</title>
+<meta name="description" content="Free leap year calculator. Check if any year is a leap year and find the next leap year. Instant results in your browser.">
+<link rel="canonical" href="https://mikaio.dev/zh/leapyear/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/leapyear/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/leapyear/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/leapyear/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/leapyear/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/leapyear/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/leapyear/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/leapyear/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/leapyear/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Leap Year Calculator — is this year a leap year?">
+<meta property="og:description" content="Free leap year calculator. Check if any year is a leap year and find the next leap year. Instant results in your browser.">
+<meta property="og:url" content="https://mikaio.dev/zh/leapyear/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Leap Year Calculator — is this year a leap year?","url":"https://mikaio.dev/zh/leapyear/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free leap year calculator. Check if any year is a leap year and find the next leap year. Instant results in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Leap Year Calculator","item":"https://mikaio.dev/zh/leapyear/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What makes a year a leap year?","acceptedAnswer":{"@type":"Answer","text":"A year is a leap year if it is divisible by 4, except for century years (divisible by 100), which must also be divisible by 400. So 2000 was a leap year but 1900 was not."}},{"@type":"Question","name":"Why do we need leap years?","acceptedAnswer":{"@type":"Answer","text":"A solar year is approximately 365.2422 days, not exactly 365. Without leap years, the calendar would drift against the seasons by about 6 hours per year."}},{"@type":"Question","name":"When is the next leap year?","acceptedAnswer":{"@type":"Answer","text":"Enter the current year to see the next one, or the calculator shows it automatically for the current year."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Leap Year Calculator</span></nav>
+  <h1>Leap Year Calculator</h1>
+  <p class="lead">Enter any year to find out if it is a leap year.</p>
+  <section class="widget" id="tool"><form id="ly-form"><div class="row"><div class="field"><label for="ly-year">Year</label><input type="number" id="ly-year" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="big" id="ly-out">—</span></div><div id="ly-next" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>今年是闰年吗</h2>
+<p>闰年是指多出一天——2月29日——的公历年份,一共366天,而不是通常的365天。设置闰年是为了让日历和地球绕太阳公转的周期保持同步,而这个周期大约是365.2422天,并不是刚好365天。如果不做周期性修正,日历会以每年大约6小时的速度相对季节发生偏移,四年下来就会累积出整整一天的误差,长此以往,北半球的圣诞节甚至会慢慢移到夏天。</p>
+<h2>公历的闰年规则</h2>
+<p>现代公历自1582年起在世界各地陆续被采用,它用一个三段式规则来判断闰年:</p>
+<ol>
+<li>能被4整除的年份是闰年——所以2024年、2028年和2032年都是闰年。</li>
+<li><strong>例外</strong>:能被100整除的年份不是闰年——所以1900年、1800年和1700年虽然能被4整除,却都不是闰年。</li>
+<li><strong>例外的例外</strong>:能被400整除的年份是闰年——所以2000年和1600年都是闰年。</li>
+</ol>
+<p>这个三段式规则意味着每400年周期里有97个闰年,而不是100个,平均每年长度是365.2425天,和实际的太阳年365.2422天极为接近——误差每3000年还不到一天。</p>
+<h2>历史:儒略历及其累积误差</h2>
+<p>在公历改革之前,儒略历(由尤利乌斯·恺撒在公元前45年颁布)每四年增加一个闰日,没有整百年份的例外规则,这样算下来平均每年是365.25天——略微偏长。几个世纪下来,儒略历相对太阳年每年大约累积11分钟的误差,到16世纪已经累积了整整10天的偏差。教皇格里高利十三世在1582年的历法改革中,直接从日历上删掉了10天,并引入了整百年份的例外规则,以防止未来继续累积误差。</p>
+<h2>2月29日出生的人</h2>
+<p>在2月29日出生的人——有时被称为&quot;闰日宝宝&quot;——严格来说,他们的生日只有每四年才真正存在一次。在日常生活中,他们在非闰年通常会选择在2月28日或3月1日庆祝生日。在法律上,大多数司法辖区在官方事务中,也会把他们的生日算作2月28日或3月1日。</p>
+<p>在2月29日出生的概率大约是1/1461(四年一次,每年365天再加一天),约合0.068%。全世界有几百万人是&quot;闰日宝宝&quot;。</p>
+<h2>对金融和法律的影响</h2>
+<p>闰年会影响利息计算、合同期限和法定截止日期。按日计息的贷款,在闰年会多累积一天的利息。规定&quot;365天&quot;期限的年度合同,在闰年可能会因司法辖区和合同措辞的不同,技术上提前一天到期。计算固定年薪员工工资的系统,处理这多出来的一天时也可能有所不同——有些年薪会按365天分摊,有些则按366天,视具体年份而定。</p>
+<h2>其他历法系统</h2>
+<p>伊斯兰教历(希吉来历)是纯粹的阴历,不使用公历的闰年系统,不过它有自己的闰年周期来让阴历月份保持对齐。希伯来历是一种阴阳合历,每19年周期里会有7次插入一整个闰月(阿达尔一月)。伊朗历(太阳希吉来历)采用一种8年一循环的闰年规则,精确度甚至超过公历。</p>
+<h2>使用方法</h2>
+<p>输入任意一个过去或未来的年份,工具会立刻告诉你它是不是闰年,自动应用三段式公历规则,你完全不用自己去记那个整百年份的例外情况。这对测试日期处理代码边界情况的程序员、需要计算跨越2月的截止日期或合同期限的人,或者单纯好奇某一年情况的人来说,都很实用。</p>
+<h2>用几个&quot;刁钻&quot;的年份测试一下规则</h2>
+<p>整百年份的例外规则是大多数人最容易搞错的地方,值得直接测试几个具体案例。2100年能被4整除,看起来像是闰年,但它同时也能被100整除、却不能被400整除,所以例外规则生效,2100年将不是闰年——这将是自1900年以来,第一个&quot;能被4整除&quot;却结果不是闰年的年份。相比之下,2000年能被4、100和400同时整除,所以&quot;例外的例外&quot;让它恢复成了闰年。把这两个年份都拿到这个检测工具里试一试,是在真正需要用到某个日期计算之前,快速建立对这条规则信心的好办法。</p>
+<h2>未来几个整百年份速查</h2>
+<p>因为整百年份的例外情况比较少见、容易被遗忘,记住几个具体的未来日期会很有帮助:2100年、2200年和2300年虽然表面上符合&quot;能被4整除&quot;的条件,却都不是闰年;而2400年会像2000年一样重新成为闰年。如果某个软件把&quot;每四年一个闰年&quot;硬编码进去、却没有加上整百年份的例外规则,从2100年开始就会悄悄给出错误答案——这种bug要过几十年才会暴露出来,而这正是这个检测工具今天就能帮你提前验证的那类&quot;潜伏&quot;边界情况。</p>
+<h2>私密且即时</h2>
+<p>闰年判断使用简单的算术运算,完全在你的浏览器中完成,输入年份后结果即刻显示,你输入的任何内容都不会被发送到服务器、记录或分享。</p>
+    <section class="faq"><h2>Leap year FAQ</h2><dl><dt>What makes a year a leap year?</dt><dd>A year is a leap year if it is divisible by 4, except for century years (divisible by 100), which must also be divisible by 400. So 2000 was a leap year but 1900 was not.</dd><dt>Why do we need leap years?</dt><dd>A solar year is approximately 365.2422 days, not exactly 365. Without leap years, the calendar would drift against the seasons by about 6 hours per year.</dd><dt>When is the next leap year?</dt><dd>Enter the current year to see the next one, or the calculator shows it automatically for the current year.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/leapyear/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/leapyear/">中文</a></li><li><a hreflang="es" lang="es" href="/es/leapyear/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/leapyear/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/leapyear/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/leapyear/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/leapyear/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/leapyear.js" defer></script>
+</body>
+</html>

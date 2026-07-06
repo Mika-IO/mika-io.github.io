@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllable Counter — count syllables in any word or text</title>
+<meta name="description" content="Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing.">
+<link rel="canonical" href="https://mikaio.dev/en/syllablecount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/syllablecount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/syllablecount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/syllablecount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Syllable Counter — count syllables in any word or text">
+<meta property="og:description" content="Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing.">
+<meta property="og:url" content="https://mikaio.dev/en/syllablecount/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Syllable Counter — count syllables in any word or text","url":"https://mikaio.dev/en/syllablecount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Syllable Counter","item":"https://mikaio.dev/en/syllablecount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the syllable count work?","acceptedAnswer":{"@type":"Answer","text":"The tool estimates syllables using common English phonetic rules: counting vowel groups, applying exceptions for silent-e and common suffixes. It is an estimate and may differ slightly from a dictionary for unusual words."}},{"@type":"Question","name":"What is a syllable?","acceptedAnswer":{"@type":"Answer","text":"A syllable is a unit of pronunciation containing a single vowel sound. The word \"cat\" has one syllable; \"water\" has two (wa-ter); \"education\" has five (ed-u-ca-tion)."}},{"@type":"Question","name":"Is this good for haiku?","acceptedAnswer":{"@type":"Answer","text":"Yes. A traditional haiku has 5-7-5 syllables across three lines. Write each line separately and check the count."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/syllablecount/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/syllablecount/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/syllablecount/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/syllablecount/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/syllablecount/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/syllablecount/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Count syllables in any text" />
+<meta property="og:description" content="Count syllables in any text" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/syllablecount/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Count syllables in any text","description":"Count syllables in any text","url":"https://example.com/en/syllablecount/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Syllable Counter</span></nav>
+  <h1>Syllable Counter</h1>
+  <p class="lead">Type or paste text to count syllables and words. Useful for haiku, sonnets, song lyrics, and meter checking.</p>
+  <section class="widget" id="tool"><div id="syl-app"><textarea id="syl-text" rows="4" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Type or paste English text here…"></textarea><div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">Syllables</div><div class="big" id="syl-count">0</div></div><div><div class="hint">Words</div><div class="big" id="syl-words">0</div></div></div></div></section>
+  <article class="content">
+    <h2>Count syllables in any text</h2>
+<p>Syllable counting is essential for anyone working with metered verse, song lyrics, or any form of writing where rhythm matters. Haiku requires exactly 5-7-5 syllables across three lines. Sonnets follow specific metre patterns. Song lyrics fit syllables to musical beats. This tool estimates the syllable count for any English text instantly, so you can focus on the words rather than the counting.</p>
+<h2>What is a syllable?</h2>
+<p>A syllable is a unit of pronunciation organized around a single vowel sound. Every word can be broken into syllables:</p>
+<ul>
+<li>&quot;cat&quot; → 1 syllable (cat)</li>
+<li>&quot;water&quot; → 2 syllables (wa-ter)</li>
+<li>&quot;beautiful&quot; → 3 syllables (beau-ti-ful)</li>
+<li>&quot;education&quot; → 5 syllables (ed-u-ca-tion)</li>
+<li>&quot;unimaginable&quot; → 6 syllables (un-i-mag-i-na-ble)</li>
+</ul>
+<p>The number of syllables in a word depends on the number of distinct vowel sounds — not the number of vowel letters. The word &quot;bake&quot; has two vowel letters (a and e) but only one vowel sound, making it one syllable.</p>
+<h2>How the counter works</h2>
+<p>The tool uses common English phonetic rules to estimate syllables:</p>
+<ol>
+<li>Count groups of adjacent vowels (each group is approximately one syllable)</li>
+<li>Subtract for silent-e at the end of words (e.g., &quot;cake&quot; is 1 syllable, not 2)</li>
+<li>Subtract for common suffixes like &quot;-ed&quot; that are often silent</li>
+<li>Ensure at least one syllable per word</li>
+</ol>
+<p>This method is a good approximation for most common English words. Some irregular words and proper nouns may be counted slightly differently from their dictionary pronunciation.</p>
+<h2>Uses in creative writing</h2>
+<p><strong>Haiku</strong>: A Japanese poetic form traditionally imported into English as a three-line poem with 5-7-5 syllables. The haiku form requires careful syllable counting; this tool makes it easy to verify each line.</p>
+<p><strong>Iambic pentameter</strong>: Shakespeare&#39;s preferred metre has 10 syllables per line in an unstressed-stressed pattern (da-DUM repeated five times). Counting syllables is the first step to checking whether a line fits the metre.</p>
+<p><strong>Song lyrics</strong>: Each syllable maps to a beat or note. Lyricists count syllables to ensure words fit the melody. A verse that sings well has syllables distributed evenly across musical beats.</p>
+<p><strong>Limericks</strong>: The AABBA rhyme scheme has lines of 8-8-5-5-8 syllables in the traditional form.</p>
+<p><strong>Raps and hip-hop</strong>: Flow in rap is largely about syllable density and pattern. Many rappers deliberately pack more syllables into a bar for an effect called multisyllabic rhyming or double-time.</p>
+<h2>Checking meter in poetry</h2>
+<p>Classical English metre divides syllables into stressed (/) and unstressed (u). The most common patterns are:</p>
+<ul>
+<li><strong>Iambic</strong>: uU (unstressed-stressed), as in &quot;to BE, or NOT to BE&quot;</li>
+<li><strong>Trochaic</strong>: Uu (stressed-unstressed), as in &quot;TI-ger, TI-ger, BURN-ing BRIGHT&quot;</li>
+<li><strong>Dactylic</strong>: Uuu (stressed-unstressed-unstressed)</li>
+<li><strong>Anapestic</strong>: uuU (unstressed-unstressed-stressed)</li>
+</ul>
+<p>Counting syllables is the essential prerequisite to analyzing any of these patterns.</p>
+<h2>How to use the counter</h2>
+<p>Type or paste any English text into the box and the total syllable count updates immediately below it, along with a per-word breakdown when you need to check a specific line rather than a whole passage. This live feedback is exactly what you want when drafting to a strict form like haiku, where getting a single line from six syllables down to five means editing word by word and watching the count in real time rather than counting on your fingers after every change.</p>
+<h2>Why automatic counting is genuinely hard</h2>
+<p>English spelling is a famously unreliable guide to pronunciation, which is exactly why syllable counting cannot simply count vowel letters. Silent letters, digraphs where two vowels make one sound, and words borrowed from other languages with their own spelling conventions all conspire to make the relationship between spelling and syllable count inconsistent. The rule-based approach this tool uses — counting vowel groups, then adjusting for silent endings and common suffixes — gets the overwhelming majority of everyday English words right, but a handful of unusual words, names, and borrowed terms may differ slightly from a dictionary&#39;s official syllable count, simply because no small set of rules can capture every exception English has accumulated over a thousand years of borrowing from other languages.</p>
+<h2>Syllables and readability formulas</h2>
+<p>Beyond poetry, syllable counting is a key input to several well-known readability formulas. The Flesch-Kincaid Reading Ease and Grade Level formulas both use average syllables per word alongside average sentence length to estimate how difficult a passage is to read — text with more multi-syllable words scores as more difficult, roughly tracking the intuition that &quot;utilize&quot; reads as harder than &quot;use&quot; even though both mean the same thing. Writers aiming for a specific reading level, such as content for a general audience or a young readership, often check syllable-heavy passages and simplify word choice where the syllable count runs high.</p>
+<h2>Counting syllables by ear vs by rule</h2>
+<p>The most reliable way to count syllables in an unfamiliar word is still to say it aloud and feel where your jaw drops or your breath pauses — each of those moments marks roughly one syllable. Rule-based approaches like the one this tool uses approximate that same intuition through vowel-group counting, which works correctly for the overwhelming majority of English words but occasionally disagrees with the spoken version for unusual borrowings or names, since no fixed set of spelling rules perfectly captures every quirk of English pronunciation.</p>
+<h2>Private and instant</h2>
+<p>The counter runs entirely in your browser, so results update instantly as you type and no text you enter is ever sent anywhere, logged or shared.</p>
+    <section class="faq"><h2>Syllable counter FAQ</h2><dl><dt>How does the syllable count work?</dt><dd>The tool estimates syllables using common English phonetic rules: counting vowel groups, applying exceptions for silent-e and common suffixes. It is an estimate and may differ slightly from a dictionary for unusual words.</dd><dt>What is a syllable?</dt><dd>A syllable is a unit of pronunciation containing a single vowel sound. The word &quot;cat&quot; has one syllable; &quot;water&quot; has two (wa-ter); &quot;education&quot; has five (ed-u-ca-tion).</dd><dt>Is this good for haiku?</dt><dd>Yes. A traditional haiku has 5-7-5 syllables across three lines. Write each line separately and check the count.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/syllablecount/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/syllablecount.js" defer></script>
+</body>
+</html>

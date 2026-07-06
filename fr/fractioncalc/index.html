@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fraction Calculator — add, subtract, multiply and simplify fractions</title>
+<meta name="description" content="Free fraction calculator. Add, subtract, multiply or divide any two fractions and get the simplified result instantly. Also shows the decimal equivalent.">
+<link rel="canonical" href="https://mikaio.dev/fr/fractioncalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/fractioncalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/fractioncalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/fractioncalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/fractioncalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/fractioncalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/fractioncalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/fractioncalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fraction Calculator — add, subtract, multiply and simplify fractions">
+<meta property="og:description" content="Free fraction calculator. Add, subtract, multiply or divide any two fractions and get the simplified result instantly. Also shows the decimal equivalent.">
+<meta property="og:url" content="https://mikaio.dev/fr/fractioncalc/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Fraction Calculator — add, subtract, multiply and simplify fractions","url":"https://mikaio.dev/fr/fractioncalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free fraction calculator. Add, subtract, multiply or divide any two fractions and get the simplified result instantly. Also shows the decimal equivalent."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Fraction Calculator","item":"https://mikaio.dev/fr/fractioncalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How are the results simplified?","acceptedAnswer":{"@type":"Answer","text":"The calculator divides numerator and denominator by their greatest common divisor (GCD) to produce the fraction in its simplest form. For example, 4/8 simplifies to 1/2."}},{"@type":"Question","name":"Can I enter negative fractions?","acceptedAnswer":{"@type":"Answer","text":"Yes, enter a negative numerator. For example -3/4 represents negative three quarters."}},{"@type":"Question","name":"What if the denominator is zero?","acceptedAnswer":{"@type":"Answer","text":"Division by zero is undefined. If you enter a denominator of zero the result will show an error."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/fr/fractioncalc/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/fractioncalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/fractioncalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/fractioncalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/fractioncalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/fractioncalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/fractioncalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Travaillez avec des fractions sans papier ni crayon" />
+<meta property="og:description" content="Travaillez avec des fractions sans papier ni crayon" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/fr/fractioncalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Travaillez avec des fractions sans papier ni crayon","description":"Travaillez avec des fractions sans papier ni crayon","url":"https://example.com/fr/fractioncalc/","inLanguage":"fr"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Fraction Calculator</span></nav>
+  <h1>Fraction Calculator</h1>
+  <p class="lead">Enter two fractions, choose an operation, and see the simplified result plus its decimal value.</p>
+  <section class="widget" id="tool"><form id="frac-form"><div class="row"><div class="field" style="max-width:200px"><label>Fraction A</label><div style="display:flex;align-items:center;gap:0.25rem"><input type="number" id="frac-a-num" step="1" placeholder="Num" style="width:60px"> / <input type="number" id="frac-a-den" step="1" min="1" placeholder="Den" style="width:60px"></div></div><div class="field" style="max-width:60px;align-self:flex-end;padding-bottom:0.5rem"><select id="frac-op"><option value="+">+</option><option value="-">−</option><option value="*">×</option><option value="/">÷</option></select></div><div class="field" style="max-width:200px"><label>Fraction B</label><div style="display:flex;align-items:center;gap:0.25rem"><input type="number" id="frac-b-num" step="1" placeholder="Num" style="width:60px"> / <input type="number" id="frac-b-den" step="1" min="1" placeholder="Den" style="width:60px"></div></div></div><div class="result"><span class="hint">Result: </span><span class="big" id="frac-out">—</span></div><div id="frac-decimal" style="opacity:0.7;font-size:0.9rem"></div></form></section>
+  <article class="content">
+    <h2>Travaillez avec des fractions sans papier ni crayon</h2>
+<p>Les fractions sont omniprésentes en mathématiques, en cuisine, en menuiserie, en ingénierie et dans de nombreuses situations du quotidien, et pourtant les règles pour les combiner s&#39;oublient facilement. Additionner deux fractions exige un dénominateur commun ; multiplier n&#39;en demande pas. Diviser revient à inverser puis multiplier. Simplifier le résultat signifie trouver le plus grand diviseur commun et diviser par celui-ci. Ce calculateur gère automatiquement toutes ces étapes. Saisissez deux fractions, choisissez votre opération, et le résultat simplifié apparaît instantanément.</p>
+<h2>Comment fonctionnent les opérations sur les fractions</h2>
+<p><strong>L&#39;addition et la soustraction</strong> exigent un dénominateur commun. Pour additionner 1/3 et 1/4, trouvez le plus petit multiple commun de 3 et 4, qui est 12. Convertissez les deux fractions : 1/3 devient 4/12 et 1/4 devient 3/12. Additionnez ensuite les numérateurs : 7/12. La même logique s&#39;applique à la soustraction : convertir vers un dénominateur commun, puis soustraire les numérateurs.</p>
+<p><strong>La multiplication</strong> est plus simple : multipliez les numérateurs entre eux, puis les dénominateurs entre eux. Un tiers multiplié par un quart donne 1×1 sur 3×4, soit 1/12. Nul besoin de dénominateur commun.</p>
+<p><strong>La division</strong> consiste à multiplier par l&#39;inverse de la seconde fraction. Un tiers divisé par un quart équivaut à un tiers multiplié par quatre sur un, soit 4/3.</p>
+<h2>La simplification</h2>
+<p>Après chaque opération, le résultat est réduit à sa forme la plus simple. Le calculateur détermine le plus grand diviseur commun du numérateur et du dénominateur à l&#39;aide de l&#39;algorithme d&#39;Euclide, puis divise les deux par celui-ci. Si le dénominateur du résultat vaut 1, la fraction s&#39;affiche comme un nombre entier.</p>
+<h2>Nombres mixtes et fractions impropres</h2>
+<p>Une fraction impropre a un numérateur plus grand que son dénominateur, comme 7/4. C&#39;est l&#39;équivalent du nombre mixte 1¾. Le calculateur travaille directement avec les fractions impropres — saisissez 7 comme numérateur et 4 comme dénominateur. L&#39;équivalent décimal affiché vous aide à comprendre l&#39;ordre de grandeur du résultat.</p>
+<h2>Apprendre et enseigner les fractions</h2>
+<p>Les calculateurs de fractions sont très prisés des élèves qui découvrent ces règles pour la première fois. Pouvoir vérifier instantanément un calcul fait à la main renforce la compréhension et permet de repérer les erreurs tôt. Voir le résultat simplifié à côté de son équivalent décimal renforce le lien entre la représentation fractionnaire et la valeur réelle qu&#39;elle exprime.</p>
+<p>Les enseignants utilisent des calculateurs de fractions pour générer des exemples et vérifier rapidement des solutions. La logique étape par étape — dénominateur commun, addition des numérateurs, simplification — reste la même, qu&#39;elle soit faite à la main ou par un calculateur ; l&#39;outil ne fait qu&#39;automatiser l&#39;arithmétique.</p>
+<h2>Cuisine et recettes</h2>
+<p>De nombreuses recettes traditionnelles utilisent des fractions : un demi-verre, trois quarts de cuillère à café, deux tiers d&#39;une livre. Adapter une recette à la hausse ou à la baisse exige de multiplier les quantités d&#39;ingrédients par le facteur d&#39;échelle. Si une recette demande 3/4 de tasse de farine et que vous voulez faire deux fois et demie la quantité, il faut calculer 3/4 × 5/2 = 15/8, soit 1 et 7/8 tasse. Le calculateur gère cela directement.</p>
+<h2>Comment utiliser le calculateur</h2>
+<p>Saisissez le numérateur et le dénominateur de votre première fraction, choisissez une opération — addition, soustraction, multiplication ou division —, puis saisissez la seconde fraction. Le résultat apparaît immédiatement, déjà simplifié à sa forme la plus réduite, accompagné de son équivalent décimal pour que vous puissiez vérifier son ordre de grandeur d&#39;un coup d&#39;œil. Inutile de trouver vous-même un dénominateur commun au préalable ; le calculateur gère correctement l&#39;addition et la soustraction quels que soient les dénominateurs saisis.</p>
+<h2>Pourquoi trouver un dénominateur commun fonctionne</h2>
+<p>Il vaut la peine de comprendre pourquoi cette étape du dénominateur commun est nécessaire plutôt que de simplement la mémoriser. Une fraction comme 1/3 et une fraction comme 1/4 ne peuvent pas s&#39;additionner directement, car elles décrivent des parts de tailles différentes — un tiers de quelque chose est une portion d&#39;une taille différente qu&#39;un quart de cette même chose. Convertir les deux fractions en douzièmes (4/12 et 3/12) les réécrit en termes d&#39;une part de taille identique, si bien qu&#39;additionner les numérateurs revient simplement à compter combien de ces parts égales on possède au total : 7/12. La multiplication n&#39;a pas ce problème, car multiplier des fractions représente le fait de prendre une fraction d&#39;une fraction, une opération différente qui se combine proprement quel que soit le dénominateur.</p>
+<h2>Menuiserie et mesures</h2>
+<p>Les fractions de pouce sont la norme en menuiserie et en construction dans les pays utilisant les unités impériales — une planche peut être spécifiée à 3/4 de pouce d&#39;épaisseur, avec des coupes et des assemblages à marquer au 1/16 ou au 1/32 de pouce près. Additionner plusieurs mesures fractionnaires pour vérifier une longueur totale, ou calculer l&#39;écart entre deux mesures, est exactement le genre de calcul que cet outil automatise, vous épargnant l&#39;arithmétique du dénominateur commun pendant que vous avez un mètre ruban dans une main.</p>
+<h2>Adapter une recette à la hausse ou à la baisse</h2>
+<p>De nombreuses recettes traditionnelles utilisent des fractions de bout en bout : un demi-verre, trois quarts de cuillère à café, deux tiers d&#39;une livre. Adapter une recette exige de multiplier chaque quantité d&#39;ingrédient par le même facteur d&#39;échelle, et cette multiplication produit fréquemment une fraction peu commode qu&#39;il faut ensuite simplifier. Si une recette demande 3/4 de tasse de farine et que vous voulez faire deux fois et demie la quantité, le calcul est 3/4 × 5/2 = 15/8, qui se simplifie en 1 et 7/8 tasse — un calcul facile à rater à la main sous la pression du temps en cuisine, et que ce calculateur résout en une fraction de seconde.</p>
+<h2>Privé et instantané</h2>
+<p>Tous les calculs s&#39;exécutent entièrement dans votre navigateur à l&#39;aide de l&#39;algorithme d&#39;Euclide pour simplifier les résultats, si bien que la réponse apparaît instantanément et qu&#39;aucun chiffre que vous saisissez n&#39;est jamais envoyé à un serveur, enregistré ou partagé. Rien n&#39;est conservé d&#39;une visite à l&#39;autre, et l&#39;outil fonctionne hors ligne une fois la page chargée, prêt chaque fois qu&#39;un problème de fraction se présente à l&#39;improviste.</p>
+    <section class="faq"><h2>Fraction calculator FAQ</h2><dl><dt>How are the results simplified?</dt><dd>The calculator divides numerator and denominator by their greatest common divisor (GCD) to produce the fraction in its simplest form. For example, 4/8 simplifies to 1/2.</dd><dt>Can I enter negative fractions?</dt><dd>Yes, enter a negative numerator. For example -3/4 represents negative three quarters.</dd><dt>What if the denominator is zero?</dt><dd>Division by zero is undefined. If you enter a denominator of zero the result will show an error.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/fractioncalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/fractioncalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/fractioncalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/fractioncalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/fractioncalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/fractioncalc/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/fractioncalc.js" defer></script>
+</body>
+</html>

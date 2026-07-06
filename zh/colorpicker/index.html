@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Picker — get HEX, RGB, and HSL color codes</title>
+<meta name="description" content="Free color picker. Select any color and instantly get its HEX, RGB, and HSL codes. Copy with one click. Works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/zh/colorpicker/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/colorpicker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/colorpicker/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/colorpicker/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/colorpicker/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/colorpicker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/colorpicker/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/colorpicker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/colorpicker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Color Picker — get HEX, RGB, and HSL color codes">
+<meta property="og:description" content="Free color picker. Select any color and instantly get its HEX, RGB, and HSL codes. Copy with one click. Works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/zh/colorpicker/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Color Picker — get HEX, RGB, and HSL color codes","url":"https://mikaio.dev/zh/colorpicker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free color picker. Select any color and instantly get its HEX, RGB, and HSL codes. Copy with one click. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Color Picker","item":"https://mikaio.dev/zh/colorpicker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are HEX, RGB, and HSL?","acceptedAnswer":{"@type":"Answer","text":"HEX is a six-digit hexadecimal code like #ff5733. RGB specifies red, green, and blue channels from 0 to 255. HSL specifies hue (0-360°), saturation (%), and lightness (%). All three represent the same color differently."}},{"@type":"Question","name":"Which format should I use?","acceptedAnswer":{"@type":"Answer","text":"HEX is most common in web design and CSS. RGB is used in programming and image editing. HSL is intuitive for humans because hue is easy to understand and adjust."}},{"@type":"Question","name":"Can I enter a specific color code?","acceptedAnswer":{"@type":"Answer","text":"Use the color picker to select visually. For entering a specific HEX or RGB value precisely, use your browser's color input directly — click it and type the value."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/zh/colorpicker/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/colorpicker/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/colorpicker/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/colorpicker/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/colorpicker/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/colorpicker/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/colorpicker/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/colorpicker/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/colorpicker/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/colorpicker/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/colorpicker/">
+  <!-- SEO injected -->
+<meta property="og:title" content="挑一个颜色,立刻拿到它的色值代码" />
+<meta property="og:description" content="颜色代码在网页设计、平面设计和编程中无处不在。当你看中一个颜色想要使用或还原它时,就需要知道它的代码——可能是CSS用的HEX值,Photoshop用的RGB三元组,或是用来做程序化色彩处理的HSL表示法。这个工具能一次性给出你选中颜色的这三种格式。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/zh/colorpicker/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"挑一个颜色,立刻拿到它的色值代码","description":"颜色代码在网页设计、平面设计和编程中无处不在。当你看中一个颜色想要使用或还原它时,就需要知道它的代码——可能是CSS用的HEX值,Photoshop用的RGB三元组,或是用来做程序化色彩处理的HSL表示法。这个工具能一次性给出你选中颜色的这三种格式。","url":"https://example.com/zh/colorpicker/","inLanguage":"zh"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Color Picker</span></nav>
+  <h1>Color Picker</h1>
+  <p class="lead">Click the color swatch to open the color picker. The HEX, RGB, and HSL codes update instantly.</p>
+  <section class="widget" id="tool"><div id="cp-app"><div class="row"><div class="field"><label for="cp-color">Pick a color</label><input type="color" id="cp-color" value="#4f8ef7" style="width:80px;height:48px;border:none;background:none;cursor:pointer"></div></div><div id="cp-results" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">HEX</div><div class="big" id="cp-hex">#4f8ef7</div></div><div><div class="hint">RGB</div><div class="big" id="cp-rgb">—</div></div><div><div class="hint">HSL</div><div class="big" id="cp-hsl">—</div></div></div><div id="cp-swatch" style="margin-top:1rem;height:60px;border-radius:0.5rem;background:#4f8ef7"></div><button id="cp-copy-hex" class="btn secondary" style="margin-top:0.5rem">Copy HEX</button></div></section>
+  <article class="content">
+    <h2>挑一个颜色,立刻拿到它的色值代码</h2>
+<p>颜色代码在网页设计、平面设计和编程中无处不在。当你看中一个颜色想要使用或还原它时,就需要知道它的代码——可能是CSS用的HEX值,Photoshop用的RGB三元组,或是用来做程序化色彩处理的HSL表示法。这个工具能一次性给出你选中颜色的这三种格式。</p>
+<h2>三种颜色代码格式</h2>
+<p><strong>HEX(十六进制)</strong>是网页开发中使用最广泛的格式。它是一个由数字0-9和字母A-F组成的六位字符串,前面加一个井号。每两位字符代表一个颜色通道:#RRGGBB。比如#FF5733,红色通道是最大值(FF=255)、绿色通道中等(57=87)、蓝色通道较低(33=51)。当每一对字符两位相同时,HEX代码还可以写成缩写形式:#FF5500可以简写成#F50。</p>
+<p><strong>RGB(红、绿、蓝)</strong>把每个颜色通道表示成0(无)到255(最大)之间的整数。这是数字屏幕的原生格式,因为屏幕正是通过红绿蓝三种光混合发光的。rgb(255, 87, 51)和#FF5733是同一个颜色。RGB值被广泛用于CSS(rgb(r, g, b))、JavaScript、Python以及大多数图像编辑软件。</p>
+<p><strong>HSL(色相、饱和度、明度)</strong>是对人来说更直观的格式。色相是纯粹的颜色,用色轮上0°到360°的角度表示:0°是红色,120°是绿色,240°是蓝色。饱和度表示颜色有多鲜艳或多灰(0%是灰色,100%是完全饱和)。明度表示颜色有多亮或多暗(0%是黑色,100%是白色,50%是&quot;正常&quot;的完全饱和色)。HSL特别适合系统性地调整颜色:提高明度得到浅色调,降低明度得到深色调。</p>
+<h2>使用方法</h2>
+<p>点击色块打开浏览器自带的颜色选择器,用鼠标直观地挑选颜色,或者直接输入已知的颜色值,HEX、RGB和HSL三种代码会立刻同步更新,随时可以复制到你正在使用的工具或代码里。因为选色器用的是浏览器原生界面而不是自定义控件,操作体验和你预期的完全一致,在各种设备上都表现稳定。</p>
+<h2>该用哪种格式</h2>
+<p><strong>CSS和网页设计</strong>:HEX和RGB都被广泛支持,但HSL越来越受欢迎,因为调整起来特别直观——想让一个颜色亮10%,在HSL里很简单,而在RGB里则需要重新计算三个通道的数值。</p>
+<p><strong>印刷设计</strong>:印刷通常用CMYK(青、品红、黄、黑)表示颜色,这个工具并不涉及。做数字到印刷的转换,建议用Adobe Illustrator这类专业软件。</p>
+<p><strong>编程</strong>:RGB是大多数图形库的原生格式,而HSL在程序化生成配色方案时特别好用。</p>
+<h2>色彩理论基础</h2>
+<p>了解一些色彩理论,能帮你更好地用这个工具:</p>
+<p><strong>互补色</strong>:色轮上正相对(相差180°)的两个颜色,组合起来对比度最强,比如红色(0°)和青色(180°)。</p>
+<p><strong>类似色</strong>:色轮上相邻(相差30到60度)的颜色,组合起来和谐、对比度低。</p>
+<p><strong>三分色</strong>:三个在色轮上均匀相隔120度的颜色,组合起来鲜艳而均衡。</p>
+<p><strong>浅色调与深色调</strong>:把HSL的明度调高到50%以上得到浅色调(更亮的版本),调低到50%以下得到深色调(更暗的版本)。</p>
+<h2>无障碍与对比度</h2>
+<p>网页无障碍标准要求文字和背景色之间要有足够的对比度。WCAG 2.1指南规定,普通文字最低对比度要达到4.5:1,大号文字要达到3:1。可以把这里选出的颜色代码放进专门的对比度检测工具里验证是否符合无障碍要求。</p>
+<h2>更多设计常用配色方案</h2>
+<p>除了前面提到的基本配色组合,设计工作中还有几种常见搭配。单色配色方案用同一色相下不同的明暗和饱和度变化组成,做法是保持色相和饱和度不变,只调整HSL明度——这是打造统一协调配色而不担心冲突的可靠方法。分裂互补配色则是取一个基础色,再加上它互补色两侧相邻的两个颜色,能带来接近直接互补色的视觉对比,同时观感更柔和、更有层次。</p>
+<h2>CSS命名颜色</h2>
+<p>CSS定义了147种可以直接使用的命名颜色,可以代替十六进制或RGB值,从red、blue、black这类显而易见的名字,到cornflowerblue、papayawhip、rebeccapurple这类比较少见的名字——最后这个是2014年为纪念CSS开发者Eric Meyer的女儿Rebecca Meyer而命名的。用这个工具挑一个颜色,再对照最接近的CSS命名颜色,是快速确认某个色调是否已经有现成标准名字的好办法。</p>
+<h2>私密且即时</h2>
+<p>颜色选择器完全在你的浏览器中通过原生颜色输入控件运行,结果即时呈现,你选择的任何颜色都不会被发送到服务器、记录或分享。</p>
+    <section class="faq"><h2>Color picker FAQ</h2><dl><dt>What are HEX, RGB, and HSL?</dt><dd>HEX is a six-digit hexadecimal code like #ff5733. RGB specifies red, green, and blue channels from 0 to 255. HSL specifies hue (0-360°), saturation (%), and lightness (%). All three represent the same color differently.</dd><dt>Which format should I use?</dt><dd>HEX is most common in web design and CSS. RGB is used in programming and image editing. HSL is intuitive for humans because hue is easy to understand and adjust.</dd><dt>Can I enter a specific color code?</dt><dd>Use the color picker to select visually. For entering a specific HEX or RGB value precisely, use your browser&#39;s color input directly — click it and type the value.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/colorpicker/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/colorpicker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/colorpicker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/colorpicker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/colorpicker/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/colorpicker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/colorpicker/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/colorpicker.js" defer></script>
+</body>
+</html>

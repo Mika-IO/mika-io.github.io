@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Orçamento 50/30/20 — necessidades, desejos e poupança</title>
+<meta name="description" content="Calculadora gratuita da regra 50/30/20. Informe sua renda mensal e veja quanto destinar a necessidades, desejos e poupança.">
+<link rel="canonical" href="https://mikaio.dev/pt/budget503020/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/budget503020/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/budget503020/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/budget503020/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/budget503020/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/budget503020/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/budget503020/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/budget503020/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/budget503020/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/budget503020/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/budget503020/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/budget503020/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de Orçamento 50/30/20 — necessidades, desejos e poupança">
+<meta property="og:description" content="Calculadora gratuita da regra 50/30/20. Informe sua renda mensal e veja quanto destinar a necessidades, desejos e poupança.">
+<meta property="og:url" content="https://mikaio.dev/pt/budget503020/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Orçamento 50/30/20 — necessidades, desejos e poupança","url":"https://mikaio.dev/pt/budget503020/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora gratuita da regra 50/30/20. Informe sua renda mensal e veja quanto destinar a necessidades, desejos e poupança."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora da Regra 50/30/20","item":"https://mikaio.dev/pt/budget503020/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é a regra 50/30/20?","acceptedAnswer":{"@type":"Answer","text":"A regra 50/30/20 é um método simples de orçamento: 50% da renda líquida para necessidades (aluguel, comida, contas), 30% para desejos (lazer, restaurantes) e 20% para poupança e pagamento de dívidas."}},{"@type":"Question","name":"Quem criou a regra 50/30/20?","acceptedAnswer":{"@type":"Answer","text":"A regra foi popularizada pela senadora americana Elizabeth Warren e sua filha Amelia Warren Tyagi no livro 'All Your Worth' (2005)."}},{"@type":"Question","name":"O que é considerado 'necessidade' e o que é 'desejo'?","acceptedAnswer":{"@type":"Answer","text":"Necessidades são despesas essenciais: aluguel, supermercado, contas de luz e água, transporte e parcelas mínimas de dívidas. Desejos são melhorias de estilo de vida: streaming, restaurantes e viagens."}},{"@type":"Question","name":"Posso ajustar as porcentagens?","acceptedAnswer":{"@type":"Answer","text":"Sim. Em cidades com alto custo de vida, as necessidades podem consumir 60-70% da renda. Ajuste os percentuais conforme sua realidade—o importante é ter consciência dos seus gastos."}},{"@type":"Question","name":"Os 20% de poupança incluem previdência privada?","acceptedAnswer":{"@type":"Answer","text":"Sim. A categoria poupança inclui fundo de emergência, previdência privada e pagamentos extras de dívidas além do mínimo. Priorize dívidas com juros altos antes de investir."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/budget503020/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/budget503020/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/budget503020/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/budget503020/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/budget503020/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/budget503020/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/budget503020/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/budget503020/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/budget503020/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/budget503020/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/budget503020/">
+  <!-- SEO injected -->
+<meta property="og:title" content="A regra 50/30/20: um framework simples para qualquer orçamento" />
+<meta property="og:description" content="A regra 50/30/20: um framework simples para qualquer orçamento" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/budget503020/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A regra 50/30/20: um framework simples para qualquer orçamento","description":"A regra 50/30/20: um framework simples para qualquer orçamento","url":"https://example.com/pt/budget503020/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora da Regra 50/30/20</span></nav>
+  <h1>Calculadora da Regra 50/30/20</h1>
+  <p class="lead">Informe sua renda mensal líquida para ver a divisão recomendada: 50% para necessidades, 30% para desejos e 20% para poupança.</p>
+  <section class="widget" id="tool"><form id='b5020-form'><div class='row'><div class='field'><label for='b5020-income'>Renda mensal líquida</label><input type='number' id='b5020-income' step='any' min='0' inputmode='decimal'></div></div><div class='result'><span class='hint'>Necessidades (50%): </span><span class='big' id='b5020-out'>—</span></div><div id='b5020-detail' style='opacity:0.7;font-size:0.9rem;margin-top:0.5rem'></div></form></section>
+  <article class="content">
+    <h2>A regra 50/30/20: um framework simples para qualquer orçamento</h2>
+<p>A regra 50/30/20 é um dos frameworks de finanças pessoais mais recomendados porque é simples o bastante para lembrar, mas flexível o bastante para se aplicar a quase qualquer nível de renda. No seu núcleo, ela divide sua renda mensal líquida em três categorias amplas: 50% para necessidades, 30% para desejos, e 20% para poupança e pagamento de dívidas. Esta calculadora faz a aritmética instantaneamente para que você foque no que importa — realmente seguir o plano.</p>
+<h2>De onde vem a regra</h2>
+<p>A senadora americana Elizabeth Warren, professora de direito falimentar antes de entrar na política, e sua filha Amelia Warren Tyagi introduziram o framework 50/30/20 em seu livro de 2005 <em>All Your Worth</em>. Warren e Tyagi analisaram décadas de dados de gastos domésticos e concluíram que famílias que mantinham necessidades abaixo de 50% da renda eram muito mais resilientes a choques financeiros — perda de emprego, emergências médicas, divórcio — do que aquelas que deixavam despesas essenciais sufocarem a poupança.</p>
+<p>A elegância da regra é que ela não exige planilha nem rastreamento categoria por categoria. Você só precisa saber sua renda líquida e se seus gastos cabem em cada categoria.</p>
+<h2>O que conta como necessidade?</h2>
+<p>Necessidades são despesas inegociáveis — custos que você precisa pagar para manter seu padrão básico de vida e emprego: moradia (aluguel ou financiamento), utilidades (energia, água, internet básica), alimentação (compras para cozinhar em casa), transporte (carro, seguro, combustível, transporte público para o trabalho), pagamentos mínimos de dívida, seguro saúde, e creche necessária para você trabalhar.</p>
+<p>Se suas necessidades excedem 50% da renda, isso é um sinal para reavaliar: você pode encontrar moradia mais barata, refinanciar o carro, ou baixar prêmios de seguro? Em cidades de alto custo de vida, necessidades comumente consomem 60-65% da renda, exigindo um framework ajustado.</p>
+<h2>O que conta como desejo?</h2>
+<p>Desejos são despesas discricionárias — coisas que melhoram sua qualidade de vida mas não são estritamente necessárias: comer fora, entretenimento (serviços de streaming, cinema, shows), viagens e férias, academia e hobbies, roupas além do básico, planos de celular e aparelhos atualizados.</p>
+<p>A linha entre necessidades e desejos pode ficar borrada. Internet é uma necessidade; um pacote de streaming adicionado é um desejo. Transporte básico é uma necessidade; alugar um veículo de luxo quando um carro usado confiável bastaria é um desejo.</p>
+<h2>A categoria de 20% para poupança</h2>
+<p>A categoria de poupança e pagamento de dívidas é a mais importante para a saúde financeira de longo prazo: fundo de emergência (construa de 3 a 6 meses de despesas essenciais), dívida de juros altos (pague cartões de crédito e empréstimos pessoais acima de 7-8% ao ano antes de investir), contribuições de aposentadoria, outros investimentos, e fundos reservados para despesas futuras conhecidas.</p>
+<h2>Um exemplo resolvido</h2>
+<p>Suponha que sua renda líquida mensal seja R$ 5.000: necessidades 50% = R$ 2.500, desejos 30% = R$ 1.500, poupança 20% = R$ 1.000. Seu orçamento de necessidades de R$ 2.500 poderia ser: aluguel R$ 1.400 + utilidades R$ 150 + alimentação R$ 350 + seguro do carro R$ 120 + pagamento mínimo de empréstimo R$ 200 + celular R$ 80 = R$ 2.300, seguramente abaixo do limite.</p>
+<h2>Ajustando a regra para a sua situação</h2>
+<p>A regra 50/30/20 é um ponto de partida, não um mandamento. Variações comuns incluem: alta carga de dívida (mude temporariamente para 50/20/30, mais para poupança/dívida, menos para desejos), baixa renda (necessidades básicas podem consumir 70-80% da renda — foque em qualquer excedente, mesmo poupando pouco constrói o hábito), e alta renda (você pode achar que necessidades e desejos cabem facilmente em porcentagens menores, deixando mais de 20% para poupança).</p>
+<h2>O poder psicológico das categorias</h2>
+<p>Pesquisas em economia comportamental mostram que categorizar o dinheiro em contas mentais reduz gastos excessivos. Quando você sabe que R$ 1.500 é seu orçamento de desejos, você faz escolhas mais deliberadas dentro desse envelope. Combine a regra com uma checagem semanal de 5 minutos: revise as transações da semana passada e mentalmente atribua cada uma a necessidades, desejos ou poupança.</p>
+<h2>Aplicando a regra a renda irregular</h2>
+<p>Se você é freelancer, autônomo ou trabalha por comissão com renda variável, aplique as porcentagens a uma linha de base conservadora (seu mês típico mais baixo). Em meses de alta renda, aloque o excedente principalmente para poupança.</p>
+<h2>Erros comuns a evitar</h2>
+<p>Usar renda bruta em vez de líquida, ignorar despesas irregulares (seguros anuais, IPVA, presentes de fim de ano devem ser divididos por 12 e incluídos mensalmente), e tratar pagamentos mínimos de dívida como poupança — apenas pagamentos extras além do mínimo contam como poupança.</p>
+<h2>Ferramentas que complementam esta calculadora</h2>
+<p>Depois de estabelecer suas metas 50/30/20, outras calculadoras ajudam a ir mais fundo: uma calculadora de juros compostos mostra se sua poupança está de fato virando patrimônio crescente ao longo dos anos, e uma calculadora de quitação de dívida mostra quanto os pagamentos extras na categoria de poupança aceleram sua liberdade financeira.</p>
+<h2>Privado e instantâneo</h2>
+<p>Todos os cálculos acontecem inteiramente no seu navegador. Nenhum dado é enviado a nenhum servidor.</p>
+    <section class="faq"><h2>Perguntas frequentes sobre o orçamento 50/30/20</h2><dl><dt>O que é a regra 50/30/20?</dt><dd>A regra 50/30/20 é um método simples de orçamento: 50% da renda líquida para necessidades (aluguel, comida, contas), 30% para desejos (lazer, restaurantes) e 20% para poupança e pagamento de dívidas.</dd><dt>Quem criou a regra 50/30/20?</dt><dd>A regra foi popularizada pela senadora americana Elizabeth Warren e sua filha Amelia Warren Tyagi no livro &#39;All Your Worth&#39; (2005).</dd><dt>O que é considerado &#39;necessidade&#39; e o que é &#39;desejo&#39;?</dt><dd>Necessidades são despesas essenciais: aluguel, supermercado, contas de luz e água, transporte e parcelas mínimas de dívidas. Desejos são melhorias de estilo de vida: streaming, restaurantes e viagens.</dd><dt>Posso ajustar as porcentagens?</dt><dd>Sim. Em cidades com alto custo de vida, as necessidades podem consumir 60-70% da renda. Ajuste os percentuais conforme sua realidade—o importante é ter consciência dos seus gastos.</dd><dt>Os 20% de poupança incluem previdência privada?</dt><dd>Sim. A categoria poupança inclui fundo de emergência, previdência privada e pagamentos extras de dívidas além do mínimo. Priorize dívidas com juros altos antes de investir.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/budget503020/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/budget503020/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/budget503020/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/budget503020/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/budget503020/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/budget503020/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/budget503020/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/budget503020/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/budget503020/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/budget503020/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/budget503020.js" defer></script>
+</body>
+</html>

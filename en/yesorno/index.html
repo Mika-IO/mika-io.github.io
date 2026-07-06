@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yes or No — a random decision maker</title>
+<meta name="description" content="Free Yes or No generator. Ask a question and get a fair, random yes or no answer instantly, with a running tally. Works in your browser, no app needed.">
+<link rel="canonical" href="https://mikaio.dev/en/yesorno/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/yesorno/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/yesorno/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/yesorno/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/yesorno/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yes or No — a random decision maker">
+<meta property="og:description" content="Free Yes or No generator. Ask a question and get a fair, random yes or no answer instantly, with a running tally. Works in your browser, no app needed.">
+<meta property="og:url" content="https://mikaio.dev/en/yesorno/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Yes or No — a random decision maker","url":"https://mikaio.dev/en/yesorno/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free Yes or No generator. Ask a question and get a fair, random yes or no answer instantly, with a running tally. Works in your browser, no app needed."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Yes or No","item":"https://mikaio.dev/en/yesorno/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the answer really random?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each answer uses your browser's cryptographically secure random generator, giving yes and no an equal 50% chance every time, with no memory of earlier answers."}},{"@type":"Question","name":"When should I use a yes or no picker?","acceptedAnswer":{"@type":"Answer","text":"It is perfect for breaking a genuine tie, settling a trivial choice quickly, or nudging yourself into a decision when you keep going back and forth. Your reaction to the answer often tells you what you really wanted."}},{"@type":"Question","name":"Does it need the internet?","acceptedAnswer":{"@type":"Answer","text":"No. After the page loads it runs entirely in your browser, so you can keep asking with no connection."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/yesorno/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/yesorno/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/yesorno/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/yesorno/">
+  <!-- SEO injected -->
+<meta property="og:title" content="When you just need a straight answer" />
+<meta property="og:description" content="When you just need a straight answer" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/yesorno/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"When you just need a straight answer","description":"When you just need a straight answer","url":"https://example.com/en/yesorno/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Yes or No</span></nav>
+  <h1>Yes or No</h1>
+  <p class="lead">Think of a question, then tap the button for a fair, random yes or no. A tally keeps score of how the answers fall.</p>
+  <section class="widget" id="tool"><div id="yn" data-yes="Yes" data-no="No"><div class="result"><span class="big" id="yn-result">Ask me anything</span></div><div class="row" style="justify-content:center"><button type="button" class="btn" id="yn-ask">Ask the question</button></div><div class="coin-tally"><span>Yes<b id="yn-y">0</b></span><span>No<b id="yn-n">0</b></span></div></div></section>
+  <article class="content">
+    <h2>When you just need a straight answer</h2>
+<p>Some decisions do not deserve a long debate. Should you order the pizza or not? Take the umbrella? Text first? Go for a walk even though it looks a bit grey outside? When a choice is genuinely balanced and the stakes are small, the fastest way forward is often to let chance decide. This Yes or No tool does exactly that: think of your question, tap the button, and it returns a fair, random yes or no in an instant. A running tally underneath keeps track of how the answers have fallen so far. Everything happens in your browser, so the answer appears immediately and nothing you ask is ever recorded or sent anywhere.</p>
+<p>The design is as simple as the question it answers. There is one button. Press it and a large &quot;Yes&quot; or &quot;No&quot; appears, coloured green or red so the verdict is unmistakable at a glance. Two counters below show how many of each you have received, which is useful if you are asking a series of questions or simply curious about how an even split looks over many taps. There is nothing to set up, no account to create and no clutter to distract you from the decision at hand.</p>
+<h2>How the answer is chosen</h2>
+<p>Every response is produced by your browser&#39;s cryptographically secure random number generator, the same trusted source of randomness used to protect sensitive tasks online. That means each answer is genuinely unpredictable and completely independent of the ones before it. Yes and no each carry an exact fifty per cent chance, every single time, with no bias in either direction and no memory of what came before. Unlike flipping through your own thoughts, where you might unconsciously lean toward the answer you already favour, the tool has no preference at all.</p>
+<p>Because it has no memory, a string of several &quot;yes&quot; answers in a row does not make &quot;no&quot; any more likely on the next tap. This is a common misunderstanding about chance: the odds reset completely each time. The tally makes this easy to see for yourself. Over just a few questions the split can look lopsided, with one answer racing ahead, but as you keep asking, the share of yes and no drifts steadily closer to even. It is a small, hands-on demonstration of how randomness behaves in the short run versus the long run.</p>
+<h2>The surprising usefulness of leaving it to chance</h2>
+<p>Handing a decision to a coin-like tool sounds frivolous, but it has a genuine psychological value that people have relied on for a long time. The trick is not that chance makes better choices than you do — it is that the moment the answer appears, you notice how you feel about it. If the tool says &quot;yes&quot; and you feel a flicker of relief, that reaction is a strong clue that yes was what you secretly wanted all along. If it says &quot;no&quot; and you immediately want to tap again for a different result, you have just learned that the answer matters to you more than you admitted, and perhaps deserves more than a random flip.</p>
+<p>Used this way, a Yes or No picker is less a fortune teller and more a mirror. It is perfect for breaking a true tie where either option is fine, for shaking yourself out of endless back-and-forth over something trivial, or for adding a little playful spontaneity to an ordinary day. It also settles friendly disputes without anyone feeling they lost an argument, because the outcome came from an impartial source that nobody could steer.</p>
+<h2>Everyday moments it fits</h2>
+<p>The small decisions pile up. Which chore to tackle first, whether to have dessert, if tonight is a stay-in or a go-out night, whether to send that slightly risky message, which of two equally good films to watch. None of these deserve a spreadsheet, and agonising over them just drains energy you could spend elsewhere. A quick, impartial yes or no clears the logjam and lets you get on with things.</p>
+<p>It is handy in groups too. When a table of friends cannot agree and nobody strongly minds either way, one tap ends the stalemate fairly. Parents use it to make small choices feel like a game rather than a negotiation. Teachers and facilitators use it to decide who goes first or whether to try an idea, keeping the mood light. Because the range of use is so wide and the barrier so low, many people keep a tool like this within reach for exactly these little moments.</p>
+<h2>A gentle word on the bigger stuff</h2>
+<p>For decisions that genuinely matter — anything involving your health, your money, your relationships or your safety — a random yes or no is not the right tool, and it does not pretend to be. Those choices deserve real thought, good information and sometimes the advice of people you trust. Where the tool shines is precisely in the opposite territory: the countless tiny, low-stakes choices where the cost of deciding wrongly is trivial and the cost of dithering is the only real problem. Knowing which kind of decision you are facing is part of using it well.</p>
+<h2>Private, instant and free</h2>
+<p>There is no sign-up, no cost and no waiting. The whole tool is a small piece of code running on your own device, which is why it answers the instant you tap and keeps working even with no internet connection. Nothing about your questions is uploaded, because you never type them in — you simply hold the question in your mind and read the verdict. The tally lives only on your screen and resets whenever you reload the page.</p>
+<p>To use it, think of your question, press the button, and read the answer. Ask again as many times as you like, glance at the yes and no counters whenever you want to check the running score, and reload the page to start fresh. It is the simplest possible decision-maker, always ready when you cannot quite make up your mind.</p>
+    <section class="faq"><h2>Yes or No FAQ</h2><dl><dt>Is the answer really random?</dt><dd>Yes. Each answer uses your browser&#39;s cryptographically secure random generator, giving yes and no an equal 50% chance every time, with no memory of earlier answers.</dd><dt>When should I use a yes or no picker?</dt><dd>It is perfect for breaking a genuine tie, settling a trivial choice quickly, or nudging yourself into a decision when you keep going back and forth. Your reaction to the answer often tells you what you really wanted.</dd><dt>Does it need the internet?</dt><dd>No. After the page loads it runs entirely in your browser, so you can keep asking with no connection.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/yesorno/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/yesorno/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/yesorno/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/yesorno.js" defer></script>
+</body>
+</html>

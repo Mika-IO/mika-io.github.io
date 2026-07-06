@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Base64 Encoder/Decoder — encode and decode Base64 online</title>
+<meta name="description" content="Free Base64 encoder and decoder. Encode text to Base64 or decode Base64 strings back to plain text instantly in your browser.">
+<link rel="canonical" href="https://mikaio.dev/hi/base64codec/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/base64codec/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/base64codec/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/base64codec/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/base64codec/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/base64codec/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/base64codec/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/base64codec/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/base64codec/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/base64codec/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/base64codec/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/base64codec/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Base64 Encoder/Decoder — encode and decode Base64 online">
+<meta property="og:description" content="Free Base64 encoder and decoder. Encode text to Base64 or decode Base64 strings back to plain text instantly in your browser.">
+<meta property="og:url" content="https://mikaio.dev/hi/base64codec/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Base64 Encoder/Decoder — encode and decode Base64 online","url":"https://mikaio.dev/hi/base64codec/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"Free Base64 encoder and decoder. Encode text to Base64 or decode Base64 strings back to plain text instantly in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"Base64 Encoder / Decoder","item":"https://mikaio.dev/hi/base64codec/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Base64?","acceptedAnswer":{"@type":"Answer","text":"Base64 is an encoding scheme that converts binary data into ASCII text using 64 characters (A-Z, a-z, 0-9, +, /). It is used to safely transmit binary data through text-only channels like email or JSON."}},{"@type":"Question","name":"Is Base64 encryption?","acceptedAnswer":{"@type":"Answer","text":"No. Base64 is an encoding, not encryption. Anyone can decode a Base64 string instantly. Do not use it to hide sensitive data."}},{"@type":"Question","name":"What is Base64 used for?","acceptedAnswer":{"@type":"Answer","text":"Embedding images in HTML/CSS (data URIs), encoding email attachments (MIME), storing binary data in JSON, transmitting credentials in HTTP Basic Authentication, and encoding binary data in URLs."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/hi/base64codec/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/base64codec/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/base64codec/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/base64codec/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/base64codec/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/base64codec/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/base64codec/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/base64codec/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/base64codec/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/base64codec/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/base64codec/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Base64 को तुरंत एन्कोड और डिकोड करें" />
+<meta property="og:description" content="Base64 को तुरंत एन्कोड और डिकोड करें" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/hi/base64codec/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Base64 को तुरंत एन्कोड और डिकोड करें","description":"Base64 को तुरंत एन्कोड और डिकोड करें","url":"https://example.com/hi/base64codec/","inLanguage":"hi"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>Base64 Encoder / Decoder</span></nav>
+  <h1>Base64 Encoder / Decoder</h1>
+  <p class="lead">Enter text or Base64 and click Encode or Decode.</p>
+  <section class="widget" id="tool"><div id="b64-app"><textarea id="b64-in" rows="4" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem;font-family:monospace" placeholder="Enter text or Base64…"></textarea><div style="display:flex;gap:0.5rem;margin-top:0.5rem"><button id="b64-enc" class="btn">Encode</button><button id="b64-dec" class="btn secondary">Decode</button><button id="b64-copy" class="btn secondary">Copy</button></div><pre id="b64-out" style="background:rgba(255,255,255,0.04);border-radius:0.5rem;padding:0.75rem;margin-top:0.5rem;overflow:auto;font-size:0.85rem;max-height:200px;white-space:pre-wrap;word-break:break-all"></pre><div id="b64-err" style="color:#f87171;font-size:0.85rem"></div></div></section>
+  <article class="content">
+    <h2>Base64 को तुरंत एन्कोड और डिकोड करें</h2>
+<p>Base64 एक बुनियादी एन्कोडिंग तरीक़ा है जो पूरी कंप्यूटिंग दुनिया में बाइनरी डेटा को सुरक्षित रूप से टेक्स्ट के रूप में दिखाने के लिए इस्तेमाल होता है। चाहे आप APIs के साथ काम कर रहे हों, नेटवर्क रिक्वेस्ट डीबग कर रहे हों, JWT टोकन समझने की कोशिश कर रहे हों, या HTML में इमेज एम्बेड कर रहे हों — Base64 हर जगह दिखता है। यह टूल किसी भी टेक्स्ट को एक क्लिक में Base64 में बदल देता है, और किसी भी Base64 स्ट्रिंग को वापस टेक्स्ट में डिकोड कर देता है।</p>
+<h2>Base64 है क्या?</h2>
+<p>Base64 एक बाइनरी-से-टेक्स्ट एन्कोडिंग स्कीम है जो बाइनरी डेटा को दिखाने के लिए सिर्फ़ 64 प्रिंट होने लायक़ ASCII अक्षरों का इस्तेमाल करती है: 26 बड़े अक्षर (A-Z), 26 छोटे अक्षर (a-z), 10 अंक (0-9), और साथ में + और / चिह्न। एक 65वाँ अक्षर, =, पैडिंग के लिए इस्तेमाल होता है।</p>
+<p>&quot;Base64&quot; नाम इसी बात से आया है कि यह एन्कोडिंग 64 अलग-अलग अक्षरों का इस्तेमाल करती है। हर Base64 अक्षर डेटा के 6 बिट को दर्शाता है (2^6 = 64)। चूँकि एक बाइट 8 बिट की होती है, इसलिए इनपुट के हर 3 बाइट ठीक 4 Base64 अक्षरों में बदल जाते हैं।</p>
+<h2>Base64 का वजूद क्यों है</h2>
+<p>कई पुराने टेक्स्ट-आधारित प्रोटोकॉल और सिस्टम सिर्फ़ ASCII टेक्स्ट संभाल सकते हैं, मनमाने बाइनरी बाइट नहीं। ईमेल (SMTP), URL, HTTP हेडर और XML — ये सब टेक्स्ट को सुरक्षित रूप से संभाल लेते हैं। लेकिन बाइनरी डेटा — जैसे इमेज, ऑडियो फ़ाइल, क्रिप्टोग्राफ़िक की या कंप्रेस्ड डेटा — इन्हें एन्कोड किए बिना इन चैनलों से सुरक्षित रूप से भेजा नहीं जा सकता।</p>
+<p>Base64 इसका हल यह निकालता है कि किसी भी बाइनरी डेटा को ऐसे ASCII अक्षरों के एक सबसेट में बदल देता है जिन्हें हर टेक्स्ट सिस्टम आराम से स्टोर और ट्रांसमिट कर सकता है।</p>
+<h2>आम इस्तेमाल</h2>
+<p><strong>डेटा URI</strong>: इमेज को अलग फ़ाइल रिक्वेस्ट के बिना सीधे HTML या CSS में एम्बेड किया जा सकता है। एक डेटा URI <code>data:image/png;base64,</code> से शुरू होकर उसके बाद Base64-एन्कोडेड इमेज डेटा आता है।</p>
+<p><strong>ईमेल अटैचमेंट (MIME)</strong>: ईमेल अटैचमेंट को MIME प्रोटोकॉल में भेजने के लिए Base64 में एन्कोड किया जाता है।</p>
+<p><strong>JSON APIs</strong>: बाइनरी डेटा (इमेज, फ़ाइलें, क्रिप्टोग्राफ़िक हस्ताक्षर) जो JSON में भेजा जाता है, उसे Base64 में एन्कोड करना ज़रूरी है क्योंकि JSON सिर्फ़ टेक्स्ट संभालता है।</p>
+<p><strong>HTTP बेसिक ऑथेंटिकेशन</strong>: Authorization हेडर क्रेडेंशियल को Base64(username:password) के रूप में भेजता है। यह अपने आप में सुरक्षित नहीं है — HTTPS फिर भी ज़रूरी है।</p>
+<p><strong>JWT टोकन</strong>: JSON वेब टोकन तीन Base64URL-एन्कोडेड हिस्सों (हेडर, पेलोड, हस्ताक्षर) से बनते हैं, जो बिंदुओं से अलग होते हैं।</p>
+<p><strong>डेटाबेस स्टोरेज</strong>: टेक्स्ट-आधारित स्टोरेज फ़ॉर्मेट (जैसे कुछ NoSQL डेटाबेस या कॉन्फ़िग फ़ाइलें) में स्टोर किए गए बाइनरी ब्लॉब अक्सर Base64 में एन्कोड होते हैं।</p>
+<h2>Base64 बनाम Base64URL</h2>
+<p>स्टैंडर्ड Base64 + और / इस्तेमाल करता है, जो URL में ख़ास मतलब रखने वाले अक्षर हैं। Base64URL इन्हें - और _ से बदल देता है ताकि एन्कोड किया गया डेटा URL में इस्तेमाल के लिए सुरक्षित रहे। JWT टोकन Base64URL इस्तेमाल करते हैं। Base64URL में = पैडिंग अक्षर को अक्सर छोड़ भी दिया जाता है।</p>
+<h2>सुरक्षा से जुड़ा एक नोट</h2>
+<p>Base64 एन्क्रिप्शन नहीं है। जिसे भी Base64-एन्कोडेड डेटा मिलता है, वह किसी भी Base64 डिकोडर से उसे तुरंत डिकोड कर सकता है। संवेदनशील जानकारी को &quot;छुपाने&quot; के लिए Base64 का इस्तेमाल न करें — उसके लिए असली एन्क्रिप्शन ही इस्तेमाल करें, जो बिना चाबी के पढ़े जाने को रोकने के लिए गणितीय रूप से बनाई गई है, जबकि Base64 सिर्फ़ उसी डेटा को दोबारा पलटने लायक़ ढंग से लिखने का एक तरीक़ा है।</p>
+<h2>टूल कैसे इस्तेमाल करें</h2>
+<p>एन्कोड फ़ील्ड में टेक्स्ट पेस्ट करते ही उसका Base64 रूप तुरंत मिल जाता है, या डिकोड फ़ील्ड में कोई Base64 स्ट्रिंग पेस्ट करके मूल टेक्स्ट वापस पाया जा सकता है, दोनों दिशाएँ टाइप करते ही ज़िंदा (live) अपडेट होती हैं। यह किसी JWT के पेलोड को झट से देखने, किसी डेटा URI में असल में क्या है यह जाँचने, या किसी ऐसे वैल्यू को तैयार करने के लिए काम आता है जिसे URL पैरामीटर या JSON फ़ील्ड जैसे टेक्स्ट-ओनली चैनल से सुरक्षित रूप से गुज़रना है।</p>
+<h2>Base64 एन्कोडिंग चरण-दर-चरण कैसे काम करती है</h2>
+<p>Base64 बाइनरी डेटा को टेक्स्ट में बदलने के लिए एक सीधी प्रक्रिया अपनाता है। पहले, बाइनरी डेटा को 3-बाइट यानी 24-बिट के गुच्छों में बाँटा जाता है। हर 24-बिट गुच्छे को चार 6-बिट समूहों में तोड़ा जाता है। हर 6-बिट मान, जो 0 से 63 के बीच होता है, Base64 वर्णमाला में खोजा जाता है, जहाँ A=0, B=1, यह क्रम Z=25 तक चलता है, फिर a=26 से z=51, 0=52 से 9=61, +=62 और /=63। अगर इनपुट ठीक 3 बाइट का गुणक न हो, तो आख़िरी समूह पूरा करने के लिए अंत में = पैडिंग अक्षर जोड़े जाते हैं। चूँकि 3 बाइट 4 Base64 अक्षर बन जाते हैं, इसलिए एन्कोडिंग से डेटा का आकार लगभग 33 प्रतिशत बढ़ जाता है — 1 MB की बाइनरी फ़ाइल Base64 में एन्कोड होकर लगभग 1.37 MB का टेक्स्ट बन जाती है।</p>
+<h2>डेटा URI और इनलाइन इमेज</h2>
+<p>Base64 के सबसे दिखने वाले इस्तेमालों में से एक है डेटा URI, जो किसी फ़ाइल को अलग फ़ाइल की तरह रेफर करने की बजाय सीधे HTML या CSS में एम्बेड करने देता है, कुछ इस तरह: <code>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...</code>। इससे उस संसाधन के लिए अलग HTTP रिक्वेस्ट की ज़रूरत ख़त्म हो जाती है, जो छोटे आइकॉन और इमेज के लिए परफ़ॉर्मेंस बेहतर कर सकता है। लेकिन Base64 डेटा को उस पेज से अलग कैश नहीं किया जा सकता जिसमें वह एम्बेड है, और लगभग 33 प्रतिशत साइज़ बढ़ने की वजह से बड़ी इमेज के लिए यह तरीक़ा नाकाफ़ी हो जाता है, इसलिए इसे आमतौर पर छोटी फ़ाइलों तक ही सीमित रखा जाता है।</p>
+<h2>JWT टोकन और Base64URL</h2>
+<p>JSON वेब टोकन Base64URL नाम के एक वैरिएंट का इस्तेमाल करते हैं, जो + और / अक्षरों को — जिनका URL के अंदर ख़ास मतलब होता है — क्रमशः - और _ से बदल देता है, और आमतौर पर = पैडिंग को पूरी तरह छोड़ देता है। एक JWT बिंदुओं से अलग किए गए तीन हिस्सों जैसा दिखता है — हेडर, पेलोड और हस्ताक्षर — हर एक Base64URL में एन्कोड किया गया डेटा का टुकड़ा, यही वजह है कि JWT को बिना किसी अतिरिक्त एस्केपिंग के सीधे किसी URL या HTTP हेडर में रखा जा सकता है।</p>
+<h2>ईमेल में Base64</h2>
+<p>ईमेल के लिए MIME स्टैंडर्ड यह तय करता है कि मैसेज बॉडी और अटैचमेंट को ट्रांसमिशन के लिए कैसे एन्कोड किया जाए। टेक्स्ट-आधारित कंटेंट आमतौर पर एक अलग तरीक़ा इस्तेमाल करता है जिसे quoted-printable एन्कोडिंग कहते हैं, जबकि बाइनरी अटैचमेंट Base64 इस्तेमाल करते हैं। जब आप किसी ईमेल में PDF अटैच करते हैं, तो आपका ईमेल क्लाइंट भेजने से पहले उसे Base64 में एन्कोड कर देता है, और पाने वाले का क्लाइंट उसे अपने-आप वापस मूल फ़ाइल में डिकोड कर देता है — यह सब दोनों तरफ़ के लोगों को दिखे बिना होता है।</p>
+<h2>प्राइवेट और तुरंत</h2>
+<p>एन्कोडिंग और डिकोडिंग पूरी तरह आपके ब्राउज़र में बने हुए btoa और atob फ़ंक्शन इस्तेमाल करके होती है, इसलिए नतीजे तुरंत दिखते हैं और जो भी डेटा आप एन्कोड या डिकोड करते हैं वह कभी कहीं भेजा नहीं जाता।</p>
+    <section class="faq"><h2>Base64 FAQ</h2><dl><dt>What is Base64?</dt><dd>Base64 is an encoding scheme that converts binary data into ASCII text using 64 characters (A-Z, a-z, 0-9, +, /). It is used to safely transmit binary data through text-only channels like email or JSON.</dd><dt>Is Base64 encryption?</dt><dd>No. Base64 is an encoding, not encryption. Anyone can decode a Base64 string instantly. Do not use it to hide sensitive data.</dd><dt>What is Base64 used for?</dt><dd>Embedding images in HTML/CSS (data URIs), encoding email attachments (MIME), storing binary data in JSON, transmitting credentials in HTTP Basic Authentication, and encoding binary data in URLs.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/base64codec/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/base64codec/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/base64codec/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/base64codec/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/base64codec/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/base64codec/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/base64codec/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/base64codec/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/base64codec/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/base64codec/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/glossary.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/base64codec.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMI ক্যালকুলেটর — বডি মাস ইনডেক্স (মেট্রিক ও ইম্পেরিয়াল)</title>
+<meta name="description" content="ফ্রি BMI ক্যালকুলেটর। মেট্রিক বা ইম্পেরিয়াল এককে আপনার উচ্চতা ও ওজন দিন এবং ব্রাউজারেই সঙ্গে সঙ্গে আপনার বডি মাস ইনডেক্স ও শ্রেণি জেনে নিন।">
+<link rel="canonical" href="https://mikaio.dev/bn/bmicalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/bmicalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/bmicalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/bmicalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/bmicalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/bmicalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/bmicalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/bmicalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/bmicalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/bmicalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/bmicalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/bmicalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BMI ক্যালকুলেটর — বডি মাস ইনডেক্স (মেট্রিক ও ইম্পেরিয়াল)">
+<meta property="og:description" content="ফ্রি BMI ক্যালকুলেটর। মেট্রিক বা ইম্পেরিয়াল এককে আপনার উচ্চতা ও ওজন দিন এবং ব্রাউজারেই সঙ্গে সঙ্গে আপনার বডি মাস ইনডেক্স ও শ্রেণি জেনে নিন।">
+<meta property="og:url" content="https://mikaio.dev/bn/bmicalc/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"BMI ক্যালকুলেটর — বডি মাস ইনডেক্স (মেট্রিক ও ইম্পেরিয়াল)","url":"https://mikaio.dev/bn/bmicalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"ফ্রি BMI ক্যালকুলেটর। মেট্রিক বা ইম্পেরিয়াল এককে আপনার উচ্চতা ও ওজন দিন এবং ব্রাউজারেই সঙ্গে সঙ্গে আপনার বডি মাস ইনডেক্স ও শ্রেণি জেনে নিন।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"BMI ক্যালকুলেটর","item":"https://mikaio.dev/bn/bmicalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"সুস্থ BMI-এর সীমা কত?","acceptedAnswer":{"@type":"Answer","text":"বেশিরভাগ প্রাপ্তবয়স্কের জন্য 18.5 থেকে 24.9-এর মধ্যে BMI সুস্থ ওজন ধরা হয়। 18.5-এর নিচে কম ওজন, 25 থেকে 29.9 বেশি ওজন, এবং 30 বা তার বেশি স্থূলতার সীমায় পড়ে।"}},{"@type":"Question","name":"BMI কি সবার জন্য নির্ভুল?","acceptedAnswer":{"@type":"Answer","text":"BMI একটি কার্যকর স্ক্রিনিং টুল, তবে এটি সরাসরি শরীরের চর্বি মাপে না। পেশিবহুল মানুষ, ক্রীড়াবিদ, বয়স্ক ব্যক্তি ও কিছু জাতিগোষ্ঠীর জন্য ব্যাখ্যা আলাদা হতে পারে, তাই ফলাফলকে শুরুর বিন্দু হিসেবে নিন, রোগনির্ণয় হিসেবে নয়।"}},{"@type":"Question","name":"এই টুল কি আমার তথ্য সংরক্ষণ করে?","acceptedAnswer":{"@type":"Answer","text":"না। হিসাবটি সম্পূর্ণভাবে আপনার ব্রাউজারে হয় এবং আপনি যা লেখেন তার কিছুই আপলোড, সংরক্ষণ বা শেয়ার করা হয় না।"}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/bn/bmicalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/bmicalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/bmicalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/bmicalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/bmicalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/bmicalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/bmicalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/bmicalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/bmicalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/bmicalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/bmicalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="বডি মাস ইনডেক্স আসলে কী মাপে" />
+<meta property="og:description" content="বডি মাস ইনডেক্স আসলে কী মাপে" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/bn/bmicalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"বডি মাস ইনডেক্স আসলে কী মাপে","description":"বডি মাস ইনডেক্স আসলে কী মাপে","url":"https://example.com/bn/bmicalc/","inLanguage":"bn"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>BMI ক্যালকুলেটর</span></nav>
+  <h1>BMI ক্যালকুলেটর</h1>
+  <p class="lead">কয়েক সেকেন্ডেই আপনার বডি মাস ইনডেক্স বের করুন। মেট্রিক বা ইম্পেরিয়াল একক বেছে নিন, উচ্চতা ও ওজন দিন, আর সঙ্গে সঙ্গে দেখুন আপনার BMI ও শ্রেণি।</p>
+  <section class="widget" id="tool"><form id="bmi-form" data-under="কম ওজন" data-normal="সুস্থ ওজন" data-over="বেশি ওজন" data-obese="স্থূলতা" data-hmet="উচ্চতা (সেমি)" data-wmet="ওজন (কেজি)" data-himp="উচ্চতা (ইঞ্চি)" data-wimp="ওজন (পাউন্ড)"><div class="field"><label for="bmi-units">একক</label><select id="bmi-units"><option value="metric">মেট্রিক (সেমি, কেজি)</option><option value="imperial">ইম্পেরিয়াল (ইঞ্চি, পাউন্ড)</option></select></div><div class="row"><div class="field"><label id="bmi-hlabel" for="bmi-height">উচ্চতা (সেমি)</label><input type="number" id="bmi-height" inputmode="decimal" step="any" min="0"></div><div class="field"><label id="bmi-wlabel" for="bmi-weight">ওজন (কেজি)</label><input type="number" id="bmi-weight" inputmode="decimal" step="any" min="0"></div></div><button class="btn" type="submit">BMI বের করুন</button><div class="result" id="bmi-result" hidden><span class="big" id="bmi-value"></span><span id="bmi-cat"></span></div></form></section>
+  <article class="content">
+    <h2>বডি মাস ইনডেক্স আসলে কী মাপে</h2>
+<p>বডি মাস ইনডেক্স, যাকে প্রায় সবসময় সংক্ষেপে BMI বলা হয়, একটি একক সংখ্যা যা বর্ণনা করে আপনার ওজন আপনার উচ্চতার তুলনায় কেমন। উনিশ শতকে বেলজীয় গণিতবিদ আদল্‌ফ কেতলে এটি উদ্ভাবন করেন, সেই কারণেই একে কখনও কখনও কেতলে ইনডেক্স-ও বলা হয়। ধারণাটি সহজ: দুজন মানুষের ওজন হুবহু একই হতে পারে, কিন্তু একজন যদি অন্যজনের চেয়ে অনেক লম্বা হন, তবে সেই ওজন একটি বড় কাঠামোর ওপর ছড়িয়ে পড়ে এবং তার অর্থ হয় সম্পূর্ণ ভিন্ন। BMI এই সম্পর্কটিকে এমনভাবে ধরার চেষ্টা করে যা দ্রুত হিসাব করা যায় এবং একটি গোটা জনসংখ্যার মধ্যে সহজে তুলনা করা যায়।</p>
+<p>যেহেতু এর জন্য কেবল দুটি মাপ দরকার যা প্রায় সবাই আগে থেকেই জানেন — উচ্চতা ও ওজন — BMI বিশ্বের সবচেয়ে বহুল ব্যবহৃত ওজন স্ক্রিনিং টুল হয়ে উঠেছে। চিকিৎসক, নার্স, বিমা কোম্পানি, গবেষক এবং জনস্বাস্থ্য সংস্থাগুলো এর ওপর নির্ভর করে কারণ এটি সস্তা, দ্রুত এবং এর জন্য কোনও বিশেষ যন্ত্রপাতি লাগে না। এই ক্যালকুলেটর ঠিক সেই হিসাবই করে যা কোনও ক্লিনিক করত, সঙ্গে সঙ্গে এবং গোপনীয়ভাবে, আপনি যা টাইপ করেন তার কিছুই কোথাও পাঠায় না।</p>
+<h2>এই BMI ক্যালকুলেটর কীভাবে ব্যবহার করবেন</h2>
+<p>টুলটি ব্যবহার করতে মাত্র কয়েক সেকেন্ড লাগে। প্রথমে বেছে নিন আপনি মেট্রিক এককে (সেন্টিমিটার ও কিলোগ্রাম) কাজ করতে চান নাকি ইম্পেরিয়াল এককে (ইঞ্চি ও পাউন্ড)। আপনার পছন্দ অনুযায়ী দুটি বাক্সের লেবেল আপনাআপনি বদলে যায়, ফলে কোন একক কোথায় বসবে তা আপনাকে কখনও আন্দাজ করতে হয় না। এরপর প্রথম বাক্সে আপনার উচ্চতা এবং দ্বিতীয়টিতে আপনার ওজন লিখুন। শেষে <strong>BMI বের করুন</strong> বোতামে চাপ দিন। আপনার বডি মাস ইনডেক্স সঙ্গে সঙ্গে এক দশমিক পর্যন্ত একটি সংখ্যা হিসেবে দেখা যায়, সঙ্গে থাকে যে শ্রেণিতে এটি পড়ে সেটি এবং একটি রঙিন চিহ্ন, যাতে এক নজরেই বুঝতে পারেন আপনি কোথায় আছেন।</p>
+<p>সবকিছু আপনার নিজের ব্রাউজারের ভেতরেই ঘটে। কিছুই কোনও সার্ভারে আপলোড হয় না, দুই বার আসার মাঝে কিছুই সংরক্ষিত হয় না, এবং আপনাকে অ্যাকাউন্ট তৈরি করতে বা কোনও ট্র্যাকিং মেনে নিতে হয় না। আপনি যদি একাধিক সমন্বয় পরখ করতে চান — যেমন কোনও লক্ষ্য ওজন আপনার ফল কীভাবে বদলাবে তা দেখতে — তবে কেবল সংখ্যাগুলো বদলে আবার বোতামে চাপ দিন।</p>
+<h2>সংখ্যাটির পেছনের সূত্র</h2>
+<p>BMI-কে সংজ্ঞায়িত করা হয় কিলোগ্রামে আপনার ওজনকে মিটারে আপনার উচ্চতার বর্গ দিয়ে ভাগ করে। অন্যভাবে বললে:</p>
+<p><code>BMI = ওজন (কেজি) ÷ উচ্চতা (মি) ÷ উচ্চতা (মি)</code></p>
+<p>আপনি যদি ইম্পেরিয়াল একক পছন্দ করেন, তবে সমতুল্য সূত্রটি পাউন্ডে আপনার ওজনকে 703 দিয়ে গুণ করে এবং ইঞ্চিতে আপনার উচ্চতার বর্গ দিয়ে ভাগ করে:</p>
+<p><code>BMI = 703 × ওজন (পাউন্ড) ÷ উচ্চতা (ইঞ্চি) ÷ উচ্চতা (ইঞ্চি)</code></p>
+<p>703 গুণকটি কেবল পাউন্ড ও ইঞ্চির ফলকে মেট্রিক সংস্করণের একই স্কেলে নিয়ে আসে, ফলে একই ব্যক্তির জন্য দুটি সূত্রই অভিন্ন উত্তর দেয়। এই ক্যালকুলেটর রূপান্তরটি আপনার হয়ে সামলে নেয়, তবে কী ঘটছে তা বোঝা কাজের, যাতে ফলটি কখনও একটি বন্ধ বাক্সের মতো না লাগে।</p>
+<h2>শ্রেণিগুলোর অর্থ কী</h2>
+<p>বিশ্ব স্বাস্থ্য সংস্থা প্রাপ্তবয়স্কদের জন্য চারটি প্রশস্ত BMI ব্যান্ড নির্ধারণ করে, এবং এই টুল একই সীমা ব্যবহার করে:</p>
+<ul>
+<li><strong>কম ওজন:</strong> 18.5-এর নিচে BMI। কারও কারও জন্য এটি সম্পূর্ণ সুস্থ হতে পারে, তবে এটি এই ইঙ্গিতও দিতে পারে যে আপনি যথেষ্ট শক্তি বা পুষ্টি পাচ্ছেন না।</li>
+<li><strong>সুস্থ ওজন:</strong> 18.5 থেকে 24.9 পর্যন্ত BMI। বড় বড় গবেষণায় এই ব্যান্ডটিই ওজন-সম্পর্কিত স্বাস্থ্য সমস্যার সবচেয়ে কম গড় ঝুঁকির সঙ্গে যুক্ত।</li>
+<li><strong>বেশি ওজন:</strong> 25 থেকে 29.9 পর্যন্ত BMI। এই ব্যান্ডে থাকা আপনাআপনি খারাপ স্বাস্থ্য বোঝায় না, তবে এটি প্রায়ই অভ্যাস খতিয়ে দেখার একটি ভালো ইঙ্গিত।</li>
+<li><strong>স্থূলতা:</strong> 30 বা তার বেশি BMI। জনসংখ্যা গবেষণায় এই ব্যান্ডটি টাইপ 2 ডায়াবেটিস, উচ্চ রক্তচাপ ও হৃদরোগের মতো অবস্থার বেশি সম্ভাবনার সঙ্গে যুক্ত।</li>
+</ul>
+<p>এগুলো জনসংখ্যার গড়, কোনও একজন ব্যক্তির সম্পর্কে রায় নয়। এগুলো লক্ষ লক্ষ মানুষের মধ্যে পরিসংখ্যানগত ঝুঁকি বর্ণনা করে, আর আপনার ব্যক্তিগত স্বাস্থ্য এমন অনেক কিছুর ওপর নির্ভর করে যা একটিমাত্র সংখ্যা কখনও দেখতে পায় না।</p>
+<h2>একটি সমাধান করা উদাহরণ</h2>
+<p>ধরুন একজন মানুষ 1.75 মিটার লম্বা এবং তাঁর ওজন 70 কিলোগ্রাম। উচ্চতার বর্গ করলে পাওয়া যায় 1.75 × 1.75 = 3.0625। ওজনকে এই সংখ্যা দিয়ে ভাগ করলে পাওয়া যায় 70 ÷ 3.0625 ≈ 22.9। 22.9 BMI স্বচ্ছন্দে সুস্থ ওজন ব্যান্ডের ভেতরে বসে। একই ব্যক্তির ওজন যদি 82 কিলোগ্রাম হতো, তবে BMI হতো 82 ÷ 3.0625 ≈ 26.8, যা বেশি ওজন ব্যান্ডে পড়ে। লক্ষ করুন, বারো কিলোগ্রামের পরিবর্তন ফলটিকে মাত্র প্রায় চার BMI পয়েন্ট সরায় — স্কেলটি ইচ্ছাকৃতভাবে নরম রাখা হয়েছে যাতে দৈনন্দিন ছোট ওঠানামা আপনাকে এক শ্রেণি থেকে অন্যটিতে ছুড়ে না ফেলে।</p>
+<h2>BMI কেন পুরো গল্প নয়</h2>
+<p>BMI একটি স্ক্রিনিং টুল, রোগনির্ণয় নয়, এবং এর কিছু বাস্তব সীমাবদ্ধতা আছে যা বোঝা দরকার। যেহেতু এটি কেবল উচ্চতা ও ওজন থেকে হিসাব হয়, এটি পেশি ও চর্বির পার্থক্য করতে পারে না। একজন সুপ্রশিক্ষিত ক্রীড়াবিদ বা গুরুতর ভারোত্তোলক প্রচুর ঘন পেশি বহন করতে পারেন এবং বেশি ওজন এমনকি স্থূলতা ব্যান্ডে BMI দেখাতে পারেন, অথচ তাঁর শরীরে চর্বি খুব সামান্য। অন্য প্রান্তে, পেশি হারানো একজন বয়স্ক ব্যক্তির BMI সুস্থ ব্যান্ডে থাকতে পারে, তবু আদর্শের চেয়ে বেশি চর্বি বহন করতে পারেন।</p>
+<p>BMI চর্বি কোথায় জমা আছে সে সম্পর্কেও কিছু বলে না। পেটের চারপাশে জমা চর্বি সাধারণত কোমর ও ঊরুর চর্বির চেয়ে স্বাস্থ্য ঝুঁকির সঙ্গে বেশি জড়িত, সেই কারণেই কোমরের পরিধি বা কোমর-নিতম্ব অনুপাতের মতো মাপ প্রায়ই BMI-এর সঙ্গে ব্যবহৃত হয়। সবশেষে, মানক সীমাগুলো অনেকাংশে ইউরোপীয় জনসংখ্যা থেকে বের করা হয়েছিল, এবং কিছু স্বাস্থ্য সংস্থা দক্ষিণ এশীয়, চীনা ও অন্যান্য পটভূমির মানুষের জন্য নিম্নতর কাট-অফ বিন্দুর সুপারিশ করে, কারণ ঝুঁকি আরও কম BMI-তেই দেখা দিতে পারে। শিশু ও কিশোরদের জন্য BMI এখানে ব্যবহৃত স্থির প্রাপ্তবয়স্ক ব্যান্ডের বদলে বয়স-ও-লিঙ্গভিত্তিক গ্রোথ চার্টের সাপেক্ষে পড়তে হবে।</p>
+<h2>আপনার ফল ভালোভাবে কাজে লাগানো</h2>
+<p>আপনার BMI-কে বহু তথ্যের মধ্যে একটি হিসেবে ভাবুন, যেন কোনও ড্যাশবোর্ডে একটি মাত্র পাঠ। আপনার সংখ্যা যদি সুস্থ ব্যান্ডের বাইরে পড়ে, তবে এটি আরও কাছ থেকে দেখার আমন্ত্রণ, আতঙ্কিত হওয়ার কারণ নয়। একজন চিকিৎসকের সঙ্গে সংক্ষিপ্ত আলাপ, যিনি আপনার পেশি, কোমরের মাপ, রক্তচাপ, পারিবারিক ইতিহাস ও জীবনযাত্রা বিবেচনা করতে পারেন, সবসময় কোনও ক্যালকুলেটরের চেয়ে বেশি বলবেন। আপনি যদি নিজের BMI বদলাতে চান, তবে দৈনন্দিন অভ্যাসে ধীর ও স্থির পরিবর্তন — বেশি নড়াচড়া, প্রচুর শাকসবজি ও গোটা খাবারসহ সুষম আহার, ভালো ঘুম এবং চাপ সামলানো — সাধারণত নাটকীয় স্বল্পমেয়াদি ডায়েটের চেয়ে অনেক বেশি টেকসই।</p>
+<p>যেহেতু এই ক্যালকুলেটর সম্পূর্ণ গোপন ও তাৎক্ষণিক, এটি যখন খুশি সেই একটি সংখ্যা যাচাই করার, নিজের নোট দিয়ে সময়ের সঙ্গে তা ট্র্যাক করার এবং পরের সাক্ষাতে একটি সুবিবেচিত প্রশ্ন নিয়ে যাওয়ার সহজ উপায়। আজ আপনি কোথায় আছেন দেখতে ওপরে আপনার উচ্চতা ও ওজন দিন।</p>
+    <section class="faq"><h2>BMI সম্পর্কে সাধারণ প্রশ্ন</h2><dl><dt>সুস্থ BMI-এর সীমা কত?</dt><dd>বেশিরভাগ প্রাপ্তবয়স্কের জন্য 18.5 থেকে 24.9-এর মধ্যে BMI সুস্থ ওজন ধরা হয়। 18.5-এর নিচে কম ওজন, 25 থেকে 29.9 বেশি ওজন, এবং 30 বা তার বেশি স্থূলতার সীমায় পড়ে।</dd><dt>BMI কি সবার জন্য নির্ভুল?</dt><dd>BMI একটি কার্যকর স্ক্রিনিং টুল, তবে এটি সরাসরি শরীরের চর্বি মাপে না। পেশিবহুল মানুষ, ক্রীড়াবিদ, বয়স্ক ব্যক্তি ও কিছু জাতিগোষ্ঠীর জন্য ব্যাখ্যা আলাদা হতে পারে, তাই ফলাফলকে শুরুর বিন্দু হিসেবে নিন, রোগনির্ণয় হিসেবে নয়।</dd><dt>এই টুল কি আমার তথ্য সংরক্ষণ করে?</dt><dd>না। হিসাবটি সম্পূর্ণভাবে আপনার ব্রাউজারে হয় এবং আপনি যা লেখেন তার কিছুই আপলোড, সংরক্ষণ বা শেয়ার করা হয় না।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/bmicalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/bmicalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/bmicalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/bmicalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/bmicalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/bmicalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/bmicalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/bmicalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/bmicalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/bmicalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/glossary.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/bmicalc.js" defer></script>
+</body>
+</html>

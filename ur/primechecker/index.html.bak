@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prime Number Checker — is this number prime?</title>
+<meta name="description" content="Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization.">
+<link rel="canonical" href="https://mikaio.dev/ur/primechecker/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/primechecker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/primechecker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/primechecker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/primechecker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/primechecker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prime Number Checker — is this number prime?">
+<meta property="og:description" content="Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization.">
+<meta property="og:url" content="https://mikaio.dev/ur/primechecker/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Prime Number Checker — is this number prime?","url":"https://mikaio.dev/ur/primechecker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Prime Number Checker","item":"https://mikaio.dev/ur/primechecker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a prime number?","acceptedAnswer":{"@type":"Answer","text":"A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by modern convention."}},{"@type":"Question","name":"What is prime factorization?","acceptedAnswer":{"@type":"Answer","text":"Every integer greater than 1 can be expressed as a product of prime numbers in exactly one way (the Fundamental Theorem of Arithmetic). For example, 60 = 2 × 2 × 3 × 5."}},{"@type":"Question","name":"How large a number can I check?","acceptedAnswer":{"@type":"Answer","text":"The tool works efficiently for numbers up to about 10 million using trial division. Very large numbers may take a moment to process."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Prime Number Checker</span></nav>
+  <h1>Prime Number Checker</h1>
+  <p class="lead">Enter a positive integer to check if it is prime and see its divisors and prime factorization.</p>
+  <section class="widget" id="tool"><form id="prime-form"><div class="row"><div class="field"><label for="prime-n">Number</label><input type="number" id="prime-n" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="big" id="prime-out">—</span></div><div id="prime-factors" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>کیا یہ عدد مفرد ہے؟</h2>
+<p>مفرد عدد ریاضی کے سب سے بنیادی تصورات میں سے ایک ہے — ایک ایسا مثبت عدد صحیح جو 1 سے بڑا ہو اور جسے 1 اور خود اپنے سوا کسی اور عدد سے پوری طرح تقسیم نہ کیا جا سکے۔ کوئی دیا گیا عدد مفرد ہے یا نہیں، یہ سوال ہزاروں سال سے ریاضی دانوں کو مسحور کیے ہوئے ہے اور آج کی خفیہ کاری (کرپٹوگرافی) میں بھی اس کی عملی اہمیت برقرار ہے۔ یہ ٹول آپ کے درج کردہ کسی بھی عدد کا جواب فوراً دیتا ہے، اور ساتھ ہی اس کے تمام تقسیم کاروں کی مکمل فہرست اور اس کا جزوی تجزیہ بھی دکھاتا ہے۔</p>
+<h2>عدد کو مفرد کیا بناتا ہے؟</h2>
+<p>تعریف بہت سادہ ہے: ایک مثبت عدد صحیح مفرد تب ہوتا ہے جب اس کے صرف دو مثبت تقسیم کار ہوں — 1 اور خود وہ عدد۔ مثلاً 7 مفرد ہے کیونکہ اسے صرف 1 اور 7 سے مکمل تقسیم کیا جا سکتا ہے۔ اس کے برعکس 8 مفرد نہیں، کیونکہ یہ 2 اور 4 سے بھی تقسیم ہو جاتا ہے۔ عدد 1 ایک الگ صورت ہے: جدید ریاضیاتی روایت کے مطابق اسے مفرد شمار نہیں کیا جاتا، کیونکہ ایسا کرنے سے جزوی تجزیے کی منفرد حیثیت متاثر ہو جاتی۔</p>
+<p>پہلے چند مفرد اعداد یہ ہیں: 2، 3، 5، 7، 11، 13، 17، 19، 23، 29، 31، 37، 41، 43، 47۔ خیال رہے کہ 2 واحد جفت (even) مفرد عدد ہے، کیونکہ اس کے علاوہ ہر جفت عدد 2 سے تقسیم ہو جاتا ہے، اس لیے مفرد نہیں رہ سکتا۔</p>
+<h2>بڑے پیمانے پر مفرد ہونے کی جانچ</h2>
+<p>یہ ٹول جس طریقے سے کام کرتا ہے، یعنی آزمائشی تقسیم، لاکھوں تک کے اعداد کے لیے بہت اچھی طرح چلتا ہے، مگر اصل دنیا کی خفیہ کاری میں استعمال ہونے والے حقیقتاً بہت بڑے اعداد کے لیے، جو سینکڑوں ہندسوں تک جا سکتے ہیں، یہ طریقہ ناقابلِ عمل ہو جاتا ہے۔ ایسے اعداد کے لیے ریاضی دان اور کمپیوٹر سائنس دان امکانی جانچ کے طریقے استعمال کرتے ہیں، جیسے مِلر-رابن ٹیسٹ، جو کسی عدد کے مفرد ہونے کی مکمل ضمانت تو نہیں دے سکتا، مگر مرکب ہونے کے امکان کو اتنی کم غلطی کی شرح تک رد کر دیتا ہے کہ عملی طور پر اسے نظر انداز کیا جا سکتا ہے — یہ غلطی کا امکان دراصل اس کمپیوٹر میں ہارڈویئر خرابی کے امکان سے بھی کم ہوتا ہے۔ ان تیز رفتار طریقوں کی ضرورت کیوں پیش آئی، یہ سمجھنے کے لیے پہلے آزمائشی تقسیم کو سمجھنا ایک اچھی بنیاد ہے۔</p>
+<h2>جزوی تجزیہ</h2>
+<p>ریاضی کا بنیادی نظریہ (Fundamental Theorem of Arithmetic) کہتا ہے کہ 1 سے بڑا ہر عدد صحیح صرف اور صرف ایک ہی طریقے سے مفرد اعداد کے حاصل ضرب کی صورت میں لکھا جا سکتا ہے، سوائے عوامل کی ترتیب کے فرق کے۔ اسے جزوی تجزیہ کہتے ہیں۔ مثال کے طور پر: 12 = 2 × 2 × 3، جسے 2² × 3 لکھا جاتا ہے۔ عدد 360 = 2³ × 3² × 5 کے برابر ہے۔ کسی عدد کا جزوی تجزیہ نکالنا دراصل اسے اس کے مفرد اجزاء میں توڑنا ہے، جس سے اس کی ریاضیاتی ساخت کھل کر سامنے آ جاتی ہے۔</p>
+<h2>مفرد اعداد کیوں اہم ہیں</h2>
+<p>مفرد اعداد تمام اعداد صحیح کی بنیادی اکائیاں ہیں — ہر مرکب (غیر مفرد) عدد مفرد اعداد کو آپس میں ضرب دے کر بنایا جا سکتا ہے۔ یہی خاصیت انہیں نظریہِ اعداد کا مرکز بناتی ہے، ریاضی کی وہ شاخ جو اعداد صحیح کی خصوصیات کا مطالعہ کرتی ہے۔</p>
+<p>جدید کمپیوٹنگ میں بڑے اعداد کو ان کے مفرد اجزاء میں توڑنے کی دشواری ہی RSA خفیہ کاری کی بنیاد ہے، جو انٹرنیٹ کی زیادہ تر محفوظ گفتگو کو تحفظ دیتی ہے۔ دو بڑے مفرد اعداد کو آپس میں ضرب دے کر ایک عوامی کلید بنائی جاتی ہے۔ اس حاصل ضرب کو دوبارہ اس کے مفرد اجزاء میں توڑنا — بغیر پہلے سے انہیں جانے — کافی بڑے اعداد کے لیے کمپیوٹری طور پر تقریباً ناممکن ہے۔</p>
+<h2>جانچ کیسے کام کرتی ہے</h2>
+<p>یہ ٹول آزمائشی تقسیم استعمال کرتا ہے: یہ چیک کرتا ہے کہ آیا دیا گیا عدد 2 سے لے کر اس کے مربع جذر تک کسی بھی عدد سے تقسیم ہوتا ہے۔ اگر ایسا کوئی تقسیم کار مل جائے تو عدد مرکب ہے اور ٹول اس کے عوامل ریکارڈ کر لیتا ہے۔ اگر کوئی نہ ملے تو عدد مفرد ہے۔ مربع جذر کی حد اس لیے کارگر ہے کہ اگر کسی عدد n کا کوئی عامل √n سے بڑا ہو، تو اس کے ساتھ ضرور ایک چھوٹا عامل بھی موجود ہوگا جو √n سے کم ہوگا، اس لیے مربع جذر پر رک جانا کافی ہے۔</p>
+<h2>ایک مختصر مثال</h2>
+<p>عدد 91 کو لیجیے۔ یہ طاق ہے، 3 سے تقسیم نہیں ہوتا (9+1=10 جو 3 کا مضاعف نہیں)، اور نہ ہی 0 یا 5 پر ختم ہوتا ہے، تو ابتدائی، واضح ٹیسٹ یہی اشارہ دیتے ہیں کہ شاید یہ مفرد ہو — مگر 7 سے تقسیم چیک کرنے پر پتا چلتا ہے کہ 91 ÷ 7 = 13 ٹھیک بیٹھتا ہے، یعنی 91 دراصل مرکب ہے، جس کا جزوی تجزیہ 7 × 13 ہے۔ یہ ایک کلاسیکی مثال ہے جو یہ ظاہر کرتی ہے کہ &quot;کسی واضح چیز سے تقسیم نہیں ہو رہا&quot; کا مطلب یہ نہیں کہ &quot;یہ مفرد ہے&quot;: یقین سے جاننے کا واحد قابلِ اعتماد طریقہ مربع جذر تک ہر ممکنہ تقسیم کار کو چیک کرنا ہے، اور یہی کام یہ ٹول خودکار اور فوری طور پر کرتا ہے۔</p>
+<h2>روزمرہ استعمال</h2>
+<p>مفرد اعداد کی گہری ریاضیاتی اہمیت خفیہ کاری اور نظریہِ اعداد میں ہے، مگر روزمرہ استعمال میں پہیلیاں، تعلیمی مشقیں اور پروگرامنگ کے چیلنجز شامل ہیں۔ تقسیم پذیری، عوامل اور مضاعفات سیکھنے والے طلبہ کو اکثر ریاضی کی مشقوں کے دوران مفرد ہونے کی جانچ اور جزوی تجزیہ نکالنے کی ضرورت پڑتی ہے۔</p>
+<h2>چیکر کیسے استعمال کریں</h2>
+<p>خانے میں کوئی بھی مثبت عدد صحیح لکھیں اور نتیجہ فوراً سامنے آ جاتا ہے: یہ کہ عدد مفرد ہے یا نہیں، اور اگر نہیں تو اس کے تمام تقسیم کاروں کی مکمل فہرست اور اس کا جزوی تجزیہ الگ الگ مفرد قوتوں میں۔ روزمرہ استعمال کے لیے جانچے جانے والے عدد کے حجم کی کوئی عملی حد نہیں، کیونکہ یہ ٹول جو آزمائشی تقسیم کا طریقہ استعمال کرتا ہے وہ لاکھوں تک اور اس سے آگے کے اعداد کو بھی تقریباً فوری طور پر سنبھال لیتا ہے۔</p>
+<h2>مفرد اعداد لامحدود ہیں</h2>
+<p>اقلیدس نے دو ہزار سال سے زیادہ عرصہ پہلے ثابت کر دیا تھا کہ کوئی سب سے بڑا مفرد عدد نہیں ہے — یہ فہرست ہمیشہ کے لیے چلتی رہتی ہے۔ ان کا ثبوت قدیم منطق کا ایک خوبصورت نمونہ ہے: فرض کریں کہ صرف محدود تعداد میں مفرد اعداد ہوتے، ان سب کو آپس میں ضرب دیں اور اس میں ایک جمع کر دیں۔ حاصل ہونے والا نیا عدد فہرست کے کسی بھی مفرد عدد سے مکمل تقسیم نہیں ہو سکتا، کیونکہ ان میں سے کسی سے بھی تقسیم کرنے پر ہمیشہ باقی ایک بچتا ہے، تو یا تو یہ نیا عدد خود مفرد ہے، یا اس کا کوئی اور مفرد عامل ہے جو فرضی مکمل فہرست میں شامل نہیں تھا — دونوں صورتوں میں یہ اس مفروضے سے متصادم ہے کہ فہرست مکمل تھی۔ یہ نفیس دلیل، جس میں کسی اعلیٰ ریاضی کی ضرورت نہیں، آج بھی اس موضوع کی تاریخ کے سب سے معتبر ثبوتوں میں سے ایک ہے۔</p>
+<h2>نجی اور فوری</h2>
+<p>یہ حساب مکمل طور پر آپ کے براؤزر میں چلتا ہے، اس لیے آپ کے لکھتے ہی نتیجہ فوراً سامنے آ جاتا ہے، اور آپ کا درج کردہ کوئی بھی عدد کسی سرور کو نہیں بھیجا جاتا، نہ ریکارڈ کیا جاتا ہے اور نہ کہیں شیئر ہوتا ہے۔</p>
+    <section class="faq"><h2>Prime checker FAQ</h2><dl><dt>What is a prime number?</dt><dd>A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by modern convention.</dd><dt>What is prime factorization?</dt><dd>Every integer greater than 1 can be expressed as a product of prime numbers in exactly one way (the Fundamental Theorem of Arithmetic). For example, 60 = 2 × 2 × 3 × 5.</dd><dt>How large a number can I check?</dt><dd>The tool works efficiently for numbers up to about 10 million using trial division. Very large numbers may take a moment to process.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/primechecker/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/primechecker.js" defer></script>
+</body>
+</html>

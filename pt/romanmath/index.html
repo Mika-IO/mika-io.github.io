@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversor de Algarismos Romanos — converta números para romanos</title>
+<meta name="description" content="Conversor de algarismos romanos gratuito. Converta qualquer número de 1 a 3.999 para algarismos romanos, ou converta algarismos romanos para decimal.">
+<link rel="canonical" href="https://mikaio.dev/pt/romanmath/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/romanmath/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/romanmath/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/romanmath/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Conversor de Algarismos Romanos — converta números para romanos">
+<meta property="og:description" content="Conversor de algarismos romanos gratuito. Converta qualquer número de 1 a 3.999 para algarismos romanos, ou converta algarismos romanos para decimal.">
+<meta property="og:url" content="https://mikaio.dev/pt/romanmath/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Conversor de Algarismos Romanos — converta números para romanos","url":"https://mikaio.dev/pt/romanmath/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Conversor de algarismos romanos gratuito. Converta qualquer número de 1 a 3.999 para algarismos romanos, ou converta algarismos romanos para decimal."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Conversor de Algarismos Romanos","item":"https://mikaio.dev/pt/romanmath/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual é o intervalo para algarismos romanos?","acceptedAnswer":{"@type":"Answer","text":"Os algarismos romanos padrão representam números de 1 a 3.999. Este conversor suporta 1–3.999."}},{"@type":"Question","name":"Quais são os símbolos dos algarismos romanos?","acceptedAnswer":{"@type":"Answer","text":"I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Notação subtrativa: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900."}},{"@type":"Question","name":"Quando os algarismos romanos são usados hoje?","acceptedAnswer":{"@type":"Answer","text":"Os algarismos romanos aparecem em relógios, cabeçalhos de capítulos de livros, sequências de filmes (Rocky IV), números do Super Bowl, números de ano em filmes e monumentos."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/romanmath/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/romanmath/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/romanmath/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/romanmath/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/romanmath/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/romanmath/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/romanmath/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/romanmath/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Converta entre números decimais e algarismos romanos" />
+<meta property="og:description" content="Converta entre números decimais e algarismos romanos" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/romanmath/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Converta entre números decimais e algarismos romanos","description":"Converta entre números decimais e algarismos romanos","url":"https://example.com/pt/romanmath/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Conversor de Algarismos Romanos</span></nav>
+  <h1>Conversor de Algarismos Romanos</h1>
+  <p class="lead">Informe um número decimal para converter para algarismos romanos, ou informe algarismos romanos para converter para decimal.</p>
+  <section class="widget" id="tool"><form id="roman-form"><div class="row"><div class="field"><label for="roman-dec">Número decimal</label><input type="number" id="roman-dec" min="1" max="3999" step="1" inputmode="numeric"></div></div><div class="result"><span class="hint">Algarismo romano: </span><span class="big" id="roman-out">—</span></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="roman-in">Algarismo romano para decimal</label><input type="text" id="roman-in" style="text-transform:uppercase" maxlength="20"></div><div class="result"><span class="hint">Número decimal: </span><span class="big" id="roman-dec-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Converta entre números decimais e algarismos romanos</h2>
+<p>Os algarismos romanos têm sido usados por mais de dois milênios e permanecem amplamente encontrados hoje — em relógios, títulos de filmes e livros, no Super Bowl, em documentos legais e em monumentos. Este conversor funciona em ambas as direções.</p>
+<h2>O sistema de algarismos romanos</h2>
+<p>Os algarismos romanos usam sete letras latinas como símbolos: I (1), V (5), X (10), L (50), C (100), D (500) e M (1000).</p>
+<p><strong>Notação aditiva</strong>: Os símbolos são colocados do maior para o menor e seus valores são somados. III = 1+1+1 = 3.</p>
+<p><strong>Notação subtrativa</strong>: Quando um símbolo de valor menor aparece antes de um maior, ele é subtraído. IV = 4, IX = 9, XL = 40, XC = 90, CD = 400, CM = 900.</p>
+<h2>Uma nota sobre formas não padronizadas</h2>
+<p>Nem todo algarismo romano que você encontra segue as regras subtrativas estritas que este conversor usa. Historicamente, os próprios romanos nem sempre eram consistentes, e você ainda vê IIII em vez de IV em alguns mostradores de relógio puramente por equilíbrio visual em oposição a VIII, ou formas só aditivas em inscrições mais antigas. Esta ferramenta segue a convenção moderna padrão — a ensinada nas escolas e usada em publicações, créditos de filmes e documentos formais — que sempre prefere a forma mais curta e subtrativa. Se você digitar uma variante não padronizada como IIII, trate qualquer resultado inesperado como um sinal de que a entrada não estava na forma padrão, e não como um erro na conversão em si.</p>
+<h2>Onde os algarismos romanos aparecem hoje</h2>
+<p><strong>Relógios</strong>: Muitas faces de relógio tradicionais usam algarismos romanos para as horas. Note que IV às vezes é escrito como IIII nos relógios por simetria visual.</p>
+<p><strong>Filmes e televisão</strong>: Anos de produção de filmes frequentemente são exibidos em algarismos romanos nos créditos finais. Sequências de filmes usam-nos com frequência: Rocky IV, Star Wars Episódio IV.</p>
+<p><strong>Esportes</strong>: O Super Bowl tem sido numerado com algarismos romanos desde o Super Bowl V. As Olimpíadas também usam algarismos romanos para numerar as suas edições.</p>
+<p><strong>Monarquia e papado</strong>: Governantes com o mesmo nome são distinguidos por ordinais em algarismos romanos: Elizabeth II, Papa João XXIII, Henrique VIII.</p>
+<p><strong>Sumários e listas</strong>: Sumários formais (I. II. III. A. B. C. i. ii. iii.) usam algarismos romanos para numerar as seções principais.</p>
+<p><strong>Arquitetura e monumentos</strong>: Números de ano em pedras fundamentais, monumentos e edifícios públicos são tradicionalmente gravados em algarismos romanos.</p>
+<h2>Como usar o conversor</h2>
+<p>Digite um número decimal no primeiro campo para ver a sua forma em algarismos romanos aparecer na hora, ou digite algarismos romanos no segundo campo para convertê-los de volta a um número decimal. As duas direções se atualizam ao vivo enquanto você digita, então você pode ir e voltar livremente — digite 1999, veja MCMXCIX aparecer, depois edite um pouco e observe o valor decimal mudar para acompanhar. O conversor aceita algarismos romanos em notação subtrativa padrão, que cobrem todo número inteiro de 1 até 3.999, o limite prático tradicional do sistema clássico.</p>
+<h2>Convertendo decimal para romano, passo a passo</h2>
+<p>A conversão funciona combinando repetidamente o maior valor romano possível com o que resta do número, subtraindo-o e seguindo em frente. Para 1994: o maior valor que cabe é 1000 (M), sobrando 994; depois 900 cabe (CM), sobrando 94; depois 90 cabe (XC), sobrando 4; depois 4 cabe (IV), sobrando 0. Lendo os símbolos em ordem dá MCMXCIV. Essa abordagem gulosa, do maior para o menor, sempre produz a forma padrão correta porque o sistema romano foi desenhado de modo que nenhuma combinação menor de símbolos consiga representar o mesmo valor de forma mais compacta.</p>
+<h2>Convertendo romano para decimal, passo a passo</h2>
+<p>No sentido contrário, o conversor lê o algarismo romano da esquerda para a direita e soma o valor de cada símbolo, exceto quando um símbolo é imediatamente seguido por um maior, caso em que ele é subtraído. Para MCMXCIV: M (1000) é seguido por C, que é menor, então soma 1000; C (100) é seguido por M, que é maior, então subtrai 100; M (1000) é somado; X (10) é seguido por C, maior, então subtrai 10; C (100) é somado; I (1) é seguido por V, maior, então subtrai 1; V (5) é somado. Somando 1000 − 100 + 1000 − 10 + 100 − 1 + 5 dá 1994, batendo exatamente com o número original.</p>
+<h2>Por que não há ano zero nem zero romano</h2>
+<p>Uma curiosidade que vale saber é que o sistema de algarismos romanos não tem símbolo algum para zero — o conceito ainda não havia sido formalizado quando o sistema foi desenvolvido, e os algarismos romanos foram criados puramente para contar e registrar quantidades, não para o tipo de aritmética posicional que um zero possibilita. É também por isso que o calendário histórico pula diretamente de 1 aC para 1 dC sem ano zero no meio, uma curiosidade que ainda causa confusão ocasional ao calcular o intervalo exato entre datas antigas.</p>
+<h2>Limitações dos algarismos romanos</h2>
+<p>Os algarismos romanos não têm símbolo para zero, nenhuma forma de representar frações, e nenhuma aritmética direta — multiplicar dois algarismos romanos à mão é trabalhoso. É por isso que o sistema foi gradualmente substituído pelo sistema posicional indo-arábico (os dígitos de 0 a 9) para fins de cálculo. Ainda assim, os algarismos romanos sobrevivem precisamente onde a contagem simples e a apresentação formal importam mais do que a facilidade de cálculo: numerar capítulos, distinguir monarcas do mesmo nome, ou marcar um ano em pedra, onde a elegância visual do símbolo conta mais do que a conveniência aritmética.</p>
+<h2>Privado e instantâneo</h2>
+<p>A conversão roda inteiramente no seu navegador nas duas direções, então os resultados aparecem no instante em que você digita e nenhum número que você informa é enviado, registrado ou compartilhado. Funciona offline depois que a página carrega.</p>
+    <section class="faq"><h2>Perguntas frequentes de algarismos romanos</h2><dl><dt>Qual é o intervalo para algarismos romanos?</dt><dd>Os algarismos romanos padrão representam números de 1 a 3.999. Este conversor suporta 1–3.999.</dd><dt>Quais são os símbolos dos algarismos romanos?</dt><dd>I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Notação subtrativa: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900.</dd><dt>Quando os algarismos romanos são usados hoje?</dt><dd>Os algarismos romanos aparecem em relógios, cabeçalhos de capítulos de livros, sequências de filmes (Rocky IV), números do Super Bowl, números de ano em filmes e monumentos.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/romanmath/">English</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/romanmath/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/romanmath.js" defer></script>
+</body>
+</html>

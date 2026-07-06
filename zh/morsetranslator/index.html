@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morse Code Translator — convert text to Morse code and back</title>
+<meta name="description" content="Free Morse code translator. Convert any text to Morse code dots and dashes, or decode Morse code back to text. Includes audio playback. Works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/zh/morsetranslator/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/morsetranslator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/morsetranslator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/morsetranslator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/morsetranslator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Morse Code Translator — convert text to Morse code and back">
+<meta property="og:description" content="Free Morse code translator. Convert any text to Morse code dots and dashes, or decode Morse code back to text. Includes audio playback. Works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/zh/morsetranslator/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Morse Code Translator — convert text to Morse code and back","url":"https://mikaio.dev/zh/morsetranslator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free Morse code translator. Convert any text to Morse code dots and dashes, or decode Morse code back to text. Includes audio playback. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Morse Code Translator","item":"https://mikaio.dev/zh/morsetranslator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Morse code?","acceptedAnswer":{"@type":"Answer","text":"Morse code is a system for encoding letters, digits, and punctuation as sequences of dots and dashes (or short and long signals). It was developed in the 1830s and 1840s for use with the electrical telegraph. Each character has a unique dot-dash sequence."}},{"@type":"Question","name":"How do I separate letters in Morse code?","acceptedAnswer":{"@type":"Answer","text":"Letters are separated by a single space. Words are separated by a slash / or three spaces. The decoder accepts both conventions."}},{"@type":"Question","name":"Does the audio playback work?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the Web Audio API to generate tones matching the dots and dashes. Dots are short tones, dashes are three times as long. Make sure your device volume is turned on."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/zh/morsetranslator/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/morsetranslator/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/morsetranslator/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/morsetranslator/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/morsetranslator/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/morsetranslator/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/morsetranslator/">
+  <!-- SEO injected -->
+<meta property="og:title" content="在文字和摩斯电码之间互译" />
+<meta property="og:description" content="摩斯电码是历史上辨识度最高的编码系统之一。早在语音传输出现之前,那些独特的点和划就已经能跨越大陆和海洋传递信息。如今它仍然被用在业余无线电、航空导航、无障碍辅助设备,以及流行文化里。这个翻译工具能把任意文本瞬间转换成摩斯电码,把电码以音频形式播放出来,也能把摩斯电码解码回普通文字。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/zh/morsetranslator/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"在文字和摩斯电码之间互译","description":"摩斯电码是历史上辨识度最高的编码系统之一。早在语音传输出现之前,那些独特的点和划就已经能跨越大陆和海洋传递信息。如今它仍然被用在业余无线电、航空导航、无障碍辅助设备,以及流行文化里。这个翻译工具能把任意文本瞬间转换成摩斯电码,把电码以音频形式播放出来,也能把摩斯电码解码回普通文字。","url":"https://example.com/zh/morsetranslator/","inLanguage":"zh"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Morse Code Translator</span></nav>
+  <h1>Morse Code Translator</h1>
+  <p class="lead">Type text to see it translated to Morse code. Paste Morse code to decode it back to text. Click Play to hear the code as audio.</p>
+  <section class="widget" id="tool"><div id="morse-app"><div class="field"><label for="morse-in">Text to encode</label><textarea id="morse-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Type your message here…"></textarea></div><div class="result"><span class="hint">Morse code: </span><span id="morse-out" style="word-break:break-all;letter-spacing:0.1em">—</span></div><button id="morse-play" class="btn secondary" style="margin-top:0.5rem">▶ Play audio</button><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="morse-decode-in">Morse code to decode</label><textarea id="morse-decode-in" rows="2" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="e.g. .... . .-.. .-.. ---"></textarea></div><div class="result"><span class="hint">Decoded text: </span><span id="morse-decoded">—</span></div></div></section>
+  <article class="content">
+    <h2>在文字和摩斯电码之间互译</h2>
+<p>摩斯电码是历史上辨识度最高的编码系统之一。早在语音传输出现之前,那些独特的点和划就已经能跨越大陆和海洋传递信息。如今它仍然被用在业余无线电、航空导航、无障碍辅助设备,以及流行文化里。这个翻译工具能把任意文本瞬间转换成摩斯电码,把电码以音频形式播放出来,也能把摩斯电码解码回普通文字。</p>
+<h2>使用方法</h2>
+<p>在编码框里输入你的消息,摩斯电码译文会立刻显示在下方,字母之间用一个空格分隔,单词之间用斜杠分隔,完全符合摩斯电码标准书写惯例里点和划的表示方式。点击播放,就能听到直接在浏览器里生成的音频提示音,这是练习用耳朵而不是用眼睛识别摩斯电码的实用方法。反过来,把点和划粘贴进解码框,按照同样的字母和单词分隔规则,对应的普通文字会立刻显示出来。</p>
+<h2>摩斯电码的历史</h2>
+<p>塞缪尔·摩尔斯和阿尔弗雷德·维尔在19世纪三四十年代开发了摩斯电码,用于电报系统,通过长长的铜线把信号以脉冲形式发送出去。这套编码给每个字母和数字都分配了一种独一无二的短信号(点)和长信号(划)组合。最初的版本如今被称为美式摩斯电码,后来被精炼成国际摩斯电码,统一了时长比例并扩展了字符集,国际摩斯电码正是今天全世界通用的版本。</p>
+<p>著名的SOS遇险信号——三个点、三个划、三个点(··· ─── ···)——之所以被选中,正是因为它足够简单、对称,即便在紧张状态下也很容易发送。</p>
+<h2>关于用耳朵学摩斯电码的小提示</h2>
+<p>熟练的摩斯电码报务员根本不会有意识地去数点和划的个数——练到一定程度,每个字母都会被瞬间识别成一种独特的节奏型,就像一个熟练的读者能一眼认出一整个单词,而不用一个字母一个字母地拼读一样。反复听这个工具播放的音频,从简短、常见的单词开始,是培养这种节奏识别能力远比死记一张点划对照表更有效的方法,这也是为什么资深的摩斯电码学习者几乎都会建议先训练耳朵,再训练眼睛。</p>
+<h2>摩斯电码是怎么运作的</h2>
+<p>每个字母、数字和常见标点符号都有一个独一无二的点划序列。字母E只是一个点,字母T则是一个划——英语里最常用的字母得到了最短的编码。字母之间的停顿相当于三个点的时长,单词之间的停顿相当于七个点的时长。正是这套时长结构,让摩斯电码既能靠声音传递,也能靠光信号或机械方式传递。</p>
+<p>标准的时长比例是:</p>
+<ul>
+<li>点:1个单位</li>
+<li>划:3个单位</li>
+<li>同一个字母内部信号之间的间隔:1个单位</li>
+<li>字母之间的间隔:3个单位</li>
+<li>单词之间的间隔:7个单位</li>
+</ul>
+<h2>摩斯电码如今还用在哪里</h2>
+<p>世界各地的业余无线电爱好者至今仍在用摩斯电码进行远距离通信,尤其是在信号传播条件不佳的情况下,因为摩斯电码能穿透那些让语音通信完全无法进行的干扰。许多国家的业余无线电执照考试至今仍包含摩斯电码的内容。</p>
+<p>航空领域用摩斯电码作为导航信标的识别方式:VOR(甚高频全向信标)和ILS(仪表着陆系统)发射台会定期用摩斯电码广播自己的识别码,让飞行员能确认自己使用的导航设备是正确的。</p>
+<p>无障碍辅助技术有时也会用摩斯电码作为行动不便人士的输入方式。一个简单的按钮或开关就能发送点和划,让使用者能以熟练报务员才能达到的、出人意料的速度完成完整的文字输入。</p>
+<h2>这套编码为什么会这样设计</h2>
+<p>原始设计的巧妙之处,在于把编码长度和字母出现频率对应起来:因为塞缪尔·摩尔斯和阿尔弗雷德·维尔研究过英语文本中哪些字母出现得最频繁,所以最常见的字母E被分配了最短的信号——一个点,次常见的T得到了一个划。像Q、X、Z这类罕见字母则被分配了更长、更复杂的模式,因为整体目标是让传输普通文本的平均耗时最短,而不是让每个字母都同样快。这个原则——给更常用的符号分配更短的编码——在一个多世纪之后,又出现在了现代数据压缩算法里,让摩斯电码成了今天计算机科学中一些理念一个意想不到、却真实存在的先驱。</p>
+<h2>标点符号与专业信号</h2>
+<p>除了字母和数字,标准摩斯电码也为句号、逗号、问号等常见标点定义了编码,这也是为什么这个翻译工具能处理整句话,而不只是单个单词。业余无线电爱好者还会用一种叫&quot;专业信号&quot;的特殊组合序列来控制空中通话的流程——比如表示&quot;消息结束&quot;的一种序列,或者表示&quot;邀请对方发送&quot;的一种序列——这些序列会作为一整串不间断的点划发送,而不是拆成单独的字母,这是一层这个工具不会自动解码的约定,但如果你遇到了,知道它的存在还是有必要的。</p>
+<h2>私密且即时</h2>
+<p>所有翻译都完全在你的浏览器中完成,编码和解码都是即时的,你输入的任何文本都不会被发送到任何服务器、记录或分享。</p>
+    <section class="faq"><h2>Morse code FAQ</h2><dl><dt>What is Morse code?</dt><dd>Morse code is a system for encoding letters, digits, and punctuation as sequences of dots and dashes (or short and long signals). It was developed in the 1830s and 1840s for use with the electrical telegraph. Each character has a unique dot-dash sequence.</dd><dt>How do I separate letters in Morse code?</dt><dd>Letters are separated by a single space. Words are separated by a slash / or three spaces. The decoder accepts both conventions.</dd><dt>Does the audio playback work?</dt><dd>Yes. The tool uses the Web Audio API to generate tones matching the dots and dashes. Dots are short tones, dashes are three times as long. Make sure your device volume is turned on.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/morsetranslator.js" defer></script>
+</body>
+</html>

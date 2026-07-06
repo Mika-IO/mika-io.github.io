@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Clock — compare current time in cities worldwide</title>
+<meta name="description" content="Free world clock. Compare the current local time in multiple cities simultaneously. No signup required. Updates every second in your browser.">
+<link rel="canonical" href="https://mikaio.dev/ur/worldclock/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/worldclock/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/worldclock/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/worldclock/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/worldclock/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="World Clock — compare current time in cities worldwide">
+<meta property="og:description" content="Free world clock. Compare the current local time in multiple cities simultaneously. No signup required. Updates every second in your browser.">
+<meta property="og:url" content="https://mikaio.dev/ur/worldclock/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"World Clock — compare current time in cities worldwide","url":"https://mikaio.dev/ur/worldclock/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free world clock. Compare the current local time in multiple cities simultaneously. No signup required. Updates every second in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"World Clock","item":"https://mikaio.dev/ur/worldclock/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate is the world clock?","acceptedAnswer":{"@type":"Answer","text":"The times are derived from your device's system clock and the IANA timezone database built into modern browsers. They are accurate to the second as long as your device's clock is set correctly."}},{"@type":"Question","name":"Does daylight saving time affect the results?","acceptedAnswer":{"@type":"Answer","text":"Yes, the browser's Intl API automatically accounts for daylight saving time rules for each timezone, so the displayed times are always correct regardless of the time of year."}},{"@type":"Question","name":"Can I compare more than three cities?","acceptedAnswer":{"@type":"Answer","text":"The tool shows three cities at once for a clean comparison. To compare more, simply change one of the dropdowns to a different city."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>World Clock</span></nav>
+  <h1>World Clock</h1>
+  <p class="lead">Select up to three cities to compare their current local times side by side. The clock updates every second.</p>
+  <section class="widget" id="tool"><div id="wc-app"><div class="row"><div class="field"><label for="wc-city1">City 1</label><select id="wc-city1"></select></div><div class="field"><label for="wc-city2">City 2</label><select id="wc-city2"></select></div><div class="field"><label for="wc-city3">City 3</label><select id="wc-city3"></select></div></div><div id="wc-out" class="result" style="flex-direction:column;gap:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>دنیا بھر کے مقامی اوقات کا فوری موازنہ</h2>
+<p>چاہے آپ ٹوکیو میں کسی ساتھی کے ساتھ میٹنگ کا وقت طے کر رہے ہوں، نیویارک میں کسی دوست کو فون کرنا چاہتے ہوں، یا اپنے ٹائم زون میں کسی لائیو ایونٹ کے شروع ہونے کا وقت چیک کر رہے ہوں، یہ جاننا کہ کہیں اور اس وقت کیا وقت ہو رہا ہے اہمیت رکھتا ہے۔ ورلڈ کلاک آپ کو ایک ساتھ کئی شہروں کے موجودہ مقامی اوقات کا موازنہ کرنے دیتا ہے، بغیر کسی ذہنی حساب کتاب کے۔ ڈراپ ڈاؤن مینیو سے شہر منتخب کریں اور موجودہ اوقات فوراً سامنے آ جاتے ہیں، ہر سیکنڈ اپ ڈیٹ ہوتے ہوئے، اس لیے آپ ہمیشہ ایک زندہ اور درست موازنہ دیکھتے ہیں، نہ کہ ایسی جامد تصویر جو نظر ہٹاتے ہی پرانی ہو جائے۔</p>
+<h2>استعمال کا طریقہ</h2>
+<p>تینوں ڈراپ ڈاؤن مینیو میں سے ہر ایک سے ایک شہر منتخب کریں۔ جیسے ہی آپ انتخاب کریں گے، اس شہر کی گھڑی نیچے سامنے آ جائے گی، حقیقی وقت میں دوسری گھڑیوں کے ساتھ چلتی ہوئی۔ اپنی پسند کی جگہیں منتخب کرنے کے علاوہ نہ کچھ جمع کروانا ہے اور نہ کچھ ترتیب دینا ہے — کسی بھی مینیو کو کسی بھی لمحے بدل دیں اور ڈسپلے فوراً اپ ڈیٹ ہو جاتا ہے۔ ابتدائی طور پر تین وسیع پیمانے پر استعمال ہونے والے حوالہ جاتی شہر منتخب شدہ ہوتے ہیں، مگر آپ ان میں سے کسی کو بھی فہرست میں موجود کسی اور شہر سے بدل سکتے ہیں تاکہ بالکل وہی موازنہ بنا سکیں جس کی آپ کو ضرورت ہے، چاہے وہ ایک ہی ملک کے دو ساحل ہوں یا ایک ساتھ تین براعظم۔</p>
+<h2>اوقات کا موازنہ اتنا مشکل کیوں ہے</h2>
+<p>ٹائم زونز صرف نقشے پر گھنٹے گننے کا معاملہ نہیں ہیں۔ سیاسی سرحدیں، نہ کہ یکساں فاصلے پر موجود خط طول البلد، طے کرتی ہیں کہ ایک زون کہاں ختم ہوتا ہے اور دوسرا کہاں شروع، اس لیے پڑوسی علاقے کئی گھنٹے دور ہو سکتے ہیں یا چند صورتوں میں جغرافیائی طور پر دور ہونے کے باوجود ایک ہی زون میں شریک ہو سکتے ہیں۔ اس کے علاوہ بہت سے ممالک ڈے لائٹ سیونگ ٹائم کے لیے اپنی گھڑیاں آگے یا پیچھے کرتے ہیں، اور یہ سب ایک ہی تاریخوں پر نہیں کرتے — شمالی اور جنوبی نصف کرہ کے درمیان چھ مہینے کا فرق ہوتا ہے، کچھ ممالک اسے بالکل نہیں مناتے، اور جو مناتے ہیں ان کی تبدیلی کی صحیح تاریخیں بھی پڑوسی ممالک کے درمیان مختلف ہو سکتی ہیں۔ اس میں چند ایسے مقامات کو بھی شامل کر لیں جو معیاری وقت سے آدھے گھنٹے یا 45 منٹ کے غیر معمولی فرق پر ہوں، تو ہاتھ سے حساب لگانا واقعی چھوٹی ہوئی میٹنگز اور دیر سے کی گئی کالوں کا ذریعہ بن جاتا ہے۔</p>
+<h2>یہ گھڑی کیسے درست رہتی ہے</h2>
+<p>یہ اوزار اس تمام پیچیدگی کو آپ کے ویب براؤزر میں شامل ٹائم زون ڈیٹا بیس پر انحصار کر کے پیچھے چھوڑ دیتا ہے، وہی عالمی معیار جو کیلنڈرز، فون اور آپریٹنگ سسٹمز کو چلاتا ہے۔ ہر منتخب ہونے والا شہر اپنے سرکاری ٹائم زون شناخت کنندہ سے جڑا ہوتا ہے، اور براؤزر خود اس مقام کے لیے اس عین لمحے کا درست فرق نکال لیتا ہے، خود بخود ڈے لائٹ سیونگ کے اصولوں اور کسی بھی تاریخی انفرادیت کا حساب رکھتے ہوئے۔ اس کا مطلب ہے کہ دکھائے گئے اوقات ہمیشہ آج کی تاریخ کے لیے درست ہوتے ہیں، بغیر اس کے کہ آپ کو یاد رکھنا پڑے کہ آیا کوئی خاص ملک فی الحال گرمی کا وقت منا رہا ہے۔ صرف ایک شرط یہ ہے کہ آپ کے اپنے آلے کی گھڑی درست وقت پر سیٹ ہو، کیونکہ ہر موازنہ اسی کی نسبت سے حساب لگایا جاتا ہے۔</p>
+<h2>ورلڈ کلاک کہاں کارآمد ہے</h2>
+<p>بین الاقوامی ٹیمیں اسی طرح کے موازنے پر انحصار کرتی ہیں۔ تین دفاتر کے درمیان کال طے کرنا، یہ جانچنا کہ کوئی ساتھی ابھی تک اپنی میز پر موجود ہو گا یا نہیں، یا وہ سب سے مناسب دیر کا وقت معلوم کرنا جب اسی دن جواب چاہنے والا پیغام بھیجا جا سکے، یہ سب روزمرہ کے کام ہیں جو ورلڈ کلاک پر ایک نظر ڈال کر سیکنڈوں میں حل ہو جاتے ہیں۔ سفر کرنے والے لوگ اسے یہ جاننے کے لیے استعمال کرتے ہیں کہ وطن میں گھر والوں کو فون کرنا کب مناسب ہے، صحافی اور ٹریڈرز مالیاتی مراکز میں مارکیٹ کھلنے کے اوقات ٹریک کرنے کے لیے اسے استعمال کرتے ہیں، اور لائیو کھیلوں یا سٹریم شدہ ایونٹس کے شائقین کسی کک آف یا پریمیئر کے وقت کو اپنے مقامی وقت میں تبدیل کرنے کے لیے اسے استعمال کرتے ہیں۔</p>
+<p>یہ ذاتی لمحات کے لیے بھی اتنا ہی کارآمد ہے — یہ معلوم کرنا کہ بیرون ملک کسی رشتہ دار کو فون کرنے کے لیے بہت جلدی ہے یا بہت دیر، بیرون ملک منتقل ہونے والے کسی دوست کے ساتھ ویڈیو چیٹ کی منصوبہ بندی کرنا، یا محض یہ تجسس مٹانا کہ اس وقت زمین کے دوسرے کنارے پر کیا ہو رہا ہے۔</p>
+<h2>نجی، فوری اور مفت</h2>
+<p>نہ کوئی سائن اپ ہے، نہ کوئی قیمت اور نہ ہی کوئی اشتہار راستے میں حائل ہوتا ہے۔ پوری گھڑی آپ کے اپنے آلے پر چلنے والے ایک چھوٹے سے کوڈ کے طور پر کام کرتی ہے، آپ کے سسٹم کا وقت پڑھتی ہے اور براؤزر کے اندر موجود ٹائم زون اصولوں کا اطلاق کرتی ہے، اس لیے یہ فوراً کام کرتی ہے اور صفحہ لوڈ ہو جانے کے بعد بغیر انٹرنیٹ کنکشن کے بھی چلتی رہتی ہے۔ آپ نے کون سے شہر منتخب کیے، اس بارے میں کچھ بھی کبھی اپ لوڈ، محفوظ یا شیئر نہیں کیا جاتا۔</p>
+<p>اسے استعمال کرنے کے لیے تینوں ڈراپ ڈاؤن مینیو سے اپنے شہر منتخب کریں اور اوقات کو لمحہ بہ لمحہ، سیکنڈ بہ سیکنڈ اپ ڈیٹ ہوتے دیکھیں۔ کسی بھی وقت کسی شہر کو بدل کر مختلف مقامات کا موازنہ کریں، اور ڈسپلے پر بھروسہ کریں کہ وہ ڈے لائٹ سیونگ اور ٹائم زون کی انفرادیات کو ہر بار درست طریقے سے سنبھالے گا۔</p>
+<h2>معیاری وقت کی مختصر تاریخ</h2>
+<p>انیسویں صدی کے آخر سے پہلے، ہر شہر عملاً اپنا مقامی وقت سورج کی بنیاد پر رکھتا تھا، جس نے ریلوے کے ٹائم ٹیبل اور طویل فاصلے کی مواصلات کو ایک حقیقی سردرد بنا دیا تھا — چند درجن کلومیٹر دور موجود دو شہر کئی منٹ کے فرق سے متفق نہ ہوتے۔ ریلوے اور ٹیلی گراف کے پھیلاؤ نے دنیا کو معیاری ٹائم زونز کی طرف دھکیل دیا، اور 1884 میں ایک بین الاقوامی کانفرنس نے گرین وچ سے ناپے گئے خط طول البلد پر مبنی زونز کا وہ نظام قائم کیا جو، اس کے بعد سے بہت سی مقامی تبدیلیوں کے باوجود، آج بھی اسی طرح اس صفحے کے ورلڈ کلاک کی بنیاد ہے۔ اس تاریخ کو سمجھنا یہ واضح کرتا ہے کہ زون کی سرحدیں خط طول البلد کی صاف لکیروں کے بجائے ملکی سرحدوں کی پیروی کیوں کرتی ہیں: یہ عملی اور سیاسی سہولت کے لیے کھینچی گئی تھیں، ریاضیاتی صفائی کے لیے نہیں۔ چند مقامات معیاری وقت سے 30 یا 45 منٹ کے غیر معیاری فرق پر بھی ہیں، جو یاد دلاتا ہے کہ پورا نظام، اب عالمی طور پر ہم آہنگ ہونے کے باوجود، بین الاقوامی ڈھانچے کے اوپر قومی فیصلوں کی ایک تہہ در تہہ چادر ہی ہے۔</p>
+    <section class="faq"><h2>World clock FAQ</h2><dl><dt>How accurate is the world clock?</dt><dd>The times are derived from your device&#39;s system clock and the IANA timezone database built into modern browsers. They are accurate to the second as long as your device&#39;s clock is set correctly.</dd><dt>Does daylight saving time affect the results?</dt><dd>Yes, the browser&#39;s Intl API automatically accounts for daylight saving time rules for each timezone, so the displayed times are always correct regardless of the time of year.</dd><dt>Can I compare more than three cities?</dt><dd>The tool shows three cities at once for a clean comparison. To compare more, simply change one of the dropdowns to a different city.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/worldclock/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/worldclock/">Português</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/worldclock/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/worldclock.js" defer></script>
+</body>
+</html>

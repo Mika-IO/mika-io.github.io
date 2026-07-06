@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerador de Números Aleatórios — sorteie um número em qualquer intervalo</title>
+<meta name="description" content="Gerador de números aleatórios grátis. Sorteie um ou vários números entre qualquer mínimo e máximo, com opção de resultados únicos. Seguro e instantâneo no navegador.">
+<link rel="canonical" href="https://mikaio.dev/pt/randomnumber/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/randomnumber/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/randomnumber/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/randomnumber/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/randomnumber/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gerador de Números Aleatórios — sorteie um número em qualquer intervalo">
+<meta property="og:description" content="Gerador de números aleatórios grátis. Sorteie um ou vários números entre qualquer mínimo e máximo, com opção de resultados únicos. Seguro e instantâneo no navegador.">
+<meta property="og:url" content="https://mikaio.dev/pt/randomnumber/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Números Aleatórios — sorteie um número em qualquer intervalo","url":"https://mikaio.dev/pt/randomnumber/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Gerador de números aleatórios grátis. Sorteie um ou vários números entre qualquer mínimo e máximo, com opção de resultados únicos. Seguro e instantâneo no navegador."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Gerador de Números Aleatórios","item":"https://mikaio.dev/pt/randomnumber/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Os números são realmente aleatórios?","acceptedAnswer":{"@type":"Answer","text":"Eles vêm do gerador aleatório criptograficamente seguro do seu navegador, então cada número do intervalo tem chance igual e os resultados não podem ser previstos ou reproduzidos."}},{"@type":"Question","name":"O que a opção 'sem repetição' faz?","acceptedAnswer":{"@type":"Answer","text":"Com resultados únicos ativados, cada número gerado aparece só uma vez, ideal para rifas, sorteios ou escolher ganhadores distintos. Exige que o intervalo seja pelo menos tão grande quanto a quantidade."}},{"@type":"Question","name":"Funciona offline?","acceptedAnswer":{"@type":"Answer","text":"Sim. O gerador roda inteiramente no seu navegador, então, depois que a página carrega, nenhuma conexão com a internet é necessária."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/randomnumber/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/randomnumber/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/randomnumber/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/randomnumber/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/randomnumber/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/randomnumber/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Um número aleatório sempre que você precisar" />
+<meta property="og:description" content="Um número aleatório sempre que você precisar" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/randomnumber/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Um número aleatório sempre que você precisar","description":"Um número aleatório sempre que você precisar","url":"https://example.com/pt/randomnumber/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Gerador de Números Aleatórios</span></nav>
+  <h1>Gerador de Números Aleatórios</h1>
+  <p class="lead">Defina um mínimo e um máximo, escolha quantos números quer e gere. Use a opção de únicos para sorteios em que nenhum número deve se repetir.</p>
+  <section class="widget" id="tool"><form id="rng-form" data-too-many="Intervalo pequeno demais para tantos números únicos"><div class="row"><div class="field"><label for="rng-min">Mínimo</label><input type="number" id="rng-min" value="1" step="1"></div><div class="field"><label for="rng-max">Máximo</label><input type="number" id="rng-max" value="100" step="1"></div><div class="field"><label for="rng-count">Quantos</label><input type="number" id="rng-count" value="1" min="1" step="1"></div></div><div class="field"><label><input type="checkbox" id="rng-unique"> Sem repetição (únicos)</label></div><button class="btn" type="submit">Gerar</button><div class="result"><span class="big" id="rng-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Um número aleatório sempre que você precisar</h2>
+<p>Às vezes você só precisa de um número que ninguém escolheu de propósito. Talvez esteja sorteando o ganhador de uma rifa, escolhendo uma página para estudar, decidindo qual jogador começa ou iniciando um jogo. Este gerador de números aleatórios dá exatamente isso: escolha um valor mínimo e um máximo, diga quantos números quer, e ele os produz na hora. Tudo acontece dentro do seu navegador, então os resultados aparecem no instante em que você toca no botão e nada do que você digita é enviado a lugar algum.</p>
+<p>Os controles são propositalmente simples. As caixas de mínimo e máximo definem o intervalo em que os números podem cair, incluindo as duas pontas, então um intervalo de um a seis se comporta exatamente como um dado comum. A caixa &quot;quantos&quot; permite gerar um lote inteiro de uma vez em vez de um por um, e uma única caixa de seleção alterna entre permitir repetições e forçar que todo número seja diferente. Quando você aperta gerar, os resultados aparecem juntos, prontos para ler ou copiar.</p>
+<h2>O que cada opção faz</h2>
+<p><strong>Mínimo e máximo</strong> definem o conjunto de números possíveis. As duas pontas entram, então escolher 1 e 10 pode retornar qualquer número inteiro de 1 até 10. Se por acaso você digitar o número maior primeiro, a ferramenta os troca discretamente, para que você nunca receba um resultado vazio por causa de um intervalo invertido.</p>
+<p><strong>Quantos</strong> controla quantos números saem de uma vez. Deixe em um para uma escolha única, ou aumente para sortear vários de uma vez — útil para escolher múltiplos ganhadores, gerar um conjunto de números estilo loteria ou criar dados de teste. Não há limite prático para o uso do dia a dia.</p>
+<p><strong>Sem repetição</strong> é a chave importante. Com ela desligada, cada sorteio é independente, então o mesmo número pode aparecer mais de uma vez, exatamente como rolar um dado várias vezes. Com ela ligada, cada número é removido do conjunto assim que é escolhido, então todo resultado do lote é único. É isso que você quer em uma rifa justa ou em um sorteio, em que o mesmo bilhete nunca deve ser tirado duas vezes. Se você pedir mais números únicos do que o intervalo pode oferecer, a ferramenta avisa em vez de rodar para sempre.</p>
+<h2>Onde um gerador de números aleatórios ajuda</h2>
+<p>Os usos do dia a dia são infinitos. Professores escolhem um aluno ou uma questão aleatória para manter tudo justo. Streamers e gestores de comunidade sorteiam ganhadores de brindes a partir de uma lista numerada. Mestres de jogo rolam por resultados quando os dados físicos estão fora de alcance. Pais resolvem &quot;quem começa&quot; sem discussão. Como o intervalo é totalmente ajustável, a mesma ferramenta substitui uma moeda, um dado, uma roleta de cem lados ou uma máquina de loteria, apenas mudando dois números.</p>
+<p>Ela é igualmente útil para tarefas mais práticas. Desenvolvedores e testadores usam números aleatórios para criar dados de amostra, escolher casos de teste ou embaralhar entradas. Pesquisadores os usam para distribuir participantes em grupos sem viés. Qualquer um que organize um sorteio pode colar uma lista numerada de participantes e tirar ganhadores únicos em segundos, com um resultado genuinamente imparcial porque nenhum humano o tocou.</p>
+<h2>Por que esses números são confiáveis</h2>
+<p>Nem toda aleatoriedade é igual. Muitos geradores simples usam uma fórmula previsível que só parece aleatória na superfície. Esta ferramenta, em vez disso, recorre ao gerador de números aleatórios criptograficamente seguro do seu navegador — a mesma fonte de aleatoriedade usada para proteger operações sensíveis na internet. Isso significa que cada número do intervalo escolhido tem chance igual de aparecer, os resultados não podem ser previstos a partir dos anteriores, e ninguém, incluindo você, consegue influenciar o resultado.</p>
+<p>Há uma sutileza que vale conhecer. Para manter todos os valores igualmente prováveis, a ferramenta descarta e sorteia de novo os raros valores brutos que, de outra forma, tornariam alguns números levemente mais comuns que outros. Esse passo de &quot;rejeição&quot; é invisível para você, mas é o que garante uma distribuição realmente uniforme por todo o intervalo, sem viés para a ponta baixa ou alta. É a diferença entre uma aleatoriedade que apenas parece justa e uma que de fato é.</p>
+<p>Como o gerador não tem memória, uma sequência de números altos não torna um baixo mais provável na próxima vez, e vice-versa. Cada geração começa do zero. Se quiser explorar isso, gere um lote grande com repetições permitidas e verá os números se espalharem por todo o intervalo sem qualquer padrão, distribuindo-se de forma mais uniforme quanto mais você sorteia.</p>
+<h2>Privado, instantâneo e grátis</h2>
+<p>Não há conta, cobrança nem espera. O gerador inteiro é um pequeno trecho de código que roda no seu próprio dispositivo, e é por isso que ele responde na hora e continua funcionando mesmo sem conexão com a internet. Nenhum dos números que você gera, e nenhum dos intervalos que digita, é enviado, registrado ou compartilhado. O que aparece na sua tela fica na sua tela e desaparece quando você recarrega a página.</p>
+<p>Uma dica rápida para tarefas comuns: para simular um único dado, defina o intervalo como 1 e 6; para uma escolha estilo loteria, defina o intervalo como 1 e 49 ou 1 e 60, ligue a opção sem repetição e ajuste a quantidade ao número de bolas sorteadas; e para embaralhar uma lista numerada, gere essa quantidade de números únicos e leia-os como a nova ordem. Como as duas pontas do intervalo entram, você nunca precisa somar ou subtrair um para a conta fechar.</p>
+<p>Para usá-lo, defina o mínimo e o máximo, escolha quantos números quer, decida se as repetições são permitidas e aperte gerar. Ajuste qualquer valor e gere de novo quantas vezes quiser — cada toque dá um resultado novo e imparcial no qual você pode confiar.</p>
+    <section class="faq"><h2>Perguntas frequentes do gerador</h2><dl><dt>Os números são realmente aleatórios?</dt><dd>Eles vêm do gerador aleatório criptograficamente seguro do seu navegador, então cada número do intervalo tem chance igual e os resultados não podem ser previstos ou reproduzidos.</dd><dt>O que a opção &#39;sem repetição&#39; faz?</dt><dd>Com resultados únicos ativados, cada número gerado aparece só uma vez, ideal para rifas, sorteios ou escolher ganhadores distintos. Exige que o intervalo seja pelo menos tão grande quanto a quantidade.</dd><dt>Funciona offline?</dt><dd>Sim. O gerador roda inteiramente no seu navegador, então, depois que a página carrega, nenhuma conexão com a internet é necessária.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/randomnumber/">English</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/randomnumber/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/randomnumber/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/randomnumber.js" defer></script>
+</body>
+</html>

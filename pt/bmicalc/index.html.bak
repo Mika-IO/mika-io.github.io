@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de IMC — Índice de Massa Corporal (métrico e imperial)</title>
+<meta name="description" content="Calculadora de IMC grátis. Informe sua altura e peso em unidades métricas ou imperiais para obter na hora o seu Índice de Massa Corporal e a categoria, no seu navegador.">
+<link rel="canonical" href="https://mikaio.dev/pt/bmicalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/bmicalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/bmicalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/bmicalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/bmicalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/bmicalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/bmicalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/bmicalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/bmicalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/bmicalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/bmicalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/bmicalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de IMC — Índice de Massa Corporal (métrico e imperial)">
+<meta property="og:description" content="Calculadora de IMC grátis. Informe sua altura e peso em unidades métricas ou imperiais para obter na hora o seu Índice de Massa Corporal e a categoria, no seu navegador.">
+<meta property="og:url" content="https://mikaio.dev/pt/bmicalc/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de IMC — Índice de Massa Corporal (métrico e imperial)","url":"https://mikaio.dev/pt/bmicalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de IMC grátis. Informe sua altura e peso em unidades métricas ou imperiais para obter na hora o seu Índice de Massa Corporal e a categoria, no seu navegador."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora de IMC","item":"https://mikaio.dev/pt/bmicalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual é a faixa de IMC saudável?","acceptedAnswer":{"@type":"Answer","text":"Para a maioria dos adultos, um IMC entre 18,5 e 24,9 é considerado peso saudável. Abaixo de 18,5 é abaixo do peso, de 25 a 29,9 é sobrepeso e 30 ou mais entra na faixa de obesidade."}},{"@type":"Question","name":"O IMC é preciso para todo mundo?","acceptedAnswer":{"@type":"Answer","text":"O IMC é uma ferramenta de triagem útil, mas não mede a gordura corporal diretamente. Pessoas muito musculosas, atletas, idosos e alguns grupos étnicos podem precisar de outra interpretação, então use o resultado como ponto de partida, não como diagnóstico."}},{"@type":"Question","name":"Esta ferramenta guarda meus dados?","acceptedAnswer":{"@type":"Answer","text":"Não. O cálculo acontece inteiramente no seu navegador e nada do que você digita é enviado, salvo ou compartilhado."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora de IMC</span></nav>
+  <h1>Calculadora de IMC</h1>
+  <p class="lead">Descubra seu Índice de Massa Corporal em segundos. Escolha unidades métricas ou imperiais, informe sua altura e peso, e veja o IMC e a categoria na hora.</p>
+  <section class="widget" id="tool"><form id="bmi-form" data-under="Abaixo do peso" data-normal="Peso saudável" data-over="Sobrepeso" data-obese="Obesidade" data-hmet="Altura (cm)" data-wmet="Peso (kg)" data-himp="Altura (polegadas)" data-wimp="Peso (libras)"><div class="field"><label for="bmi-units">Unidades</label><select id="bmi-units"><option value="metric">Métrico (cm, kg)</option><option value="imperial">Imperial (in, lb)</option></select></div><div class="row"><div class="field"><label id="bmi-hlabel" for="bmi-height">Altura (cm)</label><input type="number" id="bmi-height" inputmode="decimal" step="any" min="0"></div><div class="field"><label id="bmi-wlabel" for="bmi-weight">Peso (kg)</label><input type="number" id="bmi-weight" inputmode="decimal" step="any" min="0"></div></div><button class="btn" type="submit">Calcular IMC</button><div class="result" id="bmi-result" hidden><span class="big" id="bmi-value"></span><span id="bmi-cat"></span></div></form></section>
+  <article class="content">
+    <h2>O que o Índice de Massa Corporal realmente mede</h2>
+<p>O Índice de Massa Corporal, quase sempre abreviado como IMC, é um único número que descreve como o seu peso se relaciona com a sua altura. Foi criado no século XIX pelo matemático belga Adolphe Quetelet, razão pela qual às vezes ainda é chamado de Índice de Quetelet. A ideia é simples: duas pessoas podem pesar exatamente o mesmo, mas se uma for muito mais alta que a outra, esse peso se distribui por um corpo maior e significa algo bem diferente. O IMC tenta captar essa relação de um jeito rápido de calcular e fácil de comparar em toda uma população.</p>
+<p>Como precisa apenas de duas medidas que quase todo mundo já conhece — altura e peso —, o IMC tornou-se a ferramenta de triagem de peso mais usada no mundo. Médicos, enfermeiros, seguradoras, pesquisadores e órgãos de saúde pública se apoiam nele porque é barato, rápido e não exige nenhum equipamento especial. Esta calculadora faz exatamente as mesmas contas que um consultório faria, na hora e de forma privada, sem enviar para lugar nenhum aquilo que você digita.</p>
+<h2>Como usar esta calculadora de IMC</h2>
+<p>Usar a ferramenta leva apenas alguns segundos. Primeiro, escolha se quer trabalhar em unidades métricas (centímetros e quilogramas) ou imperiais (polegadas e libras). Os rótulos das duas caixas mudam automaticamente conforme a sua escolha, então você nunca precisa adivinhar qual unidade vai em cada campo. Em seguida, digite a sua altura na primeira caixa e o seu peso na segunda. Por fim, pressione o botão <strong>Calcular IMC</strong>. O seu Índice de Massa Corporal aparece na hora como um número com uma casa decimal, junto com a categoria em que se encaixa e um marcador colorido para você ver num relance onde está.</p>
+<p>Tudo acontece dentro do seu próprio navegador. Nada é enviado a um servidor, nada é guardado entre visitas e você não precisa criar conta nem aceitar qualquer tipo de rastreamento. Se quiser testar várias combinações — por exemplo, para ver como um peso-alvo mudaria o seu resultado —, basta editar os números e pressionar o botão de novo.</p>
+<h2>A fórmula por trás do número</h2>
+<p>O IMC é definido como o seu peso em quilogramas dividido pelo quadrado da sua altura em metros. Ou seja:</p>
+<p><code>IMC = peso (kg) ÷ altura (m) ÷ altura (m)</code></p>
+<p>Se você prefere unidades imperiais, a fórmula equivalente multiplica o seu peso em libras por 703 e divide pelo quadrado da sua altura em polegadas:</p>
+<p><code>IMC = 703 × peso (lb) ÷ altura (in) ÷ altura (in)</code></p>
+<p>O fator 703 apenas converte o resultado em libras e polegadas para a mesma escala da versão métrica, de modo que as duas fórmulas dão uma resposta idêntica para a mesma pessoa. Esta calculadora cuida da conversão por você, mas é útil entender o que acontece para que o resultado nunca pareça uma caixa-preta.</p>
+<h2>O que as categorias significam</h2>
+<p>A Organização Mundial da Saúde define quatro grandes faixas de IMC para adultos, e esta ferramenta usa os mesmos limites:</p>
+<ul>
+<li><strong>Abaixo do peso:</strong> um IMC abaixo de 18,5. Pode ser perfeitamente saudável para algumas pessoas, mas também pode sinalizar que você não está recebendo energia ou nutrientes suficientes.</li>
+<li><strong>Peso saudável:</strong> um IMC de 18,5 até 24,9. É a faixa associada em grandes estudos ao menor risco médio de problemas de saúde ligados ao peso.</li>
+<li><strong>Sobrepeso:</strong> um IMC de 25 até 29,9. Estar nesta faixa não significa automaticamente saúde ruim, mas costuma ser um bom aviso para revisar os hábitos.</li>
+<li><strong>Obesidade:</strong> um IMC de 30 ou mais. Esta faixa está ligada, em estudos de população, a uma chance maior de condições como diabetes tipo 2, pressão alta e doenças cardíacas.</li>
+</ul>
+<p>São médias populacionais, não veredictos sobre nenhuma pessoa específica. Elas descrevem um risco estatístico entre milhões de pessoas, e a sua saúde individual depende de muitos fatores que um único número jamais consegue enxergar.</p>
+<h2>Um exemplo resolvido</h2>
+<p>Imagine alguém com 1,75 metro de altura e 70 quilogramas. Elevando a altura ao quadrado, temos 1,75 × 1,75 = 3,0625. Dividindo o peso por esse valor, temos 70 ÷ 3,0625 ≈ 22,9. Um IMC de 22,9 fica confortavelmente dentro da faixa de peso saudável. Se essa mesma pessoa pesasse 82 quilogramas, o IMC seria 82 ÷ 3,0625 ≈ 26,8, que cai na faixa de sobrepeso. Repare como uma mudança de doze quilogramas move o resultado apenas cerca de quatro pontos de IMC: a escala é propositalmente suave para que pequenas variações do dia a dia não façam você saltar de uma categoria para outra.</p>
+<h2>Por que o IMC não é a história completa</h2>
+<p>O IMC é uma ferramenta de triagem, não um diagnóstico, e tem limitações reais que vale a pena entender. Como é calculado apenas a partir da altura e do peso, ele não consegue distinguir músculo de gordura. Um atleta bem treinado ou alguém que levanta muito peso pode carregar bastante músculo denso e registrar um IMC na faixa de sobrepeso ou até de obesidade, tendo muito pouca gordura corporal. No outro extremo, uma pessoa idosa que perdeu músculo pode ter um IMC na faixa saudável e ainda assim carregar mais gordura do que o ideal.</p>
+<p>O IMC também não diz nada sobre onde a gordura está armazenada. A gordura acumulada ao redor do abdômen costuma estar mais ligada ao risco à saúde do que a dos quadris e das coxas, por isso medidas como a circunferência da cintura ou a relação cintura-quadril são frequentemente usadas junto com o IMC. Por fim, os limites padrão foram, em grande parte, obtidos de populações europeias, e alguns órgãos de saúde recomendam pontos de corte mais baixos para pessoas de origem sul-asiática, chinesa e de outras procedências, porque os riscos podem surgir com um IMC mais baixo. Em crianças e adolescentes, o IMC deve ser lido em relação a curvas de crescimento por idade e sexo, e não com as faixas fixas de adultos usadas aqui.</p>
+<h2>Como aproveitar bem o seu resultado</h2>
+<p>Encare o seu IMC como um dado entre muitos, como uma única leitura em um painel. Se o seu número ficar fora da faixa saudável, é um convite para olhar com mais atenção, não um motivo para pânico. Uma breve conversa com um médico, que possa avaliar a sua massa muscular, a medida da cintura, a pressão arterial, o histórico familiar e o estilo de vida, sempre vai lhe dizer mais do que uma calculadora. Se o seu objetivo é mudar o IMC, alterações lentas e constantes nos hábitos do dia a dia — mover-se mais, comer de forma equilibrada com bastante vegetais e alimentos integrais, dormir bem e administrar o estresse — tendem a ser muito mais duradouras do que dietas drásticas de curto prazo.</p>
+<p>Como esta calculadora é totalmente privada e instantânea, ela é uma forma simples de conferir esse número quando quiser, acompanhá-lo ao longo do tempo com as suas próprias anotações e levar uma pergunta bem informada à sua próxima consulta. Informe a sua altura e o seu peso acima para ver onde você está hoje.</p>
+    <section class="faq"><h2>Perguntas frequentes sobre o IMC</h2><dl><dt>Qual é a faixa de IMC saudável?</dt><dd>Para a maioria dos adultos, um IMC entre 18,5 e 24,9 é considerado peso saudável. Abaixo de 18,5 é abaixo do peso, de 25 a 29,9 é sobrepeso e 30 ou mais entra na faixa de obesidade.</dd><dt>O IMC é preciso para todo mundo?</dt><dd>O IMC é uma ferramenta de triagem útil, mas não mede a gordura corporal diretamente. Pessoas muito musculosas, atletas, idosos e alguns grupos étnicos podem precisar de outra interpretação, então use o resultado como ponto de partida, não como diagnóstico.</dd><dt>Esta ferramenta guarda meus dados?</dt><dd>Não. O cálculo acontece inteiramente no seu navegador e nada do que você digita é enviado, salvo ou compartilhado.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/bmicalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/bmicalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/bmicalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/bmicalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/bmicalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/bmicalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/bmicalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/bmicalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/bmicalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/bmicalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/bmicalc.js" defer></script>
+</body>
+</html>

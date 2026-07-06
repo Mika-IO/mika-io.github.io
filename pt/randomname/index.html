@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerador de Nomes Aleatórios — nomes para personagens, jogos ou bebês</title>
+<meta name="description" content="Gerador de nomes aleatórios gratuito. Gere nomes e sobrenomes aleatórios por gênero e origem cultural. Perfeito para escritores, desenvolvedores de jogos e inspiração para nomes de bebês.">
+<link rel="canonical" href="https://mikaio.dev/pt/randomname/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/randomname/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/randomname/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/randomname/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/randomname/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gerador de Nomes Aleatórios — nomes para personagens, jogos ou bebês">
+<meta property="og:description" content="Gerador de nomes aleatórios gratuito. Gere nomes e sobrenomes aleatórios por gênero e origem cultural. Perfeito para escritores, desenvolvedores de jogos e inspiração para nomes de bebês.">
+<meta property="og:url" content="https://mikaio.dev/pt/randomname/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Nomes Aleatórios — nomes para personagens, jogos ou bebês","url":"https://mikaio.dev/pt/randomname/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Gerador de nomes aleatórios gratuito. Gere nomes e sobrenomes aleatórios por gênero e origem cultural. Perfeito para escritores, desenvolvedores de jogos e inspiração para nomes de bebês."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Gerador de Nomes Aleatórios","item":"https://mikaio.dev/pt/randomname/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"De onde vêm os nomes?","acceptedAnswer":{"@type":"Answer","text":"Os nomes são extraídos de listas curadas de nomes próprios e sobrenomes comuns para cada origem cultural. Eles representam convenções de nomenclatura reais para cada tradição."}},{"@type":"Question","name":"Posso usar esses nomes para minha história ou jogo?","acceptedAnswer":{"@type":"Answer","text":"Sim, os nomes são gerados no seu dispositivo e não estão sujeitos a nenhuma restrição. Use-os livremente para ficção, jogos ou qualquer projeto criativo."}},{"@type":"Question","name":"É bom para nomes de bebês?","acceptedAnswer":{"@type":"Answer","text":"O gerador pode fornecer inspiração, mas para nomes de bebês a maioria dos pais também considera significado, tradição familiar e como o nome soa com o sobrenome."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/randomname/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/randomname/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/randomname/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/randomname/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/randomname/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/randomname/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Gere nomes aleatórios para qualquer finalidade" />
+<meta property="og:description" content="Gere nomes aleatórios para qualquer finalidade" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/randomname/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Gere nomes aleatórios para qualquer finalidade","description":"Gere nomes aleatórios para qualquer finalidade","url":"https://example.com/pt/randomname/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Gerador de Nomes Aleatórios</span></nav>
+  <h1>Gerador de Nomes Aleatórios</h1>
+  <p class="lead">Escolha um gênero e origem cultural, depois clique em Gerar para obter um nome e sobrenome aleatórios.</p>
+  <section class="widget" id="tool"><div id="rname-app" style="text-align:center"><div class="row" style="justify-content:center;gap:0.5rem;flex-wrap:wrap"><div class="field"><label for="rname-gender">Gênero</label><select id="rname-gender"><option value="any">Qualquer</option><option value="male">Masculino</option><option value="female">Feminino</option></select></div><div class="field"><label for="rname-origin">Origem</label><select id="rname-origin"><option value="en">Inglês</option><option value="es">Espanhol</option><option value="ja">Japonês</option><option value="ar">Árabe</option></select></div></div><button id="rname-btn" class="btn" style="margin:1rem 0;font-size:1.1rem">🎭 Gerar nome</button><div id="rname-out" style="font-size:2.5rem;font-weight:700;min-height:3rem">—</div></div></section>
+  <article class="content">
+    <h2>Gere nomes aleatórios para qualquer finalidade</h2>
+<p>Seja você um romancista criando personagens para uma história, um desenvolvedor de jogos populando um mundo de RPG, um roteirista precisando de nomes placeholder para um script, ou simplesmente curioso sobre qual nome uma pessoa aleatória poderia ter em outra cultura, um gerador de nomes fornece inspiração instantânea.</p>
+<h2>Por que existem geradores de nomes aleatórios</h2>
+<p>Escrita e design de jogos ambos requerem grandes números de nomes únicos. Um romance de fantasia pode ter dezenas de personagens nomeados. Um videogame pode precisar de nomes para centenas de personagens não-jogáveis. Criar nomes culturalmente consistentes e críveis é surpreendentemente demorado.</p>
+<h2>Misturando tradições para mundos diversos</h2>
+<p>Comunidades, ambientes de trabalho e cidades reais raramente são compostos de nomes de uma única tradição, e a ficção que busca realismo geralmente se beneficia da mesma variedade. Gerar um lote de nomes através de várias tradições em vez de se ater a apenas uma é uma forma rápida de povoar um elenco de personagens de diversidade crível ou uma lista realista de usuários de teste, sem que a saída do gerador nunca pareça monótona ou intercambiável, do jeito que uma lista de uma única tradição com uma dúzia de nomes pode começar a parecer depois de um tempo.</p>
+<h2>Origens culturais e convenções de nomenclatura</h2>
+<p>Nomes carregam peso cultural. Esta ferramenta utiliza listas separadas para convenções de nomenclatura inglesa, espanhola, japonesa e árabe, para que os nomes gerados soem autênticos dentro de sua tradição.</p>
+<p><strong>Nomes em inglês</strong> seguem convenções britânicas e americanas.</p>
+<p><strong>Nomes em espanhol</strong> seguem as convenções dos países de língua espanhola.</p>
+<p><strong>Nomes japoneses</strong> colocam o sobrenome primeiro, seguindo o costume japonês.</p>
+<p><strong>Nomes em árabe</strong> refletem nomes próprios comuns usados nos países de língua árabe.</p>
+<h2>Escritores e criação de mundos</h2>
+<p>Escritores de ficção frequentemente usam geradores de nomes para despertar ideias em vez de usar o resultado diretamente. Um nome gerado pode ser adaptado, ou os nomes gerados podem inspirar uma direção completamente diferente. Muitos escritores acham que ver um nome aleatório imediatamente evoca uma personalidade, o que pode ajudar a desenvolver um personagem que ainda não haviam definido. Para a criação de mundos de fantasia e ficção científica, gerar muitos nomes rapidamente ajuda a estabelecer o som e a sensação de uma cultura fictícia.</p>
+<h2>Como usar o gerador</h2>
+<p>Escolha uma tradição de nomenclatura e, se quiser, um gênero, depois aperte gerar para obter uma combinação de nome e sobrenome instantaneamente. Continue apertando para percorrer quantas combinações quiser — cada toque é independente, então você pode gerar dezenas de nomes seguidos enquanto procura um que combine com um personagem ou propósito específico.</p>
+<h2>Testes de software e dados de preenchimento</h2>
+<p>Além da ficção, nomes aleatórios são uma ferramenta genuína no desenvolvimento de software. Bancos de dados de teste, contas de demonstração e scripts de preenchimento de formulário precisam de nomes de aparência realista que obviamente não são pessoas reais, e um gerador que puxa de várias tradições culturais de nomenclatura é muito mais útil para isso do que um script que sempre produz &quot;Usuário Teste&quot; repetidamente.</p>
+<h2>Escolhendo uma tradição de nomenclatura com cuidado</h2>
+<p>Como um nome sinaliza tanto contexto cultural, vale a pena combinar a saída do gerador com um pouco de julgamento antes de usá-la em um trabalho sério: um nome gerado que soa autêntico dentro da sua tradição para alguém não familiarizado com aquela cultura pode parecer um estereótipo ou uma combinação estranha para um leitor que de fato a conhece bem. Usar esta ferramenta como ponto de partida para pesquisa, ou conferir um nome gerado contra exemplos reais da cultura que ele representa, produz resultados muito melhores do que tratar a primeira saída como automaticamente correta.</p>
+<h2>Nomes japoneses e a ordem sobrenome-nome</h2>
+<p>Vale notar que os nomes japoneses gerados aqui seguem o costume japonês de colocar o sobrenome primeiro, diferente da ordem nome-sobrenome comum em português e inglês. Isso é intencional: manter a convenção original em vez de inverter a ordem preserva a autenticidade cultural, mesmo que exija um pequeno ajuste mental para quem está acostumado com a ordem oposta.</p>
+<h2>Inspiração para nomes de bebês</h2>
+<p>Pais buscando ideias de nomes às vezes usam geradores aleatórios para descobrir nomes que não haviam considerado antes. O gerador expõe nomes de outras culturas que podem não ser familiares do dia a dia, expandindo as possibilidades. Ver um nome em que você nunca tinha pensado — e amá-lo imediatamente — é uma experiência comum com geradores de nomes.</p>
+<h2>Nomes para personagens secundários</h2>
+<p>Um truque útil ao escrever ficção com um elenco grande é reservar nomes mais elaborados ou memoráveis para os personagens principais e usar o gerador livremente para qualquer papel menor — o garçom que aparece uma vez, o vizinho mencionado de passagem, o colega de trabalho num diálogo curto. Isso evita o problema comum de gastar tempo demais nomeando personagens que o leitor mal vai notar, enquanto ainda garante que ninguém no texto fique sem nome ou seja chamado genericamente de &quot;o homem&quot; a cada menção.</p>
+<h2>Nomes para dados de teste</h2>
+<p>Além da ficção, nomes aleatórios são uma ferramenta genuína no desenvolvimento de software: bancos de dados de teste, contas de demonstração e scripts de preenchimento de formulário precisam de nomes de aparência realista que obviamente não são pessoas reais, e um gerador que puxa de várias tradições culturais é muito mais útil para isso do que um script que sempre produz &quot;Usuário Teste&quot; repetidamente, além de ajudar a pegar bugs que só aparecem com certos conjuntos de caracteres ou comprimentos de nome.</p>
+<h2>Privado e instantâneo</h2>
+<p>Todos os nomes são gerados inteiramente no seu navegador a partir de listas de nomes integradas, então nada é enviado a lugar nenhum e os nomes gerados nunca são rastreados, registrados ou armazenados, sem limite de quantos você gera.</p>
+    <section class="faq"><h2>Perguntas frequentes do gerador de nomes</h2><dl><dt>De onde vêm os nomes?</dt><dd>Os nomes são extraídos de listas curadas de nomes próprios e sobrenomes comuns para cada origem cultural. Eles representam convenções de nomenclatura reais para cada tradição.</dd><dt>Posso usar esses nomes para minha história ou jogo?</dt><dd>Sim, os nomes são gerados no seu dispositivo e não estão sujeitos a nenhuma restrição. Use-os livremente para ficção, jogos ou qualquer projeto criativo.</dd><dt>É bom para nomes de bebês?</dt><dd>O gerador pode fornecer inspiração, mas para nomes de bebês a maioria dos pais também considera significado, tradição familiar e como o nome soa com o sobrenome.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/randomname/">English</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/randomname/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/randomname/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/randomname.js" defer></script>
+</body>
+</html>

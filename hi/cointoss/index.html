@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coin Flip — flip a virtual coin online (heads or tails)</title>
+<meta name="description" content="Free online coin flip. Tap to flip a fair virtual coin and get heads or tails instantly, with a running tally. Works in your browser, no app needed.">
+<link rel="canonical" href="https://mikaio.dev/hi/cointoss/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/cointoss/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/cointoss/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/cointoss/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/cointoss/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/cointoss/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/cointoss/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/cointoss/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/cointoss/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coin Flip — flip a virtual coin online (heads or tails)">
+<meta property="og:description" content="Free online coin flip. Tap to flip a fair virtual coin and get heads or tails instantly, with a running tally. Works in your browser, no app needed.">
+<meta property="og:url" content="https://mikaio.dev/hi/cointoss/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Coin Flip — flip a virtual coin online (heads or tails)","url":"https://mikaio.dev/hi/cointoss/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"Free online coin flip. Tap to flip a fair virtual coin and get heads or tails instantly, with a running tally. Works in your browser, no app needed."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"Coin Flip","item":"https://mikaio.dev/hi/cointoss/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the coin flip really fair?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each flip uses your browser's cryptographically secure random generator, giving heads and tails an equal 50% chance every single time, with no memory of previous flips."}},{"@type":"Question","name":"Why use an online coin instead of a real one?","acceptedAnswer":{"@type":"Answer","text":"A virtual coin is always in your pocket, cannot land on its edge or roll away, and keeps an automatic tally, which is handy for settling decisions or running many flips quickly."}},{"@type":"Question","name":"Does it need the internet?","acceptedAnswer":{"@type":"Answer","text":"No. Once the page has loaded it runs entirely in your browser, so you can keep flipping even with no connection."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/hi/cointoss/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/cointoss/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/cointoss/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/cointoss/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/cointoss/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/cointoss/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/cointoss/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/cointoss/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/cointoss/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/cointoss/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/cointoss/">
+  <!-- SEO injected -->
+<meta property="og:title" content="बिना जेब में हाथ डाले सिक्का उछालें" />
+<meta property="og:description" content="बिना जेब में हाथ डाले सिक्का उछालें" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/hi/cointoss/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"बिना जेब में हाथ डाले सिक्का उछालें","description":"बिना जेब में हाथ डाले सिक्का उछालें","url":"https://example.com/hi/cointoss/","inLanguage":"hi"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>Coin Flip</span></nav>
+  <h1>Coin Flip</h1>
+  <p class="lead">Tap the button to flip a fair virtual coin. Heads or tails is decided by your device&#39;s secure random generator, and a tally keeps score.</p>
+  <section class="widget" id="tool"><div id="coin" data-heads="Heads" data-tails="Tails" data-flipping="Flipping…"><div class="coin-face" id="coin-face" aria-hidden="true">🪙</div><div class="result"><span class="big" id="coin-result">Ready</span></div><div class="row" style="justify-content:center"><button type="button" class="btn" id="coin-flip">Flip the coin</button></div><div class="coin-tally"><span>Heads<b id="coin-h">0</b></span><span>Tails<b id="coin-t">0</b></span></div></div></section>
+  <article class="content">
+    <h2>बिना जेब में हाथ डाले सिक्का उछालें</h2>
+<p>सिक्का उछालना दो विकल्पों में से एक चुनने का सबसे पुराना निष्पक्ष तरीक़ा है। हज़ारों सालों से लोग किसी घूमते हुए धातु के टुकड़े पर इसीलिए भरोसा करते आए हैं, क्योंकि कोई भी यह तय नहीं कर सकता कि वह कैसे गिरेगा। यह ऑनलाइन कॉइन फ़्लिप वही सीधी-सादी निष्पक्षता आपकी स्क्रीन पर ले आता है। बटन दबाएँ, सिक्के को घूमते देखें, और यह हर बार बराबर मौक़े के साथ हेड या टेल पर आ जाता है। न कुछ इंस्टॉल करना है, न सोफ़े के पीछे गिरा हुआ सिक्का ढूँढना है, और एक चलती हुई गिनती हिसाब रखती है ताकि आप देख सकें कि उछालों की एक लंबी शृंखला में नतीजा कैसा निकलता है।</p>
+<p>यह टूल जान-बूझकर सीधा-सादा रखा गया है। एक बटन सिक्का उछालता है, नतीजा बड़े अक्षरों में दिखता है, और नीचे दो काउंटर ट्रैक करते हैं कि अब तक कितने हेड और कितने टेल आए। आप किसी छोटी बहस को सुलझाने के लिए एक बार उछाल सकते हैं, या लगातार दर्जनों बार टैप करके यह देख सकते हैं कि संभावना असल में कैसे काम करती है — जो हैरानी की हद तक दिलचस्प तरीक़ा है।</p>
+<h2>नतीजा कैसे तय होता है</h2>
+<p>हर उछाल आपके ब्राउज़र के अंदरूनी क्रिप्टोग्राफ़िक रूप से सुरक्षित रैंडम नंबर जनरेटर से बनता है, वही तरह की रैंडमनेस जो ऑनलाइन संवेदनशील कामों को सुरक्षित रखने के लिए इस्तेमाल होती है। इसका मतलब है कि हर उछाल सचमुच अप्रत्याशित होता है और पिछले उछालों से पूरी तरह स्वतंत्र होता है। हेड और टेल — दोनों को हर बार, बिना किसी झुकाव और बिना किसी याददाश्त के, ठीक पचास प्रतिशत मौक़ा मिलता है। असली सिक्के के उलट, जो अपनी बनावट से या उछालने के तरीक़े से हल्का-सा झुका हो सकता है, यह वर्चुअल सिक्का लगभग पूरी तरह निष्पक्ष होने के जितना करीब पहुँचा जा सकता है, उतना है।</p>
+<p>चूँकि सिक्के की कोई याददाश्त नहीं होती, लगातार कई बार हेड आने से अगले उछाल में टेल &quot;बकाया&quot; नहीं हो जाता। संभावना को लेकर यह सबसे आम ग़लतफ़हमियों में से एक है। सिक्के को न पता है और न फ़र्क़ पड़ता है कि एक पल पहले क्या हुआ था; हर उछाल पर मौक़े पचास-पचास पर रीसेट हो जाते हैं। सिक्के के नीचे की गिनती इसे ख़ुद परखना आसान बना देती है: कुछ उछालों में बँटवारा एक तरफ़ झुका हुआ दिख सकता है, लेकिन जैसे-जैसे उछालों की संख्या बढ़ती है, हेड और टेल का हिस्सा धीरे-धीरे बराबरी के क़रीब खिसकता जाता है।</p>
+<h2>सिक्का उछालना ठीक कब काम आता है</h2>
+<p>जब कोई फ़ैसला सचमुच बराबरी पर हो और आपको बस उसे निष्पक्ष और झटपट तोड़ने का तरीक़ा चाहिए, तब सिक्का उछालना कमाल का काम करता है। किसी खेल में पहले कौन जाएगा यह तय करना, दो रेस्तराँ में से किसी एक को चुनना, कोई काम बाँटना, या किसी दोस्ताना शर्त में कोई पक्ष चुनना — ये सब इसके क्लासिक इस्तेमाल हैं। खेलों में पीढ़ियों से किकऑफ़ या साइड तय करने के लिए सिक्का उछाला जाता रहा है, और इसकी अपील वही है: दोनों लोग नतीजे को स्वीकार करते हैं क्योंकि कोई भी उसे प्रभावित नहीं कर सकता था।</p>
+<p>वर्चुअल सिक्के के असली सिक्के पर कुछ फ़ायदे हैं। यह आपके फ़ोन या कंप्यूटर पर हमेशा आपके साथ रहता है, यह कभी किनारे पर खड़ा नहीं हो सकता या फ़्रिज के नीचे नहीं लुढ़क सकता, और इससे यह शक भी नहीं रहता कि किसी ने उसे पकड़कर पलट दिया। ख़ुद-ब-ख़ुद बनने वाली गिनती भी सचमुच काम की है। अगर आपको बेस्ट-ऑफ़-थ्री या बेस्ट-ऑफ़-फ़ाइव चाहिए, तो काउंटर आपके लिए हिसाब रखते हैं, और अगर आप उछालों का इस्तेमाल किसी बेतरतीब चुनाव के लिए कर रहे हैं, तो गिनती खोए बिना जितनी बार चाहें उतनी बार उछाल सकते हैं।</p>
+<h2>संभावना समझने का एक आसान तरीक़ा</h2>
+<p>फ़ैसले सुलझाने से आगे, सिक्का उछालना संभावना कैसे काम करती है इसे हाथों-हाथ समझने के सबसे अच्छे तरीक़ों में से एक है। शिक्षक और माता-पिता इसका इस्तेमाल यह दिखाने के लिए करते हैं कि पचास-पचास वाली कोई घटना छोटी अवधि में कोई साफ़-सुथरा, बारी-बारी वाला पैटर्न नहीं बनाती। दस बार उछालें और शायद सात बार हेड आ जाए; यह बिल्कुल सामान्य है और इसका मतलब यह नहीं कि सिक्का ख़राब है। लेकिन सौ या हज़ार बार तक उछालते रहें, तो अनुपात आधे के क़रीब स्थिर हो जाता है। दोनों काउंटर को बढ़ते देखना आँकड़ेबाज़ों के &quot;लॉ ऑफ़ लार्ज नंबर्स&quot; (बड़ी संख्याओं के नियम) की एक यादगार मिसाल है, बिना एक भी समीकरण के।</p>
+<p>आप सिक्के का इस्तेमाल दो से ज़्यादा विकल्पों में से चुनने के लिए भी कर सकते हैं, क्रमों को अर्थ देकर। दो उछाल चार बराबर संभावना वाले नतीजे देते हैं, तीन उछाल आठ, और यह क्रम आगे बढ़ता जाता है, जो किसी छोटी सूची में से निष्पक्ष रूप से चुनने के लिए काफ़ी है। यह एक सुंदर याद दिलाना है कि एक साधारा-सा दो-तरफ़ा सिक्का, थोड़ी चालाकी से, कई-तरफ़ा पासे की जगह ले सकता है।</p>
+<p>गिनती धैर्य का भी एक हल्का सबक़ है। शुरुआत में, कोई एक पक्ष आगे कूद सकता है और कुछ समय तक आगे बना रह सकता है, जिससे लगता है जैसे सिक्का उसकी तरफ़ झुका हो। लेकिन इसे पर्याप्त उछाल दें, तो वह शुरुआती बढ़त दोनों गिनती के बढ़ने के साथ चुपचाप निगल ली जाती है। कोई भी जान-बूझकर असंतुलन को नहीं सुधारता; कुल संख्या बढ़ने के साथ यह बस धीरे-धीरे कम मायने रखने लगता है। इसे अपने ही टैप से होते देखना यह बताए जाने से कहीं ज़्यादा भरोसेमंद है कि मौक़े बराबर हैं।</p>
+<h2>प्राइवेट, तुरंत और हमेशा मुफ़्त</h2>
+<p>न कोई खाता बनाना है, न विज्ञापनों से भरा इंतज़ार, न कोई लागत। पूरा सिक्का एक छोटे से कोड में रहता है जो आपकी अपनी डिवाइस पर चलता है, इसलिए यह टैप करते ही तुरंत प्रतिक्रिया देता है और आपका कनेक्शन टूटने पर भी काम करता रहता है। आपके उछालों के बारे में कुछ भी अपलोड या रिकॉर्ड नहीं किया जाता; गिनती सिर्फ़ आपकी स्क्रीन पर मौजूद रहती है और पेज रीलोड करते ही रीसेट हो जाती है।</p>
+<p>इसे इस्तेमाल करने के लिए, बस फ़्लिप बटन दबाएँ और नतीजा पढ़ें। जितनी बार चाहें उतनी बार दोबारा उछालें, जब भी चलती हुई गिनती जाँचनी हो हेड और टेल काउंटर देख लें, और जब भी नई शुरुआत करनी हो पेज रीलोड कर दें। यह वही निष्पक्ष पचास-पचास वाला फ़ैसला है जिस पर इंसान सदियों से भरोसा करते आए हैं, अब हमेशा आपकी पहुँच में।</p>
+    <section class="faq"><h2>Coin flip FAQ</h2><dl><dt>Is the coin flip really fair?</dt><dd>Yes. Each flip uses your browser&#39;s cryptographically secure random generator, giving heads and tails an equal 50% chance every single time, with no memory of previous flips.</dd><dt>Why use an online coin instead of a real one?</dt><dd>A virtual coin is always in your pocket, cannot land on its edge or roll away, and keeps an automatic tally, which is handy for settling decisions or running many flips quickly.</dd><dt>Does it need the internet?</dt><dd>No. Once the page has loaded it runs entirely in your browser, so you can keep flipping even with no connection.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/cointoss/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/cointoss/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/cointoss/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/cointoss/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/cointoss/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/cointoss/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/cointoss/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/glossary.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/cointoss.js" defer></script>
+</body>
+</html>

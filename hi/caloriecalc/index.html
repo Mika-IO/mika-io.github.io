@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calorie Calculator — calories per food item</title>
+<meta name="description" content="Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.">
+<link rel="canonical" href="https://mikaio.dev/hi/caloriecalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/caloriecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/caloriecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/caloriecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/caloriecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/caloriecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/caloriecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/caloriecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/caloriecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/caloriecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/caloriecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/caloriecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calorie Calculator — calories per food item">
+<meta property="og:description" content="Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.">
+<meta property="og:url" content="https://mikaio.dev/hi/caloriecalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calorie Calculator — calories per food item","url":"https://mikaio.dev/hi/caloriecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"Food Calorie Calculator","item":"https://mikaio.dev/hi/caloriecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate are these values?","acceptedAnswer":{"@type":"Answer","text":"Values are approximate and based on typical nutritional data. Actual calories vary with variety, cooking method, and preparation. Use a verified nutrition database or food packaging for precise values."}},{"@type":"Question","name":"Per 100g vs per serving?","acceptedAnswer":{"@type":"Answer","text":"Enter 100 in the quantity field for the per-100g value. Enter your actual portion size to see the calories for that portion."}},{"@type":"Question","name":"Are these raw or cooked values?","acceptedAnswer":{"@type":"Answer","text":"Most values are for raw weight unless noted. Cooked foods typically change in water content, which changes the calorie density per gram."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/hi/caloriecalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/caloriecalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/caloriecalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/caloriecalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/caloriecalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/caloriecalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/caloriecalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/caloriecalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/caloriecalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/caloriecalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/caloriecalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="किसी भी खाने की कैलोरी गिनें" />
+<meta property="og:description" content="किसी भी खाने की कैलोरी गिनें" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/hi/caloriecalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"किसी भी खाने की कैलोरी गिनें","description":"किसी भी खाने की कैलोरी गिनें","url":"https://example.com/hi/caloriecalc/","inLanguage":"hi"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>Food Calorie Calculator</span></nav>
+  <h1>Food Calorie Calculator</h1>
+  <p class="lead">Type a food name and quantity to see the estimated calorie count. Based on approximate values per 100g.</p>
+  <section class="widget" id="tool"><form id="cal-form"><div class="row"><div class="field"><label for="cal-food">Food name</label><input type="text" id="cal-food" placeholder="e.g. banana, rice, chicken" list="cal-list"><datalist id="cal-list"></datalist></div><div class="field"><label for="cal-qty">Amount</label><input type="number" id="cal-qty" value="100" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="cal-unit">Unit</label><select id="cal-unit"><option value="g">g</option><option value="oz">oz</option></select></div></div><div class="result"><span class="hint">Approximate calories: </span><span class="big" id="cal-out">—</span></div></form></section>
+  <article class="content">
+    <h2>किसी भी खाने की कैलोरी गिनें</h2>
+<p>कैलोरी गिनना डाइट ट्रैकिंग और वज़न प्रबंधन के सबसे ज़्यादा इस्तेमाल होने वाले तरीक़ों में से एक है। आम खानों की अनुमानित कैलोरी मात्रा जानना आपको यह समझदारी से तय करने में मदद करता है कि क्या और कितना खाना है। यह टूल मानक पोषण संदर्भ डेटा के आधार पर 60 से ज़्यादा आम खानों के लिए अनुमानित कैलोरी वैल्यू देता है।</p>
+<h2>इस टूल को इस्तेमाल कैसे करें</h2>
+<p>किसी खाने को ब्राउज़ करें या खोजें ताकि उसकी एक सामान्य सर्विंग और प्रति 100 ग्राम अनुमानित कैलोरी संख्या दिख जाए, जिससे खानों की तुलना एक बराबरी के स्तर पर करना आसान हो जाता है, चाहे उन्हें आमतौर पर किसी भी माप में परोसा जाता हो। यह ख़ासकर उन खानों को पहचानने में काम आता है जो एक सर्विंग में मामूली दिखते हैं लेकिन किसी विकल्प के मुक़ाबले ग्राम-दर-ग्राम तुलना करने पर उम्मीद से कहीं ज़्यादा कैलोरी-घना निकलते हैं।</p>
+<h2>कैलोरी है क्या?</h2>
+<p>एक कैलोरी (kcal या किलोकैलोरी) ऊर्जा की एक इकाई है। पोषण में, &quot;कैलोरी&quot; का मतलब आमतौर पर किलोकैलोरी होता है — वह ऊर्जा जो 1 किलोग्राम पानी का तापमान 1 डिग्री सेल्सियस बढ़ाने के लिए चाहिए। आपका शरीर हर गतिविधि के लिए कैलोरी जलाता है: साँस लेना, सोचना, हिलना-डुलना, और खाना पचाना।</p>
+<h2>खाद्य समूहों के हिसाब से कैलोरी घनत्व</h2>
+<p>अलग-अलग खानों का प्रति 100 ग्राम कैलोरी घनत्व काफ़ी अलग-अलग होता है:</p>
+<p><strong>बहुत कम कैलोरी (50 kcal/100g से कम)</strong>: ज़्यादातर बिना-स्टार्च वाली सब्ज़ियाँ — सलाद पत्ता (15), खीरा (15), पालक (23), टमाटर (18), ब्रोकली (34), स्ट्रॉबेरी (32)</p>
+<p><strong>कम कैलोरी (50–100 kcal/100g)</strong>: ज़्यादातर फल, डेयरी — सेब (52), केला (89), संतरा (47), दूध (61), आलू (77), अंडा (155 — ज़्यादा लेकिन प्रति यूनिट छोटा)</p>
+<p><strong>मध्यम कैलोरी (100–200 kcal/100g)</strong>: पका हुआ अनाज, दुबला मांस — चावल (130), चिकन ब्रेस्ट (165), सैल्मन (208), पास्ता (131)</p>
+<p><strong>ज़्यादा कैलोरी (200–400 kcal/100g)</strong>: पनीर, ब्रेड, चिकनाई वाला मांस — ब्रेड (265), बीफ़ (250), डार्क चॉकलेट (600)</p>
+<p><strong>बहुत ज़्यादा कैलोरी (400+ kcal/100g)</strong>: तेल, मेवे, शक्कर — जैतून का तेल (884), बादाम (579), पीनट बटर (588), चीनी (387)</p>
+<h2>पोषण लेबल पढ़ना</h2>
+<p>ज़्यादातर देशों में पैक किए हुए खाने पर प्रति 100 ग्राम और प्रति सर्विंग पोषण जानकारी दिखानी ज़रूरी होती है। प्रति-100g वैल्यू प्रोडक्ट के बीच तुलना करना आसान बनाती है। प्रति-सर्विंग वैल्यू बताती है कि एक सामान्य हिस्से में कितनी कैलोरी है, हालाँकि लेबल पर तय की गई सर्विंग साइज़ अक्सर उससे छोटी होती है जितना लोग असल में खाते हैं।</p>
+<h2>मैक्रोन्यूट्रिएंट और कैलोरी योगदान</h2>
+<p>हर मैक्रोन्यूट्रिएंट प्रति ग्राम एक तय संख्या में कैलोरी देता है:</p>
+<ul>
+<li>कार्बोहाइड्रेट: 4 kcal प्रति ग्राम</li>
+<li>प्रोटीन: 4 kcal प्रति ग्राम</li>
+<li>वसा: 9 kcal प्रति ग्राम</li>
+<li>अल्कोहल: 7 kcal प्रति ग्राम</li>
+</ul>
+<p>यही वजह है कि ज़्यादा वसा वाले खानों का कैलोरी घनत्व ज़्यादा होता है — वसा में कार्बोहाइड्रेट या प्रोटीन से प्रति ग्राम दोगुने से भी ज़्यादा कैलोरी होती है।</p>
+<h2>एक जैसी कैलोरी संख्या अलग-अलग क्यों महसूस होती है</h2>
+<p>एक जैसी कैलोरी संख्या वाले दो खाने ज़रूरी नहीं कि भूख, ऊर्जा या सेहत पर एक जैसा असर डालें। फ़ाइबर और प्रोटीन से भरपूर कोई खाना, रिफ़ाइंड शुगर और वसा से भरपूर खाने के मुक़ाबले प्रति कैलोरी कहीं ज़्यादा पेट भरा हुआ महसूस कराता है, क्योंकि फ़ाइबर और प्रोटीन दोनों पाचन को धीमा करते हैं और तृप्ति के ज़्यादा मज़बूत संकेत भेजते हैं। यही एक वजह है कि &quot;जितनी कैलोरी अंदर, उतनी बाहर&quot; एक ऊर्जा-संतुलन के सिद्धांत के रूप में सही तो है लेकिन व्यावहारिक डाइट सलाह के तौर पर अधूरा है — उन कैलोरी की बनावट यह तय करती है कि किसी तय सेवन लक्ष्य पर दिन-ब-दिन टिके रहना कितना आसान या मुश्किल है।</p>
+<h2>वज़न प्रबंधन की बुनियादी बातें</h2>
+<p>वज़न प्रबंधन का बुनियादी सिद्धांत: जलाई गई कैलोरी से ज़्यादा खाने पर वज़न बढ़ता है; कम खाने पर वज़न घटता है। शरीर की एक किलोग्राम चर्बी में लगभग 7,700 kcal होती है। रोज़ाना 500 kcal की कमी से लगभग 0.5 किलो साप्ताहिक चर्बी घटती है।</p>
+<h2>खाद्य लेबल और पोषण डेटाबेस</h2>
+<p>इस टूल में दी गई कैलोरी वैल्यू अनुमानित संदर्भ मान हैं। असली कैलोरी मात्रा किसी खाने की ख़ास किस्म, उसकी पक्वता या वसा मात्रा, उसे बनाने के तरीक़े, और इस्तेमाल किए गए हिस्से के हिसाब से बदल सकती है। ज़्यादा विस्तृत जानकारी वाले आधिकारिक पोषण डेटाबेस में शामिल हैं: अमेरिका का USDA FoodData Central, जो हज़ारों खानों समेत सबसे व्यापक सार्वजनिक रूप से उपलब्ध डेटाबेस है; ब्रिटेन की ONS Food Composition Tables; ऑस्ट्रेलिया का फ़ूड कंपोज़िशन डेटाबेस; और ब्राज़ील की Tabela Brasileira de Composição de Alimentos। भारत में FSSAI और नेशनल इंस्टीट्यूट ऑफ़ न्यूट्रिशन (NIN) की Indian Food Composition Tables भी एक विश्वसनीय स्रोत हैं।</p>
+<h2>कैलोरी से आगे मैक्रोन्यूट्रिएंट संतुलन</h2>
+<p>कुल कैलोरी सेवन वज़न में बदलाव तय करता है, लेकिन डाइट की मैक्रोन्यूट्रिएंट बनावट दूसरे स्वास्थ्य नतीजों को भी प्रभावित करती है। प्रोटीन का सेवन वज़न घटाते समय मांसपेशी मास बचाने, तृप्ति और शरीर की बनावट को प्रभावित करता है। वसा की गुणवत्ता, यानी सैचुरेटेड बनाम अनसैचुरेटेड, हृदय स्वास्थ्य को प्रभावित करती है। कार्बोहाइड्रेट की गुणवत्ता, जिसमें ग्लाइसेमिक इंडेक्स और फ़ाइबर मात्रा शामिल है, ब्लड ग्लूकोज़ नियंत्रण और आंत के स्वास्थ्य को प्रभावित करती है — यही वजह है कि एक जैसी कुल कैलोरी वाली दो डाइट किसी व्यक्ति के महसूस करने के तरीक़े और समय के साथ उसके शरीर की बनावट बदलने के तरीक़े पर काफ़ी अलग असर डाल सकती हैं।</p>
+<h2>फ़ाइबर: शून्य-कैलोरी वाला मैक्रोन्यूट्रिएंट</h2>
+<p>आहार फ़ाइबर तकनीकी रूप से एक कार्बोहाइड्रेट है लेकिन इंसानी एंज़ाइम इसे पचा नहीं सकते, तो यह पोषण लेबल पर कुल कार्बोहाइड्रेट ग्राम में गिने जाने के बावजूद व्यावहारिक रूप से शून्य कैलोरी देता है। सब्ज़ियों, दालों, साबुत अनाज और फलों से मिलने वाला फ़ाइबर पेट भरने का एहसास बढ़ाता है, आंत के फ़ायदेमंद बैक्टीरिया को खिलाता है, ग्लूकोज़ के अवशोषण को धीमा करता है और हृदय रोग के जोखिम को घटाता है। ज़्यादा फ़ाइबर वाली डाइट टाइप 2 डायबिटीज़, कोलन कैंसर और हृदय रोग के कम जोखिम से जुड़ी है, यही एक वजह है कि पोषण संबंधी सलाह आमतौर पर रिफ़ाइंड खाने के मुक़ाबले साबुत खाने को प्राथमिकता देती है, भले ही काग़ज़ पर कैलोरी संख्या एक जैसी दिखे।</p>
+<h2>अल्कोहल की कैलोरी</h2>
+<p>अल्कोहल में प्रति ग्राम 7 kcal होती है, जो कार्बोहाइड्रेट या प्रोटीन से ज़्यादा लेकिन वसा से कम है। लगभग 14 ग्राम अल्कोहल वाला एक स्टैंडर्ड ड्रिंक अकेले अल्कोहल से लगभग 100 kcal देता है, बिना किसी मिक्सर को गिने, और बियर, वाइन और स्पिरिट की कुल कैलोरी मात्रा अल्कोहल प्रतिशत और बची हुई शक्कर के फ़र्क़ की वजह से काफ़ी अलग-अलग होती है। सेवन ट्रैक करते समय यह अक्सर कम आँकी जाने वाली कैलोरी का स्रोत है, क्योंकि अल्कोहल वाले ड्रिंक को मानसिक रूप से &quot;खाने&quot; की बजाय &quot;पीने&quot; के ख़ाने में रखा जाता है, भले ही उनकी असली कैलोरी लागत हो।</p>
+<h2>प्राइवेट और तुरंत</h2>
+<p>सारी गणना पूरी तरह आपके ब्राउज़र में होती है, इसलिए नतीजे तुरंत दिखते हैं और आप क्या खाते या पीते हैं इस बारे में कोई भी डेटा कभी किसी सर्वर पर नहीं भेजा जाता, न लॉग किया जाता है और न साझा किया जाता है।</p>
+    <section class="faq"><h2>Calorie calculator FAQ</h2><dl><dt>How accurate are these values?</dt><dd>Values are approximate and based on typical nutritional data. Actual calories vary with variety, cooking method, and preparation. Use a verified nutrition database or food packaging for precise values.</dd><dt>Per 100g vs per serving?</dt><dd>Enter 100 in the quantity field for the per-100g value. Enter your actual portion size to see the calories for that portion.</dd><dt>Are these raw or cooked values?</dt><dd>Most values are for raw weight unless noted. Cooked foods typically change in water content, which changes the calorie density per gram.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/caloriecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/caloriecalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/caloriecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/caloriecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/caloriecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/caloriecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/caloriecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/caloriecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/caloriecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/caloriecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/glossary.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/caloriecalc.js" defer></script>
+</body>
+</html>

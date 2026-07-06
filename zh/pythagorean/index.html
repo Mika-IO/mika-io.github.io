@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pythagorean Theorem Calculator — find the missing side of a right triangle</title>
+<meta name="description" content="Free Pythagorean theorem calculator. Enter any two sides of a right triangle to find the third. Works for hypotenuse or either leg. Instant and accurate.">
+<link rel="canonical" href="https://mikaio.dev/zh/pythagorean/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/pythagorean/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/pythagorean/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/pythagorean/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/pythagorean/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/pythagorean/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pythagorean Theorem Calculator — find the missing side of a right triangle">
+<meta property="og:description" content="Free Pythagorean theorem calculator. Enter any two sides of a right triangle to find the third. Works for hypotenuse or either leg. Instant and accurate.">
+<meta property="og:url" content="https://mikaio.dev/zh/pythagorean/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Pythagorean Theorem Calculator — find the missing side of a right triangle","url":"https://mikaio.dev/zh/pythagorean/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free Pythagorean theorem calculator. Enter any two sides of a right triangle to find the third. Works for hypotenuse or either leg. Instant and accurate."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Pythagorean Theorem Calculator","item":"https://mikaio.dev/zh/pythagorean/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Pythagorean theorem?","acceptedAnswer":{"@type":"Answer","text":"For a right triangle with legs a and b and hypotenuse c, the theorem states that a² + b² = c². The hypotenuse is always the side opposite the right angle and is always the longest side."}},{"@type":"Question","name":"Can I find a leg if I know the hypotenuse and the other leg?","acceptedAnswer":{"@type":"Answer","text":"Yes. If you know c and a, then b = √(c² − a²). Enter values in c and a and leave b blank."}},{"@type":"Question","name":"What units can I use?","acceptedAnswer":{"@type":"Answer","text":"Any consistent unit: metres, feet, centimetres, inches. The result is in the same unit as the inputs."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/zh/pythagorean/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/pythagorean/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/pythagorean/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/pythagorean/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/pythagorean/">
+  <!-- SEO injected -->
+<meta property="og:title" content="瞬间求出直角三角形的任意一条边" />
+<meta property="og:description" content="勾股定理是整个数学领域里最实用、也最广为人知的结论之一。对任何一个直角三角形——有一个角恰好是90度的三角形——斜边的平方等于另外两条边平方之和。这个计算器让你在已知其中两条边的情况下,立刻求出第三条边。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/zh/pythagorean/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"瞬间求出直角三角形的任意一条边","description":"勾股定理是整个数学领域里最实用、也最广为人知的结论之一。对任何一个直角三角形——有一个角恰好是90度的三角形——斜边的平方等于另外两条边平方之和。这个计算器让你在已知其中两条边的情况下,立刻求出第三条边。","url":"https://example.com/zh/pythagorean/","inLanguage":"zh"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Pythagorean Theorem Calculator</span></nav>
+  <h1>Pythagorean Theorem Calculator</h1>
+  <p class="lead">Enter any two sides of a right triangle and leave the third blank. The missing side is calculated automatically.</p>
+  <section class="widget" id="tool"><form id="pyth-form"><div class="row"><div class="field"><label for="pyth-a">Side a</label><input type="number" id="pyth-a" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="pyth-b">Side b</label><input type="number" id="pyth-b" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="pyth-c">Hypotenuse c</label><input type="number" id="pyth-c" step="any" min="0" inputmode="decimal"></div></div><div class="result"><span class="hint">Missing side: </span><span class="big" id="pyth-out">—</span></div><p style="font-size:0.85rem;opacity:0.6;margin-top:0.5rem">Leave one field blank — it will be calculated from the other two.</p></form></section>
+  <article class="content">
+    <h2>瞬间求出直角三角形的任意一条边</h2>
+<p>勾股定理是整个数学领域里最实用、也最广为人知的结论之一。对任何一个直角三角形——有一个角恰好是90度的三角形——斜边的平方等于另外两条边平方之和。这个计算器让你在已知其中两条边的情况下,立刻求出第三条边。</p>
+<h2>航海与航位推算</h2>
+<p>在卫星定位技术出现之前,航海者依靠航位推算——根据已知的起始位置、航向、速度和经过的时间,算出当前位置。一艘同时向北和向东航行的船只或飞机,走的其实是一条对角线路径,而要从分别的南北和东西分量算出实际走过的直线距离,正是这里所用的同一条定理的直接、实际应用。</p>
+<h2>公式</h2>
+<p>经典的表述是a² + b² = c²,其中a和b是两条较短的边(叫做直角边),c是斜边——直角所对的那条边,也永远是最长的一条边。求斜边:c = √(a² + b²)。求直角边:a = √(c² − b²)。</p>
+<h2>使用方法</h2>
+<p>在a、b、c三个值中输入任意两个,留空第三个。工具会自动检测出缺失的是哪个值并计算出来。举例来说,在a边输入3,在b边输入4,计算器会立刻给出斜边为5,验证了著名的3-4-5直角三角形。或者在斜边输入5,在a边输入3,它会算出b边是4。</p>
+<h2>为什么它只适用于直角三角形</h2>
+<p>这个定理限定只适用于直角三角形,这并不是一个无关紧要的技术性限制——恰恰是这个限制,才让这个关系如此简洁。对任何其他类型的三角形,三条边之间的关系涉及某个角的余弦值,这是一个更一般的结论,叫做余弦定理,只有当那个角恰好是90度、余弦值恰好为零时,才会简化成这个简单的勾股公式。在把这个计算器套用到一个其实不是直角三角形的三角形之前,了解这一点很重要,因为那样做只会悄悄算出一个毫无意义的数字,而不会给出任何警告。</p>
+<h2>实际应用</h2>
+<p><strong>建筑与木工</strong>:确认一个角是不是直角(真正的90度),是勾股定理在实际工作中最常见的用途之一。经典的3-4-5方法——沿一面墙量3个单位,沿相邻的墙量4个单位,再检查对角线是否恰好是5个单位——建筑工人已经使用了几千年。这个计算器把这个方法推广到任意测量数值。</p>
+<p><strong>屏幕和显示器尺寸</strong>:当厂商宣传一台电视或显示器的&quot;对角线尺寸&quot;时,他们给出的其实是屏幕宽和高构成的矩形的斜边长度。如果你知道对角线长度和宽高比,勾股定理就能帮你求出实际的宽和高。</p>
+<p><strong>距离计算</strong>:在平面上,坐标为(x₁, y₁)和(x₂, y₂)的两点之间的直线距离是√((x₂−x₁)² + (y₂−y₁)²),这是定理的直接应用。</p>
+<p><strong>工程与测量</strong>:计算对角支撑的长度、一段斜屋顶线,或者两个不同高度点之间的电缆长度,都可以归结为同一个直角三角形关系,这也是勾股定理在结构规划中最常被用到的原因之一。</p>
+<h2>屏幕尺寸的实例</h2>
+<p>当厂商宣传一台&quot;55英寸电视&quot;时,这个数字指的是对角线长度——也就是屏幕宽高构成的矩形的斜边——而不是宽度或高度本身,这是第一次买电视的人常常搞混的地方。结合显示器的宽高比,现代电视通常是16:9,勾股定理就能帮你还原出实际的宽和高:对于16:9的屏幕,宽和高保持同样的16:9比例,所以55英寸的对角线换算下来大约是48英寸宽、27英寸高——这些数字值得在购买前对照你家墙面或柜子的空间核实一下,而不是单凭对角线数字就想当然。</p>
+<h2>历史背景</h2>
+<p>这个定理以毕达哥拉斯的名字命名,他是公元前570年到495年左右的古希腊数学家和哲学家,不过这个关系早在他之前几个世纪就已经被巴比伦和印度的数学家所知晓。大约公元前1800年的巴比伦泥板上,就列出了勾股数组——满足这个定理的三个整数组合——远远早于毕达哥拉斯出生。</p>
+<h2>勾股数</h2>
+<p>有些三个整数的组合能精确满足a² + b² = c²,完全不需要四舍五入,这样的组合叫做勾股数。3-4-5三角形是最小、也最著名的一组,但还有无穷多其他组合:5-12-13、8-15-17和7-24-25都同样是有效的整数直角三角形。把一组已知勾股数的每条边都乘以同一个倍数,会得到另一组有效的勾股数——3-4-5乘以2得到6-8-10——这正是为什么经典的3-4-5木工方法在任何尺度下都同样有效,不管你是要校正一个小书架的直角,还是整栋建筑的墙角。</p>
+<h2>私密且即时</h2>
+<p>所有计算都完全在你的浏览器中完成,输入另外两条边后,缺失的那条边会立刻显示出来,你输入的任何测量数据都不会被发送到服务器、记录或分享,页面加载完成后即可离线使用。</p>
+    <section class="faq"><h2>Pythagorean theorem FAQ</h2><dl><dt>What is the Pythagorean theorem?</dt><dd>For a right triangle with legs a and b and hypotenuse c, the theorem states that a² + b² = c². The hypotenuse is always the side opposite the right angle and is always the longest side.</dd><dt>Can I find a leg if I know the hypotenuse and the other leg?</dt><dd>Yes. If you know c and a, then b = √(c² − a²). Enter values in c and a and leave b blank.</dd><dt>What units can I use?</dt><dd>Any consistent unit: metres, feet, centimetres, inches. The result is in the same unit as the inputs.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pythagorean/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/pythagorean/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/pythagorean/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/pythagorean/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/pythagorean.js" defer></script>
+</body>
+</html>

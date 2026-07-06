@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backwards Text Generator — reverse text, words or lines</title>
+<meta name="description" content="Free backwards text generator. Instantly reverse the letters, the word order or the line order of any text in your browser, then copy the result.">
+<link rel="canonical" href="https://mikaio.dev/hi/backwardstext/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/backwardstext/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/backwardstext/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/backwardstext/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/backwardstext/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/backwardstext/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/backwardstext/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/backwardstext/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/backwardstext/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/backwardstext/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/backwardstext/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/backwardstext/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Backwards Text Generator — reverse text, words or lines">
+<meta property="og:description" content="Free backwards text generator. Instantly reverse the letters, the word order or the line order of any text in your browser, then copy the result.">
+<meta property="og:url" content="https://mikaio.dev/hi/backwardstext/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Backwards Text Generator — reverse text, words or lines","url":"https://mikaio.dev/hi/backwardstext/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"Free backwards text generator. Instantly reverse the letters, the word order or the line order of any text in your browser, then copy the result."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"Backwards Text Generator","item":"https://mikaio.dev/hi/backwardstext/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between the three modes?","acceptedAnswer":{"@type":"Answer","text":"Reverse letters flips every character so 'hello' becomes 'olleh'. Reverse word order keeps each word intact but puts them in the opposite sequence. Reverse line order flips a list or block from bottom to top."}},{"@type":"Question","name":"Will emoji and accented letters break?","acceptedAnswer":{"@type":"Answer","text":"No. The tool reverses text by whole characters, so emoji, accented letters and other symbols stay intact rather than being split apart."}},{"@type":"Question","name":"Is my text uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Reversing happens instantly in your browser, so nothing you type is sent to a server, saved or shared."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>Backwards Text Generator</span></nav>
+  <h1>Backwards Text Generator</h1>
+  <p class="lead">Type or paste text and it is reversed as you go. Switch between reversing letters, words or lines, then copy the result.</p>
+  <section class="widget" id="tool"><div id="bw"><div class="field"><label for="bw-input">Your text</label><textarea id="bw-input" placeholder="Type or paste text to reverse…"></textarea></div><div class="cc-btns row"><button type="button" class="btn" data-mode="chars" aria-pressed="true">Reverse letters</button><button type="button" class="btn" data-mode="words" aria-pressed="false">Reverse word order</button><button type="button" class="btn" data-mode="lines" aria-pressed="false">Reverse line order</button></div><div class="field"><label for="bw-output">Reversed text</label><textarea id="bw-output" readonly></textarea></div><button type="button" class="btn secondary" data-copy="#bw-output" data-copied="Copied!">Copy result</button></div></section>
+  <article class="content">
+    <h2>किसी भी टेक्स्ट को पल भर में उलटा घुमाएँ</h2>
+<p>टेक्स्ट को उल्टा करना उन छोटी-छोटी तरकीबों में से एक है जो अंदाज़े से कहीं ज़्यादा काम की निकलती हैं। चाहे आप शीशे में ही सही ढंग से पढ़ा जा सकने वाला कोई गुप्त संदेश लिखना चाहते हों, कोई अनोखा यूज़रनेम बनाना चाहते हों, कोई शब्द-पहेली सुलझानी हो, या यह जाँचना हो कि कोई वाक्य पैलिंड्रोम है या नहीं — अक्षरों का क्रम पलटना ही इसकी शुरुआत है। यह &quot;उल्टा टेक्स्ट&quot; जनरेटर आपके टाइप करते ही यह काम कर देता है, और ज़्यादातर टूल्स से आगे बढ़कर काम करता है: अलग-अलग अक्षरों को पलटने के अलावा यह पूरे शब्दों का क्रम भी उलट सकता है, या किसी लिस्ट की लाइनों को नीचे से ऊपर भी कर सकता है। सब कुछ आपके ब्राउज़र में होता है, इसलिए नतीजा तुरंत आता है और आपका डाला हुआ कुछ भी कभी अपलोड नहीं होता।</p>
+<p>इसे इस्तेमाल करना बेहद आसान है। अपना टेक्स्ट पहले बॉक्स में टाइप करें या पेस्ट करें, और उल्टा वर्ज़न तुरंत दूसरे बॉक्स में दिखने लगेगा, हर बार टाइप करते ही अपडेट होते हुए। तीन बटन आपको यह चुनने देते हैं कि &quot;उल्टा&quot; का मतलब बिल्कुल क्या हो, और एक कॉपी बटन तैयार नतीजे को क्लिपबोर्ड पर रख देता है ताकि आप उसे कहीं भी पेस्ट कर सकें। लंबाई की कोई सीमा नहीं है, इसलिए आप एक अकेला शब्द या पूरा पन्ना — दोनों को उतनी ही आसानी से उलट सकते हैं।</p>
+<h2>उलटने के तीन तरीक़े</h2>
+<p><strong>अक्षर उलटें</strong> आपके टेक्स्ट के हर अक्षर को पलट देता है, तो &quot;hello world&quot; बन जाता है &quot;dlrow olleh&quot;। यह वही क्लासिक आईने वाली लेखनी का असर है और ज़्यादातर लोग &quot;उल्टा टेक्स्ट&quot; कहते हुए इसी को मतलब लेते हैं। गुप्त संदेशों के लिए, एनाग्राम-जैसी पहेलियाँ सुलझाने के लिए, और बायो या कैप्शन में एक अलग-सा चमकीला असर डालने के लिए यही मोड सही है।</p>
+<p><strong>शब्दों का क्रम उलटें</strong> हर शब्द को सही-सही लिखा हुआ रखता है, बस शब्दों को उलटे क्रम में सजा देता है — &quot;the quick brown fox&quot; बन जाता है &quot;fox brown quick the&quot;। यह तब काम आता है जब आप किसी वाक्य को फेंटना चाहें, शब्दों के क्रम से खेलना चाहें, या शब्दों को बेमानी बनाए बिना कोई काव्यात्मक या हास्यास्पद असर पैदा करना चाहें।</p>
+<p><strong>लाइनों का क्रम उलटें</strong> टेक्स्ट के एक ब्लॉक को इस तरह पलट देता है कि आख़िरी लाइन पहली बन जाए। यह रोज़मर्रा के कामों में सचमुच काम की है: किसी कालक्रम वाली लिस्ट को उलटकर सबसे नई एंट्री को ऊपर लाना, नीचे-से-ऊपर लिखे किसी लॉग को सही क्रम में करना, या बिना दोबारा टाइप किए किसी भी लिस्ट को पलट देना। चूँकि यह लाइन-दर-लाइन काम करता है, इसलिए हर लाइन के भीतर के शब्द और अक्षर बिल्कुल वैसे ही रहते हैं जैसे आपने लिखे थे।</p>
+<h2>उल्टा टेक्स्ट किन जगहों पर काम आता है</h2>
+<p>टेक्स्ट रिवर्सर की तरफ़ लोगों के आने की सबसे आम वजह है मज़ा और जिज्ञासा। उल्टी लिखावट दिलचस्प लगती है, इसलिए यह सोशल मीडिया नामों, गेमिंग हैंडल, कैप्शन और दोस्तों के बीच होने वाले हल्के-फुल्के संदेशों में दिखती है। कोई छोटा वाक्यांश उल्टा लिखकर किसी से उसे समझने को कहना, या शीशे के सामने रखने को कहना, एक ऐसा छोटा खेल है जो हमेशा असर छोड़ता है। कुछ लोग अक्षर पलटने को एक हल्की छुपाने की तरकीब की तरह भी इस्तेमाल करते हैं, ताकि कोई नोट एक नज़र में न पढ़ा जा सके।</p>
+<p>इसके व्यावहारिक इस्तेमाल भी हैं। शब्द-खेल और पहेली के शौकीन अक्षर पलटने का इस्तेमाल पैलिंड्रोम जाँचने के लिए करते हैं — ऐसे शब्द या वाक्य जो आगे और पीछे दोनों तरफ़ से एक जैसे पढ़े जाते हैं, जैसे &quot;level&quot; या &quot;madam&quot; — मूल टेक्स्ट को उसके उल्टे रूप से मिलाकर। लेखक और संपादक शब्द-क्रम और लाइन-क्रम पलटने का इस्तेमाल टेक्स्ट को जल्दी दोबारा व्यवस्थित करने के लिए करते हैं। लिस्ट, लॉग या एक्सपोर्ट किए गए डेटा के साथ काम करने वाले किसी को भी कभी-कभी लाइनों का क्रम पलटना पड़ता है, और यहाँ यह काम एक सेकंड में हो जाता है, बजाय हर लाइन को हाथ से काटकर-पेस्ट करने के थकाऊ काम के।</p>
+<h2>अक्षरों के साथ सावधानी</h2>
+<p>टेक्स्ट को उलटना सुनने में मामूली लगता है, लेकिन इसमें ग़लती होना हैरानी की बात नहीं। एक भोला तरीक़ा जो किसी स्ट्रिंग को अक्षर-दर-अक्षर पलट देता है, वह आधुनिक अक्षरों को बीच में तोड़ सकता है जो असल में कई हिस्सों से मिलकर बने होते हैं — कई इमोजी, कुछ ऐक्सेंट वाले अक्षर और कई सिंबल एक से ज़्यादा यूनिट में स्टोर होते हैं, और उन्हें बीच से काटने पर टूटे हुए चौकोर या बेमतलब निशान बन जाते हैं। यह टूल टेक्स्ट को पूरे अक्षरों के हिसाब से उलटता है, जैसा एक पाठक उन्हें पहचानता है, इसलिए कोई इमोजी पूरा इमोजी ही रहता है और &quot;é&quot; जैसा कोई ऐक्सेंट वाला अक्षर टूटकर अपने ऐक्सेंट और बुनियादी अक्षर में बँटने की बजाय साबुत रहता है।</p>
+<p>यही सावधानी इस रिवर्सर को अलग-अलग भाषाओं और लिपियों में समझदारी से काम करने लायक़ बनाती है। ऐक्सेंट, इमोजी, विराम चिह्न और मिश्रित वर्णमाला वाला टेक्स्ट — सब कुछ साफ़-सुथरे ढंग से उलट जाता है। ध्यान रहे कि अरबी या हिब्रू जैसी दाएँ-से-बाएँ चलने वाली लिपि में लिखे टेक्स्ट के अक्षर पलटने से उसका दिखना बदल जाएगा, क्योंकि वे लिपियाँ पहले से ही उल्टी दिशा में चलती हैं; फिर भी टूल भीतर के अक्षर-क्रम को पूरी ईमानदारी से पलटता है, जो पहेलियों और असर पैदा करने के लिए बिल्कुल सही है।</p>
+<h2>हिंदी और देवनागरी टेक्स्ट पर एक नोट</h2>
+<p>देवनागरी में हर अक्षर के साथ मात्राएँ (जैसे ि, ी, ु, ू) और संयुक्ताक्षर जुड़े होते हैं, जो अक्सर एक से ज़्यादा यूनिकोड यूनिट से मिलकर बनते हैं। इसीलिए यह टूल अक्षरों को उनके पूरे रूप में पहचानकर उलटता है, न कि कच्ची यूनिकोड यूनिट के हिसाब से — इससे &quot;नमस्ते&quot; जैसा शब्द उलटने पर मात्राएँ टूटती नहीं, बल्कि हर अक्षर अपनी मात्रा के साथ जुड़ा रहता है, भले ही क्रम उलटा हो जाए।</p>
+<h2>प्राइवेट, तुरंत और मुफ़्त</h2>
+<p>न कोई साइन-अप, न कोई ख़र्च, न कोई इंतज़ार। यह पूरा रिवर्सर एक छोटा-सा कोड है जो आपकी अपनी डिवाइस पर चलता है, इसलिए यह टाइप करते ही तुरंत अपडेट होता है और बिना इंटरनेट कनेक्शन के भी काम करता रहता है। आपका पेस्ट किया कुछ भी कहीं भेजा, सेव या साझा नहीं किया जाता, इसलिए निजी नोट्स या ऐसे संदेशों के लिए भी यह पूरी तरह सुरक्षित है जिन्हें आप सिर्फ़ अपने तक रखना चाहते हैं।</p>
+<p>शुरू करने के लिए, अपना टेक्स्ट पहले बॉक्स में टाइप करें या पेस्ट करें और नीचे उल्टा वर्ज़न दिखते देखें। अक्षर, शब्द या लाइन उलटने के बीच बटन दबाकर तब तक बदलते रहें जब तक मनचाहा असर न मिल जाए, फिर कॉपी बटन से नतीजा उठा लें। टेक्स्ट कभी भी बदलें, आउटपुट उसी रफ़्तार से साथ चलता है, इसलिए तब तक आज़माते रहें जब तक बात बिल्कुल सही न लगे। यहाँ कुछ भी स्थायी नहीं है, और जितनी बार चाहें उतनी बार आज़मा सकते हैं, तो बेझिझक अपने शब्दों और मोड को बदलते रहें जब तक उल्टा टेक्स्ट ठीक वैसा न पढ़ा जाए जैसा आपने सोचा था।</p>
+    <section class="faq"><h2>Backwards text FAQ</h2><dl><dt>What is the difference between the three modes?</dt><dd>Reverse letters flips every character so &#39;hello&#39; becomes &#39;olleh&#39;. Reverse word order keeps each word intact but puts them in the opposite sequence. Reverse line order flips a list or block from bottom to top.</dd><dt>Will emoji and accented letters break?</dt><dd>No. The tool reverses text by whole characters, so emoji, accented letters and other symbols stay intact rather than being split apart.</dd><dt>Is my text uploaded?</dt><dd>No. Reversing happens instantly in your browser, so nothing you type is sent to a server, saved or shared.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/backwardstext/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/backwardstext/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/backwardstext/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/backwardstext/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/backwardstext/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/backwardstext/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/backwardstext/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/backwardstext/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/backwardstext/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/backwardstext/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/glossary.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/backwardstext.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Idade — sua idade exata em anos, meses e dias</title>
+<meta name="description" content="Calculadora de idade grátis. Informe a sua data de nascimento para ver a idade exata em anos, meses e dias, o total de dias vividos e a contagem para o próximo aniversário.">
+<link rel="canonical" href="https://mikaio.dev/pt/agecalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/agecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/agecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/agecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/agecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/agecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/agecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/agecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/agecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/agecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/agecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/agecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de Idade — sua idade exata em anos, meses e dias">
+<meta property="og:description" content="Calculadora de idade grátis. Informe a sua data de nascimento para ver a idade exata em anos, meses e dias, o total de dias vividos e a contagem para o próximo aniversário.">
+<meta property="og:url" content="https://mikaio.dev/pt/agecalc/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Idade — sua idade exata em anos, meses e dias","url":"https://mikaio.dev/pt/agecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de idade grátis. Informe a sua data de nascimento para ver a idade exata em anos, meses e dias, o total de dias vividos e a contagem para o próximo aniversário."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora de Idade","item":"https://mikaio.dev/pt/agecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como a minha idade exata é calculada?","acceptedAnswer":{"@type":"Answer","text":"A calculadora conta os anos completos da sua data de nascimento até a data de referência, depois os meses inteiros restantes e, por fim, os dias que sobram, ajustando para os tamanhos diferentes de cada mês para que o resultado seja exato."}},{"@type":"Question","name":"Posso descobrir a idade em uma data passada ou futura?","acceptedAnswer":{"@type":"Answer","text":"Sim. Deixe a segunda data em branco para usar hoje, ou defina-a para qualquer data para ver quantos anos você tinha, ou terá, naquele dia."}},{"@type":"Question","name":"Minha data de nascimento é guardada?","acceptedAnswer":{"@type":"Answer","text":"Não. O cálculo roda inteiramente no seu navegador, então as datas que você informa nunca são enviadas, salvas ou compartilhadas."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/agecalc/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/agecalc/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/agecalc/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/agecalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/agecalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/agecalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/agecalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/agecalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/agecalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/agecalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/agecalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Saiba a sua idade exata, até o dia" />
+<meta property="og:description" content="Saiba a sua idade exata, até o dia" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/agecalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Saiba a sua idade exata, até o dia","description":"Saiba a sua idade exata, até o dia","url":"https://example.com/pt/agecalc/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora de Idade</span></nav>
+  <h1>Calculadora de Idade</h1>
+  <p class="lead">Informe a sua data de nascimento para ver a idade exata em anos, meses e dias. Deixe a segunda data em branco para hoje, ou defina-a para a idade em qualquer data.</p>
+  <section class="widget" id="tool"><form id="age" data-years="anos" data-months="meses" data-days="dias" data-totaldays="dias vividos no total" data-nextbday="Próximo aniversário" data-dayssuffix="dias"><div class="row"><div class="field"><label for="age-dob">Data de nascimento</label><input type="date" id="age-dob"></div><div class="field"><label for="age-at">Idade na data (opcional)</label><input type="date" id="age-at"></div></div><div class="result" id="age-out" hidden><span class="big" id="age-main">—</span><span id="age-total" class="hint"></span><br><span id="age-next" class="hint"></span></div></form></section>
+  <article class="content">
+    <h2>Saiba a sua idade exata, até o dia</h2>
+<p>A maioria de nós sabe dizer a idade em anos sem pensar, mas no momento em que você precisa de algo mais preciso — a idade em meses e dias, exatamente quantos dias está vivo, ou quantos anos terá em uma data futura específica — a conta de cabeça fica surpreendentemente complicada. Os meses têm tamanhos diferentes, os anos bissextos enfiam um dia extra em fevereiro, e contar por eles à mão é trabalhoso e fácil de errar. Esta calculadora de idade cuida de tudo isso para você. Informe a sua data de nascimento e ela mostra a idade precisa em anos, meses e dias, o número total de dias que você viveu, e quanto falta para o próximo aniversário. Tudo acontece no seu navegador, então a resposta aparece na hora e as datas que você digita nunca saem do seu dispositivo.</p>
+<p>Usá-la leva só um instante. Escolha a sua data de nascimento no primeiro campo e os resultados aparecem imediatamente, com base na data de hoje. Se quiser a idade como era, ou será, em outro dia, preencha também o segundo campo de data e a calculadora mede a distância entre as duas datas. Deixe esse segundo campo em branco e ela simplesmente usa hoje.</p>
+<h2>O que a calculadora mostra</h2>
+<p>O resultado principal é a sua idade exata expressa em três partes: anos completos, depois os meses inteiros restantes e, por fim, os dias que sobram. É assim que as pessoas geralmente querem dizer &quot;idade exata&quot;, e é muito mais informativo do que só os anos — especialmente para bebês e crianças pequenas, onde meses e dias importam muito, e para marcos em que você quer saber com precisão o quanto já avançou.</p>
+<p>Abaixo disso, a calculadora mostra o número total de dias que você viveu. Esse único número grande é uma forma divertida e um pouco surpreendente de ver a vida medida em dias em vez de anos, e é genuinamente útil sempre que um formulário ou um cálculo precisar de uma idade em dias. Por fim, ela informa quantos dias faltam para o seu próximo aniversário, uma pequena contagem útil, seja para planejar uma comemoração ou apenas por curiosidade.</p>
+<h2>Como a idade exata é calculada</h2>
+<p>Calcular uma idade exata é mais sutil do que subtrair um ano de outro. A calculadora parte da sua data de nascimento e conta o número de anos completos que se passaram até a data de referência. Depois conta os meses inteiros além disso e, por fim, os dias restantes. A parte complicada são os dias: como os meses variam de 28 a 31 dias, a calculadora pega emprestado o número correto de dias do mês anterior sempre que o dia do mês ainda não foi alcançado, para que a contagem seja sempre exata em vez de supor que todo mês tem o mesmo tamanho.</p>
+<p>Os anos bissextos são tratados automaticamente como parte disso. Alguém nascido em 29 de fevereiro é contado corretamente, e como a cifra do total de dias é medida como o número real de dias entre as duas datas, cada dia bissexto que você viveu é incluído. É por isso que o total de dias vividos é o mais sólido dos três números: é simplesmente a distância real entre a sua data de nascimento e a data de referência, sem nada arredondado.</p>
+<h2>Por que você pode precisar dela</h2>
+<p>Há mais motivos para querer uma idade exata do que se imagina. Pais acompanham a idade de um bebê em semanas e meses para marcos do desenvolvimento, vacinas e consultas, onde &quot;um ano de idade&quot; é vago demais. Formulários oficiais — para vistos, aposentadorias, seguros e registros médicos — às vezes pedem uma idade ou um cálculo preciso de datas, e acertar isso importa. Quem planeja aniversários e datas comemorativas gosta de saber a contagem exata, e qualquer um que marque um &quot;dia especial&quot;, como completar dez mil dias de vida, precisa da cifra do total de dias para achar a data.</p>
+<p>Também é simplesmente interessante. Ver a sua vida expressa como um número de dias, ou descobrir quantos anos uma figura histórica tinha em uma data específica, ou comparar as idades exatas de duas pessoas, é o tipo de pequena curiosidade que esta ferramenta responde em um segundo. Como você pode definir a segunda data livremente, pode olhar para trás em qualquer ponto do seu passado ou para frente em qualquer ponto do seu futuro.</p>
+<h2>Usando a segunda data</h2>
+<p>A segunda data opcional é o que transforma uma simples calculadora de idade em uma ferramenta flexível de diferença de datas. Normalmente você a deixa em branco e a calculadora usa hoje, dando a sua idade atual. Mas ao defini-la, você pode responder perguntas como &quot;quantos anos eu tinha quando esta foto foi tirada?&quot;, &quot;quantos anos terei no início do próximo ano letivo?&quot;, ou &quot;qual será a minha idade nesta data futura exata?&quot;. A calculadora sempre mede da data mais antiga para a mais recente, então, desde que a sua data de nascimento seja a mais antiga das duas, ela funciona exatamente como você esperaria.</p>
+<p>Isso a torna útil muito além da sua própria idade. Defina qualquer data anterior como &quot;data de nascimento&quot; e qualquer data posterior como referência, e você tem uma medida precisa do tempo entre elas em anos, meses e dias, além do número total de dias — útil para descobrir a duração de qualquer coisa, de um projeto a um relacionamento a uma assinatura.</p>
+<h2>Privado, instantâneo e grátis</h2>
+<p>Não há cadastro, custo nem anúncios no caminho. A calculadora inteira é um pequeno trecho de código que roda no seu próprio dispositivo, então ela responde no instante em que você escolhe uma data e continua funcionando sem conexão com a internet. As datas que você informa, incluindo a sua data de nascimento, nunca são enviadas, registradas ou compartilhadas; elas existem apenas na sua tela e desaparecem quando você recarrega a página.</p>
+<p>Para usá-la, escolha a sua data de nascimento, opcionalmente defina uma segunda data, e leia a sua idade exata, o total de dias vividos e a contagem para o próximo aniversário. Mude qualquer uma das datas a qualquer momento e todos os valores se atualizam na hora, para você explorar qualquer idade em qualquer dia quantas vezes quiser.</p>
+    <section class="faq"><h2>Perguntas frequentes da calculadora de idade</h2><dl><dt>Como a minha idade exata é calculada?</dt><dd>A calculadora conta os anos completos da sua data de nascimento até a data de referência, depois os meses inteiros restantes e, por fim, os dias que sobram, ajustando para os tamanhos diferentes de cada mês para que o resultado seja exato.</dd><dt>Posso descobrir a idade em uma data passada ou futura?</dt><dd>Sim. Deixe a segunda data em branco para usar hoje, ou defina-a para qualquer data para ver quantos anos você tinha, ou terá, naquele dia.</dd><dt>Minha data de nascimento é guardada?</dt><dd>Não. O cálculo roda inteiramente no seu navegador, então as datas que você informa nunca são enviadas, salvas ou compartilhadas.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/agecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/agecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/agecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/agecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/agecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/agecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/agecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/agecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/agecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/agecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/agecalc.js" defer></script>
+</body>
+</html>

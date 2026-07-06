@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loan Calculator — monthly payment and total interest</title>
+<meta name="description" content="Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans.">
+<link rel="canonical" href="https://mikaio.dev/ur/loancalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/loancalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/loancalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/loancalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/loancalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/loancalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/loancalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/loancalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/loancalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loan Calculator — monthly payment and total interest">
+<meta property="og:description" content="Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans.">
+<meta property="og:url" content="https://mikaio.dev/ur/loancalc/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Loan Calculator — monthly payment and total interest","url":"https://mikaio.dev/ur/loancalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Loan Calculator","item":"https://mikaio.dev/ur/loancalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What formula is used?","acceptedAnswer":{"@type":"Answer","text":"Monthly payment = P × [r(1+r)^n] / [(1+r)^n - 1], where P is the loan amount, r is the monthly interest rate (annual / 12), and n is the number of months."}},{"@type":"Question","name":"What types of loans can I calculate?","acceptedAnswer":{"@type":"Answer","text":"The formula applies to any standard amortising loan: mortgages, car loans, personal loans, student loans. For interest-only or balloon loans the formula differs."}},{"@type":"Question","name":"Does this include fees or insurance?","acceptedAnswer":{"@type":"Answer","text":"No, this calculates only the principal and interest payment. Your actual monthly payment may be higher if it includes property tax, insurance, or other fees."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/ur/loancalc/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/loancalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/loancalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/loancalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/loancalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/loancalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/loancalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/loancalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="قرض لینے سے پہلے اپنی ماہانہ قسط معلوم کریں" />
+<meta property="og:description" content="قرض لینے سے پہلے اپنی ماہانہ قسط معلوم کریں" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/ur/loancalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"قرض لینے سے پہلے اپنی ماہانہ قسط معلوم کریں","description":"قرض لینے سے پہلے اپنی ماہانہ قسط معلوم کریں","url":"https://example.com/ur/loancalc/","inLanguage":"ur"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Loan Calculator</span></nav>
+  <h1>Loan Calculator</h1>
+  <p class="lead">Enter the loan amount, annual interest rate, and term in years to calculate your monthly payment.</p>
+  <section class="widget" id="tool"><form id="loan-form"><div class="row"><div class="field"><label for="loan-amt">Loan amount</label><input type="number" id="loan-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-rate">Annual interest rate %</label><input type="number" id="loan-rate" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-years">Term (years)</label><input type="number" id="loan-years" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="hint">Monthly payment: </span><span class="big" id="loan-monthly">—</span></div><div id="loan-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>قرض لینے سے پہلے اپنی ماہانہ قسط معلوم کریں</h2>
+<p>کوئی بھی قرض لینے سے پہلے — چاہے وہ گھر کی خریداری کے لیے ہو، گاڑی کے لیے، ذاتی ضرورت کے لیے یا تعلیمی مقصد کے لیے — یہ جاننا کہ ماہانہ قسط کتنی بنے گی اور کل سود کتنا لگے گا، ایک باخبر فیصلہ کرنے میں مدد دیتا ہے۔ یہ کیلکولیٹر معیاری امورٹائزیشن فارمولا استعمال کرتے ہوئے بالکل واضح بتاتا ہے کہ آپ ہر مہینے کتنی رقم ادا کریں گے اور پورے قرض کی کل لاگت کیا بنے گی۔</p>
+<h2>قرض کی قسط کا فارمولا</h2>
+<p>معیاری امورٹائزنگ قرض کی ماہانہ قسط اس فارمولے سے نکالی جاتی ہے:</p>
+<p>M = P × [r(1+r)^n] ÷ [(1+r)^n − 1]</p>
+<p>جہاں:</p>
+<ul>
+<li>M = ماہانہ قسط</li>
+<li>P = اصل رقم (قرض کی مقدار)</li>
+<li>r = ماہانہ شرح سود (سالانہ شرح ÷ 12، اعشاریے کی صورت میں)</li>
+<li>n = کل ماہانہ اقساط کی تعداد (سالوں × 12)</li>
+</ul>
+<p>اسے امورٹائزیشن فارمولا کہا جاتا ہے، اور یہ قرض کی پوری مدت میں ایک مقررہ قسط پیدا کرتا ہے جو سود اور اصل رقم دونوں کا احاطہ کرتی ہے۔</p>
+<h2>امورٹائزیشن کیسے کام کرتی ہے</h2>
+<p>ہر ماہانہ قسط کا ایک حصہ سود میں جاتا ہے اور دوسرا حصہ اصل رقم کم کرتا ہے۔ قرض کے ابتدائی حصے میں چونکہ باقی رقم زیادہ ہوتی ہے، اس لیے قسط کا بیشتر حصہ سود ہی ہوتا ہے۔ جیسے جیسے باقی رقم کم ہوتی جاتی ہے، سود کا حصہ سکڑتا ہے اور اصل رقم کا حصہ بڑھتا جاتا ہے۔ آخری قسط تک پہنچتے پہنچتے تقریباً پوری قسط اصل رقم پر ہی جا رہی ہوتی ہے۔</p>
+<p>مثال کے طور پر: 300,000 ڈالر کا رہائشی قرض، 7 فیصد سالانہ شرح پر، تیس سال کی مدت کے لیے:</p>
+<ul>
+<li>ماہانہ قسط: تقریباً 1,995 ڈالر</li>
+<li>تیس سال میں کل ادا شدہ رقم: 718,200 ڈالر</li>
+<li>کل ادا کردہ سود: 418,200 ڈالر — یعنی اصل قرض سے بھی زیادہ</li>
+</ul>
+<p>یہ مثال واضح کرتی ہے کہ لمبی مدت کے قرضے سود میں اتنے مہنگے کیوں پڑتے ہیں۔ اسی شرح پر پندرہ سالہ قرض کی ماہانہ قسط زیادہ ہوگی، مگر کل سود میں یہ زبردست بچت دلائے گا۔</p>
+<h2>شرح سود کا اثر</h2>
+<p>شرح سود قسط اور مجموعی لاگت پر بہت گہرا اثر ڈالتی ہے۔ 200,000 ڈالر کے تیس سالہ قرض پر:</p>
+<ul>
+<li>4 فیصد پر: 955 ڈالر ماہانہ، کل سود 143,739 ڈالر</li>
+<li>6 فیصد پر: 1,199 ڈالر ماہانہ، کل سود 231,676 ڈالر</li>
+<li>8 فیصد پر: 1,468 ڈالر ماہانہ، کل سود 328,310 ڈالر</li>
+</ul>
+<p>شرح میں دو فیصد پوائنٹس کا اضافہ تیس سالہ مدت میں سود کی لاگت کو تقریباً دوگنا کر دیتا ہے۔</p>
+<h2>قرضوں کی اقسام</h2>
+<p>یہ کیلکولیٹر کسی بھی معیاری امورٹائزنگ قرض کے لیے کام کرتا ہے:</p>
+<p><strong>رہائشی قرضے (مارگیج)</strong>: امریکہ میں عام طور پر 15 یا 30 سال، جبکہ برطانیہ اور کینیڈا میں 25 سے 35 سال تک۔ فکسڈ ریٹ مارگیج میں پوری مدت میں یکساں قسط رہتی ہے، جبکہ ایڈجسٹ ایبل ریٹ مارگیج کسی اشاریے کے ساتھ بدلتی رہتی ہے۔</p>
+<p><strong>گاڑی کے قرضے</strong>: عام طور پر 48 سے 84 مہینے (چار سے سات سال)۔ چھوٹی مدت مطلب زیادہ قسط لیکن کم مجموعی سود۔</p>
+<p><strong>ذاتی قرضے</strong>: عموماً ایک سے سات سال۔ شرحیں کریڈٹ ہسٹری کے مطابق بہت مختلف ہوتی ہیں — بہترین کریڈٹ پر پانچ فیصد سے لے کر کمزور کریڈٹ پر تیس فیصد سے زیادہ تک۔</p>
+<p><strong>تعلیمی قرضے</strong>: امریکہ کے وفاقی طلبہ قرضوں کی شرحیں فی الوقت پانچ سے آٹھ فیصد کے درمیان ہیں، اور آمدنی پر مبنی ادائیگی کے اختیارات بھی موجود ہیں۔</p>
+<h2>سمجھوتے کی ایک حل شدہ مثال</h2>
+<p>فرض کریں آپ 250,000 ڈالر چھ فیصد سالانہ شرح پر لیتے ہیں۔ تیس سال کی مدت میں ماہانہ قسط تقریباً 1,499 ڈالر بنے گی، اور پوری زندگی میں ادا کردہ کل سود تقریباً 289,600 ڈالر ہو جائے گا — جو اصل رقم سے بھی زیادہ ہے۔ اگر یہی رقم پندرہ سال کے لیے اسی شرح پر لی جائے تو ماہانہ قسط بڑھ کر تقریباً 2,110 ڈالر ہو جاتی ہے، جو نمایاں طور پر زیادہ ہے، مگر کل سود گر کر تقریباً 129,800 ڈالر رہ جاتا ہے، یعنی تیس سالہ رقم کے آدھے سے بھی کم۔ دونوں میں سے کوئی مدت خود بخود درست نہیں — صحیح انتخاب اس بات پر منحصر ہے کہ آپ کا بجٹ کس ماہانہ قسط کو برداشت کر سکتا ہے، اس لچک کے بدلے آپ کتنی مجموعی لاگت قبول کرنے کو تیار ہیں۔</p>
+<h2>منصوبہ بندی کے لیے کیلکولیٹر کا استعمال</h2>
+<p>آپ اس کیلکولیٹر کو کئی طریقوں سے استعمال کر سکتے ہیں: جتنی رقم لینے کا ارادہ ہو وہ درج کریں اور دیکھیں قسط کتنی بنے گی؛ یا الٹا سوچیں — اگر آپ ماہانہ ایک مخصوص رقم برداشت کر سکتے ہیں تو مختلف رقوم اور شرحوں کو آزما کر دیکھیں کہ زیادہ سے زیادہ کتنا قرض لیا جا سکتا ہے؛ یا مختلف مدتوں پر کل سود کا موازنہ کر کے قرض کی مدت کے بارے میں زیادہ باخبر فیصلہ کریں۔</p>
+<h2>کیلکولیٹر استعمال کرنے کا طریقہ</h2>
+<p>قرض کی رقم، سالانہ شرح سود اور سالوں میں مدت درج کریں، ماہانہ قسط فوراً سامنے آ جائے گی، ساتھ ہی وہ کل رقم بھی جو آپ قرض کی پوری مدت میں ادا کریں گے اور اس میں شامل کل سود بھی۔ تینوں میں سے کسی بھی قدر کو تبدیل کریں تو ہر عدد فوراً دوبارہ حساب ہو جاتا ہے، جس سے یہ موازنہ کرنا آسان ہو جاتا ہے کہ چھوٹی مدت، مختلف شرح، یا زیادہ پیشگی رقم آپ کی اصل ادائیگی کو کیسے بدل دے گی۔</p>
+<h2>اضافی ادائیگیاں اور قرض جلدی اتارنا</h2>
+<p>اصل رقم کی طرف اضافی ادائیگیاں کرنا، خواہ چھوٹی ہی کیوں نہ ہوں، قرض کی مدت کو کافی حد تک کم کر سکتا ہے اور کل سود میں نمایاں بچت دلا سکتا ہے، کیونکہ اصل رقم پر لگایا گیا ہر اضافی روپیہ قرض کی باقی مدت کے لیے سود جمع کرنا بند کر دیتا ہے۔ کسی طویل مدتی رہائشی قرض میں، ابتدائی سالوں میں — جب باقی رقم اور اس پر لگنے والا سود دونوں اپنے عروج پر ہوتے ہیں — ہر ماہانہ قسط میں معمولی سا اضافہ کرنے کا اثر بعد کے سالوں میں یہی اضافی رقم دینے سے کہیں زیادہ ہوتا ہے۔ بہت سے قرض دہندگان بغیر کسی جرمانے کے اصل رقم میں اضافی ادائیگی کی اجازت دیتے ہیں، اگرچہ اس حکمت عملی پر انحصار کرنے سے پہلے یہ تصدیق ضرور کر لینی چاہیے، کیونکہ بعض معاہدے جلد ادائیگی پر جرمانہ عائد کرتے ہیں۔</p>
+<h2>قرض کی مدتوں کا آمنے سامنے موازنہ</h2>
+<p>شاید اس کیلکولیٹر کا سب سے قیمتی استعمال یہ دیکھنا ہے کہ ایک ہی رقم کا قرض مختلف مدتوں میں کیسا برتاؤ کرتا ہے۔ مختصر مدت ہمیشہ زیادہ ماہانہ قسط مگر کم کل سود کا مطلب رکھتی ہے، کیونکہ باقی رقم تیزی سے ادا ہو جاتی ہے اور اس پر سود جمع ہونے کا وقت کم ملتا ہے۔ لمبی مدت اسی رقم کو چھوٹی چھوٹی اقساط میں پھیلا دیتی ہے، جو ماہانہ بنیاد پر خریداری کو قابل برداشت بنا دیتی ہے، مگر مجموعی طور پر کہیں زیادہ ادائیگی کی قیمت پر۔ ایک ہی اصل رقم اور شرح کو پندرہ اور پھر تیس سال کی مدت پر اس کیلکولیٹر سے آمنے سامنے چلانا، ماہانہ استطاعت اور کل لاگت کے درمیان سمجھوتے کو تجریدی کے بجائے ٹھوس بنا دیتا ہے — اور یہی وہ موازنہ ہے جو کسی بھی طویل مدتی قرض کے معاہدے پر دستخط کرنے سے پہلے کر لینا چاہیے۔</p>
+<h2>نجی اور فوری</h2>
+<p>تمام حساب کتاب معیاری امورٹائزیشن فارمولے کے مطابق مکمل طور پر آپ کے براؤزر میں چلتا ہے، اس لیے جیسے ہی آپ کوئی بھی ان پٹ تبدیل کریں، نتائج فوراً اپ ڈیٹ ہو جاتے ہیں، اور آپ کا درج کردہ قرض کی رقم، شرح یا مدت کبھی کسی سرور کو نہیں بھیجی جاتی، نہ محفوظ ہوتی ہے نہ شیئر کی جاتی ہے۔</p>
+    <section class="faq"><h2>Loan calculator FAQ</h2><dl><dt>What formula is used?</dt><dd>Monthly payment = P × [r(1+r)^n] / [(1+r)^n - 1], where P is the loan amount, r is the monthly interest rate (annual / 12), and n is the number of months.</dd><dt>What types of loans can I calculate?</dt><dd>The formula applies to any standard amortising loan: mortgages, car loans, personal loans, student loans. For interest-only or balloon loans the formula differs.</dd><dt>Does this include fees or insurance?</dt><dd>No, this calculates only the principal and interest payment. Your actual monthly payment may be higher if it includes property tax, insurance, or other fees.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/loancalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/loancalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/loancalc.js" defer></script>
+</body>
+</html>

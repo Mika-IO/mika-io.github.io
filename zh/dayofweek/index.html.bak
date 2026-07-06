@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day of Week Calculator — what day of the week was any date?</title>
+<meta name="description" content="Free day of week calculator. Find out what day of the week any date falls on. Check birthdays, historical dates, or any future date instantly.">
+<link rel="canonical" href="https://mikaio.dev/zh/dayofweek/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/dayofweek/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/dayofweek/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/dayofweek/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/dayofweek/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/dayofweek/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/dayofweek/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/dayofweek/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/dayofweek/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Day of Week Calculator — what day of the week was any date?">
+<meta property="og:description" content="Free day of week calculator. Find out what day of the week any date falls on. Check birthdays, historical dates, or any future date instantly.">
+<meta property="og:url" content="https://mikaio.dev/zh/dayofweek/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Day of Week Calculator — what day of the week was any date?","url":"https://mikaio.dev/zh/dayofweek/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free day of week calculator. Find out what day of the week any date falls on. Check birthdays, historical dates, or any future date instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Day of the Week","item":"https://mikaio.dev/zh/dayofweek/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What day of the week was I born?","acceptedAnswer":{"@type":"Answer","text":"Enter your birthday and the calculator shows the day of the week."}},{"@type":"Question","name":"How far back can I go?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses JavaScript's Date object, which reliably handles dates from the year 100 CE onward in the Gregorian calendar."}},{"@type":"Question","name":"Why is January 1, 2000 useful to know?","acceptedAnswer":{"@type":"Answer","text":"January 1, 2000 was a Saturday. Y2K was on a weekend, which reduced the immediate disruption."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Day of the Week</span></nav>
+  <h1>Day of the Week</h1>
+  <p class="lead">Enter any date to find out which day of the week it falls on.</p>
+  <section class="widget" id="tool"><form id="dow-form"><div class="row"><div class="field"><label for="dow-date">Date</label><input type="date" id="dow-date"></div></div><div class="result"><span class="big" id="dow-out">—</span></div><div id="dow-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>查出任意日期是星期几</h2>
+<p>知道某个具体日期是星期几,用途比想象中广泛得多:查一查自己出生那天是星期几,查某个重要历史事件发生在星期几,核实未来的会议或假期落在哪一天,或者解答一道趣味问答题。输入任意日期,星期几立刻显示出来。</p>
+<h2>星期几是怎么算出来的</h2>
+<p>任意日期对应的星期几,可以通过一种叫做&quot;蔡勒公式&quot;或&quot;世界末日算法&quot;(Doomsday algorithm)的公式算出来,两者都基于模运算。这个计算器使用的JavaScript日期对象会自动应用公历规则,对公历纪元内的任意日期都能给出准确结果。</p>
+<h2>历史上的有趣巧合</h2>
+<p>一些具有历史意义的日期,对应的星期几本身就很有意思:</p>
+<ul>
+<li><strong>2000年1月1日</strong>(千年虫危机):星期六——广受担忧的计算机千年虫问题恰好发生在一个周末,减少了对企业运转的即时冲击。</li>
+<li><strong>1776年7月4日</strong>(美国独立):星期四——大陆会议在一个星期四通过了《独立宣言》。</li>
+<li><strong>1989年11月9日</strong>(柏林墙倒塌):星期四。</li>
+<li><strong>2001年9月11日</strong>:星期二——世贸中心遇袭发生在一个周二的早晨。</li>
+<li><strong>2025年12月25日</strong>(圣诞节):星期四。</li>
+</ul>
+<h2>关于生日的趣味小知识</h2>
+<p>很多人好奇自己出生那天是星期几,这个计算只需要知道出生日期就够了。一些名人的生日也透出些有趣的规律——阿尔伯特·爱因斯坦出生于1879年3月14日,那天是星期五;而威廉·莎士比亚出生和去世都在4月23日,分别落在1564年的星期二和1616年的星期三。</p>
+<h2>用星期几来规划</h2>
+<p>知道未来某个日期是星期几,对实际规划很有帮助:确认某个计划中的活动不会落在周末,查一下某个法定假日是星期几(如果是星期一,就能拼出一个小长假),或者核实签证预约、机票预订、合同截止日期具体落在哪一天。</p>
+<h2>公历与其他历法</h2>
+<p>公历是1582年由教皇格里高利十三世为改革儒略历而颁布的。不同国家采用公历的时间并不一样——英国及其殖民地在1752年才改用公历,俄国则一直拖到1918年。在一个国家采用公历之前的日期,严格来说属于儒略历,同样的日期在儒略历下对应的星期几可能不同。这个计算器采用的是&quot;外推公历&quot;(proleptic Gregorian calendar),也就是把公历规则一致地往回推算,这是计算历史日期时的标准做法。</p>
+<h2>使用方法</h2>
+<p>用日期字段选择任意一个日期,不管是过去还是未来,星期几会立刻显示在下方。不需要单独点确认按钮——改变日期就会立即重新计算结果,方便你快速核对一连串日期,比如查一下某个事件未来十年里每一次周年纪念日落在星期几,或者往回翻查一连串历史日期。</p>
+<h2>一个心算的小技巧</h2>
+<p>数学家约翰·康威推广的&quot;世界末日算法&quot;,是一种不用计算器就能推算任意日期是星期几的心算捷径。它的原理是先记住每一年的&quot;世界末日&quot;——一个当年好几个容易记住的日期(比如4/4、6/6、8/8、10/10、12/12)总会落在的那个星期几,再从这些日期里最近的一个往前或往后数到你要查的日期。熟练运用需要一些练习,但一旦学会,绝对是一个能震住人的小把戏,而这个计算器正好可以用来验证你心算的答案是否正确。</p>
+<h2>为什么同一个日期在不同年份是不同的星期几</h2>
+<p>因为平年有365天,不是7的整数倍,所以任何一个固定日期(比如你的生日)对应的星期几,每年都会往后挪一天,遇到闰年则会挪两天,因为多出来的那个2月29日会把之后的所有日子都往后再推一步。这就是为什么生日这一年落在星期二,下一年就变成星期三,再碰上一个闰年之后又跳到星期五。只要拉的时间足够长,这个规律就会重复:在旧式儒略历闰年间隔下,任意一个日期每隔28年就会回到同一个星期几,不过公历的世纪例外规则会偶尔让这个周期稍微拉长一点。</p>
+<h2>私密且即时</h2>
+<p>计算完全使用JavaScript内置的日期对象,在你的浏览器中运行,自动应用公历规则,选好日期后结果立即显示,你输入的任何内容都不会被发送到服务器、记录或分享。</p>
+    <section class="faq"><h2>Day of week FAQ</h2><dl><dt>What day of the week was I born?</dt><dd>Enter your birthday and the calculator shows the day of the week.</dd><dt>How far back can I go?</dt><dd>The calculator uses JavaScript&#39;s Date object, which reliably handles dates from the year 100 CE onward in the Gregorian calendar.</dd><dt>Why is January 1, 2000 useful to know?</dt><dd>January 1, 2000 was a Saturday. Y2K was on a weekend, which reduced the immediate disruption.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/dayofweek/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/dayofweek/">中文</a></li><li><a hreflang="es" lang="es" href="/es/dayofweek/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/dayofweek/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/dayofweek/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/dayofweek/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/dayofweek/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/dayofweek.js" defer></script>
+</body>
+</html>

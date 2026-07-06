@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compteur de Mots — comptez mots, caractères et temps de lecture</title>
+<meta name="description" content="Compteur de mots gratuit en direct. Collez ou tapez du texte pour compter mots, caractères, phrases, paragraphes et temps de lecture estimé instantanément dans votre navigateur.">
+<link rel="canonical" href="https://mikaio.dev/fr/wordcount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/wordcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/wordcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/wordcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/wordcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/wordcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/wordcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/wordcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/wordcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/wordcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/wordcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/wordcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compteur de Mots — comptez mots, caractères et temps de lecture">
+<meta property="og:description" content="Compteur de mots gratuit en direct. Collez ou tapez du texte pour compter mots, caractères, phrases, paragraphes et temps de lecture estimé instantanément dans votre navigateur.">
+<meta property="og:url" content="https://mikaio.dev/fr/wordcount/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Compteur de Mots — comptez mots, caractères et temps de lecture","url":"https://mikaio.dev/fr/wordcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Compteur de mots gratuit en direct. Collez ou tapez du texte pour compter mots, caractères, phrases, paragraphes et temps de lecture estimé instantanément dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Compteur de Mots","item":"https://mikaio.dev/fr/wordcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment le temps de lecture est-il estimé ?","acceptedAnswer":{"@type":"Answer","text":"Le temps de lecture suppose une vitesse moyenne d'un adulte d'environ 200 mots par minute et arrondit à une minute au minimum. Les lecteurs plus rapides ou plus lents doivent l'ajuster."}},{"@type":"Question","name":"Comment les mots sont-ils comptés dans les langues sans espaces ?","acceptedAnswer":{"@type":"Answer","text":"Pour les écritures comme le chinois et le japonais, qui ne séparent pas les mots par des espaces, chaque caractère compte pour une unité, ce qui correspond assez bien à la façon dont ces langues mesurent la longueur."}},{"@type":"Question","name":"Mon texte est-il stocké quelque part ?","acceptedAnswer":{"@type":"Answer","text":"Non. Tout le comptage se fait dans votre navigateur pendant que vous tapez. Votre texte n'est jamais envoyé à un serveur, enregistré ni partagé."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/fr/wordcount/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/wordcount/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/wordcount/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/wordcount/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/wordcount/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/wordcount/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/wordcount/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/wordcount/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/wordcount/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/wordcount/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/wordcount/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Un compteur de mots qui vous suit" />
+<meta property="og:description" content="Un compteur de mots qui vous suit" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/fr/wordcount/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Un compteur de mots qui vous suit","description":"Un compteur de mots qui vous suit","url":"https://example.com/fr/wordcount/","inLanguage":"fr"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Compteur de Mots</span></nav>
+  <h1>Compteur de Mots</h1>
+  <p class="lead">Tapez ou collez votre texte ci-dessous. Mots, caractères, phrases, paragraphes et temps de lecture se mettent à jour en direct pendant que vous écrivez ; rien n&#39;est envoyé.</p>
+  <section class="widget" id="tool"><div id="wc"><textarea id="wc-input" placeholder="Commencez à taper ou collez votre texte ici…" aria-label="Commencez à taper ou collez votre texte ici…"></textarea><div class="wc-stats"><div class="result"><span class="big" id="wc-words">0</span><span class="hint">Mots</span></div><div class="result"><span class="big" id="wc-characters">0</span><span class="hint">Caractères</span></div><div class="result"><span class="big" id="wc-nospace">0</span><span class="hint">Caractères (sans espaces)</span></div><div class="result"><span class="big" id="wc-sentences">0</span><span class="hint">Phrases</span></div><div class="result"><span class="big" id="wc-paragraphs">0</span><span class="hint">Paragraphes</span></div><div class="result"><span class="big" id="wc-reading">0</span><span class="hint">Temps de lecture (min)</span></div></div></div></section>
+  <article class="content">
+    <h2>Un compteur de mots qui vous suit</h2>
+<p>Ce compteur de mots mesure votre texte à l&#39;instant où vous le tapez ou le collez. Aucun bouton à presser, aucune attente : dès qu&#39;un caractère apparaît dans la zone, les compteurs à côté se rafraîchissent. Il suit six choses à la fois — mots, caractères, caractères sans espaces, phrases, paragraphes et un temps de lecture estimé —, si bien que vous avez une image complète d&#39;un texte d&#39;un seul coup d&#39;œil. Tout s&#39;exécute dans votre navigateur, ce qui le rend rapide, le fait fonctionner hors ligne et n&#39;envoie jamais votre texte où que ce soit.</p>
+<p>Compter des mots paraît anodin jusqu&#39;à ce que vous ayez vraiment besoin d&#39;un nombre exact pour une raison concrète. Les étudiants ont des dissertations aux limites strictes. Les candidats réduisent leur lettre de motivation à une page. Les rédacteurs de contenu atteignent des longueurs cibles pour la visibilité dans les recherches. Les annonceurs font tenir un texte dans un nombre fixe de caractères. Les traducteurs facturent au mot. Dans chacun de ces cas, un décompte fiable et honnête compte, et c&#39;est précisément ce que cet outil est conçu pour vous offrir.</p>
+<h2>Ce que signifie chaque nombre</h2>
+<p><strong>Mots</strong> est le décompte qui importe le plus à la plupart des gens. Ici, un mot est toute suite de lettres ou de chiffres, si bien que les contractions et les termes à trait d&#39;union sont chacun traités comme un seul mot, comme le comptent la plupart des correcteurs et des enseignants.</p>
+<p><strong>Caractères</strong> compte chaque caractère de la zone, y compris les espaces, les sauts de ligne et la ponctuation. C&#39;est le nombre qui compte quand un formulaire impose une limite stricte de caractères.</p>
+<p><strong>Caractères sans espaces</strong> retire les blancs et ne compte que les signes visibles. Certaines plateformes et certains cahiers des charges mesurent la longueur ainsi, il est donc pratique d&#39;avoir les deux chiffres côte à côte.</p>
+<p><strong>Phrases</strong> repère la ponctuation qui termine normalement une phrase — points, points d&#39;interrogation et d&#39;exclamation, y compris leurs équivalents dans d&#39;autres écritures. C&#39;est une bonne estimation plutôt qu&#39;un jugement grammatical, car les abréviations et une ponctuation inhabituelle peuvent parfois tromper n&#39;importe quel compteur automatique.</p>
+<p><strong>Paragraphes</strong> compte les blocs de texte séparés par une ligne vide. Cela reflète la manière dont les paragraphes sont habituellement disposés et ignore les lignes vides isolées pour que le nombre reste cohérent.</p>
+<p><strong>Temps de lecture</strong> transforme votre décompte de mots en une estimation du temps nécessaire pour lire le texte à un rythme confortable. Il suppose environ deux cents mots par minute, une moyenne largement admise pour la lecture adulte, et n&#39;affiche jamais moins d&#39;une minute pour un texte contenant le moindre mot.</p>
+<h2>Pourquoi les rédacteurs surveillent leur décompte</h2>
+<p>La longueur n&#39;est pas qu&#39;une formalité ; elle façonne l&#39;accueil d&#39;un texte. Un billet de blog trop court peut sembler maigre et se classe rarement bien dans les résultats de recherche, tandis qu&#39;un texte qui s&#39;éparpille perd ses lecteurs avant d&#39;arriver au but. Les travaux universitaires sont souvent assortis de limites précisément parce que l&#39;argumentation concise fait partie de la compétence évaluée, et un dépassement peut coûter des points. Sur les réseaux sociaux, des plafonds stricts de caractères décident si votre message paraît, alors connaître votre décompte exact avant d&#39;envoyer évite bien des frustrations.</p>
+<p>Le temps de lecture est devenu tout aussi important. Beaucoup de sites affichent désormais une estimation en tête d&#39;un article parce que les lecteurs aiment savoir ce à quoi ils s&#39;engagent. Une infolettre qui promet une « lecture de trois minutes » crée une attente, et la tenir bâtit la confiance. Les intervenants appliquent la même logique à l&#39;envers, en vérifiant qu&#39;un script tient dans un créneau avant même de monter sur scène.</p>
+<h2>Conseils pour atteindre une longueur cible</h2>
+<p>Si vous dépassez votre limite, les coupes les plus rapides viennent d&#39;ordinaire de la suppression des mots qui n&#39;apportent rien. Des tournures de remplissage comme « afin de », « le fait que » ou « à l&#39;heure actuelle » peuvent presque toujours être raccourcies ou supprimées sans perte de sens. Les phrases longues peuvent souvent être scindées, et des adverbes comme « très », « vraiment » ou « au fond » tendent à affaiblir l&#39;écriture plutôt qu&#39;à la renforcer. Voir le décompte baisser à mesure que vous élaguez donne un retour immédiat sur ce qui fonctionne.</p>
+<p>Si vous êtes en dessous de votre cible, résistez à la tentation de délayer. Cherchez plutôt les endroits où une idée est énoncée mais non étayée : un exemple, une courte explication ou un détail concret ajouteront une longueur véritable tout en améliorant le texte, alors que le remplissage vide ne fait que l&#39;allonger. Le compteur aide là aussi, en vous montrant exactement ce qu&#39;apporte une nouvelle phrase ou un nouveau paragraphe.</p>
+<h2>Compter à travers les langues</h2>
+<p>Toutes les langues ne se comptent pas de la même façon. L&#39;anglais, l&#39;espagnol, le français et la plupart des langues européennes séparent les mots par des espaces, ce qui rend le comptage simple. Le chinois et le japonais, en revanche, ne mettent pas d&#39;espaces entre les mots, et les lecteurs de ces langues mesurent généralement le texte au nombre de caractères. Ce compteur le gère automatiquement : pour les langues à espaces il compte les mots de la manière habituelle, et pour les écritures à base de caractères il compte chaque caractère comme une unité, donnant un nombre qui reflète la façon dont la longueur est réellement perçue dans cette langue.</p>
+<p>Cette même souplesse rend l&#39;outil utile pour les textes mixtes, comme un article en français citant une expression chinoise, ou des notes qui passent d&#39;une langue à l&#39;autre. Comme les règles de comptage s&#39;adaptent aux caractères réellement présents, les totaux restent pertinents même quand un document n&#39;est pas écrit dans une seule langue.</p>
+<h2>Confidentiel par conception</h2>
+<p>Un texte est souvent personnel ou confidentiel : le brouillon d&#39;une lettre de démission, un chapitre inédit, le brief d&#39;un client, une note médicale. Beaucoup de compteurs en ligne envoient ce que vous collez à un serveur pour le traiter, ce qui convient mal à un contenu sensible. Cet outil fait l&#39;inverse. Tout le comptage est réalisé par un petit bout de code qui s&#39;exécute entièrement sur votre appareil, si bien que vos mots ne quittent jamais la page. Vous pouvez même vous déconnecter d&#39;internet, il continuera de fonctionner à l&#39;identique.</p>
+<p>Pour l&#39;utiliser, cliquez simplement dans la zone et commencez à écrire, ou collez un texte que vous avez déjà. Les six statistiques se mettent à jour en continu, ce qui vous permet de suivre votre progression vers une limite en temps réel, d&#39;élaguer ou d&#39;étoffer selon les besoins, et de copier votre texte terminé quand bon vous semble.</p>
+    <section class="faq"><h2>Questions fréquentes sur le compteur de mots</h2><dl><dt>Comment le temps de lecture est-il estimé ?</dt><dd>Le temps de lecture suppose une vitesse moyenne d&#39;un adulte d&#39;environ 200 mots par minute et arrondit à une minute au minimum. Les lecteurs plus rapides ou plus lents doivent l&#39;ajuster.</dd><dt>Comment les mots sont-ils comptés dans les langues sans espaces ?</dt><dd>Pour les écritures comme le chinois et le japonais, qui ne séparent pas les mots par des espaces, chaque caractère compte pour une unité, ce qui correspond assez bien à la façon dont ces langues mesurent la longueur.</dd><dt>Mon texte est-il stocké quelque part ?</dt><dd>Non. Tout le comptage se fait dans votre navigateur pendant que vous tapez. Votre texte n&#39;est jamais envoyé à un serveur, enregistré ni partagé.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wordcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wordcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wordcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wordcount/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/wordcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wordcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/wordcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wordcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wordcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wordcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/wordcount.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Binary Translator — convert text to binary and back</title>
+<meta name="description" content="Free binary translator. Convert any text to binary code and decode binary back to text, with full Unicode support, instantly and privately in your browser.">
+<link rel="canonical" href="https://mikaio.dev/bn/binarytext/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/binarytext/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/binarytext/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/binarytext/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/binarytext/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/binarytext/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/binarytext/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/binarytext/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/binarytext/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/binarytext/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/binarytext/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/binarytext/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Binary Translator — convert text to binary and back">
+<meta property="og:description" content="Free binary translator. Convert any text to binary code and decode binary back to text, with full Unicode support, instantly and privately in your browser.">
+<meta property="og:url" content="https://mikaio.dev/bn/binarytext/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Binary Translator — convert text to binary and back","url":"https://mikaio.dev/bn/binarytext/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"Free binary translator. Convert any text to binary code and decode binary back to text, with full Unicode support, instantly and privately in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"Binary Translator","item":"https://mikaio.dev/bn/binarytext/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is text turned into binary?","acceptedAnswer":{"@type":"Answer","text":"Each character is encoded as one or more bytes using the UTF-8 standard, and each byte is written as eight binary digits (bits). Groups are separated by spaces so the result is easy to read and to decode again."}},{"@type":"Question","name":"Can it handle accents and emoji?","acceptedAnswer":{"@type":"Answer","text":"Yes. Because it uses UTF-8, letters with accents, non-Latin scripts and emoji are converted correctly into their multi-byte binary form and decoded back without loss."}},{"@type":"Question","name":"To decode, how should the binary be formatted?","acceptedAnswer":{"@type":"Answer","text":"Paste groups of eight bits separated by spaces, such as 01001000 01101001. Extra spaces are ignored, and anything that is not a 0 or 1 group is skipped."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/bn/binarytext/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/binarytext/">
+<link rel="alternate" hreflang="bn" href="https://example.com/bn/binarytext/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/binarytext/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/binarytext/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/binarytext/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/binarytext/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/binarytext/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/binarytext/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/binarytext/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/binarytext/">
+  <!-- SEO injected -->
+<meta property="og:title" content="সাধারণ লেখা আর খাঁটি বাইনারির মধ্যে অনুবাদ করুন" />
+<meta property="og:description" content="সাধারণ লেখা আর খাঁটি বাইনারির মধ্যে অনুবাদ করুন" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/bn/binarytext/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"সাধারণ লেখা আর খাঁটি বাইনারির মধ্যে অনুবাদ করুন","description":"সাধারণ লেখা আর খাঁটি বাইনারির মধ্যে অনুবাদ করুন","url":"https://example.com/bn/binarytext/","inLanguage":"bn"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>Binary Translator</span></nav>
+  <h1>Binary Translator</h1>
+  <p class="lead">Type text and tap &#39;To binary&#39; to see its binary code, or paste binary and tap &#39;To text&#39; to decode it. Works with any language.</p>
+  <section class="widget" id="tool"><div id="bin"><div class="field"><label for="bin-input">Text or binary</label><textarea id="bin-input" placeholder="Type text, or paste binary like 01001000…"></textarea></div><div class="cc-btns row"><button type="button" class="btn" data-op="encode">To binary</button><button type="button" class="btn" data-op="decode">To text</button></div><div class="field"><label for="bin-output">Result</label><textarea id="bin-output" readonly></textarea></div><button type="button" class="btn secondary" data-copy="#bin-output" data-copied="Copied!">Copy result</button></div></section>
+  <article class="content">
+    <h2>সাধারণ লেখা আর খাঁটি বাইনারির মধ্যে অনুবাদ করুন</h2>
+<p>গভীরে গেলে, আপনি যা কিছু টাইপ করেন — প্রতিটা অক্ষর, সংখ্যা, স্পেস আর ইমোজি — কম্পিউটার সেটা সংরক্ষণ করে শূন্য আর একের একটা লম্বা সারি হিসেবে। এটাই বাইনারি — সেই বেস-২ সংখ্যা পদ্ধতি, যা শেষ পর্যন্ত সব ডিজিটাল যন্ত্রই ব্যবহার করে। এই বাইনারি ট্রান্সলেটরটি আপনাকে দুই জগতের মধ্যে অবাধে যাতায়াত করতে দেয়: সাধারণ লেখা টাইপ করে সেটাকে বাইনারি কোডে রূপান্তর করুন, অথবা শূন্য-এক এর একটা স্রোত পেস্ট করে সেটাকে আবার পড়ার-যোগ্য লেখায় ডিকোড করুন। এটা যেকোনো ভাষা এমনকি ইমোজি নিয়েও কাজ করে, আর সবকিছু ঘটে আপনার ব্রাউজারের ভেতরেই, তাই রূপান্তর তাৎক্ষণিক, আর আপনার দেওয়া কিছুই কখনো আপলোড হয় না।</p>
+<p>ব্যবহার করাটা সহজ। বাক্সে আপনার লেখা টাইপ বা পেস্ট করুন, তারপর &quot;To binary&quot;-তে ট্যাপ করলে নিচে বাইনারি সংস্করণ দেখা যাবে, পরিপাটিভাবে আট-অঙ্কের খণ্ডে সাজানো। উল্টো দিকে যেতে, বাক্সে বাইনারি কোড পেস্ট করে &quot;To text&quot;-এ ট্যাপ করলে সেটা আবার শব্দে ডিকোড হয়ে যাবে। কপি বাটন ফলাফলটা আপনার ক্লিপবোর্ডে বসিয়ে দেয়, যেখানে দরকার সেখানে পেস্ট করার জন্য প্রস্তুত।</p>
+<h2>লেখা কীভাবে বাইনারিতে পরিণত হয়</h2>
+<p>কম্পিউটার সরাসরি অক্ষর সংরক্ষণ করে না; তারা সংরক্ষণ করে সংখ্যা, আর সেই সংখ্যাগুলো লেখে বাইনারিতে। একটা অক্ষর আর তার সংখ্যার মধ্যকার সংযোগ ঠিক করে দেয় একটা ক্যারেক্টার এনকোডিং, আর আধুনিক স্ট্যান্ডার্ডের নাম UTF-8। UTF-8-এ, একটা সাধারণ ইংরেজি অক্ষর একটামাত্র বাইট নেয় — আট বিট, বা আট বাইনারি অঙ্ক। যেমন বড়হাতের অক্ষর &quot;A&quot; হলো সংখ্যা 65, যা বাইনারিতে 01000001। এমন কয়েকটা বাইট একসাথে জোড়া দিলে, প্রতি অক্ষরে একটা করে, পুরো একটা বার্তার বাইনারি রূপ পাওয়া যায়। এই ট্রান্সলেটরটি প্রতিটা বাইটকে তার পূর্ণ আট-অঙ্কের গ্রুপ হিসেবে লেখে আর গ্রুপগুলোকে স্পেস দিয়ে আলাদা করে, যা বাইনারি লেখা দেখানোর প্রচলিত, পড়ার-যোগ্য উপায় আর আবার সহজে ডিকোড করতে সাহায্য করে।</p>
+<p>মৌলিক ইংরেজি অক্ষরসেটের বাইরের অক্ষর — উচ্চারণ-চিহ্নযুক্ত অক্ষর, অন্যান্য বর্ণমালা, প্রতীক আর ইমোজি — একটার বেশি বাইট দরকার হয়, আর UTF-8 এটা সুন্দরভাবে সামলায় দুই, তিন বা চারটা বাইট ব্যবহার করে। ট্রান্সলেটরটি একই নিয়ম মেনে চলে, তাই সেই অক্ষরগুলো সঠিকভাবে কয়েকটা আট-বিট গ্রুপে রূপান্তরিত হয় আর ডিকোড করার সময় নিখুঁতভাবে আবার জোড়া লাগে। এই কারণেই টুলটা অন্য একটা ভাষায় লেখা বার্তা বা এক লাইন ইমোজির জন্যও ঠিক সাধারণ ইংরেজির মতোই ভালো কাজ করে — আর বাংলা লেখাও ঠিক একইভাবে নিখুঁতভাবে চলে যায়, যেহেতু UTF-8 প্রতিটা বাংলা অক্ষরকেও একাধিক বাইটের গ্রুপে ঠিকঠাক বিভক্ত করে।</p>
+<h2>বাইনারি থেকে আবার লেখায় ডিকোড করা</h2>
+<p>বাইনারি থেকে লেখায় ফেরা মানে পুরো প্রক্রিয়াটাই উল্টে দেওয়া। ট্রান্সলেটরটি আপনার ইনপুট আট বিটের গ্রুপে পড়ে, প্রতিটা গ্রুপকে তার বাইট মানে ফিরিয়ে আনে, তারপর বাইটের সেই সিকোয়েন্সকে UTF-8 হিসেবে ব্যাখ্যা করে মূল অক্ষরগুলো পুনর্গঠন করে। এটা কাজ করার জন্য বাইনারিটা আট-অঙ্কের গ্রুপে সাজানো থাকা উচিত, আদর্শভাবে স্পেস দিয়ে আলাদা, যেমন 01001000 01101001। টুলটা বাড়তি স্পেসিং নিয়ে বেশ সহনশীল, আর যা কিছু শূন্য-এক এর বৈধ গ্রুপ নয় তা স্রেফ এড়িয়ে যায়, তাই একটা এলোমেলো অক্ষর পুরো ডিকোডকে নষ্ট করে দেয় না।</p>
+<p>এই দ্বিমুখী ক্ষমতাটাই ট্রান্সলেটরকে নিছক একটা মজার জিনিসের চেয়ে সত্যিকারের কাজের করে তোলে। আপনি একটা বার্তা এনকোড করে সেই বাইনারিটা কাউকে পাঠাতে পারেন, আর তারা সেটা আবার পেস্ট করে পড়তে পারবে — একটা সহজ, কম-প্রযুক্তির উপায়ে এমন একটা নোট পাঠানোর জন্য যা যে কেউ দেখবে তার কাছে অর্থহীন প্রতীকের সারি মনে হবে, যতক্ষণ না সে বুঝবে এটা আসলে লেখা।</p>
+<h2>মানুষ কেন লেখাকে বাইনারিতে রূপান্তর করে</h2>
+<p>সবচেয়ে সাধারণ কারণটা হলো শেখা। কম্পিউটার কীভাবে কাজ করে তা বোঝার শুরুই হয় বাইনারি দিয়ে, আর নিজের নামটা শূন্য আর একে পরিণত হতে দেখলে একটা বিমূর্ত ধারণা হঠাৎ করেই বাস্তব মনে হয়। শিক্ষার্থী আর কৌতূহলী নতুনরা এমন একটা ট্রান্সলেটর ব্যবহার করেন অনুশীলন যাচাই করতে, বিভিন্ন অক্ষর কীভাবে বিভিন্ন বাইট প্যাটার্নে ম্যাপ হয় তা খুঁজে দেখতে, আর প্রতিদিন ব্যবহার করা সফটওয়্যারের নিচে আসলে কী ঘটছে তার একটা স্বজ্ঞা তৈরি করতে। শিক্ষকরা এটা ব্যবহার করেন ক্লাসকে হাতে-কলমে রূপান্তর করতে না বলেও ক্যারেক্টার এনকোডিং দেখানোর জন্য।</p>
+<p>এর একটা দুষ্টুমিমাখা দিকও আছে। বাইনারি লেখা গোপন বার্তা লেখার, একটা গিকি প্রোফাইল সাজানোর, বা বন্ধুদের জন্য একটা ধাঁধা তৈরি করার একটা জনপ্রিয় উপায়। যেহেতু ফলাফলটা শূন্য আর এক দিয়ে তৈরি একটা প্রকৃত লেখা, তাই এটা একটা বায়ো, বার্তা বা মন্তব্যে কপি করা যায়। আর যারা পেশাদারভাবে কম্পিউটার নিয়ে কাজ করেন, তাদের জন্য কোনো লেখার বাইনারি বা বাইট মান চোখ বুলিয়ে দেখার সুযোগ মাঝেমধ্যে একটা কাজের ডিবাগিং কৌশল হয়ে ওঠে, বিশেষ করে যখন কোনো এলোমেলো বা অদৃশ্য অক্ষর সমস্যা তৈরি করছে।</p>
+<h2>সংখ্যাগুলো বোঝা</h2>
+<p>লেখাকে বাইনারিতে দেখাটা তথ্য কীভাবে যোগ হয় তা উপলব্ধি করারও একটা চমৎকার উপায়। সাধারণ ইংরেজির প্রতিটা অক্ষর হয়ে যায় আট বিট, তাই একটা ছোট বাক্যও দ্রুত অঙ্কের একটা লম্বা সারিতে পরিণত হয় — একটা প্রাণবন্ত মনে করিয়ে দেওয়া যে সামান্য একটু লেখার নিচেও লুকিয়ে থাকে অবাক করার মতো অনেক শূন্য আর এক। এটা এটাও দেখায় কেন ফাইলের আকার এভাবে মাপা হয়: একটা বাইট মানেই সেই আট বিট, একটা কিলোবাইট মানে মোটামুটি হাজার খানেক বাইট, এভাবেই চলতে থাকে। কয়েকটা শব্দ রূপান্তর করে গ্রুপগুলো গুনে দেখলেই ডিজিটাল ডেটার স্কেল সম্পর্কে একটা বাস্তব ধারণা পাওয়া যায়।</p>
+<h2>ব্যক্তিগত, তাৎক্ষণিক ও বিনামূল্যে</h2>
+<p>এখানে কোনো সাইনআপ নেই, খরচ নেই, আর চোখের সামনে কোনো বিরক্তিকর বিজ্ঞাপনও নেই। পুরো ট্রান্সলেটরটাই একটা ছোট কোডের টুকরো, যা আপনার নিজের ডিভাইসে চলে, এই কারণেই এটা আপনি ট্যাপ করার সাথে সাথে রূপান্তর করে আর ইন্টারনেট সংযোগ ছাড়াও কাজ করতে থাকে। আপনার দেওয়া কিছুই আপলোড, সংরক্ষণ বা শেয়ার করা হয় না; আপনার লেখা আর তার বাইনারি রূপ শুধু আপনার স্ক্রিনেই থাকে আর পেজ রিলোড করলেই মিলিয়ে যায়।</p>
+<p>ব্যবহার করতে, আপনার লেখা টাইপ বা পেস্ট করুন আর &quot;To binary&quot;-তে ট্যাপ করুন, অথবা বাইনারি পেস্ট করে &quot;To text&quot;-এ ট্যাপ করুন। বাটন দিয়ে ফলাফল কপি করুন, আর যতবার ইচ্ছা দুই দিকে সুইচ করতে থাকুন — ট্রান্সলেটরটি যেকোনো ভাষা, প্রতীক বা ইমোজি দুই দিকেই পরিষ্কারভাবে সামলায়।</p>
+    <section class="faq"><h2>Binary translator FAQ</h2><dl><dt>How is text turned into binary?</dt><dd>Each character is encoded as one or more bytes using the UTF-8 standard, and each byte is written as eight binary digits (bits). Groups are separated by spaces so the result is easy to read and to decode again.</dd><dt>Can it handle accents and emoji?</dt><dd>Yes. Because it uses UTF-8, letters with accents, non-Latin scripts and emoji are converted correctly into their multi-byte binary form and decoded back without loss.</dd><dt>To decode, how should the binary be formatted?</dt><dd>Paste groups of eight bits separated by spaces, such as 01001000 01101001. Extra spaces are ignored, and anything that is not a 0 or 1 group is skipped.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/binarytext/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/binarytext/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/binarytext/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/binarytext/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/binarytext/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/binarytext/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/binarytext/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/binarytext/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/binarytext/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/binarytext/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/glossary.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/binarytext.js" defer></script>
+</body>
+</html>

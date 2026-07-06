@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hash Generator — SHA-256, SHA-1, MD5 hash calculator</title>
+<meta name="description" content="Free hash generator. Calculate SHA-256, SHA-1, and MD5 hashes for any text input instantly in your browser. No data is sent anywhere.">
+<link rel="canonical" href="https://mikaio.dev/fr/hashgenerator/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/hashgenerator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/hashgenerator/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/hashgenerator/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/hashgenerator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/hashgenerator/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/hashgenerator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/hashgenerator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hash Generator — SHA-256, SHA-1, MD5 hash calculator">
+<meta property="og:description" content="Free hash generator. Calculate SHA-256, SHA-1, and MD5 hashes for any text input instantly in your browser. No data is sent anywhere.">
+<meta property="og:url" content="https://mikaio.dev/fr/hashgenerator/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Hash Generator — SHA-256, SHA-1, MD5 hash calculator","url":"https://mikaio.dev/fr/hashgenerator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free hash generator. Calculate SHA-256, SHA-1, and MD5 hashes for any text input instantly in your browser. No data is sent anywhere."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Hash Generator","item":"https://mikaio.dev/fr/hashgenerator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a hash?","acceptedAnswer":{"@type":"Answer","text":"A cryptographic hash function takes any input and produces a fixed-length output (the hash or digest). The same input always produces the same output, but even a one-character change produces a completely different hash."}},{"@type":"Question","name":"What is SHA-256 used for?","acceptedAnswer":{"@type":"Answer","text":"SHA-256 is used in Bitcoin mining, SSL/TLS certificates, file integrity verification, password storage (with salt), and digital signatures."}},{"@type":"Question","name":"Is MD5 still safe?","acceptedAnswer":{"@type":"Answer","text":"MD5 is not considered cryptographically secure for security purposes — collisions (two different inputs producing the same hash) can be generated. It is still used for non-security purposes like file checksums."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/fr/hashgenerator/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/hashgenerator/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/hashgenerator/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/hashgenerator/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/hashgenerator/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/hashgenerator/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/hashgenerator/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Générez des empreintes cryptographiques pour n'importe quel texte" />
+<meta property="og:description" content="Générez des empreintes cryptographiques pour n'importe quel texte" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/fr/hashgenerator/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Générez des empreintes cryptographiques pour n'importe quel texte","description":"Générez des empreintes cryptographiques pour n'importe quel texte","url":"https://example.com/fr/hashgenerator/","inLanguage":"fr"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Hash Generator</span></nav>
+  <h1>Hash Generator</h1>
+  <p class="lead">Type or paste text to generate its cryptographic hashes.</p>
+  <section class="widget" id="tool"><div id="hash-app"><textarea id="hash-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Type or paste text to hash…"></textarea><div style="margin-top:0.75rem"><div style="margin-bottom:0.5rem"><div class="hint">SHA-256</div><div id="hash-sha256" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div><div style="margin-bottom:0.5rem"><div class="hint">SHA-1</div><div id="hash-sha1" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div><div><div class="hint">MD5 (approximate)</div><div id="hash-md5" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div></div></div></section>
+  <article class="content">
+    <h2>Générez des empreintes cryptographiques pour n&#39;importe quel texte</h2>
+<p>Une fonction de hachage prend n&#39;importe quelle entrée et produit une empreinte de longueur fixe, appelée hash ou condensat. La même entrée produit toujours la même sortie, mais changer un seul caractère produit un hash complètement différent — une propriété appelée effet d&#39;avalanche. Cet outil génère des empreintes SHA-256, SHA-1 et MD5 pour n&#39;importe quel texte que vous saisissez, calculées entièrement dans votre navigateur.</p>
+<h2>SHA-256, SHA-1 et MD5 comparés</h2>
+<p>SHA-256, qui appartient à la famille SHA-2, produit une empreinte de 256 bits écrite sous forme de 64 caractères hexadécimaux, et est considéré comme cryptographiquement sûr pour toutes les applications actuelles, ce qui en fait le choix par défaut pour les nouveaux systèmes aujourd&#39;hui. SHA-1 produit une empreinte plus courte de 160 bits et est déconseillé à des fins de sécurité depuis 2017, après que des chercheurs ont démontré que deux entrées différentes pouvaient être délibérément construites pour produire le même hash — une collision qui sape les garanties que l&#39;algorithme était censé offrir, bien qu&#39;il subsiste dans certains systèmes hérités et dans d&#39;anciennes parties de Git, lui-même en train de progressivement s&#39;en éloigner. MD5 produit une empreinte encore plus courte de 128 bits et est considéré comme cryptographiquement cassé : des collisions peuvent être générées délibérément et rapidement avec du matériel moderne, si bien que MD5 aujourd&#39;hui ne convient qu&#39;à des usages non sécuritaires, comme des sommes de contrôle basiques de fichiers ou des recherches rapides en base de données où un adversaire fabriquant une collision malveillante n&#39;est pas une préoccupation.</p>
+<h2>À quoi servent les fonctions de hachage ?</h2>
+<p><strong>Intégrité des fichiers</strong> : les sites de téléchargement publient le hash SHA-256 de chaque fichier. Après téléchargement, vous calculez le hash et le comparez à la valeur publiée. S&#39;ils correspondent, le fichier n&#39;a pas été corrompu ni altéré en cours de route.</p>
+<p><strong>Stockage des mots de passe</strong> : les sites web ne devraient jamais stocker de mots de passe en texte brut. Ils stockent plutôt un hash (idéalement SHA-256 ou bcrypt avec un sel aléatoire) et hachent votre tentative de connexion pour la comparer.</p>
+<p><strong>Signatures numériques</strong> : signer un document consiste à le hacher puis à chiffrer le hash avec une clé privée. Le destinataire peut vérifier le hash à l&#39;aide de la clé publique.</p>
+<p><strong>Minage de Bitcoin</strong> : SHA-256 est utilisé dans l&#39;algorithme de preuve de travail de Bitcoin. Les mineurs doivent trouver une entrée (nonce) qui produit un hash commençant par un certain nombre de zéros.</p>
+<p><strong>Contrôle de versions</strong> : Git utilise SHA-1 (en cours de migration vers SHA-256) pour identifier chaque commit, fichier et objet du dépôt. Le hash sert d&#39;identifiant unique.</p>
+<h2>L&#39;effet d&#39;avalanche</h2>
+<p>Une propriété caractéristique des fonctions de hachage cryptographiques est que même un minuscule changement d&#39;entrée produit des sorties radicalement différentes :</p>
+<p>« Bonjour » → SHA-256 : 185f8db3...</p>
+<p>« bonjour » → SHA-256 : 2cf24dba...</p>
+<p>Les deux empreintes ne partagent aucune ressemblance visible, malgré une seule différence de casse. C&#39;est l&#39;effet d&#39;avalanche.</p>
+<h2>Une fonction à sens unique</h2>
+<p>Les hashes fonctionnent à sens unique : vous pouvez calculer un hash à partir d&#39;une entrée, mais vous ne pouvez pas inverser le processus pour retrouver l&#39;entrée à partir du hash. Le seul moyen de « casser » un hash consiste à essayer de nombreuses entrées (attaque par force brute ou par dictionnaire) et à voir laquelle produit le même hash.</p>
+<h2>Comment utiliser l&#39;outil</h2>
+<p>Tapez ou collez n&#39;importe quel texte dans le champ prévu, et les trois empreintes — SHA-256, SHA-1 et MD5 — apparaissent immédiatement en dessous, se recalculant à chaque frappe. Cela facilite la vérification de la somme de contrôle publiée d&#39;un fichier, la génération rapide d&#39;un identifiant unique pour un morceau de texte, ou simplement l&#39;exploration de l&#39;effet d&#39;avalanche en modifiant votre saisie caractère par caractère et en observant chaque hash changer complètement.</p>
+<h2>Pourquoi on ne peut pas inverser un hash</h2>
+<p>Une fonction de hachage cryptographique est délibérément conçue pour détruire l&#39;information d&#39;une manière précise : elle prend une entrée de longueur quelconque et la compresse en une sortie fixe et courte, en éliminant bien plus d&#39;information qu&#39;elle n&#39;en conserve. Comme d&#39;innombrables entrées différentes pourraient théoriquement se compresser vers la même courte sortie, il n&#39;existe aucune opération inverse unique permettant de retrouver l&#39;entrée d&#39;origine à partir du hash — le processus ne fonctionne que dans un seul sens. Le seul moyen de trouver une entrée produisant un hash donné consiste à essayer des entrées candidates les unes après les autres et à vérifier si l&#39;une d&#39;elles correspond par hasard, ce qui explique précisément pourquoi hacher les mots de passe plutôt que de les stocker directement est efficace : même si un hash est volé, retrouver le mot de passe d&#39;origine à partir de celui-ci est infaisable en pratique pour un algorithme de hachage bien choisi et un mot de passe suffisamment long.</p>
+<h2>Choisir le bon hash pour la tâche</h2>
+<p>Pour tout ce qui touche à la sécurité aujourd&#39;hui — stockage de mots de passe, signatures numériques, vérification qu&#39;un fichier téléchargé n&#39;a pas été altéré — SHA-256, ou un membre plus robuste encore de la famille SHA-2 ou SHA-3, constitue le choix approprié, puisque SHA-1 et MD5 présentent tous deux des faiblesses connues qu&#39;un attaquant déterminé peut exploiter. SHA-1 et MD5 restent utiles uniquement dans des contextes où la sécurité n&#39;est pas du tout l&#39;enjeu : une somme de contrôle rapide pour repérer une corruption accidentelle, un moyen rapide de générer une courte clé unique pour une recherche en cache, ou la compatibilité avec un ancien système qui n&#39;a pas été mis à jour. En cas de doute sur lequel utiliser pour quelque chose d&#39;important, SHA-256 constitue presque toujours le choix par défaut le plus sûr.</p>
+<h2>Privé et instantané</h2>
+<p>SHA-256 et SHA-1 sont calculés à l&#39;aide de l&#39;API Web Crypto intégrée au navigateur, et MD5 est calculé à l&#39;aide d&#39;une implémentation JavaScript pure, si bien que chaque hash apparaît instantanément et qu&#39;aucun texte que vous saisissez n&#39;est jamais envoyé où que ce soit, enregistré ou partagé ; l&#39;outil fonctionne hors ligne une fois la page chargée, sans limite sur le nombre de hashes générés, sans coût et sans rien à installer.</p>
+    <section class="faq"><h2>Hash generator FAQ</h2><dl><dt>What is a hash?</dt><dd>A cryptographic hash function takes any input and produces a fixed-length output (the hash or digest). The same input always produces the same output, but even a one-character change produces a completely different hash.</dd><dt>What is SHA-256 used for?</dt><dd>SHA-256 is used in Bitcoin mining, SSL/TLS certificates, file integrity verification, password storage (with salt), and digital signatures.</dd><dt>Is MD5 still safe?</dt><dd>MD5 is not considered cryptographically secure for security purposes — collisions (two different inputs producing the same hash) can be generated. It is still used for non-security purposes like file checksums.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/hashgenerator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/hashgenerator/">中文</a></li><li><a hreflang="es" lang="es" href="/es/hashgenerator/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/hashgenerator/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/hashgenerator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/hashgenerator/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/hashgenerator.js" defer></script>
+</body>
+</html>

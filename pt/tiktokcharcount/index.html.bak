@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analisador de Legenda do TikTok</title>
+<meta name="description" content="Analisador de legenda do TikTok gratuito. Veja contagem de caracteres vs limite de 2200, contagem de hashtags, contagem de palavras e tempo estimado de leitura.">
+<link rel="canonical" href="https://mikaio.dev/pt/tiktokcharcount/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tiktokcharcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tiktokcharcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tiktokcharcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Analisador de Legenda do TikTok">
+<meta property="og:description" content="Analisador de legenda do TikTok gratuito. Veja contagem de caracteres vs limite de 2200, contagem de hashtags, contagem de palavras e tempo estimado de leitura.">
+<meta property="og:url" content="https://mikaio.dev/pt/tiktokcharcount/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Analisador de Legenda do TikTok","url":"https://mikaio.dev/pt/tiktokcharcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Analisador de legenda do TikTok gratuito. Veja contagem de caracteres vs limite de 2200, contagem de hashtags, contagem de palavras e tempo estimado de leitura."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Analisador de Legenda do TikTok","item":"https://mikaio.dev/pt/tiktokcharcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual é o limite de caracteres da legenda do TikTok?","acceptedAnswer":{"@type":"Answer","text":"O TikTok permite até 2.200 caracteres em uma legenda. Isso inclui hashtags, menções e todo o texto. Versões anteriores tinham um limite de 300 caracteres, mas o TikTok aumentou para 2.200 para permitir legendas mais descritivas."}},{"@type":"Question","name":"Quantas hashtags devo usar no TikTok?","acceptedAnswer":{"@type":"Answer","text":"O TikTok não tem um limite rígido de hashtags, mas a maioria dos criadores usa entre 3 e 10 hashtags por post. Usar muitas hashtags pode parecer spam. Uma mistura de hashtags de nicho específico e mais amplas geralmente funciona melhor."}},{"@type":"Question","name":"O comprimento da legenda afeta o alcance do TikTok?","acceptedAnswer":{"@type":"Answer","text":"O comprimento da legenda em si não determina diretamente o alcance, mas legendas bem escritas com palavras-chave relevantes podem ajudar o algoritmo do TikTok a categorizar seu conteúdo corretamente. Legendas que incentivam engajamento tendem a aumentar comentários e compartilhamentos."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Analisador de Legenda do TikTok</span></nav>
+  <h1>Analisador de Legenda do TikTok</h1>
+  <p class="lead">Digite ou cole sua legenda do TikTok abaixo. Veja contagem de caracteres, hashtags, palavras e tempo estimado de leitura em tempo real.</p>
+  <section class="widget" id="tool"><form id="tiktok-form"><div class="field"><label for="tiktok-caption">Texto da legenda</label><textarea id="tiktok-caption" rows="6" placeholder="Write your TikTok caption here... #trending #viral"></textarea></div><div class="result" id="tiktok-out" style="text-align:left"></div></form></section>
+  <article class="content">
+    <h2>Escreva legendas de TikTok que cabem e funcionam bem</h2>
+<p>Uma legenda de TikTok tem um trabalho a fazer em um espaço muito pequeno: fisgar um espectador rolando a tela rapidamente, acrescentar contexto que o vídeo sozinho não consegue transmitir, e carregar as hashtags que ajudam o algoritmo do app a entender do que se trata o seu conteúdo. Acertar o comprimento importa, e também importa saber de relance quantas hashtags, palavras e segundos estimados de leitura você está colocando naquele espaço. Este analisador observa a sua legenda enquanto você digita e mostra a contagem de caracteres contra o limite do TikTok, a contagem de hashtags, a contagem de palavras e um tempo estimado de leitura, tudo atualizando ao vivo para você nunca precisar colar no próprio app só para checar se está passando do limite.</p>
+<h2>Como usar</h2>
+<p>Digite ou cole a sua legenda na caixa e cada estatística se atualiza imediatamente abaixo dela: uma contagem grande de caracteres contra o teto de 2.200 caracteres, uma barra de progresso que muda de verde para âmbar e para vermelho conforme você se aproxima e ultrapassa o limite, o número de hashtags detectadas, a contagem de palavras, e uma estimativa aproximada de quanto tempo a legenda leva para ler. Se você passar do limite, a ferramenta diz exatamente quantos caracteres cortar, então editar para caber é uma questão de observar o número em vez de adivinhar.</p>
+<h2>O limite de legenda do TikTok, e por que mudou</h2>
+<p>O TikTok permite hoje até 2.200 caracteres em uma legenda, um limite que inclui hashtags, @menções e todo o texto visível. Isso é um aumento substancial em relação aos primeiros dias da plataforma, quando as legendas eram limitadas a apenas 150 caracteres e depois 300, refletindo como o uso da plataforma se ampliou de frases curtas para narrativas mais descritivas, atualizações no estilo de mini-blog e contexto detalhado para tutoriais ou conteúdo de produto. Mesmo com o teto generoso, a grande maioria das legendas de alto desempenho é bem mais curta que o máximo — o TikTok é uma plataforma centrada em vídeo, e o trabalho de uma legenda geralmente é acrescentar um gancho ou uma piada, não carregar a mensagem inteira.</p>
+<h2>Hashtags: quantas e de que tipo</h2>
+<p>O TikTok não impõe um limite rígido de hashtags dentro da contagem de caracteres, mas a maioria dos criadores de sucesso se estabiliza em algo entre três e dez por post. Empilhar bem mais do que isso tende a parecer spam e pode sufocar a mensagem real da legenda. Uma abordagem comum mistura um par de hashtags amplas e de alto tráfego com algumas mais específicas de nicho que descrevem o conteúdo com precisão — as tags amplas expõem o vídeo a uma busca de público mais ampla, enquanto as específicas ajudam-no a aparecer para espectadores que já têm interesse exatamente naquele assunto. O contador de hashtags aqui facilita ver de relance se você entrou no território de excesso de hashtags antes de postar.</p>
+<h2>Por que a qualidade da legenda ainda importa para o alcance</h2>
+<p>O comprimento da legenda por si só não é um sinal de ranqueamento, mas as palavras que você escolhe ainda influenciam o desempenho do seu conteúdo. Legendas que incluem as palavras-chave reais que um espectador poderia buscar ajudam o sistema de recomendação do TikTok a categorizar e mostrar o seu vídeo corretamente, de forma parecida com como um bom título ajuda um mecanismo de busca a entender uma página web. Legendas que terminam com uma pergunta ou um convite explícito para comentar tendem a gerar mais engajamento, e esse engajamento é em si um dos sinais que o algoritmo usa para decidir o quão amplamente distribuir um vídeo. Em resumo: o comprimento é uma restrição técnica a respeitar, mas é nas palavras escolhidas que está o verdadeiro ganho.</p>
+<h2>Tempo de leitura e o ritmo da sua mensagem</h2>
+<p>O tempo de leitura estimado mostrado ao lado da contagem de caracteres é uma boa aproximação de como uma legenda se sente para um espectador rolando a tela, não só de quão longa ela é tecnicamente. Uma legenda que leva dez segundos para ler compete diretamente com um vídeo que talvez dure só quinze, então se a sua legenda é longa o bastante para distrair do próprio vídeo, ela pode estar trabalhando contra o conteúdo que deveria apoiar. Muitas legendas longas de sucesso colocam o gancho ou o desfecho logo na primeira linha, que é tudo que aparece antes de o espectador tocar em &quot;ver mais&quot;, e usam o restante do espaço para contexto, uma chamada para ação, ou o bloco de hashtags, em vez de informação crítica que o espectador talvez nunca role para ver.</p>
+<h2>Conferindo antes de postar</h2>
+<p>Como as legendas costumam ser escritas em um app de notas ou em um documento de roteiro em vez de diretamente no compositor do TikTok, é fácil perder a noção do comprimento até o momento de colar, quando um truncamento ou uma mensagem de erro é o primeiro sinal de que algo era longo demais. Rodar um rascunho por este analisador antes de colá-lo no app remove essa surpresa por completo, e fazer isso em uma janela separada também facilita rascunhar várias opções de legenda lado a lado e comparar o comprimento, a contagem de hashtags e o tempo de leitura de cada uma antes de decidir qual combina melhor com o seu vídeo.</p>
+<h2>Privado e instantâneo</h2>
+<p>Tudo roda no seu próprio navegador enquanto você digita, então a sua legenda, as suas hashtags e as suas ideias de rascunho nunca são enviadas, registradas ou compartilhadas com ninguém. Funciona offline depois que a página carrega e não guarda nenhum registro de nada que você escreve depois que você sai da página.</p>
+    <section class="faq"><h2>Perguntas frequentes sobre legendas do TikTok</h2><dl><dt>Qual é o limite de caracteres da legenda do TikTok?</dt><dd>O TikTok permite até 2.200 caracteres em uma legenda. Isso inclui hashtags, menções e todo o texto. Versões anteriores tinham um limite de 300 caracteres, mas o TikTok aumentou para 2.200 para permitir legendas mais descritivas.</dd><dt>Quantas hashtags devo usar no TikTok?</dt><dd>O TikTok não tem um limite rígido de hashtags, mas a maioria dos criadores usa entre 3 e 10 hashtags por post. Usar muitas hashtags pode parecer spam. Uma mistura de hashtags de nicho específico e mais amplas geralmente funciona melhor.</dd><dt>O comprimento da legenda afeta o alcance do TikTok?</dt><dd>O comprimento da legenda em si não determina diretamente o alcance, mas legendas bem escritas com palavras-chave relevantes podem ajudar o algoritmo do TikTok a categorizar seu conteúdo corretamente. Legendas que incentivam engajamento tendem a aumentar comentários e compartilhamentos.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tiktokcharcount/">English</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/tiktokcharcount/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/tiktokcharcount.js" defer></script>
+</body>
+</html>

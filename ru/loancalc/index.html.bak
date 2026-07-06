@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loan Calculator — monthly payment and total interest</title>
+<meta name="description" content="Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans.">
+<link rel="canonical" href="https://mikaio.dev/ru/loancalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/loancalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/loancalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/loancalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/loancalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/loancalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/loancalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/loancalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/loancalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loan Calculator — monthly payment and total interest">
+<meta property="og:description" content="Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans.">
+<meta property="og:url" content="https://mikaio.dev/ru/loancalc/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Loan Calculator — monthly payment and total interest","url":"https://mikaio.dev/ru/loancalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Loan Calculator","item":"https://mikaio.dev/ru/loancalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What formula is used?","acceptedAnswer":{"@type":"Answer","text":"Monthly payment = P × [r(1+r)^n] / [(1+r)^n - 1], where P is the loan amount, r is the monthly interest rate (annual / 12), and n is the number of months."}},{"@type":"Question","name":"What types of loans can I calculate?","acceptedAnswer":{"@type":"Answer","text":"The formula applies to any standard amortising loan: mortgages, car loans, personal loans, student loans. For interest-only or balloon loans the formula differs."}},{"@type":"Question","name":"Does this include fees or insurance?","acceptedAnswer":{"@type":"Answer","text":"No, this calculates only the principal and interest payment. Your actual monthly payment may be higher if it includes property tax, insurance, or other fees."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Loan Calculator</span></nav>
+  <h1>Loan Calculator</h1>
+  <p class="lead">Enter the loan amount, annual interest rate, and term in years to calculate your monthly payment.</p>
+  <section class="widget" id="tool"><form id="loan-form"><div class="row"><div class="field"><label for="loan-amt">Loan amount</label><input type="number" id="loan-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-rate">Annual interest rate %</label><input type="number" id="loan-rate" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-years">Term (years)</label><input type="number" id="loan-years" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="hint">Monthly payment: </span><span class="big" id="loan-monthly">—</span></div><div id="loan-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Рассчитайте платёж по кредиту до того, как его взять</h2>
+<p>Прежде чем брать любой кредит — ипотеку, автокредит, потребительский заём или образовательный кредит, — знание ежемесячного платежа и общей стоимости процентов помогает принять взвешенное решение. Этот калькулятор использует стандартную формулу амортизации, чтобы показать в точности, сколько вы будете платить каждый месяц и во сколько кредит обойдётся в итоге.</p>
+<h2>Формула платежа по кредиту</h2>
+<p>Ежемесячный платёж по стандартному амортизируемому кредиту рассчитывается по формуле:</p>
+<p>M = P × [r(1+r)^n] / [(1+r)^n − 1]</p>
+<p>Где:</p>
+<ul>
+<li>M — ежемесячный платёж</li>
+<li>P — основная сумма (сумма кредита)</li>
+<li>r — месячная процентная ставка (годовая ставка ÷ 12, в виде десятичной дроби)</li>
+<li>n — общее число ежемесячных платежей (годы × 12)</li>
+</ul>
+<p>Эта формула называется формулой амортизации и даёт фиксированный платёж, который покрывает и проценты, и основной долг на протяжении всего срока кредита.</p>
+<h2>Как работает амортизация</h2>
+<p>С каждым ежемесячным платежом часть идёт на проценты, а часть уменьшает основной долг. В начале срока кредита большая часть платежа — это проценты, потому что остаток задолженности велик. По мере уменьшения остатка доля процентов сокращается, а доля основного долга растёт. К последнему платежу почти всё уходит на погашение самого долга.</p>
+<p>Для ипотеки в 15 000 000 рублей под 12% годовых на 20 лет:</p>
+<ul>
+<li>Ежемесячный платёж: примерно 165 100 рублей</li>
+<li>Всего выплачено за 20 лет: около 39 624 000 рублей</li>
+<li>Всего выплачено процентов: около 24 624 000 рублей — больше первоначальной суммы кредита</li>
+</ul>
+<p>Это наглядно показывает, почему долгие сроки кредита обходятся настолько дороже по процентам. Ипотека на 10 лет под ту же ставку имеет более высокий ежемесячный платёж, но даёт колоссальную экономию на общей сумме процентов.</p>
+<h2>Влияние процентной ставки</h2>
+<p>Процентная ставка сильно влияет на платёж и итоговую стоимость. На кредите в 10 000 000 рублей на 20 лет:</p>
+<ul>
+<li>При 8%: около 83 600 рублей в месяц, 10 064 000 рублей процентов всего</li>
+<li>При 12%: около 110 100 рублей в месяц, 16 424 000 рублей процентов всего</li>
+<li>При 16%: около 139 300 рублей в месяц, 23 432 000 рублей процентов всего</li>
+</ul>
+<p>Увеличение ставки на 4 процентных пункта примерно удваивает стоимость процентов за 20-летний срок.</p>
+<h2>Виды кредитов</h2>
+<p>Этот калькулятор подходит для любого стандартного амортизируемого кредита:</p>
+<p><strong>Ипотека</strong>: жилищные кредиты обычно оформляются на 15–30 лет. Кредиты с фиксированной ставкой имеют одинаковый платёж на всём сроке; кредиты с плавающей ставкой меняются вместе с базовым индексом.</p>
+<p><strong>Автокредиты</strong>: обычно на 2–7 лет. Более короткий срок означает более высокий платёж, но меньше процентов в итоге.</p>
+<p><strong>Потребительские кредиты</strong>: как правило, на 1–7 лет. Ставки сильно различаются в зависимости от кредитоспособности заёмщика.</p>
+<p><strong>Образовательные кредиты</strong>: во многих странах предлагаются по льготным фиксированным ставкам с возможностью привязки платежей к доходу.</p>
+<h2>Разобранный пример компромисса</h2>
+<p>Рассмотрим кредит в 5 000 000 рублей под 10% годовых. За 30 лет ежемесячный платёж составит около 43 900 рублей, а общая сумма процентов за весь срок кредита достигнет примерно 10 800 000 рублей — больше исходно занятой суммы. За 15 лет при той же ставке ежемесячный платёж вырастет до примерно 53 700 рублей, заметно больше в месяц, но общая сумма процентов упадёт примерно до 4 670 000 рублей — заметно меньше половины от суммы за 30-летний срок. Ни один из сроков не является объективно верным; правильный выбор зависит от того, какой ежемесячный платёж укладывается в ваш бюджет против того, сколько общей стоимости вы готовы принять ради этой гибкости.</p>
+<h2>Использование калькулятора для планирования</h2>
+<p>Этим калькулятором можно пользоваться несколькими способами:</p>
+<ul>
+<li>Введите ожидаемую сумму займа, чтобы узнать будущий платёж.</li>
+<li>Работайте в обратную сторону: если вы можете позволить себе X рублей в месяц, попробуйте разные суммы кредита и ставки, чтобы понять максимум, который можно занять.</li>
+<li>Сравните общую сумму процентов при разных сроках, чтобы принять более взвешенное решение о продолжительности кредита.</li>
+</ul>
+<h2>Как пользоваться калькулятором</h2>
+<p>Введите сумму кредита, годовую процентную ставку и срок в годах, и ежемесячный платёж появится сразу же, вместе с общей суммой, которую вы выплатите за весь срок кредита, и общей суммой процентов, которую это составляет. Измените любое из трёх значений — и все цифры мгновенно пересчитаются, что упрощает сравнение того, как более короткий срок, другая ставка или больший первоначальный взнос изменят реальную сумму ваших выплат.</p>
+<h2>Досрочные платежи и погашение кредита раньше срока</h2>
+<p>Внесение дополнительных платежей в счёт основного долга, даже небольших, может сократить срок кредита и заметно уменьшить общую сумму процентов, поскольку каждый лишний рубль, направленный на основной долг, перестаёт начислять проценты на оставшийся срок кредита. На типичной долгосрочной ипотеке добавление скромной суммы к каждому ежемесячному платежу в первые годы — когда остаток и, соответственно, начисление процентов максимальны, — даёт непропорционально больший эффект по сравнению с тем же дополнительным платежом позже по сроку. Многие кредиторы разрешают дополнительные платежи в счёт основного долга без штрафа, хотя это всегда стоит уточнить заранее, поскольку в некоторых кредитных договорах предусмотрена комиссия за досрочное погашение.</p>
+<h2>Сравнение сроков кредита бок о бок</h2>
+<p>Возможно, самое ценное применение этого калькулятора — сравнение того, как одна и та же сумма кредита ведёт себя при разных сроках. Более короткий срок всегда означает более высокий ежемесячный платёж, но меньшую общую стоимость процентов, поскольку долг гасится быстрее и у него меньше времени накапливать проценты против вас. Более длинный срок распределяет ту же сумму на меньшие платежи, что может сделать покупку доступной месяц за месяцем, но ценой заметно большей общей переплаты. Прогнав одну и ту же основную сумму и ставку через этот калькулятор сначала на 15 лет, а затем на 30, вы делаете компромисс между доступностью в месяц и общей стоимостью конкретным, а не абстрактным, — именно такое сравнение стоит сделать перед подписанием любого долгосрочного кредитного договора.</p>
+<h2>Приватно и мгновенно</h2>
+<p>Все расчёты выполняются полностью в вашем браузере с использованием стандартной формулы амортизации, поэтому результаты обновляются мгновенно при изменении любого параметра, а никакие введённые вами суммы кредита, ставки или сроки никогда не отправляются на сервер, не логируются и не передаются кому-либо ещё.</p>
+    <section class="faq"><h2>Loan calculator FAQ</h2><dl><dt>What formula is used?</dt><dd>Monthly payment = P × [r(1+r)^n] / [(1+r)^n - 1], where P is the loan amount, r is the monthly interest rate (annual / 12), and n is the number of months.</dd><dt>What types of loans can I calculate?</dt><dd>The formula applies to any standard amortising loan: mortgages, car loans, personal loans, student loans. For interest-only or balloon loans the formula differs.</dd><dt>Does this include fees or insurance?</dt><dd>No, this calculates only the principal and interest payment. Your actual monthly payment may be higher if it includes property tax, insurance, or other fees.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/loancalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/loancalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/loancalc.js" defer></script>
+</body>
+</html>

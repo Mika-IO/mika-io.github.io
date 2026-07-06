@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Calculator — basic arithmetic calculator</title>
+<meta name="description" content="Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser.">
+<link rel="canonical" href="https://mikaio.dev/fr/basiccalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/basiccalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/basiccalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/basiccalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/basiccalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/basiccalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/basiccalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/basiccalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/basiccalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/basiccalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/basiccalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/basiccalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online Calculator — basic arithmetic calculator">
+<meta property="og:description" content="Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser.">
+<meta property="og:url" content="https://mikaio.dev/fr/basiccalc/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Online Calculator — basic arithmetic calculator","url":"https://mikaio.dev/fr/basiccalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Online Basic Calculator","item":"https://mikaio.dev/fr/basiccalc/"}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Online Basic Calculator</span></nav>
+  <h1>Online Basic Calculator</h1>
+  <p class="lead">Use the buttons or your keyboard to perform calculations.</p>
+  <section class="widget" id="tool"><div id="bc-app"><div id="bc-display" style="text-align:right;font-size:1.8rem;padding:0.75rem 1rem;border-radius:0.5rem;background:rgba(255,255,255,0.06);min-height:2.5rem;word-break:break-all;min-width:0">0</div><div id="bc-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.35rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>Une calculatrice de base, simple et rapide</h2>
+<p>Une calculatrice arithmétique de base gère les quatre opérations fondamentales — addition, soustraction, multiplication et division —, ainsi que le pourcentage et les parenthèses pour regrouper les termes. Cette calculatrice fonctionne directement dans votre navigateur, sans installation, sans publicité et sans suivi.</p>
+<h2>Raccourcis clavier</h2>
+<p>La calculatrice répond aussi bien au clavier qu&#39;aux clics de souris :</p>
+<ul>
+<li>Chiffres : 0–9 et point décimal</li>
+<li>Addition : +</li>
+<li>Soustraction : -</li>
+<li>Multiplication : * (affiché sous forme de ×)</li>
+<li>Division : / (affiché sous forme de ÷)</li>
+<li>Égal : Entrée ou =</li>
+<li>Effacer : Échap</li>
+<li>Supprimer le dernier caractère : Retour arrière</li>
+</ul>
+<h2>Ordre des opérations</h2>
+<p>La calculatrice évalue les expressions selon l&#39;ordre mathématique standard : parenthèses d&#39;abord, puis exposants (non pris en charge en mode basique), puis multiplications et divisions de gauche à droite, puis additions et soustractions de gauche à droite — la règle bien connue sous le nom de priorité des opérations.</p>
+<p>Sans parenthèses : 2 + 3 × 4 = 14 (et non 20), car la multiplication s&#39;effectue avant l&#39;addition.</p>
+<p>Avec parenthèses : (2 + 3) × 4 = 20, car l&#39;addition entre parenthèses s&#39;effectue en premier.</p>
+<h2>Arithmétique à virgule flottante</h2>
+<p>Les ordinateurs stockent les nombres en binaire à virgule flottante (norme IEEE 754 double précision). La plupart des fractions décimales ne peuvent pas être représentées exactement en binaire, ce qui entraîne parfois de petites erreurs d&#39;arrondi. L&#39;exemple classique est 0,1 + 0,2, qui donne 0,30000000000000004 en arithmétique IEEE 754 brute — ce n&#39;est pas un bogue, mais une limite inhérente à la représentation de fractions en base dix dans un système en base deux. Cette calculatrice arrondit les résultats affichés à 10 décimales significatives pour masquer l&#39;essentiel de ce bruit résiduel.</p>
+<h2>Opérations de pourcentage</h2>
+<p>La touche % divise la valeur actuelle par 100. C&#39;est pratique pour des calculs rapides de pourcentage : pour trouver 15 % de 200, saisissez 200 × 15 % = 30.</p>
+<h2>Une brève histoire du calcul</h2>
+<p>La calculatrice mécanique a été inventée par Wilhelm Schickard en 1623, puis perfectionnée par Blaise Pascal avec sa Pascaline en 1642, et par Gottfried Wilhelm Leibniz qui conçut vers 1672 sa machine à calculer à pas variable. Ces premières machines savaient additionner, soustraire, multiplier et diviser, mais exigeaient un effort mécanique considérable, et la règle à calcul est restée l&#39;auxiliaire de calcul du quotidien depuis le dix-septième siècle jusque dans les années 1970. Les calculatrices électroniques sont apparues dans les années 1960 et au début des années 1970, la première véritable calculatrice de poche, la Busicom LE-120A, ayant été commercialisée en 1971. Texas Instruments et Hewlett-Packard ont rapidement fait figure de pionniers de la calculatrice scientifique, et dès le milieu des années 1970, la calculatrice était devenue un objet de consommation courante plutôt qu&#39;un équipement professionnel coûteux.</p>
+<h2>Erreurs de calcul les plus fréquentes</h2>
+<p>Quelques habitudes expliquent la majorité des erreurs arithmétiques du quotidien. Oublier la priorité des opérations arrive en tête : sans parenthèses, 2 + 3 × 4 donne 14, pas 20, car la multiplication l&#39;emporte sur l&#39;addition — si vous vouliez réellement 20, il fallait écrire (2 + 3) × 4. Les erreurs de signe viennent en second : soustraire un nombre négatif revient à additionner son équivalent positif, donc 10 − (−5) vaut 15, un résultat qui piège facilement quand on va trop vite. La confusion sur les pourcentages arrive en troisième position : une hausse de 20 % suivie d&#39;une baisse de 20 % ne ramène pas au nombre de départ, car le second pourcentage se calcule sur une base différente (plus grande) — 100 augmenté de 20 % donne 120, et 120 diminué de 20 % donne 96, pas 100.</p>
+<h2>Calculatrice contre calcul mental</h2>
+<p>Une calculatrice reste la solution la plus rapide et la plus fiable dès que l&#39;on dépasse de simples additions à un chiffre, en particulier lorsque des décimales, des pourcentages ou des expressions à plusieurs étapes entrent en jeu. Le calcul mental garde toutefois son utilité pour les estimations rapides et les vérifications de bon sens : arrondir 297 × 4 à environ 300 × 4 = 1200 permet de repérer instantanément une erreur de saisie si le résultat réel s&#39;avère très différent. Les deux approches se complètent plutôt qu&#39;elles ne se concurrencent : utilisez l&#39;estimation pour repérer les grosses erreurs, et la calculatrice pour le chiffre exact.</p>
+<h2>Pourquoi une calculatrice web dédiée reste utile</h2>
+<p>Chaque téléphone et chaque ordinateur dispose déjà d&#39;une application calculatrice, ce qui amène naturellement à se demander en quoi une version en ligne présente un quelconque intérêt. La réponse honnête tient à la fluidité de l&#39;usage : quand vous êtes déjà en train de lire une page dans votre navigateur — comparer des prix, vérifier une recette, relire un tableau dans un autre onglet — ouvrir une application native séparée casse votre élan, alors qu&#39;une calculatrice qui n&#39;est jamais qu&#39;un onglet de plus ne coûte rien à atteindre. Elle est aussi disponible instantanément sur n&#39;importe quel appareil doté d&#39;un navigateur, quel que soit le système d&#39;exploitation, sans installation ni permission à accorder.</p>
+<h2>Quand préférer une calculatrice scientifique</h2>
+<p>Cette calculatrice couvre les quatre opérations de base ainsi que le pourcentage et les parenthèses, ce qui suffit à l&#39;immense majorité des besoins arithmétiques du quotidien. Si votre tâche implique de la trigonométrie, des logarithmes, des puissances au-delà du simple carré, ou des fonctions statistiques, il vous faut une calculatrice scientifique — essayer d&#39;approximer ces opérations en répétant des calculs de base est lent et source d&#39;erreurs comparé à un outil conçu pour cet usage.</p>
+<h2>Le réflexe de la vérification rapide</h2>
+<p>Avant de vous fier à un résultat sur lequel vous allez vous appuyer — partager une note de restaurant, commander des matériaux — il est utile de faire d&#39;abord une estimation mentale approximative et de la comparer à ce qu&#39;affiche la calculatrice. Si les deux chiffres diffèrent nettement, vous avez probablement mal saisi un nombre ou un opérateur, et repérer l&#39;erreur avant d&#39;agir sur le mauvais chiffre vaut largement les quelques secondes supplémentaires que cela demande.</p>
+<h2>Un usage quotidien qui dépasse les simples calculs</h2>
+<p>Au-delà d&#39;additionner des achats ou de partager une addition entre amis, cette calculatrice se prête aussi très bien à vérifier rapidement un calcul de recette de cuisine, ajuster des proportions d&#39;ingrédients, ou contrôler une monnaie rendue avant de fermer une caisse — toutes ces situations quotidiennes où ouvrir un tableur complet serait franchement excessif.</p>
+<h2>Fonctionne sur n&#39;importe quel appareil</h2>
+<p>Comme la calculatrice s&#39;exécute entièrement dans le navigateur, elle fonctionne de la même manière sur un téléphone, une tablette ou un ordinateur de bureau, sans version distincte à installer pour chaque plateforme, et la mise en page s&#39;adapte automatiquement à la taille d&#39;écran disponible, des gros boutons tactiles sur mobile jusqu&#39;à la prise en charge complète du clavier sur ordinateur.</p>
+<h2>Privé et instantané</h2>
+<p>Tous les calculs s&#39;exécutent entièrement dans votre navigateur à l&#39;aide des opérateurs arithmétiques natifs de JavaScript, si bien que les résultats apparaissent instantanément et qu&#39;aucun nombre que vous saisissez n&#39;est jamais envoyé où que ce soit, enregistré ou partagé.</p>
+    
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/basiccalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/basiccalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/basiccalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/basiccalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/basiccalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/basiccalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/basiccalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/basiccalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/basiccalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/basiccalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/basiccalc.js" defer></script>
+</body>
+</html>

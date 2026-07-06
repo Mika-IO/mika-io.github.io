@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text Diff Tool — compare two texts side by side</title>
+<meta name="description" content="Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly.">
+<link rel="canonical" href="https://mikaio.dev/en/textdiff/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textdiff/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textdiff/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textdiff/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Text Diff Tool — compare two texts side by side">
+<meta property="og:description" content="Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly.">
+<meta property="og:url" content="https://mikaio.dev/en/textdiff/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Text Diff Tool — compare two texts side by side","url":"https://mikaio.dev/en/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Text Diff Tool","item":"https://mikaio.dev/en/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the diff work?","acceptedAnswer":{"@type":"Answer","text":"The tool compares the two texts word by word. Words present in B but not in A are shown in green (added). Words in A but not in B are shown in red (removed)."}},{"@type":"Question","name":"Is this a real diff like git diff?","acceptedAnswer":{"@type":"Answer","text":"This is a simple word-level diff for quick comparison. For character-level or line-level diffs as used in programming, dedicated tools like git diff or diff(1) are more appropriate."}},{"@type":"Question","name":"Is my text stored?","acceptedAnswer":{"@type":"Answer","text":"No. The comparison runs entirely in your browser. Nothing is sent to any server."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/textdiff/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/ar/textdiff/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/textdiff/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/textdiff/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/textdiff/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Compare two texts and find the differences" />
+<meta property="og:description" content="Compare two texts and find the differences" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/textdiff/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Compare two texts and find the differences","description":"Compare two texts and find the differences","url":"https://example.com/en/textdiff/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Text Diff Tool</span></nav>
+  <h1>Text Diff Tool</h1>
+  <p class="lead">Paste two versions of a text in the boxes below to see what changed between them.</p>
+  <section class="widget" id="tool"><div id="td-app"><div class="row"><div class="field"><label for="td-a">Original text</label><textarea id="td-a" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Paste original text here…"></textarea></div><div class="field"><label for="td-b">New text</label><textarea id="td-b" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Paste new or revised text here…"></textarea></div></div><div id="td-out" style="margin-top:1rem;font-family:monospace;font-size:0.85rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);white-space:pre-wrap;line-height:1.7"></div></div></section>
+  <article class="content">
+    <h2>Compare two texts and find the differences</h2>
+<p>Whether you are proofreading a revised document, checking what changed in a contract, comparing two versions of an essay, or verifying that a copy-paste was accurate, a text diff tool saves time by highlighting exactly what changed. Paste the original text in the first box and the new version in the second, and the differences are marked instantly.</p>
+<h2>How word-level diff works</h2>
+<p>The tool uses the Longest Common Subsequence (LCS) algorithm — the same algorithm underlying the Unix diff command and git diff. It finds the largest sequence of words that appear in both texts in the same order, then marks everything outside that sequence as added or deleted.</p>
+<p>Words shown in red with strikethrough are in the original but not in the new version (deleted). Words highlighted in green are in the new version but not in the original (added). Unchanged words appear in normal text.</p>
+<h2>Common uses for text comparison</h2>
+<p><strong>Document revisions</strong>: When a collaborator returns a revised document, quickly see exactly which words or sentences changed without reading both versions in full.</p>
+<p><strong>Contract review</strong>: Legal professionals use diff to track changes between contract versions. A &quot;redline&quot; or &quot;markup&quot; document is essentially a diff applied to legal text.</p>
+<p><strong>Academic proofreading</strong>: Compare a first draft to a revised draft to verify the intended edits were made correctly and no unintended changes were introduced.</p>
+<p><strong>Code review</strong>: While code diffs are best handled by tools like git diff (which operates line-by-line), a word-level diff can help when reviewing documentation or comments.</p>
+<p><strong>Plagiarism checking</strong>: Compare a submitted text against an original to spot paraphrasing — reordered or substituted words that preserve the same meaning.</p>
+<p><strong>Translation verification</strong>: Compare a source text to its translation word-for-word to ensure completeness (though this is approximate due to natural language differences).</p>
+<h2>Limitations of word-level diff</h2>
+<p>This tool compares words without understanding semantics. A sentence that is entirely rewritten with the same meaning will appear fully deleted and added. For understanding semantic similarity, natural language processing tools are needed.</p>
+<p>The comparison also does not distinguish formatting, capitalization, or punctuation within words unless they are part of a word token. &quot;Hello&quot; and &quot;hello&quot; are treated as different words.</p>
+<h2>How to use the tool</h2>
+<p>Paste the original text into the first box and the revised version into the second, and the comparison appears immediately below, with deletions struck through in red and additions highlighted in green. There is no button to press to trigger the comparison — it updates live, so you can paste a new version at any time and immediately see how it differs from what came before.</p>
+<h2>Why word-level comparison, not character-level</h2>
+<p>A diff tool could theoretically compare character by character rather than word by word, but that approach produces results that are technically accurate and practically useless: fixing a single typo in the middle of a long sentence would show almost the entire rest of the sentence as changed, because every character after the correction shifts position. Comparing at the word level instead means a single corrected word shows as one deletion and one addition, while everything else in the sentence that did not actually change is correctly left alone — a far more useful signal for a human trying to understand what was actually edited, which is exactly the level of granularity most real editing and proofreading tasks care about.</p>
+<h2>Reading a diff efficiently</h2>
+<p>When reviewing a long comparison, it helps to scan for clusters of colour rather than reading every word: a tight cluster of red and green next to each other usually indicates a small rewording, while a long uninterrupted run of one colour indicates a genuinely new or deleted passage rather than an edit. Getting comfortable with this pattern-scanning approach is what lets experienced editors and legal reviewers process a multi-page redline in a few minutes rather than re-reading the entire document line by line.</p>
+<h2>Diff tools in software vs prose</h2>
+<p>Programmers use line-based diff tools like git diff constantly, and it is worth understanding why a word-level diff like this one is a different, complementary tool rather than a replacement. Source code is naturally organized into discrete lines, so comparing line by line is the right granularity — a changed line is a changed unit of logic. Prose has no such natural line boundaries; a single sentence might wrap across several lines depending on window width, and the meaningful unit of change is the word or phrase, not wherever a line happens to break. That is precisely why comparing prose requires a word-level approach rather than reusing a code-oriented, line-based diff tool.</p>
+<h2>Comparing translation drafts</h2>
+<p>Bilingual editors and translators sometimes use a word-level diff to compare two versions of a translation of the same source text — for instance, a human translator&#39;s draft against a machine-translated version, or two successive revisions of the same paragraph — to quickly spot exactly where word choices diverge, without needing to re-read the entire passage hunting for the difference.</p>
+<h2>A quick sanity check before relying on a diff</h2>
+<p>Before trusting a diff result for something important — a legal document, a graded assignment — paste a small known change into the two boxes first and confirm the tool highlights exactly that change and nothing else, the same way you would test a new kitchen scale with a known weight before trusting it for a recipe.</p>
+<h2>Private and instant</h2>
+<p>All comparisons run entirely in your browser using the Longest Common Subsequence algorithm, so results appear instantly and no text you paste is ever sent to any server, logged or shared.</p>
+    <section class="faq"><h2>Text diff FAQ</h2><dl><dt>How does the diff work?</dt><dd>The tool compares the two texts word by word. Words present in B but not in A are shown in green (added). Words in A but not in B are shown in red (removed).</dd><dt>Is this a real diff like git diff?</dt><dd>This is a simple word-level diff for quick comparison. For character-level or line-level diffs as used in programming, dedicated tools like git diff or diff(1) are more appropriate.</dd><dt>Is my text stored?</dt><dd>No. The comparison runs entirely in your browser. Nothing is sent to any server.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/textdiff/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/textdiff.js" defer></script>
+</body>
+</html>

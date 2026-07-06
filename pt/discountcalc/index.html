@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Desconto — preço final e quanto você economiza</title>
+<meta name="description" content="Calculadora de desconto grátis. Informe o preço original e a porcentagem de desconto para ver na hora o preço final da promoção e exatamente quanto você economiza.">
+<link rel="canonical" href="https://mikaio.dev/pt/discountcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/discountcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/discountcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/discountcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/discountcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/discountcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/discountcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/discountcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/discountcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de Desconto — preço final e quanto você economiza">
+<meta property="og:description" content="Calculadora de desconto grátis. Informe o preço original e a porcentagem de desconto para ver na hora o preço final da promoção e exatamente quanto você economiza.">
+<meta property="og:url" content="https://mikaio.dev/pt/discountcalc/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Desconto — preço final e quanto você economiza","url":"https://mikaio.dev/pt/discountcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de desconto grátis. Informe o preço original e a porcentagem de desconto para ver na hora o preço final da promoção e exatamente quanto você economiza."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora de Desconto","item":"https://mikaio.dev/pt/discountcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como um desconto é calculado?","acceptedAnswer":{"@type":"Answer","text":"Multiplique o preço original pela porcentagem de desconto dividida por cem para obter o valor economizado, depois subtraia isso do preço. Por exemplo, 30% de desconto em um item de 50 economiza 15, deixando 35."}},{"@type":"Question","name":"Como combino dois descontos?","acceptedAnswer":{"@type":"Answer","text":"Descontos acumulados se aplicam um após o outro, não somados. Um desconto de 20% e depois 10% não é 30% de desconto — tire 20% primeiro, depois 10% do preço já reduzido, o que dá um pouco menos que 30%."}},{"@type":"Question","name":"Algo que eu informo é salvo?","acceptedAnswer":{"@type":"Answer","text":"Não. O cálculo roda inteiramente no seu navegador, então os preços que você digita nunca são enviados, guardados ou compartilhados."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/discountcalc/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/discountcalc/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/discountcalc/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/discountcalc/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/discountcalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/discountcalc/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/discountcalc/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/discountcalc/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/discountcalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Veja o preço real antes de comprar" />
+<meta property="og:description" content="Veja o preço real antes de comprar" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/discountcalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Veja o preço real antes de comprar","description":"Veja o preço real antes de comprar","url":"https://example.com/pt/discountcalc/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora de Desconto</span></nav>
+  <h1>Calculadora de Desconto</h1>
+  <p class="lead">Informe o preço original e a porcentagem de desconto para ver o preço final e o valor que você economiza, atualizado enquanto digita.</p>
+  <section class="widget" id="tool"><form id="disc"><div class="row"><div class="field"><label for="disc-price">Preço original</label><input type="number" id="disc-price" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="disc-pct">Desconto %</label><input type="number" id="disc-pct" step="any" min="0" inputmode="decimal"></div></div><div class="result"><span class="hint">Preço final: </span><span class="big" id="disc-final">—</span></div><div class="result"><span class="hint">Você economiza: </span><b id="disc-saved">—</b></div></form></section>
+  <article class="content">
+    <h2>Veja o preço real antes de comprar</h2>
+<p>Um desconto só significa algo quando você sabe o preço que realmente vai pagar. &quot;40% de desconto&quot; soa ótimo em uma etiqueta, mas o número que importa é o que sai da sua carteira, e calcular isso de cabeça — especialmente com um preço quebrado como 47,90 e um desconto difícil como 35% — é exatamente o tipo de conta rápida fácil de escorregar. Esta calculadora de desconto faz isso por você na hora. Informe o preço original e a porcentagem de desconto, e ela mostra o preço final da promoção ao lado do valor exato que você economiza, atualizando no momento em que você digita. Tudo roda no seu navegador, então é imediato, privado e funciona até em uma loja sem sinal.</p>
+<p>A ferramenta é propositalmente simples: duas caixas e dois resultados claros. Não há botão para apertar nem nada para reiniciar, porque os números se recalculam ao vivo conforme você os muda. Isso facilita comparar ofertas — digite uma promoção, anote o preço final, depois mude o desconto para ver como uma oferta melhor ou pior se compara.</p>
+<h2>Como usar</h2>
+<p>Informe o preço original, cheio, do item na primeira caixa. Depois digite a porcentagem de desconto na segunda caixa — só o número, então uma promoção de &quot;25% de desconto&quot; é simplesmente 25. A calculadora mostra imediatamente duas coisas: o preço final que você realmente vai pagar após o desconto, e o valor que você economiza em relação ao preço original. Se uma loja anuncia a economia em vez da porcentagem, você ainda pode conferir a conta dela testando uma porcentagem e vendo se o valor economizado bate.</p>
+<p>Como ela se atualiza na hora, a calculadora é ideal para comprar na hora. Parado em frente a uma arara de roupas com desconto ou a uma prateleira de produtos remarcados, você pode digitar cada preço e desconto em um segundo e saber exatamente com o que está se comprometendo antes de chegar ao caixa.</p>
+<h2>Como um desconto é calculado</h2>
+<p>Um desconto é uma porcentagem tirada de um preço, então a conta tem dois passos. Primeiro você calcula o valor do desconto multiplicando o preço pela porcentagem dividida por cem. Para um desconto de 30% em um item de 50, isso é 50 × 0,30 = 15. Depois você subtrai essa economia do preço original para obter o que paga: 50 − 15 = 35. A calculadora faz os dois passos de uma vez, e é por isso que ela pode mostrar o preço final e a economia lado a lado.</p>
+<p>Um atalho mental rápido é achar dez por cento primeiro — mover a vírgula uma casa para a esquerda — e escalar a partir daí. Dez por cento de 50 é 5, então 30% é três vezes isso, ou seja, 15. É uma forma útil de conferir uma oferta de relance, enquanto a calculadora dá o valor exato incluindo os decimais chatos.</p>
+<h2>A armadilha dos descontos acumulados</h2>
+<p>Um dos erros mais comuns que os consumidores cometem é somar as porcentagens. Se uma loja oferece 20% de desconto e depois mais 10% no caixa, é tentador achar que você está ganhando 30% de desconto — mas não está. Descontos acumulados se aplicam um após o outro, cada um ao preço deixado pelo anterior. Tire 20% de um item de 100 e você fica com 80; tire mais 10% desses 80 e você economiza outros 8, deixando 72. Isso é um desconto total de 28%, não 30%. A ordem não muda a resposta final, mas as duas porcentagens nunca simplesmente se somam.</p>
+<p>Você pode usar esta calculadora para resolver descontos acumulados corretamente. Aplique o primeiro desconto, anote o preço final, depois digite esse preço de volta na caixa de preço original e aplique o segundo desconto. O resultado final é o preço verdadeiro, e compará-lo com o original mostra a economia combinada real — que é sempre um pouco menor do que as duas porcentagens somadas.</p>
+<h2>Além das lojas</h2>
+<p>O mesmo cálculo é útil muito além das promoções do varejo. Qualquer um que ofereça ou receba uma redução percentual pode usá-lo: um fornecedor dando um desconto para revenda, um freelancer oferecendo uma porcentagem de desconto em um orçamento, um proprietário reduzindo o aluguel por uma porcentagem fixa, ou um estudante conferindo uma bolsa baseada em porcentagem. Onde quer que uma porcentagem saia de um valor inicial, a ferramenta informa tanto o valor reduzido quanto o tamanho da redução. Como você controla os números por completo, ela também serve como uma calculadora geral de &quot;tirar uma porcentagem&quot; para qualquer situação, não só compras.</p>
+<h2>Privado, instantâneo e grátis</h2>
+<p>Não há cadastro, custo nem anúncios no caminho. A calculadora inteira é um pequeno trecho de código que roda no seu próprio dispositivo, e é por isso que ela responde no instante em que você digita e continua funcionando sem conexão com a internet — genuinamente útil em uma loja movimentada. Nenhum dos preços que você informa é enviado, registrado ou compartilhado; eles existem apenas na sua tela e desaparecem quando você recarrega a página.</p>
+<p>Para usá-la, informe o preço original e a porcentagem de desconto, e leia o preço final e a sua economia. Mude qualquer número a qualquer momento e os resultados acompanham, para você conferir uma única oferta ou comparar várias em segundos e sempre saber o preço real antes de decidir comprar.</p>
+    <section class="faq"><h2>Perguntas frequentes da calculadora de desconto</h2><dl><dt>Como um desconto é calculado?</dt><dd>Multiplique o preço original pela porcentagem de desconto dividida por cem para obter o valor economizado, depois subtraia isso do preço. Por exemplo, 30% de desconto em um item de 50 economiza 15, deixando 35.</dd><dt>Como combino dois descontos?</dt><dd>Descontos acumulados se aplicam um após o outro, não somados. Um desconto de 20% e depois 10% não é 30% de desconto — tire 20% primeiro, depois 10% do preço já reduzido, o que dá um pouco menos que 30%.</dd><dt>Algo que eu informo é salvo?</dt><dd>Não. O cálculo roda inteiramente no seu navegador, então os preços que você digita nunca são enviados, guardados ou compartilhados.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/discountcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/discountcalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/discountcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/discountcalc/">Français</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/discountcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/discountcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/discountcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/discountcalc.js" defer></script>
+</body>
+</html>

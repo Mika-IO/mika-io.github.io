@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construtor de UTM — crie URLs de campanha rastreáveis</title>
+<meta name="description" content="Construtor de UTM gratuito. Crie URLs com tags UTM para Google Analytics e outras plataformas. Rastreie tráfego de e-mail, redes sociais e campanhas pagas.">
+<link rel="canonical" href="https://mikaio.dev/pt/utmbuilder/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/utmbuilder/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/utmbuilder/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/utmbuilder/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/utmbuilder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Construtor de UTM — crie URLs de campanha rastreáveis">
+<meta property="og:description" content="Construtor de UTM gratuito. Crie URLs com tags UTM para Google Analytics e outras plataformas. Rastreie tráfego de e-mail, redes sociais e campanhas pagas.">
+<meta property="og:url" content="https://mikaio.dev/pt/utmbuilder/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Construtor de UTM — crie URLs de campanha rastreáveis","url":"https://mikaio.dev/pt/utmbuilder/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Construtor de UTM gratuito. Crie URLs com tags UTM para Google Analytics e outras plataformas. Rastreie tráfego de e-mail, redes sociais e campanhas pagas."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Construtor de Link UTM","item":"https://mikaio.dev/pt/utmbuilder/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que são parâmetros UTM?","acceptedAnswer":{"@type":"Answer","text":"Parâmetros UTM (Urchin Tracking Module) são tags adicionadas a uma URL que informam plataformas de análise como o Google Analytics de onde o tráfego veio, qual meio foi usado e qual campanha o gerou."}},{"@type":"Question","name":"Quais parâmetros são obrigatórios?","acceptedAnswer":{"@type":"Answer","text":"Fonte, Meio e Campanha são os três parâmetros obrigatórios. Termo (usado para palavras-chave de busca paga) e Conteúdo (usado para testes A/B) são opcionais."}},{"@type":"Question","name":"Os parâmetros UTM diferenciam maiúsculas e minúsculas?","acceptedAnswer":{"@type":"Answer","text":"Sim. \"Email\" e \"email\" são rastreados como fontes separadas. Use convenções de nomenclatura minúsculas consistentes em todas as suas campanhas."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/utmbuilder/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/utmbuilder/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/utmbuilder/">
+<link rel="alternate" hreflang="ur" href="https://example.com/ur/utmbuilder/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Crie URLs com tags UTM para rastreamento preciso de campanhas" />
+<meta property="og:description" content="Crie URLs com tags UTM para rastreamento preciso de campanhas" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/utmbuilder/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Crie URLs com tags UTM para rastreamento preciso de campanhas","description":"Crie URLs com tags UTM para rastreamento preciso de campanhas","url":"https://example.com/pt/utmbuilder/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Construtor de Link UTM</span></nav>
+  <h1>Construtor de Link UTM</h1>
+  <p class="lead">Preencha a URL e os parâmetros de campanha para gerar um link UTM rastreável.</p>
+  <section class="widget" id="tool"><div id="utm-app"><div class="row"><div class="field"><label for="utm-url">URL do site</label><input type="url" id="utm-url" placeholder="https://example.com/page"></div></div><div class="row"><div class="field"><label for="utm-source">Fonte UTM</label><input type="text" id="utm-source" placeholder="newsletter"></div><div class="field"><label for="utm-medium">Meio UTM</label><input type="text" id="utm-medium" placeholder="email"></div><div class="field"><label for="utm-campaign">Campanha UTM</label><input type="text" id="utm-campaign" placeholder="venda_verao"></div></div><div class="row"><div class="field"><label for="utm-term">Termo UTM (opcional)</label><input type="text" id="utm-term" placeholder="tenis+corrida"></div><div class="field"><label for="utm-content">Conteúdo UTM (opcional)</label><input type="text" id="utm-content" placeholder="botao_cta"></div></div><div id="utm-out" style="margin-top:1rem;word-break:break-all;font-size:0.9rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);min-height:3rem"></div><button id="utm-copy" class="btn secondary" style="margin-top:0.5rem">Copiar link</button></div></section>
+  <article class="content">
+    <h2>Crie URLs com tags UTM para rastreamento preciso de campanhas</h2>
+<p>Os parâmetros UTM são a forma padrão de dizer a plataformas de análise como o Google Analytics exatamente de onde o tráfego do site vem. Sem tags UTM, o tráfego da sua newsletter, posts de redes sociais e anúncios pagos parecem todos iguais na análise.</p>
+<h2>O que são parâmetros UTM?</h2>
+<p>UTM significa Urchin Tracking Module. Os parâmetros UTM são pares chave-valor adicionados a uma URL como uma string de consulta. Quando alguém clica neste link e chega ao seu site, o Google Analytics registra todos os parâmetros junto com os dados da visita.</p>
+<h2>Os cinco parâmetros UTM</h2>
+<p><strong>utm_source</strong> (obrigatório): Identifica de onde o tráfego vem. Exemplos: newsletter, facebook, google, linkedin.</p>
+<p><strong>utm_medium</strong> (obrigatório): Descreve o canal de marketing. Exemplos: email, social, cpc, organico.</p>
+<p><strong>utm_campaign</strong> (obrigatório): Nomeia a campanha de marketing específica. Exemplos: venda_verao_2024.</p>
+<p><strong>utm_term</strong> (opcional): Usado principalmente para busca paga para identificar a palavra-chave.</p>
+<p><strong>utm_content</strong> (opcional): Usado para testes A/B ou para diferenciar links na mesma campanha.</p>
+<h2>Boas práticas para nomenclatura UTM</h2>
+<p><strong>A consistência é crítica</strong>: utm_source=Email e utm_source=email são tratados como duas fontes diferentes.</p>
+<p><strong>Use minúsculas</strong>: A maioria das equipes usa tudo em minúsculas com sublinhados ou hífens.</p>
+<h2>Não use UTM em links internos</h2>
+<p>Parâmetros UTM reiniciam a sessão no Google Analytics. Links internos com UTM atribuirão o tráfego incorretamente, fazendo parecer que um visitante chegou de uma nova fonte externa quando na verdade só clicou em um link dentro do próprio site.</p>
+<h2>Exemplos comuns de URL de campanha</h2>
+<p>Newsletter: utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=resumo_semanal. Anúncio no Facebook: utm_source=facebook&amp;utm_medium=cpc&amp;utm_campaign=reconhecimento_marca. Post no LinkedIn: utm_source=linkedin&amp;utm_medium=social&amp;utm_campaign=lancamento_produto. QR code em um panfleto: utm_source=panfleto&amp;utm_medium=qr_code&amp;utm_campaign=evento_2024.</p>
+<h2>Como usar o construtor</h2>
+<p>Informe a sua URL de destino e preencha os campos de origem, meio e campanha, acrescentando termo e conteúdo se a sua campanha precisar deles, e a URL completa com tags aparece imediatamente, corretamente codificada e pronta para copiar em um e-mail, uma plataforma de anúncios ou um post. Construí-la assim remove os dois erros mais comuns que as pessoas cometem digitando links UTM à mão: um erro de digitação no nome de um parâmetro que a análise silenciosamente deixa de reconhecer, e capitalização inconsistente que divide o que deveria ser uma única fonte de tráfego em várias que parecem diferentes em um relatório.</p>
+<h2>Por que a consistência importa mais que os nomes exatos escolhidos</h2>
+<p>Plataformas de análise tratam valores UTM como strings literais em vez de interpretar o seu significado, então &quot;Newsletter&quot;, &quot;newsletter&quot; e &quot;news_letter&quot; são registrados como três fontes completamente separadas, mesmo que um humano lendo o relatório reconhecesse que são a mesma coisa. Essa é a forma mais comum pela qual o rastreamento UTM silenciosamente quebra dentro de equipes de marketing maiores: todos concordam com o conceito, mas ninguém impõe a grafia exata, e meses depois o relatório de análise está fragmentado em uma dúzia de linhas quase duplicadas que significam todas a mesma campanha.</p>
+<h2>UTM e rastreamento nativo de plataforma</h2>
+<p>Algumas plataformas de anúncio, incluindo Google Ads e Facebook Ads, oferecem seus próprios sistemas automáticos de marcação (gclid, fbclid) que podem duplicar ou entrar em conflito com parâmetros UTM construídos manualmente se ambos forem usados sem cuidado no mesmo link. A boa prática geral é deixar a marcação automática da plataforma cuidar da atribuição específica daquela plataforma, enquanto usa parâmetros UTM para a história mais ampla em nível de campanha que você quer ver no Google Analytics — a origem, o meio e o nome da campanha —, já que os parâmetros UTM são o único esquema de marcação que praticamente toda plataforma de análise entende de forma consistente, não importa qual rede de anúncios de fato serviu o clique.</p>
+<h2>Auditando seus links UTM antes do lançamento</h2>
+<p>Antes de uma campanha ir ao ar, vale testar cada link com tag UTM exatamente como um destinatário o encontraria: cole a URL completa em uma janela anônima do navegador e confirme que ela chega na página pretendida com as tags intactas, já que alguns sistemas de gerenciamento de conteúdo e encurtadores de link silenciosamente removem parâmetros de consulta durante um redirecionamento. Uma campanha que parece perfeitamente marcada no construtor, mas perde os parâmetros UTM em algum ponto de uma cadeia de redirecionamento, será registrada como tráfego &quot;direto&quot; na análise, apagando silenciosamente a atribuição exata que as tags deveriam fornecer.</p>
+<h2>Mantendo uma referência de nomenclatura compartilhada</h2>
+<p>Equipes maiores se beneficiam de manter um documento de referência simples e compartilhado listando os valores exatos aprovados para utm_source e utm_medium — &quot;email&quot;, não &quot;Email&quot; ou &quot;e-mail&quot; —, para que todos que constroem links de campanha, não importa qual ferramenta usem, produzam valores UTM que se consolidem de forma limpa nas mesmas linhas de um relatório de análise em vez de se fragmentarem em quase duplicatas ao longo do tempo.</p>
+<h2>Encurtadores de link e parâmetros UTM</h2>
+<p>Ao passar uma URL com tags UTM por um encurtador de link antes de publicá-la, confirme que o encurtador escolhido preserva a string de consulta completa no redirecionamento — alguns serviços gratuitos truncam ou removem parâmetros extras, o que apagaria silenciosamente todo o rastreamento que você acabou de configurar sem nenhum aviso de erro.</p>
+<h2>Privado e instantâneo</h2>
+<p>A URL é construída inteiramente no seu navegador, então aparece na hora enquanto você digita e nada que você informa é enviado a nenhum servidor, registrado ou compartilhado.</p>
+    <section class="faq"><h2>Perguntas frequentes do construtor de UTM</h2><dl><dt>O que são parâmetros UTM?</dt><dd>Parâmetros UTM (Urchin Tracking Module) são tags adicionadas a uma URL que informam plataformas de análise como o Google Analytics de onde o tráfego veio, qual meio foi usado e qual campanha o gerou.</dd><dt>Quais parâmetros são obrigatórios?</dt><dd>Fonte, Meio e Campanha são os três parâmetros obrigatórios. Termo (usado para palavras-chave de busca paga) e Conteúdo (usado para testes A/B) são opcionais.</dd><dt>Os parâmetros UTM diferenciam maiúsculas e minúsculas?</dt><dd>Sim. &quot;Email&quot; e &quot;email&quot; são rastreados como fontes separadas. Use convenções de nomenclatura minúsculas consistentes em todas as suas campanhas.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/utmbuilder/">English</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/utmbuilder/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/utmbuilder/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/utmbuilder.js" defer></script>
+</body>
+</html>

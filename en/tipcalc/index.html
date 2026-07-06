@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tip Calculator — work out the tip and split the bill</title>
+<meta name="description" content="Free tip calculator. Enter the bill and tip percentage to see the tip amount and total, then split it evenly between any number of people. Instant and private.">
+<link rel="canonical" href="https://mikaio.dev/en/tipcalc/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tipcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tipcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tipcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tip Calculator — work out the tip and split the bill">
+<meta property="og:description" content="Free tip calculator. Enter the bill and tip percentage to see the tip amount and total, then split it evenly between any number of people. Instant and private.">
+<meta property="og:url" content="https://mikaio.dev/en/tipcalc/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Tip Calculator — work out the tip and split the bill","url":"https://mikaio.dev/en/tipcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free tip calculator. Enter the bill and tip percentage to see the tip amount and total, then split it evenly between any number of people. Instant and private."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Tip Calculator","item":"https://mikaio.dev/en/tipcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much should I tip?","acceptedAnswer":{"@type":"Answer","text":"In many countries a restaurant tip of 15% to 20% of the bill is common for good service, with the quick buttons above set to 10, 15, 18 and 20 percent. Customs vary widely by country, so use the amount that fits where you are."}},{"@type":"Question","name":"Should I tip on the pre-tax or post-tax total?","acceptedAnswer":{"@type":"Answer","text":"Either is acceptable and the difference is usually small. If you want to be precise, enter the pre-tax bill amount, since the tip is meant to reward service rather than tax."}},{"@type":"Question","name":"Is anything I type saved?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation runs entirely in your browser, so the bill amounts you enter are never uploaded, stored or shared."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/en/tipcalc/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/tipcalc/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/tipcalc/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Work out the tip and split the bill without the awkward maths" />
+<meta property="og:description" content="Work out the tip and split the bill without the awkward maths" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/en/tipcalc/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Work out the tip and split the bill without the awkward maths","description":"Work out the tip and split the bill without the awkward maths","url":"https://example.com/en/tipcalc/","inLanguage":"en"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Tip Calculator</span></nav>
+  <h1>Tip Calculator</h1>
+  <p class="lead">Enter your bill and a tip percentage to see the tip and total at once. Set the number of people to split the bill evenly.</p>
+  <section class="widget" id="tool"><form id="tip"><div class="row"><div class="field"><label for="tip-bill">Bill amount</label><input type="number" id="tip-bill" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-pct">Tip %</label><input type="number" id="tip-pct" value="15" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-people">Split between</label><input type="number" id="tip-people" value="1" min="1" step="1"></div></div><div class="cc-btns row"><button type="button" class="btn secondary" data-tip="10">10%</button><button type="button" class="btn secondary" data-tip="15">15%</button><button type="button" class="btn secondary" data-tip="18">18%</button><button type="button" class="btn secondary" data-tip="20">20%</button></div><div class="result"><span class="hint">Tip: </span><span class="big" id="tip-amount">—</span></div><div class="result"><span class="hint">Total: </span><b id="tip-total">—</b> · <span class="hint">Each person: </span><b id="tip-each">—</b></div></form></section>
+  <article class="content">
+    <h2>Work out the tip and split the bill without the awkward maths</h2>
+<p>The end of a good meal should not turn into a maths test. Working out a tip in your head, adding it to the bill and then dividing the whole thing between everyone at the table is exactly the kind of quick arithmetic that is easy to get slightly wrong, especially after a glass of wine. This tip calculator does all of it for you at once. Enter the bill, choose a tip percentage, say how many people are splitting it, and it shows the tip, the new total and the amount each person owes — updating instantly as you type. Everything runs in your browser, so it is fast, private and works even when the restaurant has no signal.</p>
+<p>There are quick buttons for the most common tip rates, so a single tap sets 10, 15, 18 or 20 percent, and you can always type an exact figure of your own instead. Change any number and every result recalculates immediately, which makes it easy to try a couple of tip levels and see how much difference they really make before you decide.</p>
+<h2>How to use it</h2>
+<p>Start by typing the bill total into the first box. Then set the tip percentage, either by tapping one of the preset buttons or by entering your own number. Finally, if you are sharing the cost, set how many people are splitting it. The calculator shows three things: the tip amount on its own, the grand total including the tip, and the share each person pays when the total is divided evenly. If you are dining alone, just leave the number of people at one and ignore the per-person figure.</p>
+<p>Because the results update live, there is no button to press and nothing to reset. Adjust the tip from 15 to 18 percent and watch the numbers move; add a person to the split and see each share drop. It is designed to answer the real questions people have at the table quickly, so you can settle up and move on.</p>
+<h2>How a tip is calculated</h2>
+<p>A tip is simply a percentage of the bill. To find it by hand, you divide the tip percentage by one hundred and multiply by the bill: a 20% tip on a 50 bill is 0.20 × 50 = 10. The total you actually pay is the bill plus that tip, so 50 + 10 = 60. When you split the bill, you divide that final total by the number of people, so four diners sharing a 60 total pay 15 each. The calculator follows exactly these steps, which is why the per-person figure already includes everyone&#39;s share of the tip rather than just the food.</p>
+<p>A useful mental shortcut for a rough tip is to take ten percent — move the decimal point one place to the left — and then adjust from there. Ten percent of 50 is 5, so a fifteen percent tip is about 5 plus half of 5, which is 7.50, and twenty percent is simply double the ten percent, or 10. The calculator gives you the exact figure, but these tricks are handy for a quick sanity check.</p>
+<h2>How much to tip</h2>
+<p>Tipping customs vary enormously around the world, and there is no single right answer. In the United States, a restaurant tip of 15 to 20 percent of the pre-tax bill is widely expected for table service, and tipping is a significant part of many workers&#39; income. In much of Europe a service charge is often already included, and a smaller tip or simply rounding up is normal. In some countries tipping is uncommon or even discouraged. The quick buttons on this calculator cover the common 10 to 20 percent range, but the best guide is always the local custom of wherever you are eating.</p>
+<p>It is also worth thinking about what you are tipping for. A tip traditionally rewards the quality of service, so many people tip a little more for attentive, friendly service and a little less when it falls short. For larger groups, restaurants sometimes add a service charge automatically, in which case an extra tip may not be expected — it is always worth checking the bill before adding more.</p>
+<h2>Beyond restaurants</h2>
+<p>Although it is most associated with dining out, the same calculation applies anywhere a percentage-based tip or gratuity comes up. It works just as well for a taxi or ride-share fare, a haircut, a food delivery, a hotel service or a bar tab. Anywhere you want to add a percentage to a base amount and perhaps divide the result among a few people, the tool does the job. Because you control the percentage completely, it also doubles as a quick way to add any percentage to a number and split it, whether or not a tip is involved.</p>
+<h2>Private, instant and free</h2>
+<p>There is no sign-up, no cost and no adverts getting in your way. The whole calculator is a small piece of code that runs on your own device, so it responds the moment you type and keeps working with no internet connection — genuinely useful in a busy restaurant where the signal is weak. None of the amounts you enter are uploaded, logged or shared; they exist only on your screen and vanish when you close the page.</p>
+<p>To use it, enter your bill, pick a tip percentage, set the number of people if you are splitting, and read off the tip, total and per-person share. Adjust anything at any time and the figures keep pace, so you can settle the bill quickly and fairly every time.</p>
+    <section class="faq"><h2>Tip calculator FAQ</h2><dl><dt>How much should I tip?</dt><dd>In many countries a restaurant tip of 15% to 20% of the bill is common for good service, with the quick buttons above set to 10, 15, 18 and 20 percent. Customs vary widely by country, so use the amount that fits where you are.</dd><dt>Should I tip on the pre-tax or post-tax total?</dt><dd>Either is acceptable and the difference is usually small. If you want to be precise, enter the pre-tax bill amount, since the tip is meant to reward service rather than tax.</dd><dt>Is anything I type saved?</dt><dd>No. The calculation runs entirely in your browser, so the bill amounts you enter are never uploaded, stored or shared.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/tipcalc/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/tipcalc.js" defer></script>
+</body>
+</html>

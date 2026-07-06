@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contagem Regressiva — conte regressivamente para qualquer data ou evento</title>
+<meta name="description" content="Contagem regressiva gratuita. Informe qualquer data futura e veja exatamente quantos dias, horas, minutos e segundos faltam. Funciona no seu navegador.">
+<link rel="canonical" href="https://mikaio.dev/pt/countdown/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/countdown/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/countdown/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/countdown/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/countdown/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/countdown/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/countdown/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/countdown/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/countdown/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contagem Regressiva — conte regressivamente para qualquer data ou evento">
+<meta property="og:description" content="Contagem regressiva gratuita. Informe qualquer data futura e veja exatamente quantos dias, horas, minutos e segundos faltam. Funciona no seu navegador.">
+<meta property="og:url" content="https://mikaio.dev/pt/countdown/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Contagem Regressiva — conte regressivamente para qualquer data ou evento","url":"https://mikaio.dev/pt/countdown/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Contagem regressiva gratuita. Informe qualquer data futura e veja exatamente quantos dias, horas, minutos e segundos faltam. Funciona no seu navegador."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Contagem Regressiva","item":"https://mikaio.dev/pt/countdown/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Posso contar regressivamente para um horário específico em uma data?","acceptedAnswer":{"@type":"Answer","text":"Sim. O seletor de data e hora permite definir a hora e o minuto exatos, então a contagem é precisa ao segundo."}},{"@type":"Question","name":"O que acontece quando a contagem chega a zero?","acceptedAnswer":{"@type":"Answer","text":"O visor mostra que o evento chegou. Recarregue a página se quiser iniciar uma nova contagem."}},{"@type":"Question","name":"A contagem é salva se eu fechar o navegador?","acceptedAnswer":{"@type":"Answer","text":"Não. A data que você informou não é armazenada em lugar nenhum. Você precisará informá-la novamente se recarregar a página."}}]}]</script>
+
+  <!-- SEO injected -->
+  <link rel="canonical" href="https://example.com/pt/countdown/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/countdown/">
+<link rel="alternate" hreflang="es" href="https://example.com/es/countdown/">
+<link rel="alternate" hreflang="fr" href="https://example.com/fr/countdown/">
+<link rel="alternate" hreflang="hi" href="https://example.com/hi/countdown/">
+<link rel="alternate" hreflang="pt" href="https://example.com/pt/countdown/">
+<link rel="alternate" hreflang="ru" href="https://example.com/ru/countdown/">
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/countdown/">
+  <!-- SEO injected -->
+<meta property="og:title" content="Conte regressivamente para qualquer momento que importa" />
+<meta property="og:description" content="Conte regressivamente para qualquer momento que importa" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://example.com/pt/countdown/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Conte regressivamente para qualquer momento que importa","description":"Conte regressivamente para qualquer momento que importa","url":"https://example.com/pt/countdown/","inLanguage":"pt"}</script>
+  <!-- end SEO injected -->
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Contagem Regressiva</span></nav>
+  <h1>Contagem Regressiva</h1>
+  <p class="lead">Escolha uma data e hora alvo, nomeie o evento opcionalmente, e veja a contagem regressiva atualizar a cada segundo.</p>
+  <section class="widget" id="tool"><div id="cd-app"><div class="row"><div class="field"><label for="cd-date">Data e hora alvo</label><input type="datetime-local" id="cd-date"></div><div class="field"><label for="cd-label">Nome do evento (opcional)</label><input type="text" id="cd-label" maxlength="60" placeholder="ex: Meu aniversário"></div></div><div id="cd-out" class="result" style="font-size:1.5rem;font-weight:700;min-height:2.5rem">—</div></div></section>
+  <article class="content">
+    <h2>Conte regressivamente para qualquer momento que importa</h2>
+<p>Um timer de contagem regressiva transforma uma data futura abstrata em algo visceral — um número vivo e tique-taque que faz o evento parecer real e iminente. Seja contando regressivamente para um aniversário, uma viagem, o lançamento de um produto, uma prova, um feriado ou qualquer marco pessoal, esta ferramenta mostra exatamente quantos dias, horas, minutos e segundos faltam.</p>
+<h2>Como usar o timer de contagem regressiva</h2>
+<p>Abra o seletor de data e hora e selecione sua data alvo. O seletor aceita qualquer data e hora futura, então você pode ser preciso ao minuto. Se quiser, digite um nome para o evento no campo de rótulo — &quot;Casamento&quot;, &quot;Maratona&quot;, &quot;Ano Novo&quot; — e ele aparece acima da contagem. A partir do momento em que você seleciona a data, a contagem corre automaticamente, subtraindo um segundo de cada vez até o momento chegar.</p>
+<h2>Por que contagens regressivas funcionam</h2>
+<p>Psicólogos há muito notam que tornar um objetivo concreto e com prazo aumenta a motivação. Quando você pode ver exatamente que faltam quarenta e dois dias, sete horas e quatorze minutos para o seu prazo, o futuro abstrato se cristaliza em algo contra o qual você pode planejar. Timers de contagem regressiva são usados em marketing exatamente por essa razão — um relógio tique-taqueando em uma venda cria urgência — mas o mesmo efeito se aplica a objetivos pessoais.</p>
+<p>Atletas contam regressivamente até o dia da prova para adequar o ritmo do treinamento. Estudantes contam regressivamente para datas de exames para estruturar seus cronogramas de revisão. Organizadores de eventos contam regressivamente para o dia do show. Famílias contam regressivamente para férias para construir expectativa nas crianças.</p>
+<h2>Precisão</h2>
+<p>A contagem usa a aritmética de datas nativa do navegador, que é precisa ao milissegundo. O horário exibido é baseado no relógio do sistema do seu dispositivo. Se o relógio do seu dispositivo estiver corretamente sincronizado — o que é padrão na maioria dos smartphones e computadores — a contagem será precisa ao segundo. O tempo é recalculado a cada segundo, então não há atraso acumulado: se você deixar a aba aberta durante a noite e voltar de manhã, o tempo exibido refletirá corretamente o tempo real decorrido.</p>
+<h2>Contando regressivamente entre fusos horários</h2>
+<p>A contagem usa seu horário local, que é o horário configurado no seu dispositivo. Se você está em São Paulo contando regressivamente para um evento de Ano Novo que começa à meia-noite em Londres, digite meia-noite no horário de Londres, e seu navegador converterá para o equivalente local quando você definir o campo de data e hora.</p>
+<h2>Eventos grandes e pequenos</h2>
+<p>Contagens regressivas funcionam para eventos públicos como finais esportivas, eleições ou lançamentos espaciais — momentos em que todo mundo concorda em um único instante. Elas também funcionam para marcos profundamente pessoais: quantos dias faltam para um aniversário de casamento, uma formatura, a data prevista de um bebê, ou um reencontro com alguém de quem você sente saudade. Um número sozinho não capta a emoção de um evento, mas pode fazer esse evento parecer concreto e próximo.</p>
+<h2>Contagem vs cronômetro</h2>
+<p>Um cronômetro conta para frente a partir de zero, medindo tempo decorrido. Um timer de contagem regressiva começa de uma duração especificada e conta até zero. Ambos medem tempo, mas servem propósitos cognitivos diferentes: um cronômetro responde &quot;quanto tempo já passou?&quot; enquanto uma contagem regressiva responde &quot;quanto tempo falta?&quot;.</p>
+<h2>Alarme e notificação</h2>
+<p>Quando a contagem chega a zero, esta ferramenta exibe um alerta visual. Requisitos de segurança do navegador exigem que alarmes sonoros precisem de uma interação do usuário (um clique) antes de poderem tocar — se você precisa de um alerta sonoro, certifique-se de ter interagido com a página depois de carregá-la.</p>
+<h2>Contagens regressivas no marketing e no dia a dia</h2>
+<p>Sites de e-commerce colocam um relógio de contagem regressiva ao lado de uma promoção especificamente porque um número que diminui em tempo real cria uma sensação de urgência que um texto estático como &quot;oferta por tempo limitado&quot; não consegue igualar — ver os minutos e segundos genuinamente correndo ativa uma resposta psicológica diferente de apenas ler que existe um prazo. O mesmo princípio, aplicado a objetivos pessoais em vez de vendas, é exatamente o que torna esta ferramenta útil para contar os dias até um casamento, uma viagem ou uma formatura: transformar uma data no calendário em um número que visivelmente diminui a cada segundo.</p>
+<h2>Usando várias contagens regressivas ao mesmo tempo</h2>
+<p>Nada impede abrir esta ferramenta em várias abas para acompanhar vários eventos futuros simultaneamente — um prazo de trabalho em uma aba, um aniversário em outra, uma viagem em uma terceira —, já que cada aba mantém seu próprio estado de forma independente no seu navegador, sem interferência entre elas.</p>
+<h2>Fechando a aba não apaga o evento real</h2>
+<p>Vale lembrar que fechar a aba do navegador apaga apenas o estado desta ferramenta — a data alvo salva localmente no seu navegador —, não o evento real que você está contando. Se você fechar a aba por engano no meio de uma contagem importante, basta voltar à página e informar a data novamente para retomar de onde parou, já que a contagem em si é recalculada instantaneamente a partir da data-alvo, não de um cronômetro contínuo que precisaria continuar rodando em segundo plano.</p>
+<h2>Privado e sempre tique-taqueando</h2>
+<p>Nada do que você informa é enviado a nenhum servidor. A data alvo e o nome do evento ficam inteiramente no seu navegador, usando a aritmética de datas nativa do JavaScript recalculada a cada segundo. Não há conta, login ou rastreamento. Feche a aba e tudo desaparece.</p>
+    <section class="faq"><h2>Perguntas frequentes da contagem regressiva</h2><dl><dt>Posso contar regressivamente para um horário específico em uma data?</dt><dd>Sim. O seletor de data e hora permite definir a hora e o minuto exatos, então a contagem é precisa ao segundo.</dd><dt>O que acontece quando a contagem chega a zero?</dt><dd>O visor mostra que o evento chegou. Recarregue a página se quiser iniciar uma nova contagem.</dd><dt>A contagem é salva se eu fechar o navegador?</dt><dd>Não. A data que você informou não é armazenada em lugar nenhum. Você precisará informá-la novamente se recarregar a página.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/countdown/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/countdown/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/countdown/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/countdown/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/countdown/">Français</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/countdown/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/countdown/">Русский</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/countdown.js" defer></script>
+</body>
+</html>

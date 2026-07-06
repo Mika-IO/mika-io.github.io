@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Percentage Calculator — percent of a number, change &amp; more</title>
+<meta name="description" content="Free percentage calculator. Find a percent of a number, work out what percent one value is of another, and calculate percentage increase or decrease instantly.">
+<link rel="canonical" href="https://mikaio.dev/en/percentage/">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/percentage/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/percentage/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/percentage/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/percentage/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/percentage/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/percentage/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/percentage/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/percentage/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/percentage/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/percentage/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/percentage/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Percentage Calculator — percent of a number, change &amp; more">
+<meta property="og:description" content="Free percentage calculator. Find a percent of a number, work out what percent one value is of another, and calculate percentage increase or decrease instantly.">
+<meta property="og:url" content="https://mikaio.dev/en/percentage/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator — percent of a number, change & more","url":"https://mikaio.dev/en/percentage/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free percentage calculator. Find a percent of a number, work out what percent one value is of another, and calculate percentage increase or decrease instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Percentage Calculator","item":"https://mikaio.dev/en/percentage/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find a percentage of a number?","acceptedAnswer":{"@type":"Answer","text":"Divide the percentage by 100 and multiply by the number. For example, 20% of 150 is 0.20 × 150 = 30. The first box above does this for you automatically."}},{"@type":"Question","name":"How is percentage change calculated?","acceptedAnswer":{"@type":"Answer","text":"Subtract the original value from the new value, divide by the absolute original value and multiply by 100. A positive result is an increase and a negative result is a decrease."}},{"@type":"Question","name":"Does the calculator round the answer?","acceptedAnswer":{"@type":"Answer","text":"Results are shown to two decimal places for readability, and formatted for your language. The underlying calculation uses full precision."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Percentage Calculator</span></nav>
+  <h1>Percentage Calculator</h1>
+  <p class="lead">Three quick percentage tools in one place. Fill in any pair of numbers and the answer updates as you type — no button needed.</p>
+  <section class="widget" id="tool"><div id="pct"><div class="pct-mode"><h3>What is P% of a number?</h3><div class="row"><div class="field"><label for="pct1-p">Percentage (%)</label><input type="number" id="pct1-p" step="any" inputmode="decimal"></div><div class="field"><label for="pct1-n">Of number</label><input type="number" id="pct1-n" step="any" inputmode="decimal"></div></div><div class="result"><span class="hint">Result: </span><span class="big" id="pct1-out">—</span></div></div><div class="pct-mode"><h3>One number is what percent of another?</h3><div class="row"><div class="field"><label for="pct2-a">This number</label><input type="number" id="pct2-a" step="any" inputmode="decimal"></div><div class="field"><label for="pct2-b">Out of</label><input type="number" id="pct2-b" step="any" inputmode="decimal"></div></div><div class="result"><span class="hint">Is: </span><span class="big" id="pct2-out">—</span></div></div><div class="pct-mode"><h3>Percentage increase or decrease</h3><div class="row"><div class="field"><label for="pct3-x">Original value</label><input type="number" id="pct3-x" step="any" inputmode="decimal"></div><div class="field"><label for="pct3-y">New value</label><input type="number" id="pct3-y" step="any" inputmode="decimal"></div></div><div class="result"><span class="hint">Change: </span><span class="big" id="pct3-out">—</span></div></div></div></section>
+  <article class="content">
+    <h2>Percentages, explained simply</h2>
+<p>A percentage is just a way of describing a part of a whole where the whole is always counted as one hundred. The word comes from the Latin <em>per centum</em>, meaning &quot;for each hundred&quot;. When a shop says an item is 25% off, it is telling you that for every hundred units of price, twenty-five are being taken away. Because everything is scaled to the same base of one hundred, percentages let you compare things that would otherwise be hard to line up — a discount on a small purchase and a discount on a large one, a test score out of forty and another out of sixty, or the growth of two very different businesses.</p>
+<p>This calculator brings together the three percentage questions people ask most often, so you never have to remember which formula goes where. Each section works on its own, updates the moment you type, and keeps everything inside your browser. Nothing you enter is sent anywhere, saved, or used to track you.</p>
+<h2>The three tools on this page</h2>
+<p><strong>Percentage of a number.</strong> The first box answers the classic question &quot;what is P percent of N?&quot; Type the percentage into the first field and the number into the second, and the result appears instantly. This is the calculation behind sales discounts, tips, tax, commissions and almost any &quot;take this share of that amount&quot; situation.</p>
+<p><strong>One number as a percent of another.</strong> The second box answers &quot;this value is what percent of that value?&quot; Enter the part in the first field and the whole in the second. It is the tool you want when you have a score, a count or an amount and you need to express it as a percentage — for example, working out that 18 correct answers out of 24 questions is 75%.</p>
+<p><strong>Percentage increase or decrease.</strong> The third box compares an original value with a new one and tells you how much it changed in percentage terms. Enter where you started and where you ended up. A positive answer means the value went up, and a negative answer means it went down. This is exactly how price changes, salary rises, population growth and investment returns are usually described.</p>
+<h2>How each calculation works</h2>
+<p>To find a percentage of a number, divide the percentage by one hundred and multiply by the number. For example, 20% of 150 is 0.20 × 150 = 30. It helps to remember that &quot;percent&quot; literally means &quot;divide by a hundred&quot;, so 20% is simply another way of writing 0.2.</p>
+<p>To express one number as a percentage of another, divide the first number by the second and multiply by one hundred. So 18 out of 24 is 18 ÷ 24 × 100 = 75%. If the result is more than 100%, that simply means the first number is larger than the second — 30 out of 20 is 150%, which is perfectly valid.</p>
+<p>To calculate percentage change, subtract the original value from the new value, divide by the original value (ignoring its sign), and multiply by one hundred. Going from 40 to 50 is (50 − 40) ÷ 40 × 100 = 25%, an increase. Going from 50 to 40 is (40 − 50) ÷ 50 × 100 = −20%, a decrease. Notice that the same ten-unit gap gives different percentages depending on where you started, which is one of the most common sources of confusion with percentages.</p>
+<h2>Everyday examples</h2>
+<p>Percentages turn up far more often than most people notice. When you leave an 18% tip on a 60 restaurant bill, you are finding a percentage of a number: 0.18 × 60 = 10.80. When a phone that cost 900 is on sale for 720, the percentage change tells you the discount is (720 − 900) ÷ 900 × 100 = −20%, so you are saving a fifth. When a student scores 42 out of 50 on an exam, expressing it as a percentage gives 84%, which is far easier to compare against other results than the raw marks.</p>
+<p>The same maths applies to money and business. Interest rates, sales tax, profit margins, markups, and the returns on an investment are all percentages. Being comfortable moving between a raw amount and its percentage form is one of the most useful everyday numeracy skills there is, and it is exactly what the three tools above are designed to make effortless.</p>
+<h2>A few things worth remembering</h2>
+<p>Percentages do not simply add up in the way it feels like they should. If a price rises by 10% and then falls by 10%, you do not end up back where you started. Say something costs 100: a 10% rise takes it to 110, and a 10% fall from 110 removes 11, leaving 99. The second percentage is taken from a different, larger base, so the two changes do not cancel out. This is why the third tool always asks for the actual starting and ending values rather than a single percentage.</p>
+<p>It is also worth keeping the difference between percentage points and percent clear. If an interest rate moves from 4% to 6%, that is a rise of two <em>percentage points</em>, but it is a 50% <em>increase</em> relative to the original 4%. Both statements are correct; they just measure different things. When you read news about rates, taxes or poll numbers, noticing which one is being used will help you avoid a very common misunderstanding.</p>
+<p>Finally, remember that a percentage on its own can hide the size of what it describes. A 50% increase sounds dramatic, but 50% of a tiny number is still tiny, while a 5% increase on something enormous can be a huge amount in absolute terms. Whenever a percentage matters, it is worth glancing at the underlying quantities too. The calculator above shows both the numbers you enter and the percentage they produce, so you always keep sight of both sides.</p>
+<h2>Using the calculator</h2>
+<p>Pick whichever of the three tools matches your question, type your two numbers, and read the answer as it appears. There is no submit button and nothing to reset — just change a value to try another calculation. Results are rounded to two decimal places and formatted for your language so they are easy to read, while the calculation itself keeps full precision behind the scenes. Because it all runs locally, it works offline and responds instantly, making it handy whether you are checking a shop discount, marking a test, or working through homework.</p>
+    <section class="faq"><h2>Percentage calculator FAQ</h2><dl><dt>How do I find a percentage of a number?</dt><dd>Divide the percentage by 100 and multiply by the number. For example, 20% of 150 is 0.20 × 150 = 30. The first box above does this for you automatically.</dd><dt>How is percentage change calculated?</dt><dd>Subtract the original value from the new value, divide by the absolute original value and multiply by 100. A positive result is an increase and a negative result is a decrease.</dd><dt>Does the calculator round the answer?</dt><dd>Results are shown to two decimal places for readability, and formatted for your language. The underlying calculation uses full precision.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/percentage/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/percentage/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/percentage/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/percentage/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/percentage/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/percentage/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/percentage/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/percentage/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/percentage/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/percentage/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/glossary.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/percentage.js" defer></script>
+</body>
+</html>
