@@ -1,6 +1,6 @@
 # Mika-IO.github.io
 
-- Portifolio P
+- DEV Portifolio 
 - Free tools to make money with google ads and magnetic leads 
 
 # Programmatic SEO
@@ -20,13 +20,13 @@ glossary.html at the root with the list of all pages
 
 # Top 10 languages in númber of speakers
 
-Inglês
-Chinês Mandarim
-Hindi
-Espanhol
-Francês
-Árabe Padrão
-Bengali
-Português
-Russo
-Urdu
+- Inglês
+- Chinês Mandarim
+- Hindi
+- Espanhol
+- Francês
+- Árabe Padrão
+- Bengali
+- Português
+- Russo
+- Urdu
