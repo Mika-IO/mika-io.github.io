@@ -1,0 +1,30 @@
+## Retournez complètement votre écriture
+
+Le texte à l’envers est l’un de ces effets ludiques qui ressemblent à de la magie dès la première fois que vous le voyez : un message qui semble avoir été tourné d’un demi-tour complet, il se lit donc de bas en haut et chaque lettre est inversée. Ce générateur le crée instantanément. Tapez dans la case et vos mots sont bouleversés au fur et à mesure, prêts à être copiés et collés dans une biographie de réseau social, un nom d'utilisateur, un commentaire ou un message à un ami. Il s’agit d’un vrai texte plutôt que d’une image, ce qui vous permet de le coller presque n’importe où. Tout se passe dans votre navigateur, l'effet est donc immédiat et rien de ce que vous tapez n'est jamais téléchargé.
+
+Son utilisation ne pourrait pas être plus simple. Écrivez ou collez votre texte dans la première case et la version inversée apparaît immédiatement dans la deuxième case, mise à jour à chaque frappe. Lorsqu'il semble correct, le bouton Copier place le texte à l'envers dans votre presse-papiers afin que vous puissiez le déposer où vous le souhaitez. Il n’y a pas de limite de longueur, donc un seul mot ou une phrase entière fonctionne tout aussi bien.
+
+## Comment fonctionne réellement le texte à l’envers
+
+Ce qui est intelligent, c'est que les lettres ne sont pas vraiment tournées du tout - elles sont remplacées par d'autres caractères qui ressemblent aux originaux tournés à 180 degrés. La norme Unicode, qui définit les dizaines de milliers de caractères que les ordinateurs peuvent afficher, comprend de nombreux symboles mathématiques, phonétiques et autres alphabets qui ressemblent à une lettre latine inversée. Un « e » minuscule, par exemple, ressemble beaucoup au caractère « ǝ » et un « a » ressemble à « ɐ ». Le générateur mappe chacune de vos lettres au sosie le plus proche, puis inverse l'ordre de la chaîne entière, de sorte que la lecture du nouveau début à la nouvelle fin donne l'impression d'un texte renversé.
+
+Le résultat étant construit à partir de caractères Unicode ordinaires, il se comporte comme n’importe quel autre texte. Vous pouvez le sélectionner, le copier, le coller et l'envoyer, et il voyage avec votre message plutôt que d'avoir besoin d'un fichier image. C'est la principale différence entre cela et la simple rotation d'une photo de certains mots : le texte à l'envers reste sous forme de texte, il fonctionne donc dans des endroits qui n'acceptent que les caractères tapés.
+
+## Où les gens l'utilisent
+
+Les réseaux sociaux sont le support le plus populaire pour les textes à l’envers. Une biographie, un nom d'utilisateur ou une légende inversés se démarquent dans un flux rempli d'écritures ordinaires et signalent un peu de jeu. Les gens l’utilisent pour rendre une publication intrigante, pour ajouter une touche originale à un profil ou simplement pour attirer l’attention. C'est également un favori pour les messages légers entre amis : envoyer une note que l'autre personne doit retourner son téléphone pour lire est une petite astuce satisfaisante.
+
+Au-delà de la décoration, le texte inversé a un côté pratique et doux. Parce qu'il est un peu plus difficile à lire d'un seul coup d'œil, certaines personnes l'utilisent pour cacher une punchline, un spoiler ou une surprise, afin qu'il ne soit pas révélé instantanément. D’autres l’apprécient uniquement comme une nouveauté ou comme un casse-tête, mettant leurs amis au défi de décoder une phrase inversée. Quelle que soit la raison, l'attrait est le même : il transforme une frappe simple en quelque chose de frappant et d'inhabituel sans aucun effort.
+
+## À quoi s'attendre des personnages
+
+Étant donné que le texte inversé repose sur l’emprunt de caractères similaires, la correspondance est très bonne mais pas toujours parfaite. La plupart des lettres minuscules ont une excellente contrepartie inversée, de sorte que les mots dans la casse ordinaire semblent retournés de manière convaincante. Quelques lettres majuscules et symboles inhabituels n'ont pas de jumeau inversé, le générateur utilise donc le caractère disponible le plus proche ou le laisse tel quel. Les chiffres, la ponctuation courante et les crochets sont tous gérés - les points d'interrogation et les points d'exclamation s'inversent et les crochets ouvrants deviennent des crochets fermants - de sorte que la plupart des textes de tous les jours sont convertis proprement.
+
+Il convient également de savoir qu'un petit nombre d'applications ou de systèmes plus anciens peuvent ne pas afficher tous ces caractères spéciaux et afficher une case vide à la place. Ceci est rare sur les téléphones et les sites Web modernes, qui gèrent bien Unicode, mais si un endroit particulier présente des lacunes, cela signifie simplement qu'il manque une des formes de caractères sur la plate-forme. En pratique, la grande majorité des réseaux sociaux et des applications de messagerie affichent sans problème du texte à l’envers.
+
+## Privé, instantané et gratuit
+
+Il n'y a pas d'inscription, pas de frais et pas de publicité. L'ensemble du générateur est un petit morceau de code qui s'exécute sur votre propre appareil, c'est pourquoi il se met à jour dès que vous tapez et continue de fonctionner sans connexion Internet. Rien de ce que vous saisissez n'est téléchargé, stocké ou partagé ; votre texte et sa version inversée n'existent que sur votre écran et disparaissent lorsque vous rechargez la page.
+
+Pour l'utiliser, tapez ou collez votre texte dans la première case et regardez la version inversée ci-dessous. Lorsque vous en êtes satisfait, appuyez sur le bouton Copier et collez le texte inversé dans votre biographie, publication, nom d'utilisateur ou message. Modifiez le texte à tout moment et le résultat suit le rythme, vous pouvez donc expérimenter librement jusqu'à ce qu'il ressemble exactement à ce que vous souhaitez. Parce qu'il n'y a pas de limite et que rien n'est jamais enregistré, vous pouvez essayer autant de variantes que vous le souhaitez, en mélangeant les mots et la ponctuation jusqu'à ce que le résultat inversé soit exactement tel que vous l'avez imaginé.
+

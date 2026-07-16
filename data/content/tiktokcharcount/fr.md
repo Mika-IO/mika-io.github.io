@@ -1,0 +1,31 @@
+## Écrivez des légendes TikTok qui correspondent et atterrissent bien
+
+Une légende TikTok a un travail à faire dans un très petit espace : accrocher un spectateur qui défile à grande vitesse, ajouter un contexte que la vidéo à elle seule ne peut pas transmettre et porter les hashtags qui aident l'algorithme de l'application à comprendre de quoi parle votre contenu. Il est important d'avoir la bonne longueur, tout comme de savoir en un coup d'œil combien de hashtags, de mots et de secondes de lecture estimées vous placez dans cet espace. Cet analyseur surveille votre légende pendant que vous tapez et affiche le nombre de caractères par rapport à la limite de TikTok, le nombre de hashtags, le nombre de mots et un temps de lecture estimé, le tout mis à jour en direct afin que vous n'ayez jamais à le coller dans l'application elle-même juste pour vérifier si vous avez dépassé la limite.
+
+## Comment l'utiliser
+
+Tapez ou collez votre légende dans la zone et toutes les statistiques sont mises à jour immédiatement en dessous : un grand nombre de caractères par rapport au plafond de 2 200 caractères, une barre de progression qui passe du vert à l'orange puis au rouge à mesure que vous approchez et dépassez la limite, le nombre de hashtags détectés, le nombre de mots et une estimation approximative du temps de lecture de la légende. Si vous dépassez la limite, l'outil vous indique exactement le nombre de caractères à supprimer. Par conséquent, l'édition pour l'ajuster consiste à surveiller le nombre plutôt qu'à deviner.
+
+## La limite de sous-titres de TikTok et pourquoi elle a changé
+
+TikTok autorise aujourd'hui jusqu'à 2 200 caractères dans une légende, une limite qui inclut les hashtags, les @mentions et tout le texte visible. Il s'agit d'une augmentation substantielle par rapport aux débuts de la plate-forme, lorsque les sous-titres étaient limités à 150 caractères, puis à 300, ce qui reflète la façon dont l'utilisation de la plate-forme s'est élargie, passant de courtes plaisanteries à une narration plus descriptive, de petites mises à jour de style blog et un contexte détaillé pour les didacticiels ou le contenu du produit. Même avec le plafond généreux, la grande majorité des sous-titres très performants sont bien plus courts que le maximum – TikTok est une plate-forme axée avant tout sur la vidéo, et le travail d'un sous-titre consiste généralement à ajouter une accroche ou une punchline, et non à transmettre l'intégralité du message.
+
+## Hashtags : combien et de quel type
+
+TikTok n'impose pas de limite stricte de hashtag dans le nombre de caractères, mais la plupart des créateurs à succès se contentent d'entre trois et dix par publication. En empiler bien plus a tendance à ressembler à du spam et peut évincer le message réel de la légende. Une approche courante mélange quelques hashtags larges et à fort trafic avec quelques hashtags plus étroits et spécifiques à une niche qui décrivent le contenu avec précision : les balises larges exposent la vidéo à une recherche d'audience plus large, tandis que les balises spécifiques l'aident à apparaître auprès des téléspectateurs qui sont déjà intéressés exactement par ce sujet. Le compteur de hashtag ici permet de voir facilement en un coup d'œil si vous avez dérivé dans le territoire du bourrage de hashtag avant de publier.
+
+## Pourquoi la qualité des sous-titres est toujours importante pour la portée
+
+La longueur des sous-titres en elle-même n'est pas un signal de classement, mais les mots que vous choisissez influencent toujours les performances de votre contenu. Les légendes qui incluent les mots-clés réels qu'un spectateur pourrait rechercher aident le système de recommandation de TikTok à catégoriser et à présenter correctement votre vidéo, de la même manière qu'un bon titre aide un moteur de recherche à comprendre une page Web. Les sous-titres qui se terminent par une question ou une invitation explicite à commenter ont tendance à générer plus d'engagement, et cet engagement est lui-même l'un des signaux que l'algorithme utilise pour décider de l'étendue de la diffusion d'une vidéo. En bref : la longueur est une contrainte technique à respecter, mais c'est dans la formulation même que réside le véritable gain.
+
+## Temps de lecture et rythme de votre message
+
+Le temps de lecture estimé affiché à côté du nombre de caractères est un indicateur utile de la sensation d'une légende pour un spectateur défilant, et pas seulement de sa durée technique. Une légende qui prend dix secondes à lire est en concurrence directe avec une vidéo qui ne dure que quinze secondes. Par conséquent, si votre légende est suffisamment longue pour détourner l'attention de la vidéo elle-même, elle peut aller à l'encontre du contenu même qu'elle est censée prendre en charge. De nombreuses légendes plus longues et réussies chargent l'accroche ou le gain dans la première ligne, c'est-à-dire tout ce qui s'affiche avant qu'un téléspectateur appuie sur « voir plus », et utilisent la longueur restante pour le contexte, un appel à l'action ou le bloc hashtag plutôt que des informations critiques que le téléspectateur ne fera peut-être jamais défiler vers le bas pour voir.
+
+## Vérifier avant de poster
+
+Étant donné que les légendes sont souvent écrites dans une application de notes ou un document de script plutôt que directement dans le propre compositeur de TikTok, il est facile de perdre la notion de longueur jusqu'au moment de les coller, lorsqu'une troncature ou un message d'erreur est le premier signe que quelque chose était trop long. L'exécution d'un brouillon via cet analyseur avant de le copier dans l'application supprime complètement cette surprise, et le faire dans une fenêtre séparée facilite également la rédaction de plusieurs options de sous-titres côte à côte et la comparaison de leur longueur, du nombre de hashtags et du temps de lecture avant de choisir celle qui correspond le mieux à votre vidéo.
+
+## Privé et instantané
+
+Tout s'exécute dans votre propre navigateur au fur et à mesure que vous tapez, de sorte que votre légende, vos hashtags et vos brouillons d'idées ne sont jamais téléchargés, enregistrés ou partagés avec qui que ce soit. Il fonctionne hors ligne une fois la page chargée et ne conserve aucune trace de tout ce que vous écrivez une fois que vous quittez la page.

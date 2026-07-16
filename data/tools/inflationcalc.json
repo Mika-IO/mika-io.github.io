@@ -1,0 +1,289 @@
+{
+  "slug": "inflationcalc",
+  "category": "finance",
+  "icon": "📊",
+  "script": "inflationcalc.js",
+  "widget": "<form id=\"ic-form\"><div class=\"row\"><div class=\"field\"><label for=\"ic-amount\">{{ui.amount}}</label><input type=\"number\" id=\"ic-amount\" step=\"0.01\" min=\"0.01\" value=\"1000\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"ic-from\">{{ui.fromYear}}</label><input type=\"number\" id=\"ic-from\" min=\"1913\" max=\"2024\" value=\"2000\" inputmode=\"numeric\"></div><div class=\"field\"><label for=\"ic-to\">{{ui.toYear}}</label><input type=\"number\" id=\"ic-to\" min=\"1913\" max=\"2024\" value=\"2024\" inputmode=\"numeric\"></div><div class=\"field\"><label for=\"ic-rate\">{{ui.rate}}</label><input type=\"number\" id=\"ic-rate\" step=\"0.1\" value=\"3.5\" inputmode=\"decimal\"></div></div><button class=\"btn\" type=\"submit\">{{ui.calculate}}</button></form><div id=\"ic-out\" hidden class=\"result\" style=\"display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.5rem\"></div>",
+  "strings": {
+    "en": {
+      "title": "Inflation Calculator — calculate purchasing power over time",
+      "metaDescription": "Free inflation calculator. Enter an amount and years to see how inflation affects purchasing power. Uses a custom annual inflation rate.",
+      "h1": "Inflation Calculator",
+      "intro": "Calculate the equivalent purchasing power of money over time using a custom annual inflation rate.",
+      "faq_title": "Inflation calculator FAQ",
+      "ui": {
+        "amount": "Amount",
+        "fromYear": "From year",
+        "toYear": "To year",
+        "rate": "Annual inflation rate (%)",
+        "calculate": "Calculate"
+      },
+      "faq": [
+        {
+          "q": "What is inflation?",
+          "a": "Inflation is the rate at which the general price level of goods and services rises over time, decreasing purchasing power. If inflation is 3%, something costing $100 today will cost $103 next year."
+        },
+        {
+          "q": "What is the historical average inflation rate?",
+          "a": "US historical average CPI inflation: ~3.1% per year (1913–2023). UK: ~3.8%. In the 1970s US inflation reached 14%. From 2010–2020 it averaged ~1.7%. In 2022 it briefly hit 9.1%."
+        },
+        {
+          "q": "What is the Rule of 70?",
+          "a": "A quick way to estimate doubling time: 70 ÷ inflation rate = years to double prices. At 3.5% inflation: 70/3.5 = 20 years for prices to double. At 7% inflation: 70/7 = 10 years."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Calculadora de Inflação — calcular poder de compra ao longo do tempo",
+      "metaDescription": "Calculadora de inflação gratuita. Insira um valor e anos para ver como a inflação afeta o poder de compra. Usa uma taxa de inflação anual personalizada.",
+      "h1": "Calculadora de Inflação",
+      "intro": "Calcule o poder de compra equivalente do dinheiro ao longo do tempo usando uma taxa de inflação anual personalizada.",
+      "faq_title": "Perguntas frequentes sobre calculadora de inflação",
+      "ui": {
+        "amount": "Valor",
+        "fromYear": "Do ano",
+        "toYear": "Para o ano",
+        "rate": "Taxa de inflação anual (%)",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "O que é inflação?",
+          "a": "Inflação é a taxa na qual o nível geral de preços de bens e serviços sobe ao longo do tempo, diminuindo o poder de compra."
+        },
+        {
+          "q": "Qual é a taxa de inflação histórica média?",
+          "a": "Inflação histórica média do IPC dos EUA: ~3,1% ao ano (1913–2023). Reino Unido: ~3,8%. Na década de 1970 a inflação dos EUA chegou a 14%."
+        },
+        {
+          "q": "O que é a Regra de 70?",
+          "a": "Uma maneira rápida de estimar o tempo de dobramento: 70 ÷ taxa de inflação = anos para dobrar os preços. A 3,5% de inflação: 70/3,5 = 20 anos para os preços dobrarem."
+        }
+      ]
+    },
+    "zh": {
+      "title": "通货膨胀计算器 — 计算一段时间内的购买力",
+      "metaDescription": "免费通货膨胀计算器。输入金额和年份以查看通货膨胀如何影响购买力。使用自定义的年通货膨胀率。",
+      "h1": "通货膨胀计算器",
+      "intro": "使用自定义的年度通货膨胀率计算一段时间内货币的等价购买力。",
+      "faq_title": "通货膨胀计算器常见问题解答",
+      "ui": {
+        "amount": "金额",
+        "fromYear": "从年份",
+        "toYear": "至年",
+        "rate": "年通货膨胀率(%)",
+        "calculate": "计算"
+      },
+      "faq": [
+        {
+          "q": "什么是通货膨胀？",
+          "a": "通货膨胀是指商品和服务的总体价格水平随着时间的推移而上涨，从而降低购买力的速度。如果通货膨胀率为 3%，那么今天花费 100 美元的东西明年将花费 103 美元。"
+        },
+        {
+          "q": "历史平均通胀率是多少？",
+          "a": "美国历史平均 CPI 通胀：每年约 3.1%（1913 年至 2023 年）。英国：~3.8%。 20世纪70年代美国通货膨胀率达到14%。从 2010 年到 2020 年，平均约为 1.7%。 2022 年，这一数字曾一度达到 9.1%。"
+        },
+        {
+          "q": "70法则是什么？",
+          "a": "估算翻倍时间的快速方法：70 ÷ 通货膨胀率 = 价格翻倍所需的年数。通货膨胀率为 3.5% 时：70/3.5 = 20 年价格翻倍。通货膨胀率为 7% 时：70/7 = 10 年。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "मुद्रास्फीति कैलकुलेटर - समय के साथ क्रय शक्ति की गणना करें",
+      "metaDescription": "मुफ़्त मुद्रास्फीति कैलकुलेटर. यह देखने के लिए राशि और वर्ष दर्ज करें कि मुद्रास्फीति क्रय शक्ति को कैसे प्रभावित करती है। एक कस्टम वार्षिक मुद्रास्फीति दर का उपयोग करता है।",
+      "h1": "मुद्रास्फीति कैलकुलेटर",
+      "intro": "कस्टम वार्षिक मुद्रास्फीति दर का उपयोग करके समय के साथ पैसे की समतुल्य क्रय शक्ति की गणना करें।",
+      "faq_title": "मुद्रास्फीति कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "amount": "रकम",
+        "fromYear": "साल से",
+        "toYear": "साल तक",
+        "rate": "वार्षिक मुद्रास्फीति दर (%)",
+        "calculate": "गणना करें"
+      },
+      "faq": [
+        {
+          "q": "मुद्रास्फीति क्या है?",
+          "a": "मुद्रास्फीति वह दर है जिस पर समय के साथ वस्तुओं और सेवाओं का सामान्य मूल्य स्तर बढ़ता है, जिससे क्रय शक्ति कम हो जाती है। यदि मुद्रास्फीति 3% है, तो आज जिस चीज़ की कीमत 100 डॉलर है, उसकी कीमत अगले साल 103 डॉलर होगी।"
+        },
+        {
+          "q": "ऐतिहासिक औसत मुद्रास्फीति दर क्या है?",
+          "a": "अमेरिकी ऐतिहासिक औसत सीपीआई मुद्रास्फीति: ~3.1% प्रति वर्ष (1913-2023)। यूके: ~3.8%। 1970 के दशक में अमेरिकी मुद्रास्फीति 14% तक पहुंच गई। 2010-2020 तक इसका औसत ~1.7% था। 2022 में यह थोड़े समय के लिए 9.1% पर पहुंच गया।"
+        },
+        {
+          "q": "70 का नियम क्या है?",
+          "a": "दोगुनी समय का अनुमान लगाने का एक त्वरित तरीका: 70 ÷ मुद्रास्फीति दर = कीमतें दोगुनी होने में वर्ष। 3.5% मुद्रास्फीति पर: 70/3.5 = कीमतें दोगुनी होने में 20 वर्ष। 7% मुद्रास्फीति पर: 70/7 = 10 वर्ष।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Calculadora de inflación: calcula el poder adquisitivo a lo largo del tiempo",
+      "metaDescription": "Calculadora de inflación gratuita. Ingrese una cantidad y años para ver cómo la inflación afecta el poder adquisitivo. Utiliza una tasa de inflación anual personalizada.",
+      "h1": "Calculadora de inflación",
+      "intro": "Calcule el poder adquisitivo equivalente del dinero a lo largo del tiempo utilizando una tasa de inflación anual personalizada.",
+      "faq_title": "Preguntas frecuentes sobre la calculadora de inflación",
+      "ui": {
+        "amount": "Cantidad",
+        "fromYear": "Del año",
+        "toYear": "Al año",
+        "rate": "Tasa de inflación anual (%)",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "¿Qué es la inflación?",
+          "a": "La inflación es la tasa a la que el nivel general de precios de bienes y servicios aumenta con el tiempo, disminuyendo el poder adquisitivo. Si la inflación es del 3%, algo que cuesta 100 dólares hoy costará 103 dólares el año que viene."
+        },
+        {
+          "q": "¿Cuál es la tasa de inflación promedio histórica?",
+          "a": "Inflación promedio histórica del IPC en EE. UU.: ~3,1 % anual (1913-2023). Reino Unido: ~3,8%. En la década de 1970, la inflación estadounidense alcanzó el 14%. Entre 2010 y 2020 promedió ~1,7%. En 2022 alcanzó brevemente el 9,1%."
+        },
+        {
+          "q": "¿Qué es la regla del 70?",
+          "a": "Una forma rápida de estimar el tiempo de duplicación: 70 ÷ tasa de inflación = años para duplicar los precios. Con una inflación del 3,5%: 70/3,5 = 20 años para que los precios se dupliquen. Con una inflación del 7%: 70/7 = 10 años."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Calculateur d'inflation - calculez le pouvoir d'achat au fil du temps",
+      "metaDescription": "Calculateur d'inflation gratuit. Entrez un montant et des années pour voir comment l’inflation affecte le pouvoir d’achat. Utilise un taux d’inflation annuel personnalisé.",
+      "h1": "Calculateur d'inflation",
+      "intro": "Calculez le pouvoir d’achat équivalent de l’argent au fil du temps en utilisant un taux d’inflation annuel personnalisé.",
+      "faq_title": "FAQ sur le calculateur d’inflation",
+      "ui": {
+        "amount": "Montant",
+        "fromYear": "De l'année",
+        "toYear": "À l'année",
+        "rate": "Taux d'inflation annuel (%)",
+        "calculate": "Calculer"
+      },
+      "faq": [
+        {
+          "q": "Qu’est-ce que l’inflation ?",
+          "a": "L’inflation est le taux auquel le niveau général des prix des biens et services augmente au fil du temps, diminuant ainsi le pouvoir d’achat. Si l’inflation est de 3 %, quelque chose qui coûte 100 $ aujourd’hui coûtera 103 $ l’année prochaine."
+        },
+        {
+          "q": "Quel est le taux d’inflation moyen historique ?",
+          "a": "Inflation moyenne historique de l’IPC aux États-Unis : ~3,1 % par an (1913-2023). Royaume-Uni : ~3,8 %. Dans les années 1970, l’inflation américaine atteignait 14 %. De 2010 à 2020, il s’est élevé en moyenne à environ 1,7 %. En 2022, il a brièvement atteint 9,1 %."
+        },
+        {
+          "q": "Qu'est-ce que la règle des 70 ?",
+          "a": "Un moyen rapide d'estimer le temps de doublement : 70 ÷ taux d'inflation = années pour doubler les prix. A 3,5% d’inflation : 70/3,5 = 20 ans pour que les prix doublent. À 7% d'inflation : 70/7 = 10 ans."
+        }
+      ]
+    },
+    "ar": {
+      "title": "حاسبة التضخم — حساب القوة الشرائية مع مرور الوقت",
+      "metaDescription": "حاسبة التضخم المجانية. أدخل المبلغ والسنوات لترى كيف يؤثر التضخم على القوة الشرائية. يستخدم معدل التضخم السنوي المخصص.",
+      "h1": "حاسبة التضخم",
+      "intro": "احسب القوة الشرائية المكافئة للنقود مع مرور الوقت باستخدام معدل التضخم السنوي المخصص.",
+      "faq_title": "الأسئلة الشائعة حول حاسبة التضخم",
+      "ui": {
+        "amount": "المبلغ",
+        "fromYear": "من سنة",
+        "toYear": "إلى سنة",
+        "rate": "معدل التضخم السنوي (%)",
+        "calculate": "احسب"
+      },
+      "faq": [
+        {
+          "q": "ما هو التضخم؟",
+          "a": "التضخم هو المعدل الذي يرتفع فيه المستوى العام لأسعار السلع والخدمات بمرور الوقت، مما يؤدي إلى انخفاض القوة الشرائية. فإذا كان معدل التضخم 3%، فإن الشيء الذي يكلف 100 دولار اليوم سيكلف 103 دولارات في العام المقبل."
+        },
+        {
+          "q": "ما هو متوسط ​​معدل التضخم التاريخي؟",
+          "a": "متوسط ​​التضخم التاريخي لمؤشر أسعار المستهلكين في الولايات المتحدة: ~3.1% سنويًا (1913-2023). المملكة المتحدة: ~3.8%. وفي السبعينيات وصل معدل التضخم في الولايات المتحدة إلى 14%. من 2010 إلى 2020 بلغ متوسطه حوالي 1.7%. وفي عام 2022 وصل لفترة وجيزة إلى 9.1%."
+        },
+        {
+          "q": "ما هي قاعدة 70؟",
+          "a": "طريقة سريعة لتقدير وقت المضاعفة: 70 ÷ معدل التضخم = سنوات مضاعفة الأسعار. عند معدل تضخم 3.5%: 70/3.5 = 20 سنة لتضاعف الأسعار. عند معدل تضخم 7%: 70/7 = 10 سنوات."
+        }
+      ]
+    },
+    "bn": {
+      "title": "মুদ্রাস্ফীতি ক্যালকুলেটর - সময়ের সাথে ক্রয় ক্ষমতা গণনা করুন",
+      "metaDescription": "বিনামূল্যে মুদ্রাস্ফীতি ক্যালকুলেটর. মুদ্রাস্ফীতি কীভাবে ক্রয়ক্ষমতাকে প্রভাবিত করে তা দেখতে একটি পরিমাণ এবং বছর লিখুন। একটি কাস্টম বার্ষিক মুদ্রাস্ফীতির হার ব্যবহার করে।",
+      "h1": "মুদ্রাস্ফীতি ক্যালকুলেটর",
+      "intro": "একটি কাস্টম বার্ষিক মুদ্রাস্ফীতির হার ব্যবহার করে সময়ের সাথে সাথে টাকার সমতুল্য ক্রয় ক্ষমতা গণনা করুন।",
+      "faq_title": "মুদ্রাস্ফীতি ক্যালকুলেটর FAQ",
+      "ui": {
+        "amount": "পরিমাণ",
+        "fromYear": "বছর থেকে",
+        "toYear": "বছর থেকে",
+        "rate": "বার্ষিক মুদ্রাস্ফীতির হার (%)",
+        "calculate": "হিসাব করুন"
+      },
+      "faq": [
+        {
+          "q": "মুদ্রাস্ফীতি কি?",
+          "a": "মুদ্রাস্ফীতি হল যে হারে পণ্য ও পরিষেবার সাধারণ মূল্য স্তর সময়ের সাথে বৃদ্ধি পায়, ক্রয়ক্ষমতা হ্রাস পায়। যদি মুদ্রাস্ফীতি 3% হয়, তাহলে আজকে $100 এর দাম পরের বছর $103 হবে।"
+        },
+        {
+          "q": "ঐতিহাসিক গড় মুদ্রাস্ফীতির হার কত?",
+          "a": "মার্কিন ঐতিহাসিক গড় CPI মুদ্রাস্ফীতি: ~3.1% প্রতি বছর (1913-2023)। ইউকে: ~3.8%। 1970-এর দশকে মার্কিন মুদ্রাস্ফীতি 14% এ পৌঁছেছিল। 2010-2020 থেকে এটি গড় ~1.7%। 2022 সালে এটি সংক্ষিপ্তভাবে 9.1% আঘাত করে।"
+        },
+        {
+          "q": "70 এর নিয়ম কি?",
+          "a": "দ্বিগুণ সময় অনুমান করার একটি দ্রুত উপায়: 70 ÷ মুদ্রাস্ফীতির হার = বছর থেকে দ্বিগুণ দাম। 3.5% মুদ্রাস্ফীতিতে: 70/3.5 = 20 বছর দাম দ্বিগুণ করার জন্য। 7% মূল্যস্ফীতিতে: 70/7 = 10 বছর।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Калькулятор инфляции — расчет покупательной способности с течением времени",
+      "metaDescription": "Бесплатный калькулятор инфляции. Введите сумму и годы, чтобы увидеть, как инфляция влияет на покупательную способность. Использует собственный годовой уровень инфляции.",
+      "h1": "Калькулятор инфляции",
+      "intro": "Рассчитайте эквивалентную покупательную способность денег с течением времени, используя индивидуальный годовой уровень инфляции.",
+      "faq_title": "Калькулятор инфляции: часто задаваемые вопросы",
+      "ui": {
+        "amount": "Сумма",
+        "fromYear": "Из года",
+        "toYear": "К году",
+        "rate": "Годовой уровень инфляции (%)",
+        "calculate": "Рассчитать"
+      },
+      "faq": [
+        {
+          "q": "Что такое инфляция?",
+          "a": "Инфляция – это скорость, с которой общий уровень цен на товары и услуги со временем растет, снижая покупательную способность. Если инфляция составляет 3%, то то, что сегодня стоит 100 долларов, в следующем году будет стоить 103 доллара."
+        },
+        {
+          "q": "Каков исторический средний уровень инфляции?",
+          "a": "Средняя историческая инфляция ИПЦ в США: ~ 3,1% в год (1913–2023 гг.). Великобритания: ~3,8%. В 1970-е годы инфляция в США достигла 14%. В 2010–2020 годах он составлял в среднем ~1,7%. В 2022 году он ненадолго достиг 9,1%."
+        },
+        {
+          "q": "Что такое Правило 70?",
+          "a": "Быстрый способ оценить время удвоения: 70 ÷ уровень инфляции = годы, необходимые для удвоения цен. При инфляции 3,5%: 70/3,5 = 20 лет, чтобы цены удвоились. При инфляции 7%: 70/7 = 10 лет."
+        }
+      ]
+    },
+    "ur": {
+      "title": "افراط زر کیلکولیٹر - وقت کے ساتھ قوت خرید کا حساب لگائیں۔",
+      "metaDescription": "مفت افراط زر کیلکولیٹر۔ یہ دیکھنے کے لیے رقم اور سال درج کریں کہ افراط زر قوت خرید کو کیسے متاثر کرتا ہے۔ اپنی مرضی کے مطابق سالانہ افراط زر کی شرح استعمال کرتا ہے۔",
+      "h1": "افراط زر کیلکولیٹر",
+      "intro": "حسب ضرورت سالانہ افراط زر کی شرح کا استعمال کرتے ہوئے وقت کے ساتھ ساتھ رقم کی مساوی قوت خرید کا حساب لگائیں۔",
+      "faq_title": "افراط زر کیلکولیٹر کے اکثر پوچھے گئے سوالات",
+      "ui": {
+        "amount": "رقم",
+        "fromYear": "سال سے",
+        "toYear": "سال تک",
+        "rate": "سالانہ افراط زر کی شرح (%)",
+        "calculate": "حساب لگانا"
+      },
+      "faq": [
+        {
+          "q": "مہنگائی کیا ہے؟",
+          "a": "افراط زر وہ شرح ہے جس پر سامان اور خدمات کی عمومی قیمت کی سطح وقت کے ساتھ بڑھتی ہے، قوت خرید میں کمی آتی ہے۔ اگر افراط زر 3% ہے، آج جس چیز کی قیمت $100 ہے اس کی قیمت اگلے سال $103 ہوگی۔"
+        },
+        {
+          "q": "تاریخی اوسط افراط زر کی شرح کیا ہے؟",
+          "a": "امریکی تاریخی اوسط CPI افراط زر: ~3.1% فی سال (1913–2023)۔ UK: ~3.8%۔ 1970 کی دہائی میں امریکی افراط زر 14 فیصد تک پہنچ گیا۔ 2010-2020 تک اس کی اوسط ~1.7% تھی۔ 2022 میں یہ مختصر طور پر 9.1 فیصد تک پہنچ گیا۔"
+        },
+        {
+          "q": "70 کا اصول کیا ہے؟",
+          "a": "دوگنا وقت کا تخمینہ لگانے کا ایک تیز طریقہ: 70 ÷ افراط زر کی شرح = سال سے دوگنا قیمتیں۔ 3.5% افراط زر پر: قیمتوں کو دوگنا کرنے کے لیے 70/3.5 = 20 سال۔ 7% افراط زر پر: 70/7 = 10 سال۔"
+        }
+      ]
+    }
+  }
+}

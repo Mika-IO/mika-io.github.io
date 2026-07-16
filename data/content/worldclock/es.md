@@ -1,0 +1,31 @@
+## Compara horas locales de todo el mundo al instante
+
+Ya sea que esté programando una reunión con un colega en Tokio, llamando a un amigo en Nueva York o verificando cuándo comienza un evento en vivo en su zona horaria, saber qué hora es en otros lugares es importante. El reloj mundial te permite comparar la hora local actual en varias ciudades simultáneamente sin hacer ningún cálculo mental. Elija las ciudades de los menús desplegables y las horas actuales aparecerán inmediatamente, actualizándose cada segundo, para que siempre vea una comparación precisa y en vivo en lugar de una instantánea que se vuelve obsoleta en el momento en que aparta la mirada.
+
+## como usarlo
+
+Elija una ciudad de cada uno de los tres menús desplegables. Tan pronto como hagas una selección, el reloj de esa ciudad aparecerá debajo, marcando en tiempo real junto con los demás. No hay nada que enviar ni nada que configurar más allá de elegir los lugares que le interesan: cambie cualquier menú desplegable en cualquier momento y la pantalla se actualizará al instante. Los tres valores predeterminados están configurados para ciudades de referencia ampliamente utilizadas, pero puede cambiar cualquiera de ellas por cualquier otra ciudad de la lista para crear la comparación exacta que necesita, ya sean dos costas del mismo país o tres continentes a la vez.
+
+## Por qué comparar tiempos es más difícil de lo que parece
+
+Las zonas horarias no son simplemente una cuestión de contar horas en un mapa. Los límites políticos, que no son meridianos espaciados uniformemente, deciden dónde termina una zona y comienza otra, por lo que las regiones vecinas pueden estar separadas por horas o, en algunos casos, compartir una zona a pesar de estar muy alejadas geográficamente. Además de eso, muchos países adelantan o retrasan sus relojes para aplicar el horario de verano, y no todos lo hacen en las mismas fechas: los hemisferios norte y sur están retrasados ​​seis meses, algunos países no lo respetan en absoluto y las fechas exactas de cambio pueden diferir incluso entre los países vecinos que sí lo hacen. Agregue un puñado de lugares que utilizan diferencias inusuales de media hora o 45 minutos con respecto a la hora estándar, y el cálculo manual se convierte en una verdadera fuente de reuniones perdidas y llamadas tardías.
+
+## Cómo el reloj se mantiene preciso
+
+Esta herramienta evita toda esa complejidad al confiar en la base de datos de zona horaria integrada en su navegador web, el mismo estándar mundial que impulsa los calendarios, teléfonos y sistemas operativos. Cada ciudad que puede seleccionar se asigna a su identificador de zona horaria oficial, y el navegador calcula el desplazamiento actual correcto para ese lugar en este momento exacto, teniendo en cuenta automáticamente las reglas de horario de verano y cualquier peculiaridad histórica. Esto significa que las horas mostradas siempre son correctas para la fecha de hoy sin necesidad de recordar si un país en particular observa actualmente el horario de verano. El único requisito es que el reloj de tu propio dispositivo esté configurado correctamente, ya que cada comparación se calcula en relación con él.
+
+## Donde ayuda un reloj mundial
+
+Los equipos internacionales viven según este tipo de comparación. Programar una llamada en tres oficinas, comprobar si es probable que un colega todavía esté en su escritorio o calcular la última hora razonable para enviar un mensaje que necesita una respuesta el mismo día son tareas cotidianas que un vistazo rápido al reloj mundial resuelve en segundos. Los viajeros lo usan para saber cuándo es seguro llamar a sus familiares en casa, los periodistas y comerciantes lo usan para seguir los horarios de apertura de los mercados en los centros financieros, y los fanáticos de los deportes en vivo o los eventos transmitidos por streaming lo usan para traducir la hora de inicio o estreno a su propia hora local.
+
+Es igualmente útil para momentos personales: determinar si es demasiado temprano o demasiado tarde para llamar a un familiar en el extranjero, planificar una videoconferencia con un amigo que se ha mudado al extranjero o simplemente satisfacer la curiosidad sobre lo que está sucediendo en el otro lado del planeta en este momento.
+
+## Privado, instantáneo y gratuito
+
+No hay registro, ni costo ni publicidad en el camino. Todo el reloj funciona como un pequeño fragmento de código en su propio dispositivo, lee la hora de su sistema y aplica las reglas de zona horaria integradas del navegador, por lo que funciona instantáneamente y sigue funcionando incluso sin conexión a Internet una vez que se ha cargado la página. No se carga, registra ni comparte nada sobre las ciudades que eliges.
+
+Para usarlo, elija sus ciudades de los tres menús desplegables y observe cómo se actualizan los tiempos en vivo, segundo a segundo. Cambie cualquier ciudad en cualquier momento para comparar un conjunto diferente de lugares y confíe en la pantalla para manejar correctamente las peculiaridades del horario de verano y la zona horaria en todo momento.
+
+## Una breve historia de la hora estándar.
+
+Antes de finales del siglo XIX, cada ciudad mantenía efectivamente su propia hora local basada en el sol, lo que hacía que los horarios de los ferrocarriles y las comunicaciones de larga distancia fueran un verdadero dolor de cabeza: dos ciudades separadas por sólo unas pocas docenas de kilómetros podían diferir por varios minutos. La expansión de los ferrocarriles y los telégrafos obligó al mundo a adoptar zonas horarias estandarizadas, y una conferencia internacional en 1884 estableció el sistema de zonas basadas en la longitud medidas desde Greenwich que, con muchos ajustes locales desde entonces, todavía sustenta el funcionamiento actual del reloj mundial en esta página. Comprender que la historia explica por qué los límites de las zonas siguen las fronteras de los países en lugar de líneas claras de longitud: fueron trazados por conveniencia práctica y política, no por pulcritud matemática. Un puñado de lugares incluso se compensan con 30 o 45 minutos no estándar en lugar de una hora completa, un recordatorio de que todo el sistema, aunque ahora está coordinado globalmente, sigue siendo un mosaico de decisiones nacionales superpuestas a un marco internacional.

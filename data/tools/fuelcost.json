@@ -1,0 +1,339 @@
+{
+  "slug": "fuelcost",
+  "category": "finance",
+  "icon": "[$]",
+  "script": "fuelcost.js",
+  "widget": "<form id=\"fc2-form\"><div class=\"row\"><div class=\"field\"><label for=\"fc2-dist\">{{ui.distance}}</label><input type=\"number\" id=\"fc2-dist\" step=\"any\" value=\"100\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"fc2-dunit\">{{ui.unit}}</label><select id=\"fc2-dunit\"><option value=\"miles\">{{ui.miles}}</option><option value=\"km\">{{ui.kilometres}}</option></select></div></div><div class=\"row\"><div class=\"field\"><label for=\"fc2-mpg\">{{ui.fuelefficiency}}</label><input type=\"number\" id=\"fc2-mpg\" step=\"any\" value=\"30\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"fc2-eunit\">{{ui.unit}}</label><select id=\"fc2-eunit\"><option value=\"mpg\">MPG</option><option value=\"L100\">L/100km</option><option value=\"kpl\">km/L</option></select></div></div><div class=\"row\"><div class=\"field\"><label for=\"fc2-price\">{{ui.fuelpricepergallonl}}</label><input type=\"number\" id=\"fc2-price\" step=\"any\" value=\"3.50\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"fc2-punit\">{{ui.priceunit}}</label><select id=\"fc2-punit\"><option value=\"gal\">{{ui.pergallon}}</option><option value=\"L\">{{ui.perlitre}}</option></select></div></div><button class=\"btn\" type=\"submit\">{{ui.calculate}}</button></form><div id=\"fc2-out\" hidden class=\"result\" style=\"display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.5rem;text-align:center\"></div>",
+  "strings": {
+    "en": {
+      "title": "Fuel Cost Calculator",
+      "metaDescription": "Calculate fuel cost for any trip given distance, fuel efficiency and price.",
+      "h1": "Fuel Cost Calculator",
+      "intro": "Enter distance, fuel efficiency and price per gallon or litre to estimate the fuel cost of any trip.",
+      "faq_title": "Fuel cost FAQ",
+      "ui": {
+        "distance": "Distance",
+        "unit": "Unit",
+        "miles": "Miles",
+        "kilometres": "Kilometres",
+        "fuelefficiency": "Fuel efficiency",
+        "fuelpricepergallonl": "Fuel price per gallon/L ($)",
+        "priceunit": "Price unit",
+        "pergallon": "per gallon",
+        "perlitre": "per litre",
+        "calculate": "Calculate"
+      },
+      "faq": [
+        {
+          "q": "What is MPG?",
+          "a": "Miles per gallon: how many miles you can drive on one US gallon (3.785 litres). Higher = more efficient."
+        },
+        {
+          "q": "How do I convert MPG to L/100km?",
+          "a": "L/100km = 235.21 / MPG. Example: 30 MPG = 235.21/30 = 7.84 L/100km."
+        },
+        {
+          "q": "What affects fuel economy?",
+          "a": "Speed (highway vs city), tyre pressure, AC use, payload weight, terrain, engine health and driving style all affect real-world MPG."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Calculadora de Custo de Combustivel",
+      "metaDescription": "Calcule o custo de combustivel para qualquer viagem dado distancia, eficiencia e preco.",
+      "h1": "Calculadora de Custo de Combustivel",
+      "intro": "Insira distancia, eficiencia de combustivel e preco por galon ou litro para estimar o custo de combustivel.",
+      "faq_title": "FAQ custo de combustivel",
+      "ui": {
+        "distance": "Distância",
+        "unit": "Unidade",
+        "miles": "Milhas",
+        "kilometres": "Quilômetros",
+        "fuelefficiency": "Eficiência de combustível",
+        "fuelpricepergallonl": "Preço do combustível por galão/L ($)",
+        "priceunit": "Unidade de preço",
+        "pergallon": "por galão",
+        "perlitre": "por litro",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "O que e MPG?",
+          "a": "Milhas por galon: quantas milhas voce pode dirigir com um galon americano. Quanto maior, mais eficiente."
+        },
+        {
+          "q": "Como converter MPG para L/100km?",
+          "a": "L/100km = 235,21 / MPG. Exemplo: 30 MPG = 235,21/30 = 7,84 L/100km."
+        },
+        {
+          "q": "O que afeta a economia de combustivel?",
+          "a": "Velocidade, pressao dos pneus, uso do ar condicionado, peso da carga, terreno e estilo de conducao."
+        }
+      ]
+    },
+    "zh": {
+      "title": "燃油成本计算器",
+      "metaDescription": "计算给定距离、燃油效率和价格的任何行程的燃油成本。",
+      "h1": "燃油成本计算器",
+      "intro": "输入距离、燃油效率以及每加仑或升的价格来估算任何行程的燃油成本。",
+      "faq_title": "燃油成本常见问题解答",
+      "ui": {
+        "distance": "距离",
+        "unit": "单位",
+        "miles": "英里",
+        "kilometres": "公里",
+        "fuelefficiency": "燃油效率",
+        "fuelpricepergallonl": "每加仑/升燃油价格 ($)",
+        "priceunit": "价格单位",
+        "pergallon": "每加仑",
+        "perlitre": "每升",
+        "calculate": "计算"
+      },
+      "faq": [
+        {
+          "q": "什么是MPG？",
+          "a": "每加仑英里数：一美制加仑（3.785 升）可以行驶多少英里。更高=更高效。"
+        },
+        {
+          "q": "如何将 MPG 转换为 L/100km？",
+          "a": "L/100km = 235.21 / MPG。示例：30 MPG = 235.21/30 = 7.84 L/100km。"
+        },
+        {
+          "q": "什么影响燃油经济性？",
+          "a": "速度（高速公路与城市）、轮胎压力、空调使用、有效负载重量、地形、发动机健康状况和驾驶风格都会影响现实世界的 MPG。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "ईंधन लागत कैलकुलेटर",
+      "metaDescription": "किसी भी यात्रा के लिए दी गई दूरी, ईंधन दक्षता और कीमत के लिए ईंधन लागत की गणना करें।",
+      "h1": "ईंधन लागत कैलकुलेटर",
+      "intro": "किसी भी यात्रा की ईंधन लागत का अनुमान लगाने के लिए दूरी, ईंधन दक्षता और प्रति गैलन या लीटर कीमत दर्ज करें।",
+      "faq_title": "ईंधन लागत अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "distance": "दूरी",
+        "unit": "इकाई",
+        "miles": "मील",
+        "kilometres": "किलोमीटर",
+        "fuelefficiency": "ईंधन दक्षता",
+        "fuelpricepergallonl": "ईंधन की कीमत प्रति गैलन/लीटर ($)",
+        "priceunit": "मूल्य इकाई",
+        "pergallon": "प्रति गैलन",
+        "perlitre": "प्रति लीटर",
+        "calculate": "गणना करें"
+      },
+      "faq": [
+        {
+          "q": "एमपीजी क्या है?",
+          "a": "मील प्रति गैलन: आप एक यूएस गैलन (3.785 लीटर) पर कितने मील ड्राइव कर सकते हैं। उच्चतर = अधिक कुशल."
+        },
+        {
+          "q": "मैं एमपीजी को एल/100 किमी में कैसे परिवर्तित करूं?",
+          "a": "एल/100 किमी = 235.21/एमपीजी। उदाहरण: 30 एमपीजी = 235.21/30 = 7.84 लीटर/100 किमी।"
+        },
+        {
+          "q": "ईंधन अर्थव्यवस्था पर क्या प्रभाव पड़ता है?",
+          "a": "गति (राजमार्ग बनाम शहर), टायर का दबाव, एसी का उपयोग, पेलोड वजन, इलाके, इंजन स्वास्थ्य और ड्राइविंग शैली सभी वास्तविक दुनिया एमपीजी को प्रभावित करते हैं।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Calculadora de costo de combustible",
+      "metaDescription": "Calcule el costo del combustible para cualquier viaje teniendo en cuenta la distancia, la eficiencia del combustible y el precio.",
+      "h1": "Calculadora de costo de combustible",
+      "intro": "Ingrese la distancia, la eficiencia del combustible y el precio por galón o litro para estimar el costo del combustible de cualquier viaje.",
+      "faq_title": "Preguntas frecuentes sobre el costo del combustible",
+      "ui": {
+        "distance": "Distancia",
+        "unit": "Unidad",
+        "miles": "Millas",
+        "kilometres": "Kilómetros",
+        "fuelefficiency": "Eficiencia de combustible",
+        "fuelpricepergallonl": "Precio del combustible por galón/L ($)",
+        "priceunit": "Unidad de precio",
+        "pergallon": "por galón",
+        "perlitre": "por litro",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "¿Qué es MPG?",
+          "a": "Millas por galón: cuántas millas puedes conducir con un galón estadounidense (3,785 litros). Mayor = más eficiente."
+        },
+        {
+          "q": "¿Cómo convierto MPG a L/100 km?",
+          "a": "L/100 km = 235,21 / MPG. Ejemplo: 30 MPG = 235,21/30 = 7,84 L/100 km."
+        },
+        {
+          "q": "¿Qué afecta la economía de combustible?",
+          "a": "La velocidad (carretera versus ciudad), la presión de los neumáticos, el uso de aire acondicionado, el peso de la carga útil, el terreno, el estado del motor y el estilo de conducción afectan las MPG en el mundo real."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Calculateur du coût du carburant",
+      "metaDescription": "Calculez le coût du carburant pour n'importe quel trajet en fonction de la distance, de l'efficacité énergétique et du prix.",
+      "h1": "Calculateur du coût du carburant",
+      "intro": "Entrez la distance, la consommation de carburant et le prix par gallon ou litre pour estimer le coût en carburant de n'importe quel voyage.",
+      "faq_title": "FAQ sur le coût du carburant",
+      "ui": {
+        "distance": "Distance",
+        "unit": "Unité",
+        "miles": "Milles",
+        "kilometres": "Kilomètres",
+        "fuelefficiency": "Efficacité énergétique",
+        "fuelpricepergallonl": "Prix du carburant par gallon/L ($)",
+        "priceunit": "Unité de prix",
+        "pergallon": "par gallon",
+        "perlitre": "par litre",
+        "calculate": "Calculer"
+      },
+      "faq": [
+        {
+          "q": "Qu’est-ce que le MPG ?",
+          "a": "Miles par gallon : combien de kilomètres vous pouvez parcourir avec un gallon américain (3,785 litres). Plus élevé = plus efficace."
+        },
+        {
+          "q": "Comment convertir des MPG en L/100 km ?",
+          "a": "L/100 km = 235,21 / MPG. Exemple : 30 MPG = 235,21/30 = 7,84 L/100 km."
+        },
+        {
+          "q": "Qu’est-ce qui affecte l’économie de carburant ?",
+          "a": "La vitesse (autoroute ou ville), la pression des pneus, l’utilisation du courant alternatif, le poids de la charge utile, le terrain, l’état du moteur et le style de conduite affectent tous le MPG réel."
+        }
+      ]
+    },
+    "ar": {
+      "title": "حاسبة تكلفة الوقود",
+      "metaDescription": "حساب تكلفة الوقود لأي رحلة نظرا للمسافة وكفاءة استهلاك الوقود والسعر.",
+      "h1": "حاسبة تكلفة الوقود",
+      "intro": "أدخل المسافة وكفاءة استهلاك الوقود وسعر الجالون أو اللتر لتقدير تكلفة الوقود لأي رحلة.",
+      "faq_title": "الأسئلة الشائعة حول تكلفة الوقود",
+      "ui": {
+        "distance": "المسافة",
+        "unit": "وحدة",
+        "miles": "مايلز",
+        "kilometres": "كيلومترات",
+        "fuelefficiency": "كفاءة الوقود",
+        "fuelpricepergallonl": "سعر الوقود للجالون/لتر ($)",
+        "priceunit": "وحدة السعر",
+        "pergallon": "لكل جالون",
+        "perlitre": "لكل لتر",
+        "calculate": "احسب"
+      },
+      "faq": [
+        {
+          "q": "ما هو ميلا في الغالون؟",
+          "a": "عدد الأميال لكل جالون: كم عدد الأميال التي يمكنك قطعها بجالون أمريكي واحد (3.785 لتر). أعلى = أكثر كفاءة."
+        },
+        {
+          "q": "كيف أقوم بتحويل MPG إلى L/100km؟",
+          "a": "لتر/100كم = 235.21 ميلا في الغالون. مثال: 30 ميلا في الغالون = 235.21/30 = 7.84 لتر/100 كم."
+        },
+        {
+          "q": "ما الذي يؤثر على الاقتصاد في استهلاك الوقود؟",
+          "a": "تؤثر السرعة (الطريق السريع مقابل المدينة)، وضغط الإطارات، واستخدام مكيف الهواء، ووزن الحمولة، والتضاريس، وصحة المحرك، وأسلوب القيادة، على ميلا في الغالون (MPG) في العالم الحقيقي."
+        }
+      ]
+    },
+    "bn": {
+      "title": "জ্বালানী খরচ ক্যালকুলেটর",
+      "metaDescription": "প্রদত্ত দূরত্ব, জ্বালানি দক্ষতা এবং দামের জন্য যে কোনও ভ্রমণের জন্য জ্বালানী খরচ গণনা করুন।",
+      "h1": "জ্বালানী খরচ ক্যালকুলেটর",
+      "intro": "যেকোন ভ্রমণের জ্বালানী খরচ অনুমান করতে দূরত্ব, জ্বালানী দক্ষতা এবং গ্যালন বা লিটার প্রতি মূল্য লিখুন।",
+      "faq_title": "জ্বালানী খরচ FAQ",
+      "ui": {
+        "distance": "দূরত্ব",
+        "unit": "ইউনিট",
+        "miles": "মাইলস",
+        "kilometres": "কিলোমিটার",
+        "fuelefficiency": "জ্বালানী দক্ষতা",
+        "fuelpricepergallonl": "প্রতি গ্যালন/L ($) জ্বালানির দাম",
+        "priceunit": "মূল্য ইউনিট",
+        "pergallon": "প্রতি গ্যালন",
+        "perlitre": "প্রতি লিটার",
+        "calculate": "হিসাব করুন"
+      },
+      "faq": [
+        {
+          "q": "MPG কি?",
+          "a": "মাইলস প্রতি গ্যালন: আপনি এক ইউএস গ্যালনে কত মাইল চালাতে পারেন (3.785 লিটার)। উচ্চতর = আরও দক্ষ।"
+        },
+        {
+          "q": "আমি কিভাবে MPG কে L/100km এ রূপান্তর করব?",
+          "a": "L/100km = 235.21 / MPG। উদাহরণ: 30 MPG = 235.21/30 = 7.84 L/100km।"
+        },
+        {
+          "q": "কি জ্বালানী অর্থনীতি প্রভাবিত করে?",
+          "a": "গতি (হাইওয়ে বনাম শহর), টায়ারের চাপ, এসি ব্যবহার, পেলোডের ওজন, ভূখণ্ড, ইঞ্জিনের স্বাস্থ্য এবং ড্রাইভিং শৈলী সবই বাস্তব-বিশ্ব MPG কে প্রভাবিত করে।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Калькулятор стоимости топлива",
+      "metaDescription": "Рассчитайте стоимость топлива для любой поездки, учитывая расстояние, топливную экономичность и цену.",
+      "h1": "Калькулятор стоимости топлива",
+      "intro": "Введите расстояние, топливную экономичность и цену за галлон или литр, чтобы оценить стоимость топлива для любой поездки.",
+      "faq_title": "Часто задаваемые вопросы о стоимости топлива",
+      "ui": {
+        "distance": "Расстояние",
+        "unit": "Единица",
+        "miles": "Майлз",
+        "kilometres": "Километры",
+        "fuelefficiency": "Топливная эффективность",
+        "fuelpricepergallonl": "Цена топлива за галлон/л ($)",
+        "priceunit": "Единица цены",
+        "pergallon": "за галлон",
+        "perlitre": "за литр",
+        "calculate": "Рассчитать"
+      },
+      "faq": [
+        {
+          "q": "Что такое MPG?",
+          "a": "Мили на галлон: сколько миль вы можете проехать на одном галлоне США (3,785 литра). Выше = более эффективно."
+        },
+        {
+          "q": "Как мне перевести MPG в L/100km?",
+          "a": "л/100 км = 235,21/миль на галлон. Пример: 30 миль на галлон = 235,21/30 = 7,84 л/100 км."
+        },
+        {
+          "q": "Что влияет на экономию топлива?",
+          "a": "Скорость (шоссе или город), давление в шинах, использование кондиционера, вес полезной нагрузки, рельеф местности, состояние двигателя и стиль вождения — все это влияет на реальный расход топлива."
+        }
+      ]
+    },
+    "ur": {
+      "title": "ایندھن کی لاگت کیلکولیٹر",
+      "metaDescription": "فاصلہ، ایندھن کی کارکردگی اور قیمت کے مطابق کسی بھی سفر کے لیے ایندھن کی لاگت کا حساب لگائیں۔",
+      "h1": "ایندھن کی لاگت کیلکولیٹر",
+      "intro": "کسی بھی سفر کے ایندھن کی قیمت کا اندازہ لگانے کے لیے فاصلہ، ایندھن کی کارکردگی اور قیمت فی گیلن یا لیٹر درج کریں۔",
+      "faq_title": "ایندھن کی قیمت اکثر پوچھے گئے سوالات",
+      "ui": {
+        "distance": "فاصلہ",
+        "unit": "یونٹ",
+        "miles": "میل",
+        "kilometres": "کلومیٹر",
+        "fuelefficiency": "ایندھن کی کارکردگی",
+        "fuelpricepergallonl": "ایندھن کی قیمت فی گیلن/L ($)",
+        "priceunit": "قیمت یونٹ",
+        "pergallon": "فی گیلن",
+        "perlitre": "فی لیٹر",
+        "calculate": "حساب لگانا"
+      },
+      "faq": [
+        {
+          "q": "MPG کیا ہے؟",
+          "a": "میل فی گیلن: آپ ایک امریکی گیلن (3.785 لیٹر) پر کتنے میل چلا سکتے ہیں۔ اعلی = زیادہ موثر۔"
+        },
+        {
+          "q": "میں MPG کو L/100km میں کیسے تبدیل کروں؟",
+          "a": "L/100km = 235.21/MPG۔ مثال: 30 MPG = 235.21/30 = 7.84 L/100km۔"
+        },
+        {
+          "q": "ایندھن کی معیشت پر کیا اثر پڑتا ہے؟",
+          "a": "رفتار (ہائی وے بمقابلہ شہر)، ٹائر کا دباؤ، AC کا استعمال، پے لوڈ کا وزن، خطہ، انجن کی صحت اور ڈرائیونگ کا انداز سبھی حقیقی دنیا کے MPG کو متاثر کرتے ہیں۔"
+        }
+      ]
+    }
+  }
+}

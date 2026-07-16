@@ -1,0 +1,299 @@
+{
+  "slug": "unixperms",
+  "category": "dev",
+  "icon": "[P]",
+  "script": "unixperms.js",
+  "widget": "<div id=\"up-app\"><div style=\"display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:0.75rem\"><div style=\"text-align:center\"><div style=\"font-weight:600;margin-bottom:0.4rem\">{{ui.owneru}}</div><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"o\" data-bit=\"4\" checked> {{ui.readr}}</label><br><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"o\" data-bit=\"2\" checked> {{ui.writew}}</label><br><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"o\" data-bit=\"1\" checked> {{ui.executex}}</label></div><div style=\"text-align:center\"><div style=\"font-weight:600;margin-bottom:0.4rem\">{{ui.groupg}}</div><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"g\" data-bit=\"4\" checked> {{ui.readr}}</label><br><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"g\" data-bit=\"2\"> {{ui.writew}}</label><br><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"g\" data-bit=\"1\"> {{ui.executex}}</label></div><div style=\"text-align:center\"><div style=\"font-weight:600;margin-bottom:0.4rem\">{{ui.otherso}}</div><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"w\" data-bit=\"4\" checked> {{ui.readr}}</label><br><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"w\" data-bit=\"2\"> {{ui.writew}}</label><br><label><input type=\"checkbox\" class=\"up-cb\" data-who=\"w\" data-bit=\"1\"> {{ui.executex}}</label></div></div><div class=\"result\" style=\"text-align:center\"><div style=\"font-size:2.5rem;font-weight:800;font-family:monospace\" id=\"up-octal\"></div><div style=\"font-size:1.1rem;font-family:monospace;opacity:0.8\" id=\"up-sym\"></div><div style=\"opacity:0.6;font-size:0.875rem;margin-top:0.4rem\" id=\"up-cmd\"></div></div></div>",
+  "strings": {
+    "en": {
+      "title": "Unix File Permissions Calculator",
+      "metaDescription": "Toggle chmod permissions and get the octal code and symbolic notation.",
+      "h1": "Unix File Permissions Calculator",
+      "intro": "Toggle permission bits for owner, group and others to generate the chmod octal code (e.g., 755) and symbolic notation.",
+      "faq_title": "Unix permissions FAQ",
+      "ui": {
+        "owneru": "Owner (u)",
+        "readr": "Read (r)",
+        "writew": "Write (w)",
+        "executex": "Execute (x)",
+        "groupg": "Group (g)",
+        "otherso": "Others (o)"
+      },
+      "faq": [
+        {
+          "q": "How do Unix permissions work?",
+          "a": "Each file has permissions for owner, group and others. Each set has 3 bits: read (4), write (2), execute (1). Sum them: rwx=7, rw-=6, r-x=5, r--=4."
+        },
+        {
+          "q": "What is chmod 755?",
+          "a": "Owner: rwx (7). Group: r-x (5). Others: r-x (5). Standard for web server directories and scripts."
+        },
+        {
+          "q": "What is chmod 644?",
+          "a": "Owner: rw- (6). Group: r-- (4). Others: r-- (4). Standard for static files."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Calculadora de Permissoes Unix",
+      "metaDescription": "Calcule permissoes chmod para proprietario, grupo e outros.",
+      "h1": "Calculadora de Permissoes de Arquivo Unix",
+      "intro": "Alterne bits de permissao para proprietario, grupo e outros para gerar o codigo octal chmod e notacao simbolica.",
+      "faq_title": "FAQ permissoes Unix",
+      "ui": {
+        "owneru": "Proprietário (você)",
+        "readr": "Leia (r)",
+        "writew": "Escreva (w)",
+        "executex": "Executar (x)",
+        "groupg": "Grupo (g)",
+        "otherso": "Outros (o)"
+      },
+      "faq": [
+        {
+          "q": "Como funcionam as permissoes Unix?",
+          "a": "Cada arquivo tem permissoes para proprietario, grupo e outros. Cada conjunto tem 3 bits: leitura (4), escrita (2), execucao (1)."
+        },
+        {
+          "q": "O que e chmod 755?",
+          "a": "Proprietario: rwx (7). Grupo: r-x (5). Outros: r-x (5). Padrao para diretorios de servidor web."
+        },
+        {
+          "q": "O que e chmod 644?",
+          "a": "Proprietario: rw- (6). Grupo: r-- (4). Outros: r-- (4). Padrao para arquivos estaticos."
+        }
+      ]
+    },
+    "zh": {
+      "title": "Unix 文件权限计算器",
+      "metaDescription": "切换 chmod 权限并获取八进制代码和符号表示法。",
+      "h1": "Unix 文件权限计算器",
+      "intro": "切换所有者、组和其他人的权限位以生成 chmod 八进制代码（例如 755）和符号表示法。",
+      "faq_title": "Unix 权限常见问题解答",
+      "ui": {
+        "owneru": "所有者 (u)",
+        "readr": "读(r)",
+        "writew": "写（w）",
+        "executex": "执行（x）",
+        "groupg": "组别（克）",
+        "otherso": "其他(o)"
+      },
+      "faq": [
+        {
+          "q": "Unix 权限如何工作？",
+          "a": "每个文件都有所有者、组和其他人的权限。每组有 3 位：读 (4)、写 (2)、执行 (1)。将它们相加：rwx=7，rw-=6，r-x=5，r--=4。"
+        },
+        {
+          "q": "什么是 chmod 755？",
+          "a": "所有者：rwx (7)。组：r-x (5)。其他：r-x (5)。 Web 服务器目录和脚本的标准。"
+        },
+        {
+          "q": "什么是 chmod 644？",
+          "a": "所有者：rw- (6)。组：r--(4)。其他：r-- (4)。静态文件的标准。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "यूनिक्स फ़ाइल अनुमतियाँ कैलकुलेटर",
+      "metaDescription": "chmod अनुमतियाँ टॉगल करें और ऑक्टल कोड और प्रतीकात्मक नोटेशन प्राप्त करें।",
+      "h1": "यूनिक्स फ़ाइल अनुमतियाँ कैलकुलेटर",
+      "intro": "chmod ऑक्टल कोड (उदाहरण के लिए, 755) और प्रतीकात्मक नोटेशन उत्पन्न करने के लिए मालिक, समूह और अन्य लोगों के लिए अनुमति बिट्स को टॉगल करें।",
+      "faq_title": "यूनिक्स अनुमतियाँ अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "owneru": "मालिक (यू)",
+        "readr": "पढ़ें (आर)",
+        "writew": "लिखें (डब्ल्यू)",
+        "executex": "निष्पादित करें (x)",
+        "groupg": "समूह (जी)",
+        "otherso": "अन्य (ओ)"
+      },
+      "faq": [
+        {
+          "q": "यूनिक्स अनुमतियाँ कैसे काम करती हैं?",
+          "a": "प्रत्येक फ़ाइल में स्वामी, समूह और अन्य के लिए अनुमतियाँ हैं। प्रत्येक सेट में 3 बिट हैं: पढ़ें (4), लिखें (2), निष्पादित करें (1)। उनका योग करें: rwx=7, rw-=6, r-x=5, r--=4।"
+        },
+        {
+          "q": "चामोद 755 क्या है?",
+          "a": "मालिक: आरडब्ल्यूएक्स (7). समूह: आर-एक्स (5)। अन्य: आर-एक्स (5)। वेब सर्वर निर्देशिकाओं और स्क्रिप्ट के लिए मानक।"
+        },
+        {
+          "q": "चामोद 644 क्या है?",
+          "a": "मालिक: rw- (6). समूह: आर-- (4). अन्य: आर-- (4). स्थिर फ़ाइलों के लिए मानक."
+        }
+      ]
+    },
+    "es": {
+      "title": "Calculadora de permisos de archivos Unix",
+      "metaDescription": "Cambie los permisos de chmod y obtenga el código octal y la notación simbólica.",
+      "h1": "Calculadora de permisos de archivos Unix",
+      "intro": "Alterne los bits de permiso para que el propietario, el grupo y otros generen el código octal chmod (por ejemplo, 755) y la notación simbólica.",
+      "faq_title": "Preguntas frecuentes sobre permisos de Unix",
+      "ui": {
+        "owneru": "Dueño (tú)",
+        "readr": "Leer (r)",
+        "writew": "Escribir (w)",
+        "executex": "Ejecutar (x)",
+        "groupg": "Grupo (g)",
+        "otherso": "Otros (o)"
+      },
+      "faq": [
+        {
+          "q": "¿Cómo funcionan los permisos de Unix?",
+          "a": "Cada archivo tiene permisos de propietario, grupo y otros. Cada conjunto tiene 3 bits: lectura (4), escritura (2), ejecución (1). Súmalos: rwx=7, rw-=6, r-x=5, r--=4."
+        },
+        {
+          "q": "¿Qué es el chmod 755?",
+          "a": "Propietario: rwx (7). Grupo: r-x (5). Otros: r-x (5). Estándar para directorios y scripts de servidores web."
+        },
+        {
+          "q": "¿Qué es chmod 644?",
+          "a": "Propietario: rw- (6). Grupo: r-- (4). Otros: r-- (4). Estándar para archivos estáticos."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Calculateur d'autorisations de fichiers Unix",
+      "metaDescription": "Basculez les autorisations chmod et obtenez le code octal et la notation symbolique.",
+      "h1": "Calculateur d'autorisations de fichiers Unix",
+      "intro": "Basculez les bits d'autorisation pour le propriétaire, le groupe et d'autres personnes afin de générer le code octal chmod (par exemple, 755) et la notation symbolique.",
+      "faq_title": "FAQ sur les autorisations Unix",
+      "ui": {
+        "owneru": "Propriétaire (u)",
+        "readr": "Lire (r)",
+        "writew": "Écrire (w)",
+        "executex": "Exécuter (x)",
+        "groupg": "Groupe (g)",
+        "otherso": "Autres (o)"
+      },
+      "faq": [
+        {
+          "q": "Comment fonctionnent les autorisations Unix ?",
+          "a": "Chaque fichier dispose d'autorisations pour le propriétaire, le groupe et autres. Chaque ensemble comporte 3 bits : lecture (4), écriture (2), exécution (1). Additionnez-les : rwx=7, rw-=6, r-x=5, r--=4."
+        },
+        {
+          "q": "Qu'est-ce que le chmod 755 ?",
+          "a": "Propriétaire : rwx (7). Groupe : rx (5). Autres : rx (5). Standard pour les répertoires et les scripts du serveur Web."
+        },
+        {
+          "q": "Qu'est-ce que le chmod 644 ?",
+          "a": "Propriétaire : rw- (6). Groupe : r-- (4). Autres : r-- (4). Standard pour les fichiers statiques."
+        }
+      ]
+    },
+    "ar": {
+      "title": "حاسبة أذونات ملف يونكس",
+      "metaDescription": "قم بتبديل أذونات chmod واحصل على الرمز الثماني والتدوين الرمزي.",
+      "h1": "حاسبة أذونات ملف يونكس",
+      "intro": "تبديل بتات الأذونات للمالك والمجموعة والآخرين لإنشاء رمز chmod الثماني (على سبيل المثال، 755) والتدوين الرمزي.",
+      "faq_title": "الأسئلة الشائعة حول أذونات Unix",
+      "ui": {
+        "owneru": "المالك (أنت)",
+        "readr": "قراءة (ص)",
+        "writew": "اكتب (ث)",
+        "executex": "تنفيذ (x)",
+        "groupg": "المجموعة (ز)",
+        "otherso": "أخرى (س)"
+      },
+      "faq": [
+        {
+          "q": "كيف تعمل أذونات يونكس؟",
+          "a": "كل ملف له أذونات للمالك والمجموعة وغيرهم. تحتوي كل مجموعة على 3 بتات: القراءة (4)، الكتابة (2)، التنفيذ (1). اجمعها: rwx=7، rw-=6، r-x=5، r--=4."
+        },
+        {
+          "q": "ما هو شمود 755؟",
+          "a": "المالك : rwx (7). المجموعة: ص-س (5). آخرون: ص-س (5). معيار لأدلة خادم الويب والبرامج النصية."
+        },
+        {
+          "q": "ما هو شمود 644؟",
+          "a": "المالك : ر- (6). المجموعة: ص-- (4). آخرون: ص-- (4). معيار للملفات الثابتة."
+        }
+      ]
+    },
+    "bn": {
+      "title": "ইউনিক্স ফাইল পারমিশন ক্যালকুলেটর",
+      "metaDescription": "chmod অনুমতি টগল করুন এবং অক্টাল কোড এবং প্রতীকী স্বরলিপি পান।",
+      "h1": "ইউনিক্স ফাইল পারমিশন ক্যালকুলেটর",
+      "intro": "chmod অক্টাল কোড (যেমন, 755) এবং সিম্বলিক নোটেশন তৈরি করতে মালিক, গোষ্ঠী এবং অন্যদের জন্য অনুমতি বিটগুলি টগল করুন।",
+      "faq_title": "ইউনিক্স অনুমতি FAQ",
+      "ui": {
+        "owneru": "মালিক (উ)",
+        "readr": "পড়ুন (আর)",
+        "writew": "লিখুন",
+        "executex": "চালান (x)",
+        "groupg": "গ্রুপ (ছ)",
+        "otherso": "অন্যান্য (ও)"
+      },
+      "faq": [
+        {
+          "q": "ইউনিক্স অনুমতি কিভাবে কাজ করে?",
+          "a": "প্রতিটি ফাইলের মালিক, গোষ্ঠী এবং অন্যান্যদের জন্য অনুমতি রয়েছে৷ প্রতিটি সেটে 3 বিট রয়েছে: পড়ুন (4), লিখুন (2), কার্যকর করুন (1)। তাদের যোগ করুন: rwx=7, rw-=6, r-x=5, r--=4।"
+        },
+        {
+          "q": "chmod 755 কি?",
+          "a": "মালিক: rwx (7)। গ্রুপ: r-x (5)। অন্যান্য: r-x (5)। ওয়েব সার্ভার ডিরেক্টরি এবং স্ক্রিপ্টের জন্য স্ট্যান্ডার্ড।"
+        },
+        {
+          "q": "chmod 644 কি?",
+          "a": "মালিক: rw- (6)। গ্রুপ: r-- (4)। অন্যান্য: r-- (4)। স্ট্যাটিক ফাইলের জন্য স্ট্যান্ডার্ড।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Калькулятор прав доступа к файлам Unix",
+      "metaDescription": "Переключите разрешения chmod и получите восьмеричный код и символическое обозначение.",
+      "h1": "Калькулятор прав доступа к файлам Unix",
+      "intro": "Переключите биты разрешений для владельца, группы и других, чтобы сгенерировать восьмеричный код chmod (например, 755) и символическое обозначение.",
+      "faq_title": "Часто задаваемые вопросы о разрешениях Unix",
+      "ui": {
+        "owneru": "Владелец (вы)",
+        "readr": "Читать (р)",
+        "writew": "Напиши (ж)",
+        "executex": "Выполнить (х)",
+        "groupg": "Группа (г)",
+        "otherso": "Другие (о)"
+      },
+      "faq": [
+        {
+          "q": "Как работают разрешения Unix?",
+          "a": "Каждый файл имеет разрешения для владельца, группы и других. Каждый набор имеет 3 бита: чтение (4), запись (2), выполнение (1). Суммируем их: rwx=7, rw-=6, r-x=5, r--=4."
+        },
+        {
+          "q": "Что такое chmod 755?",
+          "a": "Владелец: rwx (7). Группа: р-х (5). Другие: r-x (5). Стандарт для каталогов и сценариев веб-сервера."
+        },
+        {
+          "q": "Что такое chmod 644?",
+          "a": "Владелец: rw- (6). Группа: р-- (4). Другие: р-- (4). Стандарт для статических файлов."
+        }
+      ]
+    },
+    "ur": {
+      "title": "یونکس فائل پرمیشنز کیلکولیٹر",
+      "metaDescription": "chmod اجازتوں کو ٹوگل کریں اور آکٹل کوڈ اور علامتی اشارے حاصل کریں۔",
+      "h1": "یونکس فائل پرمیشنز کیلکولیٹر",
+      "intro": "chmod آکٹل کوڈ (جیسے، 755) اور علامتی اشارے بنانے کے لیے مالک، گروپ اور دیگر کے لیے اجازت بٹس کو ٹوگل کریں۔",
+      "faq_title": "یونکس کی اجازت کے اکثر پوچھے گئے سوالات",
+      "ui": {
+        "owneru": "مالک (یو)",
+        "readr": "پڑھیں (ر)",
+        "writew": "لکھیں (w)",
+        "executex": "عمل کریں (x)",
+        "groupg": "گروپ (جی)",
+        "otherso": "دیگر (o)"
+      },
+      "faq": [
+        {
+          "q": "یونکس کی اجازتیں کیسے کام کرتی ہیں؟",
+          "a": "ہر فائل میں مالک، گروپ اور دیگر کے لیے اجازت ہوتی ہے۔ ہر سیٹ میں 3 بٹس ہوتے ہیں: پڑھیں (4)، لکھیں (2)، عمل کریں (1)۔ ان کا مجموعہ: rwx=7، rw-=6، r-x=5، r--=4۔"
+        },
+        {
+          "q": "chmod 755 کیا ہے؟",
+          "a": "مالک: rwx (7)۔ گروپ: r-x (5)۔ دیگر: r-x (5)۔ ویب سرور ڈائریکٹریز اور اسکرپٹس کے لیے معیاری۔"
+        },
+        {
+          "q": "chmod 644 کیا ہے؟",
+          "a": "مالک: rw- (6)۔ گروپ: r-- (4)۔ دیگر: r-- (4)۔ جامد فائلوں کے لیے معیاری۔"
+        }
+      ]
+    }
+  }
+}

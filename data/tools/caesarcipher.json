@@ -1,0 +1,309 @@
+{
+  "slug": "caesarcipher",
+  "category": "utility",
+  "icon": "🏛️",
+  "script": "caesarcipher.js",
+  "widget": "<form id=\"cc2-form\"><div class=\"row\"><div class=\"field\"><label for=\"cc2-in\">{{ui.input}}</label><textarea id=\"cc2-in\" rows=\"3\" placeholder=\"Hello World\" style=\"width:100%;resize:vertical;padding:0.75rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text)\"></textarea></div></div><div class=\"row\"><div class=\"field\"><label for=\"cc2-shift\">{{ui.shift}}</label><input type=\"number\" id=\"cc2-shift\" min=\"-25\" max=\"25\" value=\"3\" inputmode=\"numeric\"></div><div class=\"field\"><label for=\"cc2-dir\">{{ui.direction}}</label><select id=\"cc2-dir\"><option value=\"enc\">{{ui.encode}}</option><option value=\"dec\">{{ui.decode}}</option></select></div><button class=\"btn\" type=\"submit\">{{ui.apply}}</button></div></form><div class=\"field\" style=\"margin-top:0.5rem\"><label for=\"cc2-out\">{{ui.output}}</label><textarea id=\"cc2-out\" rows=\"3\" readonly style=\"width:100%;resize:vertical;padding:0.75rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text)\"></textarea></div>",
+  "strings": {
+    "en": {
+      "title": "Caesar Cipher — encrypt and decrypt with the Caesar shift cipher",
+      "metaDescription": "Free Caesar cipher tool. Encode or decode text using the Caesar substitution cipher with any shift value from 1 to 25.",
+      "h1": "Caesar Cipher",
+      "intro": "Enter text and choose a shift value to encode or decode using the Caesar cipher. ROT13 is a Caesar cipher with shift 13.",
+      "faq_title": "Caesar cipher FAQ",
+      "ui": {
+        "input": "Text",
+        "shift": "Shift (1-25)",
+        "direction": "Mode",
+        "encode": "Encode",
+        "decode": "Decode",
+        "apply": "Apply cipher",
+        "output": "Result"
+      },
+      "faq": [
+        {
+          "q": "What is the Caesar cipher?",
+          "a": "The Caesar cipher shifts every letter in the alphabet by a fixed number. With shift 3: A→D, B→E, C→F and so on. Named after Julius Caesar who used it in his private correspondence."
+        },
+        {
+          "q": "How secure is the Caesar cipher?",
+          "a": "Not at all secure. The Caesar cipher is trivially broken by trying all 25 possible shifts (brute force) or by frequency analysis. It is a historical teaching tool, not a real encryption method."
+        },
+        {
+          "q": "What is the key space?",
+          "a": "There are only 25 meaningful shifts (shift 0 does nothing, shift 26 = shift 0). A brute-force attack requires at most 25 attempts — easily done by hand. Modern encryption algorithms have key spaces of 2^128 or more."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Cifra de César — criptografar e descriptografar com a cifra de deslocamento de César",
+      "metaDescription": "Ferramenta de cifra de César gratuita. Codifique ou decodifique texto usando a cifra de substituição de César com qualquer valor de deslocamento de 1 a 25.",
+      "h1": "Cifra de César",
+      "intro": "Insira texto e escolha um valor de deslocamento para codificar ou decodificar usando a cifra de César.",
+      "faq_title": "Perguntas frequentes sobre cifra de César",
+      "ui": {
+        "input": "Texto",
+        "shift": "Deslocamento (1-25)",
+        "direction": "Modo",
+        "encode": "Codificar",
+        "decode": "Decodificar",
+        "apply": "Aplicar cifra",
+        "output": "Resultado"
+      },
+      "faq": [
+        {
+          "q": "O que é a cifra de César?",
+          "a": "A cifra de César desloca cada letra no alfabeto por um número fixo. Com deslocamento 3: A→D, B→E, C→F e assim por diante. Nomeada após Júlio César, que a usava em sua correspondência privada."
+        },
+        {
+          "q": "Quão segura é a cifra de César?",
+          "a": "Nada segura. A cifra de César é trivialmente quebrada tentando todos os 25 deslocamentos possíveis (força bruta) ou por análise de frequência."
+        },
+        {
+          "q": "O que é o espaço de chaves?",
+          "a": "Há apenas 25 deslocamentos significativos. Um ataque de força bruta requer no máximo 25 tentativas. Algoritmos modernos têm espaços de chave de 2^128 ou mais."
+        }
+      ]
+    },
+    "zh": {
+      "title": "凯撒密码 — 使用凯撒移位密码进行加密和解密",
+      "metaDescription": "免费凯撒密码工具。使用凯撒替换密码以及 1 到 25 之间的任意移位值对文本进行编码或解码。",
+      "h1": "凯撒密码",
+      "intro": "输入文本并选择要使用凯撒密码进行编码或解码的移位值。 ROT13 是移位 13 的凯撒密码。",
+      "faq_title": "凯撒密码常见问题解答",
+      "ui": {
+        "input": "文字",
+        "shift": "班次（1-25）",
+        "direction": "模式",
+        "encode": "编码",
+        "decode": "解码",
+        "apply": "应用密码",
+        "output": "结果"
+      },
+      "faq": [
+        {
+          "q": "什么是凯撒密码？",
+          "a": "凯撒密码将字母表中的每个字母移动一个固定的数字。班次 3：A→D、B→E、C→F 等。以凯撒大帝的名字命名，他在私人信件中使用了它。"
+        },
+        {
+          "q": "凯撒密码的安全性如何？",
+          "a": "一点也不安全。通过尝试所有 25 种可能的移位（强力）或通过频率分析，凯撒密码就可以轻松破解。它是一个历史教学工具，而不是真正的加密方法。"
+        },
+        {
+          "q": "关键空间是什么？",
+          "a": "只有 25 个有意义的移位（移位 0 不执行任何操作，移位 26 = 移位 0）。暴力攻击最多需要 25 次尝试——手动即可轻松完成。现代加密算法的密钥空间为 2^128 或更多。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "सीज़र सिफर - सीज़र शिफ्ट सिफर के साथ एन्क्रिप्ट और डिक्रिप्ट",
+      "metaDescription": "निःशुल्क सीज़र सिफर उपकरण। 1 से 25 तक किसी भी शिफ्ट मान के साथ सीज़र प्रतिस्थापन सिफर का उपयोग करके टेक्स्ट को एनकोड या डीकोड करें।",
+      "h1": "सीज़र सिफर",
+      "intro": "टेक्स्ट दर्ज करें और सीज़र सिफर का उपयोग करके एनकोड या डीकोड करने के लिए एक शिफ्ट मान चुनें। ROT13 शिफ्ट 13 के साथ एक सीज़र सिफर है।",
+      "faq_title": "सीज़र सिफर अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "input": "पाठ",
+        "shift": "शिफ्ट (1-25)",
+        "direction": "मोड",
+        "encode": "सांकेतिक शब्दों में बदलना",
+        "decode": "डिकोड",
+        "apply": "सिफर लागू करें",
+        "output": "नतीजा"
+      },
+      "faq": [
+        {
+          "q": "सीज़र सिफर क्या है?",
+          "a": "सीज़र सिफर वर्णमाला के प्रत्येक अक्षर को एक निश्चित संख्या से बदल देता है। शिफ्ट 3 के साथ: A→D, B→E, C→F इत्यादि। इसका नाम जूलियस सीज़र के नाम पर रखा गया, जिन्होंने इसे अपने निजी पत्राचार में इस्तेमाल किया था।"
+        },
+        {
+          "q": "सीज़र सिफर कितना सुरक्षित है?",
+          "a": "बिल्कुल सुरक्षित नहीं. सीज़र सिफर को सभी 25 संभावित बदलावों (क्रूर बल) की कोशिश करके या आवृत्ति विश्लेषण द्वारा तुच्छ रूप से तोड़ दिया गया है। यह एक ऐतिहासिक शिक्षण उपकरण है, वास्तविक एन्क्रिप्शन विधि नहीं।"
+        },
+        {
+          "q": "मुख्य स्थान क्या है?",
+          "a": "केवल 25 सार्थक बदलाव हैं (शिफ्ट 0 कुछ नहीं करता, शिफ्ट 26 = शिफ्ट 0)। क्रूर-बल के हमले के लिए अधिकतम 25 प्रयासों की आवश्यकता होती है - आसानी से हाथ से किया जाता है। आधुनिक एन्क्रिप्शन एल्गोरिदम में 2^128 या अधिक के प्रमुख स्थान हैं।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Cifrado César: cifra y descifra con el cifrado de desplazamiento César",
+      "metaDescription": "Herramienta gratuita de cifrado César. Codifique o decodifique texto utilizando el cifrado de sustitución César con cualquier valor de desplazamiento de 1 a 25.",
+      "h1": "Cifrado César",
+      "intro": "Ingrese texto y elija un valor de desplazamiento para codificar o decodificar usando el cifrado César. ROT13 es un cifrado César con desplazamiento 13.",
+      "faq_title": "Preguntas frecuentes sobre el cifrado César",
+      "ui": {
+        "input": "Texto",
+        "shift": "Turno (1-25)",
+        "direction": "Modo",
+        "encode": "Codificar",
+        "decode": "Decodificar",
+        "apply": "Aplicar cifrado",
+        "output": "Resultado"
+      },
+      "faq": [
+        {
+          "q": "¿Qué es el cifrado César?",
+          "a": "El cifrado César desplaza cada letra del alfabeto en un número fijo. Con turno 3: A→D, B→E, C→F y así sucesivamente. Lleva el nombre de Julio César, quien lo utilizó en su correspondencia privada."
+        },
+        {
+          "q": "¿Qué tan seguro es el cifrado César?",
+          "a": "Nada seguro. El cifrado César se descifra trivialmente probando los 25 desplazamientos posibles (fuerza bruta) o mediante análisis de frecuencia. Es una herramienta de enseñanza histórica, no un método de cifrado real."
+        },
+        {
+          "q": "¿Cuál es el espacio clave?",
+          "a": "Solo hay 25 turnos significativos (el turno 0 no hace nada, el turno 26 = turno 0). Un ataque de fuerza bruta requiere como máximo 25 intentos, algo que se puede realizar fácilmente a mano. Los algoritmos de cifrado modernos tienen espacios clave de 2^128 o más."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Chiffre de César – chiffrer et déchiffrer avec le chiffrement par décalage de César",
+      "metaDescription": "Outil de chiffrement César gratuit. Encodez ou décodez du texte à l'aide du chiffre de substitution César avec n'importe quelle valeur de décalage comprise entre 1 et 25.",
+      "h1": "Chiffre de César",
+      "intro": "Saisissez du texte et choisissez une valeur de décalage à encoder ou décoder à l'aide du chiffre César. ROT13 est un chiffre de César avec décalage 13.",
+      "faq_title": "FAQ sur le chiffre de César",
+      "ui": {
+        "input": "Texte",
+        "shift": "Changement (1-25)",
+        "direction": "Mode",
+        "encode": "Encoder",
+        "decode": "Décoder",
+        "apply": "Appliquer le chiffre",
+        "output": "Résultat"
+      },
+      "faq": [
+        {
+          "q": "Qu'est-ce que le chiffre de César ?",
+          "a": "Le chiffre de César décale chaque lettre de l'alphabet d'un nombre fixe. Avec le décalage 3 : A→D, B→E, C→F et ainsi de suite. Nommé d'après Jules César qui l'utilisait dans sa correspondance privée."
+        },
+        {
+          "q": "Dans quelle mesure le chiffre César est-il sécurisé ?",
+          "a": "Pas du tout sécurisé. Le chiffre de César est trivialement brisé en essayant les 25 décalages possibles (force brute) ou par analyse de fréquence. Il s’agit d’un outil pédagogique historique, pas d’une véritable méthode de cryptage."
+        },
+        {
+          "q": "Quel est l'espace clé ?",
+          "a": "Il n'y a que 25 changements significatifs (le changement 0 ne fait rien, le changement 26 = le changement 0). Une attaque par force brute nécessite au maximum 25 tentatives, faciles à réaliser manuellement. Les algorithmes de chiffrement modernes ont des espaces clés de 2 ^ 128 ou plus."
+        }
+      ]
+    },
+    "ar": {
+      "title": "قيصر التشفير - تشفير وفك التشفير باستخدام تشفير قيصر التحول",
+      "metaDescription": "أداة تشفير قيصر مجانية. قم بتشفير النص أو فك تشفيره باستخدام تشفير قيصر البديل مع أي قيمة تحويل من 1 إلى 25.",
+      "h1": "تشفير قيصر",
+      "intro": "أدخل النص واختر قيمة التحول للتشفير أو فك التشفير باستخدام تشفير قيصر. ROT13 هو تشفير قيصر مع التحول 13.",
+      "faq_title": "الأسئلة الشائعة حول تشفير قيصر",
+      "ui": {
+        "input": "نص",
+        "shift": "التحول (1-25)",
+        "direction": "الوضع",
+        "encode": "تشفير",
+        "decode": "فك التشفير",
+        "apply": "تطبيق التشفير",
+        "output": "النتيجة"
+      },
+      "faq": [
+        {
+          "q": "ما هي شفرة قيصر؟",
+          "a": "تقوم شفرة قيصر بنقل كل حرف في الأبجدية برقم ثابت. مع التحول 3: A → D، B → E، C → F، وما إلى ذلك. سميت على اسم يوليوس قيصر الذي استخدمها في مراسلاته الخاصة."
+        },
+        {
+          "q": "ما مدى أمان تشفير قيصر؟",
+          "a": "ليست آمنة على الإطلاق. يتم كسر تشفير قيصر بشكل تافه من خلال تجربة جميع التحولات الخمسة والعشرين الممكنة (القوة الغاشمة) أو عن طريق تحليل التردد. إنها أداة تعليمية تاريخية، وليست طريقة تشفير حقيقية."
+        },
+        {
+          "q": "ما هي المساحة الرئيسية؟",
+          "a": "لا يوجد سوى 25 تحولًا ذا معنى (التحول 0 لا يفعل شيئًا، التحول 26 = التحول 0). يتطلب هجوم القوة الغاشمة 25 محاولة على الأكثر، ويتم تنفيذها بسهولة باليد. تحتوي خوارزميات التشفير الحديثة على مسافات رئيسية تبلغ 2^128 أو أكثر."
+        }
+      ]
+    },
+    "bn": {
+      "title": "সিজার সাইফার — সিজার শিফট সাইফার দিয়ে এনক্রিপ্ট এবং ডিক্রিপ্ট করুন",
+      "metaDescription": "ফ্রি সিজার সাইফার টুল। 1 থেকে 25 পর্যন্ত যেকোনো শিফট মান সহ সিজার প্রতিস্থাপন সাইফার ব্যবহার করে পাঠ্যকে এনকোড বা ডিকোড করুন।",
+      "h1": "সিজার সাইফার",
+      "intro": "টেক্সট লিখুন এবং সিজার সাইফার ব্যবহার করে এনকোড বা ডিকোড করতে একটি শিফট মান চয়ন করুন। ROT13 শিফট 13 সহ একটি সিজার সাইফার।",
+      "faq_title": "সিজার সাইফার FAQ",
+      "ui": {
+        "input": "পাঠ্য",
+        "shift": "শিফট (1-25)",
+        "direction": "মোড",
+        "encode": "এনকোড",
+        "decode": "ডিকোড",
+        "apply": "সাইফার প্রয়োগ করুন",
+        "output": "ফলাফল"
+      },
+      "faq": [
+        {
+          "q": "সিজার সাইফার কি?",
+          "a": "সিজার সাইফার বর্ণমালার প্রতিটি অক্ষরকে একটি নির্দিষ্ট সংখ্যা দ্বারা স্থানান্তরিত করে। শিফট 3 সহ: A→D, B→E, C→F এবং আরও অনেক কিছু। জুলিয়াস সিজারের নামে নামকরণ করা হয়েছে যিনি এটি তার ব্যক্তিগত চিঠিপত্রে ব্যবহার করেছিলেন।"
+        },
+        {
+          "q": "সিজার সাইফার কতটা নিরাপদ?",
+          "a": "মোটেও নিরাপদ নয়। 25টি সম্ভাব্য শিফট (ব্রুট ফোর্স) চেষ্টা করে বা ফ্রিকোয়েন্সি বিশ্লেষণের মাধ্যমে সিজার সাইফারটি তুচ্ছভাবে ভেঙে যায়। এটি একটি ঐতিহাসিক শিক্ষার টুল, একটি বাস্তব এনক্রিপশন পদ্ধতি নয়।"
+        },
+        {
+          "q": "মূল স্থান কি?",
+          "a": "শুধুমাত্র 25টি অর্থপূর্ণ স্থানান্তর রয়েছে (shift 0 কিছুই করে না, shift 26 = shift 0)। একটি নৃশংস-বাহিনী আক্রমণের জন্য সর্বাধিক 25টি প্রচেষ্টার প্রয়োজন - সহজেই হাতে করা হয়। আধুনিক এনক্রিপশন অ্যালগরিদমের মূল স্পেস 2^128 বা তার বেশি।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Шифр Цезаря — шифрование и дешифрование с помощью шифра сдвига Цезаря.",
+      "metaDescription": "Бесплатный инструмент для шифрования Цезаря. Кодируйте или декодируйте текст, используя шифр замены Цезаря с любым значением сдвига от 1 до 25.",
+      "h1": "Шифр Цезаря",
+      "intro": "Введите текст и выберите значение сдвига для кодирования или декодирования с использованием шифра Цезаря. ROT13 — шифр Цезаря со сдвигом 13.",
+      "faq_title": "Часто задаваемые вопросы по шифру Цезаря",
+      "ui": {
+        "input": "Текст",
+        "shift": "Смена (1-25)",
+        "direction": "Режим",
+        "encode": "Кодировать",
+        "decode": "Декодировать",
+        "apply": "Применить шифр",
+        "output": "Результат"
+      },
+      "faq": [
+        {
+          "q": "Что такое шифр Цезаря?",
+          "a": "Шифр Цезаря сдвигает каждую букву алфавита на фиксированное число. Со сдвигом 3: A→D, B→E, C→F и так далее. Назван в честь Юлия Цезаря, который использовал его в своей частной переписке."
+        },
+        {
+          "q": "Насколько надежен шифр Цезаря?",
+          "a": "Совсем не безопасно. Шифр Цезаря легко взломать, перепробовав все 25 возможных сдвигов (грубая сила) или с помощью частотного анализа. Это инструмент исторического обучения, а не настоящий метод шифрования."
+        },
+        {
+          "q": "Что такое ключевое пространство?",
+          "a": "Всего 25 значимых сдвигов (сдвиг 0 ничего не делает, сдвиг 26 = сдвиг 0). Для грубой атаки требуется не более 25 попыток, и ее легко выполнить вручную. Современные алгоритмы шифрования имеют пространство ключей 2^128 или более."
+        }
+      ]
+    },
+    "ur": {
+      "title": "سیزر سائفر - سیزر شفٹ سائفر کے ساتھ انکرپٹ اور ڈکرپٹ",
+      "metaDescription": "مفت سیزر سائفر ٹول۔ 1 سے 25 تک کسی بھی شفٹ ویلیو کے ساتھ سیزر متبادل سائفر کا استعمال کرتے ہوئے متن کو انکوڈ یا ڈی کوڈ کریں۔",
+      "h1": "سیزر سائفر",
+      "intro": "متن درج کریں اور سیزر سائفر کا استعمال کرتے ہوئے انکوڈ یا ڈی کوڈ کرنے کے لیے شفٹ ویلیو کا انتخاب کریں۔ ROT13 شفٹ 13 کے ساتھ ایک سیزر سائفر ہے۔",
+      "faq_title": "سیزر سائفر اکثر پوچھے گئے سوالات",
+      "ui": {
+        "input": "متن",
+        "shift": "شفٹ (1-25)",
+        "direction": "موڈ",
+        "encode": "انکوڈ",
+        "decode": "ڈی کوڈ",
+        "apply": "سائفر لگائیں۔",
+        "output": "نتیجہ"
+      },
+      "faq": [
+        {
+          "q": "سیزر سائفر کیا ہے؟",
+          "a": "سیزر سائفر حروف تہجی کے ہر حرف کو ایک مقررہ نمبر کے ذریعہ تبدیل کرتا ہے۔ شفٹ 3 کے ساتھ: A→D، B→E، C→F وغیرہ۔ جولیس سیزر کے نام پر رکھا گیا جس نے اسے اپنے نجی خط و کتابت میں استعمال کیا۔"
+        },
+        {
+          "q": "سیزر سائفر کتنا محفوظ ہے؟",
+          "a": "بالکل محفوظ نہیں۔ تمام 25 ممکنہ شفٹوں (بروٹ فورس) کو آزمانے یا فریکوئنسی تجزیہ کے ذریعے سیزر سائفر معمولی طور پر ٹوٹ جاتا ہے۔ یہ ایک تاریخی تدریسی ٹول ہے، حقیقی خفیہ کاری کا طریقہ نہیں۔"
+        },
+        {
+          "q": "کلیدی جگہ کیا ہے؟",
+          "a": "صرف 25 معنی خیز شفٹیں ہیں (شفٹ 0 کچھ نہیں کرتا، شفٹ 26 = شفٹ 0)۔ ایک وحشیانہ حملے کے لیے زیادہ سے زیادہ 25 کوششوں کی ضرورت ہوتی ہے - آسانی سے ہاتھ سے کی جاتی ہے۔ جدید انکرپشن الگورتھم میں کلیدی جگہیں 2^128 یا اس سے زیادہ ہیں۔"
+        }
+      ]
+    }
+  }
+}

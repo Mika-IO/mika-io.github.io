@@ -1,0 +1,279 @@
+{
+  "slug": "npvcalc",
+  "category": "finance",
+  "icon": "💰",
+  "script": "npvcalc.js",
+  "widget": "<div id=\"npv-app\"><div class=\"row\"><div class=\"field\"><label for=\"npv-rate\">{{ui.rate}}</label><input type=\"number\" id=\"npv-rate\" step=\"any\" min=\"0\" value=\"10\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"npv-init\">{{ui.initial}}</label><input type=\"number\" id=\"npv-init\" step=\"any\" value=\"10000\" inputmode=\"decimal\"></div></div><div class=\"field\"><label>{{ui.cashflows}}</label><textarea id=\"npv-cf\" rows=\"5\" style=\"width:100%;padding:0.5rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font-family:monospace\" placeholder=\"3000&#10;4000&#10;5000&#10;4000&#10;3000\"></textarea></div><button class=\"btn\" id=\"npv-go\" style=\"margin-top:0.25rem\">{{ui.calculate}}</button><div id=\"npv-out\" hidden class=\"result\" style=\"display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.5rem;margin-top:0.75rem\"></div></div>",
+  "strings": {
+    "en": {
+      "title": "Net Present Value (NPV) Calculator — evaluate investment decisions",
+      "metaDescription": "Free NPV calculator. Enter cash flows and discount rate to calculate Net Present Value and Internal Rate of Return (IRR) for investment analysis.",
+      "h1": "Net Present Value (NPV) Calculator",
+      "intro": "Calculate the Net Present Value (NPV) of a series of future cash flows to evaluate whether an investment is worthwhile.",
+      "faq_title": "NPV calculator FAQ",
+      "ui": {
+        "rate": "Discount rate (%)",
+        "initial": "Initial investment",
+        "cashflows": "Annual cash flows (one per line)",
+        "calculate": "Calculate"
+      },
+      "faq": [
+        {
+          "q": "What is Net Present Value?",
+          "a": "NPV is the present value of all future cash flows minus the initial investment, discounted at a required rate of return. If NPV > 0, the investment creates value. If NPV < 0, it destroys value."
+        },
+        {
+          "q": "What discount rate should I use?",
+          "a": "The discount rate should reflect the required rate of return or opportunity cost of capital. For a business: weighted average cost of capital (WACC). For personal investments: your expected alternative investment return (e.g., 7–10% for stock market)."
+        },
+        {
+          "q": "What is IRR?",
+          "a": "Internal Rate of Return is the discount rate that makes NPV = 0. If IRR > your required return, the investment is attractive. IRR is found by iteration (no closed-form formula)."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Calculadora de Valor Presente Líquido (VPL) — avaliar decisões de investimento",
+      "metaDescription": "Calculadora de VPL gratuita. Insira fluxos de caixa e taxa de desconto para calcular o Valor Presente Líquido e a Taxa Interna de Retorno (TIR) para análise de investimento.",
+      "h1": "Calculadora de Valor Presente Líquido (VPL)",
+      "intro": "Calcule o Valor Presente Líquido (VPL) de uma série de fluxos de caixa futuros para avaliar se um investimento vale a pena.",
+      "faq_title": "Perguntas frequentes sobre calculadora de VPL",
+      "ui": {
+        "rate": "Taxa de desconto (%)",
+        "initial": "Investimento inicial",
+        "cashflows": "Fluxos de caixa anuais (um por linha)",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "O que é Valor Presente Líquido?",
+          "a": "VPL é o valor presente de todos os fluxos de caixa futuros menos o investimento inicial, descontados a uma taxa de retorno exigida. Se VPL > 0, o investimento cria valor."
+        },
+        {
+          "q": "Qual taxa de desconto devo usar?",
+          "a": "A taxa de desconto deve refletir a taxa de retorno exigida ou custo de oportunidade do capital. Para um negócio: WACC. Para investimentos pessoais: seu retorno alternativo esperado (ex.: 7–10% para mercado de ações)."
+        },
+        {
+          "q": "O que é TIR?",
+          "a": "Taxa Interna de Retorno é a taxa de desconto que torna o VPL = 0. Se TIR > seu retorno exigido, o investimento é atraente."
+        }
+      ]
+    },
+    "zh": {
+      "title": "净现值 (NPV) 计算器 — 评估投资决策",
+      "metaDescription": "免费 NPV 计算器。输入现金流量和贴现率来计算净现值和内部收益率（IRR）以进行投资分析。",
+      "h1": "净现值 (NPV) 计算器",
+      "intro": "计算一系列未来现金流量的净现值 (NPV)，以评估一项投资是否值得。",
+      "faq_title": "NPV 计算器常见问题解答",
+      "ui": {
+        "rate": "贴现率(%)",
+        "initial": "初始投资",
+        "cashflows": "年度现金流量（每条线一个）",
+        "calculate": "计算"
+      },
+      "faq": [
+        {
+          "q": "什么是净现值？",
+          "a": "NPV 是所有未来现金流量的现值减去初始投资，按要求的回报率贴现。如果 NPV > 0，则投资创造价值。如果 NPV < 0，就会破坏价值。"
+        },
+        {
+          "q": "我应该使用什么折扣率？",
+          "a": "贴现率应反映所需的回报率或资本的机会成本。对于企业：加权平均资本成本（WACC）。对于个人投资：您预期的另类投资回报（例如，股票市场为 7-10%）。"
+        },
+        {
+          "q": "什么是内部收益率？",
+          "a": "内部回报率是使 NPV = 0 的贴现率。如果 IRR > 您所需的回报，则投资具有吸引力。 IRR 是通过迭代找到的（没有封闭式公式）。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "शुद्ध वर्तमान मूल्य (एनपीवी) कैलकुलेटर - निवेश निर्णयों का मूल्यांकन करें",
+      "metaDescription": "निःशुल्क एनपीवी कैलकुलेटर। निवेश विश्लेषण के लिए शुद्ध वर्तमान मूल्य और आंतरिक रिटर्न दर (आईआरआर) की गणना करने के लिए नकदी प्रवाह और छूट दर दर्ज करें।",
+      "h1": "शुद्ध वर्तमान मूल्य (एनपीवी) कैलकुलेटर",
+      "intro": "कोई निवेश सार्थक है या नहीं, इसका मूल्यांकन करने के लिए भविष्य के नकदी प्रवाह की श्रृंखला के शुद्ध वर्तमान मूल्य (एनपीवी) की गणना करें।",
+      "faq_title": "एनपीवी कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "rate": "छूट दर (%)",
+        "initial": "प्रारंभिक निवेश",
+        "cashflows": "वार्षिक नकदी प्रवाह (प्रति पंक्ति एक)",
+        "calculate": "गणना करें"
+      },
+      "faq": [
+        {
+          "q": "शुद्ध वर्तमान मूल्य क्या है?",
+          "a": "एनपीवी भविष्य के सभी नकदी प्रवाहों का वर्तमान मूल्य है, जिसमें प्रारंभिक निवेश को घटाकर, रिटर्न की आवश्यक दर पर छूट दी जाती है। यदि एनपीवी > 0 है, तो निवेश मूल्य बनाता है। यदि एनपीवी <0, तो यह मूल्य को नष्ट कर देता है।"
+        },
+        {
+          "q": "मुझे किस छूट दर का उपयोग करना चाहिए?",
+          "a": "छूट दर को रिटर्न की आवश्यक दर या पूंजी की अवसर लागत को प्रतिबिंबित करना चाहिए। किसी व्यवसाय के लिए: पूंजी की भारित औसत लागत (डब्ल्यूएसीसी)। व्यक्तिगत निवेश के लिए: आपका अपेक्षित वैकल्पिक निवेश रिटर्न (उदाहरण के लिए, शेयर बाजार के लिए 7-10%)।"
+        },
+        {
+          "q": "आईआरआर क्या है?",
+          "a": "रिटर्न की आंतरिक दर वह छूट दर है जो एनपीवी = 0 बनाती है। यदि आईआरआर > आपका आवश्यक रिटर्न है, तो निवेश आकर्षक है। आईआरआर पुनरावृत्ति द्वारा पाया जाता है (कोई बंद-फ़ॉर्म फॉर्मूला नहीं)।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Calculadora del valor actual neto (VAN): evalúe las decisiones de inversión",
+      "metaDescription": "Calculadora de VPN gratuita. Ingrese los flujos de efectivo y la tasa de descuento para calcular el valor actual neto y la tasa interna de retorno (TIR) ​​para el análisis de inversiones.",
+      "h1": "Calculadora del valor actual neto (VAN)",
+      "intro": "Calcule el valor actual neto (VAN) de una serie de flujos de efectivo futuros para evaluar si vale la pena una inversión.",
+      "faq_title": "Preguntas frecuentes sobre la calculadora VPN",
+      "ui": {
+        "rate": "Tasa de descuento (%)",
+        "initial": "Inversión inicial",
+        "cashflows": "Flujos de efectivo anuales (uno por línea)",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "¿Qué es el valor actual neto?",
+          "a": "El VPN es el valor presente de todos los flujos de efectivo futuros menos la inversión inicial, descontados a una tasa de rendimiento requerida. Si VAN > 0, la inversión crea valor. Si VPN < 0, destruye el valor."
+        },
+        {
+          "q": "¿Qué tasa de descuento debo utilizar?",
+          "a": "La tasa de descuento debe reflejar la tasa de rendimiento requerida o el costo de oportunidad del capital. Para una empresa: costo de capital promedio ponderado (WACC). Para inversiones personales: el rendimiento esperado de su inversión alternativa (por ejemplo, entre 7% y 10% para el mercado de valores)."
+        },
+        {
+          "q": "¿Qué es la TIR?",
+          "a": "La tasa interna de rendimiento es la tasa de descuento que hace que el VPN = 0. Si TIR > el rendimiento requerido, la inversión es atractiva. La TIR se calcula mediante iteración (sin fórmula cerrada)."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Calculateur de valeur actuelle nette (VAN) : évaluez les décisions d'investissement",
+      "metaDescription": "Calculateur NPV gratuit. Saisissez les flux de trésorerie et le taux d'actualisation pour calculer la valeur actuelle nette et le taux de rendement interne (TRI) pour l'analyse des investissements.",
+      "h1": "Calculateur de valeur actuelle nette (VAN)",
+      "intro": "Calculez la valeur actuelle nette (VAN) d'une série de flux de trésorerie futurs pour évaluer si un investissement en vaut la peine.",
+      "faq_title": "FAQ sur le calculateur VAN",
+      "ui": {
+        "rate": "Taux d'actualisation (%)",
+        "initial": "Investissement initial",
+        "cashflows": "Flux de trésorerie annuels (un par ligne)",
+        "calculate": "Calculer"
+      },
+      "faq": [
+        {
+          "q": "Qu’est-ce que la valeur actuelle nette ?",
+          "a": "La VAN est la valeur actuelle de tous les flux de trésorerie futurs moins l'investissement initial, actualisée à un taux de rendement requis. Si VAN > 0, l'investissement crée de la valeur. Si NPV <0, cela détruit la valeur."
+        },
+        {
+          "q": "Quel taux d'actualisation dois-je utiliser ?",
+          "a": "Le taux d'actualisation doit refléter le taux de rendement requis ou le coût d'opportunité du capital. Pour une entreprise : coût moyen pondéré du capital (WACC). Pour les investissements personnels : votre retour sur investissement alternatif attendu (par exemple, 7 à 10 % pour le marché boursier)."
+        },
+        {
+          "q": "Qu’est-ce que le TRI ?",
+          "a": "Le taux de rendement interne est le taux d'actualisation qui fait que la VAN = 0. Si TRI > votre rendement requis, l'investissement est attractif. Le TRI est trouvé par itération (pas de formule fermée)."
+        }
+      ]
+    },
+    "ar": {
+      "title": "حاسبة صافي القيمة الحالية (NPV) - تقييم قرارات الاستثمار",
+      "metaDescription": "حاسبة NPV مجانية. أدخل التدفقات النقدية ومعدل الخصم لحساب صافي القيمة الحالية ومعدل العائد الداخلي (IRR) لتحليل الاستثمار.",
+      "h1": "حاسبة صافي القيمة الحالية (NPV).",
+      "intro": "احسب صافي القيمة الحالية (NPV) لسلسلة من التدفقات النقدية المستقبلية لتقييم ما إذا كان الاستثمار جديرًا بالاهتمام.",
+      "faq_title": "الأسئلة الشائعة حول حاسبة NPV",
+      "ui": {
+        "rate": "معدل الخصم (%)",
+        "initial": "الاستثمار الأولي",
+        "cashflows": "التدفقات النقدية السنوية (واحدة لكل سطر)",
+        "calculate": "احسب"
+      },
+      "faq": [
+        {
+          "q": "ما هو صافي القيمة الحالية؟",
+          "a": "NPV هي القيمة الحالية لجميع التدفقات النقدية المستقبلية مطروحا منها الاستثمار الأولي، مخصومة بمعدل العائد المطلوب. إذا كان NPV > 0، فإن الاستثمار يخلق قيمة. إذا كان NPV <0، فإنه يدمر القيمة."
+        },
+        {
+          "q": "ما هو معدل الخصم الذي يجب أن أستخدمه؟",
+          "a": "يجب أن يعكس معدل الخصم معدل العائد المطلوب أو تكلفة الفرصة البديلة لرأس المال. بالنسبة للأعمال التجارية: المتوسط ​​المرجح لتكلفة رأس المال (WACC). بالنسبة للاستثمارات الشخصية: عائد الاستثمار البديل المتوقع (على سبيل المثال، 7-10% لسوق الأوراق المالية)."
+        },
+        {
+          "q": "ما هو معدل العائد الداخلي؟",
+          "a": "معدل العائد الداخلي هو معدل الخصم الذي يجعل NPV = 0. إذا كان IRR > العائد المطلوب، فإن الاستثمار جذاب. تم العثور على IRR عن طريق التكرار (لا توجد صيغة مغلقة)."
+        }
+      ]
+    },
+    "bn": {
+      "title": "নেট প্রেজেন্ট ভ্যালু (NPV) ক্যালকুলেটর — বিনিয়োগের সিদ্ধান্তগুলি মূল্যায়ন করুন",
+      "metaDescription": "বিনামূল্যে এনপিভি ক্যালকুলেটর। বিনিয়োগ বিশ্লেষণের জন্য নেট বর্তমান মূল্য এবং অভ্যন্তরীণ আয়ের হার (IRR) গণনা করতে নগদ প্রবাহ এবং ছাড়ের হার লিখুন।",
+      "h1": "নেট প্রেজেন্ট ভ্যালু (NPV) ক্যালকুলেটর",
+      "intro": "একটি বিনিয়োগ সার্থক কিনা তা মূল্যায়ন করতে ভবিষ্যতের নগদ প্রবাহের একটি সিরিজের নেট বর্তমান মূল্য (NPV) গণনা করুন।",
+      "faq_title": "NPV ক্যালকুলেটর FAQ",
+      "ui": {
+        "rate": "ডিসকাউন্ট রেট (%)",
+        "initial": "প্রাথমিক বিনিয়োগ",
+        "cashflows": "বার্ষিক নগদ প্রবাহ (প্রতি লাইনে একটি)",
+        "calculate": "হিসাব করুন"
+      },
+      "faq": [
+        {
+          "q": "নিট বর্তমান মূল্য কি?",
+          "a": "NPV হল সমস্ত ভবিষ্যৎ নগদ প্রবাহের বর্তমান মূল্য, প্রাথমিক বিনিয়োগ বিয়োগ করে, রিটার্নের প্রয়োজনীয় হারে ছাড়। NPV > 0 হলে, বিনিয়োগ মান তৈরি করে। NPV <0 হলে, এটি মান ধ্বংস করে।"
+        },
+        {
+          "q": "আমি কি ডিসকাউন্ট হার ব্যবহার করা উচিত?",
+          "a": "ডিসকাউন্ট রেটটি রিটার্নের প্রয়োজনীয় হার বা মূলধনের সুযোগ খরচ প্রতিফলিত করা উচিত। একটি ব্যবসার জন্য: মূলধনের ওজনযুক্ত গড় খরচ (WACC)। ব্যক্তিগত বিনিয়োগের জন্য: আপনার প্রত্যাশিত বিকল্প বিনিয়োগ রিটার্ন (যেমন, স্টক মার্কেটের জন্য 7-10%)।"
+        },
+        {
+          "q": "IRR কি?",
+          "a": "রিটার্নের অভ্যন্তরীণ হার হল ডিসকাউন্ট রেট যা NPV = 0 করে। যদি IRR > আপনার প্রয়োজনীয় রিটার্ন হয়, বিনিয়োগটি আকর্ষণীয়। IRR পুনরাবৃত্তি দ্বারা পাওয়া যায় (কোন বদ্ধ-ফর্ম সূত্র নেই)।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Калькулятор чистой приведенной стоимости (NPV) — оцените инвестиционные решения",
+      "metaDescription": "Бесплатный калькулятор NPV. Введите денежные потоки и ставку дисконтирования, чтобы рассчитать чистую приведенную стоимость и внутреннюю норму доходности (IRR) для инвестиционного анализа.",
+      "h1": "Калькулятор чистой приведенной стоимости (NPV)",
+      "intro": "Рассчитайте чистую приведенную стоимость (NPV) ряда будущих денежных потоков, чтобы оценить целесообразность инвестиций.",
+      "faq_title": "Калькулятор NPV: часто задаваемые вопросы",
+      "ui": {
+        "rate": "Ставка дисконтирования (%)",
+        "initial": "Первоначальные инвестиции",
+        "cashflows": "Годовые денежные потоки (по одному на строку)",
+        "calculate": "Рассчитать"
+      },
+      "faq": [
+        {
+          "q": "Что такое чистая текущая стоимость?",
+          "a": "NPV — это текущая стоимость всех будущих денежных потоков за вычетом первоначальных инвестиций, дисконтированная с требуемой нормой доходности. Если NPV > 0, инвестиции создают стоимость. Если NPV < 0, это уничтожает ценность."
+        },
+        {
+          "q": "Какую ставку дисконтирования мне следует использовать?",
+          "a": "Ставка дисконтирования должна отражать требуемую норму прибыли или альтернативную стоимость капитала. Для бизнеса: средневзвешенная стоимость капитала (WACC). Для личных инвестиций: ожидаемый доход от альтернативных инвестиций (например, 7–10% для фондового рынка)."
+        },
+        {
+          "q": "Что такое IRR?",
+          "a": "Внутренняя норма доходности — это ставка дисконтирования, при которой NPV = 0. Если IRR > требуемой доходности, инвестиции привлекательны. IRR находится путем итерации (без формулы в закрытой форме)."
+        }
+      ]
+    },
+    "ur": {
+      "title": "نیٹ پریزنٹ ویلیو (NPV) کیلکولیٹر — سرمایہ کاری کے فیصلوں کا جائزہ لیں۔",
+      "metaDescription": "مفت NPV کیلکولیٹر۔ سرمایہ کاری کے تجزیہ کے لیے خالص موجودہ قدر اور واپسی کی داخلی شرح (IRR) کا حساب لگانے کے لیے کیش فلو اور ڈسکاؤنٹ ریٹ درج کریں۔",
+      "h1": "نیٹ پریزنٹ ویلیو (NPV) کیلکولیٹر",
+      "intro": "یہ اندازہ لگانے کے لیے کہ آیا کوئی سرمایہ کاری فائدہ مند ہے یا نہیں، مستقبل کے کیش فلو کی ایک سیریز کی خالص موجودہ قدر (NPV) کا حساب لگائیں۔",
+      "faq_title": "NPV کیلکولیٹر کے اکثر پوچھے گئے سوالات",
+      "ui": {
+        "rate": "رعایت کی شرح (%)",
+        "initial": "ابتدائی سرمایہ کاری",
+        "cashflows": "سالانہ کیش فلو (ایک لائن فی لائن)",
+        "calculate": "حساب لگانا"
+      },
+      "faq": [
+        {
+          "q": "خالص موجودہ قدر کیا ہے؟",
+          "a": "NPV مستقبل کے تمام نقد بہاؤ کی موجودہ قیمت ہے جو ابتدائی سرمایہ کاری کو کم کر کے واپسی کی مطلوبہ شرح پر رعایت کرتی ہے۔ اگر NPV > 0، تو سرمایہ کاری قدر پیدا کرتی ہے۔ اگر NPV <0، تو یہ قدر کو تباہ کر دیتا ہے۔"
+        },
+        {
+          "q": "میں کس ڈسکاؤنٹ کی شرح استعمال کروں؟",
+          "a": "ڈسکاؤنٹ کی شرح کو واپسی کی مطلوبہ شرح یا سرمائے کی موقع کی قیمت کی عکاسی کرنی چاہیے۔ کاروبار کے لیے: سرمائے کی وزنی اوسط قیمت (WACC)۔ ذاتی سرمایہ کاری کے لیے: آپ کی متوقع متبادل سرمایہ کاری کی واپسی (مثال کے طور پر، اسٹاک مارکیٹ کے لیے 7–10%)۔"
+        },
+        {
+          "q": "IRR کیا ہے؟",
+          "a": "واپسی کی اندرونی شرح وہ رعایتی شرح ہے جو NPV = 0 بناتی ہے۔ اگر IRR > آپ کی مطلوبہ واپسی ہے تو سرمایہ کاری پرکشش ہے۔ IRR تکرار کے ذریعہ پایا جاتا ہے (کوئی بند فارم فارمولہ نہیں)۔"
+        }
+      ]
+    }
+  }
+}

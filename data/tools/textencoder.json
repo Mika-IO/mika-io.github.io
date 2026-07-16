@@ -1,0 +1,339 @@
+{
+  "slug": "textencoder",
+  "category": "dev",
+  "icon": "[TE]",
+  "script": "textencoder.js",
+  "widget": "<div id=\"te-app\"><div class=\"field\"><label for=\"te-mode\">{{ui.operation}}</label><select id=\"te-mode\"><option value=\"urlenc\">{{ui.urlencode}}</option><option value=\"urldec\">{{ui.urldecode}}</option><option value=\"htmlenc\">{{ui.htmlencode}}</option><option value=\"htmldec\">{{ui.htmldecode}}</option><option value=\"b64enc\">{{ui.base64encode}}</option><option value=\"b64dec\">{{ui.base64decode}}</option></select></div><div class=\"field\"><label for=\"te-in\">{{ui.input}}</label><textarea id=\"te-in\" rows=\"5\" style=\"width:100%;font-family:monospace;font-size:0.875rem;padding:0.5rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text)\"></textarea></div><button class=\"btn\" id=\"te-go\">{{ui.convert}}</button><div class=\"field\" style=\"margin-top:0.5rem\"><label>{{ui.output}}</label><textarea id=\"te-out\" rows=\"5\" style=\"width:100%;font-family:monospace;font-size:0.875rem;padding:0.5rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text)\" readonly></textarea></div></div>",
+  "strings": {
+    "en": {
+      "title": "Text Encoder and Decoder - URL, HTML and Base64",
+      "metaDescription": "Free text encoder. URL, HTML entity and Base64 encode/decode.",
+      "h1": "Text Encoder and Decoder",
+      "intro": "Encode or decode text using URL encoding, HTML entities or Base64.",
+      "faq_title": "Encoding FAQ",
+      "ui": {
+        "operation": "Operation",
+        "input": "Input",
+        "output": "Output",
+        "convert": "Convert",
+        "urlencode": "URL Encode",
+        "urldecode": "URL Decode",
+        "htmlencode": "HTML Encode",
+        "htmldecode": "HTML Decode",
+        "base64encode": "Base64 Encode",
+        "base64decode": "Base64 Decode"
+      },
+      "faq": [
+        {
+          "q": "When do I need URL encoding?",
+          "a": "URLs can only contain certain ASCII characters. Spaces and special chars must be percent-encoded. Example: \"Hello World\" becomes \"Hello%20World\"."
+        },
+        {
+          "q": "What are HTML entities?",
+          "a": "HTML entities represent special HTML characters. < becomes &lt;, > becomes &gt;, & becomes &amp;. Always HTML-encode user input to prevent XSS attacks."
+        },
+        {
+          "q": "What is Base64?",
+          "a": "Base64 encodes binary data as ASCII text. Used to embed images in HTML (data URLs) and transmit binary data in JSON. Output is ~33% larger than input."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Codificador e Decodificador de Texto",
+      "metaDescription": "Codificador de texto gratuito. URL, entidades HTML e Base64.",
+      "h1": "Codificador e Decodificador de Texto",
+      "intro": "Codifique ou decodifique texto usando codificacao URL, entidades HTML ou Base64.",
+      "faq_title": "FAQ codificacao",
+      "ui": {
+        "operation": "Operacao",
+        "input": "Entrada",
+        "output": "Saida",
+        "convert": "Converter",
+        "urlencode": "Codificação de URL",
+        "urldecode": "Decodificação de URL",
+        "htmlencode": "Codificação HTML",
+        "htmldecode": "Decodificação HTML",
+        "base64encode": "Codificação Base64",
+        "base64decode": "Decodificação Base64"
+      },
+      "faq": [
+        {
+          "q": "Quando preciso de codificacao URL?",
+          "a": "URLs so podem conter certos caracteres ASCII. Caracteres especiais devem ser codificados em porcentagem."
+        },
+        {
+          "q": "O que sao entidades HTML?",
+          "a": "Entidades HTML representam caracteres especiais em HTML. < torna-se &lt;, > torna-se &gt;."
+        },
+        {
+          "q": "O que e Base64?",
+          "a": "Base64 codifica dados binarios como texto ASCII. Usado para incorporar imagens em HTML e transmitir dados binarios em JSON."
+        }
+      ]
+    },
+    "zh": {
+      "title": "文本编码器和解码器 - URL、HTML 和 Base64",
+      "metaDescription": "自由文本编码器。 URL、HTML 实体和 Base64 编码/解码。",
+      "h1": "文本编码器和解码器",
+      "intro": "使用 URL 编码、HTML 实体或 Base64 对文本进行编码或解码。",
+      "faq_title": "编码常见问题解答",
+      "ui": {
+        "operation": "操作",
+        "input": "输入",
+        "output": "输出",
+        "convert": "转换",
+        "urlencode": "网址编码",
+        "urldecode": "网址解码",
+        "htmlencode": "HTML 编码",
+        "htmldecode": "HTML 解码",
+        "base64encode": "Base64 编码",
+        "base64decode": "Base64解码"
+      },
+      "faq": [
+        {
+          "q": "什么时候需要URL编码？",
+          "a": "URL 只能包含某些 ASCII 字符。空格和特殊字符必须进行百分比编码。示例：“Hello World”变为“Hello%20World”。"
+        },
+        {
+          "q": "什么是 HTML 实体？",
+          "a": "HTML 实体代表特殊的 HTML 字符。 < 变为 <，> 变为 >，& 变为 &。始终对用户输入进行 HTML 编码以防止 XSS 攻击。"
+        },
+        {
+          "q": "什么是 Base64？",
+          "a": "Base64 将二进制数据编码为 ASCII 文本。用于在 HTML（数据 URL）中嵌入图像并以 JSON 传输二进制数据。输出比输入大约 33%。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "टेक्स्ट एनकोडर और डिकोडर - यूआरएल, एचटीएमएल और बेस64",
+      "metaDescription": "मुफ़्त टेक्स्ट एनकोडर. यूआरएल, एचटीएमएल इकाई और बेस64 एनकोड/डीकोड।",
+      "h1": "टेक्स्ट एनकोडर और डिकोडर",
+      "intro": "यूआरएल एन्कोडिंग, HTML इकाइयों या बेस 64 का उपयोग करके टेक्स्ट को एनकोड या डीकोड करें।",
+      "faq_title": "एन्कोडिंग अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "operation": "ऑपरेशन",
+        "input": "इनपुट",
+        "output": "आउटपुट",
+        "convert": "कनवर्ट करें",
+        "urlencode": "यूआरएल एनकोड",
+        "urldecode": "यूआरएल डिकोड",
+        "htmlencode": "HTML एनकोड",
+        "htmldecode": "HTML डिकोड",
+        "base64encode": "बेस64 एन्कोड",
+        "base64decode": "बेस64 डिकोड"
+      },
+      "faq": [
+        {
+          "q": "मुझे यूआरएल एन्कोडिंग की आवश्यकता कब होगी?",
+          "a": "URL में केवल कुछ ASCII वर्ण हो सकते हैं। रिक्त स्थान और विशेष वर्ण प्रतिशत-एन्कोडेड होने चाहिए। उदाहरण: \"हैलो वर्ल्ड\" \"हैलो%20वर्ल्ड\" बन जाता है।"
+        },
+        {
+          "q": "HTML इकाइयाँ क्या हैं?",
+          "a": "HTML इकाइयाँ विशेष HTML वर्णों का प्रतिनिधित्व करती हैं। < बन जाता है <, > बन जाता है >, & बन जाता है &। XSS हमलों को रोकने के लिए हमेशा उपयोगकर्ता इनपुट को HTML-एनकोड करें।"
+        },
+        {
+          "q": "बेस64 क्या है?",
+          "a": "बेस64 बाइनरी डेटा को ASCII टेक्स्ट के रूप में एनकोड करता है। HTML (डेटा URL) में छवियों को एम्बेड करने और JSON में बाइनरी डेटा संचारित करने के लिए उपयोग किया जाता है। आउटपुट इनपुट से ~33% बड़ा है।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Codificador y decodificador de texto: URL, HTML y Base64",
+      "metaDescription": "Codificador de texto libre. URL, entidad HTML y codificación/decodificación Base64.",
+      "h1": "Codificador y decodificador de texto",
+      "intro": "Codifique o decodifique texto utilizando codificación URL, entidades HTML o Base64.",
+      "faq_title": "Preguntas frecuentes sobre codificación",
+      "ui": {
+        "operation": "Operación",
+        "input": "Entrada",
+        "output": "Salida",
+        "convert": "Convertir",
+        "urlencode": "Codificación de URL",
+        "urldecode": "Decodificación de URL",
+        "htmlencode": "Codificación HTML",
+        "htmldecode": "Decodificación HTML",
+        "base64encode": "Codificación Base64",
+        "base64decode": "Decodificación Base64"
+      },
+      "faq": [
+        {
+          "q": "¿Cuándo necesito codificación de URL?",
+          "a": "Las URL solo pueden contener ciertos caracteres ASCII. Los espacios y caracteres especiales deben estar codificados en porcentaje. Ejemplo: \"Hola Mundo\" se convierte en \"Hola%20Mundo\"."
+        },
+        {
+          "q": "¿Qué son las entidades HTML?",
+          "a": "Las entidades HTML representan caracteres HTML especiales. < se convierte en <, > se convierte en >, & se convierte en &. Codifique siempre en HTML la entrada del usuario para evitar ataques XSS."
+        },
+        {
+          "q": "¿Qué es Base64?",
+          "a": "Base64 codifica datos binarios como texto ASCII. Se utiliza para incrustar imágenes en HTML (URL de datos) y transmitir datos binarios en JSON. La producción es ~33% mayor que la entrada."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Encodeur et décodeur de texte - URL, HTML et Base64",
+      "metaDescription": "Encodeur de texte gratuit. URL, entité HTML et encodage/décodage Base64.",
+      "h1": "Encodeur et décodeur de texte",
+      "intro": "Encodez ou décodez du texte à l'aide de l'encodage URL, d'entités HTML ou de Base64.",
+      "faq_title": "FAQ sur l'encodage",
+      "ui": {
+        "operation": "Fonctionnement",
+        "input": "Entrée",
+        "output": "Sortie",
+        "convert": "Convertir",
+        "urlencode": "Encodage d'URL",
+        "urldecode": "Décodage d'URL",
+        "htmlencode": "Encodage HTML",
+        "htmldecode": "Décoder HTML",
+        "base64encode": "Encodage Base64",
+        "base64decode": "Décodage Base64"
+      },
+      "faq": [
+        {
+          "q": "Quand ai-je besoin d’encoder une URL ?",
+          "a": "Les URL ne peuvent contenir que certains caractères ASCII. Les espaces et les caractères spéciaux doivent être codés en pourcentage. Exemple : \"Hello World\" devient \"Hello%20World\"."
+        },
+        {
+          "q": "Que sont les entités HTML ?",
+          "a": "Les entités HTML représentent des caractères HTML spéciaux. < devient <, > devient > et & devient &. Encodez toujours les entrées utilisateur en HTML pour empêcher les attaques XSS."
+        },
+        {
+          "q": "Qu’est-ce que Base64 ?",
+          "a": "Base64 code les données binaires sous forme de texte ASCII. Utilisé pour intégrer des images en HTML (URL de données) et transmettre des données binaires en JSON. La sortie est environ 33 % plus grande que l’entrée."
+        }
+      ]
+    },
+    "ar": {
+      "title": "أداة تشفير النص ووحدة فك ترميزه - URL وHTML وBase64",
+      "metaDescription": "برنامج تشفير النص المجاني. عنوان URL وكيان HTML وترميز/فك تشفير Base64.",
+      "h1": "تشفير النص وفك التشفير",
+      "intro": "قم بتشفير النص أو فك تشفيره باستخدام ترميز URL أو كيانات HTML أو Base64.",
+      "faq_title": "الأسئلة الشائعة حول التشفير",
+      "ui": {
+        "operation": "العملية",
+        "input": "الإدخال",
+        "output": "الإخراج",
+        "convert": "تحويل",
+        "urlencode": "ترميز URL",
+        "urldecode": "فك شفرة URL",
+        "htmlencode": "ترميز HTML",
+        "htmldecode": "فك ترميز HTML",
+        "base64encode": "ترميز Base64",
+        "base64decode": "فك تشفير Base64"
+      },
+      "faq": [
+        {
+          "q": "متى أحتاج إلى ترميز URL؟",
+          "a": "يمكن أن تحتوي عناوين URL على أحرف ASCII معينة فقط. يجب أن تكون المسافات والأحرف الخاصة مشفرة بنسبة مئوية. مثال: يتحول \"Hello World\" إلى \"Hello%20World\"."
+        },
+        {
+          "q": "ما هي كيانات HTML؟",
+          "a": "تمثل كيانات HTML أحرف HTML خاصة. < يصبح <، > يصبح >، & يصبح &. قم دائمًا بإدخال المستخدم بتشفير HTML لمنع هجمات XSS."
+        },
+        {
+          "q": "ما هو Base64؟",
+          "a": "يقوم Base64 بتشفير البيانات الثنائية كنص ASCII. يستخدم لتضمين الصور في HTML (عناوين URL للبيانات) ونقل البيانات الثنائية في JSON. الإخراج أكبر بنسبة 33% تقريبًا من الإدخال."
+        }
+      ]
+    },
+    "bn": {
+      "title": "টেক্সট এনকোডার এবং ডিকোডার - URL, HTML এবং Base64",
+      "metaDescription": "বিনামূল্যে পাঠ্য এনকোডার. URL, HTML সত্তা এবং Base64 এনকোড/ডিকোড।",
+      "h1": "টেক্সট এনকোডার এবং ডিকোডার",
+      "intro": "URL এনকোডিং, HTML সত্তা বা Base64 ব্যবহার করে পাঠ্য এনকোড বা ডিকোড করুন।",
+      "faq_title": "এনকোডিং FAQ",
+      "ui": {
+        "operation": "অপারেশন",
+        "input": "ইনপুট",
+        "output": "আউটপুট",
+        "convert": "রূপান্তর করুন",
+        "urlencode": "ইউআরএল এনকোড",
+        "urldecode": "ইউআরএল ডিকোড",
+        "htmlencode": "এইচটিএমএল এনকোড",
+        "htmldecode": "এইচটিএমএল ডিকোড",
+        "base64encode": "বেস64 এনকোড",
+        "base64decode": "বেস64 ডিকোড"
+      },
+      "faq": [
+        {
+          "q": "আমার কখন URL এনকোডিং দরকার?",
+          "a": "URL-এ শুধুমাত্র নির্দিষ্ট ASCII অক্ষর থাকতে পারে। স্পেস এবং বিশেষ অক্ষর অবশ্যই শতাংশ-এনকোড করা উচিত। উদাহরণ: \"হ্যালো ওয়ার্ল্ড\" হয়ে যায় \"হ্যালো% 20 ওয়ার্ল্ড\"।"
+        },
+        {
+          "q": "HTML সত্তা কি?",
+          "a": "HTML সত্তা বিশেষ HTML অক্ষর উপস্থাপন করে। < হয়ে যায় <, > হয়ে যায়>, এবং হয়ে যায় &। XSS আক্রমণ প্রতিরোধ করতে সর্বদা HTML-এনকোড ব্যবহারকারী ইনপুট।"
+        },
+        {
+          "q": "Base64 কি?",
+          "a": "Base64 ASCII টেক্সট হিসাবে বাইনারি ডেটা এনকোড করে। এইচটিএমএল (ডেটা ইউআরএল) এ ছবি এম্বেড করতে এবং JSON-এ বাইনারি ডেটা ট্রান্সমিট করতে ব্যবহৃত হয়। আউটপুট ইনপুট থেকে ~33% বড়।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Кодировщик и декодер текста — URL, HTML и Base64",
+      "metaDescription": "Бесплатный текстовый кодер. URL-адрес, объект HTML и кодирование/декодирование Base64.",
+      "h1": "Текстовый кодер и декодер",
+      "intro": "Кодируйте или декодируйте текст, используя кодировку URL, объекты HTML или Base64.",
+      "faq_title": "Часто задаваемые вопросы по кодированию",
+      "ui": {
+        "operation": "Операция",
+        "input": "Ввод",
+        "output": "Выход",
+        "convert": "Конвертировать",
+        "urlencode": "URL-кодирование",
+        "urldecode": "URL-декодирование",
+        "htmlencode": "HTML-кодирование",
+        "htmldecode": "HTML-декодирование",
+        "base64encode": "Кодирование Base64",
+        "base64decode": "Декодирование Base64"
+      },
+      "faq": [
+        {
+          "q": "Когда мне нужно кодирование URL?",
+          "a": "URL-адреса могут содержать только определенные символы ASCII. Пробелы и специальные символы должны быть закодированы в процентах. Пример: «Hello World» становится «Hello%20World»."
+        },
+        {
+          "q": "Что такое объекты HTML?",
+          "a": "Объекты HTML представляют собой специальные символы HTML. < становится <, > становится >, & становится &. Всегда кодируйте пользовательский ввод в HTML, чтобы предотвратить XSS-атаки."
+        },
+        {
+          "q": "Что такое Base64?",
+          "a": "Base64 кодирует двоичные данные как текст ASCII. Используется для встраивания изображений в HTML (URL-адреса данных) и передачи двоичных данных в формате JSON. Выходные данные примерно на 33 % больше входных."
+        }
+      ]
+    },
+    "ur": {
+      "title": "ٹیکسٹ انکوڈر اور ڈیکوڈر - URL، HTML اور Base64",
+      "metaDescription": "مفت ٹیکسٹ انکوڈر۔ URL، HTML entity اور Base64 encode/decode۔",
+      "h1": "ٹیکسٹ انکوڈر اور ڈیکوڈر",
+      "intro": "URL انکوڈنگ، HTML اداروں یا Base64 کا استعمال کرتے ہوئے متن کو انکوڈ یا ڈی کوڈ کریں۔",
+      "faq_title": "انکوڈنگ اکثر پوچھے گئے سوالات",
+      "ui": {
+        "operation": "آپریشن",
+        "input": "ان پٹ",
+        "output": "آؤٹ پٹ",
+        "convert": "تبدیل کریں",
+        "urlencode": "یو آر ایل انکوڈ",
+        "urldecode": "یو آر ایل ڈی کوڈ",
+        "htmlencode": "HTML انکوڈ",
+        "htmldecode": "ایچ ٹی ایم ایل ڈی کوڈ",
+        "base64encode": "بیس 64 انکوڈ",
+        "base64decode": "بیس 64 ڈی کوڈ"
+      },
+      "faq": [
+        {
+          "q": "مجھے یو آر ایل انکوڈنگ کی کب ضرورت ہے؟",
+          "a": "URLs میں صرف مخصوص ASCII حروف شامل ہو سکتے ہیں۔ خالی جگہوں اور خصوصی حروف کو فیصد انکوڈ کیا جانا چاہیے۔ مثال: \"Hello World\" \"Hello%20World\" بن جاتا ہے۔"
+        },
+        {
+          "q": "HTML اداروں کیا ہیں؟",
+          "a": "HTML ہستی خصوصی HTML حروف کی نمائندگی کرتی ہیں۔ < بن جاتا ہے <، > بن جاتا ہے >، اور بن جاتا ہے اور۔ XSS حملوں کو روکنے کے لیے ہمیشہ HTML-encode صارف کے ان پٹ کو کریں۔"
+        },
+        {
+          "q": "بیس 64 کیا ہے؟",
+          "a": "Base64 بائنری ڈیٹا کو ASCII متن کے بطور انکوڈ کرتا ہے۔ ایچ ٹی ایم ایل (ڈیٹا یو آر ایل) میں تصاویر کو سرایت کرنے اور JSON میں بائنری ڈیٹا منتقل کرنے کے لیے استعمال کیا جاتا ہے۔ آؤٹ پٹ ان پٹ سے ~33% بڑا ہے۔"
+        }
+      ]
+    }
+  }
+}

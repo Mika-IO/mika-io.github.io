@@ -3,7 +3,7 @@
   "category": "math",
   "icon": "🔢",
   "script": "octalconverter.js",
-  "widget": "<form id=\"tool-form\" onsubmit=\"return false;\"><div class=\"input-group\"><label for=\"oct-input-value\" id=\"oct-lbl-value\">Value</label><input type=\"text\" id=\"oct-input-value\" placeholder=\"e.g. 255\" autocomplete=\"off\" /></div><div class=\"input-group\"><label for=\"oct-input-base\" id=\"oct-lbl-base\">Input Base</label><select id=\"oct-input-base\"><option value=\"10\">Decimal (Base 10)</option><option value=\"2\">Binary (Base 2)</option><option value=\"8\">Octal (Base 8)</option><option value=\"16\">Hexadecimal (Base 16)</option></select></div><button type=\"submit\" id=\"oct-btn-convert\">Convert</button><div id=\"oct-result\" class=\"result-grid\" style=\"display:none\"><div class=\"result-row\"><span class=\"result-label\">Binary (Base 2)</span><span class=\"result-value\" id=\"oct-out-bin\"></span></div><div class=\"result-row\"><span class=\"result-label\">Octal (Base 8)</span><span class=\"result-value\" id=\"oct-out-oct\"></span></div><div class=\"result-row\"><span class=\"result-label\">Decimal (Base 10)</span><span class=\"result-value\" id=\"oct-out-dec\"></span></div><div class=\"result-row\"><span class=\"result-label\">Hexadecimal (Base 16)</span><span class=\"result-value\" id=\"oct-out-hex\"></span></div></div><p id=\"oct-error\" class=\"tool-error\" style=\"display:none\"></p></form>",
+  "widget": "<form id=\"tool-form\" onsubmit=\"return false;\"><div class=\"input-group\"><label for=\"oct-input-value\" id=\"oct-lbl-value\">{{ui.label1}}</label><input type=\"text\" id=\"oct-input-value\" placeholder=\"e.g. 255\" autocomplete=\"off\" /></div><div class=\"input-group\"><label for=\"oct-input-base\" id=\"oct-lbl-base\">{{ui.label2}}</label><select id=\"oct-input-base\"><option value=\"10\">{{ui.decimalbase10}}</option><option value=\"2\">{{ui.binarybase2}}</option><option value=\"8\">{{ui.octalbase8}}</option><option value=\"16\">{{ui.hexadecimalbase16}}</option></select></div><button type=\"submit\" id=\"oct-btn-convert\">{{ui.btn}}</button><div id=\"oct-result\" class=\"result-grid\" style=\"display:none\"><div class=\"result-row\"><span class=\"result-label\">{{ui.binarybase2}}</span><span class=\"result-value\" id=\"oct-out-bin\"></span></div><div class=\"result-row\"><span class=\"result-label\">{{ui.octalbase8}}</span><span class=\"result-value\" id=\"oct-out-oct\"></span></div><div class=\"result-row\"><span class=\"result-label\">{{ui.decimalbase10}}</span><span class=\"result-value\" id=\"oct-out-dec\"></span></div><div class=\"result-row\"><span class=\"result-label\">{{ui.hexadecimalbase16}}</span><span class=\"result-value\" id=\"oct-out-hex\"></span></div></div><p id=\"oct-error\" class=\"tool-error\" style=\"display:none\"></p></form>",
   "strings": {
     "en": {
       "title": "Octal Converter — Convert Between Binary, Octal, Decimal, and Hex",
@@ -14,12 +14,25 @@
       "ui": {
         "label1": "Value",
         "label2": "Input Base",
-        "btn": "Convert"
+        "btn": "Convert",
+        "decimalbase10": "Decimal (Base 10)",
+        "binarybase2": "Binary (Base 2)",
+        "octalbase8": "Octal (Base 8)",
+        "hexadecimalbase16": "Hexadecimal (Base 16)"
       },
       "faq": [
-        { "q": "What is octal (base 8)?", "a": "Octal is a numeral system that uses 8 digits: 0 through 7. It is commonly used in computing as a compact representation of binary data, since each octal digit maps to exactly three binary digits." },
-        { "q": "How do I convert decimal to octal?", "a": "To convert a decimal number to octal, repeatedly divide the number by 8 and record the remainders. Reading the remainders from bottom to top gives the octal representation. For example, 255 ÷ 8 = 31 remainder 7, 31 ÷ 8 = 3 remainder 7, 3 ÷ 8 = 0 remainder 3, so 255 in decimal is 377 in octal." },
-        { "q": "How does this tool handle hexadecimal input?", "a": "This tool accepts standard hexadecimal input with digits 0–9 and letters A–F (case-insensitive). It converts your hex value to its decimal equivalent first, then derives binary and octal representations automatically." }
+        {
+          "q": "What is octal (base 8)?",
+          "a": "Octal is a numeral system that uses 8 digits: 0 through 7. It is commonly used in computing as a compact representation of binary data, since each octal digit maps to exactly three binary digits."
+        },
+        {
+          "q": "How do I convert decimal to octal?",
+          "a": "To convert a decimal number to octal, repeatedly divide the number by 8 and record the remainders. Reading the remainders from bottom to top gives the octal representation. For example, 255 ÷ 8 = 31 remainder 7, 31 ÷ 8 = 3 remainder 7, 3 ÷ 8 = 0 remainder 3, so 255 in decimal is 377 in octal."
+        },
+        {
+          "q": "How does this tool handle hexadecimal input?",
+          "a": "This tool accepts standard hexadecimal input with digits 0–9 and letters A–F (case-insensitive). It converts your hex value to its decimal equivalent first, then derives binary and octal representations automatically."
+        }
       ]
     },
     "pt": {
@@ -31,12 +44,265 @@
       "ui": {
         "label1": "Valor",
         "label2": "Base de Entrada",
-        "btn": "Converter"
+        "btn": "Converter",
+        "decimalbase10": "Decimais (Base 10)",
+        "binarybase2": "Binário (Base 2)",
+        "octalbase8": "Octal (Base 8)",
+        "hexadecimalbase16": "Hexadecimal (Base 16)"
       },
       "faq": [
-        { "q": "O que é octal (base 8)?", "a": "O sistema octal é um sistema de numeração que usa 8 dígitos: de 0 a 7. É comumente usado em computação como uma representação compacta de dados binários, pois cada dígito octal corresponde exatamente a três dígitos binários." },
-        { "q": "Como converter decimal para octal?", "a": "Para converter um número decimal para octal, divida o número repetidamente por 8 e registre os restos. Lendo os restos de baixo para cima, obtém-se a representação octal. Por exemplo, 255 ÷ 8 = 31 resto 7, 31 ÷ 8 = 3 resto 7, 3 ÷ 8 = 0 resto 3, portanto 255 em decimal é 377 em octal." },
-        { "q": "Como esta ferramenta lida com a entrada hexadecimal?", "a": "Esta ferramenta aceita entrada hexadecimal padrão com dígitos 0–9 e letras A–F (sem distinção entre maiúsculas e minúsculas). Ela converte o valor hexadecimal para seu equivalente decimal primeiro e, em seguida, deriva automaticamente as representações em binário e octal." }
+        {
+          "q": "O que é octal (base 8)?",
+          "a": "O sistema octal é um sistema de numeração que usa 8 dígitos: de 0 a 7. É comumente usado em computação como uma representação compacta de dados binários, pois cada dígito octal corresponde exatamente a três dígitos binários."
+        },
+        {
+          "q": "Como converter decimal para octal?",
+          "a": "Para converter um número decimal para octal, divida o número repetidamente por 8 e registre os restos. Lendo os restos de baixo para cima, obtém-se a representação octal. Por exemplo, 255 ÷ 8 = 31 resto 7, 31 ÷ 8 = 3 resto 7, 3 ÷ 8 = 0 resto 3, portanto 255 em decimal é 377 em octal."
+        },
+        {
+          "q": "Como esta ferramenta lida com a entrada hexadecimal?",
+          "a": "Esta ferramenta aceita entrada hexadecimal padrão com dígitos 0–9 e letras A–F (sem distinção entre maiúsculas e minúsculas). Ela converte o valor hexadecimal para seu equivalente decimal primeiro e, em seguida, deriva automaticamente as representações em binário e octal."
+        }
+      ]
+    },
+    "zh": {
+      "title": "八进制转换器 — 在二进制、八进制、十进制和十六进制之间转换",
+      "metaDescription": "免费的八进制转换器工具。立即转换基数 2（二进制）、基数 8（八进制）、基数 10（十进制）和基数 16（十六进制）之间的任何数字。",
+      "h1": "八进制数转换器",
+      "intro": "输入任意二进制、八进制、十进制或十六进制数字，即可立即查看所有四种表示形式。",
+      "faq_title": "八进制转换器常见问题解答",
+      "ui": {
+        "label1": "价值",
+        "label2": "输入底座",
+        "btn": "转换",
+        "decimalbase10": "十进制（以 10 为底）",
+        "binarybase2": "二进制（基数 2）",
+        "octalbase8": "八进制（基数 8）",
+        "hexadecimalbase16": "十六进制（基数 16）"
+      },
+      "faq": [
+        {
+          "q": "什么是八进制（基数为 8）？",
+          "a": "八进制是一种使用 8 位数字的数字系统：0 到 7。它通常在计算中用作二进制数据的紧凑表示，因为每个八进制数字恰好映射到三个二进制数字。"
+        },
+        {
+          "q": "如何将十进制转换为八进制？",
+          "a": "要将十进制数转换为八进制数，请重复将该数除以 8 并记录余数。从下到上读取余数给出八进制表示形式。例如，255 ÷ 8 = 31 余 7、31 ÷ 8 = 3 余 7、3 ÷ 8 = 0 余 3，因此十进制的 255 八进制的 377。"
+        },
+        {
+          "q": "该工具如何处理十六进制输入？",
+          "a": "该工具接受包含数字 0–9 和字母 A–F（不区分大小写）的标准十六进制输入。它首先将十六进制值转换为其等值的十进制值，然后自动派生二进制和八进制表示形式。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "ऑक्टल कनवर्टर - बाइनरी, ऑक्टल, दशमलव और हेक्स के बीच कनवर्ट करें",
+      "metaDescription": "मुफ़्त ऑक्टल कनवर्टर उपकरण। आधार 2 (बाइनरी), आधार 8 (ऑक्टल), आधार 10 (दशमलव), और आधार 16 (हेक्स) के बीच किसी भी संख्या को तुरंत रूपांतरित करें।",
+      "h1": "अष्टाधारी संख्या परिवर्तक",
+      "intro": "बाइनरी, ऑक्टल, दशमलव या हेक्साडेसिमल में कोई भी संख्या दर्ज करें और तुरंत सभी चार प्रतिनिधित्व देखें।",
+      "faq_title": "ऑक्टल कन्वर्टर अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "label1": "मूल्य",
+        "label2": "इनपुट बेस",
+        "btn": "कनवर्ट करें",
+        "decimalbase10": "दशमलव (आधार 10)",
+        "binarybase2": "बाइनरी (बेस 2)",
+        "octalbase8": "ऑक्टल (बेस 8)",
+        "hexadecimalbase16": "हेक्साडेसिमल (बेस 16)"
+      },
+      "faq": [
+        {
+          "q": "ऑक्टल (आधार 8) क्या है?",
+          "a": "ऑक्टल एक अंक प्रणाली है जो 8 अंकों का उपयोग करती है: 0 से 7. इसका उपयोग आमतौर पर बाइनरी डेटा के कॉम्पैक्ट प्रतिनिधित्व के रूप में कंप्यूटिंग में किया जाता है, क्योंकि प्रत्येक ऑक्टल अंक बिल्कुल तीन बाइनरी अंकों को मैप करता है।"
+        },
+        {
+          "q": "मैं दशमलव को अष्टक में कैसे परिवर्तित करूं?",
+          "a": "दशमलव संख्या को अष्टक में बदलने के लिए, संख्या को बार-बार 8 से विभाजित करें और शेषफल रिकॉर्ड करें। शेषफलों को नीचे से ऊपर तक पढ़ने पर अष्टक निरूपण प्राप्त होता है। उदाहरण के लिए, 255 ÷ 8 = 31 शेष 7, 31 ÷ 8 = 3 शेष 7, 3 ÷ 8 = 0 शेष 3, इसलिए दशमलव में 255 अष्टक में 377 है।"
+        },
+        {
+          "q": "यह उपकरण हेक्साडेसिमल इनपुट को कैसे संभालता है?",
+          "a": "यह उपकरण 0-9 अंक और अक्षर ए-एफ (केस-असंवेदनशील) के साथ मानक हेक्साडेसिमल इनपुट स्वीकार करता है। यह पहले आपके हेक्स मान को उसके दशमलव समकक्ष में परिवर्तित करता है, फिर स्वचालित रूप से बाइनरी और ऑक्टल प्रतिनिधित्व प्राप्त करता है।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Convertidor octal: conversión entre binario, octal, decimal y hexadecimal",
+      "metaDescription": "Herramienta gratuita de conversión octal. Convierta instantáneamente cualquier número entre base 2 (binario), base 8 (octal), base 10 (decimal) y base 16 (hexadecimal).",
+      "h1": "Convertidor de números octales",
+      "intro": "Ingrese cualquier número en binario, octal, decimal o hexadecimal y vea instantáneamente las cuatro representaciones.",
+      "faq_title": "Preguntas frecuentes sobre el convertidor octal",
+      "ui": {
+        "label1": "Valor",
+        "label2": "Base de entrada",
+        "btn": "Convertir",
+        "decimalbase10": "Decimales (base 10)",
+        "binarybase2": "Binario (Base 2)",
+        "octalbase8": "Octal (Base 8)",
+        "hexadecimalbase16": "Hexadecimal (Base 16)"
+      },
+      "faq": [
+        {
+          "q": "¿Qué es octal (base 8)?",
+          "a": "Octal es un sistema numérico que utiliza 8 dígitos: del 0 al 7. Se usa comúnmente en informática como una representación compacta de datos binarios, ya que cada dígito octal se asigna a exactamente tres dígitos binarios."
+        },
+        {
+          "q": "¿Cómo convierto decimal a octal?",
+          "a": "Para convertir un número decimal a octal, divida repetidamente el número entre 8 y registre los restos. Leer los restos de abajo hacia arriba da la representación octal. Por ejemplo, 255 ÷ 8 = 31 resto 7, 31 ÷ 8 = 3 resto 7, 3 ÷ 8 = 0 resto 3, por lo que 255 en decimal es 377 en octal."
+        },
+        {
+          "q": "¿Cómo maneja esta herramienta la entrada hexadecimal?",
+          "a": "Esta herramienta acepta entrada hexadecimal estándar con dígitos del 0 al 9 y letras de la A a la F (no distingue entre mayúsculas y minúsculas). Primero convierte su valor hexadecimal a su equivalente decimal y luego deriva representaciones binarias y octales automáticamente."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Convertisseur octal - Convertissez entre binaire, octal, décimal et hexadécimal",
+      "metaDescription": "Outil de conversion octal gratuit. Convertissez instantanément n'importe quel nombre entre base 2 (binaire), base 8 (octal), base 10 (décimal) et base 16 (hex).",
+      "h1": "Convertisseur de nombres octaux",
+      "intro": "Entrez n'importe quel nombre en binaire, octal, décimal ou hexadécimal et voyez instantanément les quatre représentations.",
+      "faq_title": "FAQ sur le convertisseur octal",
+      "ui": {
+        "label1": "Valeur",
+        "label2": "Base d'entrée",
+        "btn": "Convertir",
+        "decimalbase10": "Décimal (Base 10)",
+        "binarybase2": "Binaire (Base 2)",
+        "octalbase8": "Octal (Base 8)",
+        "hexadecimalbase16": "Hexadécimal (Base 16)"
+      },
+      "faq": [
+        {
+          "q": "Qu'est-ce que l'octal (base 8) ?",
+          "a": "Octal est un système numérique qui utilise 8 chiffres : de 0 à 7. Il est couramment utilisé en informatique comme représentation compacte de données binaires, puisque chaque chiffre octal correspond à exactement trois chiffres binaires."
+        },
+        {
+          "q": "Comment convertir un nombre décimal en octal ?",
+          "a": "Pour convertir un nombre décimal en octal, divisez le nombre à plusieurs reprises par 8 et enregistrez les restes. La lecture des restes de bas en haut donne la représentation octale. Par exemple, 255 ÷ 8 = 31 reste 7, 31 ÷ 8 = 3 reste 7, 3 ÷ 8 = 0 reste 3, donc 255 en décimal équivaut à 377 en octal."
+        },
+        {
+          "q": "Comment cet outil gère-t-il la saisie hexadécimale ?",
+          "a": "Cet outil accepte la saisie hexadécimale standard avec les chiffres 0 à 9 et les lettres A à F (insensible à la casse). Il convertit d'abord votre valeur hexadécimale en son équivalent décimal, puis dérive automatiquement les représentations binaires et octales."
+        }
+      ]
+    },
+    "ar": {
+      "title": "محول ثماني - تحويل بين الثنائي، الثماني، العشري، والست عشري",
+      "metaDescription": "أداة تحويل ثماني مجانية. تحويل أي رقم على الفور بين الأساس 2 (ثنائي)، وأساس 8 (ثماني)، وأساس 10 (عشري)، وأساس 16 (ست عشري).",
+      "h1": "محول الرقم الثماني",
+      "intro": "أدخل أي رقم بالنظام الثنائي أو الثماني أو العشري أو السداسي العشري وشاهد على الفور جميع التمثيلات الأربعة.",
+      "faq_title": "الأسئلة الشائعة حول محول Octal",
+      "ui": {
+        "label1": "القيمة",
+        "label2": "قاعدة الإدخال",
+        "btn": "تحويل",
+        "decimalbase10": "عشري (الأساس 10)",
+        "binarybase2": "ثنائي (الأساس 2)",
+        "octalbase8": "ثماني (قاعدة 8)",
+        "hexadecimalbase16": "سداسي عشري (الأساس 16)"
+      },
+      "faq": [
+        {
+          "q": "ما هو الثماني (قاعدة 8)؟",
+          "a": "الثماني هو نظام رقمي يستخدم 8 أرقام: من 0 إلى 7. ويستخدم بشكل شائع في الحوسبة كتمثيل مضغوط للبيانات الثنائية، حيث أن كل رقم ثماني يعين ثلاثة أرقام ثنائية بالضبط."
+        },
+        {
+          "q": "كيف يمكنني تحويل الرقم العشري إلى ثماني؟",
+          "a": "لتحويل رقم عشري إلى رقم ثماني، قم بتقسيم الرقم بشكل متكرر على 8 وسجل الباقي. قراءة الباقي من الأسفل إلى الأعلى يعطي التمثيل الثماني. على سبيل المثال، 255 ÷ 8 = 31 الباقي 7، 31 ÷ 8 = 3 الباقي 7، 3 ÷ 8 = 0 الباقي 3، لذا فإن 255 بالنظام العشري هو 377 بالنظام الثماني."
+        },
+        {
+          "q": "كيف تتعامل هذه الأداة مع الإدخال الست عشري؟",
+          "a": "تقبل هذه الأداة الإدخال القياسي السداسي العشري بالأرقام من 0 إلى 9 والأحرف من A إلى F (غير حساسة لحالة الأحرف). يقوم بتحويل القيمة السداسية إلى مكافئها العشري أولاً، ثم يشتق تمثيلات ثنائية وثمانية تلقائيًا."
+        }
+      ]
+    },
+    "bn": {
+      "title": "অক্টাল কনভার্টার - বাইনারি, অক্টাল, দশমিক এবং হেক্সের মধ্যে রূপান্তর করুন",
+      "metaDescription": "বিনামূল্যে অক্টাল রূপান্তরকারী টুল. বেস 2 (বাইনারী), বেস 8 (অক্টাল), বেস 10 (ডেসিমেল), এবং বেস 16 (হেক্স) এর মধ্যে যেকোনো সংখ্যাকে অবিলম্বে রূপান্তর করুন।",
+      "h1": "অক্টাল নম্বর কনভার্টার",
+      "intro": "বাইনারি, অক্টাল, দশমিক বা হেক্সাডেসিমেলে যেকোনো সংখ্যা লিখুন এবং তাৎক্ষণিকভাবে চারটি উপস্থাপনা দেখুন।",
+      "faq_title": "অক্টাল কনভার্টার FAQ",
+      "ui": {
+        "label1": "মান",
+        "label2": "ইনপুট বেস",
+        "btn": "রূপান্তর করুন",
+        "decimalbase10": "দশমিক (বেস 10)",
+        "binarybase2": "বাইনারি (বেস 2)",
+        "octalbase8": "অক্টাল (বেস 8)",
+        "hexadecimalbase16": "হেক্সাডেসিমেল (বেস 16)"
+      },
+      "faq": [
+        {
+          "q": "অক্টাল (বেস 8) কি?",
+          "a": "অক্টাল হল একটি সংখ্যা পদ্ধতি যা 8টি সংখ্যা ব্যবহার করে: 0 থেকে 7। এটি সাধারণত বাইনারি ডেটার একটি কম্প্যাক্ট উপস্থাপনা হিসাবে কম্পিউটিংয়ে ব্যবহৃত হয়, যেহেতু প্রতিটি অক্টাল ডিজিট ঠিক তিনটি বাইনারি ডিজিটে ম্যাপ করে।"
+        },
+        {
+          "q": "আমি কিভাবে দশমিককে অক্টালে রূপান্তর করব?",
+          "a": "একটি দশমিক সংখ্যাকে অক্টালে রূপান্তর করতে, বারবার সংখ্যাটিকে 8 দ্বারা ভাগ করুন এবং অবশিষ্টগুলি রেকর্ড করুন। অবশিষ্টাংশগুলি নীচে থেকে উপরে পড়লে অক্টাল উপস্থাপনা পাওয়া যায়। উদাহরণস্বরূপ, 255 ÷ 8 = 31 অবশিষ্ট 7, 31 ÷ 8 = 3 অবশিষ্ট 7, 3 ÷ 8 = 0 অবশিষ্ট 3, সুতরাং দশমিকে 255 অক্টালে 377।"
+        },
+        {
+          "q": "কিভাবে এই টুল হেক্সাডেসিমাল ইনপুট পরিচালনা করে?",
+          "a": "এই টুলটি 0-9 সংখ্যা এবং অক্ষর A-F (কেস-সংবেদনশীল) সহ স্ট্যান্ডার্ড হেক্সাডেসিমেল ইনপুট গ্রহণ করে। এটি প্রথমে আপনার হেক্স মানটিকে তার দশমিক সমতুল্যে রূপান্তর করে, তারপর স্বয়ংক্রিয়ভাবে বাইনারি এবং অক্টাল উপস্থাপনা গ্রহণ করে।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Восьмеричный преобразователь — преобразование между двоичными, восьмеричными, десятичными и шестнадцатеричными числами",
+      "metaDescription": "Бесплатный восьмеричный преобразователь. Мгновенно преобразуйте любое число между основанием 2 (двоичное), основанием 8 (восьмеричное), основанием 10 (десятичное) и основанием 16 (шестнадцатеричное).",
+      "h1": "Конвертер восьмеричных чисел",
+      "intro": "Введите любое число в двоичном, восьмеричном, десятичном или шестнадцатеричном формате и мгновенно увидите все четыре представления.",
+      "faq_title": "Часто задаваемые вопросы по восьмеричному конвертеру",
+      "ui": {
+        "label1": "Значение",
+        "label2": "Входная база",
+        "btn": "Конвертировать",
+        "decimalbase10": "Десятичный (база 10)",
+        "binarybase2": "Двоичный (база 2)",
+        "octalbase8": "Восьмеричная (основание 8)",
+        "hexadecimalbase16": "Шестнадцатеричный (база 16)"
+      },
+      "faq": [
+        {
+          "q": "Что такое восьмеричная система (основание 8)?",
+          "a": "Восьмеричная система счисления использует 8 цифр: от 0 до 7. Она обычно используется в вычислениях как компактное представление двоичных данных, поскольку каждая восьмеричная цифра соответствует ровно трем двоичным цифрам."
+        },
+        {
+          "q": "Как преобразовать десятичное число в восьмеричное?",
+          "a": "Чтобы преобразовать десятичное число в восьмеричное, несколько раз разделите его на 8 и запишите остаток. Чтение остатков снизу вверх дает восьмеричное представление. Например, 255 ÷ 8 = 31 остаток 7, 31 ÷ 8 = 3 остаток 7, 3 ÷ 8 = 0 остаток 3, поэтому 255 в десятичном формате равно 377 в восьмеричном."
+        },
+        {
+          "q": "Как этот инструмент обрабатывает шестнадцатеричный ввод?",
+          "a": "Этот инструмент принимает стандартный шестнадцатеричный ввод с цифрами 0–9 и буквами A–F (без учета регистра). Сначала он преобразует шестнадцатеричное значение в его десятичный эквивалент, а затем автоматически выводит двоичные и восьмеричные представления."
+        }
+      ]
+    },
+    "ur": {
+      "title": "آکٹل کنورٹر - بائنری، آکٹل، ڈیسیمل اور ہیکس کے درمیان تبدیل کریں",
+      "metaDescription": "مفت آکٹل کنورٹر ٹول۔ بیس 2 (بائنری)، بیس 8 (آکٹل)، بیس 10 (اعشاریہ) اور بیس 16 (ہیکس) کے درمیان کسی بھی نمبر کو فوری طور پر تبدیل کریں۔",
+      "h1": "اوکٹل نمبر کنورٹر",
+      "intro": "بائنری، آکٹل، ڈیسیمل، یا ہیکسا ڈیسیمل میں کوئی بھی نمبر درج کریں اور فوری طور پر چاروں نمائندگی دیکھیں۔",
+      "faq_title": "اوکٹل کنورٹر کے اکثر پوچھے گئے سوالات",
+      "ui": {
+        "label1": "قدر",
+        "label2": "ان پٹ بیس",
+        "btn": "تبدیل کریں",
+        "decimalbase10": "اعشاریہ (بنیاد 10)",
+        "binarybase2": "بائنری (بیس 2)",
+        "octalbase8": "آکٹل (بیس 8)",
+        "hexadecimalbase16": "ہیکساڈیسیمل (بیس 16)"
+      },
+      "faq": [
+        {
+          "q": "آکٹل (بیس 8) کیا ہے؟",
+          "a": "آکٹل ایک عددی نظام ہے جو 8 ہندسوں کا استعمال کرتا ہے: 0 سے 7۔ یہ عام طور پر بائنری ڈیٹا کی کمپیکٹ نمائندگی کے طور پر کمپیوٹنگ میں استعمال ہوتا ہے، کیونکہ ہر آکٹل ہندسوں کا نقشہ بالکل تین بائنری ہندسوں پر ہوتا ہے۔"
+        },
+        {
+          "q": "میں اعشاریہ کو آکٹل میں کیسے تبدیل کروں؟",
+          "a": "اعشاریہ نمبر کو آکٹل میں تبدیل کرنے کے لیے، بار بار نمبر کو 8 سے تقسیم کریں اور بقیہ کو ریکارڈ کریں۔ باقیوں کو نیچے سے اوپر تک پڑھنے سے آکٹل نمائندگی ملتی ہے۔ مثال کے طور پر، 255 ÷ 8 = 31 باقی 7، 31 ÷ 8 = 3 باقی 7، 3 ÷ 8 = 0 باقی 3، تو اعشاریہ میں 255 آکٹل میں 377 ہے۔"
+        },
+        {
+          "q": "یہ ٹول ہیکساڈیسیمل ان پٹ کو کیسے ہینڈل کرتا ہے؟",
+          "a": "یہ ٹول 0-9 ہندسوں اور حروف A–F (کیس غیر حساس) کے ساتھ معیاری ہیکساڈیسیمل ان پٹ کو قبول کرتا ہے۔ یہ پہلے آپ کی ہیکس ویلیو کو اس کے اعشاریہ کے مساوی میں تبدیل کرتا ہے، پھر خود بخود بائنری اور آکٹل نمائندگی حاصل کرتا ہے۔"
+        }
       ]
     }
   }

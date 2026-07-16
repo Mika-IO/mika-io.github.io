@@ -1,0 +1,299 @@
+{
+  "slug": "stockreturn",
+  "category": "finance",
+  "icon": "📉",
+  "script": "stockreturn.js",
+  "widget": "<form id=\"sr-form\"><div class=\"row\"><div class=\"field\"><label for=\"sr-buy\">{{ui.buyPrice}}</label><input type=\"number\" id=\"sr-buy\" step=\"any\" min=\"0.01\" value=\"100\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"sr-sell\">{{ui.sellPrice}}</label><input type=\"number\" id=\"sr-sell\" step=\"any\" min=\"0\" value=\"150\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"sr-shares\">{{ui.shares}}</label><input type=\"number\" id=\"sr-shares\" step=\"any\" min=\"1\" value=\"10\" inputmode=\"decimal\"></div></div><div class=\"row\"><div class=\"field\"><label for=\"sr-div\">{{ui.dividends}}</label><input type=\"number\" id=\"sr-div\" step=\"any\" min=\"0\" value=\"0\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"sr-years\">{{ui.years}}</label><input type=\"number\" id=\"sr-years\" step=\"any\" min=\"0\" value=\"1\" inputmode=\"decimal\"></div></div><button class=\"btn\" type=\"submit\">{{ui.calculate}}</button></form><div id=\"sr-out\" hidden class=\"result\" style=\"display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:0.5rem\"></div>",
+  "strings": {
+    "en": {
+      "title": "Stock Return Calculator — calculate investment profit and annualized return",
+      "metaDescription": "Free stock return calculator. Enter buy price, sell price and shares to calculate total profit, percentage return and annualized CAGR.",
+      "h1": "Stock Return Calculator",
+      "intro": "Calculate your stock investment profit, total return percentage, and annualized return (CAGR) including dividends received.",
+      "faq_title": "Stock return FAQ",
+      "ui": {
+        "buyPrice": "Buy price per share",
+        "sellPrice": "Sell price per share",
+        "shares": "Number of shares",
+        "dividends": "Total dividends received",
+        "years": "Holding period (years)",
+        "calculate": "Calculate"
+      },
+      "faq": [
+        {
+          "q": "What is CAGR?",
+          "a": "CAGR (Compound Annual Growth Rate) is the rate at which an investment would have grown if it grew at a steady annual rate. Formula: CAGR = (End Value / Start Value)^(1/Years) − 1. It normalizes returns across different holding periods."
+        },
+        {
+          "q": "Are taxes included?",
+          "a": "No. This calculator shows pre-tax returns. Capital gains taxes vary by country and holding period. In the US: long-term capital gains (held 1+ year) are taxed at 0%, 15% or 20% depending on income."
+        },
+        {
+          "q": "What is a good annual stock return?",
+          "a": "The S&P 500 has historically returned ~10% annually (7% after inflation). Individual stocks vary wildly. Warren Buffett has averaged ~20% annually over 50+ years — extraordinary by any measure."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Calculadora de Retorno de Ações — calcular lucro de investimento e retorno anualizado",
+      "metaDescription": "Calculadora de retorno de ações gratuita. Insira preço de compra, preço de venda e ações para calcular lucro total, porcentagem de retorno e CAGR anualizado.",
+      "h1": "Calculadora de Retorno de Ações",
+      "intro": "Calcule o lucro do seu investimento em ações, porcentagem de retorno total e retorno anualizado (CAGR) incluindo dividendos recebidos.",
+      "faq_title": "Perguntas frequentes sobre retorno de ações",
+      "ui": {
+        "buyPrice": "Preço de compra por ação",
+        "sellPrice": "Preço de venda por ação",
+        "shares": "Número de ações",
+        "dividends": "Total de dividendos recebidos",
+        "years": "Período de retenção (anos)",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "O que é CAGR?",
+          "a": "CAGR (Taxa de Crescimento Anual Composta) é a taxa na qual um investimento teria crescido se crescesse a uma taxa anual constante. Fórmula: CAGR = (Valor Final / Valor Inicial)^(1/Anos) − 1."
+        },
+        {
+          "q": "Os impostos estão incluídos?",
+          "a": "Não. Esta calculadora mostra retornos antes de impostos. Os impostos sobre ganhos de capital variam por país e período de retenção."
+        },
+        {
+          "q": "Qual é um bom retorno anual em ações?",
+          "a": "O S&P 500 historicamente retornou ~10% anualmente (7% após a inflação). Ações individuais variam muito."
+        }
+      ]
+    },
+    "zh": {
+      "title": "股票回报计算器 — 计算投资利润和年化回报",
+      "metaDescription": "免费股票回报计算器。输入买入价、卖出价和股份来计算总利润、回报百分比和年化复合年增长率。",
+      "h1": "股票回报计算器",
+      "intro": "计算您的股票投资利润、总回报率和年化回报率（CAGR），包括收到的股息。",
+      "faq_title": "库存退货常见问题解答",
+      "ui": {
+        "buyPrice": "每股买入价",
+        "sellPrice": "每股售价",
+        "shares": "股份数量",
+        "dividends": "收到的股息总额",
+        "years": "持有期限（年）",
+        "calculate": "计算"
+      },
+      "faq": [
+        {
+          "q": "什么是复合年增长率？",
+          "a": "CAGR（复合年增长率）是指投资以稳定的年增长率增长时的增长率。公式：CAGR = (最终值 / 初始值)^(1/年) − 1。它将不同持有期间的回报标准化。"
+        },
+        {
+          "q": "含税吗？",
+          "a": "不。此计算器显示税前申报表。资本利得税因国家和持有期限而异。在美国：长期资本利得（持有 1 年以上）根据收入按 0%、15% 或 20% 征税。"
+        },
+        {
+          "q": "什么是好的年度股票回报率？",
+          "a": "标准普尔 500 指数的年回报率历来约为 10%（扣除通货膨胀后为 7%）。个股差异很大。沃伦·巴菲特 50 多年来平均每年上涨约 20%——无论以何种标准衡量都非常出色。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "स्टॉक रिटर्न कैलकुलेटर - निवेश लाभ और वार्षिक रिटर्न की गणना करें",
+      "metaDescription": "निःशुल्क स्टॉक रिटर्न कैलकुलेटर। कुल लाभ, प्रतिशत रिटर्न और वार्षिक सीएजीआर की गणना करने के लिए खरीद मूल्य, बिक्री मूल्य और शेयर दर्ज करें।",
+      "h1": "स्टॉक रिटर्न कैलकुलेटर",
+      "intro": "अपने स्टॉक निवेश लाभ, कुल रिटर्न प्रतिशत और प्राप्त लाभांश सहित वार्षिक रिटर्न (सीएजीआर) की गणना करें।",
+      "faq_title": "स्टॉक रिटर्न अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "buyPrice": "प्रति शेयर मूल्य खरीदें",
+        "sellPrice": "प्रति शेयर विक्रय मूल्य",
+        "shares": "शेयरों की संख्या",
+        "dividends": "कुल लाभांश प्राप्त हुआ",
+        "years": "होल्डिंग अवधि (वर्ष)",
+        "calculate": "गणना करें"
+      },
+      "faq": [
+        {
+          "q": "सीएजीआर क्या है?",
+          "a": "सीएजीआर (चक्रवृद्धि वार्षिक वृद्धि दर) वह दर है जिस पर कोई निवेश स्थिर वार्षिक दर से बढ़ने पर बढ़ता है। फॉर्मूला: सीएजीआर = (अंतिम मूल्य / प्रारंभ मूल्य)^(1/वर्ष) - 1. यह विभिन्न होल्डिंग अवधि में रिटर्न को सामान्य करता है।"
+        },
+        {
+          "q": "क्या कर शामिल हैं?",
+          "a": "नहीं, यह कैलकुलेटर कर-पूर्व रिटर्न दिखाता है। पूंजीगत लाभ कर देश और होल्डिंग अवधि के अनुसार अलग-अलग होते हैं। अमेरिका में: दीर्घकालिक पूंजीगत लाभ (1+ वर्ष आयोजित) पर आय के आधार पर 0%, 15% या 20% कर लगाया जाता है।"
+        },
+        {
+          "q": "एक अच्छा वार्षिक स्टॉक रिटर्न क्या है?",
+          "a": "एसएंडपी 500 ने ऐतिहासिक रूप से ~10% सालाना (मुद्रास्फीति के बाद 7%) रिटर्न दिया है। व्यक्तिगत स्टॉक में बेतहाशा भिन्नता होती है। वॉरेन बफेट ने 50+ वर्षों में सालाना औसतन ~20% हासिल किया है - किसी भी माप से असाधारण।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Calculadora de rendimiento de acciones: calcule el beneficio de la inversión y el rendimiento anualizado",
+      "metaDescription": "Calculadora de rentabilidad de acciones gratuita. Ingrese el precio de compra, el precio de venta y las acciones para calcular la ganancia total, el rendimiento porcentual y la CAGR anualizada.",
+      "h1": "Calculadora de rentabilidad de acciones",
+      "intro": "Calcule el beneficio de su inversión en acciones, el porcentaje de rendimiento total y el rendimiento anualizado (CAGR), incluidos los dividendos recibidos.",
+      "faq_title": "Preguntas frecuentes sobre devolución de acciones",
+      "ui": {
+        "buyPrice": "Precio de compra por acción",
+        "sellPrice": "Precio de venta por acción",
+        "shares": "Número de acciones",
+        "dividends": "Dividendos totales recibidos",
+        "years": "Periodo de tenencia (años)",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "¿Qué es la CAGR?",
+          "a": "CAGR (tasa de crecimiento anual compuesta) es la tasa a la que habría crecido una inversión si hubiera crecido a una tasa anual constante. Fórmula: CAGR = (Valor final / Valor inicial) ^ (1/Años) − 1. Normaliza los rendimientos en diferentes períodos de tenencia."
+        },
+        {
+          "q": "¿Están incluidos los impuestos?",
+          "a": "No. Esta calculadora muestra las declaraciones antes de impuestos. Los impuestos a las ganancias de capital varían según el país y el período de tenencia. En EE. UU.: las ganancias de capital a largo plazo (mantenidas durante más de 1 año) se gravan al 0%, 15% o 20%, según los ingresos."
+        },
+        {
+          "q": "¿Qué es un buen rendimiento anual de las acciones?",
+          "a": "Históricamente, el S&P 500 ha tenido una rentabilidad de ~10% anual (7% después de la inflación). Las acciones individuales varían enormemente. Warren Buffett ha promediado ~20% anual durante más de 50 años, algo extraordinario desde cualquier punto de vista."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Calculateur de rendement des actions - calculez le bénéfice d'investissement et le rendement annualisé",
+      "metaDescription": "Calculateur gratuit de rendement des actions. Entrez le prix d'achat, le prix de vente et les actions pour calculer le bénéfice total, le pourcentage de rendement et le TCAC annualisé.",
+      "h1": "Calculateur de rendement des actions",
+      "intro": "Calculez le bénéfice de votre investissement en actions, le pourcentage de rendement total et le rendement annualisé (TCAC), y compris les dividendes reçus.",
+      "faq_title": "FAQ sur le retour des actions",
+      "ui": {
+        "buyPrice": "Prix d'achat par action",
+        "sellPrice": "Prix de vente par action",
+        "shares": "Nombre d'actions",
+        "dividends": "Total des dividendes reçus",
+        "years": "Période de détention (années)",
+        "calculate": "Calculer"
+      },
+      "faq": [
+        {
+          "q": "Qu’est-ce que le TCAC ?",
+          "a": "Le TCAC (Taux de Croissance Annuel Composé) est le taux auquel un investissement aurait augmenté s’il avait augmenté à un rythme annuel stable. Formule : CAGR = (Valeur finale / Valeur de départ) ^ (1 / Années) - 1. Il normalise les rendements sur différentes périodes de détention."
+        },
+        {
+          "q": "Les taxes sont-elles incluses ?",
+          "a": "Non. Cette calculatrice affiche les rendements avant impôts. Les impôts sur les plus-values ​​varient selon les pays et la période de détention. Aux États-Unis : les plus-values ​​à long terme (détenues pendant plus d'un an) sont imposées à 0 %, 15 % ou 20 % selon les revenus."
+        },
+        {
+          "q": "Qu’est-ce qu’un bon rendement boursier annuel ?",
+          "a": "Le S&P 500 a historiquement rapporté environ 10 % par an (7 % après inflation). Les stocks individuels varient énormément. Warren Buffett a enregistré une moyenne annuelle d'environ 20 % sur plus de 50 ans, ce qui est extraordinaire à tous points de vue."
+        }
+      ]
+    },
+    "ar": {
+      "title": "حاسبة عائد السهم - حساب ربح الاستثمار والعائد السنوي",
+      "metaDescription": "حاسبة عائد الأسهم المجانية. أدخل سعر الشراء وسعر البيع والأسهم لحساب إجمالي الربح ونسبة العائد ومعدل النمو السنوي المركب السنوي.",
+      "h1": "حاسبة عائد الأسهم",
+      "intro": "احسب أرباح استثمار أسهمك، ونسبة العائد الإجمالي، والعائد السنوي (CAGR) بما في ذلك الأرباح المستلمة.",
+      "faq_title": "الأسئلة الشائعة حول إرجاع المخزون",
+      "ui": {
+        "buyPrice": "سعر الشراء للسهم الواحد",
+        "sellPrice": "سعر البيع للسهم الواحد",
+        "shares": "عدد الأسهم",
+        "dividends": "إجمالي الأرباح المستلمة",
+        "years": "فترة القابضة (سنوات)",
+        "calculate": "احسب"
+      },
+      "faq": [
+        {
+          "q": "ما هو معدل النمو السنوي المركب؟",
+          "a": "CAGR (معدل النمو السنوي المركب) هو المعدل الذي كان من الممكن أن ينمو به الاستثمار إذا نما بمعدل سنوي ثابت. الصيغة: معدل النمو السنوي المركب = (القيمة النهائية / قيمة البداية) ^ (1/ سنة) - 1. يقوم بتطبيع العوائد عبر فترات الاحتفاظ المختلفة."
+        },
+        {
+          "q": "هل الضرائب مشمولة؟",
+          "a": "لا، هذه الآلة الحاسبة تعرض إقرارات ما قبل الضريبة. تختلف ضرائب أرباح رأس المال حسب البلد وفترة الاحتفاظ. في الولايات المتحدة: يتم فرض ضريبة على أرباح رأس المال طويلة الأجل (المحتفظ بها لأكثر من عام) بنسبة 0٪ أو 15٪ أو 20٪ اعتمادًا على الدخل."
+        },
+        {
+          "q": "ما هو العائد السنوي الجيد للأسهم؟",
+          "a": "لقد عاد مؤشر ستاندرد آند بورز 500 تاريخياً بنسبة 10% سنوياً (7% بعد التضخم). الأسهم الفردية تختلف بشكل كبير. لقد بلغ متوسط ​​وارن بافيت حوالي 20٪ سنويًا على مدار أكثر من 50 عامًا - وهو أمر استثنائي بكل المقاييس."
+        }
+      ]
+    },
+    "bn": {
+      "title": "স্টক রিটার্ন ক্যালকুলেটর - বিনিয়োগের মুনাফা এবং বার্ষিক রিটার্ন গণনা করুন",
+      "metaDescription": "ফ্রি স্টক রিটার্ন ক্যালকুলেটর। মোট লাভ, শতাংশ রিটার্ন এবং বার্ষিক CAGR গণনা করতে ক্রয় মূল্য, বিক্রয় মূল্য এবং শেয়ার লিখুন।",
+      "h1": "স্টক রিটার্ন ক্যালকুলেটর",
+      "intro": "প্রাপ্ত লভ্যাংশ সহ আপনার স্টক বিনিয়োগ মুনাফা, মোট রিটার্ন শতাংশ এবং বার্ষিক রিটার্ন (CAGR) গণনা করুন।",
+      "faq_title": "স্টক রিটার্ন FAQ",
+      "ui": {
+        "buyPrice": "শেয়ার প্রতি মূল্য কিনুন",
+        "sellPrice": "শেয়ার প্রতি মূল্য বিক্রি",
+        "shares": "শেয়ারের সংখ্যা",
+        "dividends": "প্রাপ্ত মোট লভ্যাংশ",
+        "years": "হোল্ডিং পিরিয়ড (বছর)",
+        "calculate": "হিসাব করুন"
+      },
+      "faq": [
+        {
+          "q": "CAGR কি?",
+          "a": "CAGR (কম্পাউন্ড অ্যানুয়াল গ্রোথ রেট) হল সেই হার যে হারে একটি বিনিয়োগ বৃদ্ধি পেত যদি এটি একটি স্থির বার্ষিক হারে বৃদ্ধি পায়। সূত্র: CAGR = (শেষ মান / প্রারম্ভিক মান)^(1/বছর) − 1. এটি বিভিন্ন হোল্ডিং পিরিয়ড জুড়ে রিটার্নকে স্বাভাবিক করে।"
+        },
+        {
+          "q": "কর অন্তর্ভুক্ত?",
+          "a": "না। এই ক্যালকুলেটর প্রি-ট্যাক্স রিটার্ন দেখায়। মূলধন লাভ কর দেশ এবং হোল্ডিং পিরিয়ড অনুসারে পরিবর্তিত হয়। মার্কিন যুক্তরাষ্ট্রে: দীর্ঘমেয়াদী মূলধন লাভ (1+ বছর ধরে) আয়ের উপর নির্ভর করে 0%, 15% বা 20% হারে কর দেওয়া হয়।"
+        },
+        {
+          "q": "একটি ভাল বার্ষিক স্টক রিটার্ন কি?",
+          "a": "S&P 500 ঐতিহাসিকভাবে বার্ষিক ~10% (স্ফীতির পরে 7%) ফেরত দিয়েছে। ব্যক্তিগত স্টক বন্যভাবে পরিবর্তিত হয়. ওয়ারেন বাফেট 50+ বছরেরও বেশি সময় ধরে বার্ষিক ~20% গড় করেছেন - যে কোনো পরিমাপে অসাধারণ।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Калькулятор доходности акций — рассчитайте инвестиционную прибыль и годовую доходность",
+      "metaDescription": "Бесплатный калькулятор доходности акций. Введите цену покупки, цену продажи и акции, чтобы рассчитать общую прибыль, процентную доходность и годовой среднегодовой темп роста.",
+      "h1": "Калькулятор доходности акций",
+      "intro": "Рассчитайте прибыль от инвестиций в акции, общий процент доходности и годовой доход (CAGR), включая полученные дивиденды.",
+      "faq_title": "Возврат товара: часто задаваемые вопросы",
+      "ui": {
+        "buyPrice": "Цена покупки за акцию",
+        "sellPrice": "Цена продажи за акцию",
+        "shares": "Количество акций",
+        "dividends": "Итого полученных дивидендов",
+        "years": "Срок владения (лет)",
+        "calculate": "Рассчитать"
+      },
+      "faq": [
+        {
+          "q": "Что такое CAGR?",
+          "a": "CAGR (сложный годовой темп роста) — это скорость, с которой инвестиции росли бы, если бы они росли постоянными годовыми темпами. Формула: CAGR = (Конечная стоимость / Начальная стоимость)^(1/год) — 1. Она нормализует доходность в разные периоды владения."
+        },
+        {
+          "q": "Включены ли налоги?",
+          "a": "Нет. Этот калькулятор показывает доходы до уплаты налогов. Налоги на прирост капитала различаются в зависимости от страны и периода владения. В США: долгосрочный прирост капитала (удерживаемый более 1 года) облагается налогом по ставке 0%, 15% или 20% в зависимости от дохода."
+        },
+        {
+          "q": "Что такое хорошая годовая доходность акций?",
+          "a": "Индекс S&P 500 исторически приносил около 10% годовой доходности (7% после инфляции). Отдельные акции сильно различаются. Уоррен Баффетт зарабатывал в среднем около 20% в год на протяжении более 50 лет, что является выдающимся достижением по любым меркам."
+        }
+      ]
+    },
+    "ur": {
+      "title": "اسٹاک ریٹرن کیلکولیٹر - سرمایہ کاری کے منافع اور سالانہ منافع کا حساب لگائیں۔",
+      "metaDescription": "مفت اسٹاک ریٹرن کیلکولیٹر۔ کل منافع، فیصد کی واپسی اور سالانہ CAGR کا حساب لگانے کے لیے قیمت خرید، فروخت کی قیمت اور حصص درج کریں۔",
+      "h1": "اسٹاک ریٹرن کیلکولیٹر",
+      "intro": "اپنے سٹاک سرمایہ کاری کے منافع، کل واپسی کا فیصد، اور سالانہ واپسی (CAGR) بشمول حاصل کردہ منافع کا حساب لگائیں۔",
+      "faq_title": "اسٹاک کی واپسی کے اکثر پوچھے گئے سوالات",
+      "ui": {
+        "buyPrice": "فی حصص کی قیمت خریدیں۔",
+        "sellPrice": "فی حصص کی قیمت فروخت کریں۔",
+        "shares": "حصص کی تعداد",
+        "dividends": "حاصل کردہ کل منافع",
+        "years": "انعقاد کی مدت (سال)",
+        "calculate": "حساب لگانا"
+      },
+      "faq": [
+        {
+          "q": "CAGR کیا ہے؟",
+          "a": "CAGR (کمپاؤنڈ اینول گروتھ ریٹ) وہ شرح ہے جس پر اگر کوئی سرمایہ کاری مستحکم سالانہ شرح سے بڑھتی ہے تو اس میں اضافہ ہوتا۔ فارمولہ: CAGR = (اختتام کی قیمت / شروع کی قیمت)^(1/سال) − 1۔ یہ مختلف ہولڈنگ پیریڈز میں واپسی کو معمول بناتا ہے۔"
+        },
+        {
+          "q": "کیا ٹیکس شامل ہیں؟",
+          "a": "نہیں یہ کیلکولیٹر ٹیکس سے پہلے کے گوشوارے دکھاتا ہے۔ کیپٹل گین ٹیکس ملک اور انعقاد کی مدت کے لحاظ سے مختلف ہوتے ہیں۔ امریکہ میں: طویل مدتی کیپٹل گینز (1+ سال میں منعقد) پر آمدنی کے لحاظ سے 0%، 15% یا 20% ٹیکس لگایا جاتا ہے۔"
+        },
+        {
+          "q": "ایک اچھا سالانہ اسٹاک ریٹرن کیا ہے؟",
+          "a": "S&P 500 نے تاریخی طور پر ~10% سالانہ (افراط زر کے بعد 7%) لوٹا ہے۔ انفرادی اسٹاک بے حد مختلف ہوتے ہیں۔ وارن بفیٹ نے 50+ سالوں میں ~20% سالانہ اوسط حاصل کی ہے - کسی بھی پیمائش سے غیر معمولی۔"
+        }
+      ]
+    }
+  }
+}

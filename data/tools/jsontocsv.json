@@ -1,0 +1,319 @@
+{
+  "slug": "jsontocsv",
+  "category": "dev",
+  "icon": "📊",
+  "script": "jsontocsv.js",
+  "widget": "<div id=\"j2c-app\"><div class=\"field\"><label for=\"j2c-in\">{{ui.jsonInput}}</label><textarea id=\"j2c-in\" rows=\"8\" placeholder='[{\"name\":\"Alice\",\"age\":30},{\"name\":\"Bob\",\"age\":25}]' style=\"width:100%;resize:vertical;padding:0.75rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font-family:monospace;font-size:0.875rem\"></textarea></div><div class=\"row\" style=\"gap:0.5rem\"><div class=\"field\"><label for=\"j2c-sep\">{{ui.delimiter}}</label><select id=\"j2c-sep\"><option value=\",\">{{ui.comma}}</option><option value=\";\">{{ui.semicolon}}</option><option value=\"\\t\">{{ui.tab}}</option></select></div><button class=\"btn\" id=\"j2c-go\">{{ui.convert}}</button><button class=\"btn\" id=\"j2c-copy\">{{ui.copy}}</button></div><div class=\"field\" style=\"margin-top:0.5rem\"><label for=\"j2c-out\">{{ui.csvOutput}}</label><textarea id=\"j2c-out\" rows=\"6\" readonly style=\"width:100%;resize:vertical;padding:0.75rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font-family:monospace;font-size:0.875rem\"></textarea></div></div>",
+  "strings": {
+    "en": {
+      "title": "JSON to CSV Converter — convert JSON array to CSV online",
+      "metaDescription": "Free JSON to CSV converter. Paste a JSON array of objects and convert it to a CSV file with proper headers and escaped values.",
+      "h1": "JSON to CSV Converter",
+      "intro": "Paste a JSON array of objects to convert it to CSV format. Headers are automatically extracted from object keys.",
+      "faq_title": "JSON to CSV FAQ",
+      "ui": {
+        "jsonInput": "JSON input (array of objects)",
+        "delimiter": "Delimiter",
+        "convert": "Convert",
+        "copy": "Copy CSV",
+        "csvOutput": "CSV output",
+        "comma": "Comma (,)",
+        "semicolon": "Semicolon (;)",
+        "tab": "Tab"
+      },
+      "faq": [
+        {
+          "q": "What JSON format is supported?",
+          "a": "The input must be a JSON array of objects, where each object represents a row. All objects should ideally have the same keys. Keys from the first object are used as CSV headers."
+        },
+        {
+          "q": "How are values with commas handled?",
+          "a": "Values containing the delimiter are automatically wrapped in double quotes as required by RFC 4180. Values containing double quotes have them escaped by doubling (\"\")."
+        },
+        {
+          "q": "What is the difference between comma and semicolon CSV?",
+          "a": "In European countries that use comma as a decimal separator (like Germany and France), Excel expects semicolons as the CSV delimiter. If your CSV does not open correctly in Excel, try switching to semicolon."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Conversor de JSON para CSV — converter array JSON em CSV online",
+      "metaDescription": "Conversor de JSON para CSV gratuito. Cole um array JSON de objetos e converta para CSV com cabeçalhos e valores escapados corretamente.",
+      "h1": "Conversor de JSON para CSV",
+      "intro": "Cole um array JSON de objetos para convertê-lo para formato CSV. Os cabeçalhos são automaticamente extraídos das chaves dos objetos.",
+      "faq_title": "Perguntas frequentes sobre JSON para CSV",
+      "ui": {
+        "jsonInput": "Entrada JSON (array de objetos)",
+        "delimiter": "Delimitador",
+        "convert": "Converter",
+        "copy": "Copiar CSV",
+        "csvOutput": "Saída CSV",
+        "comma": "Vírgula (,)",
+        "semicolon": "Ponto e vírgula (;)",
+        "tab": "Guia"
+      },
+      "faq": [
+        {
+          "q": "Qual formato JSON é suportado?",
+          "a": "A entrada deve ser um array JSON de objetos, onde cada objeto representa uma linha. Todos os objetos devem idealmente ter as mesmas chaves. As chaves do primeiro objeto são usadas como cabeçalhos CSV."
+        },
+        {
+          "q": "Como valores com vírgulas são tratados?",
+          "a": "Valores contendo o delimitador são automaticamente envolvidos em aspas duplas conforme exigido pelo RFC 4180."
+        },
+        {
+          "q": "Qual a diferença entre CSV com vírgula e ponto-e-vírgula?",
+          "a": "Em países europeus que usam vírgula como separador decimal, o Excel espera ponto-e-vírgula como delimitador CSV. Se seu CSV não abrir corretamente no Excel, tente mudar para ponto-e-vírgula."
+        }
+      ]
+    },
+    "zh": {
+      "title": "JSON to CSV Converter — 在线将 JSON 数组转换为 CSV",
+      "metaDescription": "免费的 JSON 到 CSV 转换器。粘贴 JSON 对象数组并将其转换为具有正确标头和转义值的 CSV 文件。",
+      "h1": "JSON 到 CSV 转换器",
+      "intro": "粘贴 JSON 对象数组以将其转换为 CSV 格式。标头是从对象键中自动提取的。",
+      "faq_title": "JSON 到 CSV 常见问题解答",
+      "ui": {
+        "jsonInput": "JSON 输入（对象数组）",
+        "delimiter": "分隔符",
+        "convert": "转换",
+        "copy": "复制 CSV",
+        "csvOutput": "CSV 输出",
+        "comma": "逗号 (,)",
+        "semicolon": "分号 (;)",
+        "tab": "选项卡"
+      },
+      "faq": [
+        {
+          "q": "支持什么 JSON 格式？",
+          "a": "输入必须是对象的 JSON 数组，其中每个对象代表一行。理想情况下，所有对象都应该具有相同的键。第一个对象中的键用作 CSV 标头。"
+        },
+        {
+          "q": "如何处理带逗号的值？",
+          "a": "根据 RFC 4180 的要求，包含分隔符的值会自动用双引号引起来。包含双引号的值会通过双引号 (\"\") 进行转义。"
+        },
+        {
+          "q": "逗号和分号 CSV 有什么区别？",
+          "a": "在使用逗号作为小数点分隔符的欧洲国家/地区（例如德国和法国），Excel 预计使用分号作为 CSV 分隔符。如果您的 CSV 无法在 Excel 中正确打开，请尝试切换到分号。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "JSON से CSV कन्वर्टर - JSON सारणी को ऑनलाइन CSV में बदलें",
+      "metaDescription": "मुफ़्त JSON से CSV कनवर्टर। ऑब्जेक्ट की JSON सारणी चिपकाएँ और इसे उचित हेडर और एस्केप्ड मानों के साथ CSV फ़ाइल में परिवर्तित करें।",
+      "h1": "JSON से CSV कनवर्टर",
+      "intro": "इसे CSV प्रारूप में बदलने के लिए ऑब्जेक्ट की JSON सारणी चिपकाएँ। हेडर स्वचालित रूप से ऑब्जेक्ट कुंजियों से निकाले जाते हैं।",
+      "faq_title": "JSON से CSV FAQ",
+      "ui": {
+        "jsonInput": "JSON इनपुट (वस्तुओं की श्रृंखला)",
+        "delimiter": "सीमांकक",
+        "convert": "कनवर्ट करें",
+        "copy": "सीएसवी कॉपी करें",
+        "csvOutput": "सीएसवी आउटपुट",
+        "comma": "अल्पविराम (,)",
+        "semicolon": "अर्धविराम (;)",
+        "tab": "टैब"
+      },
+      "faq": [
+        {
+          "q": "कौन सा JSON प्रारूप समर्थित है?",
+          "a": "इनपुट ऑब्जेक्ट की JSON सरणी होनी चाहिए, जहां प्रत्येक ऑब्जेक्ट एक पंक्ति का प्रतिनिधित्व करता है। आदर्श रूप से सभी वस्तुओं में समान कुंजियाँ होनी चाहिए। पहले ऑब्जेक्ट की कुंजियाँ CSV हेडर के रूप में उपयोग की जाती हैं।"
+        },
+        {
+          "q": "अल्पविराम वाले मानों को कैसे नियंत्रित किया जाता है?",
+          "a": "आरएफसी 4180 की आवश्यकता के अनुसार डिलीमीटर वाले मान स्वचालित रूप से डबल कोट्स में लपेटे जाते हैं। डबल कोट्स वाले मान उन्हें दोगुना करके (\"\") से बच जाते हैं।"
+        },
+        {
+          "q": "अल्पविराम और अर्धविराम CSV के बीच क्या अंतर है?",
+          "a": "यूरोपीय देशों में जो दशमलव विभाजक के रूप में अल्पविराम का उपयोग करते हैं (जैसे जर्मनी और फ्रांस), एक्सेल सीएसवी सीमांकक के रूप में अर्धविराम की अपेक्षा करता है। यदि आपका CSV एक्सेल में सही ढंग से नहीं खुलता है, तो अर्धविराम पर स्विच करने का प्रयास करें।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Convertidor de JSON a CSV: convierta una matriz JSON a CSV en línea",
+      "metaDescription": "Convertidor gratuito de JSON a CSV. Pegue una matriz JSON de objetos y conviértala en un archivo CSV con encabezados adecuados y valores de escape.",
+      "h1": "Convertidor de JSON a CSV",
+      "intro": "Pegue una matriz JSON de objetos para convertirla al formato CSV. Los encabezados se extraen automáticamente de las claves de los objetos.",
+      "faq_title": "Preguntas frecuentes sobre JSON a CSV",
+      "ui": {
+        "jsonInput": "Entrada JSON (matriz de objetos)",
+        "delimiter": "Delimitador",
+        "convert": "Convertir",
+        "copy": "Copiar CSV",
+        "csvOutput": "Salida CSV",
+        "comma": "Coma (,)",
+        "semicolon": "Punto y coma (;)",
+        "tab": "Pestaña"
+      },
+      "faq": [
+        {
+          "q": "¿Qué formato JSON es compatible?",
+          "a": "La entrada debe ser una matriz JSON de objetos, donde cada objeto representa una fila. Lo ideal es que todos los objetos tengan las mismas claves. Las claves del primer objeto se utilizan como encabezados CSV."
+        },
+        {
+          "q": "¿Cómo se manejan los valores con comas?",
+          "a": "Los valores que contienen el delimitador se incluyen automáticamente entre comillas dobles según lo exige RFC 4180. Los valores que contienen comillas dobles se escapan duplicándolos (\"\")."
+        },
+        {
+          "q": "¿Cuál es la diferencia entre coma y punto y coma CSV?",
+          "a": "En los países europeos que utilizan comas como separador decimal (como Alemania y Francia), Excel espera puntos y coma como delimitador CSV. Si su CSV no se abre correctamente en Excel, intente cambiar a punto y coma."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Convertisseur JSON en CSV — convertissez un tableau JSON en CSV en ligne",
+      "metaDescription": "Convertisseur JSON en CSV gratuit. Collez un tableau d'objets JSON et convertissez-le en fichier CSV avec les en-têtes appropriés et les valeurs d'échappement.",
+      "h1": "Convertisseur JSON en CSV",
+      "intro": "Collez un tableau d'objets JSON pour le convertir au format CSV. Les en-têtes sont automatiquement extraits des clés d'objet.",
+      "faq_title": "FAQ JSON vers CSV",
+      "ui": {
+        "jsonInput": "Entrée JSON (tableau d'objets)",
+        "delimiter": "Délimiteur",
+        "convert": "Convertir",
+        "copy": "Copier le fichier CSV",
+        "csvOutput": "Sortie CSV",
+        "comma": "Virgule (,)",
+        "semicolon": "Point-virgule (;)",
+        "tab": "Onglet"
+      },
+      "faq": [
+        {
+          "q": "Quel format JSON est pris en charge ?",
+          "a": "L'entrée doit être un tableau d'objets JSON, où chaque objet représente une ligne. Idéalement, tous les objets devraient avoir les mêmes clés. Les clés du premier objet sont utilisées comme en-têtes CSV."
+        },
+        {
+          "q": "Comment les valeurs avec des virgules sont-elles gérées ?",
+          "a": "Les valeurs contenant le délimiteur sont automatiquement placées entre guillemets, comme l'exige la RFC 4180. Les valeurs contenant des guillemets doubles sont échappées en doublant (\"\")."
+        },
+        {
+          "q": "Quelle est la différence entre la virgule et le point-virgule CSV ?",
+          "a": "Dans les pays européens qui utilisent la virgule comme séparateur décimal (comme l'Allemagne et la France), Excel attend des points-virgules comme délimiteur CSV. Si votre CSV ne s'ouvre pas correctement dans Excel, essayez de passer au point-virgule."
+        }
+      ]
+    },
+    "ar": {
+      "title": "محول JSON إلى CSV - تحويل مصفوفة JSON إلى CSV عبر الإنترنت",
+      "metaDescription": "محول JSON إلى CSV مجاني. الصق مصفوفة JSON من الكائنات وقم بتحويلها إلى ملف CSV مع الرؤوس المناسبة والقيم التي تم تجاوزها.",
+      "h1": "JSON لتحويل CSV",
+      "intro": "قم بلصق مصفوفة JSON من الكائنات لتحويلها إلى تنسيق CSV. يتم استخراج الرؤوس تلقائيًا من مفاتيح الكائنات.",
+      "faq_title": "الأسئلة الشائعة حول JSON إلى CSV",
+      "ui": {
+        "jsonInput": "إدخال JSON (مجموعة من الكائنات)",
+        "delimiter": "محدد",
+        "convert": "تحويل",
+        "copy": "انسخ ملف CSV",
+        "csvOutput": "إخراج CSV",
+        "comma": "فاصلة (،)",
+        "semicolon": "فاصلة منقوطة (;)",
+        "tab": "علامة التبويب"
+      },
+      "faq": [
+        {
+          "q": "ما هو تنسيق JSON المدعوم؟",
+          "a": "يجب أن يكون الإدخال عبارة عن مصفوفة JSON من الكائنات، حيث يمثل كل كائن صفًا. يجب أن تحتوي جميع الكائنات بشكل مثالي على نفس المفاتيح. يتم استخدام المفاتيح من الكائن الأول كرؤوس CSV."
+        },
+        {
+          "q": "كيف يتم التعامل مع القيم التي تحتوي على فواصل؟",
+          "a": "يتم تغليف القيم التي تحتوي على المحدد تلقائيًا بعلامات اقتباس مزدوجة كما هو مطلوب بواسطة RFC 4180. وقد تم تخطي القيم التي تحتوي على علامات اقتباس مزدوجة عن طريق المضاعفة (\"\")."
+        },
+        {
+          "q": "ما الفرق بين الفاصلة والفاصلة المنقوطة CSV؟",
+          "a": "في الدول الأوروبية التي تستخدم الفاصلة كفاصل عشري (مثل ألمانيا وفرنسا)، يتوقع Excel الفواصل المنقوطة كمحدد CSV. إذا لم يتم فتح ملف CSV الخاص بك بشكل صحيح في Excel، فحاول التبديل إلى الفاصلة المنقوطة."
+        }
+      ]
+    },
+    "bn": {
+      "title": "JSON থেকে CSV কনভার্টার — JSON অ্যারেকে CSV অনলাইনে রূপান্তর করুন",
+      "metaDescription": "বিনামূল্যে JSON থেকে CSV রূপান্তরকারী। বস্তুর একটি JSON অ্যারে পেস্ট করুন এবং সঠিক শিরোনাম এবং পালানো মান সহ একটি CSV ফাইলে রূপান্তর করুন।",
+      "h1": "JSON থেকে CSV কনভার্টার",
+      "intro": "CSV ফরম্যাটে রূপান্তর করতে অবজেক্টের একটি JSON অ্যারে পেস্ট করুন। হেডার স্বয়ংক্রিয়ভাবে অবজেক্ট কী থেকে বের করা হয়।",
+      "faq_title": "JSON থেকে CSV FAQ",
+      "ui": {
+        "jsonInput": "JSON ইনপুট (অবজেক্টের অ্যারে)",
+        "delimiter": "ডিলিমিটার",
+        "convert": "রূপান্তর করুন",
+        "copy": "CSV কপি করুন",
+        "csvOutput": "CSV আউটপুট",
+        "comma": "কমা (,)",
+        "semicolon": "সেমিকোলন (;)",
+        "tab": "ট্যাব"
+      },
+      "faq": [
+        {
+          "q": "কোন JSON বিন্যাস সমর্থিত?",
+          "a": "ইনপুটটি অবজেক্টের একটি JSON অ্যারে হতে হবে, যেখানে প্রতিটি বস্তু একটি সারি প্রতিনিধিত্ব করে। সমস্ত বস্তুর আদর্শভাবে একই কী থাকা উচিত। প্রথম অবজেক্টের কীগুলি CSV হেডার হিসাবে ব্যবহার করা হয়।"
+        },
+        {
+          "q": "কমা সহ মানগুলি কীভাবে পরিচালনা করা হয়?",
+          "a": "RFC 4180-এর প্রয়োজন অনুযায়ী ডিলিমিটার যুক্ত মানগুলি স্বয়ংক্রিয়ভাবে ডবল কোটে মোড়ানো হয়। ডবল কোট ধারণকারী মানগুলি দ্বিগুণ করে (\"\") এড়িয়ে যায়।"
+        },
+        {
+          "q": "কমা এবং সেমিকোলন CSV এর মধ্যে পার্থক্য কি?",
+          "a": "ইউরোপীয় দেশগুলিতে যেগুলি দশমিক বিভাজক হিসাবে কমা ব্যবহার করে (যেমন জার্মানি এবং ফ্রান্স), এক্সেল CSV বিভাজক হিসাবে সেমিকোলন আশা করে৷ Excel এ আপনার CSV সঠিকভাবে না খুললে, সেমিকোলনে স্যুইচ করার চেষ্টা করুন।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Конвертер JSON в CSV — конвертируйте массив JSON в CSV онлайн",
+      "metaDescription": "Бесплатный конвертер JSON в CSV. Вставьте массив объектов JSON и преобразуйте его в файл CSV с правильными заголовками и экранированными значениями.",
+      "h1": "Конвертер JSON в CSV",
+      "intro": "Вставьте массив объектов JSON, чтобы преобразовать его в формат CSV. Заголовки автоматически извлекаются из ключей объекта.",
+      "faq_title": "JSON в CSV: часто задаваемые вопросы",
+      "ui": {
+        "jsonInput": "Ввод JSON (массив объектов)",
+        "delimiter": "Разделитель",
+        "convert": "Конвертировать",
+        "copy": "Копировать CSV-файл",
+        "csvOutput": "CSV-вывод",
+        "comma": "Запятая (,)",
+        "semicolon": "Точка с запятой (;)",
+        "tab": "Вкладка"
+      },
+      "faq": [
+        {
+          "q": "Какой формат JSON поддерживается?",
+          "a": "Входные данные должны представлять собой массив объектов JSON, где каждый объект представляет строку. В идеале все объекты должны иметь одинаковые ключи. Ключи из первого объекта используются в качестве заголовков CSV."
+        },
+        {
+          "q": "Как обрабатываются значения с запятыми?",
+          "a": "Значения, содержащие разделитель, автоматически заключаются в двойные кавычки, как того требует RFC 4180. Значения, содержащие двойные кавычки, экранируются удвоением (\"\")."
+        },
+        {
+          "q": "В чем разница между запятой и точкой с запятой CSV?",
+          "a": "В европейских странах, где в качестве десятичного разделителя используется запятая (например, в Германии и Франции), Excel ожидает, что в качестве разделителя CSV будут использоваться точки с запятой. Если ваш CSV-файл не открывается правильно в Excel, попробуйте переключиться на точку с запятой."
+        }
+      ]
+    },
+    "ur": {
+      "title": "JSON سے CSV کنورٹر — JSON سرنی کو CSV آن لائن میں تبدیل کریں۔",
+      "metaDescription": "مفت JSON سے CSV کنورٹر۔ اشیاء کی ایک JSON صف کو پیسٹ کریں اور اسے مناسب ہیڈر اور فرار شدہ اقدار کے ساتھ CSV فائل میں تبدیل کریں۔",
+      "h1": "JSON سے CSV کنورٹر",
+      "intro": "اشیاء کی JSON صف کو CSV فارمیٹ میں تبدیل کرنے کے لیے چسپاں کریں۔ ہیڈر آبجیکٹ کیز سے خود بخود نکالے جاتے ہیں۔",
+      "faq_title": "JSON سے CSV FAQ",
+      "ui": {
+        "jsonInput": "JSON ان پٹ (اشیاء کی صف)",
+        "delimiter": "حد بندی کرنے والا",
+        "convert": "تبدیل کریں",
+        "copy": "CSV کاپی کریں۔",
+        "csvOutput": "CSV آؤٹ پٹ",
+        "comma": "کوما (،)",
+        "semicolon": "سیمی کالون (؛)",
+        "tab": "ٹیب"
+      },
+      "faq": [
+        {
+          "q": "کون سا JSON فارمیٹ سپورٹ ہے؟",
+          "a": "ان پٹ آبجیکٹ کی JSON صف ہونی چاہیے، جہاں ہر آبجیکٹ ایک قطار کی نمائندگی کرتا ہے۔ تمام اشیاء کو مثالی طور پر ایک جیسی چابیاں ہونی چاہئیں۔ پہلے آبجیکٹ کی کلیدیں CSV ہیڈر کے طور پر استعمال ہوتی ہیں۔"
+        },
+        {
+          "q": "کوما والی اقدار کو کیسے ہینڈل کیا جاتا ہے؟",
+          "a": "حد بندی پر مشتمل اقدار RFC 4180 کی ضرورت کے مطابق خود بخود دوہرے اقتباسات میں لپیٹ دی جاتی ہیں۔"
+        },
+        {
+          "q": "کوما اور سیمیکولن CSV میں کیا فرق ہے؟",
+          "a": "یوروپی ممالک میں جو کوما کو اعشاریہ سے الگ کرنے والے کے طور پر استعمال کرتے ہیں (جیسے جرمنی اور فرانس)، Excel توقع کرتا ہے کہ CSV ڈیلیمیٹر کے طور پر سیمی کالون ہوں۔ اگر آپ کا CSV Excel میں صحیح طریقے سے نہیں کھلتا ہے، تو سیمی کالون پر سوئچ کرنے کی کوشش کریں۔"
+        }
+      ]
+    }
+  }
+}

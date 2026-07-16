@@ -1,0 +1,289 @@
+{
+  "slug": "investreturn",
+  "category": "finance",
+  "icon": "📈",
+  "script": "investreturn.js",
+  "widget": "<form id=\"ir-form\"><div class=\"row\"><div class=\"field\"><label for=\"ir-init\">{{ui.initial}}</label><input type=\"number\" id=\"ir-init\" step=\"any\" min=\"0\" placeholder=\"10000\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"ir-monthly\">{{ui.monthly}}</label><input type=\"number\" id=\"ir-monthly\" step=\"any\" min=\"0\" placeholder=\"200\" inputmode=\"decimal\"></div></div><div class=\"row\"><div class=\"field\"><label for=\"ir-rate\">{{ui.rate}}</label><input type=\"number\" id=\"ir-rate\" step=\"any\" min=\"0\" placeholder=\"7\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"ir-years\">{{ui.years}}</label><input type=\"number\" id=\"ir-years\" step=\"1\" min=\"1\" max=\"50\" placeholder=\"20\" inputmode=\"numeric\"></div></div><div class=\"row\" style=\"justify-content:center\"><button class=\"btn\" type=\"submit\">{{ui.calculate}}</button></div></form><div id=\"ir-out\" hidden class=\"result\" style=\"text-align:left;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:0.5rem;margin-top:0.75rem\"></div>",
+  "strings": {
+    "en": {
+      "title": "Investment Return Calculator — compound growth with monthly contributions",
+      "metaDescription": "Free investment return calculator. Enter an initial amount, monthly contributions, annual return rate and years to see final value and total gain.",
+      "h1": "Investment Return Calculator",
+      "intro": "Enter your initial investment, monthly contributions, annual return rate and investment period to see your projected final value.",
+      "faq_title": "Investment return FAQ",
+      "ui": {
+        "initial": "Initial amount ($)",
+        "monthly": "Monthly contribution ($)",
+        "rate": "Annual return (%)",
+        "years": "Years",
+        "calculate": "Calculate"
+      },
+      "faq": [
+        {
+          "q": "What formula is used?",
+          "a": "The calculator uses the compound interest formula for an initial lump sum plus the future value of a series of equal periodic payments (annuity). Total = P(1+r)^n + PMT × ((1+r)^n − 1) / r, where r is the monthly rate and n is the number of months."
+        },
+        {
+          "q": "What is a realistic return rate?",
+          "a": "The US S&P 500 has returned about 10% annually before inflation (≈7% after inflation) over the long term. Individual results vary greatly depending on asset allocation, time period and fees."
+        },
+        {
+          "q": "Does this account for inflation?",
+          "a": "No. Enter a real (inflation-adjusted) rate if you want inflation-adjusted results. For example, use 7% instead of 10% to approximate real US stock market returns."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Calculadora de Retorno de Investimento — crescimento composto com aportes mensais",
+      "metaDescription": "Calculadora de retorno de investimento gratuita. Insira o valor inicial, aportes mensais, taxa de retorno anual e anos para ver o valor final e o ganho total.",
+      "h1": "Calculadora de Retorno de Investimento",
+      "intro": "Insira seu investimento inicial, aportes mensais, taxa de retorno anual e período de investimento para ver o valor final projetado.",
+      "faq_title": "Perguntas frequentes sobre retorno de investimento",
+      "ui": {
+        "initial": "Valor inicial (R$)",
+        "monthly": "Aporte mensal (R$)",
+        "rate": "Retorno anual (%)",
+        "years": "Anos",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "Qual fórmula é usada?",
+          "a": "A calculadora usa a fórmula de juros compostos para uma quantia inicial mais o valor futuro de uma série de pagamentos periódicos iguais (anuidade)."
+        },
+        {
+          "q": "Qual é uma taxa de retorno realista?",
+          "a": "O índice Ibovespa historicamente rendeu entre 8–15% ao ano em termos nominais. Em termos reais (descontando inflação), é menor."
+        },
+        {
+          "q": "Isso leva em conta a inflação?",
+          "a": "Não. Insira uma taxa real (ajustada pela inflação) se quiser resultados ajustados pela inflação."
+        }
+      ]
+    },
+    "zh": {
+      "title": "投资回报计算器 — 每月供款的复合增长",
+      "metaDescription": "免费投资回报计算器。输入初始金额、每月供款、年回报率和年数即可查看最终价值和总收益。",
+      "h1": "投资回报计算器",
+      "intro": "输入您的初始投资、每月供款、年回报率和投资期限，即可查看您的预计最终价值。",
+      "faq_title": "投资回报常见问题解答",
+      "ui": {
+        "initial": "初始金额（$）",
+        "monthly": "每月供款 ($)",
+        "rate": "年回报率(%)",
+        "years": "年",
+        "calculate": "计算"
+      },
+      "faq": [
+        {
+          "q": "使用什么公式？",
+          "a": "该计算器使用复利公式计算初始一次性付款加上一系列等额定期付款（年金）的未来价值。总计 = P(1+r)^n + PMT × ((1+r)^n − 1) / r，其中 r 是月费率，n 是月数。"
+        },
+        {
+          "q": "什么是现实的回报率？",
+          "a": "从长期来看，美国标准普尔 500 指数在通胀前的年回报率约为 10%（通胀后约为 7%）。个人结果因资产配置、时间段和费用的不同而有很大差异。"
+        },
+        {
+          "q": "这是否考虑了通货膨胀？",
+          "a": "否。如果您想要通胀调整后的结果，请输入实际（通胀调整后）利率。例如，使用 7% 而不是 10% 来近似美国股市的实际回报率。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "निवेश रिटर्न कैलकुलेटर - मासिक योगदान के साथ चक्रवृद्धि वृद्धि",
+      "metaDescription": "मुफ़्त निवेश रिटर्न कैलकुलेटर। अंतिम मूल्य और कुल लाभ देखने के लिए प्रारंभिक राशि, मासिक योगदान, वार्षिक रिटर्न दर और वर्ष दर्ज करें।",
+      "h1": "निवेश रिटर्न कैलकुलेटर",
+      "intro": "अपना अनुमानित अंतिम मूल्य देखने के लिए अपना प्रारंभिक निवेश, मासिक योगदान, वार्षिक रिटर्न दर और निवेश अवधि दर्ज करें।",
+      "faq_title": "निवेश रिटर्न अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "initial": "प्रारंभिक राशि ($)",
+        "monthly": "मासिक योगदान ($)",
+        "rate": "वार्षिक रिटर्न (%)",
+        "years": "साल",
+        "calculate": "गणना करें"
+      },
+      "faq": [
+        {
+          "q": "कौन सा सूत्र प्रयोग किया जाता है?",
+          "a": "कैलकुलेटर प्रारंभिक एकमुश्त राशि और समान आवधिक भुगतान (वार्षिकी) की श्रृंखला के भविष्य के मूल्य के लिए चक्रवृद्धि ब्याज फॉर्मूला का उपयोग करता है। कुल = P(1+r)^n + PMT × ((1+r)^n − 1) / r, जहां r मासिक दर है और n महीनों की संख्या है।"
+        },
+        {
+          "q": "यथार्थवादी वापसी दर क्या है?",
+          "a": "यूएस एसएंडपी 500 ने लंबी अवधि में मुद्रास्फीति से पहले सालाना लगभग 10% (मुद्रास्फीति के बाद ≈7%) का रिटर्न दिया है। परिसंपत्ति आवंटन, समय अवधि और शुल्क के आधार पर व्यक्तिगत परिणाम काफी भिन्न होते हैं।"
+        },
+        {
+          "q": "क्या यह मुद्रास्फीति के लिए जिम्मेदार है?",
+          "a": "नहीं, यदि आप मुद्रास्फीति-समायोजित परिणाम चाहते हैं तो वास्तविक (मुद्रास्फीति-समायोजित) दर दर्ज करें। उदाहरण के लिए, वास्तविक अमेरिकी शेयर बाजार रिटर्न का अनुमान लगाने के लिए 10% के बजाय 7% का उपयोग करें।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Calculadora de retorno de la inversión: crecimiento compuesto con contribuciones mensuales",
+      "metaDescription": "Calculadora de retorno de inversión gratuita. Ingrese un monto inicial, contribuciones mensuales, tasa de retorno anual y años para ver el valor final y la ganancia total.",
+      "h1": "Calculadora de retorno de inversión",
+      "intro": "Ingrese su inversión inicial, contribuciones mensuales, tasa de retorno anual y período de inversión para ver su valor final proyectado.",
+      "faq_title": "Preguntas frecuentes sobre el retorno de la inversión",
+      "ui": {
+        "initial": "Monto inicial ($)",
+        "monthly": "Contribución mensual ($)",
+        "rate": "Rentabilidad anual (%)",
+        "years": "Años",
+        "calculate": "Calcular"
+      },
+      "faq": [
+        {
+          "q": "¿Qué fórmula se utiliza?",
+          "a": "La calculadora utiliza la fórmula del interés compuesto para una suma global inicial más el valor futuro de una serie de pagos periódicos iguales (anualidad). Total = P(1+r)^n + PMT × ((1+r)^n − 1) / r, donde r es la tasa mensual y n es el número de meses."
+        },
+        {
+          "q": "¿Qué es una tasa de retorno realista?",
+          "a": "El S&P 500 de EE.UU. ha obtenido una rentabilidad de alrededor del 10% anual antes de la inflación (≈7% después de la inflación) a largo plazo. Los resultados individuales varían mucho según la asignación de activos, el período de tiempo y las tarifas."
+        },
+        {
+          "q": "¿Esto tiene en cuenta la inflación?",
+          "a": "No. Ingrese una tasa real (ajustada a la inflación) si desea resultados ajustados a la inflación. Por ejemplo, utilice el 7% en lugar del 10% para aproximar los rendimientos reales del mercado de valores estadounidense."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Calculateur de retour sur investissement – croissance composée avec cotisations mensuelles",
+      "metaDescription": "Calculateur de retour sur investissement gratuit. Entrez un montant initial, des cotisations mensuelles, un taux de rendement annuel et des années pour voir la valeur finale et le gain total.",
+      "h1": "Calculateur de retour sur investissement",
+      "intro": "Entrez votre investissement initial, vos cotisations mensuelles, votre taux de rendement annuel et votre période d'investissement pour voir votre valeur finale projetée.",
+      "faq_title": "FAQ sur le retour sur investissement",
+      "ui": {
+        "initial": "Montant initial ($)",
+        "monthly": "Cotisation mensuelle ($)",
+        "rate": "Rendement annuel (%)",
+        "years": "Années",
+        "calculate": "Calculer"
+      },
+      "faq": [
+        {
+          "q": "Quelle formule est utilisée ?",
+          "a": "Le calculateur utilise la formule des intérêts composés pour une somme forfaitaire initiale plus la valeur future d'une série de paiements périodiques égaux (rente). Total = P(1+r)^n + PMT × ((1+r)^n − 1) / r, où r est le taux mensuel et n est le nombre de mois."
+        },
+        {
+          "q": "Qu’est-ce qu’un taux de retour réaliste ?",
+          "a": "Le S&P 500 américain a généré un rendement annuel d’environ 10 % avant inflation (≈7 % après inflation) sur le long terme. Les résultats individuels varient considérablement en fonction de l'allocation d'actifs, de la période et des frais."
+        },
+        {
+          "q": "Est-ce que cela explique l'inflation ?",
+          "a": "Non. Entrez un taux réel (ajusté à l’inflation) si vous souhaitez des résultats ajustés à l’inflation. Par exemple, utilisez 7 % au lieu de 10 % pour vous rapprocher des rendements réels du marché boursier américain."
+        }
+      ]
+    },
+    "ar": {
+      "title": "حاسبة عائد الاستثمار - النمو المركب مع المساهمات الشهرية",
+      "metaDescription": "حاسبة عائد الاستثمار المجانية. أدخل المبلغ الأولي والمساهمات الشهرية ومعدل العائد السنوي والسنوات لمعرفة القيمة النهائية وإجمالي الربح.",
+      "h1": "حاسبة عائد الاستثمار",
+      "intro": "أدخل استثمارك الأولي والمساهمات الشهرية ومعدل العائد السنوي وفترة الاستثمار لمعرفة القيمة النهائية المتوقعة.",
+      "faq_title": "الأسئلة الشائعة حول عائد الاستثمار",
+      "ui": {
+        "initial": "المبلغ الأولي ($)",
+        "monthly": "المساهمة الشهرية ($)",
+        "rate": "العائد السنوي (%)",
+        "years": "سنوات",
+        "calculate": "احسب"
+      },
+      "faq": [
+        {
+          "q": "ما هي الصيغة المستخدمة؟",
+          "a": "تستخدم الآلة الحاسبة صيغة الفائدة المركبة لمبلغ مقطوع أولي بالإضافة إلى القيمة المستقبلية لسلسلة من الدفعات الدورية المتساوية (الأقساط السنوية). الإجمالي = P(1+r)^n + PMT × ((1+r)^n − 1) / r، حيث r هو المعدل الشهري وn هو عدد الأشهر."
+        },
+        {
+          "q": "ما هو معدل العائد الواقعي؟",
+          "a": "وقد عاد مؤشر ستاندرد آند بورز 500 الأمريكي بنحو 10% سنويا قبل التضخم (7% بعد التضخم) على المدى الطويل. تختلف النتائج الفردية بشكل كبير اعتمادًا على تخصيص الأصول والفترة الزمنية والرسوم."
+        },
+        {
+          "q": "فهل هذا يفسر التضخم؟",
+          "a": "لا. أدخل معدلًا حقيقيًا (المعدل حسب التضخم) إذا كنت تريد نتائج معدلة حسب التضخم. على سبيل المثال، استخدم 7% بدلاً من 10% لتقريب عوائد سوق الأسهم الأمريكية الحقيقية."
+        }
+      ]
+    },
+    "bn": {
+      "title": "ইনভেস্টমেন্ট রিটার্ন ক্যালকুলেটর — মাসিক অবদানের সাথে চক্রবৃদ্ধি",
+      "metaDescription": "বিনামূল্যে বিনিয়োগ রিটার্ন ক্যালকুলেটর. চূড়ান্ত মূল্য এবং মোট লাভ দেখতে একটি প্রাথমিক পরিমাণ, মাসিক অবদান, বার্ষিক রিটার্ন হার এবং বছরগুলি লিখুন।",
+      "h1": "ইনভেস্টমেন্ট রিটার্ন ক্যালকুলেটর",
+      "intro": "আপনার অনুমানকৃত চূড়ান্ত মান দেখতে আপনার প্রাথমিক বিনিয়োগ, মাসিক অবদান, বার্ষিক রিটার্ন হার এবং বিনিয়োগের সময়কাল লিখুন।",
+      "faq_title": "বিনিয়োগ ফেরত FAQ",
+      "ui": {
+        "initial": "প্রাথমিক পরিমাণ ($)",
+        "monthly": "মাসিক অবদান ($)",
+        "rate": "বার্ষিক রিটার্ন (%)",
+        "years": "বছর",
+        "calculate": "হিসাব করুন"
+      },
+      "faq": [
+        {
+          "q": "কি সূত্র ব্যবহার করা হয়?",
+          "a": "ক্যালকুলেটর একটি প্রাথমিক একক সমষ্টির সাথে সমান পর্যায়ক্রমিক অর্থপ্রদানের (বার্ষিকী) সিরিজের ভবিষ্যত মূল্যের জন্য চক্রবৃদ্ধি সুদের সূত্র ব্যবহার করে। মোট = P(1+r)^n + PMT × ((1+r)^n −1) / r, যেখানে r হল মাসিক হার এবং n হল মাসের সংখ্যা৷"
+        },
+        {
+          "q": "একটি বাস্তবসম্মত রিটার্ন হার কি?",
+          "a": "US S&P 500 দীর্ঘ মেয়াদে মুদ্রাস্ফীতির আগে বার্ষিক প্রায় 10% (≈7% মুদ্রাস্ফীতির পরে) ফেরত দিয়েছে। সম্পদ বরাদ্দ, সময়কাল এবং ফি এর উপর নির্ভর করে ব্যক্তিগত ফলাফল ব্যাপকভাবে পরিবর্তিত হয়।"
+        },
+        {
+          "q": "মুদ্রাস্ফীতি জন্য এই অ্যাকাউন্ট?",
+          "a": "না। আপনি যদি মুদ্রাস্ফীতি-সামঞ্জস্যপূর্ণ ফলাফল চান তাহলে একটি বাস্তব (মূল্যস্ফীতি-সামঞ্জস্য) হার লিখুন। উদাহরণস্বরূপ, আনুমানিক বাস্তব মার্কিন স্টক মার্কেট রিটার্নের জন্য 10% এর পরিবর্তে 7% ব্যবহার করুন।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Калькулятор доходности инвестиций — сложный рост с ежемесячными взносами",
+      "metaDescription": "Бесплатный калькулятор доходности инвестиций. Введите первоначальную сумму, ежемесячные взносы, годовую доходность и годы, чтобы увидеть окончательную стоимость и общую прибыль.",
+      "h1": "Калькулятор доходности инвестиций",
+      "intro": "Введите свои первоначальные инвестиции, ежемесячные взносы, годовую доходность и инвестиционный период, чтобы увидеть прогнозируемую окончательную стоимость.",
+      "faq_title": "Возврат инвестиций: часто задаваемые вопросы",
+      "ui": {
+        "initial": "Начальная сумма ($)",
+        "monthly": "Ежемесячный взнос ($)",
+        "rate": "Годовая доходность (%)",
+        "years": "Годы",
+        "calculate": "Рассчитать"
+      },
+      "faq": [
+        {
+          "q": "Какая формула используется?",
+          "a": "Калькулятор использует формулу сложных процентов для расчета первоначальной единовременной суммы и будущей стоимости серии равных периодических платежей (аннуитета). Итого = P(1+r)^n + PMT × ((1+r)^n − 1) / r, где r — месячная ставка, а n — количество месяцев."
+        },
+        {
+          "q": "Какова реальная ставка возврата?",
+          "a": "Американский индекс S&P 500 приносил около 10% годовой доходности до инфляции (≈7% после инфляции) в долгосрочной перспективе. Индивидуальные результаты сильно различаются в зависимости от распределения активов, периода времени и комиссий."
+        },
+        {
+          "q": "Связано ли это с инфляцией?",
+          "a": "Нет. Введите реальную (с поправкой на инфляцию) ставку, если вам нужны результаты с поправкой на инфляцию. Например, используйте 7% вместо 10%, чтобы приблизить реальную доходность фондового рынка США."
+        }
+      ]
+    },
+    "ur": {
+      "title": "انوسٹمنٹ ریٹرن کیلکولیٹر - ماہانہ شراکت کے ساتھ مرکب نمو",
+      "metaDescription": "مفت سرمایہ کاری کی واپسی کیلکولیٹر۔ حتمی قیمت اور کل فائدہ دیکھنے کے لیے ایک ابتدائی رقم، ماہانہ شراکت، سالانہ واپسی کی شرح اور سال درج کریں۔",
+      "h1": "سرمایہ کاری کی واپسی کیلکولیٹر",
+      "intro": "اپنی متوقع حتمی قیمت دیکھنے کے لیے اپنی ابتدائی سرمایہ کاری، ماہانہ شراکت، سالانہ واپسی کی شرح اور سرمایہ کاری کی مدت درج کریں۔",
+      "faq_title": "سرمایہ کاری کی واپسی کے اکثر پوچھے گئے سوالات",
+      "ui": {
+        "initial": "ابتدائی رقم ($)",
+        "monthly": "ماہانہ تعاون ($)",
+        "rate": "سالانہ واپسی (%)",
+        "years": "سال",
+        "calculate": "حساب لگانا"
+      },
+      "faq": [
+        {
+          "q": "کیا فارمولہ استعمال کیا جاتا ہے؟",
+          "a": "کیلکولیٹر ابتدائی یکمشت رقم کے علاوہ مساوی متواتر ادائیگیوں (سالانہ) کی ایک سیریز کی مستقبل کی قیمت کے لیے مرکب سود کا فارمولہ استعمال کرتا ہے۔ کل = P(1+r)^n + PMT × ((1+r)^n −1) / r، جہاں r ماہانہ شرح ہے اور n مہینوں کی تعداد ہے۔"
+        },
+        {
+          "q": "ایک حقیقت پسندانہ واپسی کی شرح کیا ہے؟",
+          "a": "US S&P 500 نے طویل مدت کے دوران افراط زر سے پہلے تقریباً 10% سالانہ (≈7% افراط زر کے بعد) واپس کیا ہے۔ اثاثوں کی تقسیم، وقت کی مدت اور فیس کے لحاظ سے انفرادی نتائج بہت مختلف ہوتے ہیں۔"
+        },
+        {
+          "q": "کیا یہ مہنگائی کا حساب ہے؟",
+          "a": "نہیں، اگر آپ افراط زر سے ایڈجسٹ شدہ نتائج چاہتے ہیں تو ایک حقیقی (افراط زر کے مطابق) شرح درج کریں۔ مثال کے طور پر، امریکی اسٹاک مارکیٹ کے حقیقی منافع کے لیے 10% کی بجائے 7% استعمال کریں۔"
+        }
+      ]
+    }
+  }
+}

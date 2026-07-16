@@ -1,0 +1,289 @@
+{
+  "slug": "algebrasolver",
+  "category": "math",
+  "icon": "🧮",
+  "script": "algebrasolver.js",
+  "widget": "<form id=\"as-form\"><div class=\"field\"><label for=\"as-type\">{{ui.type}}</label><select id=\"as-type\"><option value=\"linear\">{{ui.linear}} (ax + b = c)</option><option value=\"systems\">{{ui.systems}} (2 equations, 2 unknowns)</option></select></div><div id=\"as-linear-fields\"><div class=\"row\"><div class=\"field\"><label for=\"as-a\">a</label><input type=\"number\" id=\"as-a\" value=\"2\" step=\"any\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"as-b\">b</label><input type=\"number\" id=\"as-b\" value=\"3\" step=\"any\" inputmode=\"decimal\"></div><div class=\"field\"><label for=\"as-c\">c</label><input type=\"number\" id=\"as-c\" value=\"7\" step=\"any\" inputmode=\"decimal\"></div></div></div><div id=\"as-sys-fields\" style=\"display:none\"><p style=\"opacity:0.6;font-size:0.875rem\">{{ui.sysNote}}</p><div class=\"row\"><div class=\"field\"><label>a₁x + b₁y = c₁</label><div style=\"display:flex;gap:0.4rem\"><input type=\"number\" id=\"as-a1\" value=\"2\" step=\"any\" style=\"width:60px\" inputmode=\"decimal\"><input type=\"number\" id=\"as-b1\" value=\"1\" step=\"any\" style=\"width:60px\" inputmode=\"decimal\"><input type=\"number\" id=\"as-c1\" value=\"5\" step=\"any\" style=\"width:60px\" inputmode=\"decimal\"></div></div><div class=\"field\"><label>a₂x + b₂y = c₂</label><div style=\"display:flex;gap:0.4rem\"><input type=\"number\" id=\"as-a2\" value=\"1\" step=\"any\" style=\"width:60px\" inputmode=\"decimal\"><input type=\"number\" id=\"as-b2\" value=\"-1\" step=\"any\" style=\"width:60px\" inputmode=\"decimal\"><input type=\"number\" id=\"as-c2\" value=\"1\" step=\"any\" style=\"width:60px\" inputmode=\"decimal\"></div></div></div></div><button class=\"btn\" type=\"submit\">{{ui.solve}}</button></form><div id=\"as-out\" hidden class=\"result\" style=\"text-align:center\"></div>",
+  "strings": {
+    "en": {
+      "title": "Algebra Equation Solver — solve linear equations and 2x2 systems",
+      "metaDescription": "Free algebra solver. Solve linear equations (ax + b = c) and systems of two linear equations with two unknowns using substitution and Cramer's rule.",
+      "h1": "Algebra Equation Solver",
+      "intro": "Solve linear equations and systems of two equations with two unknowns. Enter the coefficients and click Solve.",
+      "faq_title": "Algebra solver FAQ",
+      "ui": {
+        "type": "Equation type",
+        "linear": "Linear equation",
+        "systems": "System of 2 equations",
+        "sysNote": "Enter coefficients for both equations",
+        "solve": "Solve"
+      },
+      "faq": [
+        {
+          "q": "How is a linear equation solved?",
+          "a": "ax + b = c → x = (c - b) / a. Example: 2x + 3 = 7 → x = (7-3)/2 = 2."
+        },
+        {
+          "q": "How are systems of equations solved?",
+          "a": "Using Cramer's Rule with a 2×2 determinant. For a₁x + b₁y = c₁ and a₂x + b₂y = c₂: D = a₁b₂ - a₂b₁. x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "What if there is no solution?",
+          "a": "A system has no unique solution when D = 0. If D = 0 and the numerators are also 0, the system has infinitely many solutions (dependent equations). If D = 0 but numerators are not 0, there is no solution (inconsistent equations)."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Solucionador de Equações Algébricas — resolver equações lineares e sistemas 2x2",
+      "metaDescription": "Solucionador de álgebra gratuito. Resolva equações lineares (ax + b = c) e sistemas de duas equações lineares com duas incógnitas.",
+      "h1": "Solucionador de Equações Algébricas",
+      "intro": "Resolva equações lineares e sistemas de duas equações com duas incógnitas. Insira os coeficientes e clique em Resolver.",
+      "faq_title": "Perguntas frequentes sobre solucionador de álgebra",
+      "ui": {
+        "type": "Tipo de equação",
+        "linear": "Equação linear",
+        "systems": "Sistema de 2 equações",
+        "sysNote": "Insira coeficientes para ambas as equações",
+        "solve": "Resolver"
+      },
+      "faq": [
+        {
+          "q": "Como uma equação linear é resolvida?",
+          "a": "ax + b = c → x = (c - b) / a. Exemplo: 2x + 3 = 7 → x = (7-3)/2 = 2."
+        },
+        {
+          "q": "Como são resolvidos sistemas de equações?",
+          "a": "Usando a Regra de Cramer com um determinante 2×2. Para a₁x + b₁y = c₁ e a₂x + b₂y = c₂: D = a₁b₂ - a₂b₁. x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "E se não houver solução?",
+          "a": "Um sistema não tem solução única quando D = 0. Se D = 0 e os numeradores também são 0, o sistema tem infinitas soluções (equações dependentes). Se D = 0 mas os numeradores não são 0, não há solução."
+        }
+      ]
+    },
+    "zh": {
+      "title": "代数方程求解器 — 求解线性方程和 2x2 系统",
+      "metaDescription": "免费代数求解器。使用替换和克莱默法则求解线性方程 (ax + b = c) 以及具有两个未知数的两个线性方程组。",
+      "h1": "代数方程求解器",
+      "intro": "求解线性方程和具有两个未知数的两个方程组。输入系数并单击求解。",
+      "faq_title": "代数求解器常见问题解答",
+      "ui": {
+        "type": "方程类型",
+        "linear": "线性方程",
+        "systems": "2 方程组",
+        "sysNote": "输入两个方程的系数",
+        "solve": "解决"
+      },
+      "faq": [
+        {
+          "q": "线性方程如何求解？",
+          "a": "ax + b = c → x = (c - b) / a。示例：2x + 3 = 7 → x = (7-3)/2 = 2。"
+        },
+        {
+          "q": "方程组是如何求解的？",
+          "a": "使用带有 2×2 行列式的克莱默法则。对于 a1x + b1y = c1 和 a2x + b2y = c2：D = a1b2 - a2b1。 x = (c₁b2 - c2b₁) / D。 y = (a₁c2 - a2c₁) / D。"
+        },
+        {
+          "q": "如果没有解决办法怎么办？",
+          "a": "当 D = 0 时，系统没有唯一解。如果 D = 0 并且分子也为 0，则系统有无穷多个解（相关方程）。如果 D = 0 但分子不为 0，则无解（方程不一致）。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "बीजगणित समीकरण सॉल्वर - रैखिक समीकरणों और 2x2 प्रणालियों को हल करें",
+      "metaDescription": "मुफ़्त बीजगणित सॉल्वर। प्रतिस्थापन और क्रैमर नियम का उपयोग करके रैखिक समीकरण (ax + b = c) और दो अज्ञात के साथ दो रैखिक समीकरणों की प्रणालियों को हल करें।",
+      "h1": "बीजगणित समीकरण सॉल्वर",
+      "intro": "दो अज्ञात के साथ रैखिक समीकरणों और दो समीकरणों की प्रणालियों को हल करें। गुणांक दर्ज करें और हल करें पर क्लिक करें।",
+      "faq_title": "बीजगणित सॉल्वर अक्सर पूछे जाने वाले प्रश्न",
+      "ui": {
+        "type": "समीकरण प्रकार",
+        "linear": "रैखिक समीकरण",
+        "systems": "2 समीकरणों की प्रणाली",
+        "sysNote": "दोनों समीकरणों के लिए गुणांक दर्ज करें",
+        "solve": "हल करें"
+      },
+      "faq": [
+        {
+          "q": "रैखिक समीकरण कैसे हल किया जाता है?",
+          "a": "कुल्हाड़ी + बी = सी → एक्स = (सी - बी) / ए। उदाहरण: 2x + 3 = 7 → x = (7-3)/2 = 2."
+        },
+        {
+          "q": "समीकरणों की प्रणालियों को कैसे हल किया जाता है?",
+          "a": "2×2 सारणिक के साथ क्रैमर नियम का उपयोग करना। a₁x + b₁y = c₁ और a₂x + b₂y = c₂ के लिए: D = a₁b₂ - a₂b₁। x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "यदि कोई समाधान न हो तो क्या होगा?",
+          "a": "D = 0 होने पर किसी सिस्टम का कोई अद्वितीय समाधान नहीं होता है। यदि D = 0 और अंश भी 0 हैं, तो सिस्टम में अनंत रूप से कई समाधान (आश्रित समीकरण) होते हैं। यदि D = 0 है लेकिन अंश 0 नहीं हैं, तो कोई समाधान नहीं है (असंगत समीकरण)।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Solucionador de ecuaciones de álgebra: resuelve ecuaciones lineales y sistemas 2x2",
+      "metaDescription": "Solucionador de álgebra gratuito. Resolver ecuaciones lineales (ax + b = c) y sistemas de dos ecuaciones lineales con dos incógnitas mediante sustitución y regla de Cramer.",
+      "h1": "Solucionador de ecuaciones de álgebra",
+      "intro": "Resolver ecuaciones lineales y sistemas de dos ecuaciones con dos incógnitas. Ingrese los coeficientes y haga clic en Resolver.",
+      "faq_title": "Preguntas frecuentes sobre el solucionador de álgebra",
+      "ui": {
+        "type": "Tipo de ecuación",
+        "linear": "Ecuación lineal",
+        "systems": "Sistema de 2 ecuaciones",
+        "sysNote": "Ingrese coeficientes para ambas ecuaciones",
+        "solve": "Resolver"
+      },
+      "faq": [
+        {
+          "q": "¿Cómo se resuelve una ecuación lineal?",
+          "a": "hacha + b = c → x = (c - b) / a. Ejemplo: 2x + 3 = 7 → x = (7-3)/2 = 2."
+        },
+        {
+          "q": "¿Cómo se resuelven los sistemas de ecuaciones?",
+          "a": "Usando la regla de Cramer con un determinante de 2×2. Para a₁x + b₁y = c₁ y a₂x + b₂y = c₂: D = a₁b₂ - a₂b₁. x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "¿Qué pasa si no hay solución?",
+          "a": "Un sistema no tiene solución única cuando D = 0. Si D = 0 y los numeradores también son 0, el sistema tiene infinitas soluciones (ecuaciones dependientes). Si D = 0 pero los numeradores no son 0, no hay solución (ecuaciones inconsistentes)."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Solveur d'équations algébriques : résolvez des équations linéaires et des systèmes 2x2",
+      "metaDescription": "Solveur d'algèbre gratuit. Résolvez des équations linéaires (ax + b = c) et des systèmes de deux équations linéaires à deux inconnues en utilisant la substitution et la règle de Cramer.",
+      "h1": "Solveur d'équations algébriques",
+      "intro": "Résoudre des équations linéaires et des systèmes de deux équations à deux inconnues. Entrez les coefficients et cliquez sur Résoudre.",
+      "faq_title": "FAQ sur le solveur d'algèbre",
+      "ui": {
+        "type": "Type d'équation",
+        "linear": "Équation linéaire",
+        "systems": "Système de 2 équations",
+        "sysNote": "Entrez les coefficients pour les deux équations",
+        "solve": "Résoudre"
+      },
+      "faq": [
+        {
+          "q": "Comment résoudre une équation linéaire ?",
+          "a": "hache + b = c → x = (c - b) / une. Exemple : 2x + 3 = 7 → x = (7-3)/2 = 2."
+        },
+        {
+          "q": "Comment les systèmes d’équations sont-ils résolus ?",
+          "a": "Utilisation de la règle de Cramer avec un déterminant 2×2. Pour a₁x + b₁y = c₁ et a₂x + b₂y = c₂ : D = a₁b₂ - a₂b₁. x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "Et s'il n'y a pas de solution ?",
+          "a": "Un système n'a pas de solution unique lorsque D = 0. Si D = 0 et que les numérateurs sont également 0, le système a une infinité de solutions (équations dépendantes). Si D = 0 mais que les numérateurs ne sont pas 0, il n'y a pas de solution (équations incohérentes)."
+        }
+      ]
+    },
+    "ar": {
+      "title": "Algebra Equation Solver — حل المعادلات الخطية وأنظمة 2x2",
+      "metaDescription": "حل الجبر الحرة. حل المعادلات الخطية (ax + b = c) وأنظمة معادلتين خطيتين بمجهولين باستخدام التعويض وقاعدة كرامر.",
+      "h1": "الجبر المعادلات حلالا",
+      "intro": "حل المعادلات الخطية وأنظمة معادلتين بمجهولين. أدخل المعاملات وانقر فوق حل.",
+      "faq_title": "الأسئلة الشائعة لحل الجبر",
+      "ui": {
+        "type": "نوع المعادلة",
+        "linear": "المعادلة الخطية",
+        "systems": "نظام من معادلتين",
+        "sysNote": "أدخل معاملات كلا المعادلتين",
+        "solve": "حل"
+      },
+      "faq": [
+        {
+          "q": "كيف يتم حل المعادلة الخطية؟",
+          "a": "الفأس + ب = ج → س = (ج - ب) / أ. مثال: 2س + 3 = 7 → س = (7-3)/2 = 2."
+        },
+        {
+          "q": "كيف يتم حل أنظمة المعادلات؟",
+          "a": "استخدام قاعدة كرامر مع المحدد 2×2. بالنسبة إلى a₁x + b₁y = c₁ وa₂x + b₂y = c₂: D = a₁b₂ - a₂b₁. x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "ماذا لو لم يكن هناك حل؟",
+          "a": "ليس لدى النظام حل فريد عندما تكون D = 0. إذا كانت D = 0 والبسط هي أيضًا 0، فإن النظام لديه عدد لا نهائي من الحلول (المعادلات التابعة). إذا كانت D = 0 ولكن البسط ليس 0، فلا يوجد حل (معادلات غير متناسقة)."
+        }
+      ]
+    },
+    "bn": {
+      "title": "বীজগণিত সমীকরণ সমাধানকারী — রৈখিক সমীকরণ এবং 2x2 সিস্টেমগুলি সমাধান করুন",
+      "metaDescription": "বিনামূল্যে বীজগণিত সমাধানকারী. প্রতিস্থাপন এবং ক্র্যামারের নিয়ম ব্যবহার করে দুটি অজানা সহ রৈখিক সমীকরণ (ax + b = c) এবং দুটি রৈখিক সমীকরণের সিস্টেমগুলি সমাধান করুন।",
+      "h1": "বীজগণিত সমীকরণ সমাধানকারী",
+      "intro": "দুটি অজানা সহ দুটি সমীকরণের রৈখিক সমীকরণ এবং সিস্টেমগুলি সমাধান করুন। সহগ লিখুন এবং সমাধান ক্লিক করুন।",
+      "faq_title": "বীজগণিত সমাধানকারী FAQ",
+      "ui": {
+        "type": "সমীকরণের ধরন",
+        "linear": "রৈখিক সমীকরণ",
+        "systems": "2টি সমীকরণের সিস্টেম",
+        "sysNote": "উভয় সমীকরণের জন্য সহগ লিখুন",
+        "solve": "সমাধান করুন"
+      },
+      "faq": [
+        {
+          "q": "কিভাবে একটি রৈখিক সমীকরণ সমাধান করা হয়?",
+          "a": "ax + b = c → x = (c - b) / a. উদাহরণ: 2x + 3 = 7 → x = (7-3)/2 = 2।"
+        },
+        {
+          "q": "কিভাবে সমীকরণ সিস্টেম সমাধান করা হয়?",
+          "a": "একটি 2×2 নির্ধারক সহ ক্র্যামারের নিয়ম ব্যবহার করা। a₁x + b₁y = c₁ এবং a₂x + b₂y = c₂ এর জন্য: D = a₁b₂ - a₂b₁. x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "কোন সমাধান না হলে কি হবে?",
+          "a": "একটি সিস্টেমের কোন অনন্য সমাধান নেই যখন D = 0। যদি D = 0 এবং সংখ্যাগুলিও 0 হয়, তবে সিস্টেমের অসীমভাবে অনেকগুলি সমাধান রয়েছে (নির্ভর সমীকরণ)। যদি D = 0 কিন্তু লব 0 না হয় তবে কোন সমাধান নেই (অসংলগ্ন সমীকরণ)।"
+        }
+      ]
+    },
+    "ru": {
+      "title": "Algebra Equation Solver — решайте линейные уравнения и системы 2х2.",
+      "metaDescription": "Бесплатная программа для решения алгебры. Решите линейные уравнения (ax + b = c) и системы двух линейных уравнений с двумя неизвестными, используя замену и правило Крамера.",
+      "h1": "Решатель уравнений алгебры",
+      "intro": "Решайте линейные уравнения и системы двух уравнений с двумя неизвестными. Введите коэффициенты и нажмите «Решить».",
+      "faq_title": "Часто задаваемые вопросы по решателю алгебры",
+      "ui": {
+        "type": "Тип уравнения",
+        "linear": "Линейное уравнение",
+        "systems": "Система 2-х уравнений",
+        "sysNote": "Введите коэффициенты для обоих уравнений",
+        "solve": "Решить"
+      },
+      "faq": [
+        {
+          "q": "Как решается линейное уравнение?",
+          "a": "топор + b = c → x = (c – b)/a. Пример: 2x + 3 = 7 → x = (7-3)/2 = 2."
+        },
+        {
+          "q": "Как решаются системы уравнений?",
+          "a": "Использование правила Крамера с определителем 2×2. Для a₁x + b₁y = c₁ и a₂x + b₂y = c₂: D = a₁b₂ - a₂b₁. x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "Что делать, если решения нет?",
+          "a": "Система не имеет единственного решения, когда D = 0. Если D = 0 и числители также равны 0, система имеет бесконечно много решений (зависимых уравнений). Если D = 0, но числители не равны 0, решения нет (несогласованные уравнения)."
+        }
+      ]
+    },
+    "ur": {
+      "title": "الجبرا مساوات حل کرنے والا — لکیری مساوات اور 2x2 نظاموں کو حل کریں۔",
+      "metaDescription": "مفت الجبرا حل کرنے والا۔ لکیری مساوات (ax + b = c) اور دو لکیری مساوات کے نظام کو دو نامعلوم کے ساتھ متبادل اور Cramer's قاعدہ کا استعمال کرتے ہوئے حل کریں۔",
+      "h1": "الجبرا مساوات حل کرنے والا",
+      "intro": "دو نامعلوموں کے ساتھ دو مساوات کے لکیری مساوات اور نظام کو حل کریں۔ گتانک درج کریں اور حل پر کلک کریں۔",
+      "faq_title": "الجبرا حل کرنے والے اکثر پوچھے گئے سوالات",
+      "ui": {
+        "type": "مساوات کی قسم",
+        "linear": "لکیری مساوات",
+        "systems": "2 مساوات کا نظام",
+        "sysNote": "دونوں مساوات کے لیے گتانک درج کریں۔",
+        "solve": "حل کریں۔"
+      },
+      "faq": [
+        {
+          "q": "لکیری مساوات کو کیسے حل کیا جاتا ہے؟",
+          "a": "ax + b = c → x = (c - b) / a۔ مثال: 2x + 3 = 7 → x = (7-3)/2 = 2۔"
+        },
+        {
+          "q": "مساوات کے نظام کو کیسے حل کیا جاتا ہے؟",
+          "a": "2×2 تعین کنندہ کے ساتھ کرمر کے اصول کا استعمال۔ a₁x + b₁y = c₁ اور a₂x + b₂y = c₂ کے لیے: D = a₁b₂ - a₂b₁. x = (c₁b₂ - c₂b₁) / D. y = (a₁c₂ - a₂c₁) / D."
+        },
+        {
+          "q": "اگر کوئی حل نہیں ہے تو کیا ہوگا؟",
+          "a": "نظام کا کوئی انوکھا حل نہیں ہوتا ہے جب D = 0۔ اگر D = 0 اور عدد بھی 0 ہیں، تو نظام میں لامحدود بہت سے حل ہوتے ہیں (انحصار مساوات)۔ اگر D = 0 لیکن عدد 0 نہیں ہیں تو کوئی حل نہیں ہے (متضاد مساوات)۔"
+        }
+      ]
+    }
+  }
+}
