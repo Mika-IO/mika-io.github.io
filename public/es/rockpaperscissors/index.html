@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Piedra, papel o tijera: juego contra computadora en línea</title>
+<meta name="description" content="Juego gratis de Piedra, Papel o Tijera. Juega contra la computadora, mira los resultados al instante y realiza un seguimiento de tu puntuación. No es necesario descargar ni registrarse.">
+<link rel="canonical" href="https://mikaio.dev/es/rockpaperscissors/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/rockpaperscissors/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/rockpaperscissors/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/rockpaperscissors/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/rockpaperscissors/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/rockpaperscissors/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/rockpaperscissors/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/rockpaperscissors/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/rockpaperscissors/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/rockpaperscissors/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/rockpaperscissors/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/rockpaperscissors/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Piedra, papel o tijera: juego contra computadora en línea">
+<meta property="og:description" content="Juego gratis de Piedra, Papel o Tijera. Juega contra la computadora, mira los resultados al instante y realiza un seguimiento de tu puntuación. No es necesario descargar ni registrarse.">
+<meta property="og:url" content="https://mikaio.dev/es/rockpaperscissors/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Piedra, papel o tijera: juego contra computadora en línea","url":"https://mikaio.dev/es/rockpaperscissors/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Juego gratis de Piedra, Papel o Tijera. Juega contra la computadora, mira los resultados al instante y realiza un seguimiento de tu puntuación. No es necesario descargar ni registrarse."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Piedra, Papel o Tijera","item":"https://mikaio.dev/es/rockpaperscissors/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cómo elige la computadora?","acceptedAnswer":{"@type":"Answer","text":"La computadora elige Piedra, Papel o Tijera con la misma probabilidad usando un generador de números aleatorios, lo que la convierte en un oponente justo e impredecible."}},{"@type":"Question","name":"¿Existe una estrategia para ganar?","acceptedAnswer":{"@type":"Answer","text":"Contra un oponente verdaderamente aleatorio no existe una estrategia garantizada: cada resultado tiene la misma probabilidad. La diversión radica en la psicología y la lectura de patrones que conllevan los oponentes humanos."}},{"@type":"Question","name":"¿Se reinicia mi puntuación?","acceptedAnswer":{"@type":"Answer","text":"La puntuación se restablece cuando recargas la página. Realiza un seguimiento de las victorias, derrotas y empates de la sesión actual."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rockpaperscissors/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/rockpaperscissors/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rockpaperscissors/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/rockpaperscissors/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/rockpaperscissors/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rockpaperscissors/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rockpaperscissors/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rockpaperscissors/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rockpaperscissors/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/rockpaperscissors/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Piedra, Papel o Tijera</span></nav>
+  <h1>Piedra, Papel o Tijera</h1>
+  <p class="lead">Elige Piedra, Papel o Tijera y comprueba si puedes vencer a la computadora. Su puntuación se rastrea a lo largo de las rondas.</p>
+  <section class="widget" id="tool"><div id="rps-app" style="text-align:center"><div class="row" style="justify-content:center;gap:1rem;margin-bottom:1.5rem"><button class="btn rps-btn" data-choice="rock" style="font-size:2.5rem;padding:0.75rem 1.25rem">✊</button><button class="btn rps-btn" data-choice="paper" style="font-size:2.5rem;padding:0.75rem 1.25rem">🖐</button><button class="btn rps-btn" data-choice="scissors" style="font-size:2.5rem;padding:0.75rem 1.25rem">✌️</button></div><div id="rps-result" style="font-size:1.1rem;min-height:5rem;padding:1rem;background:var(--surface,#f5f5f5);border-radius:0.75rem;margin-bottom:1rem">¡Elige tu movimiento!</div><div id="rps-score" style="display:flex;justify-content:center;gap:2rem;font-size:0.95rem"><span>Tú: <b id="rps-pw">0</b></span><span>CPU: <b id="rps-cw">0</b></span><span>Sorteo: <b id="rps-d">0</b></span></div></div></section>
+  <article class="content">
+    <h2>El juego de manos más antiguo del mundo.</h2>
+<p>Piedra, papel y tijera es uno de los juegos más reconocidos universalmente del mundo. Dos jugadores revelan simultáneamente una de las tres formas de mano (un puño cerrado para la piedra, una palma plana para el papel o dos dedos extendidos para las tijeras) y un conjunto simple de reglas decide quién gana. La piedra aplasta a las tijeras, las tijeras cortan el papel, el papel cubre la piedra. A pesar de esa aparente simplicidad, el juego ha inspirado décadas de investigación en teoría de juegos, psicología y estrategia competitiva, y se ha utilizado en todo, desde disputas en el patio de juegos hasta disputas legales entre empresas que resuelven desacuerdos sobre qué casa de subastas se encargaría de la venta de una propiedad.</p>
+<p>El juego tiene sus raíces en China, donde aparece una versión llamada shoushiling en registros escritos que se remontan a la dinastía Han, hace aproximadamente dos mil años. Desde China se extendió a Japón, donde se conoció como jan-ken-pon y evolucionó hasta convertirse en el formato de tres gestos que la mayoría de la gente reconoce hoy. Los comerciantes y misioneros europeos llevaron el juego hacia Occidente durante los siglos XVII y XVIII, y en el siglo XX se había extendido prácticamente a todos los rincones del mundo. La Sociedad Mundial de Piedra, Papel y Tijera se fundó en 1918 en Toronto y todavía hoy organiza campeonatos mundiales anuales, con patrocinio, premios en metálico y competidores que viajan desde docenas de países.</p>
+<h2>Cómo funciona el juego en el navegador</h2>
+<p>Esta versión de Piedra, Papel y Tijera te enfrenta a un oponente informático que elige su movimiento completamente al azar con la misma probabilidad para las tres opciones. No hay sesgos ocultos, algoritmos de aprendizaje ni recuerdos de rondas anteriores. Cada juego es estadísticamente independiente. Haga clic en uno de los tres botones emoji (puño, mano abierta o dedos de tijera) y el resultado aparecerá inmediatamente. Una puntuación acumulada debajo del tablero registra cuántas rondas has ganado, cuántas ha ganado la computadora y cuántas han terminado en empate.</p>
+<p>La aleatoriedad se implementa utilizando la función Math.random incorporada del navegador, que genera un número pseudoaleatorio y lo asigna a una de las tres opciones. Si bien esto no es una aleatoriedad criptográficamente segura, es completamente suficiente para un juego donde lo que importa es la distribución de los resultados. Cada elección aparece aproximadamente un tercio de las veces a lo largo de muchas rondas, que es exactamente lo que debería hacer un oponente justo.</p>
+<h2>Estrategia contra un oponente aleatorio</h2>
+<p>En términos estrictamente matemáticos, no existe ninguna estrategia que supere al juego aleatorio cuando tu oponente también juega al azar. Cada uno de los nueve resultados posibles de la ronda (tres opciones para ti, tres para el oponente) tiene la misma probabilidad de un noveno. De esos nueve resultados, exactamente tres resultan en un empate, tres en una victoria para usted y tres en una derrota, lo que le da a cada lado un tercio de posibilidades de ganar una ronda determinada. No importa qué secuencia de movimientos hagas, la tasa de victoria esperada contra un oponente verdaderamente aleatorio es precisamente de un tercio.</p>
+<p>Esta realidad matemática no impide que la gente lo intente, por supuesto, y eso es parte del atractivo. El cerebro busca naturalmente patrones incluso en datos aleatorios, y muchos jugadores se convencen de haber identificado una tendencia en las elecciones de la computadora cuando lo que en realidad están viendo es ruido estadístico normal. A lo largo de cien rondas, los recuentos de victorias, derrotas y empates se agruparán en alrededor de treinta y tres cada uno, con fluctuaciones tanto por encima como por debajo de esa expectativa. Las tiradas cortas siempre parecerán desequilibradas, porque las secuencias aleatorias son genuinamente irregulares en lugar de alternarse claramente.</p>
+<p>Sin embargo, contra oponentes humanos, la estrategia se vuelve muy real. La investigación en ciencia cognitiva y economía del comportamiento ha demostrado que las personas no son aleatorias. Muestran sesgos predecibles: tienden a repetir un movimiento ganador, a alejarse de un movimiento perdedor y a elegir la piedra con más frecuencia que el papel o las tijeras en su primer lanzamiento. Los jugadores competitivos explotan estas tendencias. La psicología del juego se convierte en una especie de negociación rápida y silenciosa sobre lo que cada jugador cree que es probable que haga el otro a continuación.</p>
+<h2>Piedra, Papel o Tijera Competitiva</h2>
+<p>Los torneos profesionales de Piedra, Papel o Tijera existen y atraen a competidores serios. Los campeonatos de la Sociedad Mundial RPS se llevan a cabo desde 2002, con cientos de participantes pagando cuotas de inscripción y compitiendo a través de grupos eliminatorios. En los niveles más altos, los competidores estudian a sus oponentes durante múltiples rondas, buscando cualquier desviación del juego aleatorio que puedan explotar. Algunos jugadores afirman ser capaces de provocar respuestas particulares mediante su lenguaje corporal, señales verbales o el ritmo de la cuenta regresiva. Otros adoptan deliberadamente una estrategia rigurosamente aleatoria, precisamente para negar a sus oponentes cualquier señal explotable.</p>
+<p>Los usos notables del juego fuera del patio de recreo incluyen un caso legal de 2006 en Florida donde un juez ordenó a dos bufetes de abogados que no podían ponerse de acuerdo sobre un lugar de reunión para resolver la disputa con Piedra, Papel o Tijera. Una vez, una empresa japonesa pidió a Christie&#39;s y Sotheby&#39;s, las famosas casas de subastas, que compitieran por un envío de pinturas impresionistas utilizando el juego. Christie&#39;s consultó a las hijas de su presidente, quienes aconsejaron ir con tijeras porque, razonaron, todo el mundo siempre empieza con piedra. Ellos ganaron.</p>
+<h2>Usando el rastreador de puntuación</h2>
+<p>La pantalla de puntuación debajo de los botones le brinda un recuento actualizado de victorias, victorias de la computadora y empates para su sesión actual. Esto es útil si desea realizar un seguimiento de sus resultados en una muestra significativa de juegos. Unas pocas docenas de rondas son suficientes para ver si la distribución se acerca a la proporción esperada de un tercio, y ver cómo evoluciona la puntuación en tiempo real es una experiencia sorprendentemente atractiva incluso contra un oponente aleatorio. Si desea comenzar de nuevo, simplemente vuelva a cargar la página y los contadores se restablecerán a cero.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre piedra, papel o tijera</h2><dl><dt>¿Cómo elige la computadora?</dt><dd>La computadora elige Piedra, Papel o Tijera con la misma probabilidad usando un generador de números aleatorios, lo que la convierte en un oponente justo e impredecible.</dd><dt>¿Existe una estrategia para ganar?</dt><dd>Contra un oponente verdaderamente aleatorio no existe una estrategia garantizada: cada resultado tiene la misma probabilidad. La diversión radica en la psicología y la lectura de patrones que conllevan los oponentes humanos.</dd><dt>¿Se reinicia mi puntuación?</dt><dd>La puntuación se restablece cuando recargas la página. Realiza un seguimiento de las victorias, derrotas y empates de la sesión actual.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rockpaperscissors/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/rockpaperscissors/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rockpaperscissors/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/rockpaperscissors/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/rockpaperscissors/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rockpaperscissors/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rockpaperscissors/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rockpaperscissors/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rockpaperscissors/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/rockpaperscissors/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"you":"Tu","cpu":"Computadora","draw":"Dibujar","win":"¡Tú ganas! 🎉","lose":"La computadora gana 🤖","tie":"¡Es un empate! 🤝","chooseyourmove":"¡Elige tu movimiento!","you2":"Tú:","cpu2":"CPU:","draw2":"Sorteo:"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/rockpaperscissors.js" defer></script>
+</body>
+</html>

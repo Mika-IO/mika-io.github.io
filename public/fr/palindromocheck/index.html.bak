@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palindrome Checker : votre mot ou votre expression est-il un palindrome ?</title>
+<meta name="description" content="Vérificateur de palindrome gratuit. Testez instantanément si un mot, une phrase ou un nombre se lit de la même manière vers l&#39;avant et vers l&#39;arrière, en ignorant la casse, les espaces et la ponctuation.">
+<link rel="canonical" href="https://mikaio.dev/fr/palindromocheck/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/palindromocheck/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/palindromocheck/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/palindromocheck/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/palindromocheck/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/palindromocheck/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/palindromocheck/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/palindromocheck/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/palindromocheck/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/palindromocheck/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/palindromocheck/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/palindromocheck/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Palindrome Checker : votre mot ou votre expression est-il un palindrome ?">
+<meta property="og:description" content="Vérificateur de palindrome gratuit. Testez instantanément si un mot, une phrase ou un nombre se lit de la même manière vers l&#39;avant et vers l&#39;arrière, en ignorant la casse, les espaces et la ponctuation.">
+<meta property="og:url" content="https://mikaio.dev/fr/palindromocheck/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Palindrome Checker : votre mot ou votre expression est-il un palindrome ?","url":"https://mikaio.dev/fr/palindromocheck/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Vérificateur de palindrome gratuit. Testez instantanément si un mot, une phrase ou un nombre se lit de la même manière vers l'avant et vers l'arrière, en ignorant la casse, les espaces et la ponctuation."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Vérificateur de palindrome","item":"https://mikaio.dev/fr/palindromocheck/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce qu'un palindrome ?","acceptedAnswer":{"@type":"Answer","text":"Un palindrome est un mot, une phrase, un nombre ou une séquence qui se lit de la même manière en avant et en arrière, comme « niveau », « voiture de course » ou « Un homme, un plan, un canal : Panama »."}},{"@type":"Question","name":"Est-ce que ça compte les espaces et la ponctuation ?","acceptedAnswer":{"@type":"Answer","text":"Non. Le vérificateur ignore les majuscules, les espaces et la ponctuation, donc « Était-ce une voiture ou un chat que j'ai vu ? est correctement reconnu comme un palindrome. Il compare uniquement les lettres et les chiffres."}},{"@type":"Question","name":"Mon SMS est-il envoyé quelque part ?","acceptedAnswer":{"@type":"Answer","text":"Non. La vérification s'effectue instantanément dans votre navigateur, donc rien de ce que vous saisissez n'est téléchargé, stocké ou partagé."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Vérificateur de palindrome</span></nav>
+  <h1>Vérificateur de palindrome</h1>
+  <p class="lead">Tapez un mot, une phrase ou un chiffre et découvrez instantanément s&#39;il s&#39;agit d&#39;un palindrome. Les espaces, les majuscules et la ponctuation sont ignorés.</p>
+  <section class="widget" id="tool"><div id="pal" data-yes="C&#39;est un palindrome !" data-no="Pas un palindrome" data-empty="En attente de texte"><div class="field"><label for="pal-input">Mot ou expression</label><textarea id="pal-input" placeholder="Tapez quelque chose comme « voiture de course »…"></textarea></div><div class="result"><span class="big" id="pal-out">—</span></div></div></section>
+  <article class="content">
+    <h2>Découvrez instantanément si un mot est un palindrome</h2>
+<p>Un palindrome est un mot ou une phrase qui se lit de façon identique de gauche à droite et de droite à gauche, comme « radar », « kayak » ou « ressasser ». C&#39;est l&#39;une des bizarreries les plus satisfaisantes de la langue, et repérer un bon palindrome procure un peu la sensation de trouver un motif caché. Mais vérifier à la main si une phrase plus longue est vraiment un palindrome se révèle délicat — il faut retirer les espaces et la ponctuation, ignorer les majuscules, puis comparer les lettres depuis les deux extrémités vers le centre sans perdre le fil. Ce vérificateur fait tout cela à votre place, à l&#39;instant où vous tapez. Saisissez un mot, une phrase, ou même un nombre, et il vous dit immédiatement s&#39;il s&#39;agit d&#39;un palindrome. Tout s&#39;exécute dans votre navigateur, si bien que la réponse est immédiate et que rien de ce que vous tapez n&#39;est jamais envoyé où que ce soit.</p>
+<p>Il n&#39;y a rien à presser ni à paramétrer. Pendant que vous tapez dans le champ, l&#39;outil vérifie en continu votre texte et affiche un résultat clair : une confirmation verte s&#39;il s&#39;agit d&#39;un palindrome, ou une indication rouge dans le cas contraire. Ce retour en direct facilite l&#39;expérimentation, l&#39;ajustement d&#39;une phrase, ou le test d&#39;une liste de candidats les uns après les autres.</p>
+<h2>Comment fonctionne la vérification</h2>
+<p>La partie subtile de la vérification d&#39;un palindrome consiste à décider quoi comparer. Personne ne dirait que « Ésope reste ici et se repose » n&#39;est pas un palindrome à cause des majuscules, des espaces et des accents, donc un bon vérificateur ignore tout ce qui n&#39;est pas une lettre ou un chiffre. Cet outil retire d&#39;abord les espaces, la ponctuation et les autres symboles, et convertit tout en minuscules, ne laissant que les lettres et les chiffres essentiels. Il retire également les accents, afin que les versions accentuée et non accentuée d&#39;une même lettre soient traitées de façon identique — un point particulièrement important en français, où les accents changent l&#39;apparence d&#39;un mot sans changer sa lettre de base. Il compare ensuite simplement cette séquence nettoyée avec sa propre version inversée : si les deux correspondent exactement, vous avez affaire à un palindrome.</p>
+<p>C&#39;est pourquoi des phrases qui ne ressemblent à rien à un palindrome au premier regard — pleines d&#39;espaces, de virgules et de majuscules — sont correctement reconnues. La célèbre phrase « Engagea la gamin, un ami la gageant » devient une longue suite de lettres identiques une fois nettoyée, qui se lit de façon rigoureusement identique dans les deux sens. En ne se concentrant que sur les lettres et les chiffres, le vérificateur correspond à la façon naturelle dont les gens pensent aux palindromes, sans se laisser piéger par la mise en forme.</p>
+<h2>Mots, phrases et nombres</h2>
+<p>Les palindromes se déclinent en plusieurs variétés, et cet outil les gère toutes. Les plus simples sont des mots isolés qui s&#39;écrivent de façon identique dans les deux sens, comme « radar », « kayak », « été » ou « ressasser ». Il existe ensuite des palindromes de phrases entières, où toute la phrase se lit pareil une fois qu&#39;on ignore les espaces et la ponctuation — la célèbre phrase attribuée à Ésope, « Ésope reste ici et se repose », en est un exemple classique en français. Les nombres peuvent eux aussi être des palindromes : 1221 et 90109 se lisent identiquement à l&#39;envers, et les nombres palindromiques apparaissent souvent en mathématiques récréatives et dans des casse-têtes. Comme le vérificateur examine à la fois les lettres et les chiffres, il fonctionne aussi bien pour un palindrome numérique que pour un palindrome textuel.</p>
+<p>Vous pouvez aussi vous en servir pour tester des presque-palindromes. Tapez une phrase que vous soupçonnez d&#39;être proche, et le résultat rouge ou vert instantané vous indique si un petit changement — échanger un mot ou retirer une lettre — suffirait à en faire un véritable palindrome. Cela transforme les essais-erreurs de la création d&#39;un palindrome en quelque chose de rapide et de ludique.</p>
+<h2>Pourquoi les palindromes sont amusants et utiles</h2>
+<p>La plupart des gens découvrent les palindromes comme un jeu de mots, et c&#39;est bien là que réside leur charme. Ils apparaissent dans des énigmes, des devinettes, des mots croisés et des jeux de lettres, et concevoir un long palindrome plein de sens représente un véritable exploit de créativité que les écrivains apprécient depuis des siècles. Les enseignants les utilisent pour rendre l&#39;orthographe et la lecture plus ludiques, car lire un mot à l&#39;envers oblige à examiner chaque lettre attentivement. Les enfants trouvent souvent que leur propre prénom, ou de courts mots, sont par hasard des palindromes, ce qui procure un petit plaisir.</p>
+<p>Au-delà du jeu, l&#39;idée de palindrome apparaît dans des contextes plus sérieux. En informatique, vérifier si une séquence est un palindrome constitue un exercice classique pour débutants qui enseigne comment comparer des éléments depuis les deux extrémités d&#39;une liste. En biologie, les séquences palindromiques d&#39;ADN ont une réelle importance dans la façon dont le matériel génétique est lu et découpé. La version du quotidien que vous testez ici repose sur la même idée fondamentale — une symétrie qui se lit pareil dans les deux sens —, ce qui explique en partie pourquoi ce concept reste si satisfaisant.</p>
+<h2>Privé, instantané et gratuit</h2>
+<p>Aucune inscription, aucun coût, aucune publicité qui vienne gêner l&#39;expérience. Le vérificateur entier tient dans un petit morceau de code qui s&#39;exécute sur votre propre appareil, ce qui explique pourquoi il répond à l&#39;instant même où vous tapez et continue de fonctionner sans connexion internet. Rien de ce que vous saisissez n&#39;est envoyé, stocké ni partagé ; votre texte n&#39;existe que sur votre écran et disparaît dès que vous rechargez la page.</p>
+<p>Pour l&#39;utiliser, tapez ou collez simplement un mot, une phrase ou un nombre dans le champ, et lisez le résultat. Comme les espaces, les majuscules, les accents et la ponctuation sont tous ignorés, vous pouvez saisir le texte exactement tel qu&#39;il est écrit et faire confiance à la réponse. Modifiez le texte à tout moment et le verdict se met à jour instantanément, pour que vous puissiez tester autant de mots et de phrases que vous le souhaitez et chasser les palindromes à votre guise. Que vous tranchiez un débat amical sur une phrase délicate, vérifiiez votre propre tentative d&#39;en écrire un, ou soyez simplement curieux d&#39;un mot qui a attiré votre attention, la réponse n&#39;est jamais qu&#39;à un coup d&#39;œil.</p>
+    <section class="faq"><h2>FAQ du vérificateur de palindrome</h2><dl><dt>Qu&#39;est-ce qu&#39;un palindrome ?</dt><dd>Un palindrome est un mot, une phrase, un nombre ou une séquence qui se lit de la même manière en avant et en arrière, comme « niveau », « voiture de course » ou « Un homme, un plan, un canal : Panama ».</dd><dt>Est-ce que ça compte les espaces et la ponctuation ?</dt><dd>Non. Le vérificateur ignore les majuscules, les espaces et la ponctuation, donc « Était-ce une voiture ou un chat que j&#39;ai vu ? est correctement reconnu comme un palindrome. Il compare uniquement les lettres et les chiffres.</dd><dt>Mon SMS est-il envoyé quelque part ?</dt><dd>Non. La vérification s&#39;effectue instantanément dans votre navigateur, donc rien de ce que vous saisissez n&#39;est téléchargé, stocké ou partagé.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/palindromocheck/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/palindromocheck/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/palindromocheck/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/palindromocheck/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/palindromocheck/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/palindromocheck/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/palindromocheck/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/palindromocheck/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/palindromocheck/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/palindromocheck/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/palindromocheck.js" defer></script>
+</body>
+</html>

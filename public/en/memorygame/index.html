@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memory Card Game — flip and match pairs of emoji cards</title>
+<meta name="description" content="Free memory card matching game. Flip cards to find matching emoji pairs. Tracks moves and time. Tests and improves visual memory.">
+<link rel="canonical" href="https://mikaio.dev/en/memorygame/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/memorygame/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/memorygame/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/memorygame/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/memorygame/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/memorygame/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/memorygame/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/memorygame/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/memorygame/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/memorygame/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/memorygame/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/memorygame/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Memory Card Game — flip and match pairs of emoji cards">
+<meta property="og:description" content="Free memory card matching game. Flip cards to find matching emoji pairs. Tracks moves and time. Tests and improves visual memory.">
+<meta property="og:url" content="https://mikaio.dev/en/memorygame/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Memory Card Game — flip and match pairs of emoji cards","url":"https://mikaio.dev/en/memorygame/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free memory card matching game. Flip cards to find matching emoji pairs. Tracks moves and time. Tests and improves visual memory."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Memory Card Game","item":"https://mikaio.dev/en/memorygame/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the memory game work?","acceptedAnswer":{"@type":"Answer","text":"Cards are placed face-down. Click any card to reveal it, then click another. If they match, they stay revealed. If not, both flip back. Find all pairs to win."}},{"@type":"Question","name":"How does this improve memory?","acceptedAnswer":{"@type":"Answer","text":"Memory games exercise working memory and visual pattern recognition. Regular play has been shown to improve concentration and short-term memory, particularly in children and older adults."}},{"@type":"Question","name":"What is a good score?","acceptedAnswer":{"@type":"Answer","text":"With 16 cards (8 pairs), the theoretical minimum is 8 moves. Most players take 15–25 moves. Under 15 moves is excellent. The game also tracks your time."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/memorygame/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/memorygame/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/memorygame/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/memorygame/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/memorygame/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/memorygame/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/memorygame/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/memorygame/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/memorygame/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/memorygame/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Memory Card Game</span></nav>
+  <h1>Memory Card Game</h1>
+  <p class="lead">Flip cards to find matching pairs. Try to match all pairs in as few moves as possible!</p>
+  <section class="widget" id="tool"><div id="mg-app" style="text-align:center"><div class="row" style="justify-content:center;gap:0.75rem;margin-bottom:0.75rem"><button class="btn" id="mg-start">New Game</button><span id="mg-stats" style="align-self:center;opacity:0.7;font-size:0.9rem"></span></div><div id="mg-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;max-width:340px;margin:0 auto"></div></div></section>
+  <article class="content">
+    <h2>What Memory Card Game is for</h2>
+<p>Flip cards to find matching pairs. Try to match all pairs in as few moves as possible!</p>
+<p>That is the short version, and for many visitors it is the only part they need — the tool sits at the top of this page, it works immediately, and nothing below is required reading. The rest of this page is here for the times when the answer alone is not enough: when you want to know how the game is actually performed, where it stops being reliable, and what to do with the result once you have it.</p>
+<h2>How to use it</h2>
+<p>The controls are deliberately few. You will see a single input:</p>
+<ul>
+<li><strong>New Game</strong></li>
+</ul>
+<p>Fill in what applies to you and the result updates. Nothing is mandatory in the sense of being submitted anywhere — if you change your mind, edit the value and read the new answer. There is no save step, no confirmation dialog and no way to get it wrong permanently, so trying several variations to see how the result moves is not only allowed, it is usually the most informative way to use a tool like this.</p>
+<p>Everything runs inside your own browser. Nothing you type is uploaded, nothing is stored between visits, there is no account to create and there is no tracking to decline. Once this page has loaded it does not need the network again, so it keeps working if your connection drops.</p>
+<h2>Why a page like this exists</h2>
+<p>Not everything has to be productive. Some tools exist because they are enjoyable, because they settle an argument, or because they are a pleasant way to spend ninety seconds. That is a complete justification on its own.</p>
+<p>The web is full of tools that solve a thirty-second problem by first demanding an email address, a cookie decision and four seconds of advertising. That trade made sense to somebody, but it did not make sense to the person who just wanted the number. This page takes the opposite position: no signup, no interstitial, no upsell, and no reason to leave once you have what you came for.</p>
+<h2>What the result does and does not tell you</h2>
+<p>Randomness comes from your browser&#39;s built-in generator, which is more than good enough for games and decisions and is explicitly not suitable for anything involving security, money or a lottery you actually care about.</p>
+<p>It is worth being explicit about the boundary, because tools are routinely trusted past the point where they deserve it. This one is honest within its inputs: give it accurate values and it gives you an accurate game. It cannot tell you whether the values you gave it were the right ones to use, whether you have asked the right question, or whether the context you are applying the answer to has something important the inputs never captured. That judgement stays with you, and it is the part that actually matters.</p>
+<h2>Where it fits in a real workflow</h2>
+<p>Tools like this are rarely the whole job. More often memory card game is one step in the middle of something larger: you needed this figure so you could get on with the thing you were actually doing. That shapes how the page is built. It opens fast, it does not interrupt, it does not ask you to commit to anything, and it gets out of the way the moment you have what you came for.</p>
+<p>It also means you should feel free to use it repeatedly rather than carefully. There is no cost to a second attempt and no penalty for a wrong first guess, so the fastest route to a good answer is usually to try an approximate one, look at the result, and adjust. People tend to treat tools as though each use were expensive, which is a habit inherited from software that made it expensive. This one does not.</p>
+<h2>Common mistakes worth avoiding</h2>
+<p>The first is trusting a result whose input you did not check. A tool cannot know that you meant to type one number and typed another, and it will present the wrong answer with exactly the same confidence as the right one. Read your inputs back before you rely on the output — it takes two seconds and catches most of what goes wrong.</p>
+<p>The second is treating one number as an answer to a question it was never asked. Every game on this page answers something narrow and specific. Applying it to a nearby but different question is the most common way people end up misled by a tool that was working perfectly the entire time. If you are not sure the question you have matches the question the tool answers, that uncertainty is the useful signal, not an obstacle.</p>
+<p>The frequently asked questions below cover the cases that come up most often, including the ones where the honest answer is that this is not the right tool for what you are trying to do.</p>
+<h2>Working offline and on any device</h2>
+<p>The page is a single self-contained document. There is no framework to download, no fonts fetched from a third party and no analytics beacon firing in the background, which is why it loads quickly on a bad connection and why it costs nothing to keep open in a tab you return to occasionally. It works the same on a phone, a tablet and a desktop; the layout adapts, the behaviour does not.</p>
+<p>Because there is no server involved in the actual work, there is also no service to go down, no rate limit to hit and no quiet change in behaviour pushed out from somewhere else. What you loaded is what runs. If you want to be certain of that, open the page source — the whole implementation is right there in readable form, which is a claim very few tools of this kind can make.</p>
+<h2>A note on accuracy</h2>
+<p>Results are computed with standard double-precision arithmetic and displayed to a sensible number of places rather than to every digit the hardware can produce. A figure shown to two decimals is not claiming to be accurate to two decimals — it is claiming that the inputs you supplied, taken at face value, produce that figure. Precision in the display and accuracy in the real world are different things, and conflating them is the most common way a correct tool produces a wrong decision.</p>
+<p>If a result looks wrong, check the inputs before you doubt the arithmetic. In practice the overwhelming majority of surprising answers come from a value entered in the wrong unit, a decimal separator read differently than you intended, or a field left at its default when it should have been changed. That is not a criticism of anyone — it is simply where the errors live, and knowing where to look first saves the most time.</p>
+    <section class="faq"><h2>Memory game FAQ</h2><dl><dt>How does the memory game work?</dt><dd>Cards are placed face-down. Click any card to reveal it, then click another. If they match, they stay revealed. If not, both flip back. Find all pairs to win.</dd><dt>How does this improve memory?</dt><dd>Memory games exercise working memory and visual pattern recognition. Regular play has been shown to improve concentration and short-term memory, particularly in children and older adults.</dd><dt>What is a good score?</dt><dd>With 16 cards (8 pairs), the theoretical minimum is 8 moves. Most players take 15–25 moves. Under 15 moves is excellent. The game also tracks your time.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/memorygame/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/memorygame/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/memorygame/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/memorygame/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/memorygame/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/memorygame/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/memorygame/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/memorygame/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/memorygame/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/memorygame/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/freetools.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="en";window.__T={"start":"New Game"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/memorygame.js" defer></script>
+</body>
+</html>

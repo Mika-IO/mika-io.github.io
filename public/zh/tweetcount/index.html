@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twitter / X 字符计数器 — 计算您的推文长度</title>
+<meta name="description" content="免费 Twitter/X 字符计数器。通过 URL 规范化计算推文长度（每个 URL = 23 个字符）。 280 个字符限制的颜色编码限制指示器。">
+<link rel="canonical" href="https://mikaio.dev/zh/tweetcount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tweetcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tweetcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tweetcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tweetcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tweetcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tweetcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tweetcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tweetcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tweetcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tweetcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tweetcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Twitter / X 字符计数器 — 计算您的推文长度">
+<meta property="og:description" content="免费 Twitter/X 字符计数器。通过 URL 规范化计算推文长度（每个 URL = 23 个字符）。 280 个字符限制的颜色编码限制指示器。">
+<meta property="og:url" content="https://mikaio.dev/zh/tweetcount/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Twitter / X 字符计数器 — 计算您的推文长度","url":"https://mikaio.dev/zh/tweetcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费 Twitter/X 字符计数器。通过 URL 规范化计算推文长度（每个 URL = 23 个字符）。 280 个字符限制的颜色编码限制指示器。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Twitter / X 字符计数器","item":"https://mikaio.dev/zh/tweetcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"为什么 Twitter 将 URL 计为 23 个字符？","acceptedAnswer":{"@type":"Answer","text":"Twitter 通过其 t.co 缩短器自动包装每个 URL，该缩短器生成的链接始终为 23 个字符长。因此，无论您的 URL 是 10 个字符还是 200 个字符，它都会计入 280 个字符的限制中的 23 个字符。"}},{"@type":"Question","name":"Twitter/X 的字符数限制是多少？","acceptedAnswer":{"@type":"Answer","text":"单个推文或 X 帖子的标准字符限制为 280 个字符。 Twitter Blue / X Premium 订阅者可以访问更长的帖子（最多 25,000 个字符），但免费限制为 280 个。"}},{"@type":"Question","name":"表情符号算作一个字符吗？","acceptedAnswer":{"@type":"Answer","text":"大多数标准表情符号在 Twitter 的计数系统中计为 2 个字符，因为它们使用 Unicode 代理对。此计数器使用 JavaScript 的字符串长度，这可能与 Twitter 对某些表情符号组合的精确计数略有不同。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Twitter / X 字符计数器</span></nav>
+  <h1>Twitter / X 字符计数器</h1>
+  <p class="lead">在下面输入或粘贴您的推文。每个 URL 自动计为 23 个字符，与 Twitter 的 t.co 链接缩短行为相匹配。</p>
+  <section class="widget" id="tool"><form id="tweet-form"><div class="field"><label for="tweet-text">推文/帖子文本</label><textarea id="tweet-text" rows="5" placeholder="发生什么事了？"></textarea></div><div class="result" id="tweet-out" style="text-align:left"></div></form></section>
+  <article class="content">
+    <h2>按照 X 实际计算帖子长度的方式计算帖子长度</h2>
+<p>280 个字符的限制听起来很简单，直到您开始编写并意识到表情符号、链接和某些重音字符并不按您期望的方式计数。该计数器与浏览器工具一样接近地反映了 X（以前称为 Twitter）的实际计数规则，包括该平台对 URL 的独特处理，因此您在此处看到的数字与您在撰写框中看到的数字相匹配，而不是天真的字符计数，让您猜测帖子是否真正适合。</p>
+<h2>如何使用</h2>
+<p>在框中输入或粘贴您的帖子，字符数将立即显示在下方，并根据 280 个字符的限制显示，并带有一个颜色编码条，当您接近并超出限制时，颜色编码条会从绿色变为琥珀色、橙色到红色。您包含的任何 URL 都会自动检测并计为 23 个字符，与平台的链接缩短行为相匹配，无论实际链接有多长。剩余的字符限额会在您键入时实时更新，因此您可以在观看数字的同时修剪或扩展您的措辞，而不是盲目写作并仅在最后检查。</p>
+<h2>为什么 URL 总是计为 23 个字符</h2>
+<p>X 使用自己的 t.co 缩短服务自动包装通过其系统发布的每个链接，并且每个链接，无论原始地址多长或多短，都会成为完全相同的固定长度的 t.co 链接。这就是为什么一篇包含指向简短、干净地址的链接的帖子和一篇包含指向包含跟踪参数的巨大 URL 的链接的帖子，与 280 个字符的预算相比，作者花费的字符数完全相同（目前为 23 个）。该工具通过检测文本中的 URL 并将每个 URL 计算为 23 个字符而不是其字面长度来复制这一行为，因此您在此处看到的计数与您发布时实际发生的情况相符。</p>
+<h2>表情符号和代理对怪癖</h2>
+<p>表情符号给字符计数带来了真正的麻烦，因为它们的内部存储方式。大多数现代表情符号，尤其是较新或更复杂的表情符号，都使用所谓的代理对（两个底层代码单元而不是一个）来表示，这意味着它们经常被视为两个字符，而不是像 JavaScript 和许多其他语言那样测量字符串长度的系统中的一个字符。 X 自己的计数系统有自己的特定规则，对于不寻常的表情符号组合、标志序列或带有修饰符（例如肤色选择器）的表情符号，有时可能与浏览器的本机字符串长度计算略有不同。对于绝大多数日常帖子来说，这种差异是看不见的，但如果您正处于限制的边缘并使用多个表情符号，那么值得留下一个小缓冲区，而不是相信倒计时到确切的最终字符。</p>
+<h2>字符限制的演变</h2>
+<p>Twitter 推出时设置了 140 个字符的限制，这一数字是特意选择的，旨在将一条推文加上一个用户名限制在一条 SMS 文本消息的 160 个字符的限制之内，因为该服务最初设计的目的是像在网络上一样通过文本消息传递。 2017 年，数据显示，许多用户，尤其是那些使用需要更多字符来表达相同想法的语言的用户，一直面临空间不足的问题，之后该限制增加了一倍，达到 280 个字符。后来对付费订阅者提出了更高的字符限制，但该对策所针对的免费 280 个字符限制仍然是大多数帖子的撰写标准。</p>
+<h2>书写紧凑，控制在 280 个字符以内</h2>
+<p>由于每个字符都有严格的限制，定期发帖的作者会养成在不失去意义的情况下进行修剪的习惯：仅当语气适合时，将“because”替换为“bc”，或将“&amp;”替换为“and”，删除不会添加任何内容的填充词，并将链接或主题标签移动到最后，以便在需要最终修剪时首先删除它。在写作时观看实时计数，而不是先写出整个想法，然后才发现它太长了四十个字符，这样可以使这种严格的编辑不那么令人沮丧，因为你可以在提交之前准确地看到重写实际上节省了多少空间。</p>
+<h2>主题和多帖子草稿</h2>
+<p>当一个想法无法容纳 280 个字符时，通常的方法是将其拆分为一系列相互关联的帖子，而不是将所有内容强行整合到一个帖子中。首先在其他地方起草一个线程，然后通过这个计数器单独运行每个计划的帖子，这是一种可靠的方法，可以检查线程的每一个部分是否合适，包括一些备用字符，用于“1/”样式编号前缀（如果您使用一个线程），然后再开始一个接一个地发布它们，而不是在您已经开始发布较早的帖子后，在线程中发现一个帖子需要尴尬的最后一秒修剪。</p>
+<h2>私密且即时</h2>
+<p>当您键入时，所有内容都会在您自己的浏览器中运行，因此您的草稿帖子永远不会上传、记录或与任何人共享，一旦您离开页面，也不会保存任何内容。一旦加载，它就可以离线工作，只要您在发帖前需要快速、准确的字符检查，它就可以随时使用。</p>
+    <section class="faq"><h2>Twitter 字符计数器常见问题解答</h2><dl><dt>为什么 Twitter 将 URL 计为 23 个字符？</dt><dd>Twitter 通过其 t.co 缩短器自动包装每个 URL，该缩短器生成的链接始终为 23 个字符长。因此，无论您的 URL 是 10 个字符还是 200 个字符，它都会计入 280 个字符的限制中的 23 个字符。</dd><dt>Twitter/X 的字符数限制是多少？</dt><dd>单个推文或 X 帖子的标准字符限制为 280 个字符。 Twitter Blue / X Premium 订阅者可以访问更长的帖子（最多 25,000 个字符），但免费限制为 280 个。</dd><dt>表情符号算作一个字符吗？</dt><dd>大多数标准表情符号在 Twitter 的计数系统中计为 2 个字符，因为它们使用 Unicode 代理对。此计数器使用 JavaScript 的字符串长度，这可能与 Twitter 对某些表情符号组合的精确计数略有不同。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"text":"推文/帖子文本","whatshappening":"发生什么事了？"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tweetcount.js" defer></script>
+</body>
+</html>

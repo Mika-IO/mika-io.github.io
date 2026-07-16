@@ -66,9 +66,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -115,7 +118,7 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"mikaio.dev","url":"https://mikaio.dev/ru/","inLanguage":"ru"}</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Навигация по сайту">
     <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
   </nav></header>
@@ -124,218 +127,1006 @@ textarea{min-height:120px;resize:vertical}
   <p class="lead">Все инструменты работают полностью в вашем браузере — без аккаунтов, без загрузки файлов и без слежки. Выберите категорию, чтобы начать.</p>
   <section class="cat"><h2>🕐 Время и даты</h2><div class="grid"><a class="tool-card" href="/ru/agecalc/">
         <span class="tool-ico" aria-hidden="true">🎂</span>
-        <span class="tool-name">Age Calculator</span>
-        <span class="tool-desc">Free age calculator. Enter your date of birth to see your exact age in years, months and days, your total days lived, and a countdown to your next birthday.</span></a>
+        <span class="tool-name">Калькулятор возраста</span>
+        <span class="tool-desc">Бесплатный калькулятор возраста. Введите дату своего рождения, чтобы увидеть свой точный возраст в годах, месяцах и днях, общее количество прожитых дней и обратный отсчет до следующего дня рождения.</span></a>
 <a class="tool-card" href="/ru/countdown/">
         <span class="tool-ico" aria-hidden="true">⏳</span>
-        <span class="tool-name">Countdown Timer</span>
-        <span class="tool-desc">Free countdown timer. Enter any future date and see exactly how many days, hours, minutes and seconds remain. Works in your browser, no signup needed.</span></a>
+        <span class="tool-name">Таймер обратного отсчета</span>
+        <span class="tool-desc">Бесплатный таймер обратного отсчета. Введите любую будущую дату и узнайте, сколько именно дней, часов, минут и секунд осталось. Работает в вашем браузере, регистрация не требуется.</span></a>
+<a class="tool-card" href="/ru/countdowntimer/">
+        <span class="tool-ico" aria-hidden="true">⏳</span>
+        <span class="tool-name">Таймер обратного отсчета</span>
+        <span class="tool-desc">Бесплатный таймер обратного отсчета. Установите часы, минуты и секунды и ведите обратный отсчет с помощью четкого дисплея и звукового сигнала по завершении.</span></a>
 <a class="tool-card" href="/ru/dayofweek/">
         <span class="tool-ico" aria-hidden="true">📆</span>
-        <span class="tool-name">Day of the Week</span>
-        <span class="tool-desc">Free day of week calculator. Find out what day of the week any date falls on. Check birthdays, historical dates, or any future date instantly.</span></a>
+        <span class="tool-name">День недели</span>
+        <span class="tool-desc">Бесплатный калькулятор дней недели. Узнайте, на какой день недели приходится та или иная дата. Мгновенно проверяйте дни рождения, исторические даты или любую будущую дату.</span></a>
 <a class="tool-card" href="/ru/daysbetween/">
         <span class="tool-ico" aria-hidden="true">📅</span>
-        <span class="tool-name">Days Between Dates</span>
-        <span class="tool-desc">Free days between dates calculator. Find exactly how many days, weeks, and months are between any two dates. Works instantly in your browser.</span></a>
+        <span class="tool-name">Дни между датами</span>
+        <span class="tool-desc">Калькулятор бесплатных дней между свиданиями. Найдите точное количество дней, недель и месяцев между любыми двумя датами. Работает мгновенно в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/durationcalc/">
+        <span class="tool-ico" aria-hidden="true">⏱️</span>
+        <span class="tool-name">Калькулятор продолжительности даты и времени</span>
+        <span class="tool-desc">Бесплатный калькулятор длительности. Выберите две даты и время, чтобы мгновенно увидеть точную продолжительность в годах, месяцах, днях, часах, минутах и ​​секундах.</span></a>
+<a class="tool-card" href="/ru/lapstopwatch/">
+        <span class="tool-ico" aria-hidden="true">🏁</span>
+        <span class="tool-name">Секундомер с кругами</span>
+        <span class="tool-desc">Бесплатный онлайн-секундомер с таймером круга. Запускайте, останавливайтесь и записывайте время прохождения круга. Показывает выделенные самые быстрые и самые медленные круги.</span></a>
 <a class="tool-card" href="/ru/leapyear/">
         <span class="tool-ico" aria-hidden="true">🗓️</span>
-        <span class="tool-name">Leap Year Calculator</span>
-        <span class="tool-desc">Free leap year calculator. Check if any year is a leap year and find the next leap year. Instant results in your browser.</span></a>
+        <span class="tool-name">Калькулятор високосного года</span>
+        <span class="tool-desc">Бесплатный калькулятор високосного года. Проверьте, является ли какой-либо год високосным, и найдите следующий високосный год. Мгновенные результаты в вашем браузере.</span></a>
 <a class="tool-card" href="/ru/pomodoro/">
         <span class="tool-ico" aria-hidden="true">🍅</span>
-        <span class="tool-name">Pomodoro Timer</span>
-        <span class="tool-desc">Free Pomodoro timer. 25-minute focus sessions with 5-minute short breaks and 15-minute long breaks. No signup needed. Runs in your browser with sound alerts.</span></a>
+        <span class="tool-name">Таймер Помидора</span>
+        <span class="tool-desc">Бесплатный таймер Помидора. 25-минутные фокус-сессии с 5-минутными короткими перерывами и 15-минутными длинными перерывами. Никакой регистрации не требуется. Запускается в вашем браузере со звуковыми оповещениями.</span></a>
 <a class="tool-card" href="/ru/stopwatch/">
         <span class="tool-ico" aria-hidden="true">⏱️</span>
-        <span class="tool-name">Stopwatch</span>
-        <span class="tool-desc">Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.</span></a></div></section>
-<section class="cat"><h2>🔢 Математика</h2><div class="grid"><a class="tool-card" href="/ru/areacalc/">
+        <span class="tool-name">Секундомер</span>
+        <span class="tool-desc">Бесплатный онлайн-секундомер с точностью до миллисекунды. Запуск, пауза, запись времени круга и сброс. Загрузка не требуется. Работает полностью в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/timecalc/">
+        <span class="tool-ico" aria-hidden="true">⏰</span>
+        <span class="tool-name">Калькулятор времени</span>
+        <span class="tool-desc">Бесплатный калькулятор времени. Легко добавляйте или вычитайте часы, минуты и секунды. Отлично подходит для расчета общего рабочего времени, времени в пути и продолжительности.</span></a>
+<a class="tool-card" href="/ru/timezoneconverter/">
+        <span class="tool-ico" aria-hidden="true">🕰️</span>
+        <span class="tool-name">Конвертер часовых поясов</span>
+        <span class="tool-desc">Бесплатный конвертер часовых поясов. Мгновенно конвертируйте любую дату и время между более чем 40 городами мира и часовыми поясами. Показывает текущее время во всех городах.</span></a>
+<a class="tool-card" href="/ru/timezonediff/">
+        <span class="tool-ico" aria-hidden="true">🌐</span>
+        <span class="tool-name">Калькулятор разницы во времени</span>
+        <span class="tool-desc">Бесплатный калькулятор разницы часовых поясов. Найдите точную разницу в часах между любыми двумя городами или часовыми поясами по всему миру. Мгновенные результаты в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/unixepoch/">
+        <span class="tool-ico" aria-hidden="true">🕰️</span>
+        <span class="tool-name">Конвертер временных меток Unix</span>
+        <span class="tool-desc">Бесплатный конвертер временных меток Unix. Преобразуйте время эпохи Unix в удобочитаемую дату и время или преобразуйте любую дату обратно в временную метку Unix. Работает мгновенно в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/weeknumber/">
+        <span class="tool-ico" aria-hidden="true">📆</span>
+        <span class="tool-name">Номер недели</span>
+        <span class="tool-desc">Бесплатный калькулятор номеров недель. Найдите номер недели ISO для любой даты. Посмотрите, какая неделя года сегодня или на любую выбранную вами дату.</span></a>
+<a class="tool-card" href="/ru/workdays/">
+        <span class="tool-ico" aria-hidden="true">📅</span>
+        <span class="tool-name">Калькулятор рабочих дней</span>
+        <span class="tool-desc">Бесплатный калькулятор рабочих дней. Подсчитайте количество рабочих дней (понедельник–пятница) между любыми двумя датами, исключая выходные. Мгновенные результаты в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/worldclock/">
+        <span class="tool-ico" aria-hidden="true">🌍</span>
+        <span class="tool-name">Мировое время</span>
+        <span class="tool-desc">Бесплатные мировые часы. Сравните текущее местное время в нескольких городах одновременно. Регистрация не требуется. Обновления каждую секунду в вашем браузере.</span></a></div></section>
+<section class="cat"><h2>🔢 Математика</h2><div class="grid"><a class="tool-card" href="/ru/algebrasolver/">
+        <span class="tool-ico" aria-hidden="true">🧮</span>
+        <span class="tool-name">Решатель уравнений алгебры</span>
+        <span class="tool-desc">Бесплатная программа для решения алгебры. Решите линейные уравнения (ax + b = c) и системы двух линейных уравнений с двумя неизвестными, используя замену и правило Крамера.</span></a>
+<a class="tool-card" href="/ru/areacalc/">
         <span class="tool-ico" aria-hidden="true">📐</span>
-        <span class="tool-name">Area Calculator</span>
-        <span class="tool-desc">Free area calculator. Calculate the area of rectangles, circles, triangles, squares, and trapezoids. Enter dimensions and get the area instantly in your browser.</span></a>
+        <span class="tool-name">Калькулятор площади</span>
+        <span class="tool-desc">Бесплатный калькулятор площади. Вычислите площади прямоугольников, кругов, треугольников, квадратов и трапеций. Введите размеры и мгновенно получите площадь в своем браузере.</span></a>
 <a class="tool-card" href="/ru/aspectratio/">
         <span class="tool-ico" aria-hidden="true">📐</span>
-        <span class="tool-name">Aspect Ratio Calculator</span>
-        <span class="tool-desc">Free aspect ratio calculator. Enter width and height to get the simplified ratio (e.g. 1920×1080 = 16:9) and scale to any new size instantly.</span></a>
+        <span class="tool-name">Калькулятор соотношения сторон</span>
+        <span class="tool-desc">Бесплатный калькулятор соотношения сторон. Введите ширину и высоту, чтобы получить упрощенное соотношение (например, 1920×1080 = 16:9) и мгновенно масштабируйте его до любого нового размера.</span></a>
+<a class="tool-card" href="/ru/averagecalc/">
+        <span class="tool-ico" aria-hidden="true">➗</span>
+        <span class="tool-name">Калькулятор средних значений</span>
+        <span class="tool-desc">Бесплатный средний калькулятор. Введите список чисел для вычисления среднего арифметического, среднего геометрического, среднего гармонического, средневзвешенного и т. д.</span></a>
 <a class="tool-card" href="/ru/basiccalc/">
         <span class="tool-ico" aria-hidden="true">🧮</span>
-        <span class="tool-name">Online Basic Calculator</span>
-        <span class="tool-desc">Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser.</span></a>
+        <span class="tool-name">Базовый онлайн-калькулятор</span>
+        <span class="tool-desc">Бесплатный онлайн-калькулятор. Выполнять сложение, вычитание, умножение и деление. Чистый, простой, полнофункциональный базовый калькулятор, который полностью работает в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/bintodec/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">Конвертер системы счисления</span>
+        <span class="tool-desc">Мгновенно конвертируйте числа между двоичными, восьмеричными, десятичными и шестнадцатеричными. Бесплатный онлайн-конвертер баз с мгновенными результатами.</span></a>
+<a class="tool-card" href="/ru/combinatorics/">
+        <span class="tool-ico" aria-hidden="true">🧮</span>
+        <span class="tool-name">Калькулятор комбинаций и перестановок</span>
+        <span class="tool-desc">Бесплатный калькулятор комбинаций и перестановок. Вычислите C(n,r) и P(n,r) для любых n и r до 30. Показывает обе формулы.</span></a>
+<a class="tool-card" href="/ru/decimaltofraction/">
+        <span class="tool-ico" aria-hidden="true">½</span>
+        <span class="tool-name">Конвертер десятичных дробей в дроби</span>
+        <span class="tool-desc">Бесплатный конвертер десятичных дробей. Введите любое десятичное число и мгновенно получите точную упрощенную форму дроби.</span></a>
+<a class="tool-card" href="/ru/exponentcalc/">
+        <span class="tool-ico" aria-hidden="true">🔋</span>
+        <span class="tool-name">Калькулятор экспоненты</span>
+        <span class="tool-desc">Бесплатный калькулятор экспонент. Вычислите основание^экспонента для любых действительных чисел. Обрабатывает отрицательные показатели степени, дробные степени и большие результаты.</span></a>
+<a class="tool-card" href="/ru/factorial/">
+        <span class="tool-ico" aria-hidden="true">❗</span>
+        <span class="tool-name">Факториал Калькулятор</span>
+        <span class="tool-desc">Бесплатный калькулятор факториала. Вычислите н! для любого целого числа от 0 до 170. Показывает точный результат, экспоненциальное обозначение и количество цифр.</span></a>
+<a class="tool-card" href="/ru/fibonacci/">
+        <span class="tool-ico" aria-hidden="true">🐚</span>
+        <span class="tool-name">Генератор последовательности Фибоначчи</span>
+        <span class="tool-desc">Бесплатный генератор Фибоначчи. Введите желаемое количество членов и мгновенно увидите последовательность Фибоначчи. Поддерживает до 80 терминов точных значений.</span></a>
 <a class="tool-card" href="/ru/fractioncalc/">
         <span class="tool-ico" aria-hidden="true">½</span>
-        <span class="tool-name">Fraction Calculator</span>
-        <span class="tool-desc">Free fraction calculator. Add, subtract, multiply or divide any two fractions and get the simplified result instantly. Also shows the decimal equivalent.</span></a>
+        <span class="tool-name">Калькулятор дробей</span>
+        <span class="tool-desc">Бесплатный калькулятор дробей. Складывайте, вычитайте, умножайте или делите любые две дроби и мгновенно получайте упрощенный результат. Также показывает десятичный эквивалент.</span></a>
+<a class="tool-card" href="/ru/fractiontodecimal/">
+        <span class="tool-ico" aria-hidden="true">🔁</span>
+        <span class="tool-name">Конвертер дробей в десятичные</span>
+        <span class="tool-desc">Бесплатный конвертер дробей в десятичные. Введите числитель и знаменатель, чтобы получить десятичную форму, и посмотрите, заканчивается ли она или повторяется.</span></a>
 <a class="tool-card" href="/ru/gcdcalc/">
         <span class="tool-ico" aria-hidden="true">🔢</span>
-        <span class="tool-name">GCD Calculator</span>
-        <span class="tool-desc">Free GCD calculator. Find the Greatest Common Divisor (GCD/GCF/HCF) of any set of numbers. Also shows the LCM. Instant results in your browser.</span></a>
+        <span class="tool-name">Калькулятор НОД</span>
+        <span class="tool-desc">Бесплатный калькулятор НОД. Найдите наибольший общий делитель (НОД/НОД/HCF) любого набора чисел. Также показывает LCM. Мгновенные результаты в вашем браузере.</span></a>
 <a class="tool-card" href="/ru/lcmcalc/">
         <span class="tool-ico" aria-hidden="true">🔢</span>
-        <span class="tool-name">LCM Calculator</span>
-        <span class="tool-desc">Free LCM calculator. Find the Least Common Multiple (LCM) of any set of numbers. Also shows the GCD. Instant results in your browser.</span></a>
+        <span class="tool-name">Калькулятор LCM</span>
+        <span class="tool-desc">Бесплатный калькулятор LCM. Найдите наименьшее общее кратное (НОК) любого набора чисел. Также показывает НОД. Мгновенные результаты в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/logcalc/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">Калькулятор логарифма</span>
+        <span class="tool-desc">Бесплатный калькулятор логарифмов. Вычисление общего логарифма (по основанию 10), натурального логарифма (ln), двоичного логарифма (по основанию 2) или любого пользовательского логарифма.</span></a>
+<a class="tool-card" href="/ru/matrixcalc/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">Матричный калькулятор</span>
+        <span class="tool-desc">Бесплатный матричный калькулятор. Складывайте, вычитайте, умножайте матрицы, вычисляйте определители и мгновенно транспонируйте их в своем браузере.</span></a>
+<a class="tool-card" href="/ru/numberbase/">
+        <span class="tool-ico" aria-hidden="true">🔄</span>
+        <span class="tool-name">Конвертер системы счисления</span>
+        <span class="tool-desc">Бесплатный конвертер числовых баз. Мгновенно конвертируйте любое число между двоичным, восьмеричным, десятичным, шестнадцатеричным или любым числом от 2 до 36 в вашем браузере.</span></a>
 <a class="tool-card" href="/ru/octalconverter/">
         <span class="tool-ico" aria-hidden="true">🔢</span>
-        <span class="tool-name">Octal Number Converter</span>
-        <span class="tool-desc">Free octal converter tool. Instantly convert any number between base 2 (binary), base 8 (octal), base 10 (decimal), and base 16 (hex).</span></a>
+        <span class="tool-name">Конвертер восьмеричных чисел</span>
+        <span class="tool-desc">Бесплатный восьмеричный преобразователь. Мгновенно преобразуйте любое число между основанием 2 (двоичное), основанием 8 (восьмеричное), основанием 10 (десятичное) и основанием 16 (шестнадцатеричное).</span></a>
 <a class="tool-card" href="/ru/percentage/">
         <span class="tool-ico" aria-hidden="true">％</span>
         <span class="tool-name">Калькулятор процентов</span>
         <span class="tool-desc">Бесплатный калькулятор процентов. Найдите процент от числа, узнайте, какой процент одно значение составляет от другого, и мгновенно вычислите прирост или снижение в процентах.</span></a>
+<a class="tool-card" href="/ru/percentchange/">
+        <span class="tool-ico" aria-hidden="true">📉</span>
+        <span class="tool-name">Калькулятор процентного изменения</span>
+        <span class="tool-desc">Бесплатный калькулятор процентного изменения. Мгновенно найдите процентное увеличение или уменьшение между двумя значениями. Показывает точные изменения и направление.</span></a>
+<a class="tool-card" href="/ru/primechecker/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">Проверка простых чисел</span>
+        <span class="tool-desc">Бесплатная проверка простых чисел. Введите любое положительное целое число, чтобы мгновенно узнать, является ли оно простым. Также показаны все делители и простая факторизация.</span></a>
+<a class="tool-card" href="/ru/primefactor/">
+        <span class="tool-ico" aria-hidden="true">🔑</span>
+        <span class="tool-name">Калькулятор простой факторизации</span>
+        <span class="tool-desc">Бесплатный калькулятор факторизации простых чисел. Введите любое положительное целое число до 999 999 999 и сразу же увидите его разложение на простые числа с показателями степени.</span></a>
+<a class="tool-card" href="/ru/pythagorean/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">Калькулятор теоремы Пифагора</span>
+        <span class="tool-desc">Бесплатный калькулятор теоремы Пифагора. Введите любые две стороны прямоугольного треугольника, чтобы найти третью. Работает для гипотенузы или любого катета. Мгновенно и точно.</span></a>
+<a class="tool-card" href="/ru/quadratic/">
+        <span class="tool-ico" aria-hidden="true">📈</span>
+        <span class="tool-name">Решатель квадратных уравнений</span>
+        <span class="tool-desc">Бесплатный решатель квадратных уравнений. Введите коэффициенты a, b и c, чтобы найти корни ax² + bx + c = 0, используя квадратичную формулу.</span></a>
+<a class="tool-card" href="/ru/ratiosimplifier/">
+        <span class="tool-ico" aria-hidden="true">⚖️</span>
+        <span class="tool-name">Упрощатель отношений</span>
+        <span class="tool-desc">Свободный упроститель коэффициентов. Введите любые два числа, чтобы привести отношение к его простейшей форме, найти масштабный коэффициент и просмотреть эквивалентные соотношения.</span></a>
+<a class="tool-card" href="/ru/romanconverter/">
+        <span class="tool-ico" aria-hidden="true">🏛️</span>
+        <span class="tool-name">Конвертер римских цифр</span>
+        <span class="tool-desc">Бесплатный конвертер римских цифр. Преобразуйте любое десятичное число от 1 до 3999 в римские цифры или преобразуйте римские цифры обратно в десятичные.</span></a>
 <a class="tool-card" href="/ru/romanmath/">
         <span class="tool-ico" aria-hidden="true">🔢</span>
-        <span class="tool-name">Roman Numeral Converter</span>
-        <span class="tool-desc">Free Roman numeral converter. Convert any number from 1 to 3999 to Roman numerals, or convert Roman numerals back to decimal. Instant and accurate.</span></a>
+        <span class="tool-name">Конвертер римских цифр</span>
+        <span class="tool-desc">Бесплатный конвертер римских цифр. Преобразуйте любое число от 1 до 3999 в римские цифры или преобразуйте римские цифры обратно в десятичные. Мгновенно и точно.</span></a>
 <a class="tool-card" href="/ru/roundingcalc/">
         <span class="tool-ico" aria-hidden="true">🔢</span>
-        <span class="tool-name">Rounding Calculator</span>
-        <span class="tool-desc">Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.</span></a>
+        <span class="tool-name">Калькулятор округления</span>
+        <span class="tool-desc">Бесплатный калькулятор округлений. Округлите любое число до выбранного количества десятичных знаков или округлите его в большую или меньшую сторону мгновенно и точно в своем браузере.</span></a>
+<a class="tool-card" href="/ru/scientificcalc/">
+        <span class="tool-ico" aria-hidden="true">🔬</span>
+        <span class="tool-name">Научный калькулятор</span>
+        <span class="tool-desc">Бесплатный научный калькулятор. Оценивайте математические выражения, включая тригонометрию, логарифмы, степени и многое другое, прямо в браузере.</span></a>
 <a class="tool-card" href="/ru/squarecalc/">
         <span class="tool-ico" aria-hidden="true">√</span>
-        <span class="tool-name">Square Root Calculator</span>
-        <span class="tool-desc">Free square root calculator. Find the square root of any positive number instantly. Also shows the square (n²). Works in your browser with no signup required.</span></a></div></section>
-<section class="cat"><h2>💰 Финансы</h2><div class="grid"><a class="tool-card" href="/ru/budget503020/">
+        <span class="tool-name">Калькулятор квадратного корня</span>
+        <span class="tool-desc">Бесплатный калькулятор квадратного корня. Мгновенно найдите квадратный корень из любого положительного числа. Также показана площадь (n²). Работает в вашем браузере без необходимости регистрации.</span></a>
+<a class="tool-card" href="/ru/statscalc/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">Калькулятор статистики</span>
+        <span class="tool-desc">Бесплатный калькулятор статистики. Введите список чисел, чтобы мгновенно вычислить среднее значение, медиану, моду, стандартное отклонение, дисперсию, минимум, максимум и диапазон.</span></a>
+<a class="tool-card" href="/ru/statsviz/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">Визуализатор статистики</span>
+        <span class="tool-desc">Бесплатный визуализатор статистики. Введите список чисел, чтобы вычислить среднее значение, медиану, моду, дисперсию, стандартное отклонение и увидеть простое распределение частот.</span></a>
+<a class="tool-card" href="/ru/trigcalc/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">Тригонометрический калькулятор</span>
+        <span class="tool-desc">Бесплатный тригонометрический калькулятор. Вычислите sin, cos, tan, cot, sec, csc для любого угла в градусах или радианах.</span></a>
+<a class="tool-card" href="/ru/unitconverter/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">Конвертер единиц измерения</span>
+        <span class="tool-desc">Бесплатный конвертер единиц измерения. Мгновенно конвертируйте метры в футы, килограммы и фунты, градусы Цельсия и Фаренгейта, литры и галлоны и многие другие единицы прямо в браузере.</span></a></div></section>
+<section class="cat"><h2>💰 Финансы</h2><div class="grid"><a class="tool-card" href="/ru/breakeven/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">Калькулятор безубыточности</span>
+        <span class="tool-desc">Бесплатный калькулятор безубыточности. Введите постоянные затраты, цену продажи и переменные затраты на единицу продукции, чтобы найти точку безубыточности в единицах и выручке.</span></a>
+<a class="tool-card" href="/ru/budget503020/">
         <span class="tool-ico" aria-hidden="true">📋</span>
-        <span class="tool-name">50/30/20 Budget Rule Calculator</span>
-        <span class="tool-desc">Free 50/30/20 budget rule calculator. Enter your monthly income to instantly see how much to allocate to needs, wants, and savings.</span></a>
+        <span class="tool-name">Калькулятор бюджетного правила 50/30/20</span>
+        <span class="tool-desc">Бесплатный калькулятор бюджетного правила 50/30/20. Введите свой ежемесячный доход, чтобы сразу увидеть, сколько средств следует выделить на нужды, желания и сбережения.</span></a>
+<a class="tool-card" href="/ru/coinconverter/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">Счетчик монет и банкнот</span>
+        <span class="tool-desc">Подсчитайте монеты и банкноты США и рассчитайте общую стоимость.</span></a>
 <a class="tool-card" href="/ru/compoundinterest/">
         <span class="tool-ico" aria-hidden="true">💰</span>
-        <span class="tool-name">Compound Interest Calculator</span>
-        <span class="tool-desc">Free compound interest calculator. Enter a principal, interest rate, and time period to see how compound interest grows your investment. Monthly, quarterly, or annual compounding.</span></a>
+        <span class="tool-name">Калькулятор сложных процентов</span>
+        <span class="tool-desc">Бесплатный калькулятор сложных процентов. Введите основную сумму, процентную ставку и период времени, чтобы увидеть, как сложные проценты увеличивают ваши инвестиции. Ежемесячное, ежеквартальное или годовое начисление процентов.</span></a>
 <a class="tool-card" href="/ru/currencyconverter/">
         <span class="tool-ico" aria-hidden="true">💱</span>
-        <span class="tool-name">Currency Converter</span>
-        <span class="tool-desc">Free currency converter with approximate exchange rates. Convert USD, EUR, GBP, JPY, BRL, and 30+ more currencies instantly in your browser.</span></a>
+        <span class="tool-name">Конвертер валют</span>
+        <span class="tool-desc">Бесплатный конвертер валют с приблизительными курсами обмена. Конвертируйте доллары США, евро, фунты стерлингов, иены, BRL и еще более 30 валют мгновенно в вашем браузере.</span></a>
 <a class="tool-card" href="/ru/discountcalc/">
         <span class="tool-ico" aria-hidden="true">🏷️</span>
-        <span class="tool-name">Discount Calculator</span>
-        <span class="tool-desc">Free discount calculator. Enter the original price and the discount percentage to instantly see the final sale price and exactly how much you save.</span></a>
+        <span class="tool-name">Калькулятор скидок</span>
+        <span class="tool-desc">Бесплатный калькулятор скидок. Введите первоначальную цену и процент скидки, чтобы мгновенно увидеть окончательную цену продажи и точную сумму, которую вы сэкономите.</span></a>
+<a class="tool-card" href="/ru/emergencyfund/">
+        <span class="tool-ico" aria-hidden="true">🏦</span>
+        <span class="tool-name">Калькулятор чрезвычайного фонда</span>
+        <span class="tool-desc">Бесплатный калькулятор резервного фонда. Введите свои ежемесячные расходы, чтобы узнать целевой размер чрезвычайного фонда и количество месяцев, в течение которых он будет достигнут.</span></a>
+<a class="tool-card" href="/ru/emicalculator/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">Кредитный калькулятор EMI</span>
+        <span class="tool-desc">Рассчитайте ежемесячный EMI, общую сумму процентов и общую сумму платежа по любому кредиту.</span></a>
+<a class="tool-card" href="/ru/exchangecalc/">
+        <span class="tool-ico" aria-hidden="true">💱</span>
+        <span class="tool-name">Калькулятор обмена валюты</span>
+        <span class="tool-desc">Бесплатный калькулятор обмена валюты. Введите индивидуальный обменный курс и процент комиссии, чтобы рассчитать точную сумму, полученную после конвертации.</span></a>
+<a class="tool-card" href="/ru/exchangerate/">
+        <span class="tool-ico" aria-hidden="true">💱</span>
+        <span class="tool-name">Калькулятор обмена валюты</span>
+        <span class="tool-desc">Бесплатный конвертер валют с примерами обменных курсов. Конвертируйте доллары США, евро, фунты стерлингов, иены, BRL и другие основные валюты. Ставки представляют собой приблизительные выборочные значения.</span></a>
+<a class="tool-card" href="/ru/fuelcost/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">Калькулятор стоимости топлива</span>
+        <span class="tool-desc">Рассчитайте стоимость топлива для любой поездки, учитывая расстояние, топливную экономичность и цену.</span></a>
+<a class="tool-card" href="/ru/hourspay/">
+        <span class="tool-ico" aria-hidden="true">⏰</span>
+        <span class="tool-name">Калькулятор часов и оплаты</span>
+        <span class="tool-desc">Бесплатные часы и калькулятор оплаты. Введите отработанное время, почасовую ставку и часы сверхурочной работы, чтобы рассчитать еженедельную, ежемесячную и годовую валовую заработную плату.</span></a>
+<a class="tool-card" href="/ru/inflationcalc/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">Калькулятор инфляции</span>
+        <span class="tool-desc">Бесплатный калькулятор инфляции. Введите сумму и годы, чтобы увидеть, как инфляция влияет на покупательную способность. Использует собственный годовой уровень инфляции.</span></a>
+<a class="tool-card" href="/ru/investreturn/">
+        <span class="tool-ico" aria-hidden="true">📈</span>
+        <span class="tool-name">Калькулятор доходности инвестиций</span>
+        <span class="tool-desc">Бесплатный калькулятор доходности инвестиций. Введите первоначальную сумму, ежемесячные взносы, годовую доходность и годы, чтобы увидеть окончательную стоимость и общую прибыль.</span></a>
 <a class="tool-card" href="/ru/loancalc/">
         <span class="tool-ico" aria-hidden="true">🏦</span>
-        <span class="tool-name">Loan Calculator</span>
-        <span class="tool-desc">Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans.</span></a>
+        <span class="tool-name">Кредитный калькулятор</span>
+        <span class="tool-desc">Бесплатный кредитный калькулятор. Введите сумму кредита, процентную ставку и срок, чтобы увидеть ежемесячный платеж и общую сумму выплаченных процентов. Работает по ипотечным кредитам, автокредитам и потребительским кредитам.</span></a>
+<a class="tool-card" href="/ru/mortgageafford/">
+        <span class="tool-ico" aria-hidden="true">🏡</span>
+        <span class="tool-name">Калькулятор доступности ипотеки</span>
+        <span class="tool-desc">Бесплатный калькулятор доступности ипотеки. Введите доход, долг и первоначальный взнос, чтобы определить максимальную цену дома, которую вы можете себе позволить, исходя из правила 28/36.</span></a>
+<a class="tool-card" href="/ru/networthcalc/">
+        <span class="tool-ico" aria-hidden="true">💼</span>
+        <span class="tool-name">Калькулятор чистой стоимости</span>
+        <span class="tool-desc">Бесплатный калькулятор собственного капитала. Сложите свои активы и пассивы, чтобы рассчитать общий собственный капитал. Помогает понять ваше финансовое положение.</span></a>
+<a class="tool-card" href="/ru/npvcalc/">
+        <span class="tool-ico" aria-hidden="true">💰</span>
+        <span class="tool-name">Калькулятор чистой приведенной стоимости (NPV)</span>
+        <span class="tool-desc">Бесплатный калькулятор NPV. Введите денежные потоки и ставку дисконтирования, чтобы рассчитать чистую приведенную стоимость и внутреннюю норму доходности (IRR) для инвестиционного анализа.</span></a>
 <a class="tool-card" href="/ru/retirementcalc/">
         <span class="tool-ico" aria-hidden="true">🏖️</span>
-        <span class="tool-name">Retirement Savings Calculator</span>
-        <span class="tool-desc">Free retirement calculator. Estimate your retirement savings based on monthly contributions, expected return, and years to retirement.</span></a>
+        <span class="tool-name">Калькулятор пенсионных накоплений</span>
+        <span class="tool-desc">Бесплатный пенсионный калькулятор. Оцените свои пенсионные сбережения на основе ежемесячных взносов, ожидаемого дохода и количества лет до выхода на пенсию.</span></a>
+<a class="tool-card" href="/ru/ruleof72/">
+        <span class="tool-ico" aria-hidden="true">📈</span>
+        <span class="tool-name">Правило 72 Калькулятор</span>
+        <span class="tool-desc">Бесплатный калькулятор «Правило 72». Введите годовую доходность, чтобы узнать, через сколько времени ваши инвестиции удвоятся, или введите годы, чтобы найти требуемую ставку.</span></a>
 <a class="tool-card" href="/ru/salestax/">
         <span class="tool-ico" aria-hidden="true">🧾</span>
-        <span class="tool-name">Sales Tax Calculator</span>
-        <span class="tool-desc">Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.</span></a></div></section>
+        <span class="tool-name">Калькулятор налога с продаж</span>
+        <span class="tool-desc">Бесплатный калькулятор налога с продаж. Введите цену и ставку налога, чтобы добавить налог к ​​чистой цене или вычесть его из цены брутто. Работает для НДС, GST и любого процента.</span></a>
+<a class="tool-card" href="/ru/savingsgoal/">
+        <span class="tool-ico" aria-hidden="true">🎯</span>
+        <span class="tool-name">Калькулятор цели сбережений</span>
+        <span class="tool-desc">Бесплатный калькулятор цели сбережений. Введите цель сбережений, текущие сбережения, ежемесячный взнос и процентную ставку, чтобы узнать, как долго вы сможете достичь своей цели.</span></a>
+<a class="tool-card" href="/ru/stockreturn/">
+        <span class="tool-ico" aria-hidden="true">📉</span>
+        <span class="tool-name">Калькулятор доходности акций</span>
+        <span class="tool-desc">Бесплатный калькулятор доходности акций. Введите цену покупки, цену продажи и акции, чтобы рассчитать общую прибыль, процентную доходность и годовой среднегодовой темп роста.</span></a>
+<a class="tool-card" href="/ru/tipcalc/">
+        <span class="tool-ico" aria-hidden="true">🧾</span>
+        <span class="tool-name">Калькулятор чаевых</span>
+        <span class="tool-desc">Бесплатный калькулятор чаевых. Введите счет и процент чаевых, чтобы увидеть сумму и общую сумму чаевых, а затем разделите их поровну между любым количеством людей. Мгновенно и конфиденциально.</span></a>
+<a class="tool-card" href="/ru/tippingguide/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">Руководство по чаевым по странам</span>
+        <span class="tool-desc">Сколько давать чаевые в разных странах и сервисах.</span></a>
+<a class="tool-card" href="/ru/tipsplit/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">Калькулятор разделения чаевых и счетов</span>
+        <span class="tool-desc">Рассчитайте сумму чаевых и разделите счет поровну между несколькими людьми.</span></a>
+<a class="tool-card" href="/ru/vatcalc/">
+        <span class="tool-ico" aria-hidden="true">🧾</span>
+        <span class="tool-name">Калькулятор НДС</span>
+        <span class="tool-desc">Бесплатный калькулятор НДС. Добавьте НДС к чистой цене или удалите НДС из брутто-цены. Поддерживает любую ставку НДС. Показывает нетто, сумму НДС и брутто.</span></a></div></section>
 <section class="cat"><h2>🎲 Случайный выбор</h2><div class="grid"><a class="tool-card" href="/ru/cointoss/">
         <span class="tool-ico" aria-hidden="true">🪙</span>
-        <span class="tool-name">Coin Flip</span>
-        <span class="tool-desc">Free online coin flip. Tap to flip a fair virtual coin and get heads or tails instantly, with a running tally. Works in your browser, no app needed.</span></a>
+        <span class="tool-name">Подбрасывание монеты</span>
+        <span class="tool-desc">Бесплатный онлайн-подбрасывание монеты. Нажмите, чтобы подбросить честную виртуальную монету и мгновенно получить орел или решку с помощью текущего подсчета. Работает в вашем браузере, никаких приложений не требуется.</span></a>
 <a class="tool-card" href="/ru/randomletter/">
         <span class="tool-ico" aria-hidden="true">🔤</span>
-        <span class="tool-name">Random Letter Generator</span>
-        <span class="tool-desc">Free random letter generator. Pick one or many random letters from A to Z, in uppercase, lowercase or mixed case, instantly and fairly in your browser.</span></a>
+        <span class="tool-name">Генератор случайных букв</span>
+        <span class="tool-desc">Бесплатный генератор случайных букв. Выберите одну или несколько случайных букв от А до Я в верхнем, нижнем или смешанном регистре, мгновенно и честно в вашем браузере.</span></a>
 <a class="tool-card" href="/ru/randomname/">
         <span class="tool-ico" aria-hidden="true">🎭</span>
-        <span class="tool-name">Random Name Generator</span>
-        <span class="tool-desc">Free random name generator. Generate random first and last names by gender and cultural origin. Perfect for writers, game developers, and baby name inspiration.</span></a>
+        <span class="tool-name">Генератор случайных имен</span>
+        <span class="tool-desc">Бесплатный генератор случайных имен. Генерируйте случайные имена и фамилии по полу и культурному происхождению. Идеально подходит для писателей, разработчиков игр и вдохновителей детских имен.</span></a>
 <a class="tool-card" href="/ru/randomnumber/">
         <span class="tool-ico" aria-hidden="true">🎲</span>
-        <span class="tool-name">Random Number Generator</span>
-        <span class="tool-desc">Free random number generator. Pick one or many random numbers between any minimum and maximum, with an option for unique results. Secure and instant in your browser.</span></a>
+        <span class="tool-name">Генератор случайных чисел</span>
+        <span class="tool-desc">Бесплатный генератор случайных чисел. Выберите одно или несколько случайных чисел между любым минимумом и максимумом с возможностью получения уникальных результатов. Безопасно и мгновенно в вашем браузере.</span></a>
 <a class="tool-card" href="/ru/rolldice/">
         <span class="tool-ico" aria-hidden="true">🎲</span>
-        <span class="tool-name">Dice Roller</span>
-        <span class="tool-desc">Free online dice roller. Roll d4, d6, d8, d10, d12, d20, and d100 dice, alone or in groups. Perfect for D&amp;D, tabletop RPGs, and board games. No download needed.</span></a></div></section>
-<section class="cat"><h2>🎮 Игры и развлечения</h2><div class="grid"><a class="tool-card" href="/ru/magic8ball/">
+        <span class="tool-name">Игра в кости</span>
+        <span class="tool-desc">Бесплатная онлайн игра в кости. Бросайте кубики d4, d6, d8, d10, d12, d20 и d100 в одиночку или группами. Идеально подходит для D&amp;D, настольных ролевых игр и настольных игр. Загрузка не требуется.</span></a>
+<a class="tool-card" href="/ru/yesorno/">
+        <span class="tool-ico" aria-hidden="true">🎯</span>
+        <span class="tool-name">Да или Нет</span>
+        <span class="tool-desc">Бесплатный генератор Да или Нет. Задайте вопрос и мгновенно получите честный случайный ответ «да» или «нет» с подсчетом количества ответов. Работает в вашем браузере, никаких приложений не требуется.</span></a></div></section>
+<section class="cat"><h2>🎮 Игры и развлечения</h2><div class="grid"><a class="tool-card" href="/ru/biorhythm/">
+        <span class="tool-ico" aria-hidden="true">[BR]</span>
+        <span class="tool-name">Калькулятор биоритмов</span>
+        <span class="tool-desc">Рассчитайте физические, эмоциональные и интеллектуальные циклы биоритмов по дате вашего рождения.</span></a>
+<a class="tool-card" href="/ru/catage/">
+        <span class="tool-ico" aria-hidden="true">🐱</span>
+        <span class="tool-name">Калькулятор возраста кошки</span>
+        <span class="tool-desc">Бесплатный калькулятор возраста кошки. Преобразуйте возраст вашей кошки в человеческие годы, используя формулу, признанную AAHA. Кошки стареют быстрее в первые два года жизни.</span></a>
+<a class="tool-card" href="/ru/decisionmaker/">
+        <span class="tool-ico" aria-hidden="true">🎲</span>
+        <span class="tool-name">Лицо, принимающее решения</span>
+        <span class="tool-desc">Свободное лицо, принимающее решения. Введите свои варианты и позвольте рандомайзеру выбрать один для вас. Добавьте взвешивание плюсов и минусов для более реалистичного выбора.</span></a>
+<a class="tool-card" href="/ru/dogage/">
+        <span class="tool-ico" aria-hidden="true">🐕</span>
+        <span class="tool-name">Калькулятор возраста собаки</span>
+        <span class="tool-desc">Бесплатный калькулятор возраста собаки. Преобразуйте возраст вашей собаки в человеческие годы в зависимости от размера. Использует обновленные научные исследования, а не устаревшее правило 7×.</span></a>
+<a class="tool-card" href="/ru/emojitranslator/">
+        <span class="tool-ico" aria-hidden="true">[E]</span>
+        <span class="tool-name">Переводчик текста эмодзи</span>
+        <span class="tool-desc">Введите текст и автоматически добавьте соответствующие смайлы на основе ключевых слов.</span></a>
+<a class="tool-card" href="/ru/fingerspelling/">
+        <span class="tool-ico" aria-hidden="true">[FS]</span>
+        <span class="tool-name">Правописание пальцем ASL</span>
+        <span class="tool-desc">Посмотрите на написание пальцами ASL (американского языка жестов) любого слова или буквы.</span></a>
+<a class="tool-card" href="/ru/hangman/">
+        <span class="tool-ico" aria-hidden="true">🎮</span>
+        <span class="tool-name">Палач</span>
+        <span class="tool-desc">Бесплатная игра в слова «Палач». Угадывайте загаданное слово по одной букве, прежде чем палач будет завершен. Классическая игра в угадывание слов.</span></a>
+<a class="tool-card" href="/ru/lovecalculator/">
+        <span class="tool-ico" aria-hidden="true">[LV]</span>
+        <span class="tool-name">Калькулятор любовной совместимости</span>
+        <span class="tool-desc">Забавный калькулятор любовной совместимости по именам.</span></a>
+<a class="tool-card" href="/ru/luckynumber/">
+        <span class="tool-ico" aria-hidden="true">[LN]</span>
+        <span class="tool-name">Генератор счастливых чисел</span>
+        <span class="tool-desc">Создайте набор счастливых номеров лотереи.</span></a>
+<a class="tool-card" href="/ru/magic8ball/">
         <span class="tool-ico" aria-hidden="true">🎱</span>
-        <span class="tool-name">Magic 8 Ball</span>
-        <span class="tool-desc">Free online Magic 8 Ball. Think of a yes-or-no question, tap the ball, and receive one of the classic fortune-telling answers. Fun, instant and private.</span></a></div></section>
+        <span class="tool-name">Волшебный шар-8</span>
+        <span class="tool-desc">Бесплатная онлайн-игра «Волшебная восьмерка». Придумайте вопрос с ответом «да» или «нет», коснитесь мяча и получите один из классических ответов для гадания. Весело, мгновенно и приватно.</span></a>
+<a class="tool-card" href="/ru/memorygame/">
+        <span class="tool-ico" aria-hidden="true">🃏</span>
+        <span class="tool-name">Карточная игра на память</span>
+        <span class="tool-desc">Бесплатная игра на подбор карт памяти. Переворачивайте карточки, чтобы найти совпадающие пары смайлов. Отслеживает движения и время. Тестирует и улучшает зрительную память.</span></a>
+<a class="tool-card" href="/ru/morsetrainer/">
+        <span class="tool-ico" aria-hidden="true">[MT]</span>
+        <span class="tool-name">Тренажер азбуки Морзе</span>
+        <span class="tool-desc">Попрактикуйтесь в расшифровке азбуки Морзе. Буква изображается точками и тире.</span></a>
+<a class="tool-card" href="/ru/nameday/">
+        <span class="tool-ico" aria-hidden="true">[ND]</span>
+        <span class="tool-name">Поиск именин</span>
+        <span class="tool-desc">Найдите традиционные католические/европейские именины для любого имени.</span></a>
+<a class="tool-card" href="/ru/numberguesser/">
+        <span class="tool-ico" aria-hidden="true">🎯</span>
+        <span class="tool-name">Игра в угадайку чисел</span>
+        <span class="tool-desc">Бесплатная игра по угадыванию чисел. Угадайте секретное число и получите горячие/холодные подсказки. Выберите уровень сложности до 1000.</span></a>
+<a class="tool-card" href="/ru/numerologyname/">
+        <span class="tool-ico" aria-hidden="true">[NUM]</span>
+        <span class="tool-name">Нумерология Имя Число</span>
+        <span class="tool-desc">Рассчитайте свой нумерологический номер имени по своему полному имени.</span></a>
+<a class="tool-card" href="/ru/randomfact/">
+        <span class="tool-ico" aria-hidden="true">🤓</span>
+        <span class="tool-name">Генератор случайных фактов</span>
+        <span class="tool-desc">Бесплатный генератор случайных фактов. С каждым щелчком мыши открывайте удивительные и интересные факты из области науки, истории, математики, природы и технологий.</span></a>
+<a class="tool-card" href="/ru/randomquote/">
+        <span class="tool-ico" aria-hidden="true">💬</span>
+        <span class="tool-name">Генератор случайных цитат</span>
+        <span class="tool-desc">Бесплатный генератор случайных цитат. Получайте новую вдохновляющую или мотивационную цитату с каждым щелчком мыши. Сотни знаменитых цитат величайших мыслителей истории.</span></a>
+<a class="tool-card" href="/ru/rhymefinder/">
+        <span class="tool-ico" aria-hidden="true">[RF]</span>
+        <span class="tool-name">Поиск рифм</span>
+        <span class="tool-desc">Найдите слова, которые рифмуются с любым английским словом. Отлично подходит для стихов и текстов.</span></a>
+<a class="tool-card" href="/ru/rockpaperscissors/">
+        <span class="tool-ico" aria-hidden="true">✊</span>
+        <span class="tool-name">Камень, ножницы, бумага</span>
+        <span class="tool-desc">Бесплатная онлайн игра «Камень, ножницы, бумага». Играйте против компьютера, мгновенно просматривайте результаты и отслеживайте свой счет. Никакой загрузки или регистрации не требуется.</span></a>
+<a class="tool-card" href="/ru/semaphore/">
+        <span class="tool-ico" aria-hidden="true">[SEM]</span>
+        <span class="tool-name">Пометить семафорный кодер</span>
+        <span class="tool-desc">Кодируйте текст как положение рычага семафора флага.</span></a>
+<a class="tool-card" href="/ru/thisorthat/">
+        <span class="tool-ico" aria-hidden="true">⚡</span>
+        <span class="tool-name">Это или то</span>
+        <span class="tool-desc">Бесплатная эта или эта игра. Сделайте быстрый выбор предпочтений между двумя вариантами. Развлечение для вечеринок и познание себя.</span></a>
+<a class="tool-card" href="/ru/tictactoe/">
+        <span class="tool-ico" aria-hidden="true">⭕</span>
+        <span class="tool-name">Крестики-нолики</span>
+        <span class="tool-desc">Бесплатная игра Крестики-нолики. Играйте против друга или против непобедимого ИИ. Классические нолики и крестики 3х3.</span></a>
+<a class="tool-card" href="/ru/triviaquiz/">
+        <span class="tool-ico" aria-hidden="true">🧠</span>
+        <span class="tool-name">Викторина на общие знания</span>
+        <span class="tool-desc">Бесплатная викторина. Ответьте на 20 вопросов общего характера, касающихся науки, истории, географии, спорта и поп-культуры. Мгновенный подсчет очков.</span></a>
+<a class="tool-card" href="/ru/wheelspinner/">
+        <span class="tool-ico" aria-hidden="true">🎡</span>
+        <span class="tool-name">Колесо Спиннер</span>
+        <span class="tool-desc">Бесплатная онлайн-вертушка. Добавляйте варианты и вращайте, чтобы принять случайное решение. Отлично подходит для выбора ресторанов, игр или любого выбора.</span></a>
+<a class="tool-card" href="/ru/wordscramble/">
+        <span class="tool-ico" aria-hidden="true">🔤</span>
+        <span class="tool-name">Игра в словесную схватку</span>
+        <span class="tool-desc">Бесплатная игра в слова. Расшифруй перепутанные буквы, чтобы найти спрятанное английское слово. Получайте подсказки, если вы застряли.</span></a>
+<a class="tool-card" href="/ru/wouldyourather/">
+        <span class="tool-ico" aria-hidden="true">🤔</span>
+        <span class="tool-name">Вы бы лучше?</span>
+        <span class="tool-desc">Бесплатная игра «Вы бы предпочли». Коснитесь варианта, чтобы увидеть, что выбрали другие, а затем перейдите к следующей дилемме. Развлечение для вечеринок и ледоколов.</span></a>
+<a class="tool-card" href="/ru/zodiac/">
+        <span class="tool-ico" aria-hidden="true">♈</span>
+        <span class="tool-name">Калькулятор знаков зодиака</span>
+        <span class="tool-desc">Бесплатный калькулятор знаков зодиака. Введите свой день рождения, чтобы найти свой западный зодиак (знак солнца) и китайский знак зодиака с личностными качествами.</span></a></div></section>
 <section class="cat"><h2>📝 Текст и слова</h2><div class="grid"><a class="tool-card" href="/ru/alphabetizer/">
         <span class="tool-ico" aria-hidden="true">🔤</span>
-        <span class="tool-name">List Alphabetizer</span>
-        <span class="tool-desc">Free online list alphabetizer. Sort any list A-Z, Z-A, by last word, or remove duplicates instantly. Paste your list and click sort.</span></a>
+        <span class="tool-name">Составитель списка по алфавиту</span>
+        <span class="tool-desc">Бесплатный онлайн-алфавитизатор списков. Сортируйте любой список от А до Я, Я до последнего слова или мгновенно удаляйте дубликаты. Вставьте свой список и нажмите «Сортировать».</span></a>
+<a class="tool-card" href="/ru/anagramsolver/">
+        <span class="tool-ico" aria-hidden="true">🔡</span>
+        <span class="tool-name">Решатель анаграмм</span>
+        <span class="tool-desc">Бесплатный решатель анаграмм. Введите буквы, чтобы найти все допустимые английские слова, которые вы можете составить. Отлично подходит для Scrabble, Wordle и словесных игр.</span></a>
 <a class="tool-card" href="/ru/backwardstext/">
         <span class="tool-ico" aria-hidden="true">🔄</span>
-        <span class="tool-name">Backwards Text Generator</span>
-        <span class="tool-desc">Free backwards text generator. Instantly reverse the letters, the word order or the line order of any text in your browser, then copy the result.</span></a>
+        <span class="tool-name">Генератор обратного текста</span>
+        <span class="tool-desc">Бесплатный генератор обратного текста. Мгновенно поменяйте местами буквы, порядок слов или порядок строк любого текста в браузере, а затем скопируйте результат.</span></a>
 <a class="tool-card" href="/ru/binarytext/">
         <span class="tool-ico" aria-hidden="true">💻</span>
-        <span class="tool-name">Binary Translator</span>
-        <span class="tool-desc">Free binary translator. Convert any text to binary code and decode binary back to text, with full Unicode support, instantly and privately in your browser.</span></a>
+        <span class="tool-name">Бинарный переводчик</span>
+        <span class="tool-desc">Бесплатный бинарный переводчик. Преобразуйте любой текст в двоичный код и декодируйте двоичный код обратно в текст с полной поддержкой Unicode, мгновенно и конфиденциально в вашем браузере.</span></a>
 <a class="tool-card" href="/ru/caseconverter/">
         <span class="tool-ico" aria-hidden="true">🔠</span>
-        <span class="tool-name">Case Converter</span>
-        <span class="tool-desc">Free online case converter. Instantly change text to UPPERCASE, lowercase, Title Case, Sentence case, aLtErNaTiNg case and small caps in your browser.</span></a>
+        <span class="tool-name">Конвертер корпусов</span>
+        <span class="tool-desc">Бесплатный онлайн-конвертер кейсов. Мгновенно меняйте текст на ПРОПИСНЫЕ, строчные, регистр заголовков, регистр предложений, альтернативный регистр и прописные буквы в браузере.</span></a>
 <a class="tool-card" href="/ru/charcount/">
         <span class="tool-ico" aria-hidden="true">🔡</span>
-        <span class="tool-name">Character Counter</span>
-        <span class="tool-desc">Free character counter. Count characters (with and without spaces), words, sentences, paragraphs, and lines in any text. Instant, no signup needed.</span></a>
+        <span class="tool-name">Счетчик символов</span>
+        <span class="tool-desc">Бесплатный счетчик персонажей. Подсчитайте символы (с пробелами и без них), слова, предложения, абзацы и строки в любом тексте. Мгновенно, без регистрации.</span></a>
+<a class="tool-card" href="/ru/emojipicker/">
+        <span class="tool-ico" aria-hidden="true">😀</span>
+        <span class="tool-name">Выбор эмодзи</span>
+        <span class="tool-desc">Бесплатный выбор смайлов. Выполните поиск по более чем 1500 смайлам по имени. Щелкните любой смайлик, чтобы скопировать его в буфер обмена. Работает на всех устройствах.</span></a>
 <a class="tool-card" href="/ru/loremipsum/">
         <span class="tool-ico" aria-hidden="true">📄</span>
-        <span class="tool-name">Lorem Ipsum Generator</span>
-        <span class="tool-desc">Free Lorem Ipsum generator. Create placeholder dummy text by paragraphs, sentences or words for design mockups and layouts, then copy it in one click.</span></a>
+        <span class="tool-name">Генератор Лорем Ипсум</span>
+        <span class="tool-desc">Бесплатный генератор Lorem Ipsum. Создайте фиктивный текст-заполнитель по абзацам, предложениям или словам для макетов и макетов дизайна, а затем скопируйте его одним щелчком мыши.</span></a>
 <a class="tool-card" href="/ru/morsetranslator/">
         <span class="tool-ico" aria-hidden="true">• ─</span>
-        <span class="tool-name">Morse Code Translator</span>
-        <span class="tool-desc">Free Morse code translator. Convert any text to Morse code dots and dashes, or decode Morse code back to text. Includes audio playback. Works entirely in your browser.</span></a>
+        <span class="tool-name">Переводчик азбуки Морзе</span>
+        <span class="tool-desc">Бесплатный переводчик азбуки Морзе. Преобразуйте любой текст в точки и тире азбуки Морзе или декодируйте азбуку Морзе обратно в текст. Включает воспроизведение звука. Работает полностью в вашем браузере.</span></a>
 <a class="tool-card" href="/ru/palindromocheck/">
         <span class="tool-ico" aria-hidden="true">🔁</span>
-        <span class="tool-name">Palindrome Checker</span>
-        <span class="tool-desc">Free palindrome checker. Instantly test whether a word, phrase or number reads the same forwards and backwards, ignoring case, spaces and punctuation.</span></a>
+        <span class="tool-name">Палиндромная проверка</span>
+        <span class="tool-desc">Бесплатная проверка палиндромов. Мгновенно проверяйте, одинаково ли читается слово, фраза или число в прямом и обратном направлении, игнорируя регистр, пробелы и знаки препинания.</span></a>
 <a class="tool-card" href="/ru/readingtime/">
         <span class="tool-ico" aria-hidden="true">📖</span>
-        <span class="tool-name">Reading Time Calculator</span>
-        <span class="tool-desc">Free reading time calculator. Paste any text to instantly see the word count, estimated reading time, and estimated speaking time. No signup needed.</span></a>
+        <span class="tool-name">Калькулятор времени чтения</span>
+        <span class="tool-desc">Бесплатный калькулятор времени чтения. Вставьте любой текст, чтобы мгновенно увидеть количество слов, примерное время чтения и примерное время разговора. Никакой регистрации не требуется.</span></a>
+<a class="tool-card" href="/ru/sentencecounter/">
+        <span class="tool-ico" aria-hidden="true">📄</span>
+        <span class="tool-name">Счетчик предложений</span>
+        <span class="tool-desc">Бесплатный счетчик предложений. Вставьте любой текст, чтобы мгновенно подсчитать предложения, слова, символы, абзацы и строки. Показывает среднее количество слов в предложении.</span></a>
 <a class="tool-card" href="/ru/syllablecount/">
         <span class="tool-ico" aria-hidden="true">📝</span>
-        <span class="tool-name">Syllable Counter</span>
-        <span class="tool-desc">Free syllable counter. Count the number of syllables in any English word or text instantly. Useful for poetry, song lyrics, and haiku writing.</span></a>
+        <span class="tool-name">Счетчик слогов</span>
+        <span class="tool-desc">Свободный счетчик слогов. Мгновенно подсчитайте количество слогов в любом английском слове или тексте. Полезно для стихов, текстов песен и написания хайку.</span></a>
+<a class="tool-card" href="/ru/textdiff/">
+        <span class="tool-ico" aria-hidden="true">📋</span>
+        <span class="tool-name">Инструмент «Различие текста»</span>
+        <span class="tool-desc">Бесплатный инструмент для сравнения текста. Сравните два текста и выделите различия между ними. Мгновенно находите добавленные, удаленные и измененные слова.</span></a>
+<a class="tool-card" href="/ru/textrepeater/">
+        <span class="tool-ico" aria-hidden="true">🔁</span>
+        <span class="tool-name">Повторитель текста</span>
+        <span class="tool-desc">Бесплатный повторитель текста. Повторите слово, фразу или строку столько раз, сколько захотите, с разрывом строки, пробелом или запятой между копиями, а затем мгновенно скопируйте результат.</span></a>
+<a class="tool-card" href="/ru/textreverser/">
+        <span class="tool-ico" aria-hidden="true">↩️</span>
+        <span class="tool-name">Реверс текста</span>
+        <span class="tool-desc">Бесплатный реверс текста. Поменяйте местами символы в тексте, измените порядок слов или поменяйте порядок строк. Три режима реверса в одном инструменте.</span></a>
+<a class="tool-card" href="/ru/textsummarizer/">
+        <span class="tool-ico" aria-hidden="true">📃</span>
+        <span class="tool-name">Сумматор текста</span>
+        <span class="tool-desc">Свободный текстовый реферат. Вставляйте любой текст и автоматически извлекайте самые важные предложения, используя экстрактивное обобщение.</span></a>
+<a class="tool-card" href="/ru/titlecase/">
+        <span class="tool-ico" aria-hidden="true">🔤</span>
+        <span class="tool-name">Конвертер регистра заголовков</span>
+        <span class="tool-desc">Бесплатный конвертер регистров заголовков. Мгновенно преобразуйте текст в регистр заголовка, регистр предложений, делайте первую букву каждого слова заглавной или меняйте регистр.</span></a>
+<a class="tool-card" href="/ru/upsidedowntext/">
+        <span class="tool-ico" aria-hidden="true">🙃</span>
+        <span class="tool-name">Генератор перевернутого текста</span>
+        <span class="tool-desc">Бесплатный генератор перевернутого текста. Превратите любой текст в перевернутые символы, которые можно скопировать и вставить в социальные сети, биографию и сообщения. Мгновенно и конфиденциально.</span></a>
 <a class="tool-card" href="/ru/wordcount/">
         <span class="tool-ico" aria-hidden="true">📝</span>
         <span class="tool-name">Счётчик слов</span>
-        <span class="tool-desc">Бесплатный счётчик слов в реальном времени. Вставьте или введите текст, чтобы мгновенно подсчитать слова, символы, предложения, абзацы и примерное время чтения в браузере.</span></a></div></section>
+        <span class="tool-desc">Бесплатный счётчик слов в реальном времени. Вставьте или введите текст, чтобы мгновенно подсчитать слова, символы, предложения, абзацы и примерное время чтения в браузере.</span></a>
+<a class="tool-card" href="/ru/wordfrequency/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">Частотный счетчик слов</span>
+        <span class="tool-desc">Бесплатный счетчик частот слов. Вставьте любой текст и мгновенно увидите самые распространенные слова, ранжированные по частоте использования. Возможность исключить стоп-слова.</span></a></div></section>
 <section class="cat"><h2>📱 Соцсети</h2><div class="grid"><a class="tool-card" href="/ru/qrmaker/">
         <span class="tool-ico" aria-hidden="true">📱</span>
-        <span class="tool-name">QR Code Generator</span>
-        <span class="tool-desc">Free QR code generator. Create a QR code for any URL, text, WiFi password, or contact information. Download as PNG. Works entirely in your browser.</span></a></div></section>
+        <span class="tool-name">Генератор QR-кода</span>
+        <span class="tool-desc">Бесплатный генератор QR-кодов. Создайте QR-код для любого URL-адреса, текста, пароля Wi-Fi или контактной информации. Скачать в формате PNG. Работает полностью в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/tiktokcharcount/">
+        <span class="tool-ico" aria-hidden="true">📱</span>
+        <span class="tool-name">Анализатор титров TikTok</span>
+        <span class="tool-desc">Бесплатный анализатор титров TikTok. См. количество символов в сравнении с лимитом в 2200, количество хэштегов, количество слов и примерное время чтения. Мгновенно оптимизируйте свои подписи в TikTok.</span></a>
+<a class="tool-card" href="/ru/tweetcount/">
+        <span class="tool-ico" aria-hidden="true">🐦</span>
+        <span class="tool-name">Twitter / Счетчик символов X</span>
+        <span class="tool-desc">Бесплатный счетчик символов Twitter/X. Подсчитывает длину твита с нормализацией URL-адресов (каждый URL-адрес = 23 символа). Цветной индикатор ограничения длины в 280 символов.</span></a>
+<a class="tool-card" href="/ru/utmbuilder/">
+        <span class="tool-ico" aria-hidden="true">🔗</span>
+        <span class="tool-name">UTM-конструктор ссылок</span>
+        <span class="tool-desc">Бесплатный конструктор UTM. Создавайте URL-адреса с тегами UTM для Google Analytics и других аналитических платформ. Отслеживайте трафик из электронной почты, социальных сетей и платных кампаний.</span></a></div></section>
 <section class="cat"><h2>❤️ Здоровье и тело</h2><div class="grid"><a class="tool-card" href="/ru/bloodtype/">
         <span class="tool-ico" aria-hidden="true">❤️</span>
-        <span class="tool-name">Blood Type Compatibility Checker</span>
-        <span class="tool-desc">Free blood type compatibility checker. Select your ABO/Rh blood type to instantly see who you can donate blood to and who you can receive blood from.</span></a>
+        <span class="tool-name">Проверка совместимости групп крови</span>
+        <span class="tool-desc">Бесплатная проверка совместимости группы крови. Выберите свою группу крови ABO/Rh, чтобы мгновенно увидеть, кому вы можете сдать кровь и от кого вы можете получить кровь.</span></a>
 <a class="tool-card" href="/ru/bmicalc/">
         <span class="tool-ico" aria-hidden="true">❤️</span>
         <span class="tool-name">Калькулятор ИМТ</span>
         <span class="tool-desc">Бесплатный калькулятор ИМТ. Введите рост и вес в метрических или имперских единицах и мгновенно узнайте индекс массы тела и категорию прямо в браузере.</span></a>
 <a class="tool-card" href="/ru/bmrcalc/">
         <span class="tool-ico" aria-hidden="true">🔥</span>
-        <span class="tool-name">BMR Calculator</span>
-        <span class="tool-desc">Free BMR calculator. Calculate your Basal Metabolic Rate — the calories your body burns at rest per day. Uses the Mifflin-St Jeor equation.</span></a>
+        <span class="tool-name">Калькулятор BMR</span>
+        <span class="tool-desc">Бесплатный калькулятор BMR. Рассчитайте базальный уровень метаболизма — количество калорий, которое ваше тело сжигает в состоянии покоя за день. Использует уравнение Миффлина-Сент-Джора.</span></a>
+<a class="tool-card" href="/ru/bodyfat/">
+        <span class="tool-ico" aria-hidden="true">🏃</span>
+        <span class="tool-name">Калькулятор процента жира в организме</span>
+        <span class="tool-desc">Бесплатный калькулятор процента жира в организме по методу ВМС США. Введите размеры роста, шеи, талии и бедер (женщины), чтобы оценить количество жира в организме.</span></a>
+<a class="tool-card" href="/ru/bodyfatrange/">
+        <span class="tool-ico" aria-hidden="true">[BF]</span>
+        <span class="tool-name">Классификатор процента телесного жира</span>
+        <span class="tool-desc">Найдите свою категорию жира в организме: незаменимый, спортсмен, фитнес, средний или ожирение.</span></a>
+<a class="tool-card" href="/ru/calorieburn/">
+        <span class="tool-ico" aria-hidden="true">🔥</span>
+        <span class="tool-name">Калькулятор сжигания калорий</span>
+        <span class="tool-desc">Бесплатный калькулятор сжигания калорий. Выберите занятие, введите свой вес и продолжительность, чтобы оценить сожженные калории. Для точности используются значения MET.</span></a>
 <a class="tool-card" href="/ru/caloriecalc/">
         <span class="tool-ico" aria-hidden="true">🥗</span>
-        <span class="tool-name">Food Calorie Calculator</span>
-        <span class="tool-desc">Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.</span></a>
+        <span class="tool-name">Калькулятор пищевых калорий</span>
+        <span class="tool-desc">Бесплатный калькулятор калорий. Узнайте приблизительную калорийность обычных продуктов на 100 г. Отлично подходит для отслеживания диеты и планирования еды.</span></a>
+<a class="tool-card" href="/ru/duedatecalc/">
+        <span class="tool-ico" aria-hidden="true">👶</span>
+        <span class="tool-name">Калькулятор срока беременности</span>
+        <span class="tool-desc">Бесплатный калькулятор срока беременности. Введите дату последней менструации или зачатия, чтобы оценить дату родов и текущую неделю беременности.</span></a>
+<a class="tool-card" href="/ru/foodcalories/">
+        <span class="tool-ico" aria-hidden="true">[FC]</span>
+        <span class="tool-name">Справочник калорийности продуктов питания</span>
+        <span class="tool-desc">Калорийность на 100 г обычных продуктов, содержащих белки, углеводы и жиры.</span></a>
+<a class="tool-card" href="/ru/heartratezones/">
+        <span class="tool-ico" aria-hidden="true">❤️</span>
+        <span class="tool-name">Калькулятор зоны сердечного ритма</span>
+        <span class="tool-desc">Бесплатный калькулятор зон пульса. Введите свой возраст и частоту пульса в состоянии покоя, чтобы найти 5 тренировочных зон: сжигание жира, аэробная, анаэробная и VO2 max.</span></a>
+<a class="tool-card" href="/ru/hydrationcalc/">
+        <span class="tool-ico" aria-hidden="true">💧</span>
+        <span class="tool-name">Калькулятор ежедневного потребления воды</span>
+        <span class="tool-desc">Бесплатный калькулятор водозабора. Введите свой вес и уровень активности, чтобы узнать рекомендуемую суточную норму воды в литрах, чашках и унциях.</span></a>
 <a class="tool-card" href="/ru/idealweightcalc/">
         <span class="tool-ico" aria-hidden="true">⚖️</span>
-        <span class="tool-name">Ideal Weight Calculator</span>
-        <span class="tool-desc">Free ideal weight calculator. Find the healthy weight range for your height and sex using the BMI method and the Robinson, Miller, and Devine formulas.</span></a></div></section>
+        <span class="tool-name">Калькулятор идеального веса</span>
+        <span class="tool-desc">Бесплатный калькулятор идеального веса. Найдите диапазон здорового веса для вашего роста и пола, используя метод ИМТ и формулы Робинсона, Миллера и Девайна.</span></a>
+<a class="tool-card" href="/ru/macrocalc/">
+        <span class="tool-ico" aria-hidden="true">🥗</span>
+        <span class="tool-name">Калькулятор макронутриентов</span>
+        <span class="tool-desc">Бесплатный макрокалькулятор. Введите ежедневную норму калорий и цель диеты, чтобы получить целевые показатели белков, углеводов и жиров в граммах и калориях.</span></a>
+<a class="tool-card" href="/ru/macroratio/">
+        <span class="tool-ico" aria-hidden="true">🥗</span>
+        <span class="tool-name">Калькулятор макросоотношений</span>
+        <span class="tool-desc">Бесплатный калькулятор макросоотношений. Введите ежедневную норму калорий и цель диеты, чтобы получать оптимальное количество белка, углеводов и жиров в граммах в день.</span></a>
+<a class="tool-card" href="/ru/ovulationcalc/">
+        <span class="tool-ico" aria-hidden="true">🌸</span>
+        <span class="tool-name">Калькулятор овуляции</span>
+        <span class="tool-desc">Бесплатный калькулятор овуляции. Введите дату последней менструации и продолжительность цикла, чтобы оценить дату овуляции, окно фертильности и дату следующей менструации.</span></a>
+<a class="tool-card" href="/ru/pacecalc/">
+        <span class="tool-ico" aria-hidden="true">🏃</span>
+        <span class="tool-name">Калькулятор темпа бега</span>
+        <span class="tool-desc">Бесплатный калькулятор темпа бега. Введите расстояние и время, чтобы рассчитать темп на километр или милю, скорость и эквивалентное время финиша в гонке.</span></a>
+<a class="tool-card" href="/ru/pregnancyweek/">
+        <span class="tool-ico" aria-hidden="true">🤰</span>
+        <span class="tool-name">Калькулятор недели беременности</span>
+        <span class="tool-desc">Бесплатный калькулятор беременности. Введите дату последней менструации, чтобы узнать текущую неделю беременности, триместр и предполагаемую дату родов.</span></a>
+<a class="tool-card" href="/ru/sleepcalc/">
+        <span class="tool-ico" aria-hidden="true">😴</span>
+        <span class="tool-name">Калькулятор цикла сна</span>
+        <span class="tool-desc">Бесплатный калькулятор сна. Введите время пробуждения, чтобы найти идеальное время сна на основе 90-минутных циклов сна. Просыпайтесь отдохнувшим, а не разбитым.</span></a>
+<a class="tool-card" href="/ru/vitamindcalc/">
+        <span class="tool-ico" aria-hidden="true">☀️</span>
+        <span class="tool-name">Калькулятор воздействия витамина D на солнце</span>
+        <span class="tool-desc">Бесплатный калькулятор воздействия витамина D на солнце. Введите свой тип кожи и интенсивность солнца, чтобы определить, сколько минут пребывания на солнце вам необходимо для выработки достаточного количества витамина D.</span></a>
+<a class="tool-card" href="/ru/waterintake/">
+        <span class="tool-ico" aria-hidden="true">💧</span>
+        <span class="tool-name">Калькулятор ежедневного потребления воды</span>
+        <span class="tool-desc">Бесплатный калькулятор водозабора. Узнайте, сколько именно воды вам следует выпивать каждый день в зависимости от веса вашего тела и уровня активности. Мгновенные результаты в вашем браузере.</span></a></div></section>
 <section class="cat"><h2>🏠 Дом и авто</h2><div class="grid"><a class="tool-card" href="/ru/electricitycost/">
         <span class="tool-ico" aria-hidden="true">⚡</span>
-        <span class="tool-name">Electricity Cost Calculator</span>
-        <span class="tool-desc">Free electricity cost calculator. Enter an appliance wattage, hours of use per day, and your electricity rate to see daily, monthly, and annual running costs.</span></a>
+        <span class="tool-name">Калькулятор стоимости электроэнергии</span>
+        <span class="tool-desc">Бесплатный калькулятор стоимости электроэнергии. Введите мощность устройства, часы использования в день и тариф на электроэнергию, чтобы увидеть ежедневные, ежемесячные и годовые эксплуатационные расходы.</span></a>
 <a class="tool-card" href="/ru/paintcalc/">
         <span class="tool-ico" aria-hidden="true">🎨</span>
-        <span class="tool-name">Paint Calculator</span>
-        <span class="tool-desc">Free paint calculator. Enter your wall dimensions, number of coats, and paint coverage to calculate exactly how many litres of paint you need.</span></a></div></section>
-<section class="cat"><h2>🔧 Утилиты</h2><div class="grid"><a class="tool-card" href="/ru/colorpicker/">
+        <span class="tool-name">Калькулятор краски</span>
+        <span class="tool-desc">Бесплатный калькулятор красок. Введите размеры стены, количество слоев и покрытие краской, чтобы точно рассчитать, сколько литров краски вам нужно.</span></a></div></section>
+<section class="cat"><h2>🔧 Утилиты</h2><div class="grid"><a class="tool-card" href="/ru/ageincalculator/">
+        <span class="tool-ico" aria-hidden="true">[AI]</span>
+        <span class="tool-name">Возраст в разных единицах</span>
+        <span class="tool-desc">Рассчитайте свой возраст в годах, месяцах, неделях, днях, часах, минутах и секундах.</span></a>
+<a class="tool-card" href="/ru/caesarcipher/">
+        <span class="tool-ico" aria-hidden="true">🏛️</span>
+        <span class="tool-name">Шифр Цезаря</span>
+        <span class="tool-desc">Бесплатный инструмент для шифрования Цезаря. Кодируйте или декодируйте текст, используя шифр замены Цезаря с любым значением сдвига от 1 до 25.</span></a>
+<a class="tool-card" href="/ru/charactercounter/">
+        <span class="tool-ico" aria-hidden="true">[CC]</span>
+        <span class="tool-name">Счетчик символов и слов</span>
+        <span class="tool-desc">Подсчитайте символы, слова, предложения, абзацы и примерное время чтения.</span></a>
+<a class="tool-card" href="/ru/colorconverter/">
         <span class="tool-ico" aria-hidden="true">🎨</span>
-        <span class="tool-name">Color Picker</span>
-        <span class="tool-desc">Free color picker. Select any color and instantly get its HEX, RGB, and HSL codes. Copy with one click. Works entirely in your browser.</span></a>
+        <span class="tool-name">Конвертер цветового формата</span>
+        <span class="tool-desc">Бесплатный конвертер цветовых форматов. Мгновенное преобразование между цветовыми форматами HEX, RGB, HSL, HSV и CMYK. Вставьте любой цветовой код и просмотрите все эквиваленты.</span></a>
+<a class="tool-card" href="/ru/colorpicker/">
+        <span class="tool-ico" aria-hidden="true">🎨</span>
+        <span class="tool-name">Выбор цвета</span>
+        <span class="tool-desc">Бесплатный выбор цвета. Выберите любой цвет и мгновенно получите его коды HEX, RGB и HSL. Копируйте одним щелчком мыши. Работает полностью в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/datemath/">
+        <span class="tool-ico" aria-hidden="true">[DM]</span>
+        <span class="tool-name">Калькулятор сложения/вычитания даты</span>
+        <span class="tool-desc">Добавляйте или вычитайте дни, недели, месяцы или годы из любой даты.</span></a>
 <a class="tool-card" href="/ru/gradientgen/">
         <span class="tool-ico" aria-hidden="true">🌈</span>
-        <span class="tool-name">CSS Gradient Generator</span>
-        <span class="tool-desc">Free CSS gradient generator. Create linear and radial gradients with any colors and instantly get the CSS code. No signup needed.</span></a>
+        <span class="tool-name">Генератор CSS-градиентов</span>
+        <span class="tool-desc">Бесплатный генератор градиентов CSS. Создавайте линейные и радиальные градиенты любых цветов и мгновенно получайте CSS-код. Никакой регистрации не требуется.</span></a>
+<a class="tool-card" href="/ru/htmlcodec/">
+        <span class="tool-ico" aria-hidden="true">🌐</span>
+        <span class="tool-name">HTML-кодер/декодер</span>
+        <span class="tool-desc">Бесплатный кодировщик и декодер HTML. Преобразование специальных символов в объекты HTML и обратно. Кодируйте &lt; &gt; &amp; &quot; &#39; и другие элементы для безопасного отображения на веб-страницах.</span></a>
+<a class="tool-card" href="/ru/ipinfo/">
+        <span class="tool-ico" aria-hidden="true">🌐</span>
+        <span class="tool-name">Мой IP-адрес и информация</span>
+        <span class="tool-desc">Найдите свой общедоступный IP-адрес, приблизительное местоположение, часовой пояс и интернет-провайдера. Использует ipapi.co для поиска. Данные не сохранены.</span></a>
+<a class="tool-card" href="/ru/natoalphabet/">
+        <span class="tool-ico" aria-hidden="true">[NA]</span>
+        <span class="tool-name">Фонетический алфавит НАТО</span>
+        <span class="tool-desc">Преобразуйте текст в фонетический алфавит НАТО (Альфа, Браво, Чарли...).</span></a>
+<a class="tool-card" href="/ru/networkspeedcalc/">
+        <span class="tool-ico" aria-hidden="true">[NS]</span>
+        <span class="tool-name">Калькулятор скорости сети</span>
+        <span class="tool-desc">Подсчитайте, сколько времени потребуется для передачи файла при заданной скорости сети.</span></a>
+<a class="tool-card" href="/ru/numbertowords/">
+        <span class="tool-ico" aria-hidden="true">📝</span>
+        <span class="tool-name">Конвертер чисел в слова</span>
+        <span class="tool-desc">Бесплатный конвертер чисел в слова. Введите любое целое число и напишите его на английском или португальском языке. Полезно для проверок, юридических документов и изучения языка.</span></a>
+<a class="tool-card" href="/ru/passphregen/">
+        <span class="tool-ico" aria-hidden="true">🔐</span>
+        <span class="tool-name">Генератор парольных фраз</span>
+        <span class="tool-desc">Бесплатный генератор паролей. Создавайте запоминающиеся, но безопасные фразы-пароли, используя случайные общие слова. Гораздо легче запомнить, чем случайные символы.</span></a>
+<a class="tool-card" href="/ru/qrreader/">
+        <span class="tool-ico" aria-hidden="true">📷</span>
+        <span class="tool-name">Считыватель QR-кодов</span>
+        <span class="tool-desc">Бесплатный считыватель QR-кодов. Загрузите изображение, содержащее QR-код, чтобы мгновенно расшифровать его содержимое в браузере. Приложение не требуется.</span></a>
 <a class="tool-card" href="/ru/randomcolor/">
         <span class="tool-ico" aria-hidden="true">🎨</span>
-        <span class="tool-name">Random Color Generator</span>
-        <span class="tool-desc">Free random color generator. Generate a random colour and see its HEX, RGB and HSL codes instantly. Great for design inspiration and picking palettes.</span></a></div></section>
+        <span class="tool-name">Генератор случайных цветов</span>
+        <span class="tool-desc">Бесплатный генератор случайных цветов. Сгенерируйте случайный цвет и мгновенно просмотрите его коды HEX, RGB и HSL. Отлично подходит для вдохновения дизайна и выбора палитры.</span></a>
+<a class="tool-card" href="/ru/rot13/">
+        <span class="tool-ico" aria-hidden="true">🔄</span>
+        <span class="tool-name">Кодер/декодер ROT13</span>
+        <span class="tool-desc">Бесплатный кодер и декодер ROT13. Преобразуйте текст с помощью шифра замены ROT13 в режиме реального времени. ROT13 кодирует и декодирует с помощью одной и той же операции.</span></a>
+<a class="tool-card" href="/ru/screeninfo/">
+        <span class="tool-ico" aria-hidden="true">🖥️</span>
+        <span class="tool-name">Проверка разрешения экрана</span>
+        <span class="tool-desc">Бесплатная проверка разрешения экрана. Показывает разрешение экрана, размер области просмотра, соотношение пикселей устройства, глубину цвета, поддержку сенсорного ввода и многое другое.</span></a>
+<a class="tool-card" href="/ru/sunrisesunset/">
+        <span class="tool-ico" aria-hidden="true">[SRS]</span>
+        <span class="tool-name">Оценщик восхода и захода солнца</span>
+        <span class="tool-desc">Рассчитайте время восхода и захода солнца для любого места и даты.</span></a>
+<a class="tool-card" href="/ru/texttobinary/">
+        <span class="tool-ico" aria-hidden="true">01</span>
+        <span class="tool-name">Конвертер текста в двоичный код</span>
+        <span class="tool-desc">Бесплатный конвертер текста в двоичный код. Преобразуйте любой текст в двоичный (01010100...) и обратно в текст. Использует 8-битную кодировку ASCII.</span></a>
+<a class="tool-card" href="/ru/unitconverterx/">
+        <span class="tool-ico" aria-hidden="true">[UC]</span>
+        <span class="tool-name">Расширенный конвертер единиц измерения</span>
+        <span class="tool-desc">Преобразование между скоростью, давлением, энергией, мощностью и единицами хранения данных.</span></a>
+<a class="tool-card" href="/ru/urlcodec/">
+        <span class="tool-ico" aria-hidden="true">🔗</span>
+        <span class="tool-name">URL-кодер/декодер</span>
+        <span class="tool-desc">Бесплатный кодировщик и декодер URL-адресов. Кодируйте специальные символы в URL-адресах с помощью процентной кодировки или декодируйте URL-адреса с процентной кодировкой обратно в обычный текст.</span></a></div></section>
+<section class="cat"><h2>🔄 Конвертеры</h2><div class="grid"><a class="tool-card" href="/ru/angleconverter/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">Конвертер угловых единиц</span>
+        <span class="tool-desc">Свободный преобразователь углов. Мгновенно конвертируйте градусы, радианы, градины, угловые минуты, угловые секунды, повороты и миллирадианы.</span></a>
+<a class="tool-card" href="/ru/areaconverter/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">Конвертер единиц площади</span>
+        <span class="tool-desc">Бесплатный конвертер площадей. Мгновенно конвертируйте квадратные метры, квадратные футы, квадратные мили, акры, гектары, квадратные километры и многое другое.</span></a>
+<a class="tool-card" href="/ru/energyconverter/">
+        <span class="tool-ico" aria-hidden="true">⚡</span>
+        <span class="tool-name">Конвертер единиц энергии</span>
+        <span class="tool-desc">Бесплатный преобразователь энергии. Конвертируйте джоули, килоджоули, калории, килокалории, ватт-часы, киловатт-часы, БТЕ, фут-фунты и электрон-вольты.</span></a>
+<a class="tool-card" href="/ru/frequencyconverter/">
+        <span class="tool-ico" aria-hidden="true">〰️</span>
+        <span class="tool-name">Конвертер единиц частоты</span>
+        <span class="tool-desc">Бесплатный преобразователь частоты. Преобразование между герцами, килогерцами, мегагерцами, гигагерцами и оборотами в минуту (об/мин). Показывает период в секундах.</span></a>
+<a class="tool-card" href="/ru/pressureconverter/">
+        <span class="tool-ico" aria-hidden="true">🌡️</span>
+        <span class="tool-name">Конвертер единиц давления</span>
+        <span class="tool-desc">Бесплатный преобразователь давления. Мгновенно конвертируйте паскаль, бар, фунт на квадратный дюйм, атмосферу, мм рт. ст., дюйм рт. ст. и другие единицы давления.</span></a>
+<a class="tool-card" href="/ru/storageconverter/">
+        <span class="tool-ico" aria-hidden="true">💾</span>
+        <span class="tool-name">Конвертер хранения данных</span>
+        <span class="tool-desc">Бесплатный конвертер хранения данных. Конвертируйте биты, байты, килобайты, мегабайты, гигабайты, терабайты, петабайты и их двоичные аналоги.</span></a>
+<a class="tool-card" href="/ru/volumeconverter/">
+        <span class="tool-ico" aria-hidden="true">🥤</span>
+        <span class="tool-name">Конвертер единиц объема</span>
+        <span class="tool-desc">Бесплатный конвертер громкости. Конвертируйте литры, миллилитры, галлоны США, жидкие унции, чашки, пинты, кварты, кубические метры и многое другое.</span></a></div></section>
+<section class="cat"><h2>💻 Инструменты разработчика</h2><div class="grid"><a class="tool-card" href="/ru/base64codec/">
+        <span class="tool-ico" aria-hidden="true">🔐</span>
+        <span class="tool-name">Кодер/декодер Base64</span>
+        <span class="tool-desc">Бесплатный кодер и декодер Base64. Кодируйте текст в Base64 или декодируйте строки Base64 обратно в обычный текст мгновенно в вашем браузере.</span></a>
+<a class="tool-card" href="/ru/cronbuilder/">
+        <span class="tool-ico" aria-hidden="true">[C]</span>
+        <span class="tool-name">Построитель выражений Cron</span>
+        <span class="tool-desc">Бесплатный конструктор выражений cron. Создайте и опишите выражения расписания cron.</span></a>
+<a class="tool-card" href="/ru/cssminifier/">
+        <span class="tool-ico" aria-hidden="true">💻</span>
+        <span class="tool-name">CSS-минификатор</span>
+        <span class="tool-desc">Бесплатный минификатор CSS. Удалите пробелы, комментарии и ненужные символы из CSS, чтобы уменьшить размер файла и ускорить загрузку страниц.</span></a>
+<a class="tool-card" href="/ru/csvtojson/">
+        <span class="tool-ico" aria-hidden="true">📋</span>
+        <span class="tool-name">Конвертер CSV в JSON</span>
+        <span class="tool-desc">Бесплатный конвертер CSV в JSON. Вставьте данные CSV с заголовками, чтобы преобразовать их в массив объектов JSON. Обрабатывает значения в кавычках и различные разделители.</span></a>
+<a class="tool-card" href="/ru/diffchecker/">
+        <span class="tool-ico" aria-hidden="true">[D]</span>
+        <span class="tool-name">Проверка различий</span>
+        <span class="tool-desc">Сравните два текста и построчно выделите различия.</span></a>
+<a class="tool-card" href="/ru/hashgenerator/">
+        <span class="tool-ico" aria-hidden="true">#️⃣</span>
+        <span class="tool-name">Хэш-генератор</span>
+        <span class="tool-desc">Бесплатный генератор хэшей. Вычисляйте хэши SHA-256, SHA-1 и MD5 для любого ввода текста мгновенно в вашем браузере. Никакие данные никуда не отправляются.</span></a>
+<a class="tool-card" href="/ru/htmlbeautifier/">
+        <span class="tool-ico" aria-hidden="true">✨</span>
+        <span class="tool-name">HTML-улучшитель</span>
+        <span class="tool-desc">Бесплатный HTML-украситель. Вставьте беспорядочный или минимизированный HTML-код и отформатируйте его с правильными отступами для лучшей читаемости.</span></a>
+<a class="tool-card" href="/ru/httpcodes/">
+        <span class="tool-ico" aria-hidden="true">[H]</span>
+        <span class="tool-name">Справочник по коду состояния HTTP</span>
+        <span class="tool-desc">Полный список кодов ответов HTTP 1xx-5xx с описаниями.</span></a>
+<a class="tool-card" href="/ru/jsonformatter/">
+        <span class="tool-ico" aria-hidden="true">{ }</span>
+        <span class="tool-name">Форматер и валидатор JSON</span>
+        <span class="tool-desc">Бесплатный форматер и валидатор JSON. Вставьте JSON, чтобы отформатировать его с правильными отступами, минимизировать или проверить на наличие ошибок. Работает в вашем браузере мгновенно.</span></a>
+<a class="tool-card" href="/ru/jsonminifier/">
+        <span class="tool-ico" aria-hidden="true">📦</span>
+        <span class="tool-name">JSON минимизатор и форматтер</span>
+        <span class="tool-desc">Бесплатный минификатор и форматтер JSON. Удалите пробелы, чтобы сжать JSON, или отформатируйте минифицированный JSON с правильными отступами для удобства чтения.</span></a>
+<a class="tool-card" href="/ru/jsonpath/">
+        <span class="tool-ico" aria-hidden="true">{}</span>
+        <span class="tool-name">Тестер пути JSON</span>
+        <span class="tool-desc">Бесплатный тестер пути JSON. Вставьте JSON и введите путь к ключу в виде точечной записи для извлечения значений.</span></a>
+<a class="tool-card" href="/ru/jsontocsv/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">Конвертер JSON в CSV</span>
+        <span class="tool-desc">Бесплатный конвертер JSON в CSV. Вставьте массив объектов JSON и преобразуйте его в файл CSV с правильными заголовками и экранированными значениями.</span></a>
+<a class="tool-card" href="/ru/jwtdecoder/">
+        <span class="tool-ico" aria-hidden="true">[J]</span>
+        <span class="tool-name">JWT-декодер</span>
+        <span class="tool-desc">Бесплатный JWT-декодер. Декодируйте и проверяйте веб-токены JSON.</span></a>
+<a class="tool-card" href="/ru/markdownhtml/">
+        <span class="tool-ico" aria-hidden="true">📝</span>
+        <span class="tool-name">Конвертер Markdown в HTML</span>
+        <span class="tool-desc">Бесплатный конвертер Markdown в HTML. Вставьте Markdown и увидите вывод HTML и предварительный просмотр в реальном времени. Поддерживает заголовки, списки, ссылки, изображения, код и жирный/курсивный шрифт.</span></a>
+<a class="tool-card" href="/ru/markdownpreview/">
+        <span class="tool-ico" aria-hidden="true">[MD]</span>
+        <span class="tool-name">Предварительный просмотр уценки</span>
+        <span class="tool-desc">Бесплатный предварительный просмотр уценки в реальном времени. Напишите уценку и просмотрите предварительный просмотр визуализированного HTML в режиме реального времени.</span></a>
+<a class="tool-card" href="/ru/regexcheatsheet/">
+        <span class="tool-ico" aria-hidden="true">[R]</span>
+        <span class="tool-name">Шпаргалка по регулярным выражениям</span>
+        <span class="tool-desc">Краткий справочник по синтаксису регулярных выражений.</span></a>
+<a class="tool-card" href="/ru/regextester/">
+        <span class="tool-ico" aria-hidden="true">🔍</span>
+        <span class="tool-name">Тестер регулярных выражений</span>
+        <span class="tool-desc">Бесплатный тестер регулярных выражений. Введите шаблон регулярного выражения и тестовую строку, чтобы увидеть совпадения, выделенные в режиме реального времени. Поддерживает все флаги регулярных выражений JavaScript.</span></a>
+<a class="tool-card" href="/ru/sluggen/">
+        <span class="tool-ico" aria-hidden="true">🔗</span>
+        <span class="tool-name">Генератор URL-слагов</span>
+        <span class="tool-desc">Бесплатный генератор URL-слагов. Преобразуйте любой заголовок или текст в чистый, удобный для URL-адреса фрагмент, удалив специальные символы и заменив пробелы дефисами.</span></a>
+<a class="tool-card" href="/ru/textencoder/">
+        <span class="tool-ico" aria-hidden="true">[TE]</span>
+        <span class="tool-name">Текстовый кодер и декодер</span>
+        <span class="tool-desc">Бесплатный текстовый кодер. URL-адрес, объект HTML и кодирование/декодирование Base64.</span></a>
+<a class="tool-card" href="/ru/unixperms/">
+        <span class="tool-ico" aria-hidden="true">[P]</span>
+        <span class="tool-name">Калькулятор прав доступа к файлам Unix</span>
+        <span class="tool-desc">Переключите разрешения chmod и получите восьмеричный код и символическое обозначение.</span></a>
+<a class="tool-card" href="/ru/uuidgen/">
+        <span class="tool-ico" aria-hidden="true">🆔</span>
+        <span class="tool-name">Генератор UUID</span>
+        <span class="tool-desc">Бесплатный генератор UUID. Мгновенно сгенерируйте один или несколько случайных идентификаторов UUID v4 в своем браузере. Щелкните любой UUID, чтобы скопировать его.</span></a></div></section>
+<section class="cat"><h2>🎨 Дизайн и CSS</h2><div class="grid"><a class="tool-card" href="/ru/aspectcalc/">
+        <span class="tool-ico" aria-hidden="true">📺</span>
+        <span class="tool-name">Калькулятор соотношения сторон</span>
+        <span class="tool-desc">Бесплатный калькулятор соотношения сторон. Введите ширину и высоту, чтобы найти упрощенное соотношение сторон, и масштабируйте его до любого нового размера, сохраняя соотношение.</span></a>
+<a class="tool-card" href="/ru/borderradius/">
+        <span class="tool-ico" aria-hidden="true">⬛</span>
+        <span class="tool-name">Генератор радиуса границы</span>
+        <span class="tool-desc">Генератор радиуса свободной границы. Управляйте каждым углом индивидуально с помощью ползунков, смотрите предварительный просмотр в реальном времени и скопируйте значение радиуса границы CSS.</span></a>
+<a class="tool-card" href="/ru/boxshadow/">
+        <span class="tool-ico" aria-hidden="true">🟫</span>
+        <span class="tool-name">Генератор теней CSS Box</span>
+        <span class="tool-desc">Бесплатный CSS-генератор теней для блоков. Отрегулируйте смещение, размытие, распространение и цвет для визуального создания теней. Скопируйте CSS-код.</span></a>
+<a class="tool-card" href="/ru/contrastchecker/">
+        <span class="tool-ico" aria-hidden="true">[CC]</span>
+        <span class="tool-name">Проверка цветового контраста</span>
+        <span class="tool-desc">Бесплатная программа проверки контрастности WCAG. Рассчитайте коэффициент контрастности и проверьте соответствие WCAG 2.1 AA и AAA.</span></a>
+<a class="tool-card" href="/ru/cssgradient/">
+        <span class="tool-ico" aria-hidden="true">🌈</span>
+        <span class="tool-name">Генератор CSS-градиентов</span>
+        <span class="tool-desc">Бесплатный генератор градиентов CSS. Выберите два цвета, выберите линейный, радиальный или конический, отрегулируйте угол и скопируйте сгенерированный CSS.</span></a>
+<a class="tool-card" href="/ru/fontidentifier/">
+        <span class="tool-ico" aria-hidden="true">[FN]</span>
+        <span class="tool-name">Предварительный просмотр свойств шрифта</span>
+        <span class="tool-desc">Предварительный просмотр любого семейства шрифтов, их размеров и комбинаций насыщенности.</span></a>
+<a class="tool-card" href="/ru/fontpair/">
+        <span class="tool-ico" aria-hidden="true">✍️</span>
+        <span class="tool-name">Предварительный просмотр шрифтовой пары</span>
+        <span class="tool-desc">Бесплатный предварительный просмотр пары шрифтов. Выберите шрифт заголовка и основной шрифт из популярных шрифтов Google, чтобы увидеть, как они выглядят вместе в предварительном просмотре.</span></a>
+<a class="tool-card" href="/ru/imagecolorpicker/">
+        <span class="tool-ico" aria-hidden="true">[ICP]</span>
+        <span class="tool-name">Выбор цвета изображения</span>
+        <span class="tool-desc">Бесплатный выбор цвета изображения. Загрузите изображение и нажмите, чтобы выбрать точные цвета. Показывает шестнадцатеричные значения, значения RGB и HSL.</span></a>
+<a class="tool-card" href="/ru/palettemaker/">
+        <span class="tool-ico" aria-hidden="true">🎨</span>
+        <span class="tool-name">Генератор цветовой палитры</span>
+        <span class="tool-desc">Бесплатный генератор цветовой палитры. Введите базовый цвет и создайте дополнительные, триадные, аналогичные или монохроматические цветовые палитры. Скопируйте шестнадцатеричные коды.</span></a></div></section>
+<section class="cat"><h2>🔬 Наука</h2><div class="grid"><a class="tool-card" href="/ru/gravitycalc/">
+        <span class="tool-ico" aria-hidden="true">[G]</span>
+        <span class="tool-name">Калькулятор гравитационной силы</span>
+        <span class="tool-desc">Рассчитайте гравитационную силу, используя закон Ньютона F = Gm1m2/r в квадрате.</span></a>
+<a class="tool-card" href="/ru/idealgas/">
+        <span class="tool-ico" aria-hidden="true">💨</span>
+        <span class="tool-name">Калькулятор закона идеального газа</span>
+        <span class="tool-desc">Бесплатный калькулятор закона идеального газа. Введите любые три значения давления, объема, молей и температуры, чтобы найти неизвестную переменную, используя PV = nRT.</span></a>
+<a class="tool-card" href="/ru/kinematics/">
+        <span class="tool-ico" aria-hidden="true">🏎️</span>
+        <span class="tool-name">Решатель кинематических уравнений</span>
+        <span class="tool-desc">Бесплатный решатель кинематики. Введите любые 3 из 5 переменных (v₀, v, a, t, d), чтобы решить неизвестные кинематические переменные, используя уравнения движения.</span></a>
+<a class="tool-card" href="/ru/lightyear/">
+        <span class="tool-ico" aria-hidden="true">[LY]</span>
+        <span class="tool-name">Калькулятор светового года</span>
+        <span class="tool-desc">Преобразование между световыми годами, парсеками, астрономическими единицами, километрами и милями.</span></a>
+<a class="tool-card" href="/ru/molarmass/">
+        <span class="tool-ico" aria-hidden="true">⚗️</span>
+        <span class="tool-name">Калькулятор молярной массы</span>
+        <span class="tool-desc">Бесплатный калькулятор молярной массы. Введите химическую формулу, например H2O или NaCl, чтобы рассчитать молярную массу (молекулярную массу) в г/моль.</span></a>
+<a class="tool-card" href="/ru/newtonslaw/">
+        <span class="tool-ico" aria-hidden="true">🍎</span>
+        <span class="tool-name">Калькулятор второго закона Ньютона (F = ma)</span>
+        <span class="tool-desc">Бесплатный калькулятор второго закона Ньютона. Определите силу (F), массу (м) или ускорение (a), используя F = ma. Показывает единицы измерения и пояснения.</span></a>
+<a class="tool-card" href="/ru/ohmslaw/">
+        <span class="tool-ico" aria-hidden="true">⚡</span>
+        <span class="tool-name">Калькулятор закона Ома</span>
+        <span class="tool-desc">Бесплатный калькулятор закона Ома. Введите любые два значения: напряжение (В), ток (А) или сопротивление (Ом), чтобы вычислить недостающее значение и мощность.</span></a>
+<a class="tool-card" href="/ru/periodictable/">
+        <span class="tool-ico" aria-hidden="true">[PT]</span>
+        <span class="tool-name">Справочник по периодической таблице</span>
+        <span class="tool-desc">Найдите все 118 элементов по имени, символу или атомному номеру.</span></a>
+<a class="tool-card" href="/ru/phcalculator/">
+        <span class="tool-ico" aria-hidden="true">🧪</span>
+        <span class="tool-name">Калькулятор pH</span>
+        <span class="tool-desc">Бесплатный калькулятор pH. Введите концентрацию ионов водорода [H⁺] или концентрацию гидроксида [OH⁻], чтобы рассчитать pH и классифицировать раствор.</span></a>
+<a class="tool-card" href="/ru/resistorcolor/">
+        <span class="tool-ico" aria-hidden="true">🔩</span>
+        <span class="tool-name">Калькулятор цветового кода резистора</span>
+        <span class="tool-desc">Бесплатный калькулятор цветового кода резисторов. Выберите цветные полосы 4-полосного или 5-полосного резистора, чтобы расшифровать значение его сопротивления и допуск.</span></a>
+<a class="tool-card" href="/ru/scinotation/">
+        <span class="tool-ico" aria-hidden="true">[SN]</span>
+        <span class="tool-name">Конвертер научных обозначений</span>
+        <span class="tool-desc">Преобразование между стандартными числами и научными обозначениями.</span></a>
+<a class="tool-card" href="/ru/speedconverter/">
+        <span class="tool-ico" aria-hidden="true">💨</span>
+        <span class="tool-name">Конвертер скорости</span>
+        <span class="tool-desc">Бесплатный преобразователь скорости. Мгновенно конвертируйте метры в секунду, километры в час, мили в час, узлы и число Маха.</span></a>
+<a class="tool-card" href="/ru/tempconverter/">
+        <span class="tool-ico" aria-hidden="true">🌡️</span>
+        <span class="tool-name">Конвертер температуры</span>
+        <span class="tool-desc">Бесплатный преобразователь температуры. Мгновенно конвертируйте температуру между градусами Цельсия, Фаренгейта, Кельвина и Рэнкина. Смотрите все четыре шкалы одновременно.</span></a>
+<a class="tool-card" href="/ru/tempconverterx/">
+        <span class="tool-ico" aria-hidden="true">[T]</span>
+        <span class="tool-name">Конвертер температуры</span>
+        <span class="tool-desc">Преобразование между градусами Цельсия, Фаренгейта, Кельвина, Рэнкина, Делиля, Ньютона, Реомюра и Ромера.</span></a>
+<a class="tool-card" href="/ru/wavecalc/">
+        <span class="tool-ico" aria-hidden="true">[W]</span>
+        <span class="tool-name">Калькулятор волновых свойств</span>
+        <span class="tool-desc">Рассчитайте частоту, длину волны и скорость волны, используя v = f x длина волны.</span></a></div></section>
+<section class="cat"><h2>✅ Производительность</h2><div class="grid"><a class="tool-card" href="/ru/checklistmaker/">
+        <span class="tool-ico" aria-hidden="true">✅</span>
+        <span class="tool-name">Создатель контрольного списка</span>
+        <span class="tool-desc">Бесплатный онлайн-конструктор контрольных списков. Создавайте собственные контрольные списки, отмечайте пункты по мере их выполнения и отслеживайте свой прогресс. Сохраняет в локальное хранилище.</span></a>
+<a class="tool-card" href="/ru/flashcards/">
+        <span class="tool-ico" aria-hidden="true">🃏</span>
+        <span class="tool-name">Создатель флэш-карточек</span>
+        <span class="tool-desc">Бесплатный создатель карточек. Создавайте наборы карточек с вопросами и ответами и изучайте их в интерфейсе карточек, который можно перевернуть одним щелчком мыши. Данные сохраняются локально.</span></a>
+<a class="tool-card" href="/ru/focusmode/">
+        <span class="tool-ico" aria-hidden="true">✍️</span>
+        <span class="tool-name">Инструмент для письма в режиме фокусировки</span>
+        <span class="tool-desc">Бесплатный писатель режима фокусировки. Среда письма без отвлекающих факторов с подсчетом слов в реальном времени, количеством символов и отслеживанием прогресса в слове.</span></a>
+<a class="tool-card" href="/ru/habittracker/">
+        <span class="tool-ico" aria-hidden="true">✅</span>
+        <span class="tool-name">Трекер привычек</span>
+        <span class="tool-desc">Бесплатный браузерный трекер привычек. Добавляйте привычки и отмечайте их выполненными каждый день. Отслеживает серии и показатели завершения. Данные сохраняются локально.</span></a>
+<a class="tool-card" href="/ru/keyboardshortcuts/">
+        <span class="tool-ico" aria-hidden="true">[KB]</span>
+        <span class="tool-name">Справочник по сочетаниям клавиш</span>
+        <span class="tool-desc">Просматривайте и ищите сочетания клавиш для Windows, Mac, Excel, VS Code и Chrome.</span></a>
+<a class="tool-card" href="/ru/meetingcost/">
+        <span class="tool-ico" aria-hidden="true">💸</span>
+        <span class="tool-name">Калькулятор стоимости встречи</span>
+        <span class="tool-desc">Бесплатный калькулятор стоимости встречи. Введите участников, среднюю зарплату и продолжительность, чтобы рассчитать реальную стоимость любой встречи в долларах зарплаты.</span></a>
+<a class="tool-card" href="/ru/notepad/">
+        <span class="tool-ico" aria-hidden="true">📓</span>
+        <span class="tool-name">Онлайн блокнот</span>
+        <span class="tool-desc">Бесплатный онлайн-блокнот. Создавайте, сохраняйте и управляйте несколькими заметками в своем браузере. Автосохранение по мере ввода. Никакой учетной записи не требуется.</span></a>
+<a class="tool-card" href="/ru/pomodoropro/">
+        <span class="tool-ico" aria-hidden="true">🍅</span>
+        <span class="tool-name">Таймер Помидора Pro</span>
+        <span class="tool-desc">Бесплатный таймер Pomodoro с историей сеансов. Настраиваемая продолжительность фокусировки и перерывов. Отслеживает завершенные сеансы и общее время концентрации.</span></a>
+<a class="tool-card" href="/ru/readingspeed/">
+        <span class="tool-ico" aria-hidden="true">👁️</span>
+        <span class="tool-name">Тест скорости чтения</span>
+        <span class="tool-desc">Бесплатный тест скорости чтения. Прочтите отрывок и посмотрите свою скорость чтения в словах в минуту (WPM). Среднестатистический взрослый человек читает со скоростью 200–300 слов в минуту.</span></a>
+<a class="tool-card" href="/ru/studyplanner/">
+        <span class="tool-ico" aria-hidden="true">📚</span>
+        <span class="tool-name">Планировщик исследований</span>
+        <span class="tool-desc">Бесплатный планировщик занятий. Введите дату экзамена, общее количество учебных часов и ежедневную доступность, чтобы составить сбалансированный график обучения по вашим темам.</span></a>
+<a class="tool-card" href="/ru/teamgenerator/">
+        <span class="tool-ico" aria-hidden="true">👥</span>
+        <span class="tool-name">Генератор случайной команды</span>
+        <span class="tool-desc">Бесплатный генератор случайных команд. Вставьте имена и выберите количество команд, чтобы случайным образом разделить людей на сбалансированные группы. Отлично подходит для занятий спортом, классных проектов и игр.</span></a>
+<a class="tool-card" href="/ru/todolist/">
+        <span class="tool-ico" aria-hidden="true">📋</span>
+        <span class="tool-name">Список дел</span>
+        <span class="tool-desc">Бесплатный список дел в браузере. Добавляйте задачи, отмечайте их, фильтруйте по статусу и удаляйте выполненные элементы. Все данные сохраняются локально.</span></a>
+<a class="tool-card" href="/ru/typingtest/">
+        <span class="tool-ico" aria-hidden="true">⌨️</span>
+        <span class="tool-name">Тест скорости набора текста</span>
+        <span class="tool-desc">Бесплатный тест скорости набора текста. Измерьте количество слов в минуту (WPM) и точность с помощью теста набора текста на время. Показывает статистику в реальном времени.</span></a></div></section>
+<section class="cat"><h2>🎓 Образование</h2><div class="grid"><a class="tool-card" href="/ru/gpacalc/">
+        <span class="tool-ico" aria-hidden="true">🎓</span>
+        <span class="tool-name">Калькулятор среднего балла</span>
+        <span class="tool-desc">Бесплатный калькулятор среднего балла. Добавьте курсы с оценками и кредитными часами, чтобы рассчитать свой средний балл по шкале 4,0. Поддерживает буквенные оценки A-F.</span></a>
+<a class="tool-card" href="/ru/multtable/">
+        <span class="tool-ico" aria-hidden="true">✖️</span>
+        <span class="tool-name">Генератор таблицы умножения</span>
+        <span class="tool-desc">Бесплатный генератор таблицы умножения. Введите число, чтобы увидеть его полную таблицу умножения, или создайте полную сетку таблицы умножения до 20×20.</span></a>
+<a class="tool-card" href="/ru/testgrade/">
+        <span class="tool-ico" aria-hidden="true">📝</span>
+        <span class="tool-name">Калькулятор оценок за тест</span>
+        <span class="tool-desc">Бесплатный калькулятор оценок за тест. Введите свой результат и общее количество баллов, чтобы мгновенно получить процентную и буквенную оценку (A, B, C, D или F).</span></a></div></section>
+<section class="cat"><h2>🔒 Безопасность и конфиденциальность</h2><div class="grid"><a class="tool-card" href="/ru/passwordgen/">
+        <span class="tool-ico" aria-hidden="true">🔒</span>
+        <span class="tool-name">Генератор паролей</span>
+        <span class="tool-desc">Бесплатный генератор паролей. Создавайте надежные случайные пароли произвольной длины и наборов символов. Управление прописными и строчными буквами, цифрами и символами.</span></a>
+<a class="tool-card" href="/ru/passwordstrength/">
+        <span class="tool-ico" aria-hidden="true">[PWS]</span>
+        <span class="tool-name">Анализатор надежности паролей</span>
+        <span class="tool-desc">Проанализируйте надежность пароля и получите практические советы по его улучшению.</span></a></div></section>
 </main>
 <footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
-  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
 </body>
 </html>

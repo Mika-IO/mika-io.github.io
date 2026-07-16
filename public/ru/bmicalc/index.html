@@ -68,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -117,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Калькулятор ИМТ — индекс массы тела (метрические и имперские единицы)","url":"https://mikaio.dev/ru/bmicalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный калькулятор ИМТ. Введите рост и вес в метрических или имперских единицах и мгновенно узнайте индекс массы тела и категорию прямо в браузере."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Калькулятор ИМТ","item":"https://mikaio.dev/ru/bmicalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Какой диапазон ИМТ считается здоровым?","acceptedAnswer":{"@type":"Answer","text":"Для большинства взрослых ИМТ от 18,5 до 24,9 считается здоровым весом. Ниже 18,5 — недостаточный вес, от 25 до 29,9 — избыточный, а 30 и выше относится к ожирению."}},{"@type":"Question","name":"Точен ли ИМТ для всех?","acceptedAnswer":{"@type":"Answer","text":"ИМТ — полезный инструмент скрининга, но он не измеряет жир напрямую. Очень мускулистым людям, спортсменам, пожилым и некоторым этническим группам может потребоваться иная трактовка, поэтому воспринимайте результат как отправную точку, а не диагноз."}},{"@type":"Question","name":"Сохраняет ли инструмент мои данные?","acceptedAnswer":{"@type":"Answer","text":"Нет. Расчёт выполняется полностью в вашем браузере, и ничего из введённого не загружается, не сохраняется и не передаётся."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Навигация по сайту">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/bmicalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/bmicalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/bmicalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/bmicalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/bmicalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/bmicalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/bmicalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/bmicalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/bmicalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/bmicalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Калькулятор ИМТ</span></nav>
@@ -161,8 +164,9 @@ textarea{min-height:120px;resize:vertical}
   <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/bmicalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/bmicalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/bmicalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/bmicalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/bmicalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/bmicalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/bmicalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/bmicalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/bmicalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/bmicalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
-  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"units":"Единицы","metric":"Метрические (см, кг)","imperial":"Имперские (дюймы, фунты)","height_cm":"Рост (см)","weight_kg":"Вес (кг)","height_in":"Рост (дюймы)","weight_lb":"Вес (фунты)","calculate":"Рассчитать ИМТ","under":"Недостаточный вес","normal":"Здоровый вес","over":"Избыточный вес","obese":"Ожирение"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/bmicalc.js" defer></script>
 </body>
 </html>

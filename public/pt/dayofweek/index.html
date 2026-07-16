@@ -12,6 +12,8 @@
   <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/dayofweek/">
   <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/dayofweek/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/dayofweek/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/dayofweek/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/dayofweek/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/dayofweek/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/dayofweek/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/dayofweek/">
@@ -66,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -115,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculador de Dia da Semana — em que dia da semana foi qualquer data?","url":"https://mikaio.dev/pt/dayofweek/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de dia da semana gratuita. Descubra em que dia da semana cai qualquer data. Verifique aniversários, datas históricas ou qualquer data futura na hora."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Dia da Semana","item":"https://mikaio.dev/pt/dayofweek/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Em que dia da semana eu nasci?","acceptedAnswer":{"@type":"Answer","text":"Informe seu aniversário e a calculadora mostra o dia da semana."}},{"@type":"Question","name":"Até quando posso voltar?","acceptedAnswer":{"@type":"Answer","text":"A calculadora usa o objeto Date do JavaScript, que lida confiavelmente com datas a partir do ano 100 EC no calendário gregoriano."}},{"@type":"Question","name":"Por que 1° de janeiro de 2000 é útil saber?","acceptedAnswer":{"@type":"Answer","text":"1° de janeiro de 2000 foi um sábado. O Y2K foi em um fim de semana, o que reduziu a disrupção imediata."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navegação do site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/dayofweek/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/dayofweek/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/dayofweek/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/dayofweek/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/dayofweek/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/dayofweek/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/dayofweek/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/dayofweek/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/dayofweek/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/dayofweek/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Dia da Semana</span></nav>
@@ -157,11 +162,12 @@ textarea{min-height:120px;resize:vertical}
 <p>O cálculo usa o objeto Date embutido do JavaScript rodando inteiramente no seu navegador, aplicando as regras do calendário gregoriano automaticamente, então o resultado aparece no instante em que você escolhe uma data e nada do que você informa é enviado, registrado ou compartilhado.</p>
     <section class="faq"><h2>Perguntas frequentes do dia da semana</h2><dl><dt>Em que dia da semana eu nasci?</dt><dd>Informe seu aniversário e a calculadora mostra o dia da semana.</dd><dt>Até quando posso voltar?</dt><dd>A calculadora usa o objeto Date do JavaScript, que lida confiavelmente com datas a partir do ano 100 EC no calendário gregoriano.</dd><dt>Por que 1° de janeiro de 2000 é útil saber?</dt><dd>1° de janeiro de 2000 foi um sábado. O Y2K foi em um fim de semana, o que reduziu a disrupção imediata.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/dayofweek/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/dayofweek/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/dayofweek/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/dayofweek/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/dayofweek/">Français</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/dayofweek/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/dayofweek/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/dayofweek/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/dayofweek/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/dayofweek/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/dayofweek/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/dayofweek/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/dayofweek/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/dayofweek/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/dayofweek/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/dayofweek/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/dayofweek/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/dayofweek/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
-  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+  <p><a href="/freetools.html">Todas as ferramentas</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="pt";window.__T={"date":"Data"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/dayofweek.js" defer></script>
 </body>
 </html>

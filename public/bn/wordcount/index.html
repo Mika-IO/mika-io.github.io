@@ -68,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -117,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"শব্দ গণনা — শব্দ, অক্ষর ও পড়ার সময় গণনা করুন","url":"https://mikaio.dev/bn/wordcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"ফ্রি লাইভ শব্দ গণনা। টেক্সট পেস্ট করুন বা টাইপ করুন এবং ব্রাউজারেই সঙ্গে সঙ্গে শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও আনুমানিক পড়ার সময় গণনা করুন।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"শব্দ গণনা","item":"https://mikaio.dev/bn/wordcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"পড়ার সময় কীভাবে অনুমান করা হয়?","acceptedAnswer":{"@type":"Answer","text":"পড়ার সময় একজন প্রাপ্তবয়স্কের গড় গতি প্রতি মিনিটে প্রায় 200 শব্দ ধরে নেয় এবং অন্তত এক মিনিট পর্যন্ত ঊর্ধ্বমুখী রাউন্ড করে। দ্রুত বা ধীর পাঠকদের সেই অনুযায়ী মানিয়ে নিতে হবে।"}},{"@type":"Question","name":"স্পেসবিহীন ভাষায় শব্দ কীভাবে গোনা হয়?","acceptedAnswer":{"@type":"Answer","text":"চীনা ও জাপানির মতো লিপি, যেগুলো স্পেস দিয়ে শব্দ আলাদা করে না, সেখানে প্রতিটি অক্ষর একটি একক হিসেবে গোনা হয়, যা এসব ভাষার দৈর্ঘ্য মাপার পদ্ধতির কাছাকাছি।"}},{"@type":"Question","name":"আমার টেক্সট কি কোথাও সংরক্ষিত হয়?","acceptedAnswer":{"@type":"Answer","text":"না। সব গণনা আপনি টাইপ করার সময় আপনার ব্রাউজারেই হয়। আপনার টেক্সট কখনও কোনো সার্ভারে পাঠানো, সংরক্ষণ বা শেয়ার করা হয় না।"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/bn/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="সাইট নেভিগেশন">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wordcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wordcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wordcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wordcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/wordcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wordcount/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/wordcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wordcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wordcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wordcount/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>শব্দ গণনা</span></nav>
@@ -154,8 +157,9 @@ textarea{min-height:120px;resize:vertical}
   <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wordcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wordcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wordcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wordcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/wordcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wordcount/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/wordcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wordcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wordcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wordcount/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
-  <p><a href="/glossary.html">সব টুল</a></p></footer>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"placeholder":"এখানে টাইপ শুরু করুন বা আপনার টেক্সট পেস্ট করুন…","words":"শব্দ","characters":"অক্ষর","chars_nospace":"অক্ষর (স্পেস ছাড়া)","sentences":"বাক্য","paragraphs":"অনুচ্ছেদ","reading_time":"পড়ার সময় (মিনিট)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/wordcount.js" defer></script>
 </body>
 </html>

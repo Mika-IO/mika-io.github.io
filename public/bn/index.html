@@ -66,9 +66,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -115,7 +118,7 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"mikaio.dev","url":"https://mikaio.dev/bn/","inLanguage":"bn"}</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/bn/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="সাইট নেভিগেশন">
     <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
   </nav></header>
@@ -124,86 +127,1006 @@ textarea{min-height:120px;resize:vertical}
   <p class="lead">নিচের সব টুল সম্পূর্ণভাবে আপনার ব্রাউজারে চলে — কোনো অ্যাকাউন্ট নয়, আপলোড নয়, ট্র্যাকিং নয়। শুরু করতে একটি বিভাগ বেছে নিন।</p>
   <section class="cat"><h2>🕐 সময় ও তারিখ</h2><div class="grid"><a class="tool-card" href="/bn/agecalc/">
         <span class="tool-ico" aria-hidden="true">🎂</span>
-        <span class="tool-name">Age Calculator</span>
-        <span class="tool-desc">Free age calculator. Enter your date of birth to see your exact age in years, months and days, your total days lived, and a countdown to your next birthday.</span></a></div></section>
-<section class="cat"><h2>🔢 গণিত</h2><div class="grid"><a class="tool-card" href="/bn/areacalc/">
+        <span class="tool-name">বয়স ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে বয়স ক্যালকুলেটর. বছর, মাস এবং দিনে আপনার সঠিক বয়স, আপনার মোট দিন এবং আপনার পরবর্তী জন্মদিনের গণনা দেখতে আপনার জন্ম তারিখ লিখুন।</span></a>
+<a class="tool-card" href="/bn/countdown/">
+        <span class="tool-ico" aria-hidden="true">⏳</span>
+        <span class="tool-name">কাউন্টডাউন টাইমার</span>
+        <span class="tool-desc">বিনামূল্যে গণনা টাইমার. ভবিষ্যতের যেকোনো তারিখ লিখুন এবং ঠিক কত দিন, ঘন্টা, মিনিট এবং সেকেন্ড বাকি আছে তা দেখুন। আপনার ব্রাউজারে কাজ করে, সাইন আপের প্রয়োজন নেই।</span></a>
+<a class="tool-card" href="/bn/countdowntimer/">
+        <span class="tool-ico" aria-hidden="true">⏳</span>
+        <span class="tool-name">কাউন্টডাউন টাইমার</span>
+        <span class="tool-desc">বিনামূল্যে গণনা টাইমার. ঘন্টা, মিনিট এবং সেকেন্ড সেট করুন এবং সম্পূর্ণ হলে একটি পরিষ্কার প্রদর্শন এবং অ্যালার্ম সহ গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/dayofweek/">
+        <span class="tool-ico" aria-hidden="true">📆</span>
+        <span class="tool-name">সপ্তাহের দিন</span>
+        <span class="tool-desc">সপ্তাহের ফ্রি দিন ক্যালকুলেটর। সপ্তাহের কোন তারিখে কোন তারিখ পড়ে তা খুঁজে বের করুন। জন্মদিন, ঐতিহাসিক তারিখ বা যেকোনো ভবিষ্যতের তারিখ তাৎক্ষণিকভাবে চেক করুন।</span></a>
+<a class="tool-card" href="/bn/daysbetween/">
+        <span class="tool-ico" aria-hidden="true">📅</span>
+        <span class="tool-name">তারিখের মধ্যে দিন</span>
+        <span class="tool-desc">তারিখ ক্যালকুলেটর মধ্যে বিনামূল্যে দিন. যেকোনো দুটি তারিখের মধ্যে ঠিক কত দিন, সপ্তাহ এবং মাস আছে তা খুঁজুন। আপনার ব্রাউজারে অবিলম্বে কাজ করে.</span></a>
+<a class="tool-card" href="/bn/durationcalc/">
+        <span class="tool-ico" aria-hidden="true">⏱️</span>
+        <span class="tool-name">তারিখ এবং সময় সময়কাল ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে সময়কাল ক্যালকুলেটর. বছর, মাস, দিন, ঘন্টা, মিনিট এবং সেকেন্ডে অবিলম্বে সঠিক সময়কাল দেখতে দুটি তারিখ এবং সময় নির্বাচন করুন।</span></a>
+<a class="tool-card" href="/bn/lapstopwatch/">
+        <span class="tool-ico" aria-hidden="true">🏁</span>
+        <span class="tool-name">ল্যাপস সহ স্টপওয়াচ</span>
+        <span class="tool-desc">ল্যাপ টাইমার সহ বিনামূল্যে অনলাইন স্টপওয়াচ। শুরু করুন, থামুন এবং ল্যাপ বার রেকর্ড করুন। হাইলাইট করা দ্রুততম এবং ধীরতম ল্যাপগুলি দেখায়৷</span></a>
+<a class="tool-card" href="/bn/leapyear/">
+        <span class="tool-ico" aria-hidden="true">🗓️</span>
+        <span class="tool-name">লিপ ইয়ার ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে লিপ ইয়ার ক্যালকুলেটর। কোন বছর একটি অধিবর্ষ কিনা পরীক্ষা করুন এবং পরবর্তী লিপ বছর খুঁজুন। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।</span></a>
+<a class="tool-card" href="/bn/pomodoro/">
+        <span class="tool-ico" aria-hidden="true">🍅</span>
+        <span class="tool-name">পোমোডোরো টাইমার</span>
+        <span class="tool-desc">বিনামূল্যে Pomodoro টাইমার. 5 মিনিটের ছোট বিরতি এবং 15 মিনিটের দীর্ঘ বিরতির সাথে 25-মিনিটের ফোকাস সেশন। কোন সাইন আপ প্রয়োজন. শব্দ সতর্কতা সহ আপনার ব্রাউজারে চলে।</span></a>
+<a class="tool-card" href="/bn/stopwatch/">
+        <span class="tool-ico" aria-hidden="true">⏱️</span>
+        <span class="tool-name">স্টপওয়াচ</span>
+        <span class="tool-desc">মিলিসেকেন্ড নির্ভুলতার সাথে বিনামূল্যে অনলাইন স্টপওয়াচ। শুরু, বিরতি, রেকর্ড ল্যাপ সময়, এবং রিসেট. কোন ডাউনলোড প্রয়োজন. আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।</span></a>
+<a class="tool-card" href="/bn/timecalc/">
+        <span class="tool-ico" aria-hidden="true">⏰</span>
+        <span class="tool-name">সময় ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি টাইম ক্যালকুলেটর। ঘন্টা, মিনিট এবং সেকেন্ড সহজেই যোগ বা বিয়োগ করুন। মোট কাজের সময়, ভ্রমণের সময় এবং সময়কাল গণনার জন্য দুর্দান্ত।</span></a>
+<a class="tool-card" href="/bn/timezoneconverter/">
+        <span class="tool-ico" aria-hidden="true">🕰️</span>
+        <span class="tool-name">টাইম জোন কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে সময় অঞ্চল রূপান্তরকারী. 40+ বিশ্বের শহর এবং টাইমজোনগুলির মধ্যে যেকোনো তারিখ এবং সময়কে তাৎক্ষণিকভাবে রূপান্তর করুন। সমস্ত শহরে বর্তমান সময় দেখায়।</span></a>
+<a class="tool-card" href="/bn/timezonediff/">
+        <span class="tool-ico" aria-hidden="true">🌐</span>
+        <span class="tool-name">টাইম জোন ডিফারেন্স ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে সময় অঞ্চল পার্থক্য ক্যালকুলেটর. বিশ্বব্যাপী যেকোনো দুটি শহর বা সময় অঞ্চলের মধ্যে সঠিক সময়ের পার্থক্য খুঁজুন। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।</span></a>
+<a class="tool-card" href="/bn/unixepoch/">
+        <span class="tool-ico" aria-hidden="true">🕰️</span>
+        <span class="tool-name">ইউনিক্স টাইমস্ট্যাম্প কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে ইউনিক্স টাইমস্ট্যাম্প রূপান্তরকারী। ইউনিক্স যুগের সময়কে মানব-পাঠযোগ্য তারিখ এবং সময়ে রূপান্তর করুন, অথবা যে কোনো তারিখকে ইউনিক্স টাইমস্ট্যাম্পে রূপান্তর করুন। আপনার ব্রাউজারে অবিলম্বে কাজ করে.</span></a>
+<a class="tool-card" href="/bn/weeknumber/">
+        <span class="tool-ico" aria-hidden="true">📆</span>
+        <span class="tool-name">সপ্তাহের সংখ্যা</span>
+        <span class="tool-desc">বিনামূল্যে সপ্তাহের সংখ্যা ক্যালকুলেটর। যেকোনো তারিখের জন্য ISO সপ্তাহের নম্বর খুঁজুন। আজকে বছরের কোন সপ্তাহ বা আপনার বেছে নেওয়া যেকোনো তারিখের জন্য দেখুন।</span></a>
+<a class="tool-card" href="/bn/workdays/">
+        <span class="tool-ico" aria-hidden="true">📅</span>
+        <span class="tool-name">কাজের দিনের ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে কাজের দিন ক্যালকুলেটর. সাপ্তাহিক ছুটির দিনগুলি ব্যতীত যেকোনো দুটি তারিখের মধ্যে ব্যবসায়িক দিনের সংখ্যা (সোমবার-শুক্রবার) গণনা করুন। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।</span></a>
+<a class="tool-card" href="/bn/worldclock/">
+        <span class="tool-ico" aria-hidden="true">🌍</span>
+        <span class="tool-name">বিশ্ব ঘড়ি</span>
+        <span class="tool-desc">বিনামূল্যে বিশ্ব ঘড়ি. একই সাথে একাধিক শহরে বর্তমান স্থানীয় সময়ের তুলনা করুন। কোন সাইন আপ প্রয়োজন. আপনার ব্রাউজারে প্রতি সেকেন্ডে আপডেট হয়।</span></a></div></section>
+<section class="cat"><h2>🔢 গণিত</h2><div class="grid"><a class="tool-card" href="/bn/algebrasolver/">
+        <span class="tool-ico" aria-hidden="true">🧮</span>
+        <span class="tool-name">বীজগণিত সমীকরণ সমাধানকারী</span>
+        <span class="tool-desc">বিনামূল্যে বীজগণিত সমাধানকারী. প্রতিস্থাপন এবং ক্র্যামারের নিয়ম ব্যবহার করে দুটি অজানা সহ রৈখিক সমীকরণ (ax + b = c) এবং দুটি রৈখিক সমীকরণের সিস্টেমগুলি সমাধান করুন।</span></a>
+<a class="tool-card" href="/bn/areacalc/">
         <span class="tool-ico" aria-hidden="true">📐</span>
-        <span class="tool-name">Area Calculator</span>
-        <span class="tool-desc">Free area calculator. Calculate the area of rectangles, circles, triangles, squares, and trapezoids. Enter dimensions and get the area instantly in your browser.</span></a>
+        <span class="tool-name">এলাকা ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে এলাকা ক্যালকুলেটর. আয়তক্ষেত্র, বৃত্ত, ত্রিভুজ, বর্গক্ষেত্র এবং ট্র্যাপিজয়েডের ক্ষেত্রফল গণনা করুন। মাত্রা লিখুন এবং আপনার ব্রাউজারে অবিলম্বে এলাকা পান।</span></a>
 <a class="tool-card" href="/bn/aspectratio/">
         <span class="tool-ico" aria-hidden="true">📐</span>
-        <span class="tool-name">Aspect Ratio Calculator</span>
-        <span class="tool-desc">Free aspect ratio calculator. Enter width and height to get the simplified ratio (e.g. 1920×1080 = 16:9) and scale to any new size instantly.</span></a>
+        <span class="tool-name">অ্যাসপেক্ট রেশিও ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি অ্যাসপেক্ট রেশিও ক্যালকুলেটর। সরলীকৃত অনুপাত (যেমন 1920×1080 = 16:9) পেতে প্রস্থ এবং উচ্চতা লিখুন এবং তাত্ক্ষণিকভাবে যেকোনো নতুন আকারে স্কেল করুন।</span></a>
+<a class="tool-card" href="/bn/averagecalc/">
+        <span class="tool-ico" aria-hidden="true">➗</span>
+        <span class="tool-name">গড় ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে গড় ক্যালকুলেটর. পাটিগণিত গড়, জ্যামিতিক গড়, হারমোনিক গড়, ওজনযুক্ত গড় এবং আরও অনেক কিছু গণনা করতে সংখ্যার একটি তালিকা লিখুন।</span></a>
 <a class="tool-card" href="/bn/basiccalc/">
         <span class="tool-ico" aria-hidden="true">🧮</span>
-        <span class="tool-name">Online Basic Calculator</span>
-        <span class="tool-desc">Free online calculator. Perform addition, subtraction, multiplication, and division. A clean, simple, full-featured basic calculator that works entirely in your browser.</span></a>
+        <span class="tool-name">অনলাইন বেসিক ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন ক্যালকুলেটর. যোগ, বিয়োগ, গুণ এবং ভাগ সম্পাদন করুন। একটি পরিষ্কার, সহজ, সম্পূর্ণ বৈশিষ্ট্যযুক্ত মৌলিক ক্যালকুলেটর যা সম্পূর্ণরূপে আপনার ব্রাউজারে কাজ করে।</span></a>
 <a class="tool-card" href="/bn/bintodec/">
         <span class="tool-ico" aria-hidden="true">🔢</span>
-        <span class="tool-name">Number Base Converter</span>
-        <span class="tool-desc">Convert numbers between binary, octal, decimal, and hexadecimal instantly. Free online base converter with instant results.</span></a>
+        <span class="tool-name">নম্বর বেস কনভার্টার</span>
+        <span class="tool-desc">বাইনারি, অক্টাল, দশমিক এবং হেক্সাডেসিমেলের মধ্যে সংখ্যাকে তাৎক্ষণিকভাবে রূপান্তর করুন। তাত্ক্ষণিক ফলাফল সহ বিনামূল্যে অনলাইন বেস রূপান্তরকারী।</span></a>
+<a class="tool-card" href="/bn/combinatorics/">
+        <span class="tool-ico" aria-hidden="true">🧮</span>
+        <span class="tool-name">কম্বিনেশন এবং পারমুটেশন ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি কম্বিনেশন এবং পারমুটেশন ক্যালকুলেটর। 30 পর্যন্ত যেকোনো n এবং r-এর জন্য C(n,r) এবং P(n,r) গণনা করুন। উভয় সূত্র দেখায়।</span></a>
+<a class="tool-card" href="/bn/decimaltofraction/">
+        <span class="tool-ico" aria-hidden="true">½</span>
+        <span class="tool-name">দশমিক থেকে ভগ্নাংশ রূপান্তরকারী</span>
+        <span class="tool-desc">বিনামূল্যে দশমিক থেকে ভগ্নাংশ রূপান্তরকারী. যেকোনো দশমিক সংখ্যা লিখুন এবং অবিলম্বে সঠিক সরলীকৃত ভগ্নাংশ ফর্ম পান।</span></a>
+<a class="tool-card" href="/bn/exponentcalc/">
+        <span class="tool-ico" aria-hidden="true">🔋</span>
+        <span class="tool-name">এক্সপোনেন্ট ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি এক্সপোনেন্ট ক্যালকুলেটর। যেকোন বাস্তব সংখ্যার জন্য বেস^সূচক গণনা করুন। নেতিবাচক সূচক, ভগ্নাংশের ক্ষমতা এবং বড় ফলাফল পরিচালনা করে।</span></a>
+<a class="tool-card" href="/bn/factorial/">
+        <span class="tool-ico" aria-hidden="true">❗</span>
+        <span class="tool-name">ফ্যাক্টরিয়াল ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ফ্যাক্টরিয়াল ক্যালকুলেটর। গণনা n! 0 থেকে 170 পর্যন্ত যেকোনো পূর্ণসংখ্যার জন্য। সঠিক ফলাফল, বৈজ্ঞানিক নোটেশন এবং সংখ্যার সংখ্যা দেখায়।</span></a>
+<a class="tool-card" href="/bn/fibonacci/">
+        <span class="tool-ico" aria-hidden="true">🐚</span>
+        <span class="tool-name">ফিবোনাচি সিকোয়েন্স জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে ফিবোনাচি জেনারেটর. আপনি কতগুলি পদ চান তা লিখুন এবং অবিলম্বে ফিবোনাচি ক্রমটি দেখুন। সঠিক মানগুলির 80টি শর্তাবলী পর্যন্ত সমর্থন করে।</span></a>
+<a class="tool-card" href="/bn/fractioncalc/">
+        <span class="tool-ico" aria-hidden="true">½</span>
+        <span class="tool-name">ভগ্নাংশ ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ভগ্নাংশ ক্যালকুলেটর. যেকোন দুটি ভগ্নাংশ যোগ, বিয়োগ, গুণ বা ভাগ করুন এবং সরলীকৃত ফলাফল অবিলম্বে পান। এছাড়াও দশমিক সমতুল্য দেখায়।</span></a>
+<a class="tool-card" href="/bn/fractiontodecimal/">
+        <span class="tool-ico" aria-hidden="true">🔁</span>
+        <span class="tool-name">ভগ্নাংশ থেকে দশমিক রূপান্তরকারী</span>
+        <span class="tool-desc">ফ্রি ভগ্নাংশ থেকে দশমিক রূপান্তরকারী। দশমিক ফর্ম পেতে লব এবং হর লিখুন, এবং দেখুন এটি শেষ হয় নাকি পুনরাবৃত্তি হয়।</span></a>
+<a class="tool-card" href="/bn/gcdcalc/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">জিসিডি ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে জিসিডি ক্যালকুলেটর। সংখ্যার যেকোনো সেটের সর্বশ্রেষ্ঠ সাধারণ ভাজক (GCD/GCF/HCF) খুঁজুন। এছাড়াও LCM দেখায়। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।</span></a>
+<a class="tool-card" href="/bn/lcmcalc/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">এলসিএম ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে এলসিএম ক্যালকুলেটর। যেকোনো সংখ্যার সেটের সর্বনিম্ন সাধারণ একাধিক (LCM) খুঁজুন। এছাড়াও GCD দেখায়. আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।</span></a>
+<a class="tool-card" href="/bn/logcalc/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">লগারিদম ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে লগারিদম ক্যালকুলেটর. সাধারণ লগ (বেস 10), প্রাকৃতিক লগ (ln), বাইনারি লগ (বেস 2), বা যেকোনো কাস্টম বেস লগারিদম গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/matrixcalc/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">ম্যাট্রিক্স ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি ম্যাট্রিক্স ক্যালকুলেটর। আপনার ব্রাউজারে অবিলম্বে যোগ করুন, বিয়োগ করুন, ম্যাট্রিক্স, গণনা নির্ধারক এবং স্থানান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/numberbase/">
+        <span class="tool-ico" aria-hidden="true">🔄</span>
+        <span class="tool-name">নম্বর বেস কনভার্টার</span>
+        <span class="tool-desc">ফ্রি নম্বর বেস কনভার্টার। আপনার ব্রাউজারে অবিলম্বে বাইনারি, অক্টাল, দশমিক, হেক্সাডেসিমেল বা 2 থেকে 36 এর মধ্যে যেকোনো সংখ্যাকে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/octalconverter/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">অক্টাল নম্বর কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে অক্টাল রূপান্তরকারী টুল. বেস 2 (বাইনারী), বেস 8 (অক্টাল), বেস 10 (ডেসিমেল), এবং বেস 16 (হেক্স) এর মধ্যে যেকোনো সংখ্যাকে অবিলম্বে রূপান্তর করুন।</span></a>
 <a class="tool-card" href="/bn/percentage/">
         <span class="tool-ico" aria-hidden="true">％</span>
         <span class="tool-name">শতাংশ ক্যালকুলেটর</span>
-        <span class="tool-desc">ফ্রি শতাংশ ক্যালকুলেটর। কোনো সংখ্যার শতাংশ বের করুন, একটি মান অন্যটির কত শতাংশ তা জানুন এবং শতাংশ বৃদ্ধি বা হ্রাস সঙ্গে সঙ্গে হিসাব করুন।</span></a></div></section>
-<section class="cat"><h2>💰 অর্থনীতি</h2><div class="grid"><a class="tool-card" href="/bn/budget503020/">
+        <span class="tool-desc">ফ্রি শতাংশ ক্যালকুলেটর। কোনো সংখ্যার শতাংশ বের করুন, একটি মান অন্যটির কত শতাংশ তা জানুন এবং শতাংশ বৃদ্ধি বা হ্রাস সঙ্গে সঙ্গে হিসাব করুন।</span></a>
+<a class="tool-card" href="/bn/percentchange/">
+        <span class="tool-ico" aria-hidden="true">📉</span>
+        <span class="tool-name">শতাংশ পরিবর্তন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে শতাংশ পরিবর্তন ক্যালকুলেটর. অবিলম্বে দুটি মানের মধ্যে শতাংশ বৃদ্ধি বা হ্রাস খুঁজুন। সঠিক পরিবর্তন এবং দিক দেখায়।</span></a>
+<a class="tool-card" href="/bn/primechecker/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">প্রাইম নম্বর পরীক্ষক</span>
+        <span class="tool-desc">বিনামূল্যে প্রাইম নম্বর পরীক্ষক। যে কোন ধনাত্মক পূর্ণসংখ্যাটি তাৎক্ষণিকভাবে খুঁজে বের করতে লিখুন যে এটি মৌলিক কিনা। এছাড়াও সমস্ত ভাজক এবং প্রধান গুণনীয়ক দেখায়।</span></a>
+<a class="tool-card" href="/bn/primefactor/">
+        <span class="tool-ico" aria-hidden="true">🔑</span>
+        <span class="tool-name">প্রাইম ফ্যাক্টরাইজেশন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে প্রাইম ফ্যাক্টরাইজেশন ক্যালকুলেটর। 999,999,999 পর্যন্ত যেকোন ধনাত্মক পূর্ণসংখ্যা লিখুন এবং তাৎক্ষণিকভাবে সূচক সহ এর প্রধান গুণিতক দেখুন।</span></a>
+<a class="tool-card" href="/bn/pythagorean/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">পিথাগোরিয়ান থিওরেম ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে পিথাগোরিয়ান উপপাদ্য ক্যালকুলেটর। তৃতীয়টি খুঁজে পেতে একটি সমকোণী ত্রিভুজের যেকোনো দুটি বাহু লিখুন। কর্ণ বা উভয় পায়ের জন্য কাজ করে। তাত্ক্ষণিক এবং সঠিক।</span></a>
+<a class="tool-card" href="/bn/quadratic/">
+        <span class="tool-ico" aria-hidden="true">📈</span>
+        <span class="tool-name">দ্বিঘাত সমীকরণ সমাধানকারী</span>
+        <span class="tool-desc">বিনামূল্যে দ্বিঘাত সমীকরণ সমাধানকারী। দ্বিঘাত সূত্র ব্যবহার করে ax² + bx + c = 0 এর শিকড় খুঁজে পেতে a, b এবং c সহগ লিখুন।</span></a>
+<a class="tool-card" href="/bn/ratiosimplifier/">
+        <span class="tool-ico" aria-hidden="true">⚖️</span>
+        <span class="tool-name">অনুপাত সরলীকরণকারী</span>
+        <span class="tool-desc">বিনামূল্যে অনুপাত সরলীকরণ. অনুপাতটিকে সহজতম আকারে কমাতে যেকোনো দুটি সংখ্যা লিখুন, স্কেল ফ্যাক্টর খুঁজুন এবং সমতুল্য অনুপাত দেখুন।</span></a>
+<a class="tool-card" href="/bn/romanconverter/">
+        <span class="tool-ico" aria-hidden="true">🏛️</span>
+        <span class="tool-name">রোমান সংখ্যা রূপান্তরকারী</span>
+        <span class="tool-desc">বিনামূল্যে রোমান সংখ্যা রূপান্তরকারী. যে কোনো দশমিক সংখ্যা 1–3999 রোমান সংখ্যায় রূপান্তর করুন, অথবা রোমান সংখ্যাকে আবার দশমিকে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/romanmath/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">রোমান সংখ্যা রূপান্তরকারী</span>
+        <span class="tool-desc">বিনামূল্যে রোমান সংখ্যা রূপান্তরকারী. 1 থেকে 3999 পর্যন্ত যেকোনো সংখ্যাকে রোমান সংখ্যায় রূপান্তর করুন, অথবা রোমান সংখ্যাকে দশমিকে রূপান্তর করুন। তাত্ক্ষণিক এবং সঠিক।</span></a>
+<a class="tool-card" href="/bn/roundingcalc/">
+        <span class="tool-ico" aria-hidden="true">🔢</span>
+        <span class="tool-name">রাউন্ডিং ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে রাউন্ডিং ক্যালকুলেটর। আপনার ব্রাউজারে অবিলম্বে এবং সুনির্দিষ্টভাবে যেকোন সংখ্যাকে একটি নির্বাচিত সংখ্যার দশমিক স্থানগুলিতে বা রাউন্ড আপ বা ডাউন করুন৷</span></a>
+<a class="tool-card" href="/bn/scientificcalc/">
+        <span class="tool-ico" aria-hidden="true">🔬</span>
+        <span class="tool-name">বৈজ্ঞানিক ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে বৈজ্ঞানিক ক্যালকুলেটর। আপনার ব্রাউজারে সরাসরি ত্রিকোণমিতি, লগারিদম, ক্ষমতা এবং আরও অনেক কিছু সহ গাণিতিক অভিব্যক্তি মূল্যায়ন করুন।</span></a>
+<a class="tool-card" href="/bn/squarecalc/">
+        <span class="tool-ico" aria-hidden="true">√</span>
+        <span class="tool-name">স্কয়ার রুট ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে বর্গমূল ক্যালকুলেটর. তাৎক্ষণিকভাবে যেকোনো ধনাত্মক সংখ্যার বর্গমূল খুঁজুন। এছাড়াও বর্গ (n²) দেখায়। কোন সাইন আপ প্রয়োজন ছাড়া আপনার ব্রাউজারে কাজ করে.</span></a>
+<a class="tool-card" href="/bn/statscalc/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">পরিসংখ্যান ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে পরিসংখ্যান ক্যালকুলেটর. তাত্ক্ষণিকভাবে গড়, মধ্যক, মোড, মানক বিচ্যুতি, প্রকরণ, সর্বনিম্ন, সর্বোচ্চ এবং পরিসীমা গণনা করতে সংখ্যার একটি তালিকা লিখুন।</span></a>
+<a class="tool-card" href="/bn/statsviz/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">পরিসংখ্যান ভিজ্যুয়ালাইজার</span>
+        <span class="tool-desc">বিনামূল্যে পরিসংখ্যান ভিজ্যুয়ালাইজার. গড়, মধ্যক, মোড, প্রকরণ, আদর্শ বিচ্যুতি গণনা করতে সংখ্যার একটি তালিকা লিখুন এবং একটি সাধারণ ফ্রিকোয়েন্সি বন্টন দেখুন।</span></a>
+<a class="tool-card" href="/bn/trigcalc/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">ত্রিকোণমিতি ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ত্রিকোণমিতি ক্যালকুলেটর। ডিগ্রী বা রেডিয়ানে যেকোনো কোণের জন্য sin, cos, tan, cot, sec, csc গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/unitconverter/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">ইউনিট কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে ইউনিট রূপান্তরকারী. আপনার ব্রাউজারে অবিলম্বে মিটার এবং ফুট, কিলোগ্রাম এবং পাউন্ড, সেলসিয়াস এবং ফারেনহাইট, লিটার এবং গ্যালন এবং আরও অনেক ইউনিটের মধ্যে রূপান্তর করুন।</span></a></div></section>
+<section class="cat"><h2>💰 অর্থনীতি</h2><div class="grid"><a class="tool-card" href="/bn/breakeven/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">ব্রেক-ইভেন ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি ব্রেক-ইভেন ক্যালকুলেটর। নির্দিষ্ট খরচ, বিক্রয় মূল্য এবং ইউনিট প্রতি পরিবর্তনশীল খরচ লিখুন ইউনিট এবং রাজস্ব আপনার বিরতি-বিন্দু খুঁজে পেতে.</span></a>
+<a class="tool-card" href="/bn/budget503020/">
         <span class="tool-ico" aria-hidden="true">📋</span>
-        <span class="tool-name">50/30/20 Budget Rule Calculator</span>
-        <span class="tool-desc">Free 50/30/20 budget rule calculator. Enter your monthly income to instantly see how much to allocate to needs, wants, and savings.</span></a>
+        <span class="tool-name">50/30/20 বাজেটের নিয়ম ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে 50/30/20 বাজেট নিয়ম ক্যালকুলেটর। প্রয়োজন, চাওয়া এবং সঞ্চয়ের জন্য কতটা বরাদ্দ করতে হবে তা অবিলম্বে দেখতে আপনার মাসিক আয় লিখুন।</span></a>
+<a class="tool-card" href="/bn/coinconverter/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">কয়েন এবং নোট কাউন্টার</span>
+        <span class="tool-desc">মার্কিন মুদ্রা এবং ব্যাঙ্কনোট গণনা করুন এবং মোট মূল্য গণনা করুন।</span></a>
 <a class="tool-card" href="/bn/compoundinterest/">
         <span class="tool-ico" aria-hidden="true">💰</span>
-        <span class="tool-name">Compound Interest Calculator</span>
-        <span class="tool-desc">Free compound interest calculator. Enter a principal, interest rate, and time period to see how compound interest grows your investment. Monthly, quarterly, or annual compounding.</span></a></div></section>
+        <span class="tool-name">চক্রবৃদ্ধি সুদের ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে চক্রবৃদ্ধি সুদ ক্যালকুলেটর. চক্রবৃদ্ধি সুদ কীভাবে আপনার বিনিয়োগ বাড়ায় তা দেখতে একটি মূল, সুদের হার এবং সময়কাল লিখুন। মাসিক, ত্রৈমাসিক বা বার্ষিক চক্রবৃদ্ধি।</span></a>
+<a class="tool-card" href="/bn/currencyconverter/">
+        <span class="tool-ico" aria-hidden="true">💱</span>
+        <span class="tool-name">কারেন্সি কনভার্টার</span>
+        <span class="tool-desc">আনুমানিক বিনিময় হার সহ বিনামূল্যে মুদ্রা রূপান্তরকারী। আপনার ব্রাউজারে অবিলম্বে USD, EUR, GBP, JPY, BRL এবং আরও 30+ মুদ্রা রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/discountcalc/">
+        <span class="tool-ico" aria-hidden="true">🏷️</span>
+        <span class="tool-name">ডিসকাউন্ট ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ডিসকাউন্ট ক্যালকুলেটর. তাৎক্ষণিকভাবে চূড়ান্ত বিক্রয় মূল্য এবং ঠিক কতটা আপনি সংরক্ষণ করেছেন তা দেখতে আসল মূল্য এবং ছাড়ের শতাংশ লিখুন।</span></a>
+<a class="tool-card" href="/bn/emergencyfund/">
+        <span class="tool-ico" aria-hidden="true">🏦</span>
+        <span class="tool-name">ইমার্জেন্সি ফান্ড ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে জরুরী তহবিল ক্যালকুলেটর. আপনার টার্গেট জরুরী তহবিলের আকার এবং কত মাসে পৌঁছাতে হবে তা জানতে আপনার মাসিক খরচ লিখুন।</span></a>
+<a class="tool-card" href="/bn/emicalculator/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">লোন ইএমআই ক্যালকুলেটর</span>
+        <span class="tool-desc">যে কোনো ঋণের জন্য মাসিক EMI, মোট সুদ এবং মোট পেমেন্ট গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/exchangecalc/">
+        <span class="tool-ico" aria-hidden="true">💱</span>
+        <span class="tool-name">কারেন্সি এক্সচেঞ্জ ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে মুদ্রা বিনিময় ক্যালকুলেটর. রূপান্তরের পরে প্রাপ্ত সঠিক পরিমাণ গণনা করতে একটি কাস্টম বিনিময় হার এবং ফি শতাংশ লিখুন।</span></a>
+<a class="tool-card" href="/bn/exchangerate/">
+        <span class="tool-ico" aria-hidden="true">💱</span>
+        <span class="tool-name">কারেন্সি এক্সচেঞ্জ ক্যালকুলেটর</span>
+        <span class="tool-desc">নমুনা বিনিময় হার সহ বিনামূল্যে মুদ্রা রূপান্তরকারী। USD, EUR, GBP, JPY, BRL এবং আরও প্রধান মুদ্রার মধ্যে রূপান্তর করুন। হার আনুমানিক নমুনা মান.</span></a>
+<a class="tool-card" href="/bn/fuelcost/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">জ্বালানী খরচ ক্যালকুলেটর</span>
+        <span class="tool-desc">প্রদত্ত দূরত্ব, জ্বালানি দক্ষতা এবং দামের জন্য যে কোনও ভ্রমণের জন্য জ্বালানী খরচ গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/hourspay/">
+        <span class="tool-ico" aria-hidden="true">⏰</span>
+        <span class="tool-name">ঘন্টা এবং বেতন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ঘন্টা এবং বেতন ক্যালকুলেটর. সাপ্তাহিক, মাসিক এবং বার্ষিক মোট বেতন গণনা করতে কাজের ঘন্টা, ঘন্টার হার এবং ওভারটাইম ঘন্টা লিখুন।</span></a>
+<a class="tool-card" href="/bn/inflationcalc/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">মুদ্রাস্ফীতি ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে মুদ্রাস্ফীতি ক্যালকুলেটর. মুদ্রাস্ফীতি কীভাবে ক্রয়ক্ষমতাকে প্রভাবিত করে তা দেখতে একটি পরিমাণ এবং বছর লিখুন। একটি কাস্টম বার্ষিক মুদ্রাস্ফীতির হার ব্যবহার করে।</span></a>
+<a class="tool-card" href="/bn/investreturn/">
+        <span class="tool-ico" aria-hidden="true">📈</span>
+        <span class="tool-name">ইনভেস্টমেন্ট রিটার্ন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে বিনিয়োগ রিটার্ন ক্যালকুলেটর. চূড়ান্ত মূল্য এবং মোট লাভ দেখতে একটি প্রাথমিক পরিমাণ, মাসিক অবদান, বার্ষিক রিটার্ন হার এবং বছরগুলি লিখুন।</span></a>
+<a class="tool-card" href="/bn/loancalc/">
+        <span class="tool-ico" aria-hidden="true">🏦</span>
+        <span class="tool-name">লোন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ঋণ ক্যালকুলেটর. আপনার মাসিক অর্থপ্রদান এবং প্রদত্ত মোট সুদ দেখতে ঋণের পরিমাণ, সুদের হার এবং মেয়াদ লিখুন। বন্ধকী, গাড়ি ঋণ এবং ব্যক্তিগত ঋণের জন্য কাজ করে।</span></a>
+<a class="tool-card" href="/bn/mortgageafford/">
+        <span class="tool-ico" aria-hidden="true">🏡</span>
+        <span class="tool-name">বন্ধকী সামর্থ্য ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে বন্ধকী সামর্থ্য ক্যালকুলেটর. 28/36 নিয়মের উপর ভিত্তি করে আপনার সামর্থ্যের সর্বোচ্চ বাড়ির মূল্য খুঁজে পেতে আয়, ঋণ এবং ডাউন পেমেন্ট লিখুন।</span></a>
+<a class="tool-card" href="/bn/networthcalc/">
+        <span class="tool-ico" aria-hidden="true">💼</span>
+        <span class="tool-name">নেট ওয়ার্থ ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে নেট মূল্য ক্যালকুলেটর. আপনার মোট নিট মূল্য গণনা করতে আপনার সম্পদ এবং দায় যোগ করুন। আপনার আর্থিক অবস্থা বুঝতে সাহায্য করে।</span></a>
+<a class="tool-card" href="/bn/npvcalc/">
+        <span class="tool-ico" aria-hidden="true">💰</span>
+        <span class="tool-name">নেট প্রেজেন্ট ভ্যালু (NPV) ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে এনপিভি ক্যালকুলেটর। বিনিয়োগ বিশ্লেষণের জন্য নেট বর্তমান মূল্য এবং অভ্যন্তরীণ আয়ের হার (IRR) গণনা করতে নগদ প্রবাহ এবং ছাড়ের হার লিখুন।</span></a>
+<a class="tool-card" href="/bn/retirementcalc/">
+        <span class="tool-ico" aria-hidden="true">🏖️</span>
+        <span class="tool-name">অবসর সঞ্চয় ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে অবসর ক্যালকুলেটর. মাসিক অবদান, প্রত্যাশিত রিটার্ন এবং অবসর গ্রহণের বছরগুলির উপর ভিত্তি করে আপনার অবসরকালীন সঞ্চয় অনুমান করুন।</span></a>
+<a class="tool-card" href="/bn/ruleof72/">
+        <span class="tool-ico" aria-hidden="true">📈</span>
+        <span class="tool-name">72 ক্যালকুলেটরের নিয়ম</span>
+        <span class="tool-desc">72 ক্যালকুলেটরের বিনামূল্যের নিয়ম। আপনার বিনিয়োগ দ্বিগুণ হওয়া পর্যন্ত কতক্ষণ তা জানতে আপনার বার্ষিক রিটার্ন রেট লিখুন, অথবা প্রয়োজনীয় হার খুঁজতে বছর লিখুন।</span></a>
+<a class="tool-card" href="/bn/salestax/">
+        <span class="tool-ico" aria-hidden="true">🧾</span>
+        <span class="tool-name">সেলস ট্যাক্স ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে বিক্রয় কর ক্যালকুলেটর। একটি নেট মূল্যে ট্যাক্স যোগ করতে একটি মূল্য এবং একটি করের হার লিখুন বা এটি একটি মোট মূল্য থেকে বের করুন৷ ভ্যাট, জিএসটি এবং যেকোনো শতাংশের জন্য কাজ করে।</span></a>
+<a class="tool-card" href="/bn/savingsgoal/">
+        <span class="tool-ico" aria-hidden="true">🎯</span>
+        <span class="tool-name">সেভিংস গোল ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে সঞ্চয় লক্ষ্য ক্যালকুলেটর. কতক্ষণ আপনার লক্ষ্যে পৌঁছাতে হবে তা দেখতে আপনার সঞ্চয় লক্ষ্য, বর্তমান সঞ্চয়, মাসিক অবদান এবং সুদের হার লিখুন।</span></a>
+<a class="tool-card" href="/bn/stockreturn/">
+        <span class="tool-ico" aria-hidden="true">📉</span>
+        <span class="tool-name">স্টক রিটার্ন ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি স্টক রিটার্ন ক্যালকুলেটর। মোট লাভ, শতাংশ রিটার্ন এবং বার্ষিক CAGR গণনা করতে ক্রয় মূল্য, বিক্রয় মূল্য এবং শেয়ার লিখুন।</span></a>
+<a class="tool-card" href="/bn/tipcalc/">
+        <span class="tool-ico" aria-hidden="true">🧾</span>
+        <span class="tool-name">টিপ ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে টিপ ক্যালকুলেটর. টিপের পরিমাণ এবং মোট দেখতে বিল এবং টিপের শতাংশ লিখুন, তারপর এটিকে যেকোন সংখ্যক মানুষের মধ্যে সমানভাবে ভাগ করুন। তাত্ক্ষণিক এবং ব্যক্তিগত।</span></a>
+<a class="tool-card" href="/bn/tippingguide/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">দেশ অনুযায়ী টিপিং গাইড</span>
+        <span class="tool-desc">বিভিন্ন দেশে এবং পরিষেবাগুলিতে কত টিপ দিতে হবে।</span></a>
+<a class="tool-card" href="/bn/tipsplit/">
+        <span class="tool-ico" aria-hidden="true">[$]</span>
+        <span class="tool-name">টিপ এবং বিল স্প্লিট ক্যালকুলেটর</span>
+        <span class="tool-desc">টিপের পরিমাণ গণনা করুন এবং বিলটি একাধিক ব্যক্তির মধ্যে সমানভাবে ভাগ করুন।</span></a>
+<a class="tool-card" href="/bn/vatcalc/">
+        <span class="tool-ico" aria-hidden="true">🧾</span>
+        <span class="tool-name">ভ্যাট ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ভ্যাট ক্যালকুলেটর। একটি নিট মূল্যে ভ্যাট যোগ করুন বা মোট মূল্য থেকে ভ্যাট সরান৷ যেকোনো ভ্যাট হার সমর্থন করে। নেট, ভ্যাট পরিমাণ এবং মোট দেখায়।</span></a></div></section>
 <section class="cat"><h2>🎲 র‍্যান্ডম নির্বাচন</h2><div class="grid"><a class="tool-card" href="/bn/cointoss/">
         <span class="tool-ico" aria-hidden="true">🪙</span>
-        <span class="tool-name">Coin Flip</span>
-        <span class="tool-desc">Free online coin flip. Tap to flip a fair virtual coin and get heads or tails instantly, with a running tally. Works in your browser, no app needed.</span></a></div></section>
+        <span class="tool-name">মুদ্রা উল্টানো</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন মুদ্রা উল্টানো. একটি ন্যায্য ভার্চুয়াল কয়েন ফ্লিপ করতে আলতো চাপুন এবং চলমান ট্যালি সহ অবিলম্বে মাথা বা লেজ পেতে৷ আপনার ব্রাউজারে কাজ করে, কোনো অ্যাপের প্রয়োজন নেই।</span></a>
+<a class="tool-card" href="/bn/randomletter/">
+        <span class="tool-ico" aria-hidden="true">🔤</span>
+        <span class="tool-name">র্যান্ডম লেটার জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে র্যান্ডম চিঠি জেনারেটর. আপনার ব্রাউজারে অবিলম্বে এবং ন্যায্যভাবে, বড় হাতের, ছোট হাতের বা মিশ্র হাতের A থেকে Z থেকে এক বা অনেকগুলি এলোমেলো অক্ষর চয়ন করুন৷</span></a>
+<a class="tool-card" href="/bn/randomname/">
+        <span class="tool-ico" aria-hidden="true">🎭</span>
+        <span class="tool-name">র্যান্ডম নাম জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে র্যান্ডম নাম জেনারেটর. লিঙ্গ এবং সাংস্কৃতিক উত্স দ্বারা এলোমেলো প্রথম এবং শেষ নাম তৈরি করুন। লেখক, গেম ডেভেলপার এবং শিশুর নামের অনুপ্রেরণার জন্য পারফেক্ট।</span></a>
+<a class="tool-card" href="/bn/randomnumber/">
+        <span class="tool-ico" aria-hidden="true">🎲</span>
+        <span class="tool-name">র্যান্ডম নম্বর জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে র্যান্ডম নম্বর জেনারেটর. অনন্য ফলাফলের জন্য একটি বিকল্প সহ যেকোনো ন্যূনতম এবং সর্বোচ্চের মধ্যে এক বা অনেকগুলি র্যান্ডম সংখ্যা বেছে নিন। আপনার ব্রাউজারে নিরাপদ এবং তাত্ক্ষণিক।</span></a>
+<a class="tool-card" href="/bn/rolldice/">
+        <span class="tool-ico" aria-hidden="true">🎲</span>
+        <span class="tool-name">ডাইস রোলার</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন পাশা রোলার. রোল d4, d6, d8, d10, d12, d20, এবং d100 ডাইস, একা বা দলবদ্ধভাবে। D&amp;D, tabletop RPGs এবং বোর্ড গেমের জন্য পারফেক্ট। কোন ডাউনলোড প্রয়োজন.</span></a>
+<a class="tool-card" href="/bn/yesorno/">
+        <span class="tool-ico" aria-hidden="true">🎯</span>
+        <span class="tool-name">হ্যাঁ বা না</span>
+        <span class="tool-desc">বিনামূল্যে হ্যাঁ বা না জেনারেটর. একটি প্রশ্ন জিজ্ঞাসা করুন এবং একটি চলমান ট্যালি সহ অবিলম্বে একটি ন্যায্য, এলোমেলো হ্যাঁ বা না উত্তর পান৷ আপনার ব্রাউজারে কাজ করে, কোনো অ্যাপের প্রয়োজন নেই।</span></a></div></section>
+<section class="cat"><h2>🎮 খেলা ও বিনোদন</h2><div class="grid"><a class="tool-card" href="/bn/biorhythm/">
+        <span class="tool-ico" aria-hidden="true">[BR]</span>
+        <span class="tool-name">বায়োরিদম ক্যালকুলেটর</span>
+        <span class="tool-desc">আপনার জন্মতারিখ থেকে শারীরিক, মানসিক এবং বৌদ্ধিক বায়োরিদম চক্র গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/catage/">
+        <span class="tool-ico" aria-hidden="true">🐱</span>
+        <span class="tool-name">বিড়ালের বয়স ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে বিড়াল বয়স ক্যালকুলেটর. AAHA-স্বীকৃত সূত্র ব্যবহার করে আপনার বিড়ালের বয়সকে মানুষের বছরে রূপান্তর করুন। বিড়ালদের প্রথম দুই বছরে দ্রুত বয়স হয়।</span></a>
+<a class="tool-card" href="/bn/decisionmaker/">
+        <span class="tool-ico" aria-hidden="true">🎲</span>
+        <span class="tool-name">ডিসিশন মেকার</span>
+        <span class="tool-desc">স্বাধীন সিদ্ধান্ত গ্রহণকারী। আপনার বিকল্পগুলি লিখুন এবং র্যান্ডমাইজারকে আপনার জন্য একটি বেছে নিতে দিন। আরও বাস্তবসম্মত পছন্দের জন্য ভাল/মন্দ ওজন যোগ করুন।</span></a>
+<a class="tool-card" href="/bn/dogage/">
+        <span class="tool-ico" aria-hidden="true">🐕</span>
+        <span class="tool-name">কুকুরের বয়স ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে কুকুর বয়স ক্যালকুলেটর. আকারের উপর ভিত্তি করে আপনার কুকুরের বয়সকে মানুষের বছরে রূপান্তর করুন। আপডেট করা বৈজ্ঞানিক গবেষণা ব্যবহার করে, পুরানো 7× নিয়ম নয়।</span></a>
+<a class="tool-card" href="/bn/emojitranslator/">
+        <span class="tool-ico" aria-hidden="true">[E]</span>
+        <span class="tool-name">ইমোজি পাঠ্য অনুবাদক</span>
+        <span class="tool-desc">টেক্সট টাইপ করুন এবং কীওয়ার্ডের উপর ভিত্তি করে স্বয়ংক্রিয়ভাবে প্রাসঙ্গিক ইমোজি যোগ করুন।</span></a>
+<a class="tool-card" href="/bn/fingerspelling/">
+        <span class="tool-ico" aria-hidden="true">[FS]</span>
+        <span class="tool-name">ASL ফিঙ্গার বানান</span>
+        <span class="tool-desc">যেকোনো শব্দ বা অক্ষরের জন্য ASL (আমেরিকান সাইন ল্যাঙ্গুয়েজ) আঙুলের বানান দেখুন।</span></a>
+<a class="tool-card" href="/bn/hangman/">
+        <span class="tool-ico" aria-hidden="true">🎮</span>
+        <span class="tool-name">জল্লাদ</span>
+        <span class="tool-desc">বিনামূল্যে জল্লাদ শব্দ খেলা. জল্লাদ সম্পূর্ণ হওয়ার আগে লুকানো শব্দটি একবারে একটি অক্ষর অনুমান করুন। ক্লাসিক শব্দ অনুমান খেলা.</span></a>
+<a class="tool-card" href="/bn/lovecalculator/">
+        <span class="tool-ico" aria-hidden="true">[LV]</span>
+        <span class="tool-name">প্রেম সামঞ্জস্য ক্যালকুলেটর</span>
+        <span class="tool-desc">নামের উপর ভিত্তি করে মজার প্রেমের সামঞ্জস্যপূর্ণ ক্যালকুলেটর।</span></a>
+<a class="tool-card" href="/bn/luckynumber/">
+        <span class="tool-ico" aria-hidden="true">[LN]</span>
+        <span class="tool-name">লাকি নম্বর জেনারেটর</span>
+        <span class="tool-desc">ভাগ্যবান লটারি নম্বরের একটি সেট তৈরি করুন।</span></a>
+<a class="tool-card" href="/bn/magic8ball/">
+        <span class="tool-ico" aria-hidden="true">🎱</span>
+        <span class="tool-name">ম্যাজিক 8 বল</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন ম্যাজিক 8 বল. একটি হ্যাঁ-বা-না প্রশ্নের কথা চিন্তা করুন, বলটি আলতো চাপুন এবং একটি ক্লাসিক ভাগ্য বলার উত্তর পান৷ মজা, তাত্ক্ষণিক এবং ব্যক্তিগত।</span></a>
+<a class="tool-card" href="/bn/memorygame/">
+        <span class="tool-ico" aria-hidden="true">🃏</span>
+        <span class="tool-name">মেমরি কার্ড গেম</span>
+        <span class="tool-desc">বিনামূল্যে মেমরি কার্ড ম্যাচিং খেলা. মিলে যাওয়া ইমোজি জোড়া খুঁজতে কার্ড ফ্লিপ করুন। চালনা এবং সময় ট্র্যাক. পরীক্ষা করে এবং চাক্ষুষ মেমরি উন্নত করে।</span></a>
+<a class="tool-card" href="/bn/morsetrainer/">
+        <span class="tool-ico" aria-hidden="true">[MT]</span>
+        <span class="tool-name">মোর্স কোড প্রশিক্ষক</span>
+        <span class="tool-desc">মোর্স কোড ডিকোডিং অনুশীলন করুন। একটি চিঠি বিন্দু এবং ড্যাশ হিসাবে দেখানো হয়.</span></a>
+<a class="tool-card" href="/bn/nameday/">
+        <span class="tool-ico" aria-hidden="true">[ND]</span>
+        <span class="tool-name">নাম দিন সন্ধান</span>
+        <span class="tool-desc">যে কোনো প্রথম নামের জন্য ঐতিহ্যগত ক্যাথলিক/ইউরোপীয় নাম দিন খুঁজুন।</span></a>
+<a class="tool-card" href="/bn/numberguesser/">
+        <span class="tool-ico" aria-hidden="true">🎯</span>
+        <span class="tool-name">সংখ্যা অনুমান খেলা</span>
+        <span class="tool-desc">বিনামূল্যে সংখ্যা অনুমান খেলা. একটি গোপন নম্বর অনুমান করুন এবং গরম/ঠান্ডা ইঙ্গিত পান। 1000 পর্যন্ত আপনার অসুবিধা পরিসীমা চয়ন করুন।</span></a>
+<a class="tool-card" href="/bn/numerologyname/">
+        <span class="tool-ico" aria-hidden="true">[NUM]</span>
+        <span class="tool-name">সংখ্যাতত্ত্বের নাম সংখ্যা</span>
+        <span class="tool-desc">আপনার পুরো নাম থেকে আপনার সংখ্যাতত্ত্ব নামের সংখ্যা গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/randomfact/">
+        <span class="tool-ico" aria-hidden="true">🤓</span>
+        <span class="tool-name">র্যান্ডম ফ্যাক্ট জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে র্যান্ডম ফ্যাক্ট জেনারেটর. প্রতিটি ক্লিকে বিজ্ঞান, ইতিহাস, গণিত, প্রকৃতি এবং প্রযুক্তি জুড়ে আশ্চর্যজনক এবং আকর্ষণীয় তথ্য আবিষ্কার করুন।</span></a>
+<a class="tool-card" href="/bn/randomquote/">
+        <span class="tool-ico" aria-hidden="true">💬</span>
+        <span class="tool-name">র‍্যান্ডম কোট জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে র্যান্ডম উদ্ধৃতি জেনারেটর. প্রতি ক্লিকে একটি নতুন অনুপ্রেরণামূলক বা অনুপ্রেরণামূলক উদ্ধৃতি পান। ইতিহাসের সর্বশ্রেষ্ঠ চিন্তাবিদদের শত শত বিখ্যাত উক্তি।</span></a>
+<a class="tool-card" href="/bn/rhymefinder/">
+        <span class="tool-ico" aria-hidden="true">[RF]</span>
+        <span class="tool-name">ছড়া সন্ধানকারী</span>
+        <span class="tool-desc">যে কোন ইংরেজি শব্দের সাথে ছন্দবদ্ধ শব্দ খুঁজুন। কবিতা এবং গানের জন্য দুর্দান্ত।</span></a>
+<a class="tool-card" href="/bn/rockpaperscissors/">
+        <span class="tool-ico" aria-hidden="true">✊</span>
+        <span class="tool-name">রক পেপার কাঁচি</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন রক কাগজ কাঁচি খেলা. কম্পিউটারের বিরুদ্ধে খেলুন, অবিলম্বে ফলাফল দেখুন এবং আপনার স্কোর ট্র্যাক করুন। কোন ডাউনলোড বা সাইন আপ প্রয়োজন.</span></a>
+<a class="tool-card" href="/bn/semaphore/">
+        <span class="tool-ico" aria-hidden="true">[SEM]</span>
+        <span class="tool-name">ফ্ল্যাগ সেমাফোর এনকোডার</span>
+        <span class="tool-desc">পতাকা সেমাফোর আর্ম পজিশন হিসেবে টেক্সট এনকোড করুন।</span></a>
+<a class="tool-card" href="/bn/thisorthat/">
+        <span class="tool-ico" aria-hidden="true">⚡</span>
+        <span class="tool-name">এই বা ওটা</span>
+        <span class="tool-desc">বিনামূল্যে এই বা যে খেলা. দুটি বিকল্পের মধ্যে দ্রুত পছন্দ পছন্দ করুন। পার্টির জন্য মজা এবং নিজের সম্পর্কে শেখা।</span></a>
+<a class="tool-card" href="/bn/tictactoe/">
+        <span class="tool-ico" aria-hidden="true">⭕</span>
+        <span class="tool-name">টিক-ট্যাক-টো</span>
+        <span class="tool-desc">বিনামূল্যে টিক-ট্যাক-টো গেম। একটি বন্ধু বা বনাম একটি অপরাজেয় এআই বিরুদ্ধে খেলুন. ক্লাসিক 3x3 noughts এবং ক্রস.</span></a>
+<a class="tool-card" href="/bn/triviaquiz/">
+        <span class="tool-ico" aria-hidden="true">🧠</span>
+        <span class="tool-name">সাধারণ জ্ঞান ট্রিভিয়া কুইজ</span>
+        <span class="tool-desc">বিনামূল্যে ট্রিভিয়া কুইজ। বিজ্ঞান, ইতিহাস, ভূগোল, খেলাধুলা এবং পপ সংস্কৃতি কভার করে 20টি সাধারণ জ্ঞান প্রশ্নের উত্তর দিন। তাত্ক্ষণিক স্কোরিং।</span></a>
+<a class="tool-card" href="/bn/wheelspinner/">
+        <span class="tool-ico" aria-hidden="true">🎡</span>
+        <span class="tool-name">হুইল স্পিনার</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন হুইল স্পিনার. এলোমেলো সিদ্ধান্ত নিতে বিকল্প যোগ করুন এবং স্পিন করুন। রেস্তোরাঁ, গেমস বা যেকোন পছন্দ করার জন্য দুর্দান্ত।</span></a>
+<a class="tool-card" href="/bn/wordscramble/">
+        <span class="tool-ico" aria-hidden="true">🔤</span>
+        <span class="tool-name">শব্দ স্ক্র্যাম্বল গেম</span>
+        <span class="tool-desc">বিনামূল্যে শব্দ স্ক্র্যাম্বল খেলা. লুকানো ইংরেজি শব্দ খুঁজে পেতে এলোমেলো অক্ষরগুলি আনস্ক্র্যাম্বল করুন। আপনি আটকে থাকলে ইঙ্গিত পান.</span></a>
+<a class="tool-card" href="/bn/wouldyourather/">
+        <span class="tool-ico" aria-hidden="true">🤔</span>
+        <span class="tool-name">আপনি বরং চান?</span>
+        <span class="tool-desc">বিনামূল্যে আপনি বরং খেলা. অন্যরা কী বেছে নিয়েছে তা দেখতে একটি পছন্দ ট্যাপ করুন, তারপর পরবর্তী দ্বিধায় যান। পার্টি এবং আইসব্রেকারদের জন্য মজা।</span></a>
+<a class="tool-card" href="/bn/zodiac/">
+        <span class="tool-ico" aria-hidden="true">♈</span>
+        <span class="tool-name">রাশিচক্র সাইন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে রাশিচক্র সাইন ক্যালকুলেটর. ব্যক্তিত্বের বৈশিষ্ট্য সহ আপনার পশ্চিম রাশি (সূর্য চিহ্ন) এবং চীনা রাশিচক্রের চিহ্ন খুঁজে পেতে আপনার জন্মদিন লিখুন।</span></a></div></section>
 <section class="cat"><h2>📝 টেক্সট ও শব্দ</h2><div class="grid"><a class="tool-card" href="/bn/alphabetizer/">
         <span class="tool-ico" aria-hidden="true">🔤</span>
-        <span class="tool-name">List Alphabetizer</span>
-        <span class="tool-desc">Free online list alphabetizer. Sort any list A-Z, Z-A, by last word, or remove duplicates instantly. Paste your list and click sort.</span></a>
+        <span class="tool-name">বর্ণমালার তালিকা</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন তালিকা বর্ণমালা. যেকোন তালিকা A-Z, Z-A, শেষ শব্দ দ্বারা বাছাই করুন, অথবা অবিলম্বে সদৃশগুলি সরান। আপনার তালিকা আটকান এবং বাছাই ক্লিক করুন.</span></a>
+<a class="tool-card" href="/bn/anagramsolver/">
+        <span class="tool-ico" aria-hidden="true">🔡</span>
+        <span class="tool-name">আনাগ্রাম সমাধানকারী</span>
+        <span class="tool-desc">বিনামূল্যে অ্যানাগ্রাম সমাধানকারী। আপনি করতে পারেন এমন সমস্ত বৈধ ইংরেজি শব্দ খুঁজে পেতে অক্ষর লিখুন। স্ক্র্যাবল, ওয়ার্ডল এবং শব্দ গেমের জন্য দুর্দান্ত।</span></a>
 <a class="tool-card" href="/bn/backwardstext/">
         <span class="tool-ico" aria-hidden="true">🔄</span>
-        <span class="tool-name">Backwards Text Generator</span>
-        <span class="tool-desc">Free backwards text generator. Instantly reverse the letters, the word order or the line order of any text in your browser, then copy the result.</span></a>
+        <span class="tool-name">পিছনের টেক্সট জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে পিছনের পাঠ্য জেনারেটর. অবিলম্বে আপনার ব্রাউজারে অক্ষর, শব্দ ক্রম বা যেকোনো পাঠ্যের লাইন ক্রম বিপরীত করুন, তারপর ফলাফলটি অনুলিপি করুন।</span></a>
 <a class="tool-card" href="/bn/binarytext/">
         <span class="tool-ico" aria-hidden="true">💻</span>
-        <span class="tool-name">Binary Translator</span>
-        <span class="tool-desc">Free binary translator. Convert any text to binary code and decode binary back to text, with full Unicode support, instantly and privately in your browser.</span></a>
+        <span class="tool-name">বাইনারি অনুবাদক</span>
+        <span class="tool-desc">বিনামূল্যে বাইনারি অনুবাদক. যেকোনো পাঠ্যকে বাইনারি কোডে রূপান্তর করুন এবং আপনার ব্রাউজারে অবিলম্বে এবং ব্যক্তিগতভাবে সম্পূর্ণ ইউনিকোড সমর্থন সহ বাইনারিকে পাঠ্যে ডিকোড করুন।</span></a>
 <a class="tool-card" href="/bn/caseconverter/">
         <span class="tool-ico" aria-hidden="true">🔠</span>
-        <span class="tool-name">Case Converter</span>
-        <span class="tool-desc">Free online case converter. Instantly change text to UPPERCASE, lowercase, Title Case, Sentence case, aLtErNaTiNg case and small caps in your browser.</span></a>
+        <span class="tool-name">কেস কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন কেস রূপান্তরকারী. আপনার ব্রাউজারে তাত্ক্ষণিকভাবে পাঠ্যকে UPPERCASE, ছোট হাতের অক্ষর, টাইটেল কেস, বাক্যের কেস, aLtErNaTiNg কেস এবং ছোট ক্যাপগুলিতে পরিবর্তন করুন৷</span></a>
 <a class="tool-card" href="/bn/charcount/">
         <span class="tool-ico" aria-hidden="true">🔡</span>
-        <span class="tool-name">Character Counter</span>
-        <span class="tool-desc">Free character counter. Count characters (with and without spaces), words, sentences, paragraphs, and lines in any text. Instant, no signup needed.</span></a>
+        <span class="tool-name">ক্যারেক্টার কাউন্টার</span>
+        <span class="tool-desc">বিনামূল্যে অক্ষর কাউন্টার. যেকোনো টেক্সটে অক্ষর (স্পেস সহ এবং ছাড়া), শব্দ, বাক্য, অনুচ্ছেদ এবং লাইন গণনা করুন। তাত্ক্ষণিক, কোন সাইন আপ প্রয়োজন.</span></a>
+<a class="tool-card" href="/bn/emojipicker/">
+        <span class="tool-ico" aria-hidden="true">😀</span>
+        <span class="tool-name">ইমোজি পিকার</span>
+        <span class="tool-desc">বিনামূল্যে ইমোজি পিকার। নাম অনুসারে 1,500 টিরও বেশি ইমোজি অনুসন্ধান করুন, আপনার ক্লিপবোর্ডে অনুলিপি করতে যেকোনো ইমোজিতে ক্লিক করুন। সব ডিভাইসে কাজ করে।</span></a>
+<a class="tool-card" href="/bn/loremipsum/">
+        <span class="tool-ico" aria-hidden="true">📄</span>
+        <span class="tool-name">Lorem Ipsum জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে Lorem Ipsum জেনারেটর. ডিজাইন মকআপ এবং লেআউটের জন্য অনুচ্ছেদ, বাক্য বা শব্দ দ্বারা প্লেসহোল্ডার ডামি টেক্সট তৈরি করুন, তারপর এটি এক ক্লিকে অনুলিপি করুন।</span></a>
+<a class="tool-card" href="/bn/morsetranslator/">
+        <span class="tool-ico" aria-hidden="true">• ─</span>
+        <span class="tool-name">মোর্স কোড অনুবাদক</span>
+        <span class="tool-desc">বিনামূল্যে মোর্স কোড অনুবাদক. যেকোন টেক্সটকে মোর্স কোড ডট এবং ড্যাশে রূপান্তর করুন, অথবা মোর্স কোড ডিকোড করে টেক্সটে ফিরিয়ে দিন। অডিও প্লেব্যাক অন্তর্ভুক্ত. আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।</span></a>
+<a class="tool-card" href="/bn/palindromocheck/">
+        <span class="tool-ico" aria-hidden="true">🔁</span>
+        <span class="tool-name">প্যালিনড্রোম চেকার</span>
+        <span class="tool-desc">বিনামূল্যে প্যালিনড্রোম চেকার। কেস, স্পেস এবং বিরাম চিহ্ন উপেক্ষা করে একটি শব্দ, বাক্যাংশ বা সংখ্যা একই সামনে এবং পিছনে পড়ে কিনা তাৎক্ষণিকভাবে পরীক্ষা করুন।</span></a>
+<a class="tool-card" href="/bn/readingtime/">
+        <span class="tool-ico" aria-hidden="true">📖</span>
+        <span class="tool-name">পড়ার সময় ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি পড়ার সময় ক্যালকুলেটর। শব্দ সংখ্যা, আনুমানিক পড়ার সময় এবং আনুমানিক কথা বলার সময় তাত্ক্ষণিকভাবে দেখতে যেকোনো পাঠ্য আটকান। কোন সাইন আপ প্রয়োজন.</span></a>
+<a class="tool-card" href="/bn/sentencecounter/">
+        <span class="tool-ico" aria-hidden="true">📄</span>
+        <span class="tool-name">সেন্টেন্স কাউন্টার</span>
+        <span class="tool-desc">বিনামূল্যে বাক্য পাল্টা. বাক্য, শব্দ, অক্ষর, অনুচ্ছেদ এবং লাইনগুলি অবিলম্বে গণনা করতে যেকোনো পাঠ্য পেস্ট করুন। প্রতি বাক্যে গড় শব্দ দেখায়।</span></a>
+<a class="tool-card" href="/bn/syllablecount/">
+        <span class="tool-ico" aria-hidden="true">📝</span>
+        <span class="tool-name">সিলেবল কাউন্টার</span>
+        <span class="tool-desc">ফ্রি সিলেবল কাউন্টার। যেকোনো ইংরেজি শব্দ বা পাঠ্যের সিলেবলের সংখ্যা তাৎক্ষণিকভাবে গণনা করুন। কবিতা, গানের কথা, এবং হাইকু লেখার জন্য দরকারী।</span></a>
+<a class="tool-card" href="/bn/textdiff/">
+        <span class="tool-ico" aria-hidden="true">📋</span>
+        <span class="tool-name">টেক্সট ডিফ টুল</span>
+        <span class="tool-desc">ফ্রি টেক্সট ডিফ টুল। দুটি পাঠ তুলনা করুন এবং তাদের মধ্যে পার্থক্য হাইলাইট করুন। অবিলম্বে যোগ করা, সরানো, এবং পরিবর্তিত শব্দ খুঁজুন.</span></a>
+<a class="tool-card" href="/bn/textrepeater/">
+        <span class="tool-ico" aria-hidden="true">🔁</span>
+        <span class="tool-name">টেক্সট রিপিটার</span>
+        <span class="tool-desc">ফ্রি টেক্সট রিপিটার। একটি লাইন বিরতি, কপিগুলির মধ্যে স্থান বা কমা দিয়ে যতবার খুশি একটি শব্দ, বাক্যাংশ বা লাইন পুনরাবৃত্তি করুন, তারপর ফলাফলটি অবিলম্বে অনুলিপি করুন।</span></a>
+<a class="tool-card" href="/bn/textreverser/">
+        <span class="tool-ico" aria-hidden="true">↩️</span>
+        <span class="tool-name">টেক্সট রিভার্সার</span>
+        <span class="tool-desc">ফ্রি টেক্সট রিভার্সার। টেক্সটে অক্ষর বিপরীত করুন, শব্দের ক্রম বিপরীত করুন বা লাইনের ক্রম বিপরীত করুন। একটি টুলে তিনটি বিপরীত মোড।</span></a>
+<a class="tool-card" href="/bn/textsummarizer/">
+        <span class="tool-ico" aria-hidden="true">📃</span>
+        <span class="tool-name">টেক্সট সামারাইজার</span>
+        <span class="tool-desc">বিনামূল্যে পাঠ্য সংক্ষিপ্তসার। যেকোনো টেক্সট পেস্ট করুন এবং এক্সট্রাক্টিভ সারমাইজেশন ব্যবহার করে স্বয়ংক্রিয়ভাবে সবচেয়ে গুরুত্বপূর্ণ বাক্যগুলো বের করুন।</span></a>
+<a class="tool-card" href="/bn/titlecase/">
+        <span class="tool-ico" aria-hidden="true">🔤</span>
+        <span class="tool-name">টাইটেল কেস কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে শিরোনাম ক্ষেত্রে রূপান্তরকারী. টেক্সটকে শিরোনামের ক্ষেত্রে, বাক্যের ক্ষেত্রে রূপান্তর করুন, প্রতিটি শব্দের প্রথম অক্ষর বড় করুন, বা অবিলম্বে বিকল্প ক্ষেত্রে।</span></a>
+<a class="tool-card" href="/bn/upsidedowntext/">
+        <span class="tool-ico" aria-hidden="true">🙃</span>
+        <span class="tool-name">আপসাইড ডাউন টেক্সট জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে উল্টো টেক্সট জেনারেটর. যেকোন টেক্সটকে উল্টাপাল্টা অক্ষরে ফ্লিপ করুন আপনি কপি এবং সোশ্যাল মিডিয়া, বায়োস এবং বার্তাগুলিতে পেস্ট করতে পারেন। তাত্ক্ষণিক এবং ব্যক্তিগত।</span></a>
 <a class="tool-card" href="/bn/wordcount/">
         <span class="tool-ico" aria-hidden="true">📝</span>
         <span class="tool-name">শব্দ গণনা</span>
-        <span class="tool-desc">ফ্রি লাইভ শব্দ গণনা। টেক্সট পেস্ট করুন বা টাইপ করুন এবং ব্রাউজারেই সঙ্গে সঙ্গে শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও আনুমানিক পড়ার সময় গণনা করুন।</span></a></div></section>
+        <span class="tool-desc">ফ্রি লাইভ শব্দ গণনা। টেক্সট পেস্ট করুন বা টাইপ করুন এবং ব্রাউজারেই সঙ্গে সঙ্গে শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও আনুমানিক পড়ার সময় গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/wordfrequency/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">শব্দ ফ্রিকোয়েন্সি কাউন্টার</span>
+        <span class="tool-desc">বিনামূল্যে শব্দ ফ্রিকোয়েন্সি কাউন্টার. যেকোনো টেক্সট পেস্ট করুন এবং ফ্রিকোয়েন্সি অনুসারে র‌্যাঙ্ক করা সবচেয়ে সাধারণ শব্দগুলিকে তাত্ক্ষণিকভাবে দেখুন। স্টপ শব্দগুলি বাদ দেওয়ার বিকল্প।</span></a></div></section>
+<section class="cat"><h2>📱 সোশ্যাল মিডিয়া</h2><div class="grid"><a class="tool-card" href="/bn/qrmaker/">
+        <span class="tool-ico" aria-hidden="true">📱</span>
+        <span class="tool-name">QR কোড জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে QR কোড জেনারেটর. যেকোনো URL, টেক্সট, ওয়াইফাই পাসওয়ার্ড বা যোগাযোগের তথ্যের জন্য একটি QR কোড তৈরি করুন। PNG হিসাবে ডাউনলোড করুন। আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।</span></a>
+<a class="tool-card" href="/bn/tiktokcharcount/">
+        <span class="tool-ico" aria-hidden="true">📱</span>
+        <span class="tool-name">TikTok ক্যাপশন বিশ্লেষক</span>
+        <span class="tool-desc">বিনামূল্যে TikTok ক্যাপশন বিশ্লেষক। অক্ষর সংখ্যা বনাম 2200 সীমা, হ্যাশট্যাগ গণনা, শব্দ সংখ্যা এবং আনুমানিক পড়ার সময় দেখুন। অবিলম্বে আপনার TikTok ক্যাপশন অপ্টিমাইজ করুন।</span></a>
+<a class="tool-card" href="/bn/tweetcount/">
+        <span class="tool-ico" aria-hidden="true">🐦</span>
+        <span class="tool-name">টুইটার / এক্স ক্যারেক্টার কাউন্টার</span>
+        <span class="tool-desc">বিনামূল্যে টুইটার/এক্স অক্ষর কাউন্টার. ইউআরএল স্বাভাবিককরণের সাথে টুইটের দৈর্ঘ্য গণনা করে (প্রতিটি ইউআরএল = 23 অক্ষর)। 280-অক্ষরের সীমার জন্য রঙ-কোডেড সীমা নির্দেশক।</span></a>
+<a class="tool-card" href="/bn/utmbuilder/">
+        <span class="tool-ico" aria-hidden="true">🔗</span>
+        <span class="tool-name">UTM লিঙ্ক নির্মাতা</span>
+        <span class="tool-desc">বিনামূল্যে UTM নির্মাতা। গুগল অ্যানালিটিক্স এবং অন্যান্য বিশ্লেষণ প্ল্যাটফর্মের জন্য UTM-ট্যাগযুক্ত URL তৈরি করুন। ইমেল, সামাজিক মিডিয়া এবং অর্থপ্রদানের প্রচারাভিযান থেকে ট্র্যাফিক ট্র্যাক করুন।</span></a></div></section>
 <section class="cat"><h2>❤️ স্বাস্থ্য ও শরীর</h2><div class="grid"><a class="tool-card" href="/bn/bloodtype/">
         <span class="tool-ico" aria-hidden="true">❤️</span>
-        <span class="tool-name">Blood Type Compatibility Checker</span>
-        <span class="tool-desc">Free blood type compatibility checker. Select your ABO/Rh blood type to instantly see who you can donate blood to and who you can receive blood from.</span></a>
+        <span class="tool-name">ব্লাড টাইপ কম্প্যাটিবিলিটি চেকার</span>
+        <span class="tool-desc">বিনামূল্যে রক্তের গ্রুপ সামঞ্জস্য পরীক্ষক. আপনি কাকে রক্ত ​​দিতে পারেন এবং কার কাছ থেকে রক্ত ​​পেতে পারেন তা দেখতে আপনার ABO/Rh রক্তের ধরন নির্বাচন করুন।</span></a>
 <a class="tool-card" href="/bn/bmicalc/">
         <span class="tool-ico" aria-hidden="true">❤️</span>
         <span class="tool-name">BMI ক্যালকুলেটর</span>
         <span class="tool-desc">ফ্রি BMI ক্যালকুলেটর। মেট্রিক বা ইম্পেরিয়াল এককে আপনার উচ্চতা ও ওজন দিন এবং ব্রাউজারেই সঙ্গে সঙ্গে আপনার বডি মাস ইনডেক্স ও শ্রেণি জেনে নিন।</span></a>
 <a class="tool-card" href="/bn/bmrcalc/">
         <span class="tool-ico" aria-hidden="true">🔥</span>
-        <span class="tool-name">BMR Calculator</span>
-        <span class="tool-desc">Free BMR calculator. Calculate your Basal Metabolic Rate — the calories your body burns at rest per day. Uses the Mifflin-St Jeor equation.</span></a>
+        <span class="tool-name">বিএমআর ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে BMR ক্যালকুলেটর। আপনার বেসাল মেটাবলিক রেট গণনা করুন — আপনার শরীর প্রতিদিন বিশ্রামে যে ক্যালোরি পোড়ায়। Mifflin-St Jeor সমীকরণ ব্যবহার করে।</span></a>
+<a class="tool-card" href="/bn/bodyfat/">
+        <span class="tool-ico" aria-hidden="true">🏃</span>
+        <span class="tool-name">শরীরের চর্বি শতাংশ ক্যালকুলেটর</span>
+        <span class="tool-desc">ইউএস নেভি পদ্ধতি ব্যবহার করে বিনামূল্যে শরীরের চর্বি শতাংশ ক্যালকুলেটর. শরীরের চর্বি অনুমান করতে উচ্চতা, ঘাড়, কোমর এবং নিতম্ব (মহিলা) পরিমাপ লিখুন।</span></a>
+<a class="tool-card" href="/bn/bodyfatrange/">
+        <span class="tool-ico" aria-hidden="true">[BF]</span>
+        <span class="tool-name">বডি ফ্যাট পার্সেন্টেজ ক্লাসিফায়ার</span>
+        <span class="tool-desc">আপনার শরীরের চর্বি বিভাগ খুঁজুন: অপরিহার্য, ক্রীড়াবিদ, ফিটনেস, গড় বা স্থূল।</span></a>
+<a class="tool-card" href="/bn/calorieburn/">
+        <span class="tool-ico" aria-hidden="true">🔥</span>
+        <span class="tool-name">ক্যালোরি বার্ন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ক্যালোরি বার্ন ক্যালকুলেটর. একটি কার্যকলাপ নির্বাচন করুন, ক্যালোরি পোড়া অনুমান করার জন্য আপনার ওজন এবং সময়কাল লিখুন। নির্ভুলতার জন্য MET মান ব্যবহার করে।</span></a>
 <a class="tool-card" href="/bn/caloriecalc/">
         <span class="tool-ico" aria-hidden="true">🥗</span>
-        <span class="tool-name">Food Calorie Calculator</span>
-        <span class="tool-desc">Free calorie calculator. Look up approximate calories per 100g for common foods. Great for diet tracking and meal planning.</span></a></div></section>
-<section class="cat"><h2>🔧 দরকারি টুল</h2><div class="grid"><a class="tool-card" href="/bn/colorpicker/">
+        <span class="tool-name">খাদ্য ক্যালোরি ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ক্যালোরি ক্যালকুলেটর. সাধারণ খাবারের জন্য প্রতি 100 গ্রাম আনুমানিক ক্যালোরি দেখুন। ডায়েট ট্র্যাকিং এবং খাবার পরিকল্পনার জন্য দুর্দান্ত।</span></a>
+<a class="tool-card" href="/bn/duedatecalc/">
+        <span class="tool-ico" aria-hidden="true">👶</span>
+        <span class="tool-name">গর্ভাবস্থার নির্ধারিত তারিখ ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে গর্ভাবস্থার নির্ধারিত তারিখ ক্যালকুলেটর। আপনার নির্ধারিত তারিখ এবং গর্ভাবস্থার বর্তমান সপ্তাহ অনুমান করতে আপনার শেষ মাসিক বা গর্ভধারণের তারিখ লিখুন।</span></a>
+<a class="tool-card" href="/bn/foodcalories/">
+        <span class="tool-ico" aria-hidden="true">[FC]</span>
+        <span class="tool-name">খাদ্য ক্যালোরি রেফারেন্স</span>
+        <span class="tool-desc">প্রোটিন, শর্করা এবং চর্বিযুক্ত সাধারণ খাবারের জন্য প্রতি 100 গ্রাম ক্যালোরি।</span></a>
+<a class="tool-card" href="/bn/heartratezones/">
+        <span class="tool-ico" aria-hidden="true">❤️</span>
+        <span class="tool-name">হার্ট রেট জোন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে হার্ট রেট জোন ক্যালকুলেটর। আপনার 5টি প্রশিক্ষণ অঞ্চল খুঁজে পেতে আপনার বয়স এবং বিশ্রামের হার্ট রেট লিখুন: ফ্যাট বার্ন, অ্যারোবিক, অ্যানেরোবিক এবং VO2 সর্বোচ্চ।</span></a>
+<a class="tool-card" href="/bn/hydrationcalc/">
+        <span class="tool-ico" aria-hidden="true">💧</span>
+        <span class="tool-name">দৈনিক জল খাওয়ার ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে জল খাওয়ার ক্যালকুলেটর। লিটার, কাপ এবং আউন্সে আপনার প্রস্তাবিত দৈনিক জল খাওয়ার জন্য আপনার ওজন এবং কার্যকলাপের স্তর লিখুন।</span></a>
+<a class="tool-card" href="/bn/idealweightcalc/">
+        <span class="tool-ico" aria-hidden="true">⚖️</span>
+        <span class="tool-name">আদর্শ ওজন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে আদর্শ ওজন ক্যালকুলেটর. বিএমআই পদ্ধতি এবং রবিনসন, মিলার এবং ডিভাইন সূত্র ব্যবহার করে আপনার উচ্চতা এবং লিঙ্গের জন্য স্বাস্থ্যকর ওজন পরিসীমা খুঁজুন।</span></a>
+<a class="tool-card" href="/bn/macrocalc/">
+        <span class="tool-ico" aria-hidden="true">🥗</span>
+        <span class="tool-name">ম্যাক্রোনিউট্রিয়েন্ট ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি ম্যাক্রো ক্যালকুলেটর। গ্রাম এবং ক্যালোরিতে প্রোটিন, কার্ব এবং ফ্যাট লক্ষ্য পেতে আপনার দৈনিক ক্যালোরি লক্ষ্য এবং খাদ্য লক্ষ্য লিখুন।</span></a>
+<a class="tool-card" href="/bn/macroratio/">
+        <span class="tool-ico" aria-hidden="true">🥗</span>
+        <span class="tool-name">ম্যাক্রো রেশিও ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি ম্যাক্রো রেশিও ক্যালকুলেটর। প্রতিদিন সর্বোত্তম প্রোটিন, কার্বোহাইড্রেট এবং চর্বি গ্রাম পেতে আপনার দৈনিক ক্যালোরি লক্ষ্য এবং খাদ্য লক্ষ্য লিখুন।</span></a>
+<a class="tool-card" href="/bn/ovulationcalc/">
+        <span class="tool-ico" aria-hidden="true">🌸</span>
+        <span class="tool-name">ডিম্বস্ফোটন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ovulation ক্যালকুলেটর. আপনার ডিম্বস্ফোটনের তারিখ, উর্বর উইন্ডো এবং পরবর্তী পিরিয়ডের তারিখ অনুমান করতে আপনার শেষ পিরিয়ড এবং চক্রের দৈর্ঘ্য লিখুন।</span></a>
+<a class="tool-card" href="/bn/pacecalc/">
+        <span class="tool-ico" aria-hidden="true">🏃</span>
+        <span class="tool-name">রানিং পেস ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে চলমান গতি ক্যালকুলেটর. প্রতি কিমি বা মাইল গতি, গতি, এবং সমতুল্য রেস সমাপ্তির সময় গণনা করতে দূরত্ব এবং সময় লিখুন।</span></a>
+<a class="tool-card" href="/bn/pregnancyweek/">
+        <span class="tool-ico" aria-hidden="true">🤰</span>
+        <span class="tool-name">গর্ভাবস্থা সপ্তাহের ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে গর্ভাবস্থা ক্যালকুলেটর. আপনার বর্তমান গর্ভাবস্থা সপ্তাহ, ত্রৈমাসিক এবং আনুমানিক নির্ধারিত তারিখ খুঁজে পেতে আপনার শেষ মাসিকের তারিখ লিখুন।</span></a>
+<a class="tool-card" href="/bn/sleepcalc/">
+        <span class="tool-ico" aria-hidden="true">😴</span>
+        <span class="tool-name">স্লিপ সাইকেল ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ঘুমের ক্যালকুলেটর। 90-মিনিটের ঘুমের চক্রের উপর ভিত্তি করে আদর্শ ঘুমের সময়গুলি খুঁজে পেতে আপনার জেগে ওঠার সময় লিখুন। ঘুম থেকে ওঠার বদলে সতেজ হয়ে উঠুন।</span></a>
+<a class="tool-card" href="/bn/vitamindcalc/">
+        <span class="tool-ico" aria-hidden="true">☀️</span>
+        <span class="tool-name">ভিটামিন ডি সান এক্সপোজার ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ভিটামিন ডি সান এক্সপোজার ক্যালকুলেটর। পর্যাপ্ত ভিটামিন ডি তৈরি করতে আপনার কত মিনিট সূর্যের এক্সপোজার প্রয়োজন তা জানতে আপনার ত্বকের ধরন এবং সূর্যের তীব্রতা লিখুন।</span></a>
+<a class="tool-card" href="/bn/waterintake/">
+        <span class="tool-ico" aria-hidden="true">💧</span>
+        <span class="tool-name">দৈনিক জল খাওয়ার ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে জল খাওয়ার ক্যালকুলেটর। আপনার শরীরের ওজন এবং কার্যকলাপের স্তরের উপর ভিত্তি করে আপনার প্রতিদিন ঠিক কতটা জল পান করা উচিত তা সন্ধান করুন। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।</span></a></div></section>
+<section class="cat"><h2>🏠 বাড়ি ও গাড়ি</h2><div class="grid"><a class="tool-card" href="/bn/electricitycost/">
+        <span class="tool-ico" aria-hidden="true">⚡</span>
+        <span class="tool-name">বিদ্যুৎ খরচ ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে বিদ্যুৎ খরচ ক্যালকুলেটর। দৈনিক, মাসিক এবং বার্ষিক চলমান খরচ দেখতে একটি যন্ত্রের ওয়াট, প্রতিদিন ব্যবহারের ঘন্টা এবং আপনার বিদ্যুতের হার লিখুন।</span></a>
+<a class="tool-card" href="/bn/paintcalc/">
         <span class="tool-ico" aria-hidden="true">🎨</span>
-        <span class="tool-name">Color Picker</span>
-        <span class="tool-desc">Free color picker. Select any color and instantly get its HEX, RGB, and HSL codes. Copy with one click. Works entirely in your browser.</span></a></div></section>
+        <span class="tool-name">পেইন্ট ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে পেইন্ট ক্যালকুলেটর। আপনার কত লিটার পেইন্ট প্রয়োজন তা গণনা করতে আপনার দেয়ালের মাত্রা, কোটের সংখ্যা এবং পেইন্ট কভারেজ লিখুন।</span></a></div></section>
+<section class="cat"><h2>🔧 দরকারি টুল</h2><div class="grid"><a class="tool-card" href="/bn/ageincalculator/">
+        <span class="tool-ico" aria-hidden="true">[AI]</span>
+        <span class="tool-name">বিভিন্ন ইউনিটে বয়স</span>
+        <span class="tool-desc">বছর, মাস, সপ্তাহ, দিন, ঘন্টা, মিনিট এবং সেকেন্ডে আপনার বয়স গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/caesarcipher/">
+        <span class="tool-ico" aria-hidden="true">🏛️</span>
+        <span class="tool-name">সিজার সাইফার</span>
+        <span class="tool-desc">ফ্রি সিজার সাইফার টুল। 1 থেকে 25 পর্যন্ত যেকোনো শিফট মান সহ সিজার প্রতিস্থাপন সাইফার ব্যবহার করে পাঠ্যকে এনকোড বা ডিকোড করুন।</span></a>
+<a class="tool-card" href="/bn/charactercounter/">
+        <span class="tool-ico" aria-hidden="true">[CC]</span>
+        <span class="tool-name">চরিত্র এবং শব্দ কাউন্টার</span>
+        <span class="tool-desc">অক্ষর, শব্দ, বাক্য, অনুচ্ছেদ এবং আনুমানিক পড়ার সময় গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/colorconverter/">
+        <span class="tool-ico" aria-hidden="true">🎨</span>
+        <span class="tool-name">কালার ফরম্যাট কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে রঙ বিন্যাস রূপান্তরকারী. HEX, RGB, HSL, HSV এবং CMYK কালার ফরম্যাটের মধ্যে অবিলম্বে রূপান্তর করুন। যেকোনো রঙের কোড পেস্ট করুন এবং সমস্ত সমতুল্য দেখুন।</span></a>
+<a class="tool-card" href="/bn/colorpicker/">
+        <span class="tool-ico" aria-hidden="true">🎨</span>
+        <span class="tool-name">কালার পিকার</span>
+        <span class="tool-desc">বিনামূল্যে রঙ চয়নকারী. যেকোনো রঙ নির্বাচন করুন এবং অবিলম্বে এর HEX, RGB, এবং HSL কোডগুলি পান। এক ক্লিকে কপি করুন। আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।</span></a>
+<a class="tool-card" href="/bn/datemath/">
+        <span class="tool-ico" aria-hidden="true">[DM]</span>
+        <span class="tool-name">তারিখ যোগ/বিয়োগ ক্যালকুলেটর</span>
+        <span class="tool-desc">যেকোনো তারিখ থেকে দিন, সপ্তাহ, মাস বা বছর যোগ বা বিয়োগ করুন।</span></a>
+<a class="tool-card" href="/bn/gradientgen/">
+        <span class="tool-ico" aria-hidden="true">🌈</span>
+        <span class="tool-name">CSS গ্রেডিয়েন্ট জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে CSS গ্রেডিয়েন্ট জেনারেটর. যেকোনো রং দিয়ে লিনিয়ার এবং রেডিয়াল গ্রেডিয়েন্ট তৈরি করুন এবং সঙ্গে সঙ্গে CSS কোড পান। কোন সাইন আপ প্রয়োজন.</span></a>
+<a class="tool-card" href="/bn/htmlcodec/">
+        <span class="tool-ico" aria-hidden="true">🌐</span>
+        <span class="tool-name">এইচটিএমএল এনকোডার/ডিকোডার</span>
+        <span class="tool-desc">বিনামূল্যে HTML এনকোডার এবং ডিকোডার। বিশেষ অক্ষরকে এইচটিএমএল সত্তা এবং পিছনে রূপান্তর করুন। ওয়েব পৃষ্ঠাগুলিতে নিরাপদ প্রদর্শনের জন্য &lt; &gt; &amp; &quot; &#39; এবং আরও অনেক কিছু এনকোড করুন৷</span></a>
+<a class="tool-card" href="/bn/ipinfo/">
+        <span class="tool-ico" aria-hidden="true">🌐</span>
+        <span class="tool-name">আমার আইপি ঠিকানা এবং তথ্য</span>
+        <span class="tool-desc">আপনার সর্বজনীন IP ঠিকানা, আনুমানিক অবস্থান, সময় অঞ্চল এবং ইন্টারনেট প্রদানকারী খুঁজুন। লুকআপের জন্য ipapi.co ব্যবহার করে। কোন তথ্য সংরক্ষণ করা হয় না.</span></a>
+<a class="tool-card" href="/bn/natoalphabet/">
+        <span class="tool-ico" aria-hidden="true">[NA]</span>
+        <span class="tool-name">NATO ফোনেটিক বর্ণমালা</span>
+        <span class="tool-desc">টেক্সটকে ন্যাটো ফোনেটিক বর্ণমালায় রূপান্তর করুন (আলফা, ব্রাভো, চার্লি...)।</span></a>
+<a class="tool-card" href="/bn/networkspeedcalc/">
+        <span class="tool-ico" aria-hidden="true">[NS]</span>
+        <span class="tool-name">নেটওয়ার্ক স্পিড ক্যালকুলেটর</span>
+        <span class="tool-desc">একটি প্রদত্ত নেটওয়ার্ক গতিতে একটি ফাইল স্থানান্তর করতে কতক্ষণ সময় লাগে তা গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/numbertowords/">
+        <span class="tool-ico" aria-hidden="true">📝</span>
+        <span class="tool-name">শব্দ রূপান্তরকারী নম্বর</span>
+        <span class="tool-desc">শব্দ রূপান্তরকারী বিনামূল্যে নম্বর. যেকোনো পূর্ণসংখ্যা লিখুন এবং এটি ইংরেজি বা পর্তুগিজ ভাষায় বানান করুন। চেক, আইনি নথি এবং ভাষা শেখার জন্য দরকারী।</span></a>
+<a class="tool-card" href="/bn/passphregen/">
+        <span class="tool-ico" aria-hidden="true">🔐</span>
+        <span class="tool-name">পাসফ্রেজ জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে পাসফ্রেজ জেনারেটর. এলোমেলো সাধারণ শব্দ ব্যবহার করে স্মরণীয় কিন্তু নিরাপদ পাসফ্রেজ তৈরি করুন। এলোমেলো অক্ষরের চেয়ে মনে রাখা অনেক সহজ।</span></a>
+<a class="tool-card" href="/bn/qrreader/">
+        <span class="tool-ico" aria-hidden="true">📷</span>
+        <span class="tool-name">QR কোড রিডার</span>
+        <span class="tool-desc">বিনামূল্যে QR কোড রিডার। আপনার ব্রাউজারে অবিলম্বে তার বিষয়বস্তু ডিকোড করতে একটি QR কোড ধারণকারী একটি চিত্র আপলোড করুন৷ কোন অ্যাপের প্রয়োজন নেই।</span></a>
+<a class="tool-card" href="/bn/randomcolor/">
+        <span class="tool-ico" aria-hidden="true">🎨</span>
+        <span class="tool-name">এলোমেলো রঙ জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে র্যান্ডম রঙ জেনারেটর. একটি এলোমেলো রঙ তৈরি করুন এবং তাৎক্ষণিকভাবে এর HEX, RGB এবং HSL কোডগুলি দেখুন৷ নকশা অনুপ্রেরণা এবং বাছাই প্যালেট জন্য মহান.</span></a>
+<a class="tool-card" href="/bn/rot13/">
+        <span class="tool-ico" aria-hidden="true">🔄</span>
+        <span class="tool-name">ROT13 এনকোডার/ডিকোডার</span>
+        <span class="tool-desc">বিনামূল্যে ROT13 এনকোডার এবং ডিকোডার। রিয়েল টাইমে ROT13 প্রতিস্থাপন সাইফার দিয়ে পাঠ্য রূপান্তর করুন। ROT13 একই অপারেশনের সাথে এনকোড এবং ডিকোড করে।</span></a>
+<a class="tool-card" href="/bn/screeninfo/">
+        <span class="tool-ico" aria-hidden="true">🖥️</span>
+        <span class="tool-name">স্ক্রিন রেজোলিউশন চেকার</span>
+        <span class="tool-desc">ফ্রি স্ক্রিন রেজোলিউশন চেকার। আপনার স্ক্রীন রেজোলিউশন, ভিউপোর্ট সাইজ, ডিভাইস পিক্সেল অনুপাত, রঙের গভীরতা, স্পর্শ সমর্থন এবং আরও অনেক কিছু দেখায়।</span></a>
+<a class="tool-card" href="/bn/sunrisesunset/">
+        <span class="tool-ico" aria-hidden="true">[SRS]</span>
+        <span class="tool-name">সূর্যোদয় এবং সূর্যাস্ত অনুমানকারী</span>
+        <span class="tool-desc">যেকোনো অবস্থান এবং তারিখের জন্য সূর্যোদয় এবং সূর্যাস্তের সময় গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/texttobinary/">
+        <span class="tool-ico" aria-hidden="true">01</span>
+        <span class="tool-name">বাইনারি কনভার্টারে পাঠ্য</span>
+        <span class="tool-desc">বাইনারি কনভার্টারে বিনামূল্যে পাঠ্য। যেকোনো টেক্সটকে বাইনারি (01010100...) এবং বাইনারিকে টেক্সটে রূপান্তর করুন। 8-বিট ASCII এনকোডিং ব্যবহার করে।</span></a>
+<a class="tool-card" href="/bn/unitconverterx/">
+        <span class="tool-ico" aria-hidden="true">[UC]</span>
+        <span class="tool-name">এক্সটেন্ডেড ইউনিট কনভার্টার</span>
+        <span class="tool-desc">গতি, চাপ, শক্তি, শক্তি এবং ডেটা স্টোরেজ ইউনিটের মধ্যে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/urlcodec/">
+        <span class="tool-ico" aria-hidden="true">🔗</span>
+        <span class="tool-name">URL এনকোডার/ডিকোডার</span>
+        <span class="tool-desc">বিনামূল্যে ইউআরএল এনকোডার এবং ডিকোডার। শতাংশ-এনকোডিং সহ ইউআরএলগুলিতে বিশেষ অক্ষরগুলি এনকোড করুন বা শতাংশ-এনকোড করা URLগুলিকে প্লেইন টেক্সটে ফিরিয়ে আনুন।</span></a></div></section>
+<section class="cat"><h2>🔄 রূপান্তরকারী</h2><div class="grid"><a class="tool-card" href="/bn/angleconverter/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">অ্যাঙ্গেল ইউনিট কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে কোণ রূপান্তরকারী. ডিগ্রী, রেডিয়ান, গ্রেডিয়ান, আর্কমিনিট, আর্কসেকেন্ড, টার্ন এবং মিলিরাডিয়ানের মধ্যে অবিলম্বে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/areaconverter/">
+        <span class="tool-ico" aria-hidden="true">📐</span>
+        <span class="tool-name">এরিয়া ইউনিট কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে এলাকা রূপান্তরকারী. বর্গ মিটার, বর্গ ফুট, বর্গ মাইল, একর, হেক্টর, বর্গ কিলোমিটার এবং আরও তাত্ক্ষণিকভাবে রূপান্তর করুন৷</span></a>
+<a class="tool-card" href="/bn/energyconverter/">
+        <span class="tool-ico" aria-hidden="true">⚡</span>
+        <span class="tool-name">এনার্জি ইউনিট কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে শক্তি রূপান্তরকারী. জুল, কিলোজুল, ক্যালোরি, কিলোক্যালরি, ওয়াট-ঘন্টা, কিলোওয়াট-ঘণ্টা, বিটিইউ, ফুট-পাউন্ড এবং ইলেক্ট্রন ভোল্টের মধ্যে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/frequencyconverter/">
+        <span class="tool-ico" aria-hidden="true">〰️</span>
+        <span class="tool-name">ফ্রিকোয়েন্সি ইউনিট কনভার্টার</span>
+        <span class="tool-desc">ফ্রি ফ্রিকোয়েন্সি কনভার্টার। হার্টজ, কিলোহার্টজ, মেগাহার্টজ, গিগাহার্টজ এবং প্রতি মিনিটে বিপ্লব (RPM) এর মধ্যে রূপান্তর করুন। সেকেন্ডে সময়কাল দেখায়।</span></a>
+<a class="tool-card" href="/bn/pressureconverter/">
+        <span class="tool-ico" aria-hidden="true">🌡️</span>
+        <span class="tool-name">প্রেসার ইউনিট কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে চাপ রূপান্তরকারী. প্যাসকেল, বার, পিএসআই, বায়ুমণ্ডল, mmHg, inHg এবং অন্যান্য চাপ ইউনিটের মধ্যে অবিলম্বে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/storageconverter/">
+        <span class="tool-ico" aria-hidden="true">💾</span>
+        <span class="tool-name">ডেটা স্টোরেজ কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে ডেটা স্টোরেজ কনভার্টার। বিট, বাইট, কিলোবাইট, মেগাবাইট, গিগাবাইট, টেরাবাইট, পেটাবাইট এবং তাদের বাইনারি প্রতিরূপের মধ্যে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/volumeconverter/">
+        <span class="tool-ico" aria-hidden="true">🥤</span>
+        <span class="tool-name">ভলিউম ইউনিট কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে ভলিউম রূপান্তরকারী. লিটার, মিলিলিটার, ইউএস গ্যালন, ফ্লুইড আউন্স, কাপ, পিন্ট, কোয়ার্টস, কিউবিক মিটার এবং আরও অনেক কিছুর মধ্যে রূপান্তর করুন।</span></a></div></section>
+<section class="cat"><h2>💻 বিকাশকারী সরঞ্জাম</h2><div class="grid"><a class="tool-card" href="/bn/base64codec/">
+        <span class="tool-ico" aria-hidden="true">🔐</span>
+        <span class="tool-name">বেস64 এনকোডার/ডিকোডার</span>
+        <span class="tool-desc">বিনামূল্যে বেস64 এনকোডার এবং ডিকোডার। Base64-এ পাঠ্য এনকোড করুন বা আপনার ব্রাউজারে অবিলম্বে সাধারণ পাঠ্যে Base64 স্ট্রিংগুলিকে ডিকোড করুন।</span></a>
+<a class="tool-card" href="/bn/cronbuilder/">
+        <span class="tool-ico" aria-hidden="true">[C]</span>
+        <span class="tool-name">ক্রোন এক্সপ্রেশন বিল্ডার</span>
+        <span class="tool-desc">ফ্রি ক্রন এক্সপ্রেশন নির্মাতা। ক্রন সময়সূচী এক্সপ্রেশন তৈরি করুন এবং বর্ণনা করুন।</span></a>
+<a class="tool-card" href="/bn/cssminifier/">
+        <span class="tool-ico" aria-hidden="true">💻</span>
+        <span class="tool-name">CSS মিনিফায়ার</span>
+        <span class="tool-desc">ফ্রি সিএসএস মিনিফায়ার। দ্রুত পৃষ্ঠা লোডের জন্য ফাইলের আকার কমাতে CSS থেকে সাদা স্থান, মন্তব্য এবং অপ্রয়োজনীয় অক্ষরগুলি সরান।</span></a>
+<a class="tool-card" href="/bn/csvtojson/">
+        <span class="tool-ico" aria-hidden="true">📋</span>
+        <span class="tool-name">CSV থেকে JSON কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে CSV থেকে JSON রূপান্তরকারী। একটি JSON অ্যারে অবজেক্টে রূপান্তর করতে হেডার সহ CSV ডেটা পেস্ট করুন। উদ্ধৃত মান এবং বিভিন্ন ডিলিমিটার পরিচালনা করে।</span></a>
+<a class="tool-card" href="/bn/diffchecker/">
+        <span class="tool-ico" aria-hidden="true">[D]</span>
+        <span class="tool-name">ডিফ চেকার</span>
+        <span class="tool-desc">দুটি পাঠের তুলনা করুন এবং লাইন দ্বারা লাইন পার্থক্য হাইলাইট করুন।</span></a>
+<a class="tool-card" href="/bn/hashgenerator/">
+        <span class="tool-ico" aria-hidden="true">#️⃣</span>
+        <span class="tool-name">হ্যাশ জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে হ্যাশ জেনারেটর. আপনার ব্রাউজারে যেকোনো টেক্সট ইনপুটের জন্য তাৎক্ষণিকভাবে SHA-256, SHA-1, এবং MD5 হ্যাশ গণনা করুন। কোথাও কোনো তথ্য পাঠানো হয় না।</span></a>
+<a class="tool-card" href="/bn/htmlbeautifier/">
+        <span class="tool-ico" aria-hidden="true">✨</span>
+        <span class="tool-name">এইচটিএমএল বিউটিফায়ার</span>
+        <span class="tool-desc">বিনামূল্যে HTML বিউটিফায়ার। অগোছালো বা মিনিফাইড এইচটিএমএল পেস্ট করুন এবং ভাল পঠনযোগ্যতার জন্য সঠিক ইন্ডেন্টেশন সহ এটি ফর্ম্যাট করুন।</span></a>
+<a class="tool-card" href="/bn/httpcodes/">
+        <span class="tool-ico" aria-hidden="true">[H]</span>
+        <span class="tool-name">HTTP স্ট্যাটাস কোড রেফারেন্স</span>
+        <span class="tool-desc">বর্ণনা সহ HTTP প্রতিক্রিয়া কোড 1xx-5xx এর সম্পূর্ণ তালিকা।</span></a>
+<a class="tool-card" href="/bn/jsonformatter/">
+        <span class="tool-ico" aria-hidden="true">{ }</span>
+        <span class="tool-name">JSON ফর্ম্যাটার এবং যাচাইকারী</span>
+        <span class="tool-desc">বিনামূল্যে JSON ফর্ম্যাটার এবং যাচাইকারী। সঠিক ইন্ডেন্টেশন সহ এটিকে ফরম্যাট করতে, এটিকে ছোট করতে বা ত্রুটির জন্য এটি পরীক্ষা করতে JSON পেস্ট করুন৷ অবিলম্বে আপনার ব্রাউজারে কাজ করে.</span></a>
+<a class="tool-card" href="/bn/jsonminifier/">
+        <span class="tool-ico" aria-hidden="true">📦</span>
+        <span class="tool-name">JSON মিনিফায়ার এবং ফর্ম্যাটার</span>
+        <span class="tool-desc">বিনামূল্যে JSON মিনিফায়ার এবং ফরম্যাটার। JSON সংকুচিত করতে হোয়াইটস্পেস সরান, বা পঠনযোগ্যতার জন্য যথাযথ ইন্ডেন্টেশন সহ ছোট JSON ফর্ম্যাট করুন।</span></a>
+<a class="tool-card" href="/bn/jsonpath/">
+        <span class="tool-ico" aria-hidden="true">{}</span>
+        <span class="tool-name">JSON পাথ টেস্টার</span>
+        <span class="tool-desc">বিনামূল্যে JSON পাথ পরীক্ষক. JSON পেস্ট করুন এবং মান বের করতে একটি ডট-নোটেশন কী পাথ লিখুন।</span></a>
+<a class="tool-card" href="/bn/jsontocsv/">
+        <span class="tool-ico" aria-hidden="true">📊</span>
+        <span class="tool-name">JSON থেকে CSV কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে JSON থেকে CSV রূপান্তরকারী। বস্তুর একটি JSON অ্যারে পেস্ট করুন এবং সঠিক শিরোনাম এবং পালানো মান সহ একটি CSV ফাইলে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/jwtdecoder/">
+        <span class="tool-ico" aria-hidden="true">[J]</span>
+        <span class="tool-name">JWT ডিকোডার</span>
+        <span class="tool-desc">বিনামূল্যে JWT ডিকোডার। JSON ওয়েব টোকেন ডিকোড এবং পরিদর্শন করুন।</span></a>
+<a class="tool-card" href="/bn/markdownhtml/">
+        <span class="tool-ico" aria-hidden="true">📝</span>
+        <span class="tool-name">এইচটিএমএল কনভার্টারে মার্কডাউন করুন</span>
+        <span class="tool-desc">HTML কনভার্টারে বিনামূল্যে মার্কডাউন। মার্কডাউন পেস্ট করুন এবং এইচটিএমএল আউটপুট এবং লাইভ প্রিভিউ পাশাপাশি দেখুন। শিরোনাম, তালিকা, লিঙ্ক, ছবি, কোড এবং বোল্ড/ইটালিক সমর্থন করে।</span></a>
+<a class="tool-card" href="/bn/markdownpreview/">
+        <span class="tool-ico" aria-hidden="true">[MD]</span>
+        <span class="tool-name">মার্কডাউন প্রিভিউ</span>
+        <span class="tool-desc">বিনামূল্যে লাইভ মার্কডাউন পূর্বরূপ. মার্কডাউন লিখুন এবং রিয়েল টাইমে রেন্ডার করা HTML প্রিভিউ দেখুন।</span></a>
+<a class="tool-card" href="/bn/regexcheatsheet/">
+        <span class="tool-ico" aria-hidden="true">[R]</span>
+        <span class="tool-name">Regex চিট শীট</span>
+        <span class="tool-desc">রেগুলার এক্সপ্রেশন সিনট্যাক্সের জন্য দ্রুত রেফারেন্স।</span></a>
+<a class="tool-card" href="/bn/regextester/">
+        <span class="tool-ico" aria-hidden="true">🔍</span>
+        <span class="tool-name">রেগুলার এক্সপ্রেশন টেস্টার</span>
+        <span class="tool-desc">ফ্রি রেগুলার এক্সপ্রেশন টেস্টার। রিয়েল টাইমে হাইলাইট করা ম্যাচগুলি দেখতে একটি রেজেক্স প্যাটার্ন এবং টেস্ট স্ট্রিং লিখুন। সমস্ত জাভাস্ক্রিপ্ট রেজেক্স পতাকা সমর্থন করে।</span></a>
+<a class="tool-card" href="/bn/sluggen/">
+        <span class="tool-ico" aria-hidden="true">🔗</span>
+        <span class="tool-name">ইউআরএল স্লাগ জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে URL স্লাগ জেনারেটর. বিশেষ অক্ষর সরিয়ে এবং হাইফেন দিয়ে স্পেস প্রতিস্থাপন করে যেকোনো শিরোনাম বা পাঠ্যকে একটি পরিষ্কার, ইউআরএল-বান্ধব স্লাগে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/textencoder/">
+        <span class="tool-ico" aria-hidden="true">[TE]</span>
+        <span class="tool-name">টেক্সট এনকোডার এবং ডিকোডার</span>
+        <span class="tool-desc">বিনামূল্যে পাঠ্য এনকোডার. URL, HTML সত্তা এবং Base64 এনকোড/ডিকোড।</span></a>
+<a class="tool-card" href="/bn/unixperms/">
+        <span class="tool-ico" aria-hidden="true">[P]</span>
+        <span class="tool-name">ইউনিক্স ফাইল পারমিশন ক্যালকুলেটর</span>
+        <span class="tool-desc">chmod অনুমতি টগল করুন এবং অক্টাল কোড এবং প্রতীকী স্বরলিপি পান।</span></a>
+<a class="tool-card" href="/bn/uuidgen/">
+        <span class="tool-ico" aria-hidden="true">🆔</span>
+        <span class="tool-name">UUID জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে UUID জেনারেটর. আপনার ব্রাউজারে অবিলম্বে এক বা একাধিক র্যান্ডম UUID v4 শনাক্তকারী তৈরি করুন। এটি অনুলিপি করতে কোনো UUID ক্লিক করুন.</span></a></div></section>
+<section class="cat"><h2>🎨 ডিজাইন এবং সিএসএস</h2><div class="grid"><a class="tool-card" href="/bn/aspectcalc/">
+        <span class="tool-ico" aria-hidden="true">📺</span>
+        <span class="tool-name">অ্যাসপেক্ট রেশিও ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি অ্যাসপেক্ট রেশিও ক্যালকুলেটর। সরলীকৃত আকৃতির অনুপাত খুঁজে পেতে প্রস্থ এবং উচ্চতা লিখুন এবং অনুপাত বজায় রেখে যেকোন নতুন মাত্রায় স্কেল করুন।</span></a>
+<a class="tool-card" href="/bn/borderradius/">
+        <span class="tool-ico" aria-hidden="true">⬛</span>
+        <span class="tool-name">বর্ডার রেডিয়াস জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে সীমানা ব্যাসার্ধ জেনারেটর. স্লাইডারগুলির সাহায্যে প্রতিটি কোণকে পৃথকভাবে নিয়ন্ত্রণ করুন, একটি লাইভ প্রিভিউ দেখুন এবং CSS বর্ডার-ব্যাসার্ধ মান অনুলিপি করুন৷</span></a>
+<a class="tool-card" href="/bn/boxshadow/">
+        <span class="tool-ico" aria-hidden="true">🟫</span>
+        <span class="tool-name">CSS বক্স শ্যাডো জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে CSS বক্স ছায়া জেনারেটর. দৃশ্যত ছায়া ডিজাইন করতে অফসেট, ব্লার, স্প্রেড এবং রঙ সামঞ্জস্য করুন। CSS কোড কপি করুন।</span></a>
+<a class="tool-card" href="/bn/contrastchecker/">
+        <span class="tool-ico" aria-hidden="true">[CC]</span>
+        <span class="tool-name">কালার কনট্রাস্ট চেকার</span>
+        <span class="tool-desc">বিনামূল্যে WCAG কনট্রাস্ট চেকার। বৈসাদৃশ্য অনুপাত গণনা করুন এবং WCAG 2.1 AA এবং AAA সম্মতি পরীক্ষা করুন।</span></a>
+<a class="tool-card" href="/bn/cssgradient/">
+        <span class="tool-ico" aria-hidden="true">🌈</span>
+        <span class="tool-name">CSS গ্রেডিয়েন্ট জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে CSS গ্রেডিয়েন্ট জেনারেটর. দুটি রং বেছে নিন, রৈখিক, রেডিয়াল বা কনিক চয়ন করুন, কোণ সামঞ্জস্য করুন এবং জেনারেট করা CSS অনুলিপি করুন।</span></a>
+<a class="tool-card" href="/bn/fontidentifier/">
+        <span class="tool-ico" aria-hidden="true">[FN]</span>
+        <span class="tool-name">ফন্ট বৈশিষ্ট্য পূর্বরূপ</span>
+        <span class="tool-desc">যে কোনো ফন্ট পরিবার, আকার এবং ওজন সমন্বয় পূর্বরূপ.</span></a>
+<a class="tool-card" href="/bn/fontpair/">
+        <span class="tool-ico" aria-hidden="true">✍️</span>
+        <span class="tool-name">ফন্ট পেয়ার প্রিভিউ</span>
+        <span class="tool-desc">বিনামূল্যে ফন্ট জোড়া পূর্বরূপ. একটি লাইভ প্রিভিউতে তারা একসাথে দেখতে কেমন তা দেখতে জনপ্রিয় Google ফন্টগুলি থেকে একটি শিরোনাম ফন্ট এবং বডি ফন্ট নির্বাচন করুন৷</span></a>
+<a class="tool-card" href="/bn/imagecolorpicker/">
+        <span class="tool-ico" aria-hidden="true">[ICP]</span>
+        <span class="tool-name">ইমেজ কালার পিকার</span>
+        <span class="tool-desc">বিনামূল্যে ইমেজ রঙ চয়নকারী. একটি ছবি আপলোড করুন এবং সঠিক রং বাছাই করতে ক্লিক করুন। হেক্স, আরজিবি এবং এইচএসএল মান দেখায়।</span></a>
+<a class="tool-card" href="/bn/palettemaker/">
+        <span class="tool-ico" aria-hidden="true">🎨</span>
+        <span class="tool-name">কালার প্যালেট জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে রঙ প্যালেট জেনারেটর. একটি বেস রঙ লিখুন এবং পরিপূরক, ট্রায়াডিক, সাদৃশ্য বা একরঙা রঙের প্যালেট তৈরি করুন। হেক্স কোড কপি করুন।</span></a></div></section>
+<section class="cat"><h2>🔬 বিজ্ঞান</h2><div class="grid"><a class="tool-card" href="/bn/gravitycalc/">
+        <span class="tool-ico" aria-hidden="true">[G]</span>
+        <span class="tool-name">মহাকর্ষ বল ক্যালকুলেটর</span>
+        <span class="tool-desc">নিউটন সূত্র F = Gm1m2/r বর্গ ব্যবহার করে মহাকর্ষ বল গণনা করুন।</span></a>
+<a class="tool-card" href="/bn/idealgas/">
+        <span class="tool-ico" aria-hidden="true">💨</span>
+        <span class="tool-name">আদর্শ গ্যাস আইন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে আদর্শ গ্যাস আইন ক্যালকুলেটর. PV = nRT ব্যবহার করে অজানা চলকের সমাধান করতে চাপ, আয়তন, মোল এবং তাপমাত্রার যেকোনো 3 লিখুন।</span></a>
+<a class="tool-card" href="/bn/kinematics/">
+        <span class="tool-ico" aria-hidden="true">🏎️</span>
+        <span class="tool-name">কাইনেমেটিক সমীকরণ সমাধানকারী</span>
+        <span class="tool-desc">বিনামূল্যে গতিবিদ্যা সমাধানকারী. গতির সমীকরণ ব্যবহার করে অজানা কাইনেমেটিক ভেরিয়েবলের সমাধান করতে 5টি ভেরিয়েবলের (v₀, v, a, t, d) যেকোনো 3টি লিখুন।</span></a>
+<a class="tool-card" href="/bn/lightyear/">
+        <span class="tool-ico" aria-hidden="true">[LY]</span>
+        <span class="tool-name">আলোকবর্ষ ক্যালকুলেটর</span>
+        <span class="tool-desc">আলোকবর্ষ, পার্সেক, জ্যোতির্বিদ্যা ইউনিট, কিলোমিটার এবং মাইলের মধ্যে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/molarmass/">
+        <span class="tool-ico" aria-hidden="true">⚗️</span>
+        <span class="tool-name">মোলার ভর ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে মোলার ভর ক্যালকুলেটর. G/mol এ মোলার ভর (আণবিক ওজন) গণনা করতে H2O বা NaCl এর মত একটি রাসায়নিক সূত্র লিখুন।</span></a>
+<a class="tool-card" href="/bn/newtonslaw/">
+        <span class="tool-ico" aria-hidden="true">🍎</span>
+        <span class="tool-name">নিউটনের দ্বিতীয় সূত্র ক্যালকুলেটর (F = ma)</span>
+        <span class="tool-desc">বিনামূল্যে নিউটনের দ্বিতীয় আইন ক্যালকুলেটর. F = ma ব্যবহার করে বল (F), ভর (m) বা ত্বরণ (a) এর জন্য সমাধান করুন। একক এবং ব্যাখ্যা দেখায়।</span></a>
+<a class="tool-card" href="/bn/ohmslaw/">
+        <span class="tool-ico" aria-hidden="true">⚡</span>
+        <span class="tool-name">ওহমের আইন ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে ওহমের আইন ক্যালকুলেটর। অনুপস্থিত মান এবং শক্তি গণনা করতে ভোল্টেজ (V), কারেন্ট (A) বা রোধ (Ω) এর যেকোনো দুটি লিখুন।</span></a>
+<a class="tool-card" href="/bn/periodictable/">
+        <span class="tool-ico" aria-hidden="true">[PT]</span>
+        <span class="tool-name">পর্যায় সারণী রেফারেন্স</span>
+        <span class="tool-desc">নাম, প্রতীক বা পারমাণবিক সংখ্যা দ্বারা সমস্ত 118টি উপাদান অনুসন্ধান করুন।</span></a>
+<a class="tool-card" href="/bn/phcalculator/">
+        <span class="tool-ico" aria-hidden="true">🧪</span>
+        <span class="tool-name">পিএইচ ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে pH ক্যালকুলেটর। pH গণনা করতে এবং সমাধানটি শ্রেণিবদ্ধ করতে হাইড্রোজেন আয়ন ঘনত্ব [H⁺] বা হাইড্রক্সাইড ঘনত্ব [OH⁻] লিখুন।</span></a>
+<a class="tool-card" href="/bn/resistorcolor/">
+        <span class="tool-ico" aria-hidden="true">🔩</span>
+        <span class="tool-name">রেজিস্টর কালার কোড ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে প্রতিরোধক রঙ কোড ক্যালকুলেটর. একটি 4-ব্যান্ড বা 5-ব্যান্ড প্রতিরোধকের রঙের ব্যান্ড নির্বাচন করুন এর প্রতিরোধের মান এবং সহনশীলতা ডিকোড করতে।</span></a>
+<a class="tool-card" href="/bn/scinotation/">
+        <span class="tool-ico" aria-hidden="true">[SN]</span>
+        <span class="tool-name">বৈজ্ঞানিক নোটেশন কনভার্টার</span>
+        <span class="tool-desc">মানক সংখ্যা এবং বৈজ্ঞানিক স্বরলিপি মধ্যে রূপান্তর.</span></a>
+<a class="tool-card" href="/bn/speedconverter/">
+        <span class="tool-ico" aria-hidden="true">💨</span>
+        <span class="tool-name">স্পিড কনভার্টার</span>
+        <span class="tool-desc">বিনামূল্যে গতি রূপান্তরকারী. প্রতি সেকেন্ডে মিটার, ঘণ্টায় কিলোমিটার, ঘণ্টায় মাইল, নট এবং মাক সংখ্যার মধ্যে তাৎক্ষণিকভাবে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/tempconverter/">
+        <span class="tool-ico" aria-hidden="true">🌡️</span>
+        <span class="tool-name">তাপমাত্রা রূপান্তরকারী</span>
+        <span class="tool-desc">বিনামূল্যে তাপমাত্রা রূপান্তরকারী. তাৎক্ষণিকভাবে সেলসিয়াস, ফারেনহাইট, কেলভিন এবং র‍্যাঙ্কাইনের মধ্যে তাপমাত্রা রূপান্তর করুন। একবারে চারটি স্কেল দেখুন।</span></a>
+<a class="tool-card" href="/bn/tempconverterx/">
+        <span class="tool-ico" aria-hidden="true">[T]</span>
+        <span class="tool-name">তাপমাত্রা রূপান্তরকারী</span>
+        <span class="tool-desc">সেলসিয়াস, ফারেনহাইট, কেলভিন, র‍্যাঙ্কাইন, ডেলিসল, নিউটন, রেউমুর এবং রোমারের মধ্যে রূপান্তর করুন।</span></a>
+<a class="tool-card" href="/bn/wavecalc/">
+        <span class="tool-ico" aria-hidden="true">[W]</span>
+        <span class="tool-name">ওয়েভ প্রোপার্টি ক্যালকুলেটর</span>
+        <span class="tool-desc">v = f x তরঙ্গদৈর্ঘ্য ব্যবহার করে ফ্রিকোয়েন্সি, তরঙ্গদৈর্ঘ্য এবং তরঙ্গের গতি গণনা করুন।</span></a></div></section>
+<section class="cat"><h2>✅ উৎপাদনশীলতা</h2><div class="grid"><a class="tool-card" href="/bn/checklistmaker/">
+        <span class="tool-ico" aria-hidden="true">✅</span>
+        <span class="tool-name">চেকলিস্ট মেকার</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন চেকলিস্ট নির্মাতা. কাস্টম চেকলিস্ট তৈরি করুন, আইটেমগুলি সম্পূর্ণ করার সাথে সাথে চেক বন্ধ করুন এবং আপনার অগ্রগতি ট্র্যাক করুন। স্থানীয় স্টোরেজে সংরক্ষণ করে।</span></a>
+<a class="tool-card" href="/bn/flashcards/">
+        <span class="tool-ico" aria-hidden="true">🃏</span>
+        <span class="tool-name">ফ্ল্যাশকার্ড মেকার</span>
+        <span class="tool-desc">ফ্রি ফ্ল্যাশকার্ড মেকার। প্রশ্ন-উত্তর ফ্ল্যাশকার্ড সেট তৈরি করুন এবং একটি ক্লিক-টু-ফ্লিপ কার্ড ইন্টারফেসে সেগুলি অধ্যয়ন করুন। তথ্য স্থানীয়ভাবে সংরক্ষিত.</span></a>
+<a class="tool-card" href="/bn/focusmode/">
+        <span class="tool-ico" aria-hidden="true">✍️</span>
+        <span class="tool-name">ফোকাস মোড লেখার টুল</span>
+        <span class="tool-desc">বিনামূল্যে ফোকাস মোড লেখক. লাইভ শব্দ গণনা, অক্ষর গণনা এবং শব্দ লক্ষ্য অগ্রগতি ট্র্যাকিং সহ বিভ্রান্তি-মুক্ত লেখার পরিবেশ।</span></a>
+<a class="tool-card" href="/bn/habittracker/">
+        <span class="tool-ico" aria-hidden="true">✅</span>
+        <span class="tool-name">অভ্যাস ট্র্যাকার</span>
+        <span class="tool-desc">বিনামূল্যে ব্রাউজার ভিত্তিক অভ্যাস ট্র্যাকার. অভ্যাস যোগ করুন এবং তাদের প্রতিদিন সম্পন্ন চিহ্নিত করুন। স্ট্রীক এবং সমাপ্তির হার ট্র্যাক করে। তথ্য স্থানীয়ভাবে সংরক্ষিত.</span></a>
+<a class="tool-card" href="/bn/keyboardshortcuts/">
+        <span class="tool-ico" aria-hidden="true">[KB]</span>
+        <span class="tool-name">কীবোর্ড শর্টকাট রেফারেন্স</span>
+        <span class="tool-desc">উইন্ডোজ, ম্যাক, এক্সেল, ভিএস কোড এবং ক্রোমের জন্য কীবোর্ড শর্টকাটগুলি ব্রাউজ করুন এবং অনুসন্ধান করুন৷</span></a>
+<a class="tool-card" href="/bn/meetingcost/">
+        <span class="tool-ico" aria-hidden="true">💸</span>
+        <span class="tool-name">মিটিং কস্ট ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে মিটিং খরচ ক্যালকুলেটর. বেতন ডলারে যেকোন মিটিংয়ের প্রকৃত খরচ গণনা করতে অংশগ্রহণকারীদের, গড় বেতন এবং সময়কাল লিখুন।</span></a>
+<a class="tool-card" href="/bn/notepad/">
+        <span class="tool-ico" aria-hidden="true">📓</span>
+        <span class="tool-name">অনলাইন নোটপ্যাড</span>
+        <span class="tool-desc">বিনামূল্যে অনলাইন নোটপ্যাড. আপনার ব্রাউজারে একাধিক নোট তৈরি করুন, সংরক্ষণ করুন এবং পরিচালনা করুন। আপনি টাইপ করার সাথে সাথে স্বয়ংক্রিয়ভাবে সংরক্ষণ করে। কোন অ্যাকাউন্টের প্রয়োজন নেই।</span></a>
+<a class="tool-card" href="/bn/pomodoropro/">
+        <span class="tool-ico" aria-hidden="true">🍅</span>
+        <span class="tool-name">পোমোডোরো টাইমার প্রো</span>
+        <span class="tool-desc">সেশন ইতিহাস সহ বিনামূল্যে Pomodoro টাইমার। কাস্টমাইজযোগ্য ফোকাস এবং বিরতি সময়কাল. সম্পূর্ণ সেশন এবং মোট ফোকাস সময় ট্র্যাক করে।</span></a>
+<a class="tool-card" href="/bn/readingspeed/">
+        <span class="tool-ico" aria-hidden="true">👁️</span>
+        <span class="tool-name">পড়ার গতি পরীক্ষা</span>
+        <span class="tool-desc">বিনামূল্যে পড়ার গতি পরীক্ষা। একটি প্যাসেজ পড়ুন এবং প্রতি মিনিটে শব্দে আপনার পড়ার গতি দেখুন (WPM)। প্রাপ্তবয়স্কদের গড় 200-300 WPM পড়ে।</span></a>
+<a class="tool-card" href="/bn/studyplanner/">
+        <span class="tool-ico" aria-hidden="true">📚</span>
+        <span class="tool-name">অধ্যয়ন পরিকল্পনাকারী</span>
+        <span class="tool-desc">বিনামূল্যে অধ্যয়ন পরিকল্পনাকারী. আপনার বিষয় জুড়ে একটি সুষম অধ্যয়নের সময়সূচী তৈরি করতে আপনার পরীক্ষার তারিখ, মোট অধ্যয়নের সময় এবং দৈনিক প্রাপ্যতা লিখুন।</span></a>
+<a class="tool-card" href="/bn/teamgenerator/">
+        <span class="tool-ico" aria-hidden="true">👥</span>
+        <span class="tool-name">র্যান্ডম টিম জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে র্যান্ডম দল জেনারেটর. নাম পেস্ট করুন এবং দলগুলির সংখ্যা নির্বাচন করুন যাতে এলোমেলোভাবে লোকেদের সুষম গোষ্ঠীতে বিভক্ত করা যায়। খেলাধুলা, ক্লাস প্রকল্প এবং গেমের জন্য দুর্দান্ত।</span></a>
+<a class="tool-card" href="/bn/todolist/">
+        <span class="tool-ico" aria-hidden="true">📋</span>
+        <span class="tool-name">করণীয় তালিকা</span>
+        <span class="tool-desc">বিনামূল্যে ব্রাউজার করণীয় তালিকা. কাজগুলি যোগ করুন, সেগুলি বন্ধ করুন, স্থিতি অনুসারে ফিল্টার করুন এবং সম্পূর্ণ হওয়া আইটেমগুলি সাফ করুন৷ সমস্ত ডেটা স্থানীয়ভাবে সংরক্ষিত।</span></a>
+<a class="tool-card" href="/bn/typingtest/">
+        <span class="tool-ico" aria-hidden="true">⌨️</span>
+        <span class="tool-name">টাইপিং স্পিড টেস্ট</span>
+        <span class="tool-desc">বিনামূল্যে টাইপিং গতি পরীক্ষা. আপনার শব্দ প্রতি মিনিটে পরিমাপ করুন (WPM) এবং একটি নির্দিষ্ট টাইপিং পরীক্ষার মাধ্যমে সঠিকতা। রিয়েল-টাইম পরিসংখ্যান দেখায়।</span></a></div></section>
+<section class="cat"><h2>🎓 শিক্ষা</h2><div class="grid"><a class="tool-card" href="/bn/gpacalc/">
+        <span class="tool-ico" aria-hidden="true">🎓</span>
+        <span class="tool-name">জিপিএ ক্যালকুলেটর</span>
+        <span class="tool-desc">ফ্রি জিপিএ ক্যালকুলেটর। 4.0 স্কেলে আপনার GPA গণনা করতে গ্রেড এবং ক্রেডিট ঘন্টা সহ কোর্স যোগ করুন। লেটার গ্রেড A-F সমর্থন করে।</span></a>
+<a class="tool-card" href="/bn/multtable/">
+        <span class="tool-ico" aria-hidden="true">✖️</span>
+        <span class="tool-name">গুণন টেবিল জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে গুণন টেবিল জেনারেটর. একটি সংখ্যা লিখুন এর সম্পূর্ণ গুণন সারণী দেখতে, অথবা 20x20 পর্যন্ত একটি সম্পূর্ণ টাইম টেবিল গ্রিড তৈরি করুন৷</span></a>
+<a class="tool-card" href="/bn/testgrade/">
+        <span class="tool-ico" aria-hidden="true">📝</span>
+        <span class="tool-name">টেস্ট গ্রেড ক্যালকুলেটর</span>
+        <span class="tool-desc">বিনামূল্যে পরীক্ষা গ্রেড ক্যালকুলেটর. অবিলম্বে শতাংশ এবং লেটার গ্রেড (A, B, C, D বা F) পেতে আপনার স্কোর এবং মোট পয়েন্ট লিখুন।</span></a></div></section>
+<section class="cat"><h2>🔒 নিরাপত্তা এবং গোপনীয়তা</h2><div class="grid"><a class="tool-card" href="/bn/passwordgen/">
+        <span class="tool-ico" aria-hidden="true">🔒</span>
+        <span class="tool-name">পাসওয়ার্ড জেনারেটর</span>
+        <span class="tool-desc">বিনামূল্যে পাসওয়ার্ড জেনারেটর. কাস্টম দৈর্ঘ্য এবং অক্ষর সেট সহ শক্তিশালী, এলোমেলো পাসওয়ার্ড তৈরি করুন। বড় হাতের অক্ষর, ছোট হাতের অক্ষর, সংখ্যা এবং প্রতীক নিয়ন্ত্রণ করুন।</span></a>
+<a class="tool-card" href="/bn/passwordstrength/">
+        <span class="tool-ico" aria-hidden="true">[PWS]</span>
+        <span class="tool-name">পাসওয়ার্ড শক্তি বিশ্লেষক</span>
+        <span class="tool-desc">পাসওয়ার্ডের শক্তি বিশ্লেষণ করুন এবং কার্যকরী উন্নতির টিপস পান।</span></a></div></section>
 </main>
 <footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
-  <p><a href="/glossary.html">সব টুল</a></p></footer>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
 </body>
 </html>

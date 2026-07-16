@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>अभाज्य संख्या चेकर - क्या यह संख्या अभाज्य है?</title>
+<meta name="description" content="निःशुल्क अभाज्य संख्या चेकर. कोई भी धनात्मक पूर्णांक दर्ज करके तुरंत पता लगाएं कि क्या वह अभाज्य है। सभी भाजक और अभाज्य गुणनखंड भी दिखाता है।">
+<link rel="canonical" href="https://mikaio.dev/hi/primechecker/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/primechecker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/primechecker/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/primechecker/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/primechecker/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/primechecker/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/primechecker/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/primechecker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/primechecker/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/primechecker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/primechecker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/primechecker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="अभाज्य संख्या चेकर - क्या यह संख्या अभाज्य है?">
+<meta property="og:description" content="निःशुल्क अभाज्य संख्या चेकर. कोई भी धनात्मक पूर्णांक दर्ज करके तुरंत पता लगाएं कि क्या वह अभाज्य है। सभी भाजक और अभाज्य गुणनखंड भी दिखाता है।">
+<meta property="og:url" content="https://mikaio.dev/hi/primechecker/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"अभाज्य संख्या चेकर - क्या यह संख्या अभाज्य है?","url":"https://mikaio.dev/hi/primechecker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"निःशुल्क अभाज्य संख्या चेकर. कोई भी धनात्मक पूर्णांक दर्ज करके तुरंत पता लगाएं कि क्या वह अभाज्य है। सभी भाजक और अभाज्य गुणनखंड भी दिखाता है।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"प्राइम नंबर चेकर","item":"https://mikaio.dev/hi/primechecker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"अभाज्य संख्या क्या है?","acceptedAnswer":{"@type":"Answer","text":"अभाज्य संख्या 1 से बड़ा एक धनात्मक पूर्णांक है जिसमें 1 और स्वयं के अलावा कोई भी धनात्मक भाजक नहीं होता है। प्रथम अभाज्य संख्याएँ 2, 3, 5, 7, 11, 13, 17, 19, 23, और 29 हैं। आधुनिक परंपरा के अनुसार संख्या 1 को अभाज्य नहीं माना जाता है।"}},{"@type":"Question","name":"अभाज्य गुणनखंडन क्या है?","acceptedAnswer":{"@type":"Answer","text":"1 से बड़े प्रत्येक पूर्णांक को ठीक एक ही तरीके से अभाज्य संख्याओं के गुणनफल के रूप में व्यक्त किया जा सकता है (अंकगणित का मौलिक प्रमेय)। उदाहरण के लिए, 60 = 2 × 2 × 3 × 5."}},{"@type":"Question","name":"मैं कितनी बड़ी संख्या की जाँच कर सकता हूँ?","acceptedAnswer":{"@type":"Answer","text":"परीक्षण प्रभाग का उपयोग करके उपकरण लगभग 10 मिलियन तक की संख्याओं के लिए कुशलतापूर्वक काम करता है। बहुत बड़ी संख्या को संसाधित होने में कुछ समय लग सकता है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/primechecker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/primechecker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/primechecker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/primechecker/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/primechecker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/primechecker/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/primechecker/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>प्राइम नंबर चेकर</span></nav>
+  <h1>प्राइम नंबर चेकर</h1>
+  <p class="lead">यह जांचने के लिए कि क्या यह अभाज्य है, एक धनात्मक पूर्णांक दर्ज करें और इसके भाजक और अभाज्य गुणनखंडन देखें।</p>
+  <section class="widget" id="tool"><form id="prime-form"><div class="row"><div class="field"><label for="prime-n">संख्या</label><input type="number" id="prime-n" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="big" id="prime-out">—</span></div><div id="prime-factors" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>क्या यह संख्या अभाज्य है?</h2>
+<p>अभाज्य संख्या गणित की सबसे बुनियादी अवधारणाओं में से एक है - 1 से बड़ा एक सकारात्मक पूर्णांक जिसे 1 और स्वयं के अलावा किसी अन्य संख्या से समान रूप से विभाजित नहीं किया जा सकता है। यह निर्धारित करना कि कोई दी गई संख्या अभाज्य है या नहीं, एक ऐसा प्रश्न है जिसने सहस्राब्दियों से गणितज्ञों को आकर्षित किया है और आधुनिक क्रिप्टोग्राफी में व्यावहारिक रूप से महत्वपूर्ण बना हुआ है। यह टूल आपके द्वारा दर्ज की गई किसी भी संख्या का तुरंत उत्तर देता है, और भाजक और अभाज्य गुणनखंड की पूरी सूची भी दिखाता है।</p>
+<h2>किसी संख्या को अभाज्य क्या बनाता है?</h2>
+<p>परिभाषा सरल है: एक धनात्मक पूर्णांक अभाज्य है यदि इसका एकमात्र धनात्मक भाजक 1 और स्वयं है। संख्या 7 अभाज्य है क्योंकि इसे केवल 1 और 7 द्वारा समान रूप से विभाजित किया जा सकता है। संख्या 8 अभाज्य नहीं है - यह 2 और 4 से भी विभाज्य है। संख्या 1 एक विशेष मामला है: आधुनिक गणितीय परंपरा के अनुसार इसे अभाज्य नहीं माना जाता है, क्योंकि इसे शामिल करने से अभाज्य गुणनखंडन की विशिष्टता टूट जाएगी।</p>
+<p>पहले कुछ अभाज्य संख्याएँ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47 हैं। ध्यान दें कि 2 एकमात्र सम अभाज्य संख्या है, क्योंकि प्रत्येक अन्य सम संख्या 2 से विभाज्य है।</p>
+<h2>बड़े पैमाने पर प्रारंभिकता परीक्षण</h2>
+<p>ट्रायल डिवीजन, यह उपकरण जिस विधि का उपयोग करता है, वह लाखों तक की संख्याओं के लिए पूरी तरह से अच्छी तरह से काम करती है, लेकिन वास्तविक दुनिया क्रिप्टोग्राफी में उपयोग की जाने वाली वास्तव में विशाल संख्याओं के लिए अव्यावहारिक हो जाती है, जो सैकड़ों अंकों तक चल सकती है। उनके लिए, गणितज्ञ और कंप्यूटर वैज्ञानिक संभाव्य प्राइमलिटी परीक्षणों का उपयोग करते हैं, जैसे कि मिलर-राबिन परीक्षण, जो किसी संख्या की पूर्ण निश्चितता के साथ अभाज्य होने की गारंटी नहीं दे सकता है, लेकिन त्रुटि की संभावना के साथ समग्रता को खारिज कर सकता है, इतनी छोटी कि इसे व्यवहार में नगण्य माना जाता है - वास्तव में, उसी गणना के दौरान होने वाली हार्डवेयर त्रुटि की संभावना से भी कम। इन तेज़, संभाव्य तरीकों की आवश्यकता क्यों थी, इसकी सराहना करने से पहले परीक्षण प्रभाग को समझना सही आधार है।</p>
+<h2>प्रधान गुणनखंडन</h2>
+<p>अंकगणित के मौलिक प्रमेय में कहा गया है कि 1 से बड़े प्रत्येक पूर्णांक को कारकों के क्रम तक, बिल्कुल एक तरह से अभाज्य संख्याओं के उत्पाद के रूप में व्यक्त किया जा सकता है। इसे प्रधान गुणनखंडन कहा जाता है। उदाहरण के लिए: 12 = 2 × 2 × 3, 2² × 3 के रूप में लिखा जाता है। संख्या 360 = 2³ × 3² × 5। किसी संख्या का अभाज्य गुणनखंड ज्ञात करने का अर्थ है इसे इसके अभाज्य घटकों में तोड़ना, जो इसकी गणितीय संरचना को प्रकट करता है।</p>
+<h2>अभाज्य संख्याएँ क्यों मायने रखती हैं</h2>
+<p>अभाज्य सभी पूर्णांकों के निर्माण खंड हैं - प्रत्येक मिश्रित (गैर-अभाज्य) संख्या का निर्माण अभाज्य संख्याओं को एक साथ गुणा करके किया जा सकता है। यह उन्हें संख्या सिद्धांत का केंद्र बनाता है, जो पूर्णांकों के गुणों से संबंधित गणित की शाखा है।</p>
+<p>आधुनिक कंप्यूटिंग में, बड़ी संख्याओं को उनके प्रमुख घटकों में विभाजित करने की कठिनाई आरएसए एन्क्रिप्शन की नींव है, जो इंटरनेट के अधिकांश एन्क्रिप्टेड संचार को सुरक्षित करती है। सार्वजनिक कुंजी बनाने के लिए दो बड़े अभाज्य संख्याओं को एक साथ गुणा किया जाता है। उस उत्पाद को उसके अभाज्य संख्याओं में वापस गुणनखंडित करना - उन्हें पहले से जाने बिना - पर्याप्त बड़ी संख्याओं के लिए कम्प्यूटेशनल रूप से संभव नहीं है।</p>
+<h2>चेक कैसे काम करता है</h2>
+<p>उपकरण परीक्षण विभाजन का उपयोग करता है: यह परीक्षण करता है कि संख्या 2 से लेकर संख्या के वर्गमूल तक किसी भी पूर्णांक से विभाज्य है या नहीं। यदि ऐसा कोई भाजक मौजूद है, तो संख्या समग्र है और उपकरण उसके कारकों को रिकॉर्ड करता है। यदि कोई मौजूद नहीं है, तो संख्या अभाज्य है। वर्गमूल सीमा काम करती है क्योंकि यदि किसी संख्या n का कोई गुणनखंड √n से बड़ा है, तो उसका संगत गुणनखंड √n से छोटा भी होना चाहिए, ताकि हम वर्गमूल पर रुक सकें।</p>
+<h2>एक त्वरित कार्यशील उदाहरण</h2>
+<p>संख्या 91 लें। यह विषम है, 3 से विभाज्य नहीं है (9+1=10, 3 का गुणज नहीं), और 0 या 5 में समाप्त नहीं होता है, इसलिए सभी छोटे, स्पष्ट परीक्षणों से पता चलता है कि यह अभाज्य हो सकता है - लेकिन 7 से भाग की जाँच करने पर 91 ÷ 7 = 13 का सटीक पता चलता है, इसलिए 91 वास्तव में संयुक्त है, अभाज्य गुणनखंडन 7 × 13 के साथ। यह एक उत्कृष्ट उदाहरण है जिसका उपयोग यह बताने के लिए किया जाता है कि &quot;यह किसी भी चीज़ से विभाज्य क्यों नहीं दिखता है स्पष्ट&quot; &quot;यह अभाज्य है&quot; के समान नहीं है: निश्चित रूप से जानने का एकमात्र विश्वसनीय तरीका प्रत्येक उम्मीदवार भाजक को वर्गमूल तक जांचना है, वास्तव में यह उपकरण स्वचालित रूप से और तुरंत क्या करता है।</p>
+<h2>रोजमर्रा के उपयोग</h2>
+<p>जबकि अभाज्य संख्याओं का गहरा गणितीय महत्व क्रिप्टोग्राफी और संख्या सिद्धांत में है, रोजमर्रा के उपयोग में पहेलियाँ, शैक्षिक अभ्यास और प्रोग्रामिंग चुनौतियाँ शामिल हैं। विभाज्यता, गुणनखंड और गुणज के बारे में सीखने वाले छात्रों को अक्सर अंकगणित अभ्यास के हिस्से के रूप में मौलिकता की जांच करने और गुणनखंड खोजने की आवश्यकता होती है।</p>
+<h2>चेकर का उपयोग कैसे करें</h2>
+<p>बॉक्स में कोई भी सकारात्मक पूर्णांक टाइप करें और परिणाम तुरंत दिखाई देगा: क्या संख्या अभाज्य है, और यदि नहीं, तो इसके विभाजकों की पूरी सूची और इसके अभाज्य गुणनखंडन को अलग-अलग अभाज्य शक्तियों में विभाजित किया गया है। संख्या के आकार पर कोई व्यावहारिक सीमा नहीं है जिसे आप रोजमर्रा के उपयोग के लिए जांच सकते हैं, क्योंकि परीक्षण-विभाजन विधि का उपयोग करने वाला यह उपकरण लाखों और उससे भी अधिक संख्याओं को लगभग तुरंत संभाल लेता है।</p>
+<h2>अभाज्य संख्याएँ अनंत हैं</h2>
+<p>यूक्लिड ने दो हज़ार साल पहले साबित कर दिया था कि कोई सबसे बड़ी अभाज्य संख्या नहीं है - सूची हमेशा के लिए चलती रहती है। उनका प्रमाण प्राचीन तर्क का एक सुंदर नमूना है: एक पल के लिए मान लें कि केवल सीमित संख्या में अभाज्य संख्याएँ थीं, उन सभी को एक साथ गुणा करें, और एक जोड़ें। परिणामी संख्या को मूल सूची में किसी भी अभाज्य द्वारा समान रूप से विभाजित नहीं किया जा सकता है, क्योंकि उनमें से किसी से विभाजित करने पर हमेशा एक शेष बचता है, इसलिए या तो यह नई संख्या स्वयं अभाज्य है, या इसमें कोई अन्य अभाज्य कारक है जो कथित रूप से पूर्ण सूची से गायब था - किसी भी तरह से, इस धारणा का खंडन करता है कि सूची पूर्ण थी। यह सुंदर तर्क, जिसके लिए किसी भी उन्नत गणित की आवश्यकता नहीं है, इस विषय के इतिहास में सबसे प्रसिद्ध प्रमाणों में से एक है।</p>
+<h2>निजी और तत्काल</h2>
+<p>गणना पूरी तरह से आपके ब्राउज़र में चलती है, इसलिए परिणाम आपके टाइप करते ही तुरंत दिखाई देता है और आपके द्वारा दर्ज किया गया कोई भी नंबर कभी भी किसी सर्वर पर नहीं भेजा जाता है, लॉग इन किया जाता है या साझा किया जाता है।</p>
+    <section class="faq"><h2>प्राइम चेकर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>अभाज्य संख्या क्या है?</dt><dd>अभाज्य संख्या 1 से बड़ा एक धनात्मक पूर्णांक है जिसमें 1 और स्वयं के अलावा कोई भी धनात्मक भाजक नहीं होता है। प्रथम अभाज्य संख्याएँ 2, 3, 5, 7, 11, 13, 17, 19, 23, और 29 हैं। आधुनिक परंपरा के अनुसार संख्या 1 को अभाज्य नहीं माना जाता है।</dd><dt>अभाज्य गुणनखंडन क्या है?</dt><dd>1 से बड़े प्रत्येक पूर्णांक को ठीक एक ही तरीके से अभाज्य संख्याओं के गुणनफल के रूप में व्यक्त किया जा सकता है (अंकगणित का मौलिक प्रमेय)। उदाहरण के लिए, 60 = 2 × 2 × 3 × 5.</dd><dt>मैं कितनी बड़ी संख्या की जाँच कर सकता हूँ?</dt><dd>परीक्षण प्रभाग का उपयोग करके उपकरण लगभग 10 मिलियन तक की संख्याओं के लिए कुशलतापूर्वक काम करता है। बहुत बड़ी संख्या को संसाधित होने में कुछ समय लग सकता है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/primechecker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/primechecker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/primechecker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/primechecker/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/primechecker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/primechecker/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/primechecker/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"number":"संख्या"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/primechecker.js" defer></script>
+</body>
+</html>

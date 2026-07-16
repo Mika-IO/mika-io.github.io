@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GCD ক্যালকুলেটর — একাধিক সংখ্যার সর্বশ্রেষ্ঠ সাধারণ ভাজক</title>
+<meta name="description" content="বিনামূল্যে জিসিডি ক্যালকুলেটর। সংখ্যার যেকোনো সেটের সর্বশ্রেষ্ঠ সাধারণ ভাজক (GCD/GCF/HCF) খুঁজুন। এছাড়াও LCM দেখায়। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।">
+<link rel="canonical" href="https://mikaio.dev/bn/gcdcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gcdcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gcdcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/gcdcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gcdcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gcdcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/gcdcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/gcdcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gcdcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gcdcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/gcdcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gcdcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GCD ক্যালকুলেটর — একাধিক সংখ্যার সর্বশ্রেষ্ঠ সাধারণ ভাজক">
+<meta property="og:description" content="বিনামূল্যে জিসিডি ক্যালকুলেটর। সংখ্যার যেকোনো সেটের সর্বশ্রেষ্ঠ সাধারণ ভাজক (GCD/GCF/HCF) খুঁজুন। এছাড়াও LCM দেখায়। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।">
+<meta property="og:url" content="https://mikaio.dev/bn/gcdcalc/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"GCD ক্যালকুলেটর — একাধিক সংখ্যার সর্বশ্রেষ্ঠ সাধারণ ভাজক","url":"https://mikaio.dev/bn/gcdcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে জিসিডি ক্যালকুলেটর। সংখ্যার যেকোনো সেটের সর্বশ্রেষ্ঠ সাধারণ ভাজক (GCD/GCF/HCF) খুঁজুন। এছাড়াও LCM দেখায়। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"জিসিডি ক্যালকুলেটর","item":"https://mikaio.dev/bn/gcdcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"GCD কি?","acceptedAnswer":{"@type":"Answer","text":"গ্রেটেস্ট কমন ডিভাইজার (GCD), যাকে গ্রেটেস্ট কমন ফ্যাক্টর (GCF) বা হাইয়েস্ট কমন ফ্যাক্টর (HCF)ও বলা হয়, হল সবচেয়ে বড় ধনাত্মক পূর্ণসংখ্যা যা সমস্ত প্রদত্ত সংখ্যাকে অবশিষ্ট ছাড়াই ভাগ করে। GCD(12, 18) = 6।"}},{"@type":"Question","name":"GCD কি জন্য ব্যবহার করা হয়?","acceptedAnswer":{"@type":"Answer","text":"GCD ভগ্নাংশকে সরলীকরণ করতে ব্যবহৃত হয় — লব এবং হরকে তাদের GCD দ্বারা ভাগ করুন। এটি ক্রিপ্টোগ্রাফি, কম্পিউটার সায়েন্স অ্যালগরিদম এবং ইঞ্জিনিয়ারিংয়ে গিয়ার দাঁতের পিচ নির্ধারণেও ব্যবহৃত হয়।"}},{"@type":"Question","name":"সংখ্যাগুলো কোন সাধারণ গুণনীয়ক ভাগ না করলে কি হবে?","acceptedAnswer":{"@type":"Answer","text":"যদি দুটি সংখ্যা 1 ছাড়া অন্য কোন সাধারণ গুণনীয়ক ভাগ করে না, তাদের GCD হল 1 এবং তাদের বলা হয় coprime বা অপেক্ষাকৃত মৌলিক।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gcdcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/gcdcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/gcdcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gcdcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>জিসিডি ক্যালকুলেটর</span></nav>
+  <h1>জিসিডি ক্যালকুলেটর</h1>
+  <p class="lead">তাদের সর্বশ্রেষ্ঠ সাধারণ ভাজক খুঁজে পেতে কমা দ্বারা পৃথক করা দুই বা ততোধিক সংখ্যা লিখুন।</p>
+  <section class="widget" id="tool"><form id="gcd-form"><div class="field"><label for="gcd-nums">সংখ্যা (কমা দ্বারা পৃথক করা)</label><input type="text" id="gcd-nums" placeholder="e.g. 48, 36, 24" inputmode="numeric"></div><div class="result"><span class="hint">GCD: </span><span class="big" id="gcd-out">—</span></div><div id="gcd-lcm-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>যেকোনো সংখ্যার সর্বশ্রেষ্ঠ সাধারণ ভাজক খুঁজুন</h2>
+<p>গ্রেটেস্ট কমন ডিভাইজার (GCD) — যাকে গ্রেটেস্ট কমন ফ্যাক্টর (GCF) বা হাইয়েস্ট কমন ফ্যাক্টর (HCF)ও বলা হয় — হল সবচেয়ে বড় সংখ্যা যা সমস্ত প্রদত্ত সংখ্যাকে ভাগ করে কোনো অবশিষ্ট না রেখে। কমা দ্বারা পৃথক করা দুই বা ততোধিক সংখ্যা লিখুন এবং ইউক্লিডীয় অ্যালগরিদম ব্যবহার করে GCD তাত্ক্ষণিকভাবে গণনা করা হয়।</p>
+<h2>সংজ্ঞা এবং উদাহরণ</h2>
+<ul>
+<li>GCD(12, 18) = 6 — কারণ 6 হল বৃহত্তম সংখ্যা যা 12 এবং 18 উভয়কেই ভাগ করে।</li>
+<li>GCD(48, 36, 24) = 12 — তিনটিকে ভাগ করে সবচেয়ে বড় সংখ্যা।</li>
+<li>GCD(7, 13) = 1 — এগুলি coprime (1 ছাড়া অন্য কোন সাধারণ গুণনীয়ক)।</li>
+</ul>
+<h2>ইউক্লিডীয় অ্যালগরিদম</h2>
+<p>GCD গণনার জন্য সবচেয়ে বিখ্যাত পদ্ধতি হল ইউক্লিডীয় অ্যালগরিদম, যা ইউক্লিড তার এলিমেন্টে 300 BCE এর কাছাকাছি বর্ণনা করেছেন। অ্যালগরিদম বলে যে GCD(a, b) = GCD(b, a mod b), এবং b = 0 পর্যন্ত পুনরাবৃত্তি হয়। উদাহরণস্বরূপ: GCD(48, 36) → GCD(36, 12) → GCD(12, 0) = 12।</p>
+<h2>ভগ্নাংশ সরলীকরণ</h2>
+<p>GCD-এর সবচেয়ে সাধারণ দৈনন্দিন ব্যবহার হল ভগ্নাংশকে সর্বনিম্ন পদে সরলীকরণ করা। 48/72 সরলীকরণ করতে, GCD(48, 72) = 24 গণনা করুন, তারপর উভয়কে 24: 2/3 দ্বারা ভাগ করুন। ফলাফল সম্পূর্ণভাবে কমে গেছে কারণ লব এবং হর এখন কপ্রিম।</p>
+<h2>ক্রিপ্টোগ্রাফি</h2>
+<p>RSA এনক্রিপশন, অ্যালগরিদম যা বেশিরভাগ ইন্টারনেট যোগাযোগকে সুরক্ষিত করে, মৌলিকভাবে GCD এবং coprime সংখ্যা জড়িত সংখ্যা তত্ত্বের উপর নির্ভর করে। RSA কী জেনারেশন অ্যালগরিদমের জন্য দুটি বৃহৎ মৌলিক সংখ্যা নির্বাচন করা প্রয়োজন, যেগুলি সর্বদা একে অপরের সাথে এবং তাদের পণ্যের সাথে সহজাত হয়।</p>
+<h2>জিনিসগুলিকে সমান দলে ভাগ করা</h2>
+<p>GCD-এর একটি খুব হাতে-কলমে ব্যবহার হল বিভিন্ন আকারের সংগ্রহগুলিকে বিভক্ত করা হচ্ছে সম্ভাব্য সর্বাধিক সংখ্যক অভিন্ন গোষ্ঠীতে যেখানে কিছুই অবশিষ্ট নেই। আপনার যদি 48টি আপেল এবং 36টি কমলা থাকে এবং আপনি কোন অবশিষ্ট না থাকা সব ফল ব্যবহার করে অভিন্ন ফলের ঝুড়ি বানাতে চান, তাহলে আপনি সবচেয়ে বেশি সংখ্যক ঝুড়ি তৈরি করতে পারেন তা হল GCD(48, 36) = 12, প্রতিটিতে 4টি আপেল এবং 3টি কমলা রয়েছে। এই একই যুক্তিটি ফ্যাব্রিক বা কাঠের দৈর্ঘ্যকে সমান টুকরোতে কাটা, বিভিন্ন আকারের কক্ষ জুড়ে সমান সারিতে চেয়ার সাজানো, বা সম্ভাব্য সবচেয়ে বড় এমনকি কিস্তিতে বিভাগ জুড়ে বাজেট ভাগ করার ক্ষেত্রেও প্রযোজ্য।</p>
+<h2>ইঞ্জিনিয়ারিং</h2>
+<p>যান্ত্রিক প্রকৌশলে, দুটি গিয়ারে দাঁতের GCD গণনা করে যে একই জোড়া দাঁত কত ঘন ঘন মিলিত হয়। যদি গিয়ার A-এর 48টি দাঁত থাকে এবং গিয়ার B-এর 36টি দাঁত থাকে, GCD(48, 36) = 12, মানে গিয়ারে প্রতি 12টি দাঁত A-এর গিয়ার B-এ প্রতি 12টি দাঁত সহ একটি জাল।</p>
+<h2>কিভাবে ক্যালকুলেটর ব্যবহার করবেন</h2>
+<p>কমা দ্বারা বিভক্ত বাক্সে আপনার নম্বরগুলি টাইপ করুন — দুটি সংখ্যা, বা আপনার পছন্দ মতো অনেকগুলি৷ গণনা টিপুন এবং পুরো সেটের GCD অবিলম্বে প্রদর্শিত হবে, ধাপে ধাপে ইউক্লিডীয় হ্রাস সহ, যাতে আপনি দেখতে পারেন কীভাবে উত্তরটি ব্ল্যাক বক্স হিসাবে বিবেচনা না করে সঠিকভাবে পৌঁছেছে। একটি একক সংখ্যা, বা যে সংখ্যাগুলি 1-এর বাইরে কোন সাধারণ গুণনীয়ক ভাগ করে না, সেগুলিকে সুন্দরভাবে পরিচালনা করা হয়: টুলটি কেবল পরবর্তী ক্ষেত্রে 1-এর একটি GCD রিপোর্ট করে, সংখ্যাগুলি কপ্রিম বলে নিশ্চিত করে৷</p>
+<h2>কেন ইউক্লিডীয় অ্যালগরিদম এত দক্ষ</h2>
+<p>ইউক্লিডের পদ্ধতির আগে, একটি GCD খোঁজার অর্থ ছিল প্রতিটি সংখ্যার প্রতিটি ফ্যাক্টর তালিকাভুক্ত করা এবং তাদের মধ্যে সবচেয়ে বড়টি বাছাই করা - ছোট সংখ্যার জন্য কার্যকর কিন্তু বড়গুলির জন্য আশাহীনভাবে ধীর। ইউক্লিডীয় অ্যালগরিদম বারবার বড় সংখ্যাটিকে ছোট দ্বারা ভাগ করার অবশিষ্টাংশ দিয়ে প্রতিস্থাপন করে, সমস্যাটি দ্রুত সঙ্কুচিত করে। যেকোন বাস্তবসম্মত আকারের দুটি সংখ্যার জন্য, এটি সাধারণত পঞ্চাশটি ধাপের নিচে ভালোভাবে শেষ হয়, এই কারণেই এটি আজকে শেখানো আদর্শ পদ্ধতি হিসেবে রয়ে গেছে এবং এটি কার্যত প্রতিটি ক্যালকুলেটর, স্প্রেডশিট ফাংশন এবং প্রোগ্রামিং ভাষা লাইব্রেরিতে নির্মিত যা একটি GCD গণনা করে।</p>
+<h2>দুইটির বেশি সংখ্যায় প্রসারিত</h2>
+<p>আপনি যখন তিন বা ততোধিক সংখ্যা লিখবেন, তখন ক্যালকুলেটরের একটি নতুন অ্যালগরিদমের প্রয়োজন নেই — এটি কেবল দুই-সংখ্যার ক্ষেত্রে বারবার প্রয়োগ করে। একটি সম্পূর্ণ তালিকার GCD তৃতীয়টির সাথে মিলিত প্রথম দুটি সংখ্যার GCD এর সমান, এবং তাই: GCD(a, b, c) = GCD(GCD(a, b), c)। এটি কাজ করে কারণ যেকোন সংখ্যা যা a, b এবং c এর সকলকে ভাগ করে তাকে অবশ্যই প্রথমে তাদের যেকোনো জোড়ার GCD ভাগ করতে হবে, তাই একবারে তালিকা দুটি কমিয়ে দিলে কখনোই তথ্য হারাবে না। এটি একটি সাধারণ বিল্ডিং ব্লক - দুই-সংখ্যার GCD - একটি নির্বিচারে দীর্ঘ তালিকা পরিচালনা করার জন্য পরিষ্কারভাবে স্কেল কিভাবে একটি ভাল দৃষ্টান্ত।</p>
+<h2>Coprime সংখ্যা এবং 1 এর একটি GCD আপনাকে কী বলে</h2>
+<p>যখন ক্যালকুলেটরটি 1-এর একটি GCD রিপোর্ট করে, তখন আপনি যে সংখ্যাগুলি প্রবেশ করান তাকে বলা হয় coprime, বা অপেক্ষাকৃত প্রাইম, যার অর্থ তারা 1 এর থেকে বড় কোনো গুণনীয়ক ভাগ করে না যদিও প্রতিটিতে পৃথকভাবে অনেকগুলি ফ্যাক্টর থাকতে পারে। উদাহরণস্বরূপ, 8 এবং 15 হল কপ্রাইম যদিও 8 = 2×2×2 এবং 15 = 3×5 — তারা কেবল একই প্রাইম বিল্ডিং ব্লকগুলির কোনওটিই ভাগ করে না। সংখ্যা তত্ত্ব এবং ক্রিপ্টোগ্রাফিতে অবিচ্ছিন্নতা দেখা যায়, কারণ অনেক অ্যালগরিদম এমন সংখ্যা নির্বাচনের উপর নির্ভর করে যেগুলি লুকানো সাধারণ কাঠামো ভাগ না করার গ্যারান্টিযুক্ত।</p>
+<h2>একটি কাজের উদাহরণ, ধাপে ধাপে</h2>
+<p>GCD(48, 18) এর জন্য ইউক্লিডীয় অ্যালগরিদম ক্রিয়াশীল দেখুন। প্রথমত, 48 = 2×18 + 12, তাই সমস্যা GCD(18, 12) হয়ে যায়। পরবর্তী, 18 = 1×12 + 6, তাই এটি GCD(12, 6) হয়ে যায়। অবশেষে, 12 = 2×6 + 0, তাই অবশিষ্টাংশ শূন্যে পৌঁছে এবং শেষ অ-শূন্য অবশিষ্টাংশ, 6 হল GCD। অ্যালগরিদমের প্রতিটি ধাপ জড়িত সংখ্যাগুলিকে দ্রুত সঙ্কুচিত করে, ঠিক এই কারণেই এটি খুব বড় সংখ্যার জন্যও মাত্র কয়েকটি ধাপে শেষ হয়, প্রতিটি ফ্যাক্টরকে তালিকাভুক্ত করার বিপরীতে, যা সংখ্যা বৃদ্ধির সাথে সাথে দ্রুত ধীর হয়ে যায়।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>ইউক্লিডীয় অ্যালগরিদম ব্যবহার করে সমস্ত গণনা সম্পূর্ণরূপে আপনার ব্রাউজারে চলে, তাই ফলাফলটি আপনি টাইপ করার সাথে সাথেই প্রদর্শিত হবে এবং আপনি যে সংখ্যাগুলি লিখছেন তা কখনও সার্ভারে পাঠানো, লগ করা বা ভাগ করা হয় না৷ পৃষ্ঠাটি লোড হয়ে গেলে এটি অফলাইনে কাজ করে এবং আপনি ট্যাবটি বন্ধ বা পুনরায় লোড করার সাথে সাথে প্রতিটি গণনা বাতিল হয়ে যায়।</p>
+    <section class="faq"><h2>GCD ক্যালকুলেটর FAQ</h2><dl><dt>GCD কি?</dt><dd>গ্রেটেস্ট কমন ডিভাইজার (GCD), যাকে গ্রেটেস্ট কমন ফ্যাক্টর (GCF) বা হাইয়েস্ট কমন ফ্যাক্টর (HCF)ও বলা হয়, হল সবচেয়ে বড় ধনাত্মক পূর্ণসংখ্যা যা সমস্ত প্রদত্ত সংখ্যাকে অবশিষ্ট ছাড়াই ভাগ করে। GCD(12, 18) = 6।</dd><dt>GCD কি জন্য ব্যবহার করা হয়?</dt><dd>GCD ভগ্নাংশকে সরলীকরণ করতে ব্যবহৃত হয় — লব এবং হরকে তাদের GCD দ্বারা ভাগ করুন। এটি ক্রিপ্টোগ্রাফি, কম্পিউটার সায়েন্স অ্যালগরিদম এবং ইঞ্জিনিয়ারিংয়ে গিয়ার দাঁতের পিচ নির্ধারণেও ব্যবহৃত হয়।</dd><dt>সংখ্যাগুলো কোন সাধারণ গুণনীয়ক ভাগ না করলে কি হবে?</dt><dd>যদি দুটি সংখ্যা 1 ছাড়া অন্য কোন সাধারণ গুণনীয়ক ভাগ করে না, তাদের GCD হল 1 এবং তাদের বলা হয় coprime বা অপেক্ষাকৃত মৌলিক।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gcdcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/gcdcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/gcdcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gcdcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"numbers":"সংখ্যা (কমা দ্বারা পৃথক করা)","placeholder":"e.g. 48, 36, 24","gcd":"GCD:"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/gcdcalc.js" defer></script>
+</body>
+</html>

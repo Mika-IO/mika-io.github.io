@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>কালার পিকার — HEX, RGB, এবং HSL কালার কোড পান</title>
+<meta name="description" content="বিনামূল্যে রঙ চয়নকারী. যেকোনো রঙ নির্বাচন করুন এবং অবিলম্বে এর HEX, RGB, এবং HSL কোডগুলি পান। এক ক্লিকে কপি করুন। আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।">
+<link rel="canonical" href="https://mikaio.dev/bn/colorpicker/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/colorpicker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/colorpicker/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/colorpicker/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/colorpicker/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/colorpicker/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/colorpicker/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/colorpicker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/colorpicker/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/colorpicker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/colorpicker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/colorpicker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="কালার পিকার — HEX, RGB, এবং HSL কালার কোড পান">
+<meta property="og:description" content="বিনামূল্যে রঙ চয়নকারী. যেকোনো রঙ নির্বাচন করুন এবং অবিলম্বে এর HEX, RGB, এবং HSL কোডগুলি পান। এক ক্লিকে কপি করুন। আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।">
+<meta property="og:url" content="https://mikaio.dev/bn/colorpicker/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"কালার পিকার — HEX, RGB, এবং HSL কালার কোড পান","url":"https://mikaio.dev/bn/colorpicker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে রঙ চয়নকারী. যেকোনো রঙ নির্বাচন করুন এবং অবিলম্বে এর HEX, RGB, এবং HSL কোডগুলি পান। এক ক্লিকে কপি করুন। আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"কালার পিকার","item":"https://mikaio.dev/bn/colorpicker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"HEX, RGB, এবং HSL কি?","acceptedAnswer":{"@type":"Answer","text":"HEX হল একটি ছয় সংখ্যার হেক্সাডেসিমেল কোড যেমন #ff5733। RGB 0 থেকে 255 পর্যন্ত লাল, সবুজ এবং নীল চ্যানেল নির্দিষ্ট করে। HSL হিউ (0-360°), স্যাচুরেশন (%), এবং হালকাতা (%) নির্দিষ্ট করে। তিনটিই একই রঙকে ভিন্নভাবে উপস্থাপন করে।"}},{"@type":"Question","name":"আমি কোন বিন্যাস ব্যবহার করা উচিত?","acceptedAnswer":{"@type":"Answer","text":"ওয়েব ডিজাইন এবং CSS-এ HEX সবচেয়ে সাধারণ। RGB প্রোগ্রামিং এবং ইমেজ এডিটিং ব্যবহার করা হয়। এইচএসএল মানুষের জন্য স্বজ্ঞাত কারণ হিউ বোঝা এবং সামঞ্জস্য করা সহজ।"}},{"@type":"Question","name":"আমি একটি নির্দিষ্ট রঙের কোড লিখতে পারি?","acceptedAnswer":{"@type":"Answer","text":"দৃশ্যত নির্বাচন করতে রঙ পিকার ব্যবহার করুন। একটি নির্দিষ্ট HEX বা RGB মান সঠিকভাবে প্রবেশ করার জন্য, সরাসরি আপনার ব্রাউজারের রঙ ইনপুট ব্যবহার করুন — এটিতে ক্লিক করুন এবং মান টাইপ করুন।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>কালার পিকার</span></nav>
+  <h1>কালার পিকার</h1>
+  <p class="lead">কালার পিকার খুলতে কালার সোয়াচে ক্লিক করুন। HEX, RGB, এবং HSL কোডগুলি অবিলম্বে আপডেট হয়।</p>
+  <section class="widget" id="tool"><div id="cp-app"><div class="row"><div class="field"><label for="cp-color">একটি রঙ চয়ন করুন</label><input type="color" id="cp-color" value="#4f8ef7" style="width:80px;height:48px;border:none;background:none;cursor:pointer"></div></div><div id="cp-results" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">HEX</div><div class="big" id="cp-hex">#4f8ef7</div></div><div><div class="hint">RGB</div><div class="big" id="cp-rgb">—</div></div><div><div class="hint">HSL</div><div class="big" id="cp-hsl">—</div></div></div><div id="cp-swatch" style="margin-top:1rem;height:60px;border-radius:0.5rem;background:#4f8ef7"></div><button id="cp-copy-hex" class="btn secondary" style="margin-top:0.5rem">HEX অনুলিপি করুন</button></div></section>
+  <article class="content">
+    <h2>যেকোনো রং বেছে নিন আর তাৎক্ষণিকভাবে এর কোড পান</h2>
+<p>রংয়ের কোড ওয়েব ডিজাইন, গ্রাফিক ডিজাইন আর প্রোগ্রামিংয়ে সর্বত্র বিদ্যমান। ব্যবহার করতে বা পুনরুৎপাদন করতে চান এমন একটা রং দেখলে, আপনার এর কোড দরকার হয় — সেটা CSS-এর জন্য একটা HEX মান হোক, ফটোশপের জন্য একটা RGB ত্রয়ী হোক, বা প্রোগ্রামগতভাবে রং পরিচালনার জন্য একটা HSL স্পেসিফিকেশন হোক। এই টুলটি আপনার বেছে নেওয়া যেকোনো রংয়ের জন্য একসাথে তিনটা ফরম্যাটই দিয়ে দেয়।</p>
+<h2>তিনটা রং-কোড ফরম্যাট</h2>
+<p><strong>HEX (হেক্সাডেসিমেল)</strong>: ওয়েব ডেভেলপমেন্টে সবচেয়ে বেশি ব্যবহৃত ফরম্যাট। ০-৯ আর A-F অক্ষর দিয়ে গঠিত ছয়-অক্ষরের একটা স্ট্রিং, সামনে একটা হ্যাশ চিহ্ন সহ। প্রতি জোড়া অক্ষর একটা রং-চ্যানেল প্রকাশ করে: #RRGGBB। যেমন, #FF5733-এ সর্বোচ্চ লাল (FF = 255), মাঝারি সবুজ (57 = 87), আর কম নীল (33 = 51) আছে। প্রতি জোড়ার দুটো অক্ষর একই হলে HEX কোড সংক্ষিপ্ত রূপেও লেখা যায়: #FF5500 হয়ে যায় #F50।</p>
+<p><strong>RGB (লাল, সবুজ, নীল)</strong>: প্রতিটা রং-চ্যানেলকে ০ (কিছু নেই) থেকে ২৫৫ (সর্বোচ্চ) পর্যন্ত একটা পূর্ণসংখ্যা হিসেবে নির্দিষ্ট করে। এটাই ডিজিটাল স্ক্রিনের স্বাভাবিক ফরম্যাট, যা লাল, সবুজ আর নীল রঙে আলো নির্গত করে। rgb(255, 87, 51) হলো #FF5733-এর সাথে একই রং। RGB মান CSS-এ (rgb(r, g, b)), জাভাস্ক্রিপ্টে, পাইথনে, আর বেশিরভাগ ছবি সম্পাদনার সফটওয়্যারে ব্যবহৃত হয়।</p>
+<p><strong>HSL (হিউ, স্যাচুরেশন, লাইটনেস)</strong>: মানুষের কাছে আরও স্বজ্ঞাত একটা ফরম্যাট। হিউ হলো খাঁটি রং, একটা রং-চাকার চারপাশে ০° থেকে ৩৬০° পর্যন্ত একটা কোণ হিসেবে প্রকাশ করা: ০° = লাল, ১২০° = সবুজ, ২৪০° = নীল। স্যাচুরেশন হলো রংটা কতটা প্রাণবন্ত নাকি ধূসর (০% = ধূসর, ১০০% = সম্পূর্ণ স্যাচুরেটেড)। লাইটনেস হলো এটা কতটা হালকা নাকি গাঢ় (০% = কালো, ১০০% = সাদা, ৫০% = &quot;স্বাভাবিক&quot; সম্পূর্ণ-স্যাচুরেটেড রং)। রং নিয়মমাফিকভাবে সমন্বয় করার জন্য HSL চমৎকার: হালকা রঙের ছটা (টিন্ট) তৈরি করতে লাইটনেস বাড়ান, গাঢ় রঙের ছটা (শেড) তৈরি করতে কমান।</p>
+<h2>পিকারটা কীভাবে ব্যবহার করবেন</h2>
+<p>আপনার ব্রাউজারের নেটিভ কালার পিকার খুলতে রং-সোয়াচে ক্লিক বা ট্যাপ করুন, একটা রং চোখে দেখে বেছে নিন বা একটা পরিচিত মান টাইপ করুন, আর HEX, RGB আর HSL কোড সবগুলো একসাথে তাৎক্ষণিকভাবে আপডেট হয়ে যায়, যেকোনো টুল বা কোডে কপি করার জন্য প্রস্তুত। যেহেতু পিকারটা কোনো কাস্টম ইন্টারফেসের বদলে ব্রাউজারের নিজস্ব বিল্ট-ইন ইন্টারফেস ব্যবহার করে, এটা ঠিক যেভাবে আশা করবেন সেভাবেই আচরণ করে আর বিভিন্ন ডিভাইসে নির্ভরযোগ্যভাবে কাজ করে।</p>
+<h2>কোন ফরম্যাট কখন ব্যবহার করবেন</h2>
+<p><strong>CSS আর ওয়েব ডিজাইন</strong>: HEX আর RGB দুটোই ব্যাপকভাবে সমর্থিত, কিন্তু HSL ক্রমশ বেশি পছন্দের হয়ে উঠছে কারণ এটা সমন্বয় করা এত স্বজ্ঞাত। HSL-এ একটা রংকে ১০% হালকা করা সহজ; RGB-তে এর জন্য নতুন চ্যানেল মান হিসাব করতে হয়।</p>
+<p><strong>প্রিন্ট ডিজাইন</strong>: প্রিন্ট সাধারণত CMYK (সায়ান, ম্যাজেন্টা, ইয়েলো, কী/ব্ল্যাক) ব্যবহার করে, যা এই টুল কভার করে না। ডিজিটাল-থেকে-প্রিন্ট রূপান্তরের জন্য অ্যাডোবি ইলাস্ট্রেটরের মতো পেশাদার সফটওয়্যার ব্যবহার করুন।</p>
+<p><strong>প্রোগ্রামিং</strong>: বেশিরভাগ গ্রাফিক্স লাইব্রেরির স্বাভাবিক ফরম্যাট RGB। প্রোগ্রামগতভাবে রংয়ের প্যালেট তৈরি করতে চাইলে HSL কাজে লাগে।</p>
+<h2>রং তত্ত্বের প্রাথমিক ধারণা</h2>
+<p>রং বুঝলে এই টুলটা আরও কার্যকরভাবে ব্যবহার করা যায়:</p>
+<p><strong>পরিপূরক রং (Complementary)</strong>: হিউ চাকায় একে অপরের বিপরীতে থাকা রং (১৮০° ব্যবধানে) সর্বোচ্চ কনট্রাস্ট তৈরি করে। লাল (০°) আর সায়ান (১৮০°)।</p>
+<p><strong>সমগোত্রীয় রং (Analogous)</strong>: হিউ চাকায় পাশাপাশি থাকা রং (৩০-৬০° ব্যবধানে) সুরেলা, কম-কনট্রাস্টের প্যালেট তৈরি করে।</p>
+<p><strong>ত্রিভুজাকার রং (Triadic)</strong>: ১২০° ব্যবধানে সমানভাবে দূরে থাকা তিনটা রং প্রাণবন্ত, ভারসাম্যপূর্ণ স্কিম তৈরি করে।</p>
+<p><strong>টিন্ট আর শেড</strong>: হালকা রঙের ছটা (টিন্ট) তৈরি করতে HSL লাইটনেস ৫০%-এর ওপরে বাড়ান। গাঢ় ছটার (শেড) জন্য ৫০%-এর নিচে কমান।</p>
+<h2>অ্যাক্সেসিবিলিটি আর কনট্রাস্ট</h2>
+<p>ওয়েব অ্যাক্সেসিবিলিটি স্ট্যান্ডার্ড টেক্সট আর ব্যাকগ্রাউন্ড রংয়ের মধ্যে পর্যাপ্ত কনট্রাস্ট দাবি করে। WCAG 2.1 নির্দেশিকা সাধারণ টেক্সটের জন্য ন্যূনতম ৪.৫:১ আর বড় টেক্সটের জন্য ৩:১ কনট্রাস্ট অনুপাত নির্দিষ্ট করে। অ্যাক্সেসিবিলিটি যাচাই করতে এই পিকারের রং-কোড একটা নির্দিষ্ট কনট্রাস্ট চেকারে ব্যবহার করুন।</p>
+<h2>ডিজাইনের জন্য রংয়ের সমন্বয়</h2>
+<p>আগে উল্লেখিত মৌলিক জোড়ার বাইরেও, ডিজাইনের কাজে আরও কিছু সমন্বয় প্রায়ই আসে। একটা মনোক্রোম্যাটিক স্কিম একটা মাত্র হিউর ভিন্ন শেড, টিন্ট আর টোন ব্যবহার করে, হিউ আর স্যাচুরেশন স্থির রেখে শুধু HSL লাইটনেস বদলে তৈরি করা — কোনো রং সংঘর্ষের ঝুঁকি ছাড়াই একটা সুসংহত প্যালেট তৈরির নির্ভরযোগ্য উপায়। একটা স্প্লিট-কমপ্লিমেন্টারি স্কিম একটা মূল রং আর তার পরিপূরকের পাশের দুটো রং নেয়, যা একটা সরাসরি পরিপূরক জোড়ার বেশিরভাগ ভিজ্যুয়াল কনট্রাস্ট দেয়, তবে আরও নরম, সূক্ষ্ম অনুভূতি সহ।</p>
+<h2>ওয়েব অ্যাক্সেসিবিলিটি আর রং কনট্রাস্ট</h2>
+<p>ওয়েব কনটেন্ট অ্যাক্সেসিবিলিটি গাইডলাইন পড়ার-যোগ্য টেক্সটের জন্য কনট্রাস্ট অনুপাতের প্রয়োজনীয়তা নির্ধারণ করে: AA স্ট্যান্ডার্ড সাধারণ টেক্সটের জন্য অন্তত ৪.৫:১ আর বড় টেক্সটের জন্য (১৮pt বা তার বেশি, বা ১৪pt বোল্ড) ৩:১ দাবি করে, আর কঠোরতর AAA স্ট্যান্ডার্ড যথাক্রমে ৭:১ আর ৪.৫:১ দাবি করে। কম দৃষ্টিশক্তিসম্পন্ন যেকারো জন্য টেক্সট আর ব্যাকগ্রাউন্ডের মধ্যে উচ্চ কনট্রাস্ট গুরুত্বপূর্ণ, বিশেষ করে প্রায় ৮% পুরুষ আর ০.৫% নারীর জন্য যাদের কোনো না কোনো ধরনের রং-দৃষ্টি ত্রুটি আছে, যাদের কাছে নির্দিষ্ট কিছু রং-জোড়া, যা বেশিরভাগ মানুষের কাছে আলাদা দেখায়, প্রায় একই রকম দেখাতে পারে।</p>
+<h2>নামযুক্ত CSS রং</h2>
+<p>CSS ১৪৭টা নামযুক্ত রং সংজ্ঞায়িত করে, যা সরাসরি একটা হেক্স বা RGB মানের জায়গায় ব্যবহার করা যায়, লাল, নীল আর কালোর মতো সহজ নাম থেকে শুরু করে cornflowerblue, papayawhip, আর rebeccapurple-এর মতো আরও অস্বাভাবিক নাম পর্যন্ত — শেষেরটা ২০১৪ সালে নামকরণ করা হয় CSS ডেভেলপার এরিক মেয়ারের মেয়ে রেবেকা মেয়ারের স্মরণে। এই টুল দিয়ে একটা রং বেছে নিয়ে এটাকে সবচেয়ে কাছের নামযুক্ত CSS রংয়ের সাথে তুলনা করাটা দ্রুত দেখার একটা উপায় যে আপনার মাথায় থাকা প্রায় সেই শেডের জন্য ইতিমধ্যে একটা স্ট্যান্ডার্ড নাম আছে কি না।</p>
+<h2>ব্যক্তিগত ও তাৎক্ষণিক</h2>
+<p>কালার পিকারটি সম্পূর্ণভাবে আপনার ব্রাউজারে নেটিভ ব্রাউজার কালার ইনপুট ব্যবহার করে চলে, তাই ফলাফল আসে তাৎক্ষণিকভাবে, আর আপনার বেছে নেওয়া কোনো রংই কখনো কোনো সার্ভারে পাঠানো, লগ করা বা শেয়ার করা হয় না।</p>
+    <section class="faq"><h2>রঙ চয়নকারী FAQ</h2><dl><dt>HEX, RGB, এবং HSL কি?</dt><dd>HEX হল একটি ছয় সংখ্যার হেক্সাডেসিমেল কোড যেমন #ff5733। RGB 0 থেকে 255 পর্যন্ত লাল, সবুজ এবং নীল চ্যানেল নির্দিষ্ট করে। HSL হিউ (0-360°), স্যাচুরেশন (%), এবং হালকাতা (%) নির্দিষ্ট করে। তিনটিই একই রঙকে ভিন্নভাবে উপস্থাপন করে।</dd><dt>আমি কোন বিন্যাস ব্যবহার করা উচিত?</dt><dd>ওয়েব ডিজাইন এবং CSS-এ HEX সবচেয়ে সাধারণ। RGB প্রোগ্রামিং এবং ইমেজ এডিটিং ব্যবহার করা হয়। এইচএসএল মানুষের জন্য স্বজ্ঞাত কারণ হিউ বোঝা এবং সামঞ্জস্য করা সহজ।</dd><dt>আমি একটি নির্দিষ্ট রঙের কোড লিখতে পারি?</dt><dd>দৃশ্যত নির্বাচন করতে রঙ পিকার ব্যবহার করুন। একটি নির্দিষ্ট HEX বা RGB মান সঠিকভাবে প্রবেশ করার জন্য, সরাসরি আপনার ব্রাউজারের রঙ ইনপুট ব্যবহার করুন — এটিতে ক্লিক করুন এবং মান টাইপ করুন।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/colorpicker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/colorpicker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/colorpicker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/colorpicker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/colorpicker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/colorpicker/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/colorpicker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/colorpicker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/colorpicker/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/colorpicker/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/glossary.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/colorpicker.js" defer></script>
+</body>
+</html>

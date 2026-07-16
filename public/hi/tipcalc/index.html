@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>टिप कैलकुलेटर - टिप पर काम करें और बिल को विभाजित करें</title>
+<meta name="description" content="मुफ़्त टिप कैलकुलेटर. टिप राशि और कुल देखने के लिए बिल और टिप प्रतिशत दर्ज करें, फिर इसे किसी भी संख्या में लोगों के बीच समान रूप से विभाजित करें। त्वरित और निजी.">
+<link rel="canonical" href="https://mikaio.dev/hi/tipcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tipcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tipcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tipcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tipcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tipcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tipcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tipcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tipcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tipcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tipcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tipcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="टिप कैलकुलेटर - टिप पर काम करें और बिल को विभाजित करें">
+<meta property="og:description" content="मुफ़्त टिप कैलकुलेटर. टिप राशि और कुल देखने के लिए बिल और टिप प्रतिशत दर्ज करें, फिर इसे किसी भी संख्या में लोगों के बीच समान रूप से विभाजित करें। त्वरित और निजी.">
+<meta property="og:url" content="https://mikaio.dev/hi/tipcalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"टिप कैलकुलेटर - टिप पर काम करें और बिल को विभाजित करें","url":"https://mikaio.dev/hi/tipcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त टिप कैलकुलेटर. टिप राशि और कुल देखने के लिए बिल और टिप प्रतिशत दर्ज करें, फिर इसे किसी भी संख्या में लोगों के बीच समान रूप से विभाजित करें। त्वरित और निजी."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"टिप कैलकुलेटर","item":"https://mikaio.dev/hi/tipcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"मुझे कितनी टिप देनी चाहिए?","acceptedAnswer":{"@type":"Answer","text":"कई देशों में अच्छी सेवा के लिए रेस्तरां में बिल का 15% से 20% टिप देना आम बात है, ऊपर दिए गए त्वरित बटन 10, 15, 18 और 20 प्रतिशत पर सेट हैं। सीमा शुल्क देश के अनुसार व्यापक रूप से भिन्न-भिन्न होते हैं, इसलिए उस राशि का उपयोग करें जो आपके स्थान के अनुरूप हो।"}},{"@type":"Question","name":"क्या मुझे कर-पूर्व या कर-पश्चात कुल पर टिप देनी चाहिए?","acceptedAnswer":{"@type":"Answer","text":"कोई भी स्वीकार्य है और अंतर आमतौर पर छोटा है। यदि आप सटीक होना चाहते हैं, तो कर-पूर्व बिल राशि दर्ज करें, क्योंकि टिप कर के बजाय सेवा को पुरस्कृत करने के लिए है।"}},{"@type":"Question","name":"क्या मेरे द्वारा टाइप किया गया कुछ भी सहेजा गया है?","acceptedAnswer":{"@type":"Answer","text":"नहीं, गणना पूरी तरह से आपके ब्राउज़र में चलती है, इसलिए आपके द्वारा दर्ज की गई बिल राशि कभी भी अपलोड, संग्रहीत या साझा नहीं की जाती है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tipcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tipcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/tipcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tipcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tipcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tipcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tipcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tipcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tipcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>टिप कैलकुलेटर</span></nav>
+  <h1>टिप कैलकुलेटर</h1>
+  <p class="lead">टिप और कुल राशि एक साथ देखने के लिए अपना बिल और टिप प्रतिशत दर्ज करें। बिल को समान रूप से विभाजित करने के लिए लोगों की संख्या निर्धारित करें।</p>
+  <section class="widget" id="tool"><form id="tip"><div class="row"><div class="field"><label for="tip-bill">बिल राशि</label><input type="number" id="tip-bill" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-pct">टिप %</label><input type="number" id="tip-pct" value="15" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-people">के बीच बँटवारा</label><input type="number" id="tip-people" value="1" min="1" step="1"></div></div><div class="cc-btns row"><button type="button" class="btn secondary" data-tip="10">10%</button><button type="button" class="btn secondary" data-tip="15">15%</button><button type="button" class="btn secondary" data-tip="18">18%</button><button type="button" class="btn secondary" data-tip="20">20%</button></div><div class="result"><span class="hint">युक्ति: </span><span class="big" id="tip-amount">—</span></div><div class="result"><span class="hint">कुल: </span><b id="tip-total">—</b> · <span class="hint">प्रत्येक व्यक्ति: </span><b id="tip-each">—</b></div></form></section>
+  <article class="content">
+    <h2>टिप पर काम करें और अजीब गणित के बिना बिल को विभाजित करें</h2>
+<p>एक अच्छे भोजन का अंत गणित की परीक्षा में नहीं बदलना चाहिए। अपने दिमाग में एक टिप तैयार करना, उसे बिल में जोड़ना और फिर मेज पर मौजूद सभी लोगों के बीच पूरी बात को बांटना बिल्कुल उसी तरह का त्वरित अंकगणित है जिसमें थोड़ा गलत होना आसान है, खासकर एक गिलास वाइन के बाद। यह टिप कैलकुलेटर आपके लिए यह सब एक ही बार में करता है। बिल दर्ज करें, एक टिप प्रतिशत चुनें, बताएं कि कितने लोग इसे विभाजित कर रहे हैं, और यह टिप, नया कुल और प्रत्येक व्यक्ति पर बकाया राशि दिखाता है - आपके टाइप करते ही तुरंत अपडेट हो जाता है। सब कुछ आपके ब्राउज़र में चलता है, इसलिए यह तेज़, निजी है और रेस्तरां में सिग्नल न होने पर भी काम करता है।</p>
+<p>सबसे आम टिप दरों के लिए त्वरित बटन हैं, इसलिए एक टैप से 10, 15, 18 या 20 प्रतिशत सेट हो जाता है, और आप इसके बजाय हमेशा अपना खुद का सटीक आंकड़ा टाइप कर सकते हैं। कोई भी संख्या बदलें और प्रत्येक परिणाम तुरंत पुनर्गणना हो जाता है, जिससे कुछ टिप स्तरों को आज़माना आसान हो जाता है और यह देखना आसान हो जाता है कि आपके निर्णय लेने से पहले वे वास्तव में कितना अंतर डालते हैं।</p>
+<h2>इसका उपयोग कैसे करना है</h2>
+<p>पहले बॉक्स में कुल बिल टाइप करके प्रारंभ करें। फिर टिप प्रतिशत सेट करें, या तो पूर्व निर्धारित बटनों में से किसी एक को टैप करके या अपना खुद का नंबर दर्ज करके। अंत में, यदि आप लागत साझा कर रहे हैं, तो निर्धारित करें कि कितने लोग इसे विभाजित कर रहे हैं। कैलकुलेटर तीन चीजें दिखाता है: टिप की राशि, टिप सहित कुल योग, और कुल को समान रूप से विभाजित करने पर प्रत्येक व्यक्ति द्वारा भुगतान किया जाने वाला हिस्सा। यदि आप अकेले भोजन कर रहे हैं, तो लोगों की संख्या एक ही छोड़ दें और प्रति व्यक्ति संख्या पर ध्यान न दें।</p>
+<p>चूँकि परिणाम लाइव अपडेट होते हैं, इसलिए दबाने के लिए कोई बटन नहीं है और रीसेट करने के लिए कुछ भी नहीं है। टिप को 15 से 18 प्रतिशत तक समायोजित करें और संख्याओं में बदलाव देखें; विभाजन में एक व्यक्ति जोड़ें और प्रत्येक शेयर में गिरावट देखें। इसे टेबल पर लोगों के वास्तविक प्रश्नों का तुरंत उत्तर देने के लिए डिज़ाइन किया गया है, ताकि आप व्यवस्थित हो सकें और आगे बढ़ सकें।</p>
+<h2>टिप की गणना कैसे की जाती है</h2>
+<p>टिप बस बिल का एक प्रतिशत है। इसे हाथ से खोजने के लिए, आप टिप प्रतिशत को एक सौ से विभाजित करते हैं और बिल से गुणा करते हैं: 50 बिल पर 20% टिप 0.20 × 50 = 10 है। आपके द्वारा वास्तव में भुगतान किया जाने वाला कुल बिल और वह टिप है, इसलिए 50 + 10 = 60। जब आप बिल को विभाजित करते हैं, तो आप उस अंतिम कुल को लोगों की संख्या से विभाजित करते हैं, इसलिए कुल 60 साझा करने वाले चार भोजनकर्ता प्रत्येक को 15 का भुगतान करते हैं। कैलकुलेटर बिल्कुल इन चरणों का पालन करता है, यही कारण है कि प्रति व्यक्ति के आंकड़े में केवल भोजन के बजाय टिप का हिस्सा पहले से ही शामिल है।</p>
+<p>किसी मोटे टिप के लिए एक उपयोगी मानसिक शॉर्टकट दस प्रतिशत लेना है - दशमलव बिंदु को एक स्थान बाईं ओर ले जाएं - और फिर वहां से समायोजित करें। 50 का दस प्रतिशत 5 है, इसलिए पंद्रह प्रतिशत टिप लगभग 5 और 5 का आधा है, जो 7.50 है, और बीस प्रतिशत बस दस प्रतिशत का दोगुना है, या 10। कैलकुलेटर आपको सटीक आंकड़ा देता है, लेकिन ये तरकीबें त्वरित विवेक जांच के लिए उपयोगी हैं।</p>
+<h2>टिप कितनी देनी है</h2>
+<p>दुनिया भर में टिपिंग के रीति-रिवाज बहुत अलग-अलग हैं, और इसका कोई एक सही उत्तर नहीं है। संयुक्त राज्य अमेरिका में, टेबल सेवा के लिए रेस्तरां में कर-पूर्व बिल का 15 से 20 प्रतिशत टिप की व्यापक रूप से अपेक्षा की जाती है, और टिपिंग कई श्रमिकों की आय का एक महत्वपूर्ण हिस्सा है। अधिकांश यूरोप में सेवा शुल्क अक्सर पहले से ही शामिल होता है, और एक छोटी टिप या बस राउंड अप करना सामान्य है। कुछ देशों में टिप देना असामान्य है या हतोत्साहित भी किया जाता है। इस कैलकुलेटर के त्वरित बटन सामान्य 10 से 20 प्रतिशत रेंज को कवर करते हैं, लेकिन सबसे अच्छा मार्गदर्शक हमेशा आप जहां भी खा रहे हों वहां का स्थानीय रिवाज होता है।</p>
+<p>यह भी सोचने लायक है कि आप किस चीज़ के लिए टिप दे रहे हैं। एक टिप परंपरागत रूप से सेवा की गुणवत्ता को पुरस्कृत करती है, इसलिए कई लोग चौकस, मैत्रीपूर्ण सेवा के लिए थोड़ी अधिक टिप देते हैं और कम पड़ने पर थोड़ी कम टिप देते हैं। बड़े समूहों के लिए, रेस्तरां कभी-कभी स्वचालित रूप से सेवा शुल्क जोड़ देते हैं, ऐसी स्थिति में अतिरिक्त टिप की उम्मीद नहीं की जा सकती है - अधिक जोड़ने से पहले बिल की जांच करना हमेशा उचित होता है।</p>
+<h2>रेस्तरां से परे</h2>
+<p>हालाँकि यह ज्यादातर बाहर खाने से जुड़ा है, फिर भी यही गणना प्रतिशत-आधारित टिप या ग्रेच्युटी के मामले में कहीं भी लागू होती है। यह टैक्सी या राइड-शेयर किराया, बाल कटवाने, भोजन वितरण, होटल सेवा या बार टैब के लिए भी उतना ही अच्छा काम करता है। कहीं भी आप आधार राशि में प्रतिशत जोड़ना चाहते हैं और शायद परिणाम को कुछ लोगों के बीच विभाजित करना चाहते हैं, उपकरण काम करता है। क्योंकि आप प्रतिशत को पूरी तरह से नियंत्रित करते हैं, यह किसी संख्या में कोई भी प्रतिशत जोड़ने और उसे विभाजित करने के त्वरित तरीके के रूप में भी दोगुना हो जाता है, चाहे कोई टिप शामिल हो या नहीं।</p>
+<h2>निजी, तत्काल और मुफ़्त</h2>
+<p>इसमें कोई साइन-अप नहीं है, कोई लागत नहीं है और कोई विज्ञापन आपके रास्ते में नहीं आ रहा है। पूरा कैलकुलेटर कोड का एक छोटा टुकड़ा है जो आपके अपने डिवाइस पर चलता है, इसलिए यह आपके टाइप करते ही प्रतिक्रिया देता है और बिना इंटरनेट कनेक्शन के काम करता रहता है - वास्तव में एक व्यस्त रेस्तरां में उपयोगी है जहां सिग्नल कमजोर है। आपके द्वारा दर्ज की गई कोई भी राशि अपलोड, लॉग या साझा नहीं की गई है; वे केवल आपकी स्क्रीन पर मौजूद होते हैं और पृष्ठ बंद करते ही गायब हो जाते हैं।</p>
+<p>इसका उपयोग करने के लिए, अपना बिल दर्ज करें, टिप प्रतिशत चुनें, यदि आप बंटवारा कर रहे हैं तो लोगों की संख्या निर्धारित करें, और टिप, कुल और प्रति व्यक्ति शेयर पढ़ें। किसी भी समय कुछ भी समायोजित करें और आंकड़ों में गति बनी रहेगी, ताकि आप हर बार बिल का निपटान जल्दी और निष्पक्ष रूप से कर सकें।</p>
+    <section class="faq"><h2>टिप कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>मुझे कितनी टिप देनी चाहिए?</dt><dd>कई देशों में अच्छी सेवा के लिए रेस्तरां में बिल का 15% से 20% टिप देना आम बात है, ऊपर दिए गए त्वरित बटन 10, 15, 18 और 20 प्रतिशत पर सेट हैं। सीमा शुल्क देश के अनुसार व्यापक रूप से भिन्न-भिन्न होते हैं, इसलिए उस राशि का उपयोग करें जो आपके स्थान के अनुरूप हो।</dd><dt>क्या मुझे कर-पूर्व या कर-पश्चात कुल पर टिप देनी चाहिए?</dt><dd>कोई भी स्वीकार्य है और अंतर आमतौर पर छोटा है। यदि आप सटीक होना चाहते हैं, तो कर-पूर्व बिल राशि दर्ज करें, क्योंकि टिप कर के बजाय सेवा को पुरस्कृत करने के लिए है।</dd><dt>क्या मेरे द्वारा टाइप किया गया कुछ भी सहेजा गया है?</dt><dd>नहीं, गणना पूरी तरह से आपके ब्राउज़र में चलती है, इसलिए आपके द्वारा दर्ज की गई बिल राशि कभी भी अपलोड, संग्रहीत या साझा नहीं की जाती है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tipcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tipcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/tipcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tipcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tipcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tipcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tipcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tipcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tipcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"bill":"बिल राशि","tip_pct":"टिप %","people":"के बीच बँटवारा","tip_amount":"युक्ति","total":"कुल","each":"प्रत्येक व्यक्ति"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tipcalc.js" defer></script>
+</body>
+</html>

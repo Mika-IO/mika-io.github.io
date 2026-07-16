@@ -3,22 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dice Roller — roll virtual dice for any tabletop game</title>
-<meta name="description" content="Free online dice roller. Roll d4, d6, d8, d10, d12, d20, and d100 dice, alone or in groups. Perfect for D&amp;D, tabletop RPGs, and board games. No download needed.">
+<title>ڈائس رولر - کسی بھی ٹیبل ٹاپ گیم کے لیے ورچوئل ڈائس رول کریں۔</title>
+<meta name="description" content="مفت آن لائن ڈائس رولر۔ d4، d6، d8، d10، d12، d20، اور d100 ڈائس اکیلے یا گروپس میں رول کریں۔ D&amp;D، tabletop RPGs اور بورڈ گیمز کے لیے بہترین۔ ڈاؤن لوڈ کی ضرورت نہیں ہے۔">
 <link rel="canonical" href="https://mikaio.dev/ur/rolldice/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/rolldice/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/rolldice/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/rolldice/">
   <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/rolldice/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/rolldice/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/rolldice/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/rolldice/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/rolldice/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/rolldice/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/rolldice/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/rolldice/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Dice Roller — roll virtual dice for any tabletop game">
-<meta property="og:description" content="Free online dice roller. Roll d4, d6, d8, d10, d12, d20, and d100 dice, alone or in groups. Perfect for D&amp;D, tabletop RPGs, and board games. No download needed.">
+<meta property="og:title" content="ڈائس رولر - کسی بھی ٹیبل ٹاپ گیم کے لیے ورچوئل ڈائس رول کریں۔">
+<meta property="og:description" content="مفت آن لائن ڈائس رولر۔ d4، d6، d8، d10، d12، d20، اور d100 ڈائس اکیلے یا گروپس میں رول کریں۔ D&amp;D، tabletop RPGs اور بورڈ گیمز کے لیے بہترین۔ ڈاؤن لوڈ کی ضرورت نہیں ہے۔">
 <meta property="og:url" content="https://mikaio.dev/ur/rolldice/">
 <meta property="og:locale" content="ur">
 <meta name="twitter:card" content="summary">
@@ -66,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -112,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Dice Roller — roll virtual dice for any tabletop game","url":"https://mikaio.dev/ur/rolldice/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free online dice roller. Roll d4, d6, d8, d10, d12, d20, and d100 dice, alone or in groups. Perfect for D&D, tabletop RPGs, and board games. No download needed."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Dice Roller","item":"https://mikaio.dev/ur/rolldice/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which dice types are supported?","acceptedAnswer":{"@type":"Answer","text":"The roller supports d4, d6, d8, d10, d12, d20, and d100 (percentile dice). These cover the full standard polyhedral set used in tabletop role-playing games."}},{"@type":"Question","name":"Are the rolls truly random?","acceptedAnswer":{"@type":"Answer","text":"The tool uses the browser's Math.random() function, which provides pseudorandom numbers suitable for games. It is not cryptographically random but is more than fair enough for any gaming use."}},{"@type":"Question","name":"Can I roll multiple dice at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set the number of dice to any value from 1 to 20, choose your die type, and click Roll. Each die shows its individual result and the total is displayed prominently."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"ڈائس رولر - کسی بھی ٹیبل ٹاپ گیم کے لیے ورچوئل ڈائس رول کریں۔","url":"https://mikaio.dev/ur/rolldice/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"مفت آن لائن ڈائس رولر۔ d4، d6، d8، d10، d12، d20، اور d100 ڈائس اکیلے یا گروپس میں رول کریں۔ D&D، tabletop RPGs اور بورڈ گیمز کے لیے بہترین۔ ڈاؤن لوڈ کی ضرورت نہیں ہے۔"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"ڈائس رولر","item":"https://mikaio.dev/ur/rolldice/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"نرد کی کون سی اقسام کی حمایت کی جاتی ہے؟","acceptedAnswer":{"@type":"Answer","text":"رولر d4, d6, d8, d10, d12, d20, اور d100 (فیصدی ڈائس) کو سپورٹ کرتا ہے۔ یہ ٹیبل ٹاپ رول پلےنگ گیمز میں استعمال ہونے والے مکمل معیاری پولی ہیڈرل سیٹ کا احاطہ کرتے ہیں۔"}},{"@type":"Question","name":"کیا رولز واقعی بے ترتیب ہیں؟","acceptedAnswer":{"@type":"Answer","text":"یہ ٹول براؤزر کے Math.random() فنکشن کا استعمال کرتا ہے، جو گیمز کے لیے موزوں سیوڈورنڈم نمبر فراہم کرتا ہے۔ یہ خفیہ نگاری کے لحاظ سے بے ترتیب نہیں ہے لیکن کسی بھی گیمنگ کے استعمال کے لیے کافی زیادہ ہے۔"}},{"@type":"Question","name":"کیا میں ایک ساتھ متعدد ڈائس رول کر سکتا ہوں؟","acceptedAnswer":{"@type":"Answer","text":"جی ہاں ڈائس کی تعداد 1 سے 20 تک کسی بھی قدر پر سیٹ کریں، اپنی ڈائی ٹائپ منتخب کریں، اور رول پر کلک کریں۔ ہر ڈائی اپنا انفرادی نتیجہ دکھاتا ہے اور کل نمایاں طور پر ظاہر ہوتا ہے۔"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="سائٹ نیویگیشن">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rolldice/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/rolldice/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rolldice/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/rolldice/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/rolldice/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rolldice/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rolldice/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rolldice/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rolldice/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/rolldice/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Dice Roller</span></nav>
-  <h1>Dice Roller</h1>
-  <p class="lead">Choose a die type and how many to roll, then click Roll. See individual results and the total.</p>
-  <section class="widget" id="tool"><div id="dice-app" style="text-align:center"><div class="row" style="justify-content:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem"><button class="btn secondary dice-btn" data-sides="4">d4</button><button class="btn secondary dice-btn" data-sides="6">d6</button><button class="btn secondary dice-btn" data-sides="8">d8</button><button class="btn secondary dice-btn" data-sides="10">d10</button><button class="btn secondary dice-btn" data-sides="12">d12</button><button class="btn secondary dice-btn" data-sides="20">d20</button><button class="btn secondary dice-btn" data-sides="100">d100</button></div><div class="field" style="max-width:120px;margin:0 auto 1rem"><label for="dice-count">Number of dice</label><input type="number" id="dice-count" value="1" min="1" max="20" step="1"></div><button id="dice-roll" class="btn" style="font-size:1.2rem;padding:0.75rem 2rem">🎲 Roll</button><div id="dice-result" style="font-size:3rem;font-weight:700;margin:1rem 0">—</div><div id="dice-detail" style="opacity:0.7;font-size:0.9rem"></div></div></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>ڈائس رولر</span></nav>
+  <h1>ڈائس رولر</h1>
+  <p class="lead">ایک ڈائی قسم کا انتخاب کریں اور کتنے کو رول کرنا ہے، پھر رول پر کلک کریں۔ انفرادی نتائج اور کل دیکھیں۔</p>
+  <section class="widget" id="tool"><div id="dice-app" style="text-align:center"><div class="row" style="justify-content:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem"><button class="btn secondary dice-btn" data-sides="4">d4</button><button class="btn secondary dice-btn" data-sides="6">d6</button><button class="btn secondary dice-btn" data-sides="8">d8</button><button class="btn secondary dice-btn" data-sides="10">d10</button><button class="btn secondary dice-btn" data-sides="12">d12</button><button class="btn secondary dice-btn" data-sides="20">d20</button><button class="btn secondary dice-btn" data-sides="100">d100</button></div><div class="field" style="max-width:120px;margin:0 auto 1rem"><label for="dice-count">نرد کی تعداد</label><input type="number" id="dice-count" value="1" min="1" max="20" step="1"></div><button id="dice-roll" class="btn" style="font-size:1.2rem;padding:0.75rem 2rem">🎲 رول</button><div id="dice-result" style="font-size:3rem;font-weight:700;margin:1rem 0">—</div><div id="dice-detail" style="opacity:0.7;font-size:0.9rem"></div></div></section>
   <article class="content">
     <h2>کوئی بھی پولی ہیڈرل ڈائیس کسی بھی وقت رول کریں</h2>
 <p>ٹیبل ٹاپ رول پلےنگ گیمز، بورڈ گیمز، اور بہت سی کلاس روم سرگرمیوں کا انحصار پاسوں پر ہوتا ہے۔ جب آپ کے پاس جسمانی پاسے موجود نہ ہوں، یا آپ کو ایسی قسم کے پاسے کی ضرورت ہو جو آپ کے مجموعے میں شامل نہیں، تو ایک مجازی ڈائیس رولر فوراً آپ کی ضرورت پوری کر دیتا ہے۔ یہ ٹول گیمنگ میں استعمال ہونے والے ہر معیاری پولی ہیڈرل ڈائیس کو سیمیولیٹ کرتا ہے: ڈی فور، ڈی سکس، ڈی ایٹ، ڈی ٹین، ڈی ٹویل، ڈی ٹوئنٹی، اور ڈی ہنڈریڈ۔ ایک ڈائیس سے لے کر بیس ڈائیسوں تک ایک ساتھ رول کریں۔</p>
@@ -153,13 +158,14 @@ textarea{min-height:120px;resize:vertical}
 <p>گیم ماسٹرز اکثر ڈائیس رولز محض جنگی حل کے لیے نہیں بلکہ فوری طور پر مواد تیار کرنے کے لیے بھی استعمال کرتے ہیں: ڈی ہنڈریڈ ٹیبل پر رول کر کے یہ طے کرنا کہ شکست خوردہ دشمن نے کیا خزانہ گرایا، یا ڈی ٹویل ٹیبل سے بے ترتیب ملاقات کا انتخاب کرنا جب پارٹی سفر کر رہی ہو۔ ایک تیز اور قابل اعتماد رولر ہاتھ میں ہونا اس قسم کی فوری تیاری کے استعمال کو کافی تیز کر دیتا ہے بہ نسبت اس کے کہ آپ سیشن کے درمیان میں صحیح قسم کا جسمانی ڈائیس ڈھونڈتے پھریں۔</p>
 <h2>نجی اور فوری</h2>
 <p>کوئی رول کبھی بھی ریکارڈ نہیں کیا جاتا یا کہیں بھیجا نہیں جاتا، اور یہ ٹول صفحہ لوڈ ہونے کے بعد مکمل طور پر آف لائن کام کرتا ہے، لہٰذا یہ ایسی میز پر بھی تیار ہے جہاں کوئی سگنل نہ ہو، اور استعمال کے بعد کوئی نشان نہیں چھوڑتا۔</p>
-    <section class="faq"><h2>Dice roller FAQ</h2><dl><dt>Which dice types are supported?</dt><dd>The roller supports d4, d6, d8, d10, d12, d20, and d100 (percentile dice). These cover the full standard polyhedral set used in tabletop role-playing games.</dd><dt>Are the rolls truly random?</dt><dd>The tool uses the browser&#39;s Math.random() function, which provides pseudorandom numbers suitable for games. It is not cryptographically random but is more than fair enough for any gaming use.</dd><dt>Can I roll multiple dice at once?</dt><dd>Yes. Set the number of dice to any value from 1 to 20, choose your die type, and click Roll. Each die shows its individual result and the total is displayed prominently.</dd></dl></section>
+    <section class="faq"><h2>ڈائس رولر اکثر پوچھے گئے سوالات</h2><dl><dt>نرد کی کون سی اقسام کی حمایت کی جاتی ہے؟</dt><dd>رولر d4, d6, d8, d10, d12, d20, اور d100 (فیصدی ڈائس) کو سپورٹ کرتا ہے۔ یہ ٹیبل ٹاپ رول پلےنگ گیمز میں استعمال ہونے والے مکمل معیاری پولی ہیڈرل سیٹ کا احاطہ کرتے ہیں۔</dd><dt>کیا رولز واقعی بے ترتیب ہیں؟</dt><dd>یہ ٹول براؤزر کے Math.random() فنکشن کا استعمال کرتا ہے، جو گیمز کے لیے موزوں سیوڈورنڈم نمبر فراہم کرتا ہے۔ یہ خفیہ نگاری کے لحاظ سے بے ترتیب نہیں ہے لیکن کسی بھی گیمنگ کے استعمال کے لیے کافی زیادہ ہے۔</dd><dt>کیا میں ایک ساتھ متعدد ڈائس رول کر سکتا ہوں؟</dt><dd>جی ہاں ڈائس کی تعداد 1 سے 20 تک کسی بھی قدر پر سیٹ کریں، اپنی ڈائی ٹائپ منتخب کریں، اور رول پر کلک کریں۔ ہر ڈائی اپنا انفرادی نتیجہ دکھاتا ہے اور کل نمایاں طور پر ظاہر ہوتا ہے۔</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rolldice/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/rolldice/">中文</a></li><li><a hreflang="es" lang="es" href="/es/rolldice/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/rolldice/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rolldice/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/rolldice/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rolldice/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/rolldice/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rolldice/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/rolldice/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rolldice/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/rolldice/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/rolldice/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rolldice/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rolldice/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rolldice/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rolldice/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/rolldice/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
-  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+  <p><a href="/freetools.html">تمام ٹولز</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ur";window.__T={"num_dice":"نرد کی تعداد","roll":"رول"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/rolldice.js" defer></script>
 </body>
 </html>

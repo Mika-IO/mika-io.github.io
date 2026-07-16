@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dice Roller — 适用于任何桌面游戏的虚拟骰子</title>
+<meta name="description" content="免费在线掷骰子。单独或分组掷 d4、d6、d8、d10、d12、d20 和 d100 骰子。非常适合 D&amp;D、桌面角色扮演游戏和棋盘游戏。无需下载。">
+<link rel="canonical" href="https://mikaio.dev/zh/rolldice/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/rolldice/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/rolldice/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/rolldice/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/rolldice/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/rolldice/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/rolldice/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/rolldice/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/rolldice/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/rolldice/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/rolldice/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/rolldice/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dice Roller — 适用于任何桌面游戏的虚拟骰子">
+<meta property="og:description" content="免费在线掷骰子。单独或分组掷 d4、d6、d8、d10、d12、d20 和 d100 骰子。非常适合 D&amp;D、桌面角色扮演游戏和棋盘游戏。无需下载。">
+<meta property="og:url" content="https://mikaio.dev/zh/rolldice/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Dice Roller — 适用于任何桌面游戏的虚拟骰子","url":"https://mikaio.dev/zh/rolldice/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费在线掷骰子。单独或分组掷 d4、d6、d8、d10、d12、d20 和 d100 骰子。非常适合 D&D、桌面角色扮演游戏和棋盘游戏。无需下载。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"骰子滚子","item":"https://mikaio.dev/zh/rolldice/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"支持哪些骰子类型？","acceptedAnswer":{"@type":"Answer","text":"滚轮支持 d4、d6、d8、d10、d12、d20 和 d100（百分位数骰子）。这些涵盖了桌面角色扮演游戏中使用的完整标准多面体集。"}},{"@type":"Question","name":"卷真的是随机的吗？","acceptedAnswer":{"@type":"Answer","text":"该工具使用浏览器的 Math.random() 函数，该函数提供适合游戏的伪随机数。它不是加密随机的，但对于任何游戏用途来说都足够公平。"}},{"@type":"Question","name":"我可以同时掷多个骰子吗？","acceptedAnswer":{"@type":"Answer","text":"是的。将骰子数量设置为 1 到 20 之间的任意值，选择骰子类型，然后单击“滚动”。每个骰子都会显示其单独的结果，并且总结果会显着显示。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>骰子滚子</span></nav>
+  <h1>骰子滚子</h1>
+  <p class="lead">选择骰子类型和滚动数量，然后单击“滚动”。查看个人结果和总计。</p>
+  <section class="widget" id="tool"><div id="dice-app" style="text-align:center"><div class="row" style="justify-content:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem"><button class="btn secondary dice-btn" data-sides="4">d4</button><button class="btn secondary dice-btn" data-sides="6">d6</button><button class="btn secondary dice-btn" data-sides="8">d8</button><button class="btn secondary dice-btn" data-sides="10">d10</button><button class="btn secondary dice-btn" data-sides="12">d12</button><button class="btn secondary dice-btn" data-sides="20">d20</button><button class="btn secondary dice-btn" data-sides="100">d100</button></div><div class="field" style="max-width:120px;margin:0 auto 1rem"><label for="dice-count">骰子数量</label><input type="number" id="dice-count" value="1" min="1" max="20" step="1"></div><button id="dice-roll" class="btn" style="font-size:1.2rem;padding:0.75rem 2rem">🎲 卷</button><div id="dice-result" style="font-size:3rem;font-weight:700;margin:1rem 0">—</div><div id="dice-detail" style="opacity:0.7;font-size:0.9rem"></div></div></section>
+  <article class="content">
+    <h2>掷骰子：任意多面骰，随时随地可用</h2>
+<p>桌面角色扮演游戏、棋盘游戏和许多课堂活动都离不开骰子。当手边没有实体骰子，或者你需要一种收藏中没有的骰子时，在线掷骰工具能立刻解决问题。本工具可以模拟游戏中使用的所有标准多面骰：d4、d6、d8、d10、d12、d20 和 d100，支持同时掷一枚或多达二十枚骰子。</p>
+<h2>标准多面骰详解</h2>
+<p><strong>d4（四面体）</strong>：四个面，标有 1 到 4。在《龙与地下城》中用于匕首等小型武器和某些法术的伤害。</p>
+<p><strong>d6（正方体）</strong>：六个面，是最常见的骰子形状。广泛用于大多数棋盘游戏、D&amp;D 伤害掷骰以及&quot;亚奇&quot;等游戏。</p>
+<p><strong>d8（八面体）</strong>：八个面，标有 1 到 8。常用于长剑伤害和某些角色职业的生命骰。</p>
+<p><strong>d10（五角偏方面体）</strong>：十个面，标有 0 到 9（或 1 到 10）。也可以与另一枚 d10 配合使用，一枚作为十位数，组合成 d100 掷骰。</p>
+<p><strong>d12（十二面体）</strong>：十二个面。用于巨斧伤害和野蛮人的生命骰。</p>
+<p><strong>d20（二十面体）</strong>：《龙与地下城》最具标志性的骰子。用于攻击掷骰、属性检定和豁免检定。掷出 1 和 20 分别代表大失败和大成功。</p>
+<p><strong>d100（百分位骰）</strong>：通过掷两枚 d10 来获得 1 到 100 的结果。用于随机表、某些游戏系统中的百分位技能检定和战利品表。</p>
+<h2>同时掷多枚骰子</h2>
+<p>许多游戏场景需要同时掷多枚骰子并求和：2d6 表示剑的伤害，3d8 表示火球术，8d6 表示巨龙的吐息武器。将骰子数量设为所需数量，选择骰子类型，然后点击掷骰。每枚骰子的单独结果以及总和都会显示出来，这在规则要求检查单个骰子时非常有用（例如&quot;如果任何骰子掷出 1，则重新掷骰&quot;）。</p>
+<h2>随机性与公平性</h2>
+<p>本工具使用浏览器内置的伪随机数生成器，在大量掷骰的情况下，结果在统计上是公平的。对于休闲游戏来说完全足够。在数百万次掷骰中，每个面出现的频率大致相同，就像公正的物理骰子一样。</p>
+<h2>游戏之外的用途</h2>
+<p>掷骰工具也广泛用于概率教学——多次掷 d6 并绘制分布图，可以让学生直观地看到均匀分布是什么样的。教师用它们为课堂练习生成随机数。统计学家和模拟爱好者有时也使用骰子记号法来描述随机过程。</p>
+<h2>如何使用掷骰工具</h2>
+<p>选择骰子类型，设定一次掷多少枚，然后点击掷骰，查看每个骰子的单独结果及累计总和。这对那些关注单个骰子而非仅关注总数的游戏规则非常重要——比如某个规则在任意一枚骰子掷出 1 时触发特殊效果，或者优势机制要求比较两次单独的掷骰结果而非将它们相加。</p>
+<h2>关于骰子记号法</h2>
+<p>桌面游戏规则通常使用简洁的记号来描述掷骰：&quot;d&quot;前面的数字表示要掷多少枚骰子，后面的数字表示骰子类型。因此&quot;3d6&quot;表示掷三枚六面骰并求和，而&quot;1d20+5&quot;表示掷一枚二十面骰并在结果上加 5。学会一眼看懂这种记号是每个桌面游戏玩家的基本技能，它与本工具提供的骰子类型和数量控件直接对应。</p>
+<h2>战利品表与随机生成</h2>
+<p>游戏主持人经常利用掷骰来即兴生成内容，而不仅仅用于战斗结算：在 d100 表上掷骰来决定被击败的怪物掉落什么宝物，或者在 d12 表上为队伍旅途中的随机遭遇掷骰。手边有一个快速、可靠的掷骰工具，比起在游戏进行中手忙脚乱地寻找合适类型的实体骰子，能大大加快这类即兴操作的速度。</p>
+<h2>优势与劣势掷骰</h2>
+<p>某些现代游戏系统，包括近几版的《龙与地下城》，引入了一种机制：在某些情况下需要掷两枚 d20，取较高的结果（优势，代表有利条件）或较低的结果（劣势，代表不利因素）。本工具的逐骰结果显示让检查优势和劣势掷骰变得简单明了：同时掷两枚 d20，直接读取当前规则所要求的那个值即可。</p>
+<h2>隐私与即时性</h2>
+<p>掷出的结果永远不会被记录或发送到任何地方，工具在页面加载完成后完全离线运行，即使在信号不佳的桌游桌上也能随时使用。</p>
+    <section class="faq"><h2>骰子滚筒常见问题解答</h2><dl><dt>支持哪些骰子类型？</dt><dd>滚轮支持 d4、d6、d8、d10、d12、d20 和 d100（百分位数骰子）。这些涵盖了桌面角色扮演游戏中使用的完整标准多面体集。</dd><dt>卷真的是随机的吗？</dt><dd>该工具使用浏览器的 Math.random() 函数，该函数提供适合游戏的伪随机数。它不是加密随机的，但对于任何游戏用途来说都足够公平。</dd><dt>我可以同时掷多个骰子吗？</dt><dd>是的。将骰子数量设置为 1 到 20 之间的任意值，选择骰子类型，然后单击“滚动”。每个骰子都会显示其单独的结果，并且总结果会显着显示。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rolldice/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/rolldice/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rolldice/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/rolldice/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/rolldice/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rolldice/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rolldice/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rolldice/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rolldice/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/rolldice/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/rolldice.js" defer></script>
+</body>
+</html>

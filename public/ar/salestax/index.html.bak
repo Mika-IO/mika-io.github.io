@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة ضريبة المبيعات - إضافة أو إزالة ضريبة القيمة المضافة من أي سعر</title>
+<meta name="description" content="حاسبة ضريبة المبيعات المجانية. أدخل السعر ومعدل الضريبة لإضافة الضريبة إلى السعر الصافي أو استخراجها من السعر الإجمالي. يعمل لضريبة القيمة المضافة، ضريبة السلع والخدمات، وأي نسبة.">
+<link rel="canonical" href="https://mikaio.dev/ar/salestax/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/salestax/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/salestax/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/salestax/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/salestax/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/salestax/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/salestax/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/salestax/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/salestax/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/salestax/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/salestax/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/salestax/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حاسبة ضريبة المبيعات - إضافة أو إزالة ضريبة القيمة المضافة من أي سعر">
+<meta property="og:description" content="حاسبة ضريبة المبيعات المجانية. أدخل السعر ومعدل الضريبة لإضافة الضريبة إلى السعر الصافي أو استخراجها من السعر الإجمالي. يعمل لضريبة القيمة المضافة، ضريبة السلع والخدمات، وأي نسبة.">
+<meta property="og:url" content="https://mikaio.dev/ar/salestax/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة ضريبة المبيعات - إضافة أو إزالة ضريبة القيمة المضافة من أي سعر","url":"https://mikaio.dev/ar/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"حاسبة ضريبة المبيعات المجانية. أدخل السعر ومعدل الضريبة لإضافة الضريبة إلى السعر الصافي أو استخراجها من السعر الإجمالي. يعمل لضريبة القيمة المضافة، ضريبة السلع والخدمات، وأي نسبة."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة ضريبة المبيعات","item":"https://mikaio.dev/ar/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما الفرق بين إضافة واستخراج الضريبة؟","acceptedAnswer":{"@type":"Answer","text":"تأخذ إضافة الضريبة السعر الصافي - السعر قبل الضريبة - وتحسب السعر الإجمالي الذي تدفعه. استخراج الضريبة يؤدي إلى العكس: تقوم بإدخال السعر الإجمالي بما في ذلك الضريبة بالفعل وتقوم الآلة الحاسبة بتحديد مقدار الضريبة منه وما هو المبلغ قبل الضريبة."}},{"@type":"Question","name":"ما هي معدلات الضرائب التي يجب أن أستخدمها؟","acceptedAnswer":{"@type":"Answer","text":"استخدم أي سعر ينطبق في بلدك أو منطقتك. تشمل الأمثلة الشائعة ضريبة القيمة المضافة بنسبة 20% في المملكة المتحدة، و19% في ألمانيا، و10% ضريبة السلع والخدمات في أستراليا، ومعدلات ضريبة المبيعات المتفاوتة حسب الولاية الأمريكية. أدخل الرقم بدون علامة النسبة المئوية."}},{"@type":"Question","name":"هل تم تحميل أي شيء أكتبه؟","acceptedAnswer":{"@type":"Answer","text":"لا، كل شيء يعمل في متصفحك دون الحاجة إلى خادم. الأرقام التي تدخلها تختفي عند إغلاق الصفحة."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة ضريبة المبيعات</span></nav>
+  <h1>حاسبة ضريبة المبيعات</h1>
+  <p class="lead">أدخل المبلغ ومعدل الضريبة، ثم اختر ما إذا كنت تريد إضافة الضريبة إلى السعر الصافي أو استخراجها من المبلغ الإجمالي. يتم تحديث الأرقام الثلاثة - الصافي والضريبة والإجمالي - أثناء الكتابة.</p>
+  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">المبلغ</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">معدل الضريبة %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">الوضع</label><select id="tax-mode"><option value="add">أضف الضريبة إلى السعر</option><option value="remove">استخراج الضريبة من السعر</option></select></div></div><div class="result"><span class="hint">صافي (قبل الضريبة): </span><b id="tax-net">—</b> · <span class="hint">مبلغ الضريبة: </span><b id="tax-tax">—</b> · <span class="hint">الإجمالي (الإجمالي): </span><span class="big" id="tax-gross">—</span></div></form></section>
+  <article class="content">
+    <h2>أضف الضريبة إلى سعر أو استخرجها من إجمالي</h2>
+<p>ضريبة المبيعات أو ضريبة القيمة المضافة أو ضريبة السلع والخدمات — مهما كان اسمها في بلدك — فإن الحساب دائماً أحد عمليتين: إما إضافة نسبة الضريبة إلى سعر صافٍ للحصول على المبلغ الإجمالي الذي يدفعه المشتري، أو العمل بالعكس من سعر إجمالي لمعرفة كم منه يمثل ضريبة. تتولى هذه الحاسبة كلا الأمرين فوراً. أدخل المبلغ ونسبة الضريبة واختر الوضع؛ فيتحديث الصافي ومبلغ الضريبة والإجمالي أثناء الكتابة.</p>
+<p>فهم أي اتجاه تحتاجه هو الخطوة الأولى. إذا كنت بائعاً تسعّر منتجاً وتريد أن يكون السعر المعروض هو المبلغ قبل الضريبة مع إضافة الضريبة عند الدفع، فاختر &quot;إضافة الضريبة&quot;. أما إذا تلقيت إيصالاً أو فاتورة وتريد معرفة كم من ذلك الإجمالي كان ضريبة، فاختر &quot;استخراج الضريبة&quot;. كلاهما احتياج يومي وكلاهما ينبع من نفس الصيغة البسيطة.</p>
+<h2>كيفية استخدام الحاسبة</h2>
+<p>أدخل السعر في حقل المبلغ. في وضع &quot;إضافة الضريبة&quot; هذا هو السعر قبل الضريبة (الصافي). في وضع &quot;استخراج الضريبة&quot; هذا هو السعر الإجمالي (الإجمالي) الذي تراه على الإيصال. ثم أدخل نسبة الضريبة كرقم عادي — على سبيل المثال، أدخل 20 لنسبة 20%. اختر الوضع من القائمة المنسدلة واقرأ قيم المخرجات الثلاث: الصافي (قبل الضريبة) ومبلغ الضريبة نفسه والإجمالي (الكل مع الضريبة). تُحدَّث النتيجة فوراً مع كل ضغطة مفتاح.</p>
+<h2>الصيغ الرياضية وراء العملية</h2>
+<p>عند إضافة الضريبة، يساوي السعر الإجمالي السعر الصافي مضروباً في واحد زائد النسبة مقسومة على مئة. عنصر بقيمة 100 جنيه بنسبة 20% يصبح 120 جنيهاً. حصة الضريبة هي 20 جنيهاً.</p>
+<p>عند استخراج الضريبة، يساوي السعر الصافي السعر الإجمالي مقسوماً على واحد زائد النسبة مقسومة على مئة. إجمالي 120 جنيهاً بنسبة 20% يعطي صافياً قدره 100 جنيه وضريبة قدرها 20 جنيهاً. خطوة القسمة هذه هي التي يخطئ فيها الناس كثيراً — فالقسمة على 1.20 وليس طرح 20% من الإجمالي مباشرةً، وهو ما سيعطي إجابة مختلفة وغير صحيحة.</p>
+<h2>معدلات الضريبة الشائعة حول العالم</h2>
+<p>تختلف معدلات الضريبة بشكل كبير بين البلدان وحتى داخل البلد الواحد. في المملكة المتحدة تبلغ نسبة ضريبة القيمة المضافة القياسية 20% مع معدلات مخفضة 5% على بعض البنود. تطبق ألمانيا 19% على معظم السلع و7% على الطعام والكتب. تفرض أستراليا ضريبة سلع وخدمات بنسبة 10% على معظم السلع والخدمات. لدى كندا ضريبة سلع وخدمات فيدرالية بنسبة 5% بالإضافة إلى معدلات إقليمية. في الولايات المتحدة لا توجد ضريبة مبيعات فيدرالية؛ فالمعدلات تحددها الولايات والهيئات المحلية وتتراوح من 0% في بعض الولايات إلى أكثر من 10% في بعض المدن عند الجمع. تحقق دائماً من المعدل الذي ينطبق على وضعك الخاص قبل استخدامه لأي غرض رسمي.</p>
+<h2>متى يكون استخراج الضريبة أكثر أهمية</h2>
+<p>يكون حساب استخراج الضريبة مفيداً بشكل خاص عند تسوية الحسابات أو المطالبة باسترداد ضريبة القيمة المضافة كمدخلات بصفتك نشاطاً تجارياً، أو عند محاولة مقارنة الأسعار عبر الأسواق المختلفة حيث تُعرض بعض الأسعار شاملة الضريبة وأخرى بدونها. يظهر ذلك أيضاً في الشؤون المالية الشخصية عندما تريد فهم التكلفة الحقيقية قبل الضريبة لشيء ما، كما عند مقارنة عروض حيث يعرض أحد البائعين سعراً شاملاً الضريبة ويعرض الآخر سعراً بدونها.</p>
+<h2>المعدلات المركبة والضرائب المتعددة</h2>
+<p>تخضع بعض المعاملات لأكثر من ضريبة واحدة — على سبيل المثال إقامة فندقية تحمل ضريبة ولاية وضريبة محلية. للتعامل مع هذا، احسب الضريبة الأولى على السعر الصافي ثم طبق الضريبة الثانية على ذلك الإجمالي الوسيط معاعتباره &quot;الصافي&quot; الجديد. لا يهم الترتيب عموماً when يطبق كلا المعدلين على نفس الأساس، لكنه يهم when تُطبَّق الضرائب بشكل تسلسلي على أساس متزايد. بالنسبة للمعدلات المجمعة البسيطة يمكنك ببساطة جمع النسبتين قبل إدخالهما إذا كانتا تنطبقان على نفس المبلغ الأساسي.</p>
+<h2>مثال عملي بالاتجاهين</h2>
+<p>لنفترض أن حاسباً محمولاً يُسعَّر بـ 850 جنيهاً صافي ونسبة ضريبة القيمة المضافة المطبقة 20%. عند إضافة الضريبة: 850 × 1.20 = 1,020 جنيه إجمالي، منها 170 جنيهاً ضريبة. الآن لنفترض بدلاً من ذلك أنك تلقيت إيصالاً يُظهر 1,020 جنيه كإجمالي وتحتاج لمعرفة السعر قبل الضريبة لحساباتك. عند استخراج الضريبة: 1,020 ÷ 1.20 = 850 جنيهاً صافي، ومرة أخرى 170 جنيهاً ضريبة. كلا الاتجاهين يصفان نفس المعاملة، وهي طريقة مفيدة للتحقق من حساباتك الخاصة — أياً كان الاتجاه الذي تحسب به أولاً، فإن التحويل بالاتجاه المعاكس يجب أن يُعيدك إلى نقطة البداية.</p>
+<p>من الأخطاء الشائعة أخذ 20% من الرقم الإجمالي مباشرةً واعتبار ذلك الضريبة، وهو ما سيوحي خطأً بـ 204 جنيهات بدلاً من 170 الصحيحة بالنسبة لـ 1,020 جنيه. يكمن الخطأ لأن نسبة 20% تعرف بالنسبة للسعر الصافي وليس الإجمالي، لذا يجب تطبيقها قبل إضافة الضريبة، أو إزالتها عن طريق القسمة بدلاً من طرح نسبة ثابتة مباشرةً لاحقاً. تستخدم هذه الحاسبة دائماً العلاقة الصحيحة، لذا يمكنك الاعتماد على الأرقام دون إعادة اشتقاق الصيغة في كل مرة.</p>
+<h2>خصوصية وفورية ومجانية</h2>
+<p>لا تُرسَل أي بيانات تدخلها إلى أي مكان. الحاسبة هي قطعة صغيرة من جافاسكريبت تعمل بالكامل على جهازك. تعمل دون اتصال وتستجيب فوراً ولا تتطلب أي حساب أو تسجيل. أغلق علامة التبويب وكل رقم كتبته سيختفي.</p>
+<p>استخدم هذه الأداة كلما سعَّرت منتجاً أو طابقت إيصالاً أو احتجت لفصل مكون الضريبة من إجمالي. المخرجات الثلاث — الصافي والضريبة والإجمالي — تمنحك الصورة الكاملة في عرض واحد.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول حاسبة ضريبة المبيعات</h2><dl><dt>ما الفرق بين إضافة واستخراج الضريبة؟</dt><dd>تأخذ إضافة الضريبة السعر الصافي - السعر قبل الضريبة - وتحسب السعر الإجمالي الذي تدفعه. استخراج الضريبة يؤدي إلى العكس: تقوم بإدخال السعر الإجمالي بما في ذلك الضريبة بالفعل وتقوم الآلة الحاسبة بتحديد مقدار الضريبة منه وما هو المبلغ قبل الضريبة.</dd><dt>ما هي معدلات الضرائب التي يجب أن أستخدمها؟</dt><dd>استخدم أي سعر ينطبق في بلدك أو منطقتك. تشمل الأمثلة الشائعة ضريبة القيمة المضافة بنسبة 20% في المملكة المتحدة، و19% في ألمانيا، و10% ضريبة السلع والخدمات في أستراليا، ومعدلات ضريبة المبيعات المتفاوتة حسب الولاية الأمريكية. أدخل الرقم بدون علامة النسبة المئوية.</dd><dt>هل تم تحميل أي شيء أكتبه؟</dt><dd>لا، كل شيء يعمل في متصفحك دون الحاجة إلى خادم. الأرقام التي تدخلها تختفي عند إغلاق الصفحة.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/glossary.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/salestax.js" defer></script>
+</body>
+</html>

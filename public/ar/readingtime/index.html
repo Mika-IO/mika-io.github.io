@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة وقت القراءة - المدة التي تستغرقها قراءة أي نص</title>
+<meta name="description" content="حاسبة وقت القراءة المجانية. الصق أي نص لترى على الفور عدد الكلمات ووقت القراءة المقدر ووقت التحدث المقدر. لا حاجة للتسجيل.">
+<link rel="canonical" href="https://mikaio.dev/ar/readingtime/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/readingtime/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/readingtime/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/readingtime/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/readingtime/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/readingtime/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/readingtime/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/readingtime/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/readingtime/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/readingtime/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/readingtime/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/readingtime/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حاسبة وقت القراءة - المدة التي تستغرقها قراءة أي نص">
+<meta property="og:description" content="حاسبة وقت القراءة المجانية. الصق أي نص لترى على الفور عدد الكلمات ووقت القراءة المقدر ووقت التحدث المقدر. لا حاجة للتسجيل.">
+<meta property="og:url" content="https://mikaio.dev/ar/readingtime/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة وقت القراءة - المدة التي تستغرقها قراءة أي نص","url":"https://mikaio.dev/ar/readingtime/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"حاسبة وقت القراءة المجانية. الصق أي نص لترى على الفور عدد الكلمات ووقت القراءة المقدر ووقت التحدث المقدر. لا حاجة للتسجيل."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة وقت القراءة","item":"https://mikaio.dev/ar/readingtime/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هي سرعة القراءة التي تفترضها الآلة الحاسبة؟","acceptedAnswer":{"@type":"Answer","text":"تستخدم الآلة الحاسبة 238 كلمة في الدقيقة، وهو ما تشير الأبحاث إلى أنه متوسط ​​سرعة القراءة الصامتة للبالغين الذين يقرؤون النثر الإنجليزي غير التقني. تختلف السرعة الفعلية حسب الشخص وتعقيد النص والغرض من القراءة."}},{"@type":"Question","name":"ما هي سرعة التحدث المستخدمة؟","acceptedAnswer":{"@type":"Answer","text":"يقدر وقت التحدث بـ 150 كلمة في الدقيقة، وهي سرعة تحدث طبيعية مريحة. غالبًا ما يستهدف مقدمو العروض ومقدمو البث الصوتي 130-160 WPM من أجل الوضوح."}},{"@type":"Question","name":"هل يحسب الكلمات بالضبط؟","acceptedAnswer":{"@type":"Answer","text":"يتم تقسيم عدد الكلمات على مسافة بيضاء وتصفية الأجزاء الفارغة، وهي الطريقة القياسية. إنه يطابق معظم معالجات النصوص للنثر العادي. يتم احتساب الكلمات الموصولة ككلمة واحدة."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة وقت القراءة</span></nav>
+  <h1>حاسبة وقت القراءة</h1>
+  <p class="lead">الصق أو اكتب النص الخاص بك أدناه. يتم تحديث عدد الكلمات ووقت القراءة ووقت التحدث على الفور.</p>
+  <section class="widget" id="tool"><div id="rt-app"><textarea id="rt-text" rows="8" style="width:100%;box-sizing:border-box;resize:vertical;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="الصق أو اكتب النص الخاص بك هنا..."></textarea><div id="rt-results" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">كلمات</div><div class="big" id="rt-words">0</div></div><div><div class="hint">وقت القراءة</div><div class="big" id="rt-time">0 دقيقة</div></div><div><div class="hint">وقت التحدث</div><div class="big" id="rt-speak">0 دقيقة</div></div></div></div></section>
+  <article class="content">
+    <h2>تعرف بالضبط على المدة التي ستستغرقها قراءة المحتوى الخاص بك</h2>
+<p>قبل نشر مقال أو إعداد خطاب أو تقدير المدة التي ستستغرقها مراجعة المستند، فإن معرفة وقت القراءة مفيد. يقدّر القراء معرفة ما يلتزمون به - منشورات المدونة التي تعرض أوقات القراءة المقدرة تظهر باستمرار تفاعلًا أعلى. يحتاج المتحدثون إلى معرفة ما إذا كان النص الخاص بهم سيناسب الوقت المخصص لهم. تمنحك هذه الأداة وقت القراءة ووقت التحدث على الفور، بناءً على عدد الكلمات لديك.</p>
+<h2>كيف يتم حساب وقت القراءة</h2>
+<p>يبلغ متوسط سرعة قراءة البالغين للنثر غير التقني حوالي 238 كلمة في الدقيقة. يأتي هذا الرقم من دراسات القراءة الصامتة للبالغين في ظل الظروف العادية. وتختلف السرعة الفعلية بشكل كبير: فالقارئ الماهر للرواية الخفيفة قد يقرأ 350 كلمة في الدقيقة، في حين أن طالب القانون الذي يعمل على قانون كثيف قد يقرأ 100 كلمة في الدقيقة أو أقل. التقدير الذي توفره هذه الأداة هو خط أساس موثوق للمحتوى القياسي.</p>
+<p>الصيغة واضحة ومباشرة: وقت القراءة بالدقائق يساوي عدد الكلمات مقسومًا على 238. وتستغرق قراءة مشاركة مدونة مكونة من 1000 كلمة حوالي 4 دقائق. تستغرق المقالة المكونة من 2500 كلمة حوالي 10 دقائق. تستغرق الرواية المكونة من 60 ألف كلمة حوالي 250 دقيقة، أو أكثر من أربع ساعات - ولهذا السبب يبدو التقدم فصلاً تلو الآخر ذا معنى.</p>
+<h2>وقت التحدث</h2>
+<p>يستخدم تقدير وقت التحدث 150 كلمة في الدقيقة، وهو ما يمثل وتيرة عرض مريحة وواضحة. غالبًا ما يستهدف المتحدثون والمذيعون المحترفون ما بين 130 إلى 160 كلمة في الدقيقة لأنها سريعة بما يكفي لجذب الانتباه ولكنها بطيئة بما يكفي ليتم فهمها بسهولة. الكلام السريع جدًا – أكثر من 180 كلمة في الدقيقة – يبدأ بالشعور بالاندفاع. تتراوح سرعة المحادثة عادةً بين 120 و180 كلمة في الدقيقة اعتمادًا على الشخص والسياق.</p>
+<p>إذا كنت تقوم بإعداد خطاب أو عرض تقديمي أو برنامج نصي للبودكاست، فإن وقت التحدث يساعدك على الحكم على ما إذا كان المحتوى الخاص بك يناسب الفترة الزمنية الخاصة بك. تتيح لك فترة مدتها 10 دقائق كتابة 1500 كلمة تقريبًا. تحتوي المحادثة بأسلوب TED لمدة 20 دقيقة على حوالي 3000 كلمة عند إلقائها بوتيرة طبيعية مع توقفات مناسبة.</p>
+<h2>وقت القراءة في نشر المحتوى</h2>
+<p>المنشورات التي تضيف تقديرات وقت القراءة للمقالات - &quot;5 دقائق للقراءة&quot;، &quot;12 دقيقة للقراءة&quot; - تفعل ذلك لأن أبحاث مشاركة القارئ تظهر أن معرفة الالتزام بالوقت يقلل من معدل تخلي القراء عن المقالة قبل الأوان. عندما يعرف القراء أنهم ينظرون إلى قراءة مدتها 3 دقائق، فمن المرجح أن يلتزموا بإنهائها. عندما يجدون أنفسهم بشكل غير متوقع في قطعة أطول بكثير، فإن الإحباط من الطول غير المتوقع يمكن أن يدفعهم إلى المغادرة.</p>
+<p>بالنسبة للرسائل الإخبارية عبر البريد الإلكتروني، فإن معرفة وقت القراءة يساعد في معايرة الطول المناسب. تتطلب رسالة البريد الإلكتروني التي تستغرق قراءتها أكثر من 3 إلى 4 دقائق قدرًا كبيرًا من اهتمام المستلم وقد تشهد معدلات إكمال أقل. غالبًا ما يكون الأقصر أفضل للبريد الإلكتروني.</p>
+<h2>عدد الكلمات كإشارة الجودة</h2>
+<p>يعد عدد الكلمات وحده مقياسًا يساء استخدامه بشكل شائع. إن المقالة المكونة من 2000 كلمة ليست أفضل بطبيعتها من مقالة مكونة من 500 كلمة - فالطول المناسب هو كل ما يلزم لتغطية الموضوع بالكامل دون حشو. ومع ذلك، لأغراض تحسين محركات البحث، فإن المقالات التي تغطي موضوعًا ما بشكل كامل تميل إلى أن تكون أطول، وذلك ببساطة لأن تغطية الموضوع بشكل كامل تتطلب المزيد من المحتوى. يساعد وقت القراءة وعدد الكلمات معًا الكتّاب على قياس ما إذا كانوا قد قالوا ما يكفي.</p>
+<h2>كيفية استخدام الآلة الحاسبة</h2>
+<p>الصق النص في المربع وسيظهر كلا الشكلين - وقت القراءة ووقت التحدث - على الفور، ويتم تحديثهما مباشرةً أثناء التحرير. وهذا يجعل من السهل رؤية تأثير القطع في الوقت الفعلي: قم بقص فقرة بطيئة، وشاهد انخفاض التقدير، بدلاً من الاضطرار إلى لصق كل شيء في عداد منفصل بعد كل مراجعة.</p>
+<h2>لماذا يهم سرعتين مختلفتين؟</h2>
+<p>إن الفجوة بين رقم القراءة الذي يبلغ 238 كلمة في الدقيقة ورقم التحدث الذي يبلغ 150 كلمة في الدقيقة ليست خطأً - فهي تعكس فرقًا حقيقيًا بين كيفية معالجة العين للنص المكتوب وكيفية إنتاج الفم للكلمات المنطوقة. تتيح القراءة الصامتة للعين التخطي للأمام، وقراءة العبارات المألوفة ومعالجة عدة كلمات في لمحة واحدة، بينما يرتبط الكلام بالوتيرة الجسدية لتشكيل كل كلمة بصوت عالٍ واحدة تلو الأخرى. هذا هو بالضبط السبب في أن النص الذي يقرأ بشكل مريح في رأسك يمكن أن يتحول إلى تشغيل لفترة أطول بكثير من المتوقع بمجرد الوقوف فعليًا وتسليمه - التقديران الموجودان في هذه الصفحة موجودان خصيصًا لاكتشاف عدم التطابق هذا قبل أن يصبح مشكلة على المسرح.</p>
+<h2>التكيف مع جمهورك الفعلي</h2>
+<p>يعد خط الأساس البالغ 238 كلمة في الدقيقة متوسطًا عبر القراء البالغين للنثر العام غير الفني، ولكن جمهورك الحقيقي قد يقرأ بشكل أسرع أو أبطأ اعتمادًا على ما تكتبه. تؤدي الكتابة الأكاديمية الكثيفة، أو النص القانوني، أو المحتوى المليء بالمصطلحات غير المألوفة والمصطلحات الفنية إلى إبطاء سرعة معظم القراء بشكل كبير - أحيانًا إلى نصف السرعة الأساسية - لأن الكلمات غير المألوفة وهياكل الجملة المعقدة تتطلب معالجة معرفية أكبر لكل كلمة. على العكس من ذلك، يمكن قراءة منشور مدونة غير رسمي مكتوب بجمل قصيرة وبسيطة بشكل أسرع من الخط الأساسي بواسطة قارئ ذي خبرة يتصفح النقاط الرئيسية. إذا كنت تعرف جمهورك جيدًا، فاتعامل مع التقدير الذي تقدمه هذه الأداة كنقطة بداية واضبطه عقليًا بناءً على مدى التقنية أو مدى عدم رسمية كتابتك الفعلية.</p>
+<h2>وقت القراءة واستراتيجية طول المحتوى</h2>
+<p>يتعامل استراتيجيو المحتوى بشكل متزايد مع وقت القراءة باعتباره عائقًا للتصميم وليس كفكرة لاحقة. تستفيد الصفحة المقصودة من وقت القراءة الذي يقل عن دقيقة واحدة، لأن الزائرين يقررون ما إذا كانوا سيبقون في غضون ثوانٍ أم لا، كما يُقرأ الجدار الطويل من النص على أنه جهد وليس قيمة. وعلى النقيض من ذلك، يمكن أن يستمر الدليل الفني العميق لمدة 15 أو 20 دقيقة بشكل مريح لأن القارئ الملتزم بهذا النوع من المحتوى يبحث عن الدقة، وليس الإيجاز، والمعالجة القصيرة بشكل مثير للريبة لموضوع معقد يمكن أن تؤدي في الواقع إلى تقويض الثقة في اكتمال المحتوى.</p>
+<h2>خاصة وفورية</h2>
+<p>لا يغادر النص متصفحك أبدًا: يتم حساب الكلمات وحساب الوقت محليًا بالكامل، لذلك لا يتم تحميل أي محتوى تلصقه أو تخزينه أو تحليله بواسطة أي خادم.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول وقت القراءة</h2><dl><dt>ما هي سرعة القراءة التي تفترضها الآلة الحاسبة؟</dt><dd>تستخدم الآلة الحاسبة 238 كلمة في الدقيقة، وهو ما تشير الأبحاث إلى أنه متوسط ​​سرعة القراءة الصامتة للبالغين الذين يقرؤون النثر الإنجليزي غير التقني. تختلف السرعة الفعلية حسب الشخص وتعقيد النص والغرض من القراءة.</dd><dt>ما هي سرعة التحدث المستخدمة؟</dt><dd>يقدر وقت التحدث بـ 150 كلمة في الدقيقة، وهي سرعة تحدث طبيعية مريحة. غالبًا ما يستهدف مقدمو العروض ومقدمو البث الصوتي 130-160 WPM من أجل الوضوح.</dd><dt>هل يحسب الكلمات بالضبط؟</dt><dd>يتم تقسيم عدد الكلمات على مسافة بيضاء وتصفية الأجزاء الفارغة، وهي الطريقة القياسية. إنه يطابق معظم معالجات النصوص للنثر العادي. يتم احتساب الكلمات الموصولة ككلمة واحدة.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"paste_text":"الصق أو اكتب النص الخاص بك هنا...","words":"كلمات","reading_time":"وقت القراءة","speaking_time":"وقت التحدث","min":"دقيقة"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/readingtime.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>হ্যাশ জেনারেটর — SHA-256, SHA-1, MD5 হ্যাশ ক্যালকুলেটর</title>
+<meta name="description" content="বিনামূল্যে হ্যাশ জেনারেটর. আপনার ব্রাউজারে যেকোনো টেক্সট ইনপুটের জন্য তাৎক্ষণিকভাবে SHA-256, SHA-1, এবং MD5 হ্যাশ গণনা করুন। কোথাও কোনো তথ্য পাঠানো হয় না।">
+<link rel="canonical" href="https://mikaio.dev/bn/hashgenerator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/hashgenerator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/hashgenerator/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/hashgenerator/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/hashgenerator/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/hashgenerator/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/hashgenerator/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/hashgenerator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/hashgenerator/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/hashgenerator/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/hashgenerator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/hashgenerator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="হ্যাশ জেনারেটর — SHA-256, SHA-1, MD5 হ্যাশ ক্যালকুলেটর">
+<meta property="og:description" content="বিনামূল্যে হ্যাশ জেনারেটর. আপনার ব্রাউজারে যেকোনো টেক্সট ইনপুটের জন্য তাৎক্ষণিকভাবে SHA-256, SHA-1, এবং MD5 হ্যাশ গণনা করুন। কোথাও কোনো তথ্য পাঠানো হয় না।">
+<meta property="og:url" content="https://mikaio.dev/bn/hashgenerator/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"হ্যাশ জেনারেটর — SHA-256, SHA-1, MD5 হ্যাশ ক্যালকুলেটর","url":"https://mikaio.dev/bn/hashgenerator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে হ্যাশ জেনারেটর. আপনার ব্রাউজারে যেকোনো টেক্সট ইনপুটের জন্য তাৎক্ষণিকভাবে SHA-256, SHA-1, এবং MD5 হ্যাশ গণনা করুন। কোথাও কোনো তথ্য পাঠানো হয় না।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"হ্যাশ জেনারেটর","item":"https://mikaio.dev/bn/hashgenerator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"একটি হ্যাশ কি?","acceptedAnswer":{"@type":"Answer","text":"একটি ক্রিপ্টোগ্রাফিক হ্যাশ ফাংশন যেকোনো ইনপুট নেয় এবং একটি নির্দিষ্ট দৈর্ঘ্যের আউটপুট (হ্যাশ বা ডাইজেস্ট) তৈরি করে। একই ইনপুট সবসময় একই আউটপুট তৈরি করে, কিন্তু এমনকি একটি অক্ষর পরিবর্তন সম্পূর্ণ ভিন্ন হ্যাশ তৈরি করে।"}},{"@type":"Question","name":"SHA-256 কিসের জন্য ব্যবহৃত হয়?","acceptedAnswer":{"@type":"Answer","text":"SHA-256 বিটকয়েন মাইনিং, SSL/TLS সার্টিফিকেট, ফাইল ইন্টিগ্রিটি ভেরিফিকেশন, পাসওয়ার্ড স্টোরেজ (লবণ সহ) এবং ডিজিটাল স্বাক্ষরে ব্যবহৃত হয়।"}},{"@type":"Question","name":"MD5 কি এখনও নিরাপদ?","acceptedAnswer":{"@type":"Answer","text":"নিরাপত্তার উদ্দেশ্যে MD5 কে ক্রিপ্টোগ্রাফিকভাবে নিরাপদ বলে মনে করা হয় না — সংঘর্ষ (একই হ্যাশ তৈরি করে দুটি ভিন্ন ইনপুট) তৈরি করা যেতে পারে। এটি এখনও ফাইল চেকসামগুলির মতো অ-নিরাপত্তা উদ্দেশ্যে ব্যবহৃত হয়।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/hashgenerator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/hashgenerator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/hashgenerator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/hashgenerator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/hashgenerator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/hashgenerator/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/hashgenerator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/hashgenerator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/hashgenerator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/hashgenerator/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>হ্যাশ জেনারেটর</span></nav>
+  <h1>হ্যাশ জেনারেটর</h1>
+  <p class="lead">এর ক্রিপ্টোগ্রাফিক হ্যাশ তৈরি করতে টেক্সট টাইপ বা পেস্ট করুন।</p>
+  <section class="widget" id="tool"><div id="hash-app"><textarea id="hash-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="হ্যাশে পাঠ্য টাইপ বা পেস্ট করুন..."></textarea><div style="margin-top:0.75rem"><div style="margin-bottom:0.5rem"><div class="hint">SHA-256</div><div id="hash-sha256" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div><div style="margin-bottom:0.5rem"><div class="hint">SHA-1</div><div id="hash-sha1" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div><div><div class="hint">MD5 (আনুমানিক)</div><div id="hash-md5" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div></div></div></section>
+  <article class="content">
+    <h2>যেকোনো পাঠ্যের জন্য ক্রিপ্টোগ্রাফিক হ্যাশ তৈরি করুন</h2>
+<p>একটি হ্যাশ ফাংশন যেকোনো ইনপুট নেয় এবং হ্যাশ বা ডাইজেস্ট নামে একটি নির্দিষ্ট দৈর্ঘ্যের ফিঙ্গারপ্রিন্ট তৈরি করে। একই ইনপুট সর্বদা একই আউটপুট তৈরি করে, কিন্তু এমনকি একটি একক অক্ষর পরিবর্তন সম্পূর্ণ ভিন্ন হ্যাশ তৈরি করে — একটি বৈশিষ্ট্য যাকে avalanche effect বলা হয়। এই টুলটি SHA-256, SHA-1, এবং MD5 হ্যাশ তৈরি করে আপনার প্রবেশ করা যেকোন পাঠ্যের জন্য, সম্পূর্ণরূপে আপনার ব্রাউজারে গণনা করা।</p>
+<h2>SHA-256, SHA-1 এবং MD5 তুলনা</h2>
+<p>SHA-256, SHA-2 পরিবারের অংশ, 64 হেক্সাডেসিমেল অক্ষর হিসাবে লেখা একটি 256-বিট হ্যাশ তৈরি করে এবং বর্তমান সমস্ত অ্যাপ্লিকেশনের জন্য ক্রিপ্টোগ্রাফিকভাবে সুরক্ষিত বলে বিবেচিত হয়, যে কারণে এটি আজ নতুন সিস্টেমের জন্য ডিফল্ট পছন্দ। SHA-1 একটি সংক্ষিপ্ত 160-বিট হ্যাশ তৈরি করে এবং 2017 সাল থেকে নিরাপত্তার উদ্দেশ্যে এটিকে অবমূল্যায়ন করা হয়েছে, গবেষকরা দেখিয়েছেন যে একই হ্যাশ তৈরি করার জন্য দুটি ভিন্ন ইনপুট ইচ্ছাকৃতভাবে তৈরি করা যেতে পারে - একটি সংঘর্ষ যা অ্যালগরিদম প্রদানের গ্যারান্টিকে ক্ষুণ্ন করে, যদিও এটি সিস্টেমের কিছু অংশে পুরানো এবং মিসগ্রায় রয়ে গেছে। এটা থেকে দূরে MD5 একটি আরও ছোট 128-বিট হ্যাশ তৈরি করে এবং এটিকে ক্রিপ্টোগ্রাফিকভাবে ভাঙা বলে মনে করা হয়: আধুনিক হার্ডওয়্যারের সাথে সংঘর্ষ ইচ্ছাকৃতভাবে এবং দ্রুত তৈরি করা যেতে পারে, তাই MD5 আজ শুধুমাত্র বেসিক ফাইল চেকসাম বা দ্রুত ডাটাবেস লুকআপের মতো অ-নিরাপত্তা উদ্দেশ্যে উপযুক্ত যেখানে একটি বিদ্বেষপূর্ণ সংঘর্ষ তৈরি করা একটি উদ্বেগজনক নয়।</p>
+<h2>হ্যাশ ফাংশন কি জন্য ব্যবহৃত হয়?</h2>
+<p><strong>ফাইল ইন্টিগ্রিটি</strong>: ডাউনলোড ওয়েবসাইট প্রতিটি ফাইলের SHA-256 হ্যাশ প্রকাশ করে। ডাউনলোড করার পরে, আপনি হ্যাশ গণনা করুন এবং এটি প্রকাশিত মানের সাথে তুলনা করুন। যদি সেগুলি মিলে যায়, ফাইলটি ট্রানজিটের সময় দূষিত বা টেম্পার করা হয়নি৷</p>
+<p><strong>পাসওয়ার্ড স্টোরেজ</strong>: ওয়েবসাইটগুলি কখনই প্লেইন-টেক্সট পাসওয়ার্ড সংরক্ষণ করা উচিত নয়। পরিবর্তে, তারা একটি হ্যাশ সংরক্ষণ করে (আদর্শভাবে SHA-256 বা একটি এলোমেলো লবণ সহ bcrypt) এবং তুলনা করার জন্য আপনার লগইন প্রচেষ্টা হ্যাশ করে।</p>
+<p><strong>ডিজিটাল স্বাক্ষর</strong>: একটি নথিতে স্বাক্ষর করার জন্য এটিকে হ্যাশ করা এবং একটি ব্যক্তিগত কী দিয়ে হ্যাশকে এনক্রিপ্ট করা জড়িত। প্রাপক সর্বজনীন কী ব্যবহার করে হ্যাশ যাচাই করতে পারেন।</p>
+<p><strong>বিটকয়েন মাইনিং</strong>: বিটকয়েনের প্রুফ-অফ-ওয়ার্ক অ্যালগরিদমে SHA-256 ব্যবহার করা হয়। খনি শ্রমিকদের অবশ্যই একটি ইনপুট (নন্স) খুঁজে বের করতে হবে যা একটি নির্দিষ্ট সংখ্যক শূন্য দিয়ে শুরু করে একটি হ্যাশ তৈরি করে।</p>
+<p><strong>সংস্করণ নিয়ন্ত্রণ</strong>: রিপোজিটরির প্রতিটি কমিট, ফাইল এবং অবজেক্ট সনাক্ত করতে গিট SHA-1 (SHA-256-এ স্থানান্তরিত হচ্ছে) ব্যবহার করে। হ্যাশ হল অনন্য শনাক্তকারী।</p>
+<h2>তুষারপাতের প্রভাব</h2>
+<p>ক্রিপ্টোগ্রাফিক হ্যাশ ফাংশনগুলির একটি সংজ্ঞায়িত বৈশিষ্ট্য হল যে এমনকি ক্ষুদ্র ইনপুট পরিবর্তনগুলি নাটকীয়ভাবে ভিন্ন আউটপুট তৈরি করে:</p>
+<p>&quot;হ্যালো&quot; → SHA-256: 185f8db3...</p>
+<p>&quot;হ্যালো&quot; → SHA-256: 2cf24dba...</p>
+<p>শুধুমাত্র ক্যাপিটালাইজেশনে পার্থক্য থাকা সত্ত্বেও দুটি হ্যাশের মধ্যে কোনো দৃশ্যমান সম্পর্ক নেই। এই তুষারপাত প্রভাব.</p>
+<h2>একমুখী ফাংশন</h2>
+<p>হ্যাশগুলি একমুখী হয়: আপনি ইনপুট থেকে একটি হ্যাশ গণনা করতে পারেন, কিন্তু আপনি হ্যাশ থেকে ইনপুট পুনরুদ্ধার করার প্রক্রিয়াটি বিপরীত করতে পারবেন না। একটি হ্যাশ &quot;ক্র্যাক&quot; করার একমাত্র উপায় হল অনেক ইনপুট (ব্রুট ফোর্স বা ডিকশনারি অ্যাটাক) চেষ্টা করা এবং দেখুন কোনটি একই হ্যাশ তৈরি করে।</p>
+<h2>টুলটি কিভাবে ব্যবহার করবেন</h2>
+<p>ইনপুট বক্সে যেকোনো টেক্সট টাইপ বা পেস্ট করুন এবং তিনটি হ্যাশ - SHA-256, SHA-1 এবং MD5 - প্রতিটি কীস্ট্রোকের সাথে পুনঃগণনা করে, এটির ঠিক নীচে প্রদর্শিত হবে। এটি একটি ফাইলের প্রকাশিত চেকসাম যাচাই করা সহজ করে তোলে, পাঠ্যের একটি অংশের জন্য একটি দ্রুত অনন্য শনাক্তকারী তৈরি করে, অথবা একবারে আপনার ইনপুট একটি অক্ষর সম্পাদনা করে এবং প্রতিটি হ্যাশ পরিবর্তন সম্পূর্ণভাবে দেখার মাধ্যমে তুষারপাতের প্রভাব কীভাবে আচরণ করে তা অন্বেষণ করে৷</p>
+<h2>কেন আপনি একটি হ্যাশ বিপরীত করতে পারবেন না</h2>
+<p>একটি ক্রিপ্টোগ্রাফিক হ্যাশ ফাংশন ইচ্ছাকৃতভাবে একটি নির্দিষ্ট উপায়ে তথ্য ধ্বংস করার জন্য ডিজাইন করা হয়েছে: এটি যেকোন দৈর্ঘ্যের একটি ইনপুট নেয় এবং এটিকে একটি নির্দিষ্ট, সংক্ষিপ্ত আউটপুটে সংকুচিত করে, যা রাখে তার চেয়ে অনেক বেশি তথ্য বাতিল করে। যেহেতু অগণিত বিভিন্ন ইনপুট তাত্ত্বিকভাবে একই সংক্ষিপ্ত আউটপুটে সংকুচিত হতে পারে, হ্যাশ থেকে আসল ইনপুট পুনরুদ্ধার করার জন্য কোনও অনন্য বিপরীত অপারেশন নেই — প্রক্রিয়াটি শুধুমাত্র একটি দিকে কাজ করে। একটি প্রদত্ত হ্যাশ তৈরি করে এমন একটি ইনপুট খুঁজে পাওয়ার একমাত্র উপায় হল প্রার্থীর ইনপুটগুলি একের পর এক চেষ্টা করা এবং তাদের মধ্যে কোনওটি মেলে কিনা তা পরীক্ষা করা, যে কারণে পাসওয়ার্ডগুলিকে সরাসরি সংরক্ষণ করার পরিবর্তে হ্যাশ করা কার্যকর: এমনকি যদি একটি হ্যাশ চুরি হয়ে যায়, তবে এটি থেকে আসল পাসওয়ার্ড পুনরুদ্ধার করা একটি সঠিকভাবে নির্বাচিত হ্যাশ অ্যালগরিদম এবং যথেষ্ট দীর্ঘ পাসওয়ার্ডের জন্য গণনাগতভাবে অসম্ভব।</p>
+<h2>কাজের জন্য সঠিক হ্যাশ নির্বাচন করা</h2>
+<p>আজ নিরাপত্তা-সম্পর্কিত যেকোনো কিছুর জন্য — পাসওয়ার্ড স্টোরেজ, ডিজিটাল স্বাক্ষর, যাচাই করা যে ডাউনলোড করা ফাইলের সাথে কোনো হেরফের করা হয়নি — SHA-256 বা SHA-2 বা SHA-3 পরিবারের একজন শক্তিশালী সদস্য উপযুক্ত পছন্দ, যেহেতু SHA-1 এবং MD5 উভয়েরই দুর্বলতা রয়েছে যা একজন নির্ধারিত আক্রমণকারী কাজে লাগাতে পারে। SHA-1 এবং MD5 শুধুমাত্র সেই প্রেক্ষাপটে উপযোগী থাকে যেখানে নিরাপত্তা একেবারেই বিন্দু নয়: দুর্ঘটনাজনিত দুর্নীতি ধরার জন্য একটি দ্রুত চেকসাম, একটি ক্যাশে লুকআপের জন্য একটি ছোট অনন্য কী তৈরি করার একটি দ্রুত উপায়, বা একটি পুরানো সিস্টেমের সাথে সামঞ্জস্য যা আপডেট করা হয়নি৷ গুরুত্বপূর্ণ যেকোন কিছুর জন্য কোনটি ব্যবহার করতে হবে তা নিয়ে সন্দেহ হলে, SHA-256 প্রায় সবসময়ই নিরাপদ ডিফল্ট।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>SHA-256 এবং SHA-1 ব্রাউজারের অন্তর্নির্মিত ওয়েব ক্রিপ্টো API ব্যবহার করে গণনা করা হয়, এবং MD5 একটি বিশুদ্ধ জাভাস্ক্রিপ্ট বাস্তবায়ন ব্যবহার করে গণনা করা হয়, তাই প্রতিটি হ্যাশ তাত্ক্ষণিকভাবে প্রদর্শিত হয় এবং আপনার প্রবেশ করা কোনও পাঠ্য কোথাও পাঠানো, লগ করা বা শেয়ার করা হয় না এবং এটি অফলাইনে কাজ করে একবার পৃষ্ঠাটি লোড হয়ে গেলে, আপনার কত খরচ করতে হবে তার কোন সীমা নেই।</p>
+    <section class="faq"><h2>হ্যাশ জেনারেটর FAQ</h2><dl><dt>একটি হ্যাশ কি?</dt><dd>একটি ক্রিপ্টোগ্রাফিক হ্যাশ ফাংশন যেকোনো ইনপুট নেয় এবং একটি নির্দিষ্ট দৈর্ঘ্যের আউটপুট (হ্যাশ বা ডাইজেস্ট) তৈরি করে। একই ইনপুট সবসময় একই আউটপুট তৈরি করে, কিন্তু এমনকি একটি অক্ষর পরিবর্তন সম্পূর্ণ ভিন্ন হ্যাশ তৈরি করে।</dd><dt>SHA-256 কিসের জন্য ব্যবহৃত হয়?</dt><dd>SHA-256 বিটকয়েন মাইনিং, SSL/TLS সার্টিফিকেট, ফাইল ইন্টিগ্রিটি ভেরিফিকেশন, পাসওয়ার্ড স্টোরেজ (লবণ সহ) এবং ডিজিটাল স্বাক্ষরে ব্যবহৃত হয়।</dd><dt>MD5 কি এখনও নিরাপদ?</dt><dd>নিরাপত্তার উদ্দেশ্যে MD5 কে ক্রিপ্টোগ্রাফিকভাবে নিরাপদ বলে মনে করা হয় না — সংঘর্ষ (একই হ্যাশ তৈরি করে দুটি ভিন্ন ইনপুট) তৈরি করা যেতে পারে। এটি এখনও ফাইল চেকসামগুলির মতো অ-নিরাপত্তা উদ্দেশ্যে ব্যবহৃত হয়।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/hashgenerator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/hashgenerator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/hashgenerator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/hashgenerator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/hashgenerator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/hashgenerator/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/hashgenerator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/hashgenerator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/hashgenerator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/hashgenerator/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"placeholder":"হ্যাশে পাঠ্য টাইপ বা পেস্ট করুন...","sha256":"SHA-256","sha1":"SHA-1","md5approximate":"MD5 (আনুমানিক)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/hashgenerator.js" defer></script>
+</body>
+</html>

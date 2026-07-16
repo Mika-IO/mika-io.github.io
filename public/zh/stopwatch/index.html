@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stopwatch Online — free browser stopwatch with lap times</title>
-<meta name="description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<title>Stopwatch Online — 带单圈时间的免费浏览器秒表</title>
+<meta name="description" content="免费在线秒表，精度为毫秒。开始、暂停、记录单圈时间和重置。无需下载。完全在您的浏览器中运行。">
 <link rel="canonical" href="https://mikaio.dev/zh/stopwatch/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/stopwatch/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/stopwatch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/stopwatch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/stopwatch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/stopwatch/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/stopwatch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/stopwatch/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/stopwatch/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/stopwatch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/stopwatch/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/stopwatch/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Stopwatch Online — free browser stopwatch with lap times">
-<meta property="og:description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<meta property="og:title" content="Stopwatch Online — 带单圈时间的免费浏览器秒表">
+<meta property="og:description" content="免费在线秒表，精度为毫秒。开始、暂停、记录单圈时间和重置。无需下载。完全在您的浏览器中运行。">
 <meta property="og:url" content="https://mikaio.dev/zh/stopwatch/">
 <meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
@@ -63,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -109,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch Online — free browser stopwatch with lap times","url":"https://mikaio.dev/zh/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Stopwatch","item":"https://mikaio.dev/zh/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate is the browser stopwatch?","acceptedAnswer":{"@type":"Answer","text":"The stopwatch uses the browser's high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device."}},{"@type":"Question","name":"Will it stop if I switch tabs?","acceptedAnswer":{"@type":"Answer","text":"Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results."}},{"@type":"Question","name":"Can I use this on a mobile phone?","acceptedAnswer":{"@type":"Answer","text":"Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch Online — 带单圈时间的免费浏览器秒表","url":"https://mikaio.dev/zh/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费在线秒表，精度为毫秒。开始、暂停、记录单圈时间和重置。无需下载。完全在您的浏览器中运行。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"秒表","item":"https://mikaio.dev/zh/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"浏览器秒表的准确度如何？","acceptedAnswer":{"@type":"Answer","text":"秒表使用浏览器的高分辨率性能计时器，在正常情况下精确到毫秒以下。对于需要精确度的官方计时，请使用经过认证的计时设备。"}},{"@type":"Question","name":"如果我切换标签，它会停止吗？","acceptedAnswer":{"@type":"Answer","text":"浏览器可能会限制后台选项卡中的 JavaScript，如果您切换离开，这可能会影响准确性。保持秒表选项卡处于活动状态以获得最佳结果。"}},{"@type":"Question","name":"我可以在手机上使用这个吗？","acceptedAnswer":{"@type":"Answer","text":"是的，秒表完全兼容触摸，适用于智能手机和平板电脑。"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="网站导航">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Stopwatch</span></nav>
-  <h1>Stopwatch</h1>
-  <p class="lead">Press Start to begin timing. Press Lap to record split times without stopping. Press Reset to clear everything.</p>
-  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">Start</button><button id="sw-lap" class="btn secondary" disabled>Lap</button><button id="sw-reset" class="btn secondary" disabled>Reset</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>秒表</span></nav>
+  <h1>秒表</h1>
+  <p class="lead">按开始开始计时。按圈可不间断地记录分段时间。按重置清除所有内容。</p>
+  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">开始</button><button id="sw-lap" class="btn secondary" disabled>圈</button><button id="sw-reset" class="btn secondary" disabled>重置</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
   <article class="content">
     <h2>一款精确的秒表，就在你的浏览器中</h2>
 <p>准确计时曾经意味着需要随身带一个专用秒表。现在，任何带有浏览器的设备都可以胜任这个工作。这款在线秒表完全在你的浏览器中使用高精度计时器运行，支持记录分段成绩，并以分钟、秒和毫秒显示经过的时间。无需下载或安装任何东西。</p>
@@ -148,13 +156,14 @@ textarea{min-height:120px;resize:vertical}
 <p>如果你在保存所需的分段成绩之前不小心按了重置，没有撤销功能——计数会立即归零。对于分段记录确实很重要的任何场景，值得在产生的同时记下关键的分段成绩，而不是完全依赖屏幕上的列表保留到最后。</p>
 <h2>隐私与随时可用</h2>
 <p>任何数据都不会被发送到任何地方，秒表完全在你的浏览器中运行，页面加载完成后即可离线工作，无需账户——随时重新加载页面即可将一切重置为零。</p>
-    <section class="faq"><h2>Stopwatch FAQ</h2><dl><dt>How accurate is the browser stopwatch?</dt><dd>The stopwatch uses the browser&#39;s high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device.</dd><dt>Will it stop if I switch tabs?</dt><dd>Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results.</dd><dt>Can I use this on a mobile phone?</dt><dd>Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets.</dd></dl></section>
+    <section class="faq"><h2>秒表常见问题解答</h2><dl><dt>浏览器秒表的准确度如何？</dt><dd>秒表使用浏览器的高分辨率性能计时器，在正常情况下精确到毫秒以下。对于需要精确度的官方计时，请使用经过认证的计时设备。</dd><dt>如果我切换标签，它会停止吗？</dt><dd>浏览器可能会限制后台选项卡中的 JavaScript，如果您切换离开，这可能会影响准确性。保持秒表选项卡处于活动状态以获得最佳结果。</dd><dt>我可以在手机上使用这个吗？</dt><dd>是的，秒表完全兼容触摸，适用于智能手机和平板电脑。</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/stopwatch/">中文</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
-  <p><a href="/glossary.html">全部工具</a></p></footer>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"start":"开始","lap":"圈","reset":"重置","stop":"停止"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/stopwatch.js" defer></script>
 </body>
 </html>

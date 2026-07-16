@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة أيام العمل - حساب أيام العمل بين تاريخين</title>
+<meta name="description" content="حاسبة أيام العمل المجانية. قم بحساب عدد أيام العمل (من الاثنين إلى الجمعة) بين أي تاريخين، باستثناء عطلات نهاية الأسبوع. نتائج فورية في متصفحك.">
+<link rel="canonical" href="https://mikaio.dev/ar/workdays/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/workdays/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/workdays/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/workdays/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/workdays/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/workdays/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/workdays/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/workdays/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/workdays/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/workdays/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/workdays/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/workdays/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حاسبة أيام العمل - حساب أيام العمل بين تاريخين">
+<meta property="og:description" content="حاسبة أيام العمل المجانية. قم بحساب عدد أيام العمل (من الاثنين إلى الجمعة) بين أي تاريخين، باستثناء عطلات نهاية الأسبوع. نتائج فورية في متصفحك.">
+<meta property="og:url" content="https://mikaio.dev/ar/workdays/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة أيام العمل - حساب أيام العمل بين تاريخين","url":"https://mikaio.dev/ar/workdays/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"حاسبة أيام العمل المجانية. قم بحساب عدد أيام العمل (من الاثنين إلى الجمعة) بين أي تاريخين، باستثناء عطلات نهاية الأسبوع. نتائج فورية في متصفحك."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة أيام العمل","item":"https://mikaio.dev/ar/workdays/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل يشمل ذلك العطل الرسمية؟","acceptedAnswer":{"@type":"Answer","text":"لا، هذه الحاسبة لا تشمل سوى عطلات نهاية الأسبوع (السبت والأحد). تختلف العطلات الرسمية حسب البلد ولا يمكن تحديدها تلقائيًا دون معرفة موقعك."}},{"@type":"Question","name":"هل تم تضمين تواريخ البدء والانتهاء؟","acceptedAnswer":{"@type":"Answer","text":"نعم، يتم تضمين تاريخي البدء والانتهاء إذا كانا يقعان في أحد أيام الأسبوع."}},{"@type":"Question","name":"هل يمكنني حساب أيام العمل الماضية؟","acceptedAnswer":{"@type":"Answer","text":"نعم، أدخل أي تاريخين بأي ترتيب وستقوم الآلة الحاسبة بإرجاع العدد الصحيح."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/workdays/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/workdays/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/workdays/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/workdays/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/workdays/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/workdays/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/workdays/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/workdays/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة أيام العمل</span></nav>
+  <h1>حاسبة أيام العمل</h1>
+  <p class="lead">حدد تاريخي البدء والانتهاء لحساب أيام العمل بينهما، باستثناء عطلات نهاية الأسبوع.</p>
+  <section class="widget" id="tool"><form id="wd-form"><div class="row"><div class="field"><label for="wd-from">تاريخ البدء</label><input type="date" id="wd-from"></div><div class="field"><label for="wd-to">تاريخ الانتهاء</label><input type="date" id="wd-to"></div></div><div class="result"><span class="hint">أيام العمل: </span><span class="big" id="wd-out">—</span></div><div id="wd-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>حساب أيام العمل بين أي تاريخين</h2>
+<p>ليست كل الأيام أيام عمل. تعطل عطلات نهاية الأسبوع تدفق الأعمال، ومعرفة عدد أيام العمل الفعلية الموجودة بين تاريخين أمر ضروري لتخطيط المشروع، وإدارة العقود، وشروط الفاتورة، والمواعيد النهائية القانونية، وحسابات الموارد البشرية. تقوم هذه الآلة الحاسبة بحساب الأيام من الاثنين إلى الجمعة بين أي تاريخ بداية وانتهاء، باستثناء أيام السبت والأحد.</p>
+<h2>أيام العمل مقابل أيام التقويم</h2>
+<p>يتم احتساب أيام التقويم كل يوم من البداية إلى النهاية، بما في ذلك عطلات نهاية الأسبوع. أيام العمل (وتسمى أيضًا أيام العمل أو أيام الأسبوع) تستثني أيام السبت والأحد. الفرق مهم عندما:</p>
+<ul>
+<li>يحدد العقد فترة تسليم &quot;30 يوم عمل&quot; - وهي ستة أسابيع تقويمية، وليس 30 يومًا.</li>
+<li>الموعد النهائي القانوني هو 10 أيام عمل من تاريخ الحدث - وسيكون فقدان تاريخ التقويم خطأً.</li>
+<li>تكون الدفعة مستحقة &quot;صافي 30 يومًا&quot; - وهذا يعني عادةً 30 يومًا تقويميًا، لكن بعض الولايات القضائية تفسرها على أنها أيام عمل.</li>
+<li>فترة إشعار التوظيف مدتها أسبوعين - أي 10 أيام عمل.</li>
+</ul>
+<h2>كيف تعمل الآلة الحاسبة</h2>
+<p>تتكرر الآلة الحاسبة كل يوم بين التاريخين وتحسب فقط الأيام التي تقع في يوم الاثنين أو الثلاثاء أو الأربعاء أو الخميس أو الجمعة. يتم تضمين كل من تاريخ البدء وتاريخ الانتهاء إذا كانا من أيام الأسبوع. يُظهر الإجمالي أيضًا التقسيم: أيام التقويم، وأيام العمل، وأيام نهاية الأسبوع.</p>
+<h2>تخطيط المشروع</h2>
+<p>يستخدم مديرو المشاريع حسابات يوم العمل باستمرار. تتضمن خطة المشروع 20 مهمة، تستغرق كل منها يومي عمل، وتمتد على الأقل 40 يوم عمل - 8 أسابيع تقويمية. تتطلب إضافة المخزن المؤقت والتبعيات ودورات المراجعة معرفة عدد أيام العمل التي تتناسب مع فترة تقويم معينة.</p>
+<p>عادةً ما يستخدم التخطيط للسباق السريع في تطوير البرمجيات سباقات السرعة لمدة أسبوعين، والتي تحتوي على 10 أيام عمل. تساعد معرفة أيام العمل في أفق خريطة الطريق الأطول في تقدير عدد سباقات السرعة المناسبة من الآن وحتى إنجاز رئيسي.</p>
+<h2>الفاتورة وشروط الدفع</h2>
+<p>تكون شروط الدفع صافي 30 وصافي 60 وصافي 90 دائمًا تقريبًا في الأيام التقويمية. ومع ذلك، فإن بعض الصناعات والعقود تستخدم أيام العمل، مما يجعل التمييز مهمًا. فاتورة صافية مدتها 30 يومًا تقويميًا صادرة في يوم الاثنين تكون مستحقة الدفع بعد 30 يومًا تقويميًا، بغض النظر عن عدد عطلات نهاية الأسبوع بينهما. تنتهي فترة 30 يوم عمل في وقت لاحق - على مدى ستة أسابيع تقويمية.</p>
+<h2>التوظيف والموارد البشرية</h2>
+<p>يتم تحديد فترات الإشعار لإنهاء العمل في كثير من الأحيان بالأسابيع أو أيام العمل. فترة إشعار مدتها أسبوعين تبدأ يوم الثلاثاء وتنتهي يوم الاثنين بعد أسبوعين - 10 أيام عمل. استحقاقات الإجازة السنوية غالبا ما تكون في أيام العمل في السنة. تقوم أنظمة الموارد البشرية بتتبع أرصدة يوم العمل لطلبات الإجازة والموافقات.</p>
+<h2>العطل الرسمية</h2>
+<p>هذه الآلة الحاسبة لا تشمل سوى عطلات نهاية الأسبوع. تختلف العطلات الرسمية بشكل كبير حسب البلد والمنطقة والولاية وحتى الصناعة، ولا يمكن تحديدها تلقائيًا دون معلومات إضافية. بالنسبة للحسابات التي يجب أن تستبعد أيام العطل المحددة، استخدم النتيجة من هذه الآلة الحاسبة كنقطة بداية وقم يدويًا بطرح أيام العطل ذات الصلة التي تقع ضمن نطاق التاريخ.</p>
+<h2>كيفية استخدام الآلة الحاسبة</h2>
+<p>اختر تاريخ البدء وتاريخ الانتهاء، وسيظهر إجمالي عدد أيام العمل بينهما على الفور، مقسمًا إلى جانب عدد أيام التقويم وعدد أيام عطلة نهاية الأسبوع التي تقع ضمن النطاق. نظرًا لتحديث كلا الرقمين معًا، يمكنك أن ترى بنظرة سريعة عدد عطلات نهاية الأسبوع التي يتم تناولها في فترة تقويمية معينة - وهو سياق مفيد عندما يبدو الموعد النهائي سخيًا في الأيام التقويمية ولكن يتبين أنه ضيق بمجرد طرح عطلات نهاية الأسبوع.</p>
+<h2>لماذا التمييز رحلات الناس</h2>
+<p>يعد الخلط بين أيام العمل والأيام التقويمية أحد أكثر حالات سوء الفهم الصغيرة شيوعًا في العقود وتخطيط المشاريع، وذلك على وجه التحديد لأنه يتم وصف كليهما باستخدام نفس الكلمة اليومية &quot;أيام&quot; مع عدم وجود إشارة مضمنة للمقصود بها. تبدو مدة &quot;10 أيام&quot; متطابقة سواء كانت تعني عشرة أيام تقويمية أو عشرة أيام عمل، ولكن يمكن أن يختلف الاثنان بما يصل إلى أربعة أيام اعتمادًا على عدد عطلات نهاية الأسبوع بينهما، وهو بالضبط نوع الغموض الذي يسبب نزاعات حقيقية حول ما إذا كان الموعد النهائي قد تم الوفاء به بالفعل. إن قراءة العقد أو خطة المشروع بعناية كافية لمعرفة نوع اليوم المقصود، واستخدام آلة حاسبة كهذه للتحويل بين الاثنين، يزيل الغموض قبل أن يتحول إلى خلاف.</p>
+<h2>SLAs and turnaround guarantees</h2>
+<p>كثيرًا ما تَعِد اتفاقيات مستوى الخدمة بالرد أو الحل خلال عدد محدد من أيام العمل - &quot;الرد على طلبات الدعم خلال يومي عمل&quot;، على سبيل المثال. يتطلب حساب ما إذا كان قد تم استيفاء اتفاقية مستوى الخدمة بالفعل حساب يوم العمل الذي تؤديه هذه الأداة بالضبط: التذكرة المقدمة في الساعة 4 مساءً يوم الجمعة والرد عليها صباح يوم الاثنين تم الرد عليها تقنيًا في يوم العمل التالي، على الرغم من مرور ما يقرب من ثلاثة أيام تقويمية، والارتباك العكسي (بافتراض أن الفجوة من الجمعة إلى الاثنين تنتهك اتفاقية مستوى الخدمة &quot;يوم عمل واحد&quot;) هو مصدر شائع لشكاوى العملاء غير الضرورية.</p>
+<h2>العمل إلى الوراء من الموعد النهائي</h2>
+<p>تعمل الآلة الحاسبة أيضًا بشكل عكسي لأغراض التخطيط: إذا كنت تعلم أن التسليم مستحق في تاريخ محدد وتعرف عدد أيام العمل التي سيستغرقها العمل، فيمكنك العد التنازلي من الموعد النهائي للعثور على أحدث تاريخ بدء آمن. إن طرح أيام العمل بدلاً من الأيام التقويمية من الموعد النهائي هو بالضبط ما يمنع خطة المشروع من الافتراض بصمت أن العمل يحدث في عطلات نهاية الأسبوع - وهو خطأ يحول جدولاً زمنيًا مريحًا مدته أسبوعين إلى جدول متسرع بمجرد أن يحسب شخص ما أيام عطلة نهاية الأسبوع الأربعة المضمنة فيه بالفعل.</p>
+<h2>خاصة وفورية</h2>
+<p>يتم تشغيل جميع الحسابات بالكامل في متصفحك، لذلك يظهر العدد في اللحظة التي تختار فيها التواريخ الخاصة بك ولا يتم إرسال أي تواريخ تدخلها إلى الخادم أو تسجيلها أو مشاركتها.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول أيام العمل</h2><dl><dt>هل يشمل ذلك العطل الرسمية؟</dt><dd>لا، هذه الحاسبة لا تشمل سوى عطلات نهاية الأسبوع (السبت والأحد). تختلف العطلات الرسمية حسب البلد ولا يمكن تحديدها تلقائيًا دون معرفة موقعك.</dd><dt>هل تم تضمين تواريخ البدء والانتهاء؟</dt><dd>نعم، يتم تضمين تاريخي البدء والانتهاء إذا كانا يقعان في أحد أيام الأسبوع.</dd><dt>هل يمكنني حساب أيام العمل الماضية؟</dt><dd>نعم، أدخل أي تاريخين بأي ترتيب وستقوم الآلة الحاسبة بإرجاع العدد الصحيح.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/workdays/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/workdays/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/workdays/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/workdays/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/workdays/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/workdays/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/workdays/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/workdays/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"from_date":"تاريخ البدء","to_date":"تاريخ الانتهاء","workdays":"أيام العمل"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/workdays.js" defer></script>
+</body>
+</html>

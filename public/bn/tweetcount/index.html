@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>টুইটার / এক্স ক্যারেক্টার কাউন্টার - আপনার টুইটের দৈর্ঘ্য গণনা করুন</title>
+<meta name="description" content="বিনামূল্যে টুইটার/এক্স অক্ষর কাউন্টার. ইউআরএল স্বাভাবিককরণের সাথে টুইটের দৈর্ঘ্য গণনা করে (প্রতিটি ইউআরএল = 23 অক্ষর)। 280-অক্ষরের সীমার জন্য রঙ-কোডেড সীমা নির্দেশক।">
+<link rel="canonical" href="https://mikaio.dev/bn/tweetcount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tweetcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tweetcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tweetcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tweetcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tweetcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tweetcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tweetcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tweetcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tweetcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tweetcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tweetcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="টুইটার / এক্স ক্যারেক্টার কাউন্টার - আপনার টুইটের দৈর্ঘ্য গণনা করুন">
+<meta property="og:description" content="বিনামূল্যে টুইটার/এক্স অক্ষর কাউন্টার. ইউআরএল স্বাভাবিককরণের সাথে টুইটের দৈর্ঘ্য গণনা করে (প্রতিটি ইউআরএল = 23 অক্ষর)। 280-অক্ষরের সীমার জন্য রঙ-কোডেড সীমা নির্দেশক।">
+<meta property="og:url" content="https://mikaio.dev/bn/tweetcount/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"টুইটার / এক্স ক্যারেক্টার কাউন্টার - আপনার টুইটের দৈর্ঘ্য গণনা করুন","url":"https://mikaio.dev/bn/tweetcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে টুইটার/এক্স অক্ষর কাউন্টার. ইউআরএল স্বাভাবিককরণের সাথে টুইটের দৈর্ঘ্য গণনা করে (প্রতিটি ইউআরএল = 23 অক্ষর)। 280-অক্ষরের সীমার জন্য রঙ-কোডেড সীমা নির্দেশক।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"টুইটার / এক্স ক্যারেক্টার কাউন্টার","item":"https://mikaio.dev/bn/tweetcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"কেন টুইটার ইউআরএলগুলিকে 23টি অক্ষর হিসাবে গণনা করে?","acceptedAnswer":{"@type":"Answer","text":"টুইটার স্বয়ংক্রিয়ভাবে প্রতিটি ইউআরএলকে তার t.co শর্টনারের মাধ্যমে মুড়ে দেয়, যা সর্বদা 23টি অক্ষর দীর্ঘ লিঙ্ক তৈরি করে। তাই আপনার URL 10 অক্ষর বা 200 অক্ষর হোক না কেন, এটি আপনার 280-অক্ষরের সীমার জন্য ঠিক 23 হিসাবে গণনা করে৷"}},{"@type":"Question","name":"Twitter/X অক্ষরের সীমা কত?","acceptedAnswer":{"@type":"Answer","text":"একটি একক টুইট বা X পোস্টের জন্য আদর্শ অক্ষর সীমা হল 280 অক্ষর৷ টুইটার ব্লু / এক্স প্রিমিয়াম গ্রাহকদের দীর্ঘ পোস্টে অ্যাক্সেস থাকতে পারে (25,000 অক্ষর পর্যন্ত), তবে বিনামূল্যের সীমা 280।"}},{"@type":"Question","name":"ইমোজি কি একটি অক্ষর হিসাবে গণনা করে?","acceptedAnswer":{"@type":"Answer","text":"বেশিরভাগ স্ট্যান্ডার্ড ইমোজি টুইটারের গণনা পদ্ধতিতে 2টি অক্ষর হিসাবে গণনা করে কারণ তারা ইউনিকোড সারোগেট জোড়া ব্যবহার করে। এই কাউন্টারটি জাভাস্ক্রিপ্টের স্ট্রিং দৈর্ঘ্য ব্যবহার করে, যা নির্দিষ্ট ইমোজি সংমিশ্রণের জন্য টুইটারের সঠিক গণনা থেকে কিছুটা আলাদা হতে পারে।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>টুইটার / এক্স ক্যারেক্টার কাউন্টার</span></nav>
+  <h1>টুইটার / এক্স ক্যারেক্টার কাউন্টার</h1>
+  <p class="lead">নিচে আপনার টুইট টাইপ বা পেস্ট করুন। ইউআরএলগুলি স্বয়ংক্রিয়ভাবে প্রতিটি 23টি অক্ষর হিসাবে গণনা করা হয়, যা Twitter-এর t.co লিঙ্ক-সংক্ষিপ্ত আচরণের সাথে মিলে যায়।</p>
+  <section class="widget" id="tool"><form id="tweet-form"><div class="field"><label for="tweet-text">টুইট/পোস্ট টেক্সট</label><textarea id="tweet-text" rows="5" placeholder="কি হচ্ছে?"></textarea></div><div class="result" id="tweet-out" style="text-align:left"></div></form></section>
+  <article class="content">
+    <h2>আপনার পোস্টের দৈর্ঘ্য গণনা করুন যেভাবে X আসলে এটি গণনা করে</h2>
+<p>একটি 280-অক্ষর সীমা সহজ শোনাচ্ছে যতক্ষণ না আপনি লিখতে শুরু করেন এবং ইমোজি বুঝতে পারেন, লিঙ্ক এবং নির্দিষ্ট উচ্চারণযুক্ত অক্ষরগুলি আপনি যেভাবে আশা করবেন তা গণনা করে না। এই কাউন্টারটি X-এর (পূর্বে Twitter-এর) প্রকৃত গণনার নিয়মগুলিকে একটি ব্রাউজার টুলের মতো ঘনিষ্ঠভাবে মিরর করে, যার মধ্যে প্ল্যাটফর্মের ইউআরএলগুলির স্বতন্ত্র ট্রিটমেন্ট অন্তর্ভুক্ত রয়েছে, তাই আপনি এখানে যে সংখ্যাটি দেখছেন তা একটি সাদামাটা অক্ষর গণনার পরিবর্তে কম্পোজ বক্সে যা দেখবেন তার সাথে মিলে যায় যা আপনাকে অনুমান করতে দেয় যে কোনও পোস্ট আসলেই ফিট হবে কিনা।</p>
+<h2>কিভাবে এটি ব্যবহার করতে হয়</h2>
+<p>আপনার পোস্টটি বক্সে টাইপ করুন বা পেস্ট করুন এবং অক্ষর সংখ্যা অবিলম্বে নীচে প্রদর্শিত হবে, একটি রঙ-কোডেড দণ্ড সহ 280-অক্ষরের সীমার বিপরীতে দেখানো হয়েছে যা আপনি কাছে আসার সাথে সাথে অ্যাম্বার এবং কমলা থেকে লাল হয়ে যায় এবং তারপর সীমা অতিক্রম করে। আপনার অন্তর্ভুক্ত যেকোন ইউআরএল স্বয়ংক্রিয়ভাবে সনাক্ত করা হয় এবং 23টি অক্ষর হিসাবে গণনা করা হয়, যা প্ল্যাটফর্মের লিঙ্ক-সংক্ষিপ্ত আচরণের সাথে মিলে যায়, প্রকৃত লিঙ্কটি যতই দীর্ঘ হোক না কেন। অবশিষ্ট অক্ষর ভাতা আপডেটগুলি আপনার টাইপ করার সাথে সাথে লাইভ, তাই আপনি অন্ধ রচনা এবং শুধুমাত্র শেষে পরীক্ষা করার পরিবর্তে সংখ্যাটি দেখার সময় আপনার শব্দগুলি ছাঁটা বা প্রসারিত করতে পারেন।</p>
+<h2>কেন URL গুলি সর্বদা 23টি অক্ষর হিসাবে গণনা করে৷</h2>
+<p>X স্বয়ংক্রিয়ভাবে তার সিস্টেমের মাধ্যমে পোস্ট করা প্রতিটি লিঙ্ককে তার নিজস্ব t.co সংক্ষিপ্তকরণ পরিষেবা দিয়ে মুড়ে দেয় এবং প্রতিটি লিঙ্ক, আসল ঠিকানা যত দীর্ঘ বা ছোট হোক না কেন, ঠিক একই নির্দিষ্ট দৈর্ঘ্যের একটি t.co লিঙ্ক হয়ে যায়। এই কারণেই একটি পোস্টে একটি সংক্ষিপ্ত, পরিষ্কার ঠিকানার একটি লিঙ্ক এবং ট্র্যাকিং প্যারামিটারে ভরপুর একটি বিশাল URL-এর একটি লিঙ্ক ধারণকারী একটি পোস্ট লেখকের জন্য ঠিক একই সংখ্যক অক্ষর খরচ করে — 23, বর্তমানে — 280-অক্ষরের বাজেটের বিপরীতে। এই টুলটি আপনার টেক্সটে ইউআরএল শনাক্ত করে এবং প্রতিটিকে এর আক্ষরিক দৈর্ঘ্যের পরিবর্তে 23টি অক্ষর হিসাবে গণনা করে সেই আচরণের প্রতিলিপি করে, তাই আপনি এখানে যে গণনাটি দেখছেন তা আপনি পোস্ট করার সময় আসলে কী ঘটে তা মেলে।</p>
+<h2>ইমোজি এবং সারোগেট জুটির বিচিত্রতা</h2>
+<p>ইমোজি অভ্যন্তরীণভাবে কীভাবে সংরক্ষণ করা হয় তার কারণে অক্ষর গণনায় একটি আসল বলি যোগ করে। বেশিরভাগ আধুনিক ইমোজি, বিশেষ করে নতুন বা আরও জটিল, যাকে সারোগেট পেয়ার বলা হয় - একটির পরিবর্তে দুটি অন্তর্নিহিত কোড ইউনিট ব্যবহার করে উপস্থাপন করা হয় - যার মানে তারা প্রায়শই জাভাস্ক্রিপ্ট এবং অন্যান্য ভাষার মতো স্ট্রিং দৈর্ঘ্য পরিমাপ করে এমন সিস্টেমে একটির পরিবর্তে দুটি অক্ষর হিসাবে গণনা করে। X-এর নিজস্ব গণনা পদ্ধতির এখানে নিজস্ব নির্দিষ্ট নিয়ম রয়েছে যা মাঝে মাঝে অস্বাভাবিক ইমোজি সংমিশ্রণ, ফ্ল্যাগ সিকোয়েন্স বা স্কিন টোন সিলেক্টরের মতো মডিফায়ার সহ ইমোজির জন্য ব্রাউজারের নেটিভ স্ট্রিং দৈর্ঘ্য গণনা থেকে কিছুটা বিচ্যুত হতে পারে। দৈনন্দিন পোস্টের অপ্রতিরোধ্য সংখ্যাগরিষ্ঠের জন্য এই পার্থক্যটি অদৃশ্য, কিন্তু আপনি যদি সীমার প্রান্তে থাকেন এবং বেশ কয়েকটি ইমোজি ব্যবহার করেন তবে সঠিক চূড়ান্ত চরিত্রে গণনা করাকে বিশ্বাস করার পরিবর্তে একটি ছোট বাফার রেখে যাওয়া মূল্যবান।</p>
+<h2>চরিত্রের সীমার বিবর্তন</h2>
+<p>টুইটার একটি 140-অক্ষরের সীমার সাথে চালু করা হয়েছে, একটি চিত্র একটি টুইট এবং একটি একক SMS পাঠ্য বার্তার 160-অক্ষরের সীমার মধ্যে একটি ব্যবহারকারীর নাম ফিট করার জন্য ইচ্ছাকৃতভাবে বেছে নেওয়া হয়েছে, যেহেতু পরিষেবাটি মূলত ওয়েবের মতো টেক্সট মেসেজিং এর উপর কাজ করার জন্য ডিজাইন করা হয়েছিল। 2017 সালে সীমা দ্বিগুণ হয়ে 280 অক্ষরে পৌঁছেছে যখন ডেটা দেখায় যে অনেক ব্যবহারকারী, বিশেষ করে যেসব ভাষায় লেখালেখির জন্য একই ধারণা প্রকাশ করার জন্য আরও অক্ষর প্রয়োজন, তারা ক্রমাগতভাবে ঘরের বাইরে চলে যাচ্ছে। অর্থপ্রদানকারী গ্রাহকদের জন্য উচ্চতর অক্ষর সীমা পরে এসেছে, কিন্তু বিনামূল্যে 280-অক্ষরের সীমা যা এই পাল্টা পরিমাপ করে তা বেশিরভাগ পোস্টের জন্য লেখা হয়।</p>
+<h2>280 অক্ষরের মধ্যে শক্তভাবে লেখা</h2>
+<p>যেহেতু প্রতিটি অক্ষর একটি কঠিন সীমার মধ্যে গণনা করে, যে লেখকরা নিয়মিত পোস্ট করেন তারা অর্থ না হারিয়ে ছাঁটাই করার অভ্যাস গড়ে তোলেন: &quot;কারণ&quot; কে &quot;bc&quot; বা &quot;&amp;&quot; দিয়ে প্রতিস্থাপন করা &quot;এবং&quot; এর জন্য শুধুমাত্র যখন টোন এটির জন্য উপযুক্ত হয়, ফিলার শব্দগুলি কাটা যা কিছুই যোগ করে না, এবং একটি লিঙ্ক বা হ্যাশট্যাগ একেবারে শেষ পর্যন্ত সরানো হয়, তাই চূড়ান্ত ট্রিমের প্রয়োজন হলে এটি কাটার প্রথম জিনিস। আপনার লেখার সময় লাইভ কাউন্ট দেখা, প্রথমে সম্পূর্ণ চিন্তাভাবনা রচনা করার পরিবর্তে এবং পরে আবিষ্কার করা যে এটি চল্লিশটি অক্ষর খুব দীর্ঘ, এই ধরনের আঁটসাঁট সম্পাদনাকে অনেক কম হতাশাজনক করে তোলে, কারণ আপনি দেখতে পারেন যে এটি করার আগে একটি রিওয়ার্ডিং আসলে কতটা জায়গা বাঁচায়।</p>
+<h2>থ্রেড এবং মাল্টি-পোস্ট ড্রাফ্ট</h2>
+<p>যখন একটি একক চিন্তা 280টি অক্ষরের মধ্যে মাপসই হয় না, তখন স্বাভাবিক পদ্ধতি হল সবকিছুকে জোর করে একের মধ্যে না দিয়ে সংযুক্ত পোস্টগুলির একটি থ্রেডে বিভক্ত করা। প্রথমে অন্য কোথাও একটি থ্রেড খসড়া করা এবং প্রতিটি পরিকল্পিত পোস্ট এই কাউন্টারের মাধ্যমে পৃথকভাবে চালানো একটি নির্ভরযোগ্য উপায় যে থ্রেডের প্রতিটি অংশ আরামদায়কভাবে ফিট করে কিনা তা পরীক্ষা করার একটি নির্ভরযোগ্য উপায়, যার মধ্যে &quot;1/&quot; শৈলী নম্বরকরণ উপসর্গের জন্য কয়েকটি অতিরিক্ত অক্ষর সহ, আপনি একটি ব্যবহার করলে, আপনি সেগুলিকে একের পর এক পোস্ট করা শুরু করার আগে, মধ্য-থ্রেড আবিষ্কার করার পরিবর্তে যে একটি পোস্টের আগে একটি বিশ্রী থ্রেড প্রকাশ করা শুরু করার আগে একটি বিশ্রী থ্রেড শুরু করতে হবে।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>আপনি টাইপ করার সাথে সাথে আপনার নিজের ব্রাউজারে সবকিছু চলে, তাই আপনার ড্রাফ্ট পোস্ট কখনই আপলোড করা, লগ করা বা কারও সাথে শেয়ার করা হয় না এবং আপনি একবার পৃষ্ঠা থেকে নেভিগেট করলে কিছুই সংরক্ষিত হয় না। এটি লোড হওয়ার পরে অফলাইনে কাজ করে, যখনই আপনার পোস্ট করার আগে আপনার দ্রুত, নির্ভুল অক্ষর পরীক্ষা করার প্রয়োজন হয় তখনই প্রস্তুত৷</p>
+    <section class="faq"><h2>টুইটার অক্ষর কাউন্টার FAQ</h2><dl><dt>কেন টুইটার ইউআরএলগুলিকে 23টি অক্ষর হিসাবে গণনা করে?</dt><dd>টুইটার স্বয়ংক্রিয়ভাবে প্রতিটি ইউআরএলকে তার t.co শর্টনারের মাধ্যমে মুড়ে দেয়, যা সর্বদা 23টি অক্ষর দীর্ঘ লিঙ্ক তৈরি করে। তাই আপনার URL 10 অক্ষর বা 200 অক্ষর হোক না কেন, এটি আপনার 280-অক্ষরের সীমার জন্য ঠিক 23 হিসাবে গণনা করে৷</dd><dt>Twitter/X অক্ষরের সীমা কত?</dt><dd>একটি একক টুইট বা X পোস্টের জন্য আদর্শ অক্ষর সীমা হল 280 অক্ষর৷ টুইটার ব্লু / এক্স প্রিমিয়াম গ্রাহকদের দীর্ঘ পোস্টে অ্যাক্সেস থাকতে পারে (25,000 অক্ষর পর্যন্ত), তবে বিনামূল্যের সীমা 280।</dd><dt>ইমোজি কি একটি অক্ষর হিসাবে গণনা করে?</dt><dd>বেশিরভাগ স্ট্যান্ডার্ড ইমোজি টুইটারের গণনা পদ্ধতিতে 2টি অক্ষর হিসাবে গণনা করে কারণ তারা ইউনিকোড সারোগেট জোড়া ব্যবহার করে। এই কাউন্টারটি জাভাস্ক্রিপ্টের স্ট্রিং দৈর্ঘ্য ব্যবহার করে, যা নির্দিষ্ট ইমোজি সংমিশ্রণের জন্য টুইটারের সঠিক গণনা থেকে কিছুটা আলাদা হতে পারে।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"text":"টুইট/পোস্ট টেক্সট","whatshappening":"কি হচ্ছে?"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tweetcount.js" defer></script>
+</body>
+</html>

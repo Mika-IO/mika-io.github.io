@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UTM Builder – créez des URL de campagne traçables</title>
+<meta name="description" content="Générateur UTM gratuit. Créez des URL balisées UTM pour Google Analytics et d&#39;autres plateformes d&#39;analyse. Suivez le trafic provenant des e-mails, des réseaux sociaux et des campagnes payantes.">
+<link rel="canonical" href="https://mikaio.dev/fr/utmbuilder/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/utmbuilder/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/utmbuilder/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/utmbuilder/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/utmbuilder/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/utmbuilder/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/utmbuilder/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/utmbuilder/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/utmbuilder/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/utmbuilder/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/utmbuilder/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/utmbuilder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="UTM Builder – créez des URL de campagne traçables">
+<meta property="og:description" content="Générateur UTM gratuit. Créez des URL balisées UTM pour Google Analytics et d&#39;autres plateformes d&#39;analyse. Suivez le trafic provenant des e-mails, des réseaux sociaux et des campagnes payantes.">
+<meta property="og:url" content="https://mikaio.dev/fr/utmbuilder/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"UTM Builder – créez des URL de campagne traçables","url":"https://mikaio.dev/fr/utmbuilder/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Générateur UTM gratuit. Créez des URL balisées UTM pour Google Analytics et d'autres plateformes d'analyse. Suivez le trafic provenant des e-mails, des réseaux sociaux et des campagnes payantes."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Générateur de liens UTM","item":"https://mikaio.dev/fr/utmbuilder/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Que sont les paramètres UTM ?","acceptedAnswer":{"@type":"Answer","text":"Les paramètres UTM (Urchin Tracking Module) sont des balises ajoutées à une URL qui indiquent aux plateformes d'analyse comme Google Analytics d'où vient le trafic, quel support a été utilisé et quelle campagne l'a généré."}},{"@type":"Question","name":"Quels paramètres sont requis ?","acceptedAnswer":{"@type":"Answer","text":"Source, Support et Campagne sont les trois paramètres obligatoires. Le terme (utilisé pour le mot-clé de recherche payant) et le contenu (utilisé pour les tests A/B) sont facultatifs."}},{"@type":"Question","name":"Les paramètres UTM sont-ils sensibles à la casse ?","acceptedAnswer":{"@type":"Answer","text":"Oui. « E-mail » et « e-mail » sont suivis comme des sources distinctes. Utilisez des conventions de dénomination en minuscules cohérentes dans toutes vos campagnes."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/utmbuilder/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/utmbuilder/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/utmbuilder/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/utmbuilder/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/utmbuilder/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/utmbuilder/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/utmbuilder/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/utmbuilder/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/utmbuilder/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/utmbuilder/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Générateur de liens UTM</span></nav>
+  <h1>Générateur de liens UTM</h1>
+  <p class="lead">Remplissez l&#39;URL et les paramètres de campagne pour générer un lien UTM traçable.</p>
+  <section class="widget" id="tool"><div id="utm-app"><div class="row"><div class="field"><label for="utm-url">URL du site Web</label><input type="url" id="utm-url" placeholder="https://example.com/page"></div></div><div class="row"><div class="field"><label for="utm-source">Source UTM</label><input type="text" id="utm-source" placeholder="bulletin d&#39;information"></div><div class="field"><label for="utm-medium">Moyen UTM</label><input type="text" id="utm-medium" placeholder="email"></div><div class="field"><label for="utm-campaign">Campagne UTM</label><input type="text" id="utm-campaign" placeholder="été_vente"></div></div><div class="row"><div class="field"><label for="utm-term">Terme UTM (facultatif)</label><input type="text" id="utm-term" placeholder="course à pied + chaussures"></div><div class="field"><label for="utm-content">Contenu UTM (facultatif)</label><input type="text" id="utm-content" placeholder="cta_button"></div></div><div id="utm-out" style="margin-top:1rem;word-break:break-all;font-size:0.9rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);min-height:3rem"></div><button id="utm-copy" class="btn secondary" style="margin-top:0.5rem">Copier le lien</button></div></section>
+  <article class="content">
+    <h2>Créez des URL balisées UTM pour un suivi précis des campagnes</h2>
+<p>Les paramètres UTM sont le moyen standard d&#39;indiquer aux plateformes d&#39;analyse comme Google Analytics exactement d&#39;où vient le trafic d&#39;un site Web. Sans balises UTM, le trafic de votre newsletter par e-mail, vos publications sur les réseaux sociaux et vos publicités payantes se ressemblent tous dans les analyses – tous classés comme « directs » ou regroupés dans des catégories de référence génériques. Avec les balises UTM, vous savez précisément quelle campagne, quel support et quelle source ont conduit chaque visiteur.</p>
+<h2>Que sont les paramètres UTM ?</h2>
+<p>UTM signifie Module de suivi Urchin. Urchin Software était une société d&#39;analyse Web acquise par Google en 2005 et son module de suivi est devenu la base de Google Analytics. La dénomination UTM est restée la norme du secteur, même si Urchin lui-même a été abandonné.</p>
+<p>Les paramètres UTM sont des paires clé-valeur ajoutées à une URL sous forme de chaîne de requête. Par exemple :</p>
+<p>https://example.com/sale?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=summer_sale</p>
+<p>Lorsqu&#39;un internaute clique sur ce lien et arrive sur votre site Web, Google Analytics (ou toute autre plateforme d&#39;analyse prenant en charge UTM) enregistre les trois paramètres ainsi que les données de visite.</p>
+<h2>Les cinq paramètres UTM</h2>
+<p><strong>utm_source</strong> (obligatoire) : identifie la provenance du trafic. Exemples : newsletter, facebook, google, linkedin, twitter, instagram, podcast.</p>
+<p><strong>utm_medium</strong> (obligatoire) : décrit le canal ou le mécanisme marketing. Exemples : e-mail, réseaux sociaux, cpc (coût par clic), organique, référencement, bannière, affiliation.</p>
+<p><strong>utm_campaign</strong> (obligatoire) : nomme la campagne marketing spécifique. Exemples : summer_sale_2024, product_launch_v2, brand_awareness_q1.</p>
+<p><strong>utm_term</strong> (facultatif) : utilisé principalement pour la recherche payante afin d&#39;identifier le mot clé qui a déclenché l&#39;annonce. Exemple : course à pied+chaussures, meilleur+crm+logiciel.</p>
+<p><strong>utm_content</strong> (facultatif) : utilisé pour les tests A/B ou pour différencier plusieurs liens dans la même campagne. Exemples : cta_button, hero_image, footer_link, version_a.</p>
+<h2>Meilleures pratiques pour la dénomination UTM</h2>
+<p><strong>La cohérence est essentielle</strong> : utm_source=Email et utm_source=email sont traités comme deux sources différentes. Établissez une convention de dénomination et respectez-la dans l’ensemble de votre organisation.</p>
+<p><strong>Utilisez des minuscules</strong> : la plupart des équipes utilisent des minuscules avec des traits de soulignement ou des traits d&#39;union. Évitez les espaces (utilisez + ou %20 si nécessaire, mais des outils comme celui-ci gèrent automatiquement l&#39;encodage).</p>
+<p><strong>Soyez descriptif mais concis</strong> : utm_campaign=summer_sale_2024 vous en dit plus que utm_campaign=campaign1.</p>
+<p><strong>Ne pas utiliser UTM sur les liens internes</strong> : les paramètres UTM réinitialisent la session dans Google Analytics. Les liens internes avec les UTM attribueront incorrectement le trafic.</p>
+<h2>Exemples d&#39;URL de campagne courants</h2>
+<p>Newsletter : utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=weekly_digest</p>
+<p>Publicité Facebook : utm_source=facebook&amp;utm_medium=cpc&amp;utm_campaign=brand_awareness</p>
+<p>Publication LinkedIn : utm_source=linkedin&amp;utm_medium=social&amp;utm_campaign=product_launch</p>
+<p>Code QR sur un flyer : utm_source=print_flyer&amp;utm_medium=qr_code&amp;utm_campaign=event_2024</p>
+<h2>Comment utiliser le constructeur</h2>
+<p>Entrez votre URL de destination et remplissez les champs source, support et campagne, en ajoutant un terme et du contenu si votre campagne en a besoin, et l&#39;URL balisée complète apparaît immédiatement, correctement encodée et prête à être copiée dans un e-mail, une plateforme publicitaire ou une publication sociale. Le construire de cette manière supprime les deux erreurs les plus courantes commises par les gens en tapant manuellement des liens UTM : une faute de frappe dans un nom de paramètre que les analyses ne parviennent pas à reconnaître silencieusement, et une majuscule incohérente qui divise ce qui devrait être une source de trafic en plusieurs sources d&#39;apparence différente dans un rapport.</p>
+<h2>Pourquoi la cohérence compte plus que les noms exacts que vous choisissez</h2>
+<p>Les plates-formes d&#39;analyse traitent les valeurs UTM comme des chaînes littérales plutôt que d&#39;interpréter leur signification. Ainsi, « Newsletter », « newsletter » et « news_letter » sont enregistrées comme trois sources complètement distinctes, même si un humain lisant le rapport les reconnaîtrait comme la même chose. C&#39;est la façon la plus courante dont le suivi UTM s&#39;effondre discrètement au sein des grandes équipes marketing : tout le monde est d&#39;accord sur le concept mais personne n&#39;impose l&#39;orthographe exacte, et des mois plus tard, le rapport d&#39;analyse est fragmenté en une douzaine de lignes presque en double qui signifient toutes la même campagne. Décider d&#39;une convention de dénomination avant votre première campagne et demander à chaque membre de l&#39;équipe de créer des liens via le même outil avec les mêmes valeurs évite cela de manière beaucoup plus fiable que d&#39;essayer de nettoyer les données après coup.</p>
+<h2>Balises UTM et suivi natif de la plateforme</h2>
+<p>Certaines plateformes publicitaires, notamment Google Ads et Facebook Ads, proposent leurs propres systèmes de marquage automatique (gclid, fbclid) qui peuvent dupliquer ou entrer en conflit avec les paramètres UTM créés manuellement si les deux sont utilisés négligemment sur le même lien. La meilleure pratique générale consiste à laisser le marquage automatique de la plate-forme gérer l&#39;attribution spécifique à la plate-forme tout en utilisant les paramètres UTM pour l&#39;histoire plus large au niveau de la campagne que vous souhaitez voir dans Google Analytics (la source, le support et le nom de la campagne), car les paramètres UTM sont le seul schéma de marquage que pratiquement toutes les plateformes d&#39;analyse comprennent de manière cohérente, quel que soit le réseau publicitaire qui a réellement généré le clic.</p>
+<h2>Auditer vos liens UTM avant le lancement</h2>
+<p>Avant qu&#39;une campagne ne soit lancée, il vaut la peine de tester chaque lien balisé UTM exactement comme un destinataire le rencontrerait : collez l&#39;URL complète dans une fenêtre de navigateur privée et confirmez qu&#39;elle atterrit sur la page prévue avec les balises intactes, car certains systèmes de gestion de contenu et raccourcisseurs de liens suppriment silencieusement les paramètres de requête lors d&#39;une redirection. Une campagne qui semble parfaitement balisée dans le générateur mais qui perd ses paramètres UTM quelque part dans une chaîne de redirection sera signalée comme un trafic « direct » dans l&#39;analyse, effaçant silencieusement l&#39;attribution exacte que les balises étaient censées fournir.</p>
+<h2>Conserver une référence de dénomination partagée</h2>
+<p>Les grandes équipes ont intérêt à conserver un simple document de référence partagé répertoriant les valeurs exactes approuvées pour utm_source et utm_medium — « email », et non « Email » ou « e-mail » — afin que tous ceux qui créent des liens de campagne, quel que soit l&#39;outil qu&#39;ils utilisent, produisent des valeurs UTM qui s&#39;enroulent proprement dans les mêmes lignes dans un rapport d&#39;analyse plutôt que de se fragmenter en quasi-doublons au fil du temps.</p>
+<h2>Privé et instantané</h2>
+<p>L&#39;URL est entièrement créée dans votre navigateur, elle apparaît donc instantanément au fur et à mesure que vous tapez et rien de ce que vous saisissez n&#39;est jamais envoyé à un serveur, enregistré ou partagé.</p>
+    <section class="faq"><h2>FAQ du constructeur UTM</h2><dl><dt>Que sont les paramètres UTM ?</dt><dd>Les paramètres UTM (Urchin Tracking Module) sont des balises ajoutées à une URL qui indiquent aux plateformes d&#39;analyse comme Google Analytics d&#39;où vient le trafic, quel support a été utilisé et quelle campagne l&#39;a généré.</dd><dt>Quels paramètres sont requis ?</dt><dd>Source, Support et Campagne sont les trois paramètres obligatoires. Le terme (utilisé pour le mot-clé de recherche payant) et le contenu (utilisé pour les tests A/B) sont facultatifs.</dd><dt>Les paramètres UTM sont-ils sensibles à la casse ?</dt><dd>Oui. « E-mail » et « e-mail » sont suivis comme des sources distinctes. Utilisez des conventions de dénomination en minuscules cohérentes dans toutes vos campagnes.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/utmbuilder/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/utmbuilder/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/utmbuilder/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/utmbuilder/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/utmbuilder/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/utmbuilder/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/utmbuilder/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/utmbuilder/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/utmbuilder/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/utmbuilder/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"url":"URL du site Web","source":"Source UTM","medium":"Moyen UTM","campaign":"Campagne UTM","term":"Terme UTM","content":"Contenu UTM","optional":"facultatif","eg_source":"bulletin d'information","eg_medium":"email","eg_campaign":"été_vente","eg_term":"course à pied + chaussures","eg_content":"cta_button","copy":"Copier le lien","copied":"Copié!","copylink":"Copier le lien","fillhint":"Remplissez l'URL, la source, le support et la campagne pour générer le lien."};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/utmbuilder.js" defer></script>
+</body>
+</html>

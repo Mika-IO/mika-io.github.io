@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URL Encoder/Decoder — процентное кодирование и декодирование URL-адресов онлайн.</title>
+<meta name="description" content="Бесплатный кодировщик и декодер URL-адресов. Кодируйте специальные символы в URL-адресах с помощью процентной кодировки или декодируйте URL-адреса с процентной кодировкой обратно в обычный текст.">
+<link rel="canonical" href="https://mikaio.dev/ru/urlcodec/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/urlcodec/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/urlcodec/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/urlcodec/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/urlcodec/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/urlcodec/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/urlcodec/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/urlcodec/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/urlcodec/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/urlcodec/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/urlcodec/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/urlcodec/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="URL Encoder/Decoder — процентное кодирование и декодирование URL-адресов онлайн.">
+<meta property="og:description" content="Бесплатный кодировщик и декодер URL-адресов. Кодируйте специальные символы в URL-адресах с помощью процентной кодировки или декодируйте URL-адреса с процентной кодировкой обратно в обычный текст.">
+<meta property="og:url" content="https://mikaio.dev/ru/urlcodec/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"URL Encoder/Decoder — процентное кодирование и декодирование URL-адресов онлайн.","url":"https://mikaio.dev/ru/urlcodec/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный кодировщик и декодер URL-адресов. Кодируйте специальные символы в URL-адресах с помощью процентной кодировки или декодируйте URL-адреса с процентной кодировкой обратно в обычный текст."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"URL-кодер/декодер","item":"https://mikaio.dev/ru/urlcodec/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что такое кодирование URL?","acceptedAnswer":{"@type":"Answer","text":"Кодирование URL-адреса (процентное кодирование) заменяет небезопасные символы на %, за которым следуют две шестнадцатеричные цифры. Например, пробел становится %20, а & становится %26. Это гарантирует, что специальные символы не будут мешать синтаксису URL-адреса."}},{"@type":"Question","name":"В чем разница между encodeURI и encodeURIComponent?","acceptedAnswer":{"@type":"Answer","text":"encodeURI сохраняет символы структуры URL, такие как / : ? & = и кодирует только недопустимые символы в полном URL-адресе. encodeURIComponent кодирует все, кроме букв, цифр и -_.~, что делает его безопасным для значений URL-запроса. Этот инструмент использует encodeURIComponent."}},{"@type":"Question","name":"Когда мне следует кодировать URL?","acceptedAnswer":{"@type":"Answer","text":"Кодируйте значения параметров запроса перед включением их в URL-адрес. Например, поисковый запрос типа «привет, мир и многое другое» должен быть закодирован в URL-адресе как «привет%20мир%20%26%20ещё»."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/urlcodec/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/urlcodec/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/urlcodec/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/urlcodec/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/urlcodec/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/urlcodec/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/urlcodec/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/urlcodec/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/urlcodec/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/urlcodec/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>URL-кодер/декодер</span></nav>
+  <h1>URL-кодер/декодер</h1>
+  <p class="lead">Вставьте URL-адрес или текст, чтобы закодировать его для безопасного использования в URL-адресе, или вставьте строку в процентном кодировании, чтобы декодировать ее обратно в читаемый текст.</p>
+  <section class="widget" id="tool"><div id="url-app"><div class="field"><label for="url-in">Ввод</label><textarea id="url-in" rows="3" placeholder="Вставьте сюда текст или URL…" style="width:100%;resize:vertical;padding:0.75rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text)"></textarea></div><div class="row" style="gap:0.5rem"><button class="btn" id="url-enc">Кодировать</button><button class="btn" id="url-dec">Декодировать</button></div><div class="field" style="margin-top:0.5rem"><label for="url-out">Выход</label><textarea id="url-out" rows="3" readonly style="width:100%;resize:vertical;padding:0.75rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text)"></textarea></div></div></section>
+  <article class="content">
+    <h2>Для чего нужен URL-кодер/декодер</h2>
+<p>Вставьте URL-адрес или текст, чтобы закодировать его для безопасного использования в URL-адресе, или вставьте строку в процентном кодировании, чтобы декодировать ее обратно в читаемый текст.</p>
+<p>Это короткая версия, и для многих посетителей это единственная часть, которая им нужна — инструмент находится вверху этой страницы, он работает сразу, и ничего ниже читать не требуется. Остальная часть этой страницы предназначена для случаев, когда одного ответа недостаточно: когда вы хотите знать, как на самом деле работает инструмент, где он перестает быть надежным и что делать с результатом, когда он у вас есть.</p>
+<h2>Как его использовать</h2>
+<p>Элементов управления намеренно мало. Вы увидите 5 элементов управления:</p>
+<ul>
+<li><strong>Ввод</strong></li>
+<li><strong>Вставьте сюда текст или URL…</strong></li>
+<li><strong>Кодировать</strong></li>
+<li><strong>Декодировать</strong></li>
+<li><strong>Выход</strong></li>
+</ul>
+<p>Заполните то, что относится к вам, и результаты обновятся. Ничто не является обязательным в смысле отправки куда-либо — если вы передумаете, отредактируйте значение и прочитайте новый ответ. Здесь нет ни шага сохранения, ни диалогового окна подтверждения, ни возможности навсегда ошибиться, поэтому попробовать несколько вариантов, чтобы увидеть, как меняется результат, не только разрешено, но и обычно это наиболее информативный способ использования такого инструмента.</p>
+<p>Все работает внутри вашего браузера. Ничего из того, что вы вводите, не загружается, ничего не сохраняется между посещениями, нет необходимости создавать учетную запись и нет отслеживания, которое можно было бы отклонить. После загрузки этой страницы ей больше не нужна сеть, поэтому она продолжает работать, даже если ваше соединение обрывается.</p>
+<h2>Почему существует такая страница</h2>
+<p>Небольшие утилиты заслужили свое место, будучи доступными в тот момент, когда они вам понадобятся, без установки, входа в систему или пятиэтапной процедуры регистрации. Ценность полностью заключается в том, насколько мало трений между желанием получить ответ и его получением.</p>
+<p>В сети полно инструментов, которые решают тридцатисекундную проблему, требуя сначала адрес электронной почты, разрешение на использование файлов cookie и четыре секунды рекламы. Эта сделка имела смысл для кого-то, но не имела смысла для человека, который просто хотел получить номер. Эта страница занимает противоположную позицию: никакой регистрации, никакой межстраничной рекламы, никаких дополнительных продаж и никаких причин уходить, как только вы получите то, за чем пришли.</p>
+<h2>О чем говорит и чего не говорит вам результат</h2>
+<p>Все происходит локально в вашем браузере. После загрузки страницы ей вообще не требуется дополнительный доступ к сети, поэтому она работает в самолете, через Wi-Fi в отеле, который перестал притворяться, или при полностью отключенном соединении.</p>
+<p>Стоит четко обозначить границы, потому что инструментам обычно доверяют настолько, насколько они этого заслуживают. Он честен в своих входных данных: дайте ему точные значения, и он даст вам точный инструмент. Он не может сказать вам, были ли значения, которые вы ему дали, правильными для использования, задали ли вы правильный вопрос или есть ли в контексте, к которому вы применяете ответ, что-то важное, что входные данные никогда не улавливают. Это суждение остается с вами, и это та часть, которая действительно имеет значение.</p>
+<h2>Где это вписывается в реальный рабочий процесс</h2>
+<p>Подобные инструменты редко решают всю задачу. Чаще всего кодировщик/декодер URL-адресов является одним из шагов в середине чего-то большего: вам нужна эта цифра, чтобы вы могли продолжить то, что вы на самом деле делаете. Это определяет то, как построена страница. Он открывается быстро, не прерывает, не требует от вас каких-либо обязательств и уходит с дороги в тот момент, когда вы получаете то, за чем пришли.</p>
+<p>Это также означает, что вы можете использовать его неоднократно, а не осторожно. Вторая попытка не требует затрат, а за неправильное первое предположение не взимается штраф, поэтому самый быстрый путь к хорошему ответу обычно состоит в том, чтобы попробовать приблизительный ответ, посмотреть на результат и внести поправки. Люди склонны относиться к инструментам так, как если бы каждое их использование было дорогостоящим, и эта привычка унаследована от программного обеспечения, которое сделало его дорогим. Этот нет.</p>
+<h2>Распространенные ошибки, которых стоит избегать</h2>
+<p>Первый — доверять результату, ввод которого вы не проверяли. Инструмент не может знать, что вы хотели ввести одно число, а набрали другое, и он выдаст неправильный ответ с той же уверенностью, что и правильный. Прочтите входные данные, прежде чем полагаться на выходные данные: это занимает две секунды и выявляет большую часть того, что идет не так.</p>
+<p>Второй — рассматривать одно число как ответ на вопрос, который никогда не задавался. Каждый инструмент на этой странице отвечает на что-то узкое и конкретное. Применение его к соседнему, но другому вопросу — наиболее распространенный способ, которым люди вводят в заблуждение инструментом, который все время работал идеально. Если вы не уверены, что ваш вопрос соответствует вопросу, на который отвечает инструмент, эта неопределенность является полезным сигналом, а не препятствием.</p>
+<p>Приведенные ниже часто задаваемые вопросы охватывают случаи, которые возникают чаще всего, в том числе те, на которые честный ответ заключается в том, что этот инструмент не подходит для того, что вы пытаетесь сделать.</p>
+<h2>Работа оффлайн и на любом устройстве</h2>
+<p>Страница представляет собой отдельный автономный документ. Здесь нет платформы для загрузки, нет шрифтов, полученных от третьих лиц, и нет аналитических маяков, активирующихся в фоновом режиме, поэтому он быстро загружается при плохом соединении и почему ничего не стоит держать открытой вкладку, к которой вы время от времени возвращаетесь. Он работает одинаково на телефоне, планшете и настольном компьютере; макет адаптируется, поведение — нет.</p>
+<p>Поскольку сервер не участвует в фактической работе, также нет службы, которую нужно отключить, нет ограничения скорости, которое нужно достичь, и нет тихого изменения поведения, вытесненного откуда-то еще. Что загрузили, то и работает. Если вы хотите быть в этом уверены, откройте исходный код страницы — вся реализация находится прямо здесь в удобочитаемой форме, а это могут сделать очень немногие инструменты такого типа.</p>
+<h2>Примечание о точности</h2>
+<p>Результаты вычисляются с помощью стандартной арифметики двойной точности и отображаются в разумном количестве мест, а не в каждой цифре, которую может выдать аппаратное обеспечение. Цифра, показанная с точностью до двух десятичных знаков, не претендует на точность до двух десятичных знаков — она утверждает, что введенные вами входные данные, взятые по номиналу, дают эту цифру. Точность отображения и точность в реальном мире — разные вещи, и их объединение — наиболее распространенный способ, которым правильный инструмент приводит к неправильному решению.</p>
+<p>Если результат выглядит неверным, проверьте входные данные, прежде чем сомневаться в арифметике. На практике подавляющее большинство неожиданных ответов приходит из-за значения, введенного в неправильных единицах измерения, десятичного разделителя, который читается иначе, чем вы предполагали, или поля, оставленного по умолчанию, хотя его следовало изменить. Это не критика кого-либо — просто именно здесь обитают ошибки, и знание того, где искать в первую очередь, экономит больше всего времени.</p>
+    <section class="faq"><h2>Часто задаваемые вопросы по кодированию/декодеру URL-адресов</h2><dl><dt>Что такое кодирование URL?</dt><dd>Кодирование URL-адреса (процентное кодирование) заменяет небезопасные символы на %, за которым следуют две шестнадцатеричные цифры. Например, пробел становится %20, а &amp; становится %26. Это гарантирует, что специальные символы не будут мешать синтаксису URL-адреса.</dd><dt>В чем разница между encodeURI и encodeURIComponent?</dt><dd>encodeURI сохраняет символы структуры URL, такие как / : ? &amp; = и кодирует только недопустимые символы в полном URL-адресе. encodeURIComponent кодирует все, кроме букв, цифр и -_.~, что делает его безопасным для значений URL-запроса. Этот инструмент использует encodeURIComponent.</dd><dt>Когда мне следует кодировать URL?</dt><dd>Кодируйте значения параметров запроса перед включением их в URL-адрес. Например, поисковый запрос типа «привет, мир и многое другое» должен быть закодирован в URL-адресе как «привет%20мир%20%26%20ещё».</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/urlcodec/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/urlcodec/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/urlcodec/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/urlcodec/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/urlcodec/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/urlcodec/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/urlcodec/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/urlcodec/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/urlcodec/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/urlcodec/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"input":"Ввод","placeholder":"Вставьте сюда текст или URL…","encode":"Кодировать","decode":"Декодировать","output":"Выход"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/urlcodec.js" defer></script>
+</body>
+</html>

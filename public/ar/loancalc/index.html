@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة القرض - الدفعة الشهرية وإجمالي الفائدة</title>
+<meta name="description" content="حاسبة القروض المجانية. أدخل مبلغ القرض وسعر الفائدة والمدة لمعرفة الدفعة الشهرية وإجمالي الفائدة المدفوعة. يعمل على القروض العقارية وقروض السيارات والقروض الشخصية.">
+<link rel="canonical" href="https://mikaio.dev/ar/loancalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/loancalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/loancalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/loancalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/loancalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/loancalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/loancalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/loancalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/loancalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/loancalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/loancalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/loancalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حاسبة القرض - الدفعة الشهرية وإجمالي الفائدة">
+<meta property="og:description" content="حاسبة القروض المجانية. أدخل مبلغ القرض وسعر الفائدة والمدة لمعرفة الدفعة الشهرية وإجمالي الفائدة المدفوعة. يعمل على القروض العقارية وقروض السيارات والقروض الشخصية.">
+<meta property="og:url" content="https://mikaio.dev/ar/loancalc/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة القرض - الدفعة الشهرية وإجمالي الفائدة","url":"https://mikaio.dev/ar/loancalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"حاسبة القروض المجانية. أدخل مبلغ القرض وسعر الفائدة والمدة لمعرفة الدفعة الشهرية وإجمالي الفائدة المدفوعة. يعمل على القروض العقارية وقروض السيارات والقروض الشخصية."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة القروض","item":"https://mikaio.dev/ar/loancalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هي الصيغة المستخدمة؟","acceptedAnswer":{"@type":"Answer","text":"الدفعة الشهرية = P × [r(1+r)^n] / [(1+r)^n - 1]، حيث P هو مبلغ القرض، وr هو معدل الفائدة الشهرية (سنوي / 12)، وn هو عدد الأشهر."}},{"@type":"Question","name":"ما هي أنواع القروض التي يمكنني حسابها؟","acceptedAnswer":{"@type":"Answer","text":"تنطبق الصيغة على أي قرض إطفاء قياسي: الرهون العقارية، وقروض السيارات، والقروض الشخصية، وقروض الطلاب. تختلف الصيغة بالنسبة للقروض ذات الفائدة فقط أو القروض البالونية."}},{"@type":"Question","name":"هل يشمل ذلك الرسوم أو التأمين؟","acceptedAnswer":{"@type":"Answer","text":"لا، هذا يحسب فقط دفع أصل القرض والفائدة. قد تكون دفعتك الشهرية الفعلية أعلى إذا كانت تتضمن ضريبة الأملاك أو التأمين أو الرسوم الأخرى."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/loancalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/loancalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/loancalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/loancalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/loancalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة القروض</span></nav>
+  <h1>حاسبة القروض</h1>
+  <p class="lead">أدخل مبلغ القرض وسعر الفائدة السنوي والمدة بالسنوات لحساب الدفعة الشهرية.</p>
+  <section class="widget" id="tool"><form id="loan-form"><div class="row"><div class="field"><label for="loan-amt">مبلغ القرض</label><input type="number" id="loan-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-rate">معدل الفائدة السنوي %</label><input type="number" id="loan-rate" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-years">المدة (سنوات)</label><input type="number" id="loan-years" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="hint">الدفع الشهري: </span><span class="big" id="loan-monthly">—</span></div><div id="loan-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>حساب دفع القرض الخاص بك قبل الاقتراض</h2>
+<p>قبل الحصول على أي قرض — رهن عقاري، أو قرض سيارة، أو قرض شخصي، أو قرض طلابي — فإن معرفة الدفعة الشهرية وإجمالي تكلفة الفائدة تساعدك على اتخاذ قرار مستنير. تستخدم هذه الآلة الحاسبة صيغة الاستهلاك القياسية لتظهر لك بالضبط ما ستدفعه كل شهر والمبلغ الإجمالي لتكلفة القرض.</p>
+<h2>صيغة سداد القرض</h2>
+<p>يتم حساب الدفعة الشهرية لقرض الاستهلاك القياسي باستخدام الصيغة:</p>
+<p>م = ف × [ص(1+ص)^ن] / [(1+ص)^ن − 1]</p>
+<p>أين:</p>
+<ul>
+<li>م = الدفع الشهري</li>
+<li>P = أصل القرض (مبلغ القرض)</li>
+<li>r = معدل الفائدة الشهري (المعدل السنوي ÷ 12، معبرًا عنه بالقيمة العشرية)</li>
+<li>n = إجمالي عدد الدفعات الشهرية (سنوات × 12)</li>
+</ul>
+<p>تسمى هذه الصيغة بصيغة الاستهلاك وتنتج دفعة ثابتة تغطي كلاً من الفائدة وأصل القرض على مدار مدة القرض.</p>
+<h2>كيف يعمل الإطفاء</h2>
+<p>مع كل دفعة شهرية، يذهب جزء إلى الفائدة ويخفض جزء من أصل المبلغ. في وقت مبكر من مدة القرض، تكون معظم الدفعات عبارة عن فوائد لأن الرصيد المستحق كبير. ومع انخفاض الرصيد، يتقلص جزء الفائدة وينمو الجزء الأصلي. بحلول الدفعة النهائية، يكون معظمها تقريبًا أصليًا.</p>
+<p>للحصول على رهن عقاري بقيمة 300000 دولار بفائدة 7% لمدة 30 عامًا:</p>
+<ul>
+<li>القسط الشهري: حوالي 1,995 دولارًا</li>
+<li>إجمالي المدفوع على مدى 30 عامًا: 718.200 دولار</li>
+<li>إجمالي الفائدة المدفوعة: 418,200 دولار - أكثر من مبلغ القرض الأصلي</li>
+</ul>
+<p>يوضح هذا سبب تكلفة فوائد القروض الطويلة جدًا. الرهن العقاري لمدة 15 عامًا بنفس المعدل له دفعة شهرية أعلى ولكنه يوفر بشكل كبير في إجمالي الفائدة.</p>
+<h2>تأثير سعر الفائدة</h2>
+<p>سعر الفائدة له تأثير كبير على الدفع والتكلفة. على قرض بقيمة 200.000 دولار على مدى 30 عامًا:</p>
+<ul>
+<li>بنسبة 4%: 955 دولارًا شهريًا، وإجمالي الفائدة 143,739 دولارًا</li>
+<li>بنسبة 6%: 1,199 دولارًا أمريكيًا في الشهر، وإجمالي الفائدة 231,676 دولارًا أمريكيًا</li>
+<li>بنسبة 8%: 1,468 دولارًا أمريكيًا في الشهر، وإجمالي الفائدة 328,310 دولارًا أمريكيًا</li>
+</ul>
+<p>تؤدي الزيادة بمقدار نقطتين مئويتين إلى مضاعفة تكلفة الفائدة تقريبًا على مدى 30 عامًا.</p>
+<h2>أنواع القروض</h2>
+<p>تعمل هذه الآلة الحاسبة مع أي قرض إطفاء قياسي:</p>
+<p><strong>الرهون العقارية</strong>: تستمر القروض العقارية عادةً لمدة 15 أو 30 عامًا في الولايات المتحدة، و25-35 عامًا في المملكة المتحدة وكندا. الرهون العقارية ذات السعر الثابت لها نفس الدفع طوال المدة؛ تتغير الرهون العقارية ذات السعر القابل للتعديل مع المؤشر.</p>
+<p><strong>قروض السيارات</strong>: عادة 48-84 شهرًا (4-7 سنوات). الشروط الأقصر تعني دفعات أعلى ولكن فائدة إجمالية أقل.</p>
+<p><strong>القروض الشخصية</strong>: عادة من 1 إلى 7 سنوات. تختلف الأسعار على نطاق واسع بناءً على الجدارة الائتمانية، من 5% للائتمان الممتاز إلى 30%+ للائتمان الضعيف.</p>
+<p><strong>قروض الطلاب</strong>: تحمل قروض الطلاب الفيدرالية الأمريكية حاليًا معدلات فائدة ثابتة تتراوح من 5 إلى 8%، مع خيارات السداد على أساس الدخل.</p>
+<h2>مثال عملي على المقايضة</h2>
+<p>فكر في اقتراض 250 ألف دولار بمعدل فائدة سنوي 6%. على مدار 30 عامًا، يبلغ الدفع الشهري حوالي 1,499 دولارًا أمريكيًا، ويبلغ إجمالي الفائدة المدفوعة على مدار عمر القرض حوالي 289,600 دولارًا أمريكيًا - أي أكثر من المبلغ الأصلي المقترض. وعلى مدار 15 عامًا بنفس المعدل، يرتفع الدفع الشهري إلى حوالي 2,110 دولارات، أي أكثر بشكل ملحوظ شهريًا، لكن إجمالي الفائدة ينخفض ​​إلى حوالي 129,800 دولار، أي أقل بكثير من نصف الرقم على مدار 30 عامًا. لا يعتبر أي من المصطلحين صحيحًا بشكل موضوعي؛ يعتمد الاختيار الصحيح على الدفعة الشهرية التي تناسب ميزانيتك مقابل مقدار التكلفة الإجمالية التي ترغب في قبولها مقابل هذه المرونة.</p>
+<h2>استخدام الآلة الحاسبة في التخطيط</h2>
+<p>يمكنك استخدام هذه الآلة الحاسبة بعدة طرق:</p>
+<ul>
+<li>أدخل ما تتوقع اقتراضه لمعرفة الدفعة التي سيتم دفعها.</li>
+<li>اعمل بشكل عكسي: إذا كنت تستطيع تحمل مبلغ X دولار شهريًا، فجرب مبالغ وأسعار قروض مختلفة لمعرفة الحد الأقصى الذي يمكنك اقتراضه.</li>
+<li>قارن إجمالي الفائدة على فترات زمنية مختلفة لاتخاذ قرار أكثر استنارة بشأن مدة القرض.</li>
+</ul>
+<h2>كيفية استخدام الآلة الحاسبة</h2>
+<p>أدخل مبلغ القرض وسعر الفائدة السنوي والمدة بالسنوات، وسيظهر الدفع الشهري فورًا، إلى جانب إجمالي المبلغ الذي ستدفعه على مدار عمر القرض وإجمالي الفائدة التي تمثله. اضبط أيًا من المدخلات الثلاثة وسيتم إعادة حساب كل رقم على الفور، مما يجعل من السهل مقارنة مدى تأثير مدة أقصر أو سعر مختلف أو دفعة مقدمة أكبر على ما تدفعه فعليًا.</p>
+<h2>دفعات إضافية وسداد القرض في وقت مبكر</h2>
+<p>إن تقديم دفعات إضافية لأصل القرض، حتى ولو كانت صغيرة، من الممكن أن يؤدي إلى تقصير مدة القرض وخفض إجمالي الفائدة بشكل كبير، لأن كل دولار إضافي يتم تطبيقه على أصل القرض يتوقف عن تراكم الفائدة طوال العمر المتبقي للقرض. في حالة الرهن العقاري النموذجي طويل الأجل، فإن إضافة مبلغ متواضع إلى كل دفعة شهرية في السنوات الأولى - عندما يكون الرصيد وبالتالي الفائدة المتراكمة في أعلى مستوياتهما - له تأثير كبير مقارنة بدفع نفس الدفعة الإضافية في وقت لاحق من الأجل. يسمح العديد من المقرضين بمدفوعات رئيسية إضافية دون عقوبة، على الرغم من أنه من المفيد دائمًا تأكيد ذلك قبل الاعتماد على الإستراتيجية، نظرًا لأن بعض اتفاقيات القروض تفرض رسوم سداد مبكر.</p>
+<h2>مقارنة شروط القرض جنبا إلى جنب</h2>
+<p>ربما يكون الاستخدام الأكثر قيمة لهذه الآلة الحاسبة هو مقارنة كيفية تصرف نفس مبلغ القرض عبر شروط مختلفة. تعني المدة الأقصر دائمًا دفعة شهرية أعلى ولكن تكلفة فائدة إجمالية أقل، لأن الرصيد يتم دفعه بشكل أسرع ولديه وقت أقل لتراكم الفائدة عليه. ويوزع الأجل الأطول نفس المبلغ على دفعات أصغر، الأمر الذي يمكن أن يجعل عملية الشراء ميسورة التكلفة من شهر لآخر، ولكن على حساب دفع مبلغ أكبر بشكل عام. إن تشغيل نفس المبلغ الأساسي والمعدل من خلال هذه الآلة الحاسبة، على سبيل المثال، لمدة 15 عامًا ثم 30 عامًا جنبًا إلى جنب، يجعل المفاضلة بين القدرة على تحمل التكاليف الشهرية والتكلفة الإجمالية ملموسة وليس مجردة، وهي بالضبط المقارنة التي تستحق إجراءها قبل التوقيع على أي اتفاقية قرض طويل الأجل.</p>
+<h2>خاصة وفورية</h2>
+<p>يتم تشغيل جميع الحسابات بالكامل في متصفحك باستخدام صيغة الاستهلاك القياسية، لذلك يتم تحديث النتائج على الفور عند ضبط أي مدخلات ولا يتم إرسال أي مبالغ قروض أو أسعار أو شروط تدخلها إلى الخادم أو تسجيلها أو مشاركتها.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول حاسبة القروض</h2><dl><dt>ما هي الصيغة المستخدمة؟</dt><dd>الدفعة الشهرية = P × [r(1+r)^n] / [(1+r)^n - 1]، حيث P هو مبلغ القرض، وr هو معدل الفائدة الشهرية (سنوي / 12)، وn هو عدد الأشهر.</dd><dt>ما هي أنواع القروض التي يمكنني حسابها؟</dt><dd>تنطبق الصيغة على أي قرض إطفاء قياسي: الرهون العقارية، وقروض السيارات، والقروض الشخصية، وقروض الطلاب. تختلف الصيغة بالنسبة للقروض ذات الفائدة فقط أو القروض البالونية.</dd><dt>هل يشمل ذلك الرسوم أو التأمين؟</dt><dd>لا، هذا يحسب فقط دفع أصل القرض والفائدة. قد تكون دفعتك الشهرية الفعلية أعلى إذا كانت تتضمن ضريبة الأملاك أو التأمين أو الرسوم الأخرى.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/loancalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/loancalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/loancalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/loancalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/loancalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"amount":"مبلغ القرض","rate":"معدل الفائدة السنوي %","term":"المدة (سنوات)","monthly":"الدفع الشهري","total_paid":"مجموع المدفوعة","total_interest":"إجمالي الفائدة"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/loancalc.js" defer></script>
+</body>
+</html>

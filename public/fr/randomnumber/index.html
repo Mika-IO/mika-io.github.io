@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Générateur de nombres aléatoires : choisissez un nombre dans n&#39;importe quelle plage</title>
+<meta name="description" content="Générateur de nombres aléatoires gratuit. Choisissez un ou plusieurs nombres aléatoires entre n&#39;importe quel minimum et maximum, avec une option pour des résultats uniques. Sécurisé et instantané dans votre navigateur.">
+<link rel="canonical" href="https://mikaio.dev/fr/randomnumber/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/randomnumber/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/randomnumber/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/randomnumber/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/randomnumber/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/randomnumber/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/randomnumber/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/randomnumber/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/randomnumber/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/randomnumber/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/randomnumber/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/randomnumber/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Générateur de nombres aléatoires : choisissez un nombre dans n&#39;importe quelle plage">
+<meta property="og:description" content="Générateur de nombres aléatoires gratuit. Choisissez un ou plusieurs nombres aléatoires entre n&#39;importe quel minimum et maximum, avec une option pour des résultats uniques. Sécurisé et instantané dans votre navigateur.">
+<meta property="og:url" content="https://mikaio.dev/fr/randomnumber/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Générateur de nombres aléatoires : choisissez un nombre dans n'importe quelle plage","url":"https://mikaio.dev/fr/randomnumber/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Générateur de nombres aléatoires gratuit. Choisissez un ou plusieurs nombres aléatoires entre n'importe quel minimum et maximum, avec une option pour des résultats uniques. Sécurisé et instantané dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Générateur de nombres aléatoires","item":"https://mikaio.dev/fr/randomnumber/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Les chiffres sont-ils vraiment aléatoires ?","acceptedAnswer":{"@type":"Answer","text":"Ils proviennent du générateur aléatoire cryptographiquement sécurisé de votre navigateur, de sorte que chaque nombre de la plage est également probable et les résultats ne peuvent pas être prédits ou reproduits."}},{"@type":"Question","name":"À quoi sert l'option « pas de répétition » ?","acceptedAnswer":{"@type":"Answer","text":"Lorsque les résultats uniques sont activés, chaque numéro généré n'apparaît qu'une seule fois, ce que vous souhaitez pour les tirages au sort, les tirages au sort ou la sélection de gagnants distincts. Cela nécessite que la plage soit au moins aussi grande que le nombre."}},{"@type":"Question","name":"Est-ce que ça marche hors ligne ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Le générateur fonctionne entièrement dans votre navigateur, donc une fois la page chargée, aucune connexion Internet n'est nécessaire."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/randomnumber/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/randomnumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/randomnumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/randomnumber/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/randomnumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/randomnumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/randomnumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/randomnumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/randomnumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/randomnumber/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Générateur de nombres aléatoires</span></nav>
+  <h1>Générateur de nombres aléatoires</h1>
+  <p class="lead">Définissez un minimum et un maximum, choisissez le nombre de nombres souhaités et générez. Utilisez l&#39;option unique pour les tirages où aucun numéro ne doit se répéter.</p>
+  <section class="widget" id="tool"><form id="rng-form" data-too-many="Plage trop petite pour autant de numéros uniques"><div class="row"><div class="field"><label for="rng-min">Minimum</label><input type="number" id="rng-min" value="1" step="1"></div><div class="field"><label for="rng-max">Maximale</label><input type="number" id="rng-max" value="100" step="1"></div><div class="field"><label for="rng-count">Combien</label><input type="number" id="rng-count" value="1" min="1" step="1"></div></div><div class="field"><label><input type="checkbox" id="rng-unique"> Aucune répétition (unique)</label></div><button class="btn" type="submit">Générer</button><div class="result"><span class="big" id="rng-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Un numéro aléatoire quand vous en avez besoin</h2>
+<p>Parfois, il suffit d’un numéro que personne n’a choisi exprès. Peut-être que vous tirez au sort un gagnant de tombola, que vous choisissez une page à étudier, que vous décidez quel joueur commence ou que vous lancez une partie. Ce générateur de nombres aléatoires vous donne exactement cela : choisissez une valeur la plus basse et la plus élevée, dites combien de nombres vous voulez, et il les produit instantanément. Tout se passe dans votre navigateur, de sorte que les résultats apparaissent au moment où vous appuyez sur le bouton et rien de ce que vous saisissez n&#39;est jamais envoyé nulle part.</p>
+<p>Les commandes sont volontairement simples. Les cases minimum et maximum définissent la plage dans laquelle les nombres peuvent tomber, y compris les deux extrémités, de sorte qu&#39;une plage de un à six se comporte exactement comme un dé normal. La case &quot;combien&quot; vous permet de générer un lot entier à la fois au lieu d&#39;un à la fois, et une seule case à cocher permet de basculer entre autoriser les répétitions et forcer chaque nombre à être différent. Lorsque vous appuyez sur générer, les résultats apparaissent ensemble, prêts à être lus ou copiés.</p>
+<h2>Ce que fait chaque paramètre</h2>
+<p><strong>Minimum et maximum</strong> définissent le pool de nombres possibles. Les deux extrémités sont incluses, donc choisir 1 et 10 peut renvoyer n&#39;importe quel nombre entier de 1 à 10. Si vous entrez d&#39;abord le plus grand nombre, l&#39;outil les échange silencieusement pour vous, de sorte que vous n&#39;obtenez jamais de résultat vide d&#39;une plage inversée.</p>
+<p><strong>Combien</strong> contrôle le nombre de nombres qui sortent en une seule fois. Laissez-le à un pour un seul choix, ou augmentez-le pour en tirer plusieurs à la fois – pratique pour choisir plusieurs gagnants, générer un ensemble de numéros de style loterie ou créer des données de test. Il n’y a aucune limite pratique pour une utilisation quotidienne.</p>
+<p><strong>Aucune répétition</strong> est le commutateur important. Lorsqu&#39;il est désactivé, chaque tirage est indépendant, donc le même numéro peut apparaître plus d&#39;une fois, exactement comme lancer un dé plusieurs fois. Lorsqu&#39;il est activé, chaque numéro est supprimé du pool une fois qu&#39;il a été choisi, de sorte que chaque résultat du lot est unique. C&#39;est ce que l&#39;on souhaite pour une tombola équitable ou pour un tirage au sort, où le même ticket ne doit jamais être tiré deux fois. Si vous demandez plus de numéros uniques que la plage ne peut en fournir, l&#39;outil vous l&#39;indique plutôt que de boucler indéfiniment.</p>
+<h2>Où un générateur de nombres aléatoires aide</h2>
+<p>Les utilisations quotidiennes sont infinies. Les enseignants choisissent un élève ou une question au hasard pour que les choses restent équitables. Les streamers et les community managers tirent au sort les gagnants à partir d&#39;une liste numérotée. Les maîtres du jeu lancent les dés pour obtenir des résultats lorsque les dés physiques sont hors de portée. Les parents décident « qui commence en premier » sans argument. La portée étant entièrement réglable, le même outil remplace une pièce de monnaie, un dé, une roulette à cent faces ou une machine de loterie, simplement en changeant deux nombres.</p>
+<p>Il est également utile pour des tâches plus pratiques. Les développeurs et les testeurs utilisent des nombres aléatoires pour créer des exemples de données, choisir des cas de test ou mélanger les entrées. Les chercheurs les utilisent pour répartir les participants dans des groupes sans parti pris. Quiconque organise un tirage au sort peut coller une liste numérotée de participants et sélectionner des gagnants uniques en quelques secondes, avec un résultat véritablement impartial car aucun humain n&#39;y a touché.</p>
+<h2>Pourquoi ces chiffres sont dignes de confiance</h2>
+<p>Tous les hasards ne sont pas égaux. De nombreux générateurs simples utilisent une formule prévisible qui ne semble aléatoire qu’en surface. Cet outil s&#39;appuie plutôt sur le générateur de nombres aléatoires cryptographiquement sécurisé de votre navigateur – la même source de caractère aléatoire utilisée pour protéger les opérations sensibles en ligne. Cela signifie que chaque numéro de la plage que vous avez choisie a une chance égale d&#39;apparaître, que les résultats ne peuvent pas être prédits à partir des précédents et que personne, y compris vous, ne peut influencer le résultat.</p>
+<p>Il y a une subtilité qui mérite d&#39;être connue. Pour que chaque valeur soit également probable, l&#39;outil supprime et redessine les rares valeurs brutes qui autrement rendraient certains nombres très légèrement plus courants que d&#39;autres. Cette étape de « rejet » vous est invisible mais c&#39;est elle qui garantit une répartition véritablement homogène sur l&#39;ensemble de la gamme, sans biais vers le bas ou le haut de gamme. C’est la différence entre le hasard qui semble simplement juste et le hasard qui l’est en réalité.</p>
+<p>Étant donné que la pièce n’a pas de mémoire, une série de nombres élevés ne rend pas plus probable un nombre faible la prochaine fois, et vice versa. Chaque génération repart à zéro. Si vous souhaitez explorer cela, générez un grand lot avec des répétitions autorisées et vous verrez les nombres se disperser sur toute la plage sans aucun motif, se regroupant de manière plus uniforme à mesure que vous dessinez.</p>
+<h2>Privé, instantané et gratuit</h2>
+<p>Il n&#39;y a pas de compte, pas de frais et pas d&#39;attente. L&#39;ensemble du générateur est un petit morceau de code qui s&#39;exécute sur votre propre appareil, c&#39;est pourquoi il répond instantanément et continue de fonctionner même sans connexion Internet. Aucun des nombres que vous générez et aucune des plages que vous saisissez n&#39;est téléchargé, enregistré ou partagé. Ce qui apparaît sur votre écran reste sur votre écran et disparaît lorsque vous rechargez la page.</p>
+<p>Un petit conseil pour les tâches courantes : pour simuler un seul dé, définissez la plage sur 1 et 6 ; pour un choix de style loterie standard, définissez la plage sur 1 et 49 ou 1 et 60, activez l&#39;absence de répétition et définissez le décompte sur le nombre de boules tirées ; et pour mélanger une liste numérotée, générer autant de nombres uniques et les lire comme le nouvel ordre. Étant donné que les deux extrémités de la plage sont incluses, vous n’avez jamais besoin d’en ajouter ou de soustraire une pour que les calculs fonctionnent.</p>
+<p>Pour l&#39;utiliser, définissez votre minimum et votre maximum, choisissez le nombre de nombres souhaités, décidez si les répétitions sont autorisées et appuyez sur Générer. Ajustez n&#39;importe quelle valeur et générez à nouveau aussi souvent que vous le souhaitez : chaque pression donne un résultat nouveau et impartial sur lequel vous pouvez compter.</p>
+    <section class="faq"><h2>FAQ sur le générateur de nombres aléatoires</h2><dl><dt>Les chiffres sont-ils vraiment aléatoires ?</dt><dd>Ils proviennent du générateur aléatoire cryptographiquement sécurisé de votre navigateur, de sorte que chaque nombre de la plage est également probable et les résultats ne peuvent pas être prédits ou reproduits.</dd><dt>À quoi sert l&#39;option « pas de répétition » ?</dt><dd>Lorsque les résultats uniques sont activés, chaque numéro généré n&#39;apparaît qu&#39;une seule fois, ce que vous souhaitez pour les tirages au sort, les tirages au sort ou la sélection de gagnants distincts. Cela nécessite que la plage soit au moins aussi grande que le nombre.</dd><dt>Est-ce que ça marche hors ligne ?</dt><dd>Oui. Le générateur fonctionne entièrement dans votre navigateur, donc une fois la page chargée, aucune connexion Internet n&#39;est nécessaire.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/randomnumber/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/randomnumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/randomnumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/randomnumber/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/randomnumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/randomnumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/randomnumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/randomnumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/randomnumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/randomnumber/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"min":"Minimum","max":"Maximale","count":"Combien","unique":"Aucune répétition (unique)","generate":"Générer","too_many":"Plage trop petite pour autant de numéros uniques"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/randomnumber.js" defer></script>
+</body>
+</html>

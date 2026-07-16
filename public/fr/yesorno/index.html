@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oui ou Non – un décideur aléatoire</title>
+<meta name="description" content="Générateur gratuit Oui ou Non. Posez une question et obtenez instantanément une réponse juste et aléatoire par oui ou par non, avec un décompte continu. Fonctionne dans votre navigateur, aucune application n&#39;est nécessaire.">
+<link rel="canonical" href="https://mikaio.dev/fr/yesorno/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/yesorno/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/yesorno/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/yesorno/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/yesorno/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/yesorno/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/yesorno/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/yesorno/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/yesorno/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/yesorno/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/yesorno/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/yesorno/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Oui ou Non – un décideur aléatoire">
+<meta property="og:description" content="Générateur gratuit Oui ou Non. Posez une question et obtenez instantanément une réponse juste et aléatoire par oui ou par non, avec un décompte continu. Fonctionne dans votre navigateur, aucune application n&#39;est nécessaire.">
+<meta property="og:url" content="https://mikaio.dev/fr/yesorno/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Oui ou Non – un décideur aléatoire","url":"https://mikaio.dev/fr/yesorno/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Générateur gratuit Oui ou Non. Posez une question et obtenez instantanément une réponse juste et aléatoire par oui ou par non, avec un décompte continu. Fonctionne dans votre navigateur, aucune application n'est nécessaire."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Oui ou Non","item":"https://mikaio.dev/fr/yesorno/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"La réponse est-elle vraiment aléatoire ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Chaque réponse utilise le générateur aléatoire cryptographiquement sécurisé de votre navigateur, donnant à chaque fois oui et non une chance égale de 50 %, sans aucun souvenir des réponses précédentes."}},{"@type":"Question","name":"Quand dois-je utiliser un sélecteur oui ou non ?","acceptedAnswer":{"@type":"Answer","text":"Il est parfait pour briser une véritable égalité, régler rapidement un choix trivial ou vous pousser à prendre une décision lorsque vous continuez à faire des allers-retours. Votre réaction à la réponse vous indique souvent ce que vous vouliez vraiment."}},{"@type":"Question","name":"A-t-il besoin d'Internet ?","acceptedAnswer":{"@type":"Answer","text":"Non. Une fois la page chargée, elle s'exécute entièrement dans votre navigateur, vous pouvez donc continuer à demander sans connexion."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/yesorno/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/yesorno/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/yesorno/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/yesorno/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/yesorno/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/yesorno/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/yesorno/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/yesorno/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/yesorno/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/yesorno/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Oui ou Non</span></nav>
+  <h1>Oui ou Non</h1>
+  <p class="lead">Pensez à une question, puis appuyez sur le bouton pour un oui ou un non juste et aléatoire. Un décompte permet de noter la façon dont les réponses tombent.</p>
+  <section class="widget" id="tool"><div id="yn" data-yes="Oui" data-no="Non"><div class="result"><span class="big" id="yn-result">Demande-moi n&#39;importe quoi</span></div><div class="row" style="justify-content:center"><button type="button" class="btn" id="yn-ask">Posez la question</button></div><div class="coin-tally"><span>Oui<b id="yn-y">0</b></span><span>Non<b id="yn-n">0</b></span></div></div></section>
+  <article class="content">
+    <h2>Quand tu as juste besoin d&#39;une réponse directe</h2>
+<p>Certaines décisions ne méritent pas un long débat. Faut-il commander la pizza ou pas ? Prendre le parapluie ? Envoyez d&#39;abord un SMS ? Partir se promener même s&#39;il fait un peu gris dehors ? Lorsqu’un choix est véritablement équilibré et que les enjeux sont minimes, la voie la plus rapide consiste souvent à laisser le hasard décider. Cet outil Oui ou Non fait exactement cela : pensez à votre question, appuyez sur le bouton et il renvoie un oui ou un non juste et aléatoire en un instant. Un décompte en dessous permet de suivre l&#39;évolution des réponses jusqu&#39;à présent. Tout se passe dans votre navigateur, donc la réponse apparaît immédiatement et rien de ce que vous demandez n&#39;est jamais enregistré ou envoyé nulle part.</p>
+<p>Le design est aussi simple que la question à laquelle il répond. Il y a un bouton. Appuyez dessus et un grand « Oui » ou « Non » apparaît, coloré en vert ou en rouge pour que le verdict soit sans équivoque en un coup d&#39;œil. Deux compteurs ci-dessous indiquent combien de chaque vous avez reçu, ce qui est utile si vous posez une série de questions ou si vous êtes simplement curieux de savoir à quoi ressemble une répartition égale sur de nombreuses pressions. Il n&#39;y a rien à configurer, aucun compte à créer et aucun encombrement pour vous distraire de la décision à prendre.</p>
+<h2>Comment la réponse est choisie</h2>
+<p>Chaque réponse est produite par le générateur de nombres aléatoires cryptographiquement sécurisé de votre navigateur, la même source fiable de nombres aléatoires utilisée pour protéger les tâches sensibles en ligne. Cela signifie que chaque réponse est véritablement imprévisible et complètement indépendante de celles qui la précèdent. Oui et non, chacun comporte exactement cinquante pour cent de chances, à chaque fois, sans biais dans les deux sens et sans aucun souvenir de ce qui a précédé. Contrairement au fait de feuilleter vos propres pensées, où vous pourriez inconsciemment pencher vers la réponse que vous privilégiez déjà, l&#39;outil n&#39;a aucune préférence.</p>
+<p>Parce qu&#39;il n&#39;a pas de mémoire, une chaîne de plusieurs réponses « oui » consécutives ne rend pas le « non » plus probable au prochain tapotement. Il s’agit d’un malentendu courant à propos du hasard : les cotes se réinitialisent complètement à chaque fois. Le décompte permet de le constater facilement par vous-même. Sur quelques questions seulement, la répartition peut sembler déséquilibrée, avec une réponse qui se précipite, mais à mesure que vous continuez à poser la question, la part du oui et du non se rapproche progressivement de l&#39;égalité. Il s’agit d’une petite démonstration pratique de la façon dont le hasard se comporte à court terme par rapport à long terme.</p>
+<h2>L’utilité surprenante de s’en remettre au hasard</h2>
+<p>Confier une décision à un outil semblable à une pièce de monnaie semble frivole, mais cela a une véritable valeur psychologique sur laquelle les gens comptent depuis longtemps. L’astuce n’est pas que le hasard fasse de meilleurs choix que vous – c’est qu’au moment où la réponse apparaît, vous remarquez ce que vous en ressentez. Si l’outil dit « oui » et que vous ressentez une lueur de soulagement, cette réaction est un indice fort que oui était ce que vous vouliez secrètement depuis le début. S&#39;il dit « non » et que vous souhaitez immédiatement appuyer à nouveau pour obtenir un résultat différent, vous venez d&#39;apprendre que la réponse compte plus pour vous que vous ne l&#39;avez admis, et mérite peut-être plus qu&#39;un simple échange aléatoire.</p>
+<p>Utilisé de cette façon, un sélecteur Oui ou Non est moins une diseuse de bonne aventure qu’un miroir. Il est parfait pour rompre une véritable égalité là où l&#39;une ou l&#39;autre option convient, pour se sortir des va-et-vient interminables sur quelque chose de trivial, ou pour ajouter un peu de spontanéité ludique à une journée ordinaire. Il règle également les différends amicaux sans que personne n’ait le sentiment d’avoir perdu un argument, car l’issue est venue d’une source impartiale que personne ne pouvait diriger.</p>
+<h2>Des moments du quotidien qui lui conviennent</h2>
+<p>Les petites décisions s’accumulent. Quelle tâche entreprendre en premier, que ce soit pour prendre un dessert, si ce soir est une soirée à la maison ou pour sortir, s&#39;il faut envoyer ce message un peu risqué, lequel de deux films tout aussi bons regarder. Aucun de ces éléments ne mérite une feuille de calcul, et s&#39;en angoisser ne fait que drainer de l&#39;énergie que vous pourriez dépenser ailleurs. Un oui ou un non rapide et impartial élimine l’impasse et vous permet de continuer votre travail.</p>
+<p>C&#39;est également pratique en groupe. Lorsqu&#39;une table d&#39;amis ne parvient pas à se mettre d&#39;accord et que personne ne s&#39;y oppose vraiment, un simple clic met fin à l&#39;impasse de manière équitable. Les parents l&#39;utilisent pour faire de petits choix qui ressemblent à un jeu plutôt qu&#39;à une négociation. Les enseignants et les animateurs l&#39;utilisent pour décider qui commence ou s&#39;il faut essayer une idée, en gardant une ambiance légère. Parce que le champ d&#39;application est si large et la barrière si faible, de nombreuses personnes gardent un outil comme celui-ci à portée de main précisément pour ces petits moments.</p>
+<h2>Un mot doux sur les choses plus importantes</h2>
+<p>Pour les décisions qui comptent vraiment – ​​tout ce qui concerne votre santé, votre argent, vos relations ou votre sécurité – un oui ou un non aléatoire n’est pas le bon outil, et il ne prétend pas l’être. Ces choix méritent une vraie réflexion, de bonnes informations et parfois les conseils de personnes de confiance. Là où l’outil brille, c’est précisément dans le territoire opposé : les innombrables petits choix à faibles enjeux où le coût d’une mauvaise décision est insignifiant et le coût du hésitation est le seul véritable problème. Savoir à quel type de décision vous êtes confronté fait partie de sa bonne utilisation.</p>
+<h2>Privé, instantané et gratuit</h2>
+<p>Il n&#39;y a pas d&#39;inscription, pas de frais et pas d&#39;attente. L&#39;ensemble de l&#39;outil est un petit morceau de code exécuté sur votre propre appareil, c&#39;est pourquoi il répond dès que vous appuyez sur et continue de fonctionner même sans connexion Internet. Rien sur vos questions n’est téléchargé, car vous ne les saisissez jamais – vous gardez simplement la question en tête et lisez le verdict. Le décompte ne vit que sur votre écran et se réinitialise chaque fois que vous rechargez la page.</p>
+<p>Pour l&#39;utiliser, réfléchissez à votre question, appuyez sur le bouton et lisez la réponse. Demandez à nouveau autant de fois que vous le souhaitez, jetez un coup d&#39;œil aux compteurs oui et non chaque fois que vous souhaitez vérifier le score en cours et rechargez la page pour recommencer à zéro. C&#39;est le décideur le plus simple possible, toujours prêt quand on n&#39;arrive pas à se décider.</p>
+    <section class="faq"><h2>FAQ oui ou non</h2><dl><dt>La réponse est-elle vraiment aléatoire ?</dt><dd>Oui. Chaque réponse utilise le générateur aléatoire cryptographiquement sécurisé de votre navigateur, donnant à chaque fois oui et non une chance égale de 50 %, sans aucun souvenir des réponses précédentes.</dd><dt>Quand dois-je utiliser un sélecteur oui ou non ?</dt><dd>Il est parfait pour briser une véritable égalité, régler rapidement un choix trivial ou vous pousser à prendre une décision lorsque vous continuez à faire des allers-retours. Votre réaction à la réponse vous indique souvent ce que vous vouliez vraiment.</dd><dt>A-t-il besoin d&#39;Internet ?</dt><dd>Non. Une fois la page chargée, elle s&#39;exécute entièrement dans votre navigateur, vous pouvez donc continuer à demander sans connexion.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/yesorno/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/yesorno/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/yesorno/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/yesorno/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/yesorno/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/yesorno/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/yesorno/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/yesorno/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/yesorno/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/yesorno/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"ask":"Posez la question","yes":"Oui","no":"Non","ready":"Demande-moi n'importe quoi"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/yesorno.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>র্যান্ডম কালার জেনারেটর — এলোমেলো HEX, RGB এবং HSL রঙ</title>
+<meta name="description" content="বিনামূল্যে র্যান্ডম রঙ জেনারেটর. একটি এলোমেলো রঙ তৈরি করুন এবং তাৎক্ষণিকভাবে এর HEX, RGB এবং HSL কোডগুলি দেখুন৷ নকশা অনুপ্রেরণা এবং বাছাই প্যালেট জন্য মহান.">
+<link rel="canonical" href="https://mikaio.dev/bn/randomcolor/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/randomcolor/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/randomcolor/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/randomcolor/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/randomcolor/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/randomcolor/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/randomcolor/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/randomcolor/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/randomcolor/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/randomcolor/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/randomcolor/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/randomcolor/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="র্যান্ডম কালার জেনারেটর — এলোমেলো HEX, RGB এবং HSL রঙ">
+<meta property="og:description" content="বিনামূল্যে র্যান্ডম রঙ জেনারেটর. একটি এলোমেলো রঙ তৈরি করুন এবং তাৎক্ষণিকভাবে এর HEX, RGB এবং HSL কোডগুলি দেখুন৷ নকশা অনুপ্রেরণা এবং বাছাই প্যালেট জন্য মহান.">
+<meta property="og:url" content="https://mikaio.dev/bn/randomcolor/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"র্যান্ডম কালার জেনারেটর — এলোমেলো HEX, RGB এবং HSL রঙ","url":"https://mikaio.dev/bn/randomcolor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে র্যান্ডম রঙ জেনারেটর. একটি এলোমেলো রঙ তৈরি করুন এবং তাৎক্ষণিকভাবে এর HEX, RGB এবং HSL কোডগুলি দেখুন৷ নকশা অনুপ্রেরণা এবং বাছাই প্যালেট জন্য মহান."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"এলোমেলো রঙ জেনারেটর","item":"https://mikaio.dev/bn/randomcolor/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"HEX, RGB এবং HSL কি?","acceptedAnswer":{"@type":"Answer","text":"তারা একই রঙ লিখতে তিনটি উপায়. HEX হল ছয়-অক্ষরের কোড যা ওয়েব ডিজাইনে ব্যবহৃত হয় যেমন #3A7BD5, RGB 0 থেকে 255 পর্যন্ত লাল, সবুজ এবং নীল মান তালিকাভুক্ত করে, এবং HSL হিউ, স্যাচুরেশন এবং হালকাতা বর্ণনা করে, যা অনুভূতি দ্বারা একটি রঙ সামঞ্জস্য করার জন্য সহজ।"}},{"@type":"Question","name":"আমি কিভাবে একটি রঙ অনুলিপি করব?","acceptedAnswer":{"@type":"Answer","text":"বড় HEX কোডে ক্লিক করুন এবং এটি আপনার ক্লিপবোর্ডে অনুলিপি করা হয়েছে, একটি ডিজাইন টুল, স্টাইলশীট বা নথিতে পেস্ট করার জন্য প্রস্তুত।"}},{"@type":"Question","name":"রং কি সত্যিই এলোমেলো?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ। লাল, সবুজ এবং নীল চ্যানেলগুলির প্রতিটি স্বাধীনভাবে এলোমেলোভাবে বেছে নেওয়া হয়েছে, তাই মোটামুটি ষোল মিলিয়ন সম্ভাব্য রঙের প্রতিটির সমান সম্ভাবনা রয়েছে।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/randomcolor/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/randomcolor/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/randomcolor/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/randomcolor/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/randomcolor/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/randomcolor/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/randomcolor/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/randomcolor/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/randomcolor/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/randomcolor/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>এলোমেলো রঙ জেনারেটর</span></nav>
+  <h1>এলোমেলো রঙ জেনারেটর</h1>
+  <p class="lead">একটি এলোমেলো রঙের জন্য বোতামটি আলতো চাপুন, এটির HEX, RGB এবং HSL কোডগুলির সাথে একটি বড় সোয়াচ হিসাবে দেখানো হয়েছে৷ এটি অনুলিপি করতে HEX কোড ক্লিক করুন.</p>
+  <section class="widget" id="tool"><div id="rc"><div id="rc-swatch" style="height:120px;border-radius:12px;border:1px solid var(--line)"></div><div class="result"><b id="rc-hex" data-copy="#rc-hex" style="cursor:pointer">—</b> · <span id="rc-rgb" class="hint"></span> · <span id="rc-hsl" class="hint"></span></div><div class="row" style="justify-content:center"><button type="button" class="btn" id="rc-gen">নতুন রঙ</button></div></div></section>
+  <article class="content">
+    <h2>একটি তাজা রঙ যখনই অনুপ্রেরণা শুকিয়ে যায়</h2>
+<p>কিছুই থেকে একটি রং নির্বাচন করা আশ্চর্যজনকভাবে কঠিন। একটি স্ক্রীন প্রদর্শন করতে পারে এমন লক্ষ লক্ষ শেডের মুখোমুখি হয়ে, আমাদের মধ্যে বেশিরভাগই একই পরিচিত ব্লুজ এবং গ্রে বারে বারে পৌঁছায়। একটি এলোমেলো রঙ জেনারেটর আপনাকে এমন একটি রঙ দেওয়ার মাধ্যমে সেই অভ্যাসটি ভেঙে দেয় যা আপনি কখনই নিজের পছন্দ করেননি, যা প্রায়শই একটি ডিজাইনের জন্য প্রয়োজনীয় স্পার্ক। বোতামটি আলতো চাপুন এবং এই টুলটি একটি র্যান্ডম রঙের সাথে একটি বড় সোয়াচ পূরণ করে এবং তিনটি ফর্ম্যাটে এর সঠিক কোডগুলি দেখায় — HEX, RGB এবং HSL — ব্যবহারের জন্য প্রস্তুত৷ সবকিছু আপনার ব্রাউজারে চলে, তাই আপনার জিজ্ঞাসা করার সাথে সাথে একটি নতুন রঙ প্রদর্শিত হয় এবং কোথাও কিছুই পাঠানো হয় না।</p>
+<p>টুল ইচ্ছাকৃতভাবে uncluttered হয়. একটি বড় সোয়াচ রয়েছে যাতে আপনি আসলে একটি শালীন আকারে রঙ দেখতে পারেন, এর কোডগুলি নীচে, এবং আরেকটি তৈরি করতে একটি একক বোতাম। HEX কোডটি ক্লিক করুন এবং এটি সরাসরি আপনার ক্লিপবোর্ডে অনুলিপি করে, একটি ডিজাইন অ্যাপ, একটি স্টাইলশীট বা একটি নথিতে পেস্ট করার জন্য প্রস্তুত৷ যতক্ষণ না একটি আপনার নজরে না আসে ততক্ষণ পর্যন্ত আপনার পছন্দ মতো অনেকগুলি রঙের মাধ্যমে চালানোর জন্য আলতো চাপতে থাকুন।</p>
+<h2>HEX, RGB এবং HSL ব্যাখ্যা করেছে</h2>
+<p>সোয়াচের নীচে তিনটি কোড একই রঙের লেখার ভিন্ন ভিন্ন উপায়, এবং প্রতিটি তার নিজস্ব সেটিংয়ে কার্যকর। <strong>HEX</strong> হল ছয়-অক্ষরের কোড যা আপনি ওয়েব ডিজাইনের সর্বত্র দেখতে পান, <code>#3A7BD5</code> এর মতো হ্যাশ দিয়ে লেখা। এটি কমপ্যাক্ট এবং বেশিরভাগ ওয়েবসাইট এবং ডিজাইন টুল আশা করে। <strong>RGB</strong> রঙটিকে তিনটি সংখ্যা হিসাবে বর্ণনা করে — লাল, সবুজ এবং নীল আলোর পরিমাণ, প্রতিটি 0 থেকে 255 — যা এই তিনটি চ্যানেলকে মিশ্রিত করে স্ক্রিনগুলি কীভাবে রঙ তৈরি করে তা প্রতিফলিত করে৷ <strong>HSL</strong> একটি রঙকে তার বর্ণ (রঙের চাকার চারপাশে এর অবস্থান), এর স্যাচুরেশন (এটি কতটা উজ্জ্বল বা ধূসর) এবং এর হালকাতা (সাদা বা কালোর কতটা কাছাকাছি) দ্বারা বর্ণনা করে, আরও মানবিক পদ্ধতি গ্রহণ করে। এইচএসএল বিশেষত সুবিধাজনক যখন আপনি একটি রঙকে নাজ করতে চান, কারণ আপনি একটি ফ্যাকাশে সংস্করণ পেতে হালকাতা বাড়াতে পারেন বা কাঁচা সংখ্যা অনুমান না করে এটিকে মিউট করতে স্যাচুরেশন ড্রপ করতে পারেন।</p>
+<p>তিনটিই পাশাপাশি থাকার অর্থ হল আপনি পরবর্তী ধাপে যে ফরম্যাট প্রয়োজন তা ধরতে পারবেন। একজন ওয়েব ডেভেলপার সাধারণত HEX কোড কপি করে, কেউ ফটো বা ইলাস্ট্রেশন অ্যাপে কাজ করে RGB পছন্দ করতে পারে, এবং একজন ডিজাইনার প্যালেট ফাইন-টিউনিং প্রায়ই HSL-এ ভাবেন। তারা সব আপনার পর্দায় ঠিক একই রঙ বর্ণনা.</p>
+<h2>যেখানে একটি এলোমেলো রঙ সাহায্য করে</h2>
+<p>সবচেয়ে সাধারণ ব্যবহার হল সহজ অনুপ্রেরণা। আপনি যখন একটি ফাঁকা ক্যানভাসের দিকে তাকাচ্ছেন, তখন একটি সত্যই অপ্রত্যাশিত রঙ এমন একটি দিক নির্দেশ করতে পারে যা আপনি সতর্কতার সাথে শেডগুলি বেছে নেওয়ার মাধ্যমে খুঁজে পাননি। ডিজাইনাররা প্যালেটগুলির জন্য শুরুর পয়েন্ট হিসাবে এলোমেলো রং ব্যবহার করে, তারপর সেখান থেকে সামঞ্জস্য করুন। শিল্পী এবং শখীরা এগুলিকে একটি মজার সৃজনশীল সীমাবদ্ধতা হিসাবে ব্যবহার করে — তাদের জন্য বেছে নেওয়া রঙের চারপাশে কিছু তৈরি করতে নিজেদের চ্যালেঞ্জ করে৷ এমনকি শুধুমাত্র রঙের মাধ্যমে সাইকেল চালানো আপনাকে আপনার পছন্দের শেডগুলি আবিষ্কার করতে সাহায্য করতে পারে এবং এর জন্য আপনি কখনই একটি কোড টাইপ করবেন না।</p>
+<p>ব্যবহারিক ব্যবহারও আছে। ডেভেলপার এবং পরীক্ষকদের মাঝে মাঝে একটি মক-আপ পূরণ করতে বা লেআউট তৈরি করার সময় পর্দায় উপাদানগুলিকে আলাদা করার জন্য প্লেসহোল্ডার রঙের প্রয়োজন হয় এবং একটি সম্পূর্ণ রঙ চয়নকারী খোলার চেয়ে একটি অনুলিপিযোগ্য কোড সহ একটি এলোমেলো রঙ দ্রুত। শিক্ষক এবং পিতামাতারা একটি ক্রীড়নক প্রম্পট হিসাবে একটি এলোমেলো রঙ ব্যবহার করেন, এবং যে কেউ রঙের কোডগুলি সম্পর্কে শিখছেন তারা জেনারেটর ব্যবহার করে দেখতে পারেন যে একই শেডটি কীভাবে তিনটি ভিন্ন উপায়ে লেখা দেখায়, যা ফর্ম্যাটের মধ্যে সম্পর্কটিকে উপলব্ধি করা আরও সহজ করে তোলে।</p>
+<h2>এক রঙকে প্যালেটে পরিণত করা</h2>
+<p>একটি একক এলোমেলো রঙ প্রায়শই শুরু হয়। একবার আপনার পছন্দের একটি পেয়ে গেলে, এইচএসএল কোডটি হাত দিয়ে এটির চারপাশে একটি ছোট প্যালেট তৈরি করা সহজ করে তোলে। ব্যাকগ্রাউন্ড এবং পাঠ্যের জন্য একই রঙের হালকা এবং গাঢ় সংস্করণ তৈরি করতে রঙটি রাখুন এবং হালকাতা উপরে এবং নীচে সামঞ্জস্য করুন। অথবা রঙের চাকায় এটির পাশে বা বিপরীতে থাকা রঙগুলি খুঁজে পেতে একটি নির্দিষ্ট পরিমাণে রঙ পরিবর্তন করুন, যা অনেক ক্লাসিক রঙের স্কিমের ভিত্তি। কারণ জেনারেটর আপনাকে সঠিক HSL মান দেয়, আপনার কাছে একটি অস্পষ্ট ছাপের পরিবর্তে একটি সুনির্দিষ্ট সূচনা বিন্দু আছে।</p>
+<p>এটি শুধুমাত্র একটি রঙ খুঁজে বের করার জন্য নয় বরং একটি সম্পূর্ণ স্কিম বন্ধ করার জন্য টুলটিকে উপযোগী করে তোলে। একটি রঙ সঠিক মনে না হওয়া পর্যন্ত তৈরি করুন, এর কোডগুলি অনুলিপি করুন এবং সেগুলিকে অ্যাঙ্কর হিসাবে ব্যবহার করুন যেখান থেকে আপনার প্যালেটের বাকি অংশটি বৃদ্ধি পায়।</p>
+<h2>ব্যক্তিগত, তাত্ক্ষণিক এবং বিনামূল্যে</h2>
+<p>পথে কোন সাইন আপ, কোন খরচ এবং কোন বিজ্ঞাপন নেই. পুরো জেনারেটর হল কোডের একটি ছোট টুকরো যা আপনার নিজের ডিভাইসে চলে, এই কারণেই এটি আপনার ট্যাপ করার সাথে সাথে একটি নতুন রঙ তৈরি করে এবং ইন্টারনেট সংযোগ ছাড়াই কাজ চালিয়ে যায়। কিছুই আপলোড, লগ বা ভাগ করা হয় না; আপনি যে রঙগুলি উত্পন্ন করেন তা শুধুমাত্র আপনার স্ক্রিনে বিদ্যমান থাকে এবং আপনি যখন পৃষ্ঠাটি পুনরায় লোড করেন তখন ক্রমটি পুনরায় সেট হয়।</p>
+<p>এটি ব্যবহার করতে, এলোমেলো রঙের জন্য বোতামটি আলতো চাপুন, সোয়াচটি দেখুন এবং নীচে এর HEX, RGB এবং HSL কোডগুলি পড়ুন৷ যখন আপনি আপনার পছন্দের একটি খুঁজে পান, তখন এটিকে অনুলিপি করতে HEX কোডে ক্লিক করুন, তারপর আপনার যেখানে প্রয়োজন সেখানে পেস্ট করুন। আপনি যতবার চান ততবার তৈরি করুন — প্রতিটি রঙ আপনার স্ক্রীন দেখাতে পারে এমন সম্পূর্ণ পরিসর থেকে একটি তাজা, নিরপেক্ষ বাছাই। কোন সীমা এবং কোন খরচ নেই, তাই আপনি আপনার প্রকল্পের জন্য কিছু সঠিক মনে না হওয়া পর্যন্ত অন্বেষণ চালিয়ে যেতে পারেন।</p>
+    <section class="faq"><h2>এলোমেলো রঙ FAQ</h2><dl><dt>HEX, RGB এবং HSL কি?</dt><dd>তারা একই রঙ লিখতে তিনটি উপায়. HEX হল ছয়-অক্ষরের কোড যা ওয়েব ডিজাইনে ব্যবহৃত হয় যেমন #3A7BD5, RGB 0 থেকে 255 পর্যন্ত লাল, সবুজ এবং নীল মান তালিকাভুক্ত করে, এবং HSL হিউ, স্যাচুরেশন এবং হালকাতা বর্ণনা করে, যা অনুভূতি দ্বারা একটি রঙ সামঞ্জস্য করার জন্য সহজ।</dd><dt>আমি কিভাবে একটি রঙ অনুলিপি করব?</dt><dd>বড় HEX কোডে ক্লিক করুন এবং এটি আপনার ক্লিপবোর্ডে অনুলিপি করা হয়েছে, একটি ডিজাইন টুল, স্টাইলশীট বা নথিতে পেস্ট করার জন্য প্রস্তুত।</dd><dt>রং কি সত্যিই এলোমেলো?</dt><dd>হ্যাঁ। লাল, সবুজ এবং নীল চ্যানেলগুলির প্রতিটি স্বাধীনভাবে এলোমেলোভাবে বেছে নেওয়া হয়েছে, তাই মোটামুটি ষোল মিলিয়ন সম্ভাব্য রঙের প্রতিটির সমান সম্ভাবনা রয়েছে।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/randomcolor/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/randomcolor/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/randomcolor/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/randomcolor/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/randomcolor/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/randomcolor/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/randomcolor/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/randomcolor/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/randomcolor/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/randomcolor/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"generate":"নতুন রঙ"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/randomcolor.js" defer></script>
+</body>
+</html>

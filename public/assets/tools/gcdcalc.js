@@ -9,8 +9,8 @@
     if(nums.length<2){out.textContent='—';if(lcmOut)lcmOut.textContent='';return;}
     var g=nums.reduce(gcd);
     var l=nums.reduce(lcm);
-    out.textContent=g.toLocaleString();
-    if(lcmOut)lcmOut.textContent='LCM: '+l.toLocaleString();
+    out.textContent=g.toLocaleString(window.__LANG||undefined);
+    if(lcmOut)lcmOut.textContent='LCM: '+l.toLocaleString(window.__LANG||undefined);
   }
   inp.addEventListener('input',calc);calc();
 })();

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de retorno de la inversión: crecimiento compuesto con contribuciones mensuales</title>
+<meta name="description" content="Calculadora de retorno de inversión gratuita. Ingrese un monto inicial, contribuciones mensuales, tasa de retorno anual y años para ver el valor final y la ganancia total.">
+<link rel="canonical" href="https://mikaio.dev/es/investreturn/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/investreturn/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/investreturn/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/investreturn/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/investreturn/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/investreturn/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/investreturn/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/investreturn/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/investreturn/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/investreturn/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/investreturn/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/investreturn/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de retorno de la inversión: crecimiento compuesto con contribuciones mensuales">
+<meta property="og:description" content="Calculadora de retorno de inversión gratuita. Ingrese un monto inicial, contribuciones mensuales, tasa de retorno anual y años para ver el valor final y la ganancia total.">
+<meta property="og:url" content="https://mikaio.dev/es/investreturn/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de retorno de la inversión: crecimiento compuesto con contribuciones mensuales","url":"https://mikaio.dev/es/investreturn/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Calculadora de retorno de inversión gratuita. Ingrese un monto inicial, contribuciones mensuales, tasa de retorno anual y años para ver el valor final y la ganancia total."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Calculadora de retorno de inversión","item":"https://mikaio.dev/es/investreturn/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué fórmula se utiliza?","acceptedAnswer":{"@type":"Answer","text":"La calculadora utiliza la fórmula del interés compuesto para una suma global inicial más el valor futuro de una serie de pagos periódicos iguales (anualidad). Total = P(1+r)^n + PMT × ((1+r)^n − 1) / r, donde r es la tasa mensual y n es el número de meses."}},{"@type":"Question","name":"¿Qué es una tasa de retorno realista?","acceptedAnswer":{"@type":"Answer","text":"El S&P 500 de EE.UU. ha obtenido una rentabilidad de alrededor del 10% anual antes de la inflación (≈7% después de la inflación) a largo plazo. Los resultados individuales varían mucho según la asignación de activos, el período de tiempo y las tarifas."}},{"@type":"Question","name":"¿Esto tiene en cuenta la inflación?","acceptedAnswer":{"@type":"Answer","text":"No. Ingrese una tasa real (ajustada a la inflación) si desea resultados ajustados a la inflación. Por ejemplo, utilice el 7% en lugar del 10% para aproximar los rendimientos reales del mercado de valores estadounidense."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/investreturn/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/investreturn/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/investreturn/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/investreturn/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/investreturn/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/investreturn/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/investreturn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/investreturn/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/investreturn/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/investreturn/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Calculadora de retorno de inversión</span></nav>
+  <h1>Calculadora de retorno de inversión</h1>
+  <p class="lead">Ingrese su inversión inicial, contribuciones mensuales, tasa de retorno anual y período de inversión para ver su valor final proyectado.</p>
+  <section class="widget" id="tool"><form id="ir-form"><div class="row"><div class="field"><label for="ir-init">Monto inicial ($)</label><input type="number" id="ir-init" step="any" min="0" placeholder="10000" inputmode="decimal"></div><div class="field"><label for="ir-monthly">Contribución mensual ($)</label><input type="number" id="ir-monthly" step="any" min="0" placeholder="200" inputmode="decimal"></div></div><div class="row"><div class="field"><label for="ir-rate">Rentabilidad anual (%)</label><input type="number" id="ir-rate" step="any" min="0" placeholder="7" inputmode="decimal"></div><div class="field"><label for="ir-years">Años</label><input type="number" id="ir-years" step="1" min="1" max="50" placeholder="20" inputmode="numeric"></div></div><div class="row" style="justify-content:center"><button class="btn" type="submit">Calcular</button></div></form><div id="ir-out" hidden class="result" style="text-align:left;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:0.5rem;margin-top:0.75rem"></div></section>
+  <article class="content">
+    <h2>Para qué sirve la calculadora de rendimiento de la inversión</h2>
+<p>Ingrese su inversión inicial, contribuciones mensuales, tasa de retorno anual y período de inversión para ver su valor final proyectado.</p>
+<p>Esta es la versión corta, y para muchos visitantes es la única parte que necesitan: la herramienta se encuentra en la parte superior de esta página, funciona de inmediato y no es necesario leer nada a continuación. El resto de esta página está aquí para aquellos momentos en los que la respuesta por sí sola no es suficiente: cuando desea saber cómo se realiza realmente el cálculo, dónde deja de ser confiable y qué hacer con el resultado una vez que lo tenga.</p>
+<h2>como usarlo</h2>
+<p>Los controles son deliberadamente pocos. Verás 5 controles:</p>
+<ul>
+<li><strong>Monto inicial ($)</strong></li>
+<li><strong>Contribución mensual ($)</strong></li>
+<li><strong>Rendimiento anual (%)</strong></li>
+<li><strong>Años</strong></li>
+<li><strong>Calcular</strong></li>
+</ul>
+<p>Complete lo que se aplica a usted y las actualizaciones de resultados. Nada es obligatorio en el sentido de enviarlo a ninguna parte; si cambia de opinión, edite el valor y lea la nueva respuesta. No hay un paso para guardar, ni un cuadro de diálogo de confirmación y no hay forma de equivocarse permanentemente, por lo que probar varias variaciones para ver cómo se mueve el resultado no solo está permitido, sino que suele ser la forma más informativa de utilizar una herramienta como esta.</p>
+<p>Todo se ejecuta dentro de tu propio navegador. Nada de lo que usted escribe se carga, nada se almacena entre visitas, no hay ninguna cuenta que crear y no hay ningún seguimiento que rechazar. Una vez que esta página se ha cargado, no necesita la red nuevamente, por lo que sigue funcionando si se corta la conexión.</p>
+<h2>¿Por qué existe una página como esta?</h2>
+<p>Las cuestiones monetarias castigan la vaguedad. La diferencia entre dos suposiciones que parecen plausibles se agrava silenciosamente a lo largo de los años hasta que la brecha es lo suficientemente grande como para cambiar una decisión que ya se ha tomado. Poner números concretos a una elección, incluso si es aproximada, convierte un argumento sobre sentimientos en un argumento sobre aportes, y los aportes pueden examinarse, cuestionarse y revisarse.</p>
+<p>La web está llena de herramientas que resuelven un problema de treinta segundos exigiendo primero una dirección de correo electrónico, una decisión sobre cookies y cuatro segundos de publicidad. Ese intercambio tenía sentido para alguien, pero no tenía sentido para la persona que sólo quería el número. Esta página adopta la posición opuesta: sin registro, sin intersticiales, sin ventas adicionales y sin motivo para irse una vez que tenga lo que vino a buscar.</p>
+<h2>Lo que te dice y lo que no te dice el resultado</h2>
+<p>Trate el resultado como un modelo, no como una promesa. Refleja exactamente los supuestos que usted escribió y nada más: no hay código tributario específico del lugar donde vive, no hay tarifas que su proveedor pueda aplicar, no hay inflación a menos que usted la ingrese y no hay cambios en las circunstancias. Los modelos siguen siendo útiles: te permiten preguntar qué tendría que ser cierto para que esto funcione, que suele ser la pregunta más interesante.</p>
+<p>Vale la pena ser explícito acerca de los límites, porque habitualmente se confía en las herramientas más allá del punto en que lo merecen. Este es honesto en sus entradas: dale valores precisos y te dará un cálculo preciso. No puede decirle si los valores que le dio fueron los correctos, si hizo la pregunta correcta o si el contexto al que está aplicando la respuesta tiene algo importante que las entradas nunca capturaron. Ese juicio permanece contigo y es la parte que realmente importa.</p>
+<h2>Dónde encaja en un flujo de trabajo real</h2>
+<p>Herramientas como esta rara vez son todo el trabajo. Más a menudo, la calculadora de rendimiento de la inversión es un paso en medio de algo más grande: necesitabas esta cifra para poder continuar con lo que realmente estabas haciendo. Eso da forma a cómo se construye la página. Se abre rápido, no interrumpe, no te pide que te comprometas con nada y se quita de en medio en el momento en que tienes lo que viniste a buscar.</p>
+<p>También significa que debes sentirte libre de usarlo repetidamente en lugar de hacerlo con cuidado. Un segundo intento no tiene ningún costo ni penalización por una primera suposición incorrecta, por lo que la ruta más rápida hacia una buena respuesta suele ser probar una respuesta aproximada, observar el resultado y ajustar. La gente tiende a tratar las herramientas como si cada uso fuera costoso, lo cual es un hábito heredado del software que las encareció. Éste no.</p>
+<h2>Errores comunes que vale la pena evitar</h2>
+<p>La primera es confiar en un resultado cuya entrada no verificaste. Una herramienta no puede saber que usted quiso escribir un número y escribió otro, y presentará la respuesta incorrecta con exactamente la misma confianza que la correcta. Lea sus entradas antes de confiar en la salida: tarda dos segundos y detecta la mayor parte de lo que sale mal.</p>
+<p>El segundo es tratar un número como respuesta a una pregunta que nunca se hizo. Cada cálculo en esta página responde a algo limitado y específico. Aplicarlo a una pregunta cercana pero diferente es la forma más común en que las personas terminan engañadas por una herramienta que estuvo funcionando perfectamente todo el tiempo. Si no está seguro de que la pregunta que tiene coincide con la pregunta que responde la herramienta, esa incertidumbre es una señal útil, no un obstáculo.</p>
+<p>Las preguntas frecuentes a continuación cubren los casos que surgen con mayor frecuencia, incluidos aquellos en los que la respuesta honesta es que esta no es la herramienta adecuada para lo que está tratando de hacer.</p>
+<h2>Trabajar sin conexión y en cualquier dispositivo</h2>
+<p>La página es un documento único e independiente. No hay marco para descargar, no hay fuentes obtenidas de un tercero y no hay balizas de análisis activadas en segundo plano, razón por la cual se carga rápidamente con una mala conexión y por qué no cuesta nada mantenerla abierta en una pestaña a la que regresa ocasionalmente. Funciona igual en un teléfono, una tableta y una computadora de escritorio; el diseño se adapta, el comportamiento no.</p>
+<p>Debido a que no hay ningún servidor involucrado en el trabajo real, tampoco hay ningún servicio que dejar de funcionar, ningún límite de velocidad que alcanzar y ningún cambio silencioso en el comportamiento impulsado desde algún otro lugar. Lo que cargaste es lo que se ejecuta. Si quiere estar seguro de eso, abra la fuente de la página: toda la implementación está ahí en forma legible, lo cual es una afirmación que muy pocas herramientas de este tipo pueden hacer.</p>
+<h2>Una nota sobre la precisión</h2>
+<p>Los resultados se calculan con aritmética estándar de doble precisión y se muestran en un número razonable de lugares en lugar de en cada dígito que el hardware puede producir. Una cifra mostrada con dos decimales no pretende ser exacta con dos decimales; afirma que los datos que usted proporcionó, tomados al pie de la letra, producen esa cifra. La precisión en la visualización y la precisión en el mundo real son cosas diferentes, y combinarlas es la forma más común en que una herramienta correcta produce una decisión equivocada.</p>
+<p>Si un resultado parece incorrecto, verifique las entradas antes de dudar de la aritmética. En la práctica, la inmensa mayoría de las respuestas sorprendentes provienen de un valor ingresado en una unidad incorrecta, un separador decimal leído de manera diferente a la prevista o un campo que se dejó en su valor predeterminado cuando debería haberse cambiado. Esto no es una crítica a nadie; es simplemente dónde residen los errores, y saber dónde buscar primero ahorra la mayor parte del tiempo.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre el retorno de la inversión</h2><dl><dt>¿Qué fórmula se utiliza?</dt><dd>La calculadora utiliza la fórmula del interés compuesto para una suma global inicial más el valor futuro de una serie de pagos periódicos iguales (anualidad). Total = P(1+r)^n + PMT × ((1+r)^n − 1) / r, donde r es la tasa mensual y n es el número de meses.</dd><dt>¿Qué es una tasa de retorno realista?</dt><dd>El S&amp;P 500 de EE.UU. ha obtenido una rentabilidad de alrededor del 10% anual antes de la inflación (≈7% después de la inflación) a largo plazo. Los resultados individuales varían mucho según la asignación de activos, el período de tiempo y las tarifas.</dd><dt>¿Esto tiene en cuenta la inflación?</dt><dd>No. Ingrese una tasa real (ajustada a la inflación) si desea resultados ajustados a la inflación. Por ejemplo, utilice el 7% en lugar del 10% para aproximar los rendimientos reales del mercado de valores estadounidense.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/investreturn/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/investreturn/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/investreturn/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/investreturn/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/investreturn/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/investreturn/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/investreturn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/investreturn/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/investreturn/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/investreturn/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"initial":"Monto inicial ($)","monthly":"Contribución mensual ($)","rate":"Rentabilidad anual (%)","years":"Años","calculate":"Calcular"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/investreturn.js" defer></script>
+</body>
+</html>

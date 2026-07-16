@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rounding Calculator — round numbers to any decimal place</title>
-<meta name="description" content="Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.">
+<title>راؤنڈنگ کیلکولیٹر - کسی بھی اعشاریہ جگہ پر گول نمبر</title>
+<meta name="description" content="مفت راؤنڈنگ کیلکولیٹر۔ اپنے براؤزر میں کسی بھی نمبر کو منتخب کردہ اعشاریہ جگہوں پر گول کریں، یا اوپر یا نیچے، فوری اور درست طریقے سے گول کریں۔">
 <link rel="canonical" href="https://mikaio.dev/ur/roundingcalc/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/roundingcalc/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/roundingcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/roundingcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/roundingcalc/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/roundingcalc/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/roundingcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/roundingcalc/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/roundingcalc/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/roundingcalc/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/roundingcalc/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/roundingcalc/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Rounding Calculator — round numbers to any decimal place">
-<meta property="og:description" content="Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.">
+<meta property="og:title" content="راؤنڈنگ کیلکولیٹر - کسی بھی اعشاریہ جگہ پر گول نمبر">
+<meta property="og:description" content="مفت راؤنڈنگ کیلکولیٹر۔ اپنے براؤزر میں کسی بھی نمبر کو منتخب کردہ اعشاریہ جگہوں پر گول کریں، یا اوپر یا نیچے، فوری اور درست طریقے سے گول کریں۔">
 <meta property="og:url" content="https://mikaio.dev/ur/roundingcalc/">
 <meta property="og:locale" content="ur">
 <meta name="twitter:card" content="summary">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Rounding Calculator — round numbers to any decimal place","url":"https://mikaio.dev/ur/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Rounding Calculator","item":"https://mikaio.dev/ur/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do the decimal places mean?","acceptedAnswer":{"@type":"Answer","text":"The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred."}},{"@type":"Question","name":"What is the difference between the three methods?","acceptedAnswer":{"@type":"Answer","text":"Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes."}},{"@type":"Question","name":"How are exact halves handled?","acceptedAnswer":{"@type":"Answer","text":"When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"راؤنڈنگ کیلکولیٹر - کسی بھی اعشاریہ جگہ پر گول نمبر","url":"https://mikaio.dev/ur/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"مفت راؤنڈنگ کیلکولیٹر۔ اپنے براؤزر میں کسی بھی نمبر کو منتخب کردہ اعشاریہ جگہوں پر گول کریں، یا اوپر یا نیچے، فوری اور درست طریقے سے گول کریں۔"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"راؤنڈنگ کیلکولیٹر","item":"https://mikaio.dev/ur/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"اعشاری مقامات کا کیا مطلب ہے؟","acceptedAnswer":{"@type":"Answer","text":"اعشاریہ جگہوں کی تعداد یہ ہے کہ اعشاریہ کے بعد کتنے ہندسوں کو رکھنا ہے۔ 2 سے راؤنڈ سے سوویں تک، 0 سے پورے نمبر پر گول، یا منفی نمبر جیسے -2 سے قریب ترین سو تک گول درج کریں۔"}},{"@type":"Question","name":"تین طریقوں میں کیا فرق ہے؟","acceptedAnswer":{"@type":"Answer","text":"راؤنڈ ٹو نیسٹ تک جاتا ہے جو بھی قدر قریب ہے، اوپر یا نیچے۔ راؤنڈ اپ (چھت) ہمیشہ زیادہ قیمت پر جاتا ہے، اور گول نیچے (منزل) ہمیشہ کم قیمت پر جاتا ہے، جو قیمتوں کا تعین یا اشیاء کو بکس میں فٹ کرنے جیسی چیزوں کے لیے اہمیت رکھتا ہے۔"}},{"@type":"Question","name":"صحیح نصف کو کیسے سنبھالا جاتا ہے؟","acceptedAnswer":{"@type":"Answer","text":"جب کوئی قدر بالکل آدھے راستے پر بیٹھ جاتی ہے، تو راؤنڈ سے قریب ترین اعلی نمبر پر جاتا ہے، جو روزمرہ کا سب سے جانا پہچانا اصول ہے۔ اگر آپ کو اسے کنٹرول کرنے کی ضرورت ہے تو واضح طور پر راؤنڈ اپ یا گول ڈاون کا انتخاب کریں۔"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="سائٹ نیویگیشن">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/roundingcalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Rounding Calculator</span></nav>
-  <h1>Rounding Calculator</h1>
-  <p class="lead">Enter a number and the decimal places you want, then choose to round to nearest, up, or down. The result updates as you type.</p>
-  <section class="widget" id="tool"><form id="rnd"><div class="row"><div class="field"><label for="rnd-num">Number</label><input type="number" id="rnd-num" step="any" inputmode="decimal"></div><div class="field"><label for="rnd-places">Decimal places</label><input type="number" id="rnd-places" value="0" step="1"></div><div class="field"><label for="rnd-mode">Method</label><select id="rnd-mode"><option value="near">Round to nearest</option><option value="up">Round up</option><option value="down">Round down</option></select></div></div><div class="result"><span class="hint">Rounded: </span><span class="big" id="rnd-out">—</span></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>راؤنڈنگ کیلکولیٹر</span></nav>
+  <h1>راؤنڈنگ کیلکولیٹر</h1>
+  <p class="lead">ایک عدد اور اعشاریہ کی جگہیں جو آپ چاہتے ہیں درج کریں، پھر قریب ترین، اوپر یا نیچے گول کرنے کا انتخاب کریں۔ آپ کے ٹائپ کرتے ہی نتیجہ اپ ڈیٹ ہوجاتا ہے۔</p>
+  <section class="widget" id="tool"><form id="rnd"><div class="row"><div class="field"><label for="rnd-num">نمبر</label><input type="number" id="rnd-num" step="any" inputmode="decimal"></div><div class="field"><label for="rnd-places">اعشاریہ مقامات</label><input type="number" id="rnd-places" value="0" step="1"></div><div class="field"><label for="rnd-mode">طریقہ</label><select id="rnd-mode"><option value="near">قریب ترین گول</option><option value="up">راؤنڈ اپ</option><option value="down">گول نیچے</option></select></div></div><div class="result"><span class="hint">گول: </span><span class="big" id="rnd-out">—</span></div></form></section>
   <article class="content">
     <h2>کسی بھی نمبر کو بالکل اپنی ضرورت کے مطابق گول کریں</h2>
 <p>گول کرنا آسان لگتا ہے جب تک آپ کو احتیاط سے نہ کرنا پڑے۔ کیا دو اعشاریہ چھ سات پانچ دو اعشاریہ چھ آٹھ بنے گا یا دو اعشاریہ چھ سات؟ قریب ترین سو تک گول کرنے کا کیا مطلب ہے، یا تین اعشاریہ مقامات رکھنے کا؟ اور کیا اوپر گول کرنا اور قریب ترین تک گول کرنا ایک ہی بات ہے؟ ان باتوں کو درست کرنا اہم ہے جب بھی کسی نمبر کو رقم، پیمائش، نمبرات یا رپورٹنگ کے لیے ترتیب دینا ہو، اور غلطی ہونا آسان ہے۔ یہ راؤنڈنگ کیلکولیٹر اندازے کو ختم کر دیتا ہے۔ نمبر درج کریں، جتنے اعشاریہ مقامات چاہیں منتخب کریں، راؤنڈنگ کا طریقہ چنیں، اور نتیجہ فوراً ظاہر ہو جاتا ہے۔ سب کچھ آپ کے براؤزر میں چلتا ہے لہٰذا جواب آپ کے ٹائپ کرتے ہی ظاہر ہوتا ہے اور آپ جو بھی درج کرتے ہیں وہ کبھی اپ لوڈ نہیں ہوتا۔</p>
@@ -142,13 +148,14 @@ textarea{min-height:120px;resize:vertical}
 <h2>نجی، فوری اور مفت</h2>
 <p>کوئی سائن اپ نہیں، کوئی قیمت نہیں، اور کوئی اشتہار رکاوٹ نہیں۔ پورا کیلکولیٹر ایک چھوٹا سا کوڈ ہے جو آپ کے اپنے آلے پر چلتا ہے، اسی لیے یہ آپ کے ٹائپ کرتے ہی جواب دیتا ہے اور بغیر انٹرنیٹ کنکشن کے بھی کام کرتا رہتا ہے۔ آپ جو بھی درج کرتے ہیں وہ اپ لوڈ، محفوظ یا شیئر نہیں ہوتا؛ نمبر صرف آپ کی سکرین پر موجود ہوتے ہیں اور صفحہ دوبارہ لوڈ کرنے پر غائب ہو جاتے ہیں۔</p>
 <p>استعمال کے لیے اپنا نمبر درج کریں، اعشاریہ مقامات مقرر کریں، ایک طریقہ منتخب کریں، اور گول شدہ نتیجہ پڑھیں۔ کسی بھی وقت کوئی بھی ان پٹ تبدیل کریں اور جواب ساتھ ساتھ چلتا رہے گا، لہٰذا آپ ایک عدد کو گول کر سکتے ہیں یا یہ دیکھ سکتے ہیں کہ مختلف ترتیبات ایک ہی نمبر کو کیسے متاثر کرتی ہیں۔</p>
-    <section class="faq"><h2>Rounding calculator FAQ</h2><dl><dt>What do the decimal places mean?</dt><dd>The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred.</dd><dt>What is the difference between the three methods?</dt><dd>Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes.</dd><dt>How are exact halves handled?</dt><dd>When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that.</dd></dl></section>
+    <section class="faq"><h2>راؤنڈنگ کیلکولیٹر اکثر پوچھے گئے سوالات</h2><dl><dt>اعشاری مقامات کا کیا مطلب ہے؟</dt><dd>اعشاریہ جگہوں کی تعداد یہ ہے کہ اعشاریہ کے بعد کتنے ہندسوں کو رکھنا ہے۔ 2 سے راؤنڈ سے سوویں تک، 0 سے پورے نمبر پر گول، یا منفی نمبر جیسے -2 سے قریب ترین سو تک گول درج کریں۔</dd><dt>تین طریقوں میں کیا فرق ہے؟</dt><dd>راؤنڈ ٹو نیسٹ تک جاتا ہے جو بھی قدر قریب ہے، اوپر یا نیچے۔ راؤنڈ اپ (چھت) ہمیشہ زیادہ قیمت پر جاتا ہے، اور گول نیچے (منزل) ہمیشہ کم قیمت پر جاتا ہے، جو قیمتوں کا تعین یا اشیاء کو بکس میں فٹ کرنے جیسی چیزوں کے لیے اہمیت رکھتا ہے۔</dd><dt>صحیح نصف کو کیسے سنبھالا جاتا ہے؟</dt><dd>جب کوئی قدر بالکل آدھے راستے پر بیٹھ جاتی ہے، تو راؤنڈ سے قریب ترین اعلی نمبر پر جاتا ہے، جو روزمرہ کا سب سے جانا پہچانا اصول ہے۔ اگر آپ کو اسے کنٹرول کرنے کی ضرورت ہے تو واضح طور پر راؤنڈ اپ یا گول ڈاون کا انتخاب کریں۔</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
-  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+  <p><a href="/freetools.html">تمام ٹولز</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ur";window.__T={"number":"نمبر","places":"اعشاریہ مقامات","mode":"طریقہ","nearest":"قریب ترین گول","up":"راؤنڈ اپ","down":"گول نیچے","result":"گول"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/roundingcalc.js" defer></script>
 </body>
 </html>

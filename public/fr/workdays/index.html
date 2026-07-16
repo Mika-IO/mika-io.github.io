@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de jours ouvrables : comptez les jours ouvrables entre deux dates</title>
+<meta name="description" content="Calculateur de jours de travail gratuit. Comptez le nombre de jours ouvrables (du lundi au vendredi) entre deux dates, hors week-end. Résultats instantanés dans votre navigateur.">
+<link rel="canonical" href="https://mikaio.dev/fr/workdays/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/workdays/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/workdays/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/workdays/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/workdays/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/workdays/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/workdays/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/workdays/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/workdays/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/workdays/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/workdays/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/workdays/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculateur de jours ouvrables : comptez les jours ouvrables entre deux dates">
+<meta property="og:description" content="Calculateur de jours de travail gratuit. Comptez le nombre de jours ouvrables (du lundi au vendredi) entre deux dates, hors week-end. Résultats instantanés dans votre navigateur.">
+<meta property="og:url" content="https://mikaio.dev/fr/workdays/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de jours ouvrables : comptez les jours ouvrables entre deux dates","url":"https://mikaio.dev/fr/workdays/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur de jours de travail gratuit. Comptez le nombre de jours ouvrables (du lundi au vendredi) entre deux dates, hors week-end. Résultats instantanés dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de jours de travail","item":"https://mikaio.dev/fr/workdays/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Est-ce que cela inclut les jours fériés ?","acceptedAnswer":{"@type":"Answer","text":"Non. Ce calculateur exclut uniquement les week-ends (samedi et dimanche). Les jours fériés varient selon les pays et ne peuvent pas être déterminés automatiquement sans connaître votre emplacement."}},{"@type":"Question","name":"Les dates de début et de fin sont-elles incluses ?","acceptedAnswer":{"@type":"Answer","text":"Oui, les dates de début et de fin sont incluses si elles tombent un jour de semaine."}},{"@type":"Question","name":"Puis-je calculer les jours de travail passés ?","acceptedAnswer":{"@type":"Answer","text":"Oui, entrez deux dates dans n'importe quel ordre et la calculatrice renvoie le nombre correct."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/workdays/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/workdays/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/workdays/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/workdays/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/workdays/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/workdays/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/workdays/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/workdays/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur de jours de travail</span></nav>
+  <h1>Calculateur de jours de travail</h1>
+  <p class="lead">Sélectionnez une date de début et une date de fin pour compter les jours ouvrables entre elles, hors week-end.</p>
+  <section class="widget" id="tool"><form id="wd-form"><div class="row"><div class="field"><label for="wd-from">Date de début</label><input type="date" id="wd-from"></div><div class="field"><label for="wd-to">Date de fin</label><input type="date" id="wd-to"></div></div><div class="result"><span class="hint">Jours ouvrables: </span><span class="big" id="wd-out">—</span></div><div id="wd-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Comptez les jours ouvrables entre deux dates</h2>
+<p>Tous les jours ne sont pas des jours ouvrables. Les week-ends interrompent le flux des affaires et connaître le nombre réel de jours ouvrables entre deux dates est essentiel pour la planification des projets, la gestion des contrats, les conditions de facturation, les délais légaux et les calculs RH. Ce calculateur compte les jours du lundi au vendredi entre toute date de début et de fin, à l&#39;exclusion des samedis et dimanches.</p>
+<h2>Jours ouvrables vs jours calendaires</h2>
+<p>Les jours calendaires comptent chaque jour du début à la fin, y compris les week-ends. Les jours ouvrables (également appelés jours ouvrables ou jours de la semaine) excluent les samedis et dimanches. La différence est importante lorsque :</p>
+<ul>
+<li>Un contrat précise un délai de livraison de « 30 jours ouvrables » : il s&#39;agit de six semaines civiles et non de 30 jours.</li>
+<li>Le délai légal est de 10 jours ouvrables à compter d’un événement – ​​manquer la date du calendrier serait une erreur.</li>
+<li>Un paiement est dû « net dans 30 jours » – cela signifie généralement 30 jours calendaires, mais certaines juridictions l&#39;interprètent comme des jours ouvrables.</li>
+<li>Un délai de préavis de 2 semaines, soit 10 jours ouvrables.</li>
+</ul>
+<h2>Comment fonctionne la calculatrice</h2>
+<p>La calculatrice parcourt chaque jour entre les deux dates et ne compte que celles qui tombent le lundi, mardi, mercredi, jeudi ou vendredi. La date de début et la date de fin sont incluses si elles correspondent à des jours de semaine. Le total montre également la répartition : jours calendaires, jours ouvrables et jours de week-end.</p>
+<h2>Planification du projet</h2>
+<p>Les chefs de projet utilisent constamment les calculs des jours ouvrables. Un plan de projet comprenant 20 tâches, chacune prenant 2 jours ouvrables, s&#39;étend sur au moins 40 jours ouvrables, soit 8 semaines civiles. L&#39;ajout de tampons, de dépendances et de cycles de révision nécessite de savoir exactement combien de jours ouvrables correspondent à une période de calendrier donnée.</p>
+<p>La planification des sprints dans le développement de logiciels utilise généralement des sprints de 2 semaines, qui contiennent 10 jours ouvrables. Connaître les jours ouvrables sur un horizon de feuille de route plus long permet d&#39;estimer le nombre de sprints qui s&#39;inscriront entre maintenant et une étape majeure.</p>
+<h2>Conditions de facturation et de paiement</h2>
+<p>Les modalités de paiement net 30, net 60 et net 90 sont presque toujours en jours calendaires. Cependant, certains secteurs et certains contrats utilisent des jours ouvrables, ce qui rend la distinction importante. Une facture nette de 30 jours calendaires émise un lundi est due 30 jours calendaires plus tard, quel que soit le nombre de week-ends intermédiaires. Un mandat de 30 jours ouvrables se termine beaucoup plus tard, sur six semaines civiles.</p>
+<h2>Emploi et RH</h2>
+<p>Les délais de préavis en cas de licenciement sont souvent spécifiés en semaines ou en jours ouvrables. Un délai de préavis de 2 semaines commençant le mardi se termine le lundi deux semaines plus tard, soit 10 jours ouvrables. Les droits au congé annuel sont souvent exprimés en jours ouvrables par an. Les systèmes RH suivent les soldes des jours ouvrables pour les demandes de congés et les approbations.</p>
+<h2>Jours fériés</h2>
+<p>Ce calculateur exclut uniquement les week-ends. Les jours fériés varient énormément selon le pays, la région, l&#39;état et même le secteur, et ne peuvent pas être déterminés automatiquement sans informations supplémentaires. Pour les calculs qui doivent exclure des jours fériés spécifiques, utilisez le résultat de cette calculatrice comme point de départ et soustrayez manuellement les jours fériés pertinents compris dans la plage de dates.</p>
+<h2>Comment utiliser la calculatrice</h2>
+<p>Choisissez une date de début et une date de fin, et le nombre total de jours ouvrables entre elles apparaît immédiatement, ventilé avec le nombre de jours calendaires et le nombre de jours de week-end compris dans la plage. Étant donné que les deux chiffres sont mis à jour ensemble, vous pouvez voir en un coup d&#39;œil exactement combien de week-ends occupent une période calendaire donnée - un contexte utile lorsqu&#39;un délai semble généreux en jours calendaires mais s&#39;avère serré une fois les week-ends soustraits.</p>
+<h2>Pourquoi cette distinction fait trébucher les gens</h2>
+<p>La confusion entre les jours ouvrables et les jours calendaires est l&#39;un des petits malentendus les plus courants dans les contrats et la planification de projets, précisément parce que les deux sont décrits en utilisant le même mot quotidien « jours », sans aucun signal intégré pour lequel on est destiné. Un délai de « 10 jours » semble identique, qu&#39;il s&#39;agisse de dix jours calendaires ou de dix jours ouvrables, mais les deux peuvent différer jusqu&#39;à quatre jours selon le nombre de week-ends intermédiaires, ce qui est exactement le genre d&#39;ambiguïté qui provoque de véritables différends quant au respect d&#39;un délai. Lire un contrat ou un plan de projet suffisamment attentivement pour savoir de quel type de journée il s&#39;agit, et utiliser une calculatrice comme celle-ci pour convertir entre les deux, supprime l&#39;ambiguïté avant qu&#39;elle ne devienne un désaccord.</p>
+<h2>SLA et garanties de redressement</h2>
+<p>Les accords de niveau de service promettent souvent une réponse ou une résolution dans un nombre fixe de jours ouvrables – « tickets d&#39;assistance répondus dans les 2 jours ouvrables », par exemple. Calculer si un SLA a réellement été respecté nécessite exactement le calcul des jours ouvrables que cet outil effectue : un ticket déposé à 16 heures un vendredi et répondu le lundi matin a techniquement reçu une réponse le jour ouvrable suivant, même si près de trois jours civils se sont écoulés, et la confusion inverse (en supposant qu&#39;un écart entre le vendredi et le lundi viole un SLA de &quot;1 jour ouvrable&quot;) est une source courante de plaintes inutiles des clients.</p>
+<h2>Travailler à rebours à partir d’une date limite</h2>
+<p>Le calculateur fonctionne également à l&#39;envers à des fins de planification : si vous savez qu&#39;un livrable est dû à une date précise et que vous savez combien de jours ouvrables le travail prendra, vous pouvez compter à rebours à partir de la date limite pour trouver la dernière date de début sûre. Soustraire d&#39;une date limite les jours ouvrables plutôt que les jours calendaires est exactement ce qui empêche un plan de projet de supposer silencieusement que le travail se déroule le week-end - une erreur qui transforme un horaire confortable de deux semaines en un horaire précipité une fois que quelqu&#39;un prend en compte les quatre jours de week-end réellement intégrés.</p>
+<h2>Privé et instantané</h2>
+<p>Tous les calculs s&#39;exécutent entièrement dans votre navigateur, de sorte que le décompte apparaît à l&#39;instant où vous choisissez vos dates et aucune date que vous saisissez n&#39;est jamais envoyée à un serveur, enregistrée ou partagée.</p>
+    <section class="faq"><h2>FAQ sur les jours ouvrables</h2><dl><dt>Est-ce que cela inclut les jours fériés ?</dt><dd>Non. Ce calculateur exclut uniquement les week-ends (samedi et dimanche). Les jours fériés varient selon les pays et ne peuvent pas être déterminés automatiquement sans connaître votre emplacement.</dd><dt>Les dates de début et de fin sont-elles incluses ?</dt><dd>Oui, les dates de début et de fin sont incluses si elles tombent un jour de semaine.</dd><dt>Puis-je calculer les jours de travail passés ?</dt><dd>Oui, entrez deux dates dans n&#39;importe quel ordre et la calculatrice renvoie le nombre correct.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/workdays/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/workdays/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/workdays/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/workdays/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/workdays/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/workdays/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/workdays/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/workdays/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"from_date":"Date de début","to_date":"Date de fin","workdays":"Jours ouvrables"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/workdays.js" defer></script>
+</body>
+</html>

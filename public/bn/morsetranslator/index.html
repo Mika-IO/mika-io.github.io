@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>মোর্স কোড অনুবাদক - পাঠ্যকে মোর্স কোডে রূপান্তর করুন এবং পিছনে</title>
+<meta name="description" content="বিনামূল্যে মোর্স কোড অনুবাদক. যেকোন টেক্সটকে মোর্স কোড ডট এবং ড্যাশে রূপান্তর করুন, অথবা মোর্স কোড ডিকোড করে টেক্সটে ফিরিয়ে দিন। অডিও প্লেব্যাক অন্তর্ভুক্ত. আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।">
+<link rel="canonical" href="https://mikaio.dev/bn/morsetranslator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/morsetranslator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/morsetranslator/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/morsetranslator/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/morsetranslator/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/morsetranslator/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/morsetranslator/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/morsetranslator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/morsetranslator/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/morsetranslator/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/morsetranslator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/morsetranslator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="মোর্স কোড অনুবাদক - পাঠ্যকে মোর্স কোডে রূপান্তর করুন এবং পিছনে">
+<meta property="og:description" content="বিনামূল্যে মোর্স কোড অনুবাদক. যেকোন টেক্সটকে মোর্স কোড ডট এবং ড্যাশে রূপান্তর করুন, অথবা মোর্স কোড ডিকোড করে টেক্সটে ফিরিয়ে দিন। অডিও প্লেব্যাক অন্তর্ভুক্ত. আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।">
+<meta property="og:url" content="https://mikaio.dev/bn/morsetranslator/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"মোর্স কোড অনুবাদক - পাঠ্যকে মোর্স কোডে রূপান্তর করুন এবং পিছনে","url":"https://mikaio.dev/bn/morsetranslator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে মোর্স কোড অনুবাদক. যেকোন টেক্সটকে মোর্স কোড ডট এবং ড্যাশে রূপান্তর করুন, অথবা মোর্স কোড ডিকোড করে টেক্সটে ফিরিয়ে দিন। অডিও প্লেব্যাক অন্তর্ভুক্ত. আপনার ব্রাউজারে সম্পূর্ণরূপে কাজ করে।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"মোর্স কোড অনুবাদক","item":"https://mikaio.dev/bn/morsetranslator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"মোর্স কোড কি?","acceptedAnswer":{"@type":"Answer","text":"মোর্স কোড বিন্দু এবং ড্যাশ (বা ছোট এবং দীর্ঘ সংকেত) এর ক্রম হিসাবে অক্ষর, অঙ্ক এবং বিরাম চিহ্ন এনকোড করার একটি সিস্টেম। এটি 1830 এবং 1840 এর দশকে বৈদ্যুতিক টেলিগ্রাফের সাথে ব্যবহারের জন্য তৈরি করা হয়েছিল। প্রতিটি অক্ষরের একটি অনন্য ডট-ড্যাশ ক্রম রয়েছে।"}},{"@type":"Question","name":"আমি কিভাবে মোর্স কোডে অক্ষর আলাদা করব?","acceptedAnswer":{"@type":"Answer","text":"অক্ষর একটি একক স্থান দ্বারা পৃথক করা হয়. শব্দ একটি স্ল্যাশ / অথবা তিনটি স্পেস দ্বারা পৃথক করা হয়. ডিকোডার উভয় কনভেনশন গ্রহণ করে।"}},{"@type":"Question","name":"অডিও প্লেব্যাক কাজ করে?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ। টুলটি ডট এবং ড্যাশের সাথে মিলে যাওয়া টোন তৈরি করতে ওয়েব অডিও API ব্যবহার করে। ডট ছোট টোন, ড্যাশ তিনগুণ লম্বা। নিশ্চিত করুন যে আপনার ডিভাইস ভলিউম চালু আছে."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/morsetranslator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/morsetranslator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/morsetranslator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/morsetranslator/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/morsetranslator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/morsetranslator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/morsetranslator/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>মোর্স কোড অনুবাদক</span></nav>
+  <h1>মোর্স কোড অনুবাদক</h1>
+  <p class="lead">এটি মোর্স কোডে অনুবাদ করা দেখতে পাঠ্য টাইপ করুন। মোর্স কোড পেস্ট করুন যাতে এটিকে পাঠ্যে ফিরে আসে। অডিও হিসাবে কোড শুনতে প্লে ক্লিক করুন.</p>
+  <section class="widget" id="tool"><div id="morse-app"><div class="field"><label for="morse-in">এনকোড করার জন্য পাঠ্য</label><textarea id="morse-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="এখানে আপনার বার্তা টাইপ করুন..."></textarea></div><div class="result"><span class="hint">মোর্স কোড: </span><span id="morse-out" style="word-break:break-all;letter-spacing:0.1em">—</span></div><button id="morse-play" class="btn secondary" style="margin-top:0.5rem">▶ অডিও চালান</button><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="morse-decode-in">ডিকোড করার জন্য মোর্স কোড</label><textarea id="morse-decode-in" rows="2" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="e.g. .... . .-.. .-.. ---"></textarea></div><div class="result"><span class="hint">ডিকোড করা পাঠ্য: </span><span id="morse-decoded">—</span></div></div></section>
+  <article class="content">
+    <h2>পাঠ্য এবং মোর্স কোডের মধ্যে অনুবাদ করুন</h2>
+<p>মোর্স কোড ইতিহাসের সবচেয়ে স্বীকৃত এনকোডিং সিস্টেমগুলির মধ্যে একটি। এর স্বতন্ত্র বিন্দু এবং ড্যাশগুলি ভয়েস ট্রান্সমিশন সম্ভব হওয়ার অনেক আগে মহাদেশ এবং মহাসাগর জুড়ে বার্তাগুলিকে যোগাযোগ করেছিল। আজ এটি অপেশাদার রেডিও, বিমান চালনা, অ্যাক্সেসিবিলিটি ডিভাইস এবং জনপ্রিয় সংস্কৃতিতে ব্যবহৃত হয়। এই অনুবাদক যেকোন পাঠ্যকে তাৎক্ষণিকভাবে মোর্স কোডে রূপান্তর করে, কোডটিকে অডিও হিসেবে চালায় এবং মোর্স কোডকে আবার প্লেইন টেক্সটে ডিকোড করে।</p>
+<h2>অনুবাদক ব্যবহার করে</h2>
+<p>আপনার বার্তাটি এনকোডিং বাক্সে টাইপ করুন এবং মোর্সের অনুবাদটি অবিলম্বে এটির নীচে প্রদর্শিত হবে, একটি একক স্থান দ্বারা বিভক্ত অক্ষর সহ বিন্দু এবং ড্যাশ ব্যবহার করে এবং একটি স্ল্যাশ দ্বারা পৃথক করা শব্দগুলি, মোর্সের জন্য আদর্শ লিখিত নিয়মের সাথে হুবহু মিলে যায়। আপনার ব্রাউজারে সরাসরি উত্পন্ন অডিও টোন হিসাবে কোডটি শুনতে প্লে টিপুন, যা শুধুমাত্র দৃষ্টিশক্তির পরিবর্তে কানের দ্বারা মোর্সকে চিনতে অনুশীলন করার একটি সত্যিকারের কার্যকর উপায়। অন্য পথে যেতে, একই অক্ষর এবং শব্দ বিভাজক অনুসরণ করে ডিকোডিং বাক্সে বিন্দু এবং ড্যাশগুলি পেস্ট করুন এবং সমতুল্য প্লেইন টেক্সট তাত্ক্ষণিকভাবে প্রদর্শিত হবে।</p>
+<h2>মোর্স কোডের ইতিহাস</h2>
+<p>স্যামুয়েল মোর্স এবং আলফ্রেড ভ্যাল 1830 এবং 1840 এর দশকে বৈদ্যুতিক টেলিগ্রাফের সাথে ব্যবহারের জন্য মোর্স কোড তৈরি করেছিলেন, যা দীর্ঘ তামার তারের উপর ডাল হিসাবে সংকেত পাঠাতে পারে। কোড প্রতিটি অক্ষর এবং অঙ্ককে সংক্ষিপ্ত সংকেত (ডট) এবং দীর্ঘ সংকেত (ড্যাশ) এর একটি অনন্য প্যাটার্ন বরাদ্দ করে। মূল কোড, যাকে এখন আমেরিকান মোর্স কোড বলা হয়, পরবর্তীতে আন্তর্জাতিক মোর্স কোডে পরিমার্জিত করা হয়, যা সময় অনুপাতকে প্রমিত করে এবং অক্ষর সেটকে প্রসারিত করে। আন্তর্জাতিক মোর্স কোড আজ বিশ্বব্যাপী ব্যবহৃত সংস্করণ।</p>
+<p>বিখ্যাত এসওএস ডিস্ট্রেস সিগন্যাল — তিন বিন্দু, তিন ড্যাশ, তিন বিন্দু (··· ─── ···) - এর সরলতা এবং প্রতিসাম্যের জন্য বেছে নেওয়া হয়েছিল, যা চাপের মধ্যেও সংক্রমণ করা সহজ করে তোলে।</p>
+<h2>কান দ্বারা মোর্স শেখার একটি নোট</h2>
+<p>দক্ষ মোর্স অপারেটররা সচেতনভাবে বিন্দু এবং ড্যাশগুলি মোটেই গণনা করেন না — পর্যাপ্ত অনুশীলনের সাথে, প্রতিটি অক্ষর একটি স্বতন্ত্র ছন্দময় প্যাটার্ন হিসাবে তাত্ক্ষণিকভাবে স্বীকৃত হয়, একইভাবে একজন সাবলীল পাঠক প্রতিটি অক্ষরকে শব্দ করার পরিবর্তে এক নজরে একটি সম্পূর্ণ শব্দ চিনতে পারে। এই টুল থেকে বারবার অডিও প্লেব্যাক শোনা, সংক্ষিপ্ত, সাধারণ শব্দ দিয়ে শুরু করে, বিন্দু এবং ড্যাশের একটি লিখিত টেবিল মুখস্থ করার চেয়ে সেই ছন্দময় স্বীকৃতি তৈরি করার একটি অনেক বেশি কার্যকর উপায়, যে কারণে গুরুতর মোর্স শিক্ষার্থীদের প্রায় সর্বজনীনভাবে তাদের চোখের সামনে তাদের কানকে প্রশিক্ষণ দেওয়ার পরামর্শ দেওয়া হয়।</p>
+<h2>মোর্স কোড কিভাবে কাজ করে</h2>
+<p>প্রতিটি অক্ষর, অঙ্ক এবং সাধারণ বিরাম চিহ্নের বিন্দু এবং ড্যাশগুলির একটি অনন্য ক্রম রয়েছে। E অক্ষরটি কেবল একটি একক বিন্দু, যখন অক্ষরটি টি একটি একক ড্যাশ - ইংরেজিতে সবচেয়ে সাধারণ অক্ষরগুলি সংক্ষিপ্ত কোডগুলি পায়৷ অক্ষর তিনটি বিন্দু দৈর্ঘ্য সমান একটি বিরতি দ্বারা পৃথক করা হয়. সাতটি বিন্দু দৈর্ঘ্যের সমান একটি বিরতি দ্বারা শব্দগুলিকে পৃথক করা হয়। এই টাইমিং স্ট্রাকচারই মোর্সকে শ্রুতিমধুর, আলোর মাধ্যমে বা যান্ত্রিকভাবে প্রেরণ করতে দেয়।</p>
+<p>আদর্শ সময় হল:</p>
+<ul>
+<li>ডট: 1 ইউনিট</li>
+<li>ড্যাশ: 3 ইউনিট</li>
+<li>একই বর্ণের উপাদানগুলির মধ্যে ফাঁক: 1 ইউনিট</li>
+<li>অক্ষরের মধ্যে ফাঁক: 3 ইউনিট</li>
+<li>শব্দের মধ্যে ফাঁক: 7 একক</li>
+</ul>
+<h2>যেখানে এখনও মোর্স কোড ব্যবহার করা হয়</h2>
+<p>বিশ্বজুড়ে অপেশাদার (হ্যাম) রেডিও অপারেটররা এখনও দূর-দূরত্বের যোগাযোগের জন্য মোর্স কোড ব্যবহার করে, বিশেষ করে যখন প্রচারের অবস্থা খারাপ। মোর্স কোড হস্তক্ষেপে প্রবেশ করে যা ভয়েস যোগাযোগকে অসম্ভব করে তুলবে। অনেক দেশে আন্তর্জাতিক অপেশাদার রেডিও লাইসেন্স পরীক্ষায় এখনও একটি মোর্স কোড উপাদান অন্তর্ভুক্ত থাকে।</p>
+<p>এভিয়েশন নেভিগেশন বীকনের জন্য মোর্স কোড ব্যবহার করে: VOR (VHF omnidirectional range) এবং ILS (ইনস্ট্রুমেন্ট ল্যান্ডিং সিস্টেম) ট্রান্সমিটার নিয়মিত বিরতিতে মোর্সে তাদের সনাক্তকারী সম্প্রচার করে, যা পাইলটদের যাচাই করতে দেয় যে তারা সঠিক নেভিড ব্যবহার করছে।</p>
+<p>অ্যাক্সেসিবিলিটি প্রযুক্তি কখনও কখনও সীমিত গতিশীলতার লোকেদের জন্য ইনপুট পদ্ধতি হিসাবে মোর্স কোড ব্যবহার করে। একটি একক বোতাম বা সুইচ বিন্দু এবং ড্যাশ প্রেরণ করতে পারে, যা গতিতে সম্পূর্ণ টেক্সট ইনপুটকে অনুমতি দেয় যা দক্ষ মোর্স অপারেটররা আশ্চর্যজনকভাবে দ্রুত করতে পারে।</p>
+<h2>কেন কোডটি এমনভাবে ডিজাইন করা হয়েছিল</h2>
+<p>মূল নকশার প্রতিভাটি কোডের দৈর্ঘ্যের সাথে অক্ষরের ফ্রিকোয়েন্সির মিলের মধ্যে নিহিত: কারণ স্যামুয়েল মোর্স এবং আলফ্রেড ভেইল অধ্যয়ন করেছিলেন যে ইংরেজি পাঠ্যে কোন অক্ষরগুলি প্রায়শই প্রদর্শিত হয়, একক সর্বাধিক সাধারণ অক্ষর, E, সংক্ষিপ্ততম সম্ভাব্য সংকেত, একটি একক বিন্দু বরাদ্দ করা হয়েছিল, যখন T, পরবর্তী সবচেয়ে সাধারণ, একটি একক ড্যাশ পেয়েছে। Q, X এবং Z এর মতো বিরল অক্ষরগুলিকে দীর্ঘতর, আরও জটিল নিদর্শন দেওয়া হয়েছিল, যেহেতু সামগ্রিক লক্ষ্য ছিল সাধারণ পাঠ্য প্রেরণের জন্য প্রয়োজনীয় গড় সময়কে কমিয়ে আনা, প্রতিটি অক্ষরকে সমানভাবে দ্রুত করা নয়। এই একই নীতি — আরও ঘন ঘন চিহ্নগুলিতে সংক্ষিপ্ত কোড দিন — আধুনিক ডেটা কম্প্রেশন অ্যালগরিদমগুলিতে এক শতাব্দীরও বেশি পরে পুনরায় আবির্ভূত হয়, যা মোর্স কোডকে আজকের কম্পিউটিংয়ে ব্যবহৃত ধারণাগুলির একটি অসম্ভাব্য কিন্তু প্রকৃত পূর্বপুরুষ করে তোলে।</p>
+<h2>বিরাম চিহ্ন এবং চিহ্ন</h2>
+<p>অক্ষর এবং অঙ্কের বাইরে, স্ট্যান্ডার্ড মোর্স কোড সাধারণ বিরাম চিহ্নগুলির জন্য প্যাটার্নগুলিকেও সংজ্ঞায়িত করে যেমন ফুল স্টপ, কমা এবং প্রশ্ন চিহ্ন, যে কারণে এই অনুবাদক একক শব্দের পরিবর্তে পুরো বাক্যগুলি পরিচালনা করতে পারে। অপেশাদার রেডিও অপারেটররা অতিরিক্তভাবে বাতাসের উপর কথোপকথনের প্রবাহ নিয়ন্ত্রণ করতে prosigns নামক বিশেষ সম্মিলিত সিকোয়েন্স ব্যবহার করে - একটি ক্রম যার অর্থ &quot;বার্তার সমাপ্তি,&quot; উদাহরণস্বরূপ, বা একটি অর্থ &quot;প্রেরণ করার আমন্ত্রণ&quot; - যা পৃথক অক্ষর হিসাবে নয় বরং বিন্দু এবং ড্যাশের একক অবিচ্ছিন্ন স্ট্রিং হিসাবে প্রেরিত হয়, তবে এই কোডের একটি স্তর যা স্বয়ংক্রিয়ভাবে কনভেন্ট করার চেষ্টা করতে পারে না তবে এই কোডটি ব্যবহার করে। আপনি এটা সম্মুখীন.</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>সমস্ত অনুবাদ সম্পূর্ণরূপে আপনার ব্রাউজারে ঘটে, তাই এনকোডিং এবং ডিকোডিং তাত্ক্ষণিক হয় এবং আপনার টাইপ করা কোনও পাঠ্য কখনও কোনও সার্ভারে পাঠানো হয় না, লগ করা বা শেয়ার করা হয়।</p>
+    <section class="faq"><h2>মোর্স কোড FAQ</h2><dl><dt>মোর্স কোড কি?</dt><dd>মোর্স কোড বিন্দু এবং ড্যাশ (বা ছোট এবং দীর্ঘ সংকেত) এর ক্রম হিসাবে অক্ষর, অঙ্ক এবং বিরাম চিহ্ন এনকোড করার একটি সিস্টেম। এটি 1830 এবং 1840 এর দশকে বৈদ্যুতিক টেলিগ্রাফের সাথে ব্যবহারের জন্য তৈরি করা হয়েছিল। প্রতিটি অক্ষরের একটি অনন্য ডট-ড্যাশ ক্রম রয়েছে।</dd><dt>আমি কিভাবে মোর্স কোডে অক্ষর আলাদা করব?</dt><dd>অক্ষর একটি একক স্থান দ্বারা পৃথক করা হয়. শব্দ একটি স্ল্যাশ / অথবা তিনটি স্পেস দ্বারা পৃথক করা হয়. ডিকোডার উভয় কনভেনশন গ্রহণ করে।</dd><dt>অডিও প্লেব্যাক কাজ করে?</dt><dd>হ্যাঁ। টুলটি ডট এবং ড্যাশের সাথে মিলে যাওয়া টোন তৈরি করতে ওয়েব অডিও API ব্যবহার করে। ডট ছোট টোন, ড্যাশ তিনগুণ লম্বা। নিশ্চিত করুন যে আপনার ডিভাইস ভলিউম চালু আছে.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/morsetranslator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/morsetranslator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/morsetranslator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/morsetranslator/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/morsetranslator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/morsetranslator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/morsetranslator/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"text_input":"এনকোড করার জন্য পাঠ্য","text_placeholder":"এখানে আপনার বার্তা টাইপ করুন...","morse":"মোর্স কোড","play_audio":"▶ অডিও চালান","morse_input":"ডিকোড করার জন্য মোর্স কোড","morse_placeholder":"e.g. .... . .-.. .-.. ---","decoded":"ডিকোড করা পাঠ্য"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/morsetranslator.js" defer></script>
+</body>
+</html>

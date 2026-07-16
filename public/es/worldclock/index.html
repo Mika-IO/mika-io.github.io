@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reloj mundial: compara la hora actual en ciudades de todo el mundo</title>
+<meta name="description" content="Reloj mundial gratuito. Compare la hora local actual en varias ciudades simultáneamente. No es necesario registrarse. Se actualiza cada segundo en tu navegador.">
+<link rel="canonical" href="https://mikaio.dev/es/worldclock/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/worldclock/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/worldclock/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/worldclock/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/worldclock/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/worldclock/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/worldclock/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/worldclock/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/worldclock/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/worldclock/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/worldclock/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/worldclock/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Reloj mundial: compara la hora actual en ciudades de todo el mundo">
+<meta property="og:description" content="Reloj mundial gratuito. Compare la hora local actual en varias ciudades simultáneamente. No es necesario registrarse. Se actualiza cada segundo en tu navegador.">
+<meta property="og:url" content="https://mikaio.dev/es/worldclock/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Reloj mundial: compara la hora actual en ciudades de todo el mundo","url":"https://mikaio.dev/es/worldclock/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Reloj mundial gratuito. Compare la hora local actual en varias ciudades simultáneamente. No es necesario registrarse. Se actualiza cada segundo en tu navegador."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Reloj mundial","item":"https://mikaio.dev/es/worldclock/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué precisión tiene el reloj mundial?","acceptedAnswer":{"@type":"Answer","text":"Las horas se derivan del reloj del sistema de su dispositivo y de la base de datos de zonas horarias de la IANA integrada en los navegadores modernos. Tienen una precisión de segundos siempre que el reloj de su dispositivo esté configurado correctamente."}},{"@type":"Question","name":"¿El horario de verano afecta los resultados?","acceptedAnswer":{"@type":"Answer","text":"Sí, la API Intl del navegador tiene en cuenta automáticamente las reglas de horario de verano para cada zona horaria, por lo que las horas mostradas siempre son correctas independientemente de la época del año."}},{"@type":"Question","name":"¿Puedo comparar más de tres ciudades?","acceptedAnswer":{"@type":"Answer","text":"La herramienta muestra tres ciudades a la vez para una comparación clara. Para comparar más, simplemente cambie uno de los menús desplegables a una ciudad diferente."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/worldclock/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/worldclock/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/worldclock/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/worldclock/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/worldclock/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/worldclock/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/worldclock/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/worldclock/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/worldclock/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/worldclock/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Reloj mundial</span></nav>
+  <h1>Reloj mundial</h1>
+  <p class="lead">Seleccione hasta tres ciudades para comparar sus horas locales actuales una al lado de la otra. El reloj se actualiza cada segundo.</p>
+  <section class="widget" id="tool"><div id="wc-app"><div class="row"><div class="field"><label for="wc-city1">Ciudad 1</label><select id="wc-city1"></select></div><div class="field"><label for="wc-city2">Ciudad 2</label><select id="wc-city2"></select></div><div class="field"><label for="wc-city3">Ciudad 3</label><select id="wc-city3"></select></div></div><div id="wc-out" class="result" style="flex-direction:column;gap:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>Compara horas locales de todo el mundo al instante</h2>
+<p>Ya sea que esté programando una reunión con un colega en Tokio, llamando a un amigo en Nueva York o verificando cuándo comienza un evento en vivo en su zona horaria, saber qué hora es en otros lugares es importante. El reloj mundial te permite comparar la hora local actual en varias ciudades simultáneamente sin hacer ningún cálculo mental. Elija las ciudades de los menús desplegables y las horas actuales aparecerán inmediatamente, actualizándose cada segundo, para que siempre vea una comparación precisa y en vivo en lugar de una instantánea que se vuelve obsoleta en el momento en que aparta la mirada.</p>
+<h2>como usarlo</h2>
+<p>Elija una ciudad de cada uno de los tres menús desplegables. Tan pronto como hagas una selección, el reloj de esa ciudad aparecerá debajo, marcando en tiempo real junto con los demás. No hay nada que enviar ni nada que configurar más allá de elegir los lugares que le interesan: cambie cualquier menú desplegable en cualquier momento y la pantalla se actualizará al instante. Los tres valores predeterminados están configurados para ciudades de referencia ampliamente utilizadas, pero puede cambiar cualquiera de ellas por cualquier otra ciudad de la lista para crear la comparación exacta que necesita, ya sean dos costas del mismo país o tres continentes a la vez.</p>
+<h2>Por qué comparar tiempos es más difícil de lo que parece</h2>
+<p>Las zonas horarias no son simplemente una cuestión de contar horas en un mapa. Los límites políticos, que no son meridianos espaciados uniformemente, deciden dónde termina una zona y comienza otra, por lo que las regiones vecinas pueden estar separadas por horas o, en algunos casos, compartir una zona a pesar de estar muy alejadas geográficamente. Además de eso, muchos países adelantan o retrasan sus relojes para aplicar el horario de verano, y no todos lo hacen en las mismas fechas: los hemisferios norte y sur están retrasados ​​seis meses, algunos países no lo respetan en absoluto y las fechas exactas de cambio pueden diferir incluso entre los países vecinos que sí lo hacen. Agregue un puñado de lugares que utilizan diferencias inusuales de media hora o 45 minutos con respecto a la hora estándar, y el cálculo manual se convierte en una verdadera fuente de reuniones perdidas y llamadas tardías.</p>
+<h2>Cómo el reloj se mantiene preciso</h2>
+<p>Esta herramienta evita toda esa complejidad al confiar en la base de datos de zona horaria integrada en su navegador web, el mismo estándar mundial que impulsa los calendarios, teléfonos y sistemas operativos. Cada ciudad que puede seleccionar se asigna a su identificador de zona horaria oficial, y el navegador calcula el desplazamiento actual correcto para ese lugar en este momento exacto, teniendo en cuenta automáticamente las reglas de horario de verano y cualquier peculiaridad histórica. Esto significa que las horas mostradas siempre son correctas para la fecha de hoy sin necesidad de recordar si un país en particular observa actualmente el horario de verano. El único requisito es que el reloj de tu propio dispositivo esté configurado correctamente, ya que cada comparación se calcula en relación con él.</p>
+<h2>Donde ayuda un reloj mundial</h2>
+<p>Los equipos internacionales viven según este tipo de comparación. Programar una llamada en tres oficinas, comprobar si es probable que un colega todavía esté en su escritorio o calcular la última hora razonable para enviar un mensaje que necesita una respuesta el mismo día son tareas cotidianas que un vistazo rápido al reloj mundial resuelve en segundos. Los viajeros lo usan para saber cuándo es seguro llamar a sus familiares en casa, los periodistas y comerciantes lo usan para seguir los horarios de apertura de los mercados en los centros financieros, y los fanáticos de los deportes en vivo o los eventos transmitidos por streaming lo usan para traducir la hora de inicio o estreno a su propia hora local.</p>
+<p>Es igualmente útil para momentos personales: determinar si es demasiado temprano o demasiado tarde para llamar a un familiar en el extranjero, planificar una videoconferencia con un amigo que se ha mudado al extranjero o simplemente satisfacer la curiosidad sobre lo que está sucediendo en el otro lado del planeta en este momento.</p>
+<h2>Privado, instantáneo y gratuito</h2>
+<p>No hay registro, ni costo ni publicidad en el camino. Todo el reloj funciona como un pequeño fragmento de código en su propio dispositivo, lee la hora de su sistema y aplica las reglas de zona horaria integradas del navegador, por lo que funciona instantáneamente y sigue funcionando incluso sin conexión a Internet una vez que se ha cargado la página. No se carga, registra ni comparte nada sobre las ciudades que eliges.</p>
+<p>Para usarlo, elija sus ciudades de los tres menús desplegables y observe cómo se actualizan los tiempos en vivo, segundo a segundo. Cambie cualquier ciudad en cualquier momento para comparar un conjunto diferente de lugares y confíe en la pantalla para manejar correctamente las peculiaridades del horario de verano y la zona horaria en todo momento.</p>
+<h2>Una breve historia de la hora estándar.</h2>
+<p>Antes de finales del siglo XIX, cada ciudad mantenía efectivamente su propia hora local basada en el sol, lo que hacía que los horarios de los ferrocarriles y las comunicaciones de larga distancia fueran un verdadero dolor de cabeza: dos ciudades separadas por sólo unas pocas docenas de kilómetros podían diferir por varios minutos. La expansión de los ferrocarriles y los telégrafos obligó al mundo a adoptar zonas horarias estandarizadas, y una conferencia internacional en 1884 estableció el sistema de zonas basadas en la longitud medidas desde Greenwich que, con muchos ajustes locales desde entonces, todavía sustenta el funcionamiento actual del reloj mundial en esta página. Comprender que la historia explica por qué los límites de las zonas siguen las fronteras de los países en lugar de líneas claras de longitud: fueron trazados por conveniencia práctica y política, no por pulcritud matemática. Un puñado de lugares incluso se compensan con 30 o 45 minutos no estándar en lugar de una hora completa, un recordatorio de que todo el sistema, aunque ahora está coordinado globalmente, sigue siendo un mosaico de decisiones nacionales superpuestas a un marco internacional.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre el reloj mundial</h2><dl><dt>¿Qué precisión tiene el reloj mundial?</dt><dd>Las horas se derivan del reloj del sistema de su dispositivo y de la base de datos de zonas horarias de la IANA integrada en los navegadores modernos. Tienen una precisión de segundos siempre que el reloj de su dispositivo esté configurado correctamente.</dd><dt>¿El horario de verano afecta los resultados?</dt><dd>Sí, la API Intl del navegador tiene en cuenta automáticamente las reglas de horario de verano para cada zona horaria, por lo que las horas mostradas siempre son correctas independientemente de la época del año.</dd><dt>¿Puedo comparar más de tres ciudades?</dt><dd>La herramienta muestra tres ciudades a la vez para una comparación clara. Para comparar más, simplemente cambie uno de los menús desplegables a una ciudad diferente.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/worldclock/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/worldclock/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/worldclock/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/worldclock/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/worldclock/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/worldclock/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/worldclock/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/worldclock/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/worldclock/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/worldclock/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"city1":"Ciudad 1","city2":"Ciudad 2","city3":"Ciudad 3"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/worldclock.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morse Code Translator - convertissez le texte en code Morse et inversement</title>
+<meta name="description" content="Traducteur de code Morse gratuit. Convertissez n&#39;importe quel texte en points et tirets de code Morse, ou décodez le code Morse en texte. Comprend la lecture audio. Fonctionne entièrement dans votre navigateur.">
+<link rel="canonical" href="https://mikaio.dev/fr/morsetranslator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/morsetranslator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/morsetranslator/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/morsetranslator/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/morsetranslator/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/morsetranslator/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/morsetranslator/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/morsetranslator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/morsetranslator/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/morsetranslator/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/morsetranslator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/morsetranslator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Morse Code Translator - convertissez le texte en code Morse et inversement">
+<meta property="og:description" content="Traducteur de code Morse gratuit. Convertissez n&#39;importe quel texte en points et tirets de code Morse, ou décodez le code Morse en texte. Comprend la lecture audio. Fonctionne entièrement dans votre navigateur.">
+<meta property="og:url" content="https://mikaio.dev/fr/morsetranslator/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Morse Code Translator - convertissez le texte en code Morse et inversement","url":"https://mikaio.dev/fr/morsetranslator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Traducteur de code Morse gratuit. Convertissez n'importe quel texte en points et tirets de code Morse, ou décodez le code Morse en texte. Comprend la lecture audio. Fonctionne entièrement dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Traducteur de code Morse","item":"https://mikaio.dev/fr/morsetranslator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu’est-ce que le code Morse ?","acceptedAnswer":{"@type":"Answer","text":"Le code Morse est un système permettant de coder des lettres, des chiffres et des signes de ponctuation sous forme de séquences de points et de tirets (ou de signaux courts et longs). Il a été développé dans les années 1830 et 1840 pour être utilisé avec le télégraphe électrique. Chaque caractère a une séquence de points-tirets unique."}},{"@type":"Question","name":"Comment séparer les lettres en code Morse ?","acceptedAnswer":{"@type":"Answer","text":"Les lettres sont séparées par un seul espace. Les mots sont séparés par une barre oblique/ou trois espaces. Le décodeur accepte les deux conventions."}},{"@type":"Question","name":"La lecture audio fonctionne-t-elle ?","acceptedAnswer":{"@type":"Answer","text":"Oui. L'outil utilise l'API Web Audio pour générer des tonalités correspondant aux points et aux tirets. Les points sont des tons courts, les tirets sont trois fois plus longs. Assurez-vous que le volume de votre appareil est activé."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Traducteur de code Morse</span></nav>
+  <h1>Traducteur de code Morse</h1>
+  <p class="lead">Tapez le texte pour le voir traduit en code Morse. Collez le code Morse pour le décoder en texte. Cliquez sur Lecture pour entendre le code sous forme audio.</p>
+  <section class="widget" id="tool"><div id="morse-app"><div class="field"><label for="morse-in">Texte à encoder</label><textarea id="morse-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Tapez votre message ici…"></textarea></div><div class="result"><span class="hint">Code Morse: </span><span id="morse-out" style="word-break:break-all;letter-spacing:0.1em">—</span></div><button id="morse-play" class="btn secondary" style="margin-top:0.5rem">▶ Lire l&#39;audio</button><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="morse-decode-in">Code Morse à décoder</label><textarea id="morse-decode-in" rows="2" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="e.g. .... . .-.. .-.. ---"></textarea></div><div class="result"><span class="hint">Texte décodé: </span><span id="morse-decoded">—</span></div></div></section>
+  <article class="content">
+    <h2>Traduisez entre le texte et le code Morse</h2>
+<p>Le code Morse est l&#39;un des systèmes de codage les plus reconnaissables de l&#39;histoire. Ses points et ses traits caractéristiques ont transmis des messages à travers continents et océans bien avant que la transmission vocale ne soit possible. Aujourd&#39;hui, il s&#39;utilise en radioamateur, en aviation, dans des dispositifs d&#39;accessibilité, et dans la culture populaire. Ce traducteur convertit instantanément n&#39;importe quel texte en code Morse, joue le code sous forme audio, et décode le Morse pour retrouver du texte simple.</p>
+<h2>Utiliser le traducteur</h2>
+<p>Tapez votre message dans le champ d&#39;encodage et la traduction en Morse apparaît immédiatement en dessous, utilisant des points et des traits, les lettres séparées par un simple espace et les mots séparés par une barre oblique, exactement selon la convention écrite standard du Morse. Appuyez sur lecture pour entendre le code sous forme de tonalités audio générées directement dans votre navigateur, ce qui constitue un moyen réellement utile de s&#39;entraîner à reconnaître le Morse à l&#39;oreille plutôt qu&#39;uniquement à l&#39;œil. Pour faire le chemin inverse, collez des points et des traits dans le champ de décodage, en respectant les mêmes séparateurs de lettres et de mots, et l&#39;équivalent en texte simple apparaît instantanément.</p>
+<h2>L&#39;histoire du code Morse</h2>
+<p>Samuel Morse et Alfred Vail ont développé le code Morse dans les années 1830 et 1840 pour une utilisation avec le télégraphe électrique, capable d&#39;envoyer des signaux sous forme d&#39;impulsions sur de longs fils de cuivre. Le code attribuait à chaque lettre et chiffre un motif unique de signaux courts (points) et longs (traits). Le code original, aujourd&#39;hui appelé Morse américain, a ensuite été affiné en Morse international, qui a standardisé les ratios de temporisation et étendu le jeu de caractères. Le Morse international est la version utilisée dans le monde entier aujourd&#39;hui.</p>
+<p>Le célèbre signal de détresse SOS — trois points, trois traits, trois points (··· ─── ···) — a été choisi pour sa simplicité et sa symétrie, le rendant facile à transmettre même sous pression.</p>
+<h2>Une note sur l&#39;apprentissage du Morse à l&#39;oreille</h2>
+<p>Les opérateurs Morse chevronnés ne comptent pas consciemment les points et les traits — avec suffisamment de pratique, chaque lettre se reconnaît instantanément comme un motif rythmique distinct, de la même façon qu&#39;un lecteur aguerri reconnaît un mot entier d&#39;un coup d&#39;œil plutôt que de l&#39;épeler lettre par lettre. Écouter à plusieurs reprises la lecture audio de cet outil, en commençant par des mots courts et courants, constitue un moyen bien plus efficace de développer cette reconnaissance rythmique que de mémoriser un tableau écrit de points et de traits, ce qui explique pourquoi les apprenants sérieux du Morse reçoivent presque universellement le conseil d&#39;entraîner leurs oreilles avant leurs yeux.</p>
+<h2>Comment fonctionne le code Morse</h2>
+<p>Chaque lettre, chiffre et signe de ponctuation courant possède une séquence unique de points et de traits. La lettre E n&#39;est qu&#39;un simple point, tandis que la lettre T est un simple trait — les lettres les plus fréquentes en anglais reçoivent les codes les plus courts. Les lettres sont séparées par une pause égale à trois durées de point. Les mots sont séparés par une pause égale à sept durées de point. Cette structure temporelle permet de transmettre le Morse par le son, par la lumière, ou mécaniquement.</p>
+<p>La temporisation standard est :</p>
+<ul>
+<li>Point : 1 unité</li>
+<li>Trait : 3 unités</li>
+<li>Écart entre les éléments d&#39;une même lettre : 1 unité</li>
+<li>Écart entre les lettres : 3 unités</li>
+<li>Écart entre les mots : 7 unités</li>
+</ul>
+<h2>Où le code Morse est encore utilisé</h2>
+<p>Les radioamateurs du monde entier utilisent encore le code Morse pour les communications à longue distance, en particulier quand les conditions de propagation sont mauvaises. Le Morse traverse des interférences qui rendraient la communication vocale impossible. Les examens de licence radioamateur internationale dans de nombreux pays incluent encore une épreuve de Morse.</p>
+<p>L&#39;aviation utilise le code Morse pour les balises de navigation : les émetteurs VOR (radiophare omnidirectionnel VHF) et ILS (système d&#39;atterrissage aux instruments) diffusent leur identifiant en Morse à intervalles réguliers, permettant aux pilotes de vérifier qu&#39;ils utilisent la bonne aide à la navigation.</p>
+<p>Les technologies d&#39;accessibilité utilisent parfois le code Morse comme méthode de saisie pour les personnes à mobilité réduite. Un seul bouton ou interrupteur peut transmettre des points et des traits, permettant une saisie complète de texte à des vitesses que des opérateurs Morse expérimentés peuvent rendre étonnamment rapides.</p>
+<h2>Pourquoi le code a été conçu ainsi</h2>
+<p>Le génie de la conception originale réside dans l&#39;ajustement de la longueur du code à la fréquence des lettres : parce que Samuel Morse et Alfred Vail ont étudié quelles lettres apparaissent le plus souvent dans un texte en anglais, la lettre la plus fréquente, E, a reçu le signal le plus court possible, un simple point, tandis que T, la deuxième plus fréquente, a reçu un simple trait. Les lettres rares comme Q, X et Z ont reçu des motifs plus longs et plus complexes, puisque l&#39;objectif global était de minimiser le temps moyen nécessaire pour transmettre un texte ordinaire, et non de rendre chaque lettre également rapide. Ce même principe — donner des codes plus courts aux symboles les plus fréquents — réapparaît plus d&#39;un siècle plus tard dans les algorithmes modernes de compression de données, faisant du code Morse un ancêtre improbable mais authentique d&#39;idées utilisées aujourd&#39;hui en informatique.</p>
+<h2>Ponctuation et signaux de procédure</h2>
+<p>Au-delà des lettres et des chiffres, le code Morse standard définit aussi des motifs pour la ponctuation courante comme les points, les virgules et les points d&#39;interrogation, ce qui explique pourquoi ce traducteur peut gérer des phrases entières plutôt que des mots isolés. Les radioamateurs utilisent en plus des séquences combinées spéciales appelées signaux de procédure pour contrôler le déroulement d&#39;une conversation sur les ondes — une séquence signifiant « fin de message », par exemple, ou une autre signifiant « invitation à transmettre » — envoyées comme une seule chaîne ininterrompue de points et de traits plutôt que comme des lettres séparées, une couche de convention que cet outil ne tente pas de décoder automatiquement, mais qu&#39;il vaut la peine de connaître si vous la rencontrez.</p>
+<h2>Privé et instantané</h2>
+<p>Toute la traduction se déroule entièrement dans votre navigateur, si bien que l&#39;encodage et le décodage sont instantanés, et qu&#39;aucun texte que vous tapez n&#39;est jamais envoyé à un serveur, enregistré ou partagé.</p>
+    <section class="faq"><h2>FAQ sur le code Morse</h2><dl><dt>Qu’est-ce que le code Morse ?</dt><dd>Le code Morse est un système permettant de coder des lettres, des chiffres et des signes de ponctuation sous forme de séquences de points et de tirets (ou de signaux courts et longs). Il a été développé dans les années 1830 et 1840 pour être utilisé avec le télégraphe électrique. Chaque caractère a une séquence de points-tirets unique.</dd><dt>Comment séparer les lettres en code Morse ?</dt><dd>Les lettres sont séparées par un seul espace. Les mots sont séparés par une barre oblique/ou trois espaces. Le décodeur accepte les deux conventions.</dd><dt>La lecture audio fonctionne-t-elle ?</dt><dd>Oui. L&#39;outil utilise l&#39;API Web Audio pour générer des tonalités correspondant aux points et aux tirets. Les points sont des tons courts, les tirets sont trois fois plus longs. Assurez-vous que le volume de votre appareil est activé.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/morsetranslator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/morsetranslator/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/morsetranslator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/morsetranslator/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/morsetranslator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/morsetranslator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/morsetranslator/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/morsetranslator.js" defer></script>
+</body>
+</html>

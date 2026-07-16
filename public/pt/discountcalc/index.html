@@ -12,6 +12,8 @@
   <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/discountcalc/">
   <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/discountcalc/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/discountcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/discountcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/discountcalc/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/discountcalc/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/discountcalc/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/discountcalc/">
@@ -66,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -115,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Desconto — preço final e quanto você economiza","url":"https://mikaio.dev/pt/discountcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de desconto grátis. Informe o preço original e a porcentagem de desconto para ver na hora o preço final da promoção e exatamente quanto você economiza."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora de Desconto","item":"https://mikaio.dev/pt/discountcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como um desconto é calculado?","acceptedAnswer":{"@type":"Answer","text":"Multiplique o preço original pela porcentagem de desconto dividida por cem para obter o valor economizado, depois subtraia isso do preço. Por exemplo, 30% de desconto em um item de 50 economiza 15, deixando 35."}},{"@type":"Question","name":"Como combino dois descontos?","acceptedAnswer":{"@type":"Answer","text":"Descontos acumulados se aplicam um após o outro, não somados. Um desconto de 20% e depois 10% não é 30% de desconto — tire 20% primeiro, depois 10% do preço já reduzido, o que dá um pouco menos que 30%."}},{"@type":"Question","name":"Algo que eu informo é salvo?","acceptedAnswer":{"@type":"Answer","text":"Não. O cálculo roda inteiramente no seu navegador, então os preços que você digita nunca são enviados, guardados ou compartilhados."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navegação do site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/discountcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/discountcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/discountcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/discountcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/discountcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/discountcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/discountcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/discountcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/discountcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/discountcalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora de Desconto</span></nav>
@@ -144,11 +149,12 @@ textarea{min-height:120px;resize:vertical}
 <p>Para usá-la, informe o preço original e a porcentagem de desconto, e leia o preço final e a sua economia. Mude qualquer número a qualquer momento e os resultados acompanham, para você conferir uma única oferta ou comparar várias em segundos e sempre saber o preço real antes de decidir comprar.</p>
     <section class="faq"><h2>Perguntas frequentes da calculadora de desconto</h2><dl><dt>Como um desconto é calculado?</dt><dd>Multiplique o preço original pela porcentagem de desconto dividida por cem para obter o valor economizado, depois subtraia isso do preço. Por exemplo, 30% de desconto em um item de 50 economiza 15, deixando 35.</dd><dt>Como combino dois descontos?</dt><dd>Descontos acumulados se aplicam um após o outro, não somados. Um desconto de 20% e depois 10% não é 30% de desconto — tire 20% primeiro, depois 10% do preço já reduzido, o que dá um pouco menos que 30%.</dd><dt>Algo que eu informo é salvo?</dt><dd>Não. O cálculo roda inteiramente no seu navegador, então os preços que você digita nunca são enviados, guardados ou compartilhados.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/discountcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/discountcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/discountcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/discountcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/discountcalc/">Français</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/discountcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/discountcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/discountcalc/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/discountcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/discountcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/discountcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/discountcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/discountcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/discountcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/discountcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/discountcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/discountcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/discountcalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
-  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+  <p><a href="/freetools.html">Todas as ferramentas</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="pt";window.__T={"price":"Preço original","discount":"Desconto %","final":"Preço final","saved":"Você economiza"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/discountcalc.js" defer></script>
 </body>
 </html>

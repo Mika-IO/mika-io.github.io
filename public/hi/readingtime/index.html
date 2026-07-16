@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>पढ़ने का समय कैलकुलेटर - किसी भी पाठ को कितनी देर तक पढ़ना है</title>
+<meta name="description" content="निःशुल्क पढ़ने का समय कैलकुलेटर। शब्दों की संख्या, पढ़ने का अनुमानित समय और बोलने का अनुमानित समय तुरंत देखने के लिए कोई भी टेक्स्ट चिपकाएँ। किसी साइनअप की आवश्यकता नहीं.">
+<link rel="canonical" href="https://mikaio.dev/hi/readingtime/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/readingtime/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/readingtime/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/readingtime/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/readingtime/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/readingtime/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/readingtime/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/readingtime/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/readingtime/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/readingtime/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/readingtime/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/readingtime/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="पढ़ने का समय कैलकुलेटर - किसी भी पाठ को कितनी देर तक पढ़ना है">
+<meta property="og:description" content="निःशुल्क पढ़ने का समय कैलकुलेटर। शब्दों की संख्या, पढ़ने का अनुमानित समय और बोलने का अनुमानित समय तुरंत देखने के लिए कोई भी टेक्स्ट चिपकाएँ। किसी साइनअप की आवश्यकता नहीं.">
+<meta property="og:url" content="https://mikaio.dev/hi/readingtime/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"पढ़ने का समय कैलकुलेटर - किसी भी पाठ को कितनी देर तक पढ़ना है","url":"https://mikaio.dev/hi/readingtime/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"निःशुल्क पढ़ने का समय कैलकुलेटर। शब्दों की संख्या, पढ़ने का अनुमानित समय और बोलने का अनुमानित समय तुरंत देखने के लिए कोई भी टेक्स्ट चिपकाएँ। किसी साइनअप की आवश्यकता नहीं."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"पढ़ने का समय कैलकुलेटर","item":"https://mikaio.dev/hi/readingtime/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"कैलकुलेटर कौन सी पढ़ने की गति मानता है?","acceptedAnswer":{"@type":"Answer","text":"कैलकुलेटर प्रति मिनट 238 शब्दों का उपयोग करता है, जो शोध से पता चलता है कि गैर-तकनीकी अंग्रेजी गद्य पढ़ने वाले वयस्कों के लिए औसत मूक पढ़ने की गति है। वास्तविक गति व्यक्ति, पाठ जटिलता और पढ़ने के उद्देश्य के अनुसार भिन्न होती है।"}},{"@type":"Question","name":"किस बोलने की गति का उपयोग किया जाता है?","acceptedAnswer":{"@type":"Answer","text":"बोलने का समय 150 शब्द प्रति मिनट अनुमानित है, जो बोलने की एक आरामदायक प्राकृतिक गति है। प्रस्तुतकर्ता और पॉडकास्टर अक्सर स्पष्टता के लिए 130-160 WPM का लक्ष्य रखते हैं।"}},{"@type":"Question","name":"क्या यह शब्दों की सटीक गिनती करता है?","acceptedAnswer":{"@type":"Answer","text":"शब्द गणना रिक्त स्थान पर विभाजित होती है और खाली खंडों को फ़िल्टर करती है, जो मानक विधि है। यह सादे गद्य के लिए अधिकांश वर्ड प्रोसेसर से मेल खाता है। हाइफ़नेटेड शब्दों को एक शब्द के रूप में गिना जाता है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>पढ़ने का समय कैलकुलेटर</span></nav>
+  <h1>पढ़ने का समय कैलकुलेटर</h1>
+  <p class="lead">अपना टेक्स्ट नीचे चिपकाएँ या टाइप करें। शब्दों की गिनती, पढ़ने का समय और बोलने का समय तुरंत अपडेट हो जाता है।</p>
+  <section class="widget" id="tool"><div id="rt-app"><textarea id="rt-text" rows="8" style="width:100%;box-sizing:border-box;resize:vertical;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="अपना टेक्स्ट यहां पेस्ट करें या टाइप करें..."></textarea><div id="rt-results" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">शब्द</div><div class="big" id="rt-words">0</div></div><div><div class="hint">पढ़ने का समय</div><div class="big" id="rt-time">0 मि</div></div><div><div class="hint">बोलने का समय</div><div class="big" id="rt-speak">0 मि</div></div></div></div></section>
+  <article class="content">
+    <h2>जानें कि आपकी सामग्री को पढ़ने में कितना समय लगेगा</h2>
+<p>किसी लेख को प्रकाशित करने, भाषण तैयार करने या यह अनुमान लगाने से पहले कि किसी दस्तावेज़ की समीक्षा में कितना समय लगेगा, पढ़ने का समय जानना उपयोगी है। पाठक यह जानने की सराहना करते हैं कि वे क्या करने के लिए प्रतिबद्ध हैं - अनुमानित पढ़ने का समय प्रदर्शित करने वाले ब्लॉग पोस्ट लगातार उच्च सहभागिता दिखाते हैं। वक्ताओं को यह जानने की जरूरत है कि क्या उनकी स्क्रिप्ट उनके आवंटित समय के अनुरूप होगी। यह टूल आपकी शब्द गणना के आधार पर आपको पढ़ने का समय और बोलने का समय दोनों तुरंत देता है।</p>
+<h2>पढ़ने के समय की गणना कैसे की जाती है</h2>
+<p>गैर-तकनीकी गद्य पढ़ने वाले वयस्कों की औसत पढ़ने की गति लगभग 238 शब्द प्रति मिनट है। यह आंकड़ा सामान्य परिस्थितियों में वयस्कों के मौन पढ़ने के अध्ययन से आया है। वास्तविक गति काफी भिन्न होती है: हल्के-फुल्के उपन्यासों का एक कुशल पाठक प्रति मिनट 350 शब्द पढ़ सकता है, जबकि गहन क़ानून के माध्यम से काम करने वाला एक कानून का छात्र प्रति मिनट 100 शब्द या उससे कम पढ़ सकता है। यह उपकरण जो अनुमान प्रदान करता है वह मानक सामग्री के लिए एक विश्वसनीय आधार रेखा है।</p>
+<p>सूत्र सीधा है: मिनटों में पढ़ने का समय शब्दों की संख्या को 238 से विभाजित करने के बराबर होता है। 1,000 शब्दों वाले ब्लॉग पोस्ट को पढ़ने में लगभग 4 मिनट लगते हैं। 2,500 शब्दों के लेख में लगभग 10 मिनट लगते हैं। 60,000 शब्दों के उपन्यास में लगभग 250 मिनट या चार घंटे से अधिक का समय लगता है - यही कारण है कि अध्याय-दर-अध्याय प्रगति सार्थक लगती है।</p>
+<h2>बोलने का समय</h2>
+<p>बोलने के समय का अनुमान प्रति मिनट 150 शब्दों का उपयोग करता है, जो एक आरामदायक, स्पष्ट प्रस्तुति गति का प्रतिनिधित्व करता है। पेशेवर वक्ता और रेडियो प्रसारक अक्सर 130 से 160 शब्द प्रति मिनट का लक्ष्य रखते हैं क्योंकि यह ध्यान खींचने के लिए काफी तेज़ है लेकिन इतना धीमा है कि आसानी से समझा जा सकता है। बहुत तेज़ भाषण - 180 शब्द प्रति मिनट से ऊपर - जल्दबाज़ी महसूस होने लगती है। व्यक्ति और संदर्भ के आधार पर वार्तालाप भाषण आम तौर पर 120 से 180 शब्द प्रति मिनट के बीच होता है।</p>
+<p>यदि आप कोई भाषण, प्रस्तुति, या पॉडकास्ट स्क्रिप्ट तैयार कर रहे हैं, तो बोलने का समय आपको यह निर्णय लेने में मदद करता है कि आपकी सामग्री आपके समय स्लॉट में फिट बैठती है या नहीं। 10 मिनट का स्लॉट लगभग 1,500 शब्दों की अनुमति देता है। 20 मिनट की TED-शैली की बातचीत उचित विराम के साथ स्वाभाविक गति से की जाने पर लगभग 3,000 शब्दों की होती है।</p>
+<h2>सामग्री प्रकाशन में पढ़ने का समय</h2>
+<p>प्रकाशन जो लेखों में पढ़ने के समय का अनुमान जोड़ते हैं - &quot;5 मिनट पढ़ा,&quot; &quot;12 मिनट पढ़ा&quot; - ऐसा इसलिए करते हैं क्योंकि पाठक सहभागिता अनुसंधान से पता चलता है कि समय प्रतिबद्धता जानने से उस दर में कमी आती है जिस पर पाठक किसी लेख को समय से पहले छोड़ देते हैं। जब पाठकों को पता चलता है कि वे 3 मिनट की पढ़ाई देख रहे हैं, तो वे इसे समाप्त करने के लिए प्रतिबद्ध होने की अधिक संभावना रखते हैं। जब वे अप्रत्याशित रूप से खुद को बहुत लंबे टुकड़े में गहराई तक पाते हैं, तो अप्रत्याशित लंबाई पर निराशा उन्हें छोड़ने का कारण बन सकती है।</p>
+<p>ईमेल न्यूज़लेटर्स के लिए, पढ़ने का समय जानने से सही लंबाई तय करने में मदद मिलती है। जिस ईमेल को पढ़ने में 3 से 4 मिनट से अधिक समय लगता है, वह प्राप्तकर्ता का महत्वपूर्ण ध्यान आकर्षित करता है और पूरा होने की दर कम हो सकती है। ईमेल के लिए छोटा अक्सर बेहतर होता है।</p>
+<h2>गुणवत्ता संकेत के रूप में शब्द गणना</h2>
+<p>केवल शब्द गणना ही आमतौर पर दुरुपयोग की जाने वाली मीट्रिक है। 2,000 शब्दों का लेख स्वाभाविक रूप से 500 शब्दों के लेख से बेहतर नहीं है - विषय को बिना पैडिंग के पूरी तरह से कवर करने के लिए सही लंबाई की आवश्यकता होती है। जैसा कि कहा गया है, एसईओ प्रयोजनों के लिए, किसी विषय को पूरी तरह से कवर करने वाले लेख लंबे होते हैं क्योंकि किसी विषय को पूरी तरह से कवर करने के लिए अधिक सामग्री की आवश्यकता होती है। पढ़ने का समय और शब्दों की गिनती मिलकर लेखकों को यह पता लगाने में मदद करती है कि उन्होंने पर्याप्त कहा है या नहीं।</p>
+<h2>कैलकुलेटर का उपयोग कैसे करें</h2>
+<p>अपना टेक्स्ट बॉक्स में चिपकाएँ और दोनों आंकड़े - पढ़ने का समय और बोलने का समय - तुरंत दिखाई देंगे, जैसे ही आप संपादित करेंगे, लाइव अपडेट होंगे। इससे वास्तविक समय में कटौती के प्रभाव को देखना आसान हो जाता है: प्रत्येक संशोधन के बाद पूरी चीज़ को एक अलग काउंटर में चिपकाने के बजाय, एक धीमे पैराग्राफ को ट्रिम करें, और अनुमान में गिरावट देखें।</p>
+<h2>दो अलग-अलग गति क्यों मायने रखती हैं?</h2>
+<p>238-शब्द-प्रति-मिनट पढ़ने के आंकड़े और 150-शब्द-प्रति-मिनट बोलने के आंकड़े के बीच का अंतर कोई त्रुटि नहीं है - यह इस बीच वास्तविक अंतर को दर्शाता है कि आंखें लिखित पाठ को कैसे संसाधित करती हैं और मुंह कैसे बोले गए शब्दों को उत्पन्न करता है। मौन पढ़ने से आंख आगे बढ़ जाती है, परिचित वाक्यांशों को छोड़ देती है और एक ही नज़र में कई शब्दों को संसाधित कर देती है, जबकि भाषण एक समय में प्रत्येक शब्द को जोर से बनाने की भौतिक गति से बंधा होता है। यही कारण है कि एक स्क्रिप्ट जो आपके दिमाग में आराम से पढ़ी जाती है, एक बार जब आप वास्तव में खड़े होते हैं और इसे वितरित करते हैं तो यह उम्मीद से कहीं अधिक समय तक चल सकती है - इस पृष्ठ पर दो अनुमान विशेष रूप से उस बेमेल को पकड़ने के लिए मौजूद हैं, इससे पहले कि यह मंच पर एक समस्या बन जाए।</p>
+<h2>अपने वास्तविक दर्शकों के लिए समायोजन</h2>
+<p>सामान्य गैर-तकनीकी गद्य के वयस्क पाठकों के लिए 238 शब्द-प्रति-मिनट की आधार रेखा औसत है, लेकिन आप जो लिख रहे हैं उसके आधार पर आपके वास्तविक दर्शक तेज़ या धीमी गति से पढ़ सकते हैं। गहन अकादमिक लेखन, कानूनी पाठ, या अपरिचित शब्दजाल और तकनीकी शब्दों से भरी सामग्री अधिकांश पाठकों को काफी धीमा कर देती है - कभी-कभी आधारभूत गति से आधी तक - क्योंकि अपरिचित शब्दों और जटिल वाक्य संरचनाओं के लिए प्रति शब्द अधिक संज्ञानात्मक प्रसंस्करण की आवश्यकता होती है। इसके विपरीत, छोटे, सरल वाक्यों में लिखी गई एक आकस्मिक ब्लॉग पोस्ट को एक अनुभवी पाठक द्वारा मुख्य बिंदुओं की तलाश में आधार रेखा की तुलना में तेजी से पढ़ा जा सकता है। यदि आप अपने दर्शकों को अच्छी तरह से जानते हैं, तो इस टूल द्वारा दिए गए अनुमान को शुरुआती बिंदु मानें और आपका वास्तविक लेखन कितना तकनीकी या कितना आकस्मिक है, इसके आधार पर मानसिक रूप से समायोजित करें।</p>
+<h2>पढ़ने का समय और सामग्री की लंबाई की रणनीति</h2>
+<p>सामग्री रणनीतिकार पढ़ने के समय को बाद के विचार के बजाय एक डिज़ाइन बाधा के रूप में मानते हैं। एक लैंडिंग पृष्ठ को एक मिनट से कम पढ़ने के समय से लाभ होता है, क्योंकि आगंतुक सेकंड के भीतर तय करते हैं कि रुकना है या नहीं और पाठ की एक लंबी दीवार मूल्य के बजाय प्रयास के रूप में पढ़ी जाती है। इसके विपरीत, एक गहन तकनीकी मार्गदर्शिका आराम से 15 या 20 मिनट तक चल सकती है क्योंकि एक पाठक जो उस तरह की सामग्री के लिए प्रतिबद्ध है, वह संपूर्णता की तलाश में है, संक्षिप्तता की नहीं, और एक जटिल विषय का संदिग्ध रूप से संक्षिप्त उपचार वास्तव में सामग्री की पूर्णता में विश्वास को कम कर सकता है।</p>
+<h2>निजी और तत्काल</h2>
+<p>आपका टेक्स्ट आपके ब्राउज़र को कभी नहीं छोड़ता: शब्द गणना और समय गणना पूरी तरह से स्थानीय रूप से होती है, इसलिए आपके द्वारा पेस्ट की गई कोई भी सामग्री कभी भी किसी सर्वर द्वारा अपलोड, संग्रहीत या विश्लेषण नहीं की जाती है।</p>
+    <section class="faq"><h2>पढ़ने का समय अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>कैलकुलेटर कौन सी पढ़ने की गति मानता है?</dt><dd>कैलकुलेटर प्रति मिनट 238 शब्दों का उपयोग करता है, जो शोध से पता चलता है कि गैर-तकनीकी अंग्रेजी गद्य पढ़ने वाले वयस्कों के लिए औसत मूक पढ़ने की गति है। वास्तविक गति व्यक्ति, पाठ जटिलता और पढ़ने के उद्देश्य के अनुसार भिन्न होती है।</dd><dt>किस बोलने की गति का उपयोग किया जाता है?</dt><dd>बोलने का समय 150 शब्द प्रति मिनट अनुमानित है, जो बोलने की एक आरामदायक प्राकृतिक गति है। प्रस्तुतकर्ता और पॉडकास्टर अक्सर स्पष्टता के लिए 130-160 WPM का लक्ष्य रखते हैं।</dd><dt>क्या यह शब्दों की सटीक गिनती करता है?</dt><dd>शब्द गणना रिक्त स्थान पर विभाजित होती है और खाली खंडों को फ़िल्टर करती है, जो मानक विधि है। यह सादे गद्य के लिए अधिकांश वर्ड प्रोसेसर से मेल खाता है। हाइफ़नेटेड शब्दों को एक शब्द के रूप में गिना जाता है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"paste_text":"अपना टेक्स्ट यहां पेस्ट करें या टाइप करें...","words":"शब्द","reading_time":"पढ़ने का समय","speaking_time":"बोलने का समय","min":"मि"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/readingtime.js" defer></script>
+</body>
+</html>

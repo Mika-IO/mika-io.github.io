@@ -68,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -117,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Proporção — Simplifique e Escale Qualquer Resolução","url":"https://mikaio.dev/pt/aspectratio/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de proporção gratuita. Digite largura e altura para obter a razão simplificada (ex: 1920×1080 = 16:9) e redimensione instantaneamente."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora de Proporção (Aspect Ratio)","item":"https://mikaio.dev/pt/aspectratio/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é uma proporção (aspect ratio)?","acceptedAnswer":{"@type":"Answer","text":"A proporção é a relação entre a largura e a altura de um retângulo, expressa como dois números separados por dois-pontos, como 16:9 ou 4:3."}},{"@type":"Question","name":"Como a proporção é simplificada?","acceptedAnswer":{"@type":"Answer","text":"A calculadora encontra o Máximo Divisor Comum (MDC) da largura e da altura e divide ambos pelo MDC para obter a menor proporção em números inteiros."}},{"@type":"Question","name":"O que significa 16:9?","acceptedAnswer":{"@type":"Answer","text":"16:9 significa que para cada 16 unidades de largura há 9 de altura. É o formato widescreen padrão de TVs HD, 4K, monitores e vídeos."}},{"@type":"Question","name":"Como escalar uma resolução mantendo a proporção?","acceptedAnswer":{"@type":"Answer","text":"Digite a largura e altura originais para obter a proporção, depois insira uma nova largura na seção Escala. A calculadora calcula automaticamente a altura correspondente."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navegação do site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/aspectratio/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/aspectratio/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/aspectratio/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/aspectratio/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/aspectratio/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/aspectratio/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/aspectratio/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/aspectratio/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/aspectratio/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/aspectratio/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora de Proporção (Aspect Ratio)</span></nav>
@@ -127,15 +130,15 @@ textarea{min-height:120px;resize:vertical}
   <p class="lead">Digite qualquer largura e altura para ver a proporção simplificada e redimensioná-la para novas dimensões.</p>
   <section class="widget" id="tool"><form id="tool-form" autocomplete="off">
   <div class="ar-section">
-    <h3 class="ar-section-title">Simplify Ratio</h3>
+    <h3 class="ar-section-title">Simplificar a proporção</h3>
     <div class="ar-row">
       <div class="ar-field">
-        <label for="ar-width">Width</label>
+        <label for="ar-width">Largura</label>
         <input type="number" id="ar-width" min="1" placeholder="e.g. 1920" />
       </div>
       <span class="ar-sep">×</span>
       <div class="ar-field">
-        <label for="ar-height">Height</label>
+        <label for="ar-height">Altura</label>
         <input type="number" id="ar-height" min="1" placeholder="e.g. 1080" />
       </div>
     </div>
@@ -144,10 +147,10 @@ textarea{min-height:120px;resize:vertical}
   </div>
   <hr class="ar-divider" />
   <div class="ar-section">
-    <h3 class="ar-section-title">Scale to New Width</h3>
+    <h3 class="ar-section-title">Dimensionar para nova largura</h3>
     <div class="ar-row">
       <div class="ar-field">
-        <label for="ar-new-width">New Width</label>
+        <label for="ar-new-width">Nova Largura</label>
         <input type="number" id="ar-new-width" min="1" placeholder="e.g. 1280" />
       </div>
     </div>
@@ -174,8 +177,9 @@ textarea{min-height:120px;resize:vertical}
   <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/aspectratio/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/aspectratio/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/aspectratio/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/aspectratio/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/aspectratio/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/aspectratio/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/aspectratio/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/aspectratio/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/aspectratio/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/aspectratio/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
-  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+  <p><a href="/freetools.html">Todas as ferramentas</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="pt";window.__T={"label1":"Largura","label2":"Altura","label3":"Nova Largura","placeholder":"e.g. 1920","simplifyratio":"Simplificar a proporção","scaletonewwidth":"Dimensionar para nova largura"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/aspectratio.js" defer></script>
 </body>
 </html>

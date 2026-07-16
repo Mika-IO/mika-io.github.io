@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vérificateur de nombres premiers : ce nombre est-il premier ?</title>
+<meta name="description" content="Vérificateur de nombres premiers gratuit. Entrez n&#39;importe quel entier positif pour savoir instantanément s&#39;il est premier. Affiche également tous les diviseurs et la factorisation première.">
+<link rel="canonical" href="https://mikaio.dev/fr/primechecker/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/primechecker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/primechecker/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/primechecker/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/primechecker/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/primechecker/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/primechecker/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/primechecker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/primechecker/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/primechecker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/primechecker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/primechecker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vérificateur de nombres premiers : ce nombre est-il premier ?">
+<meta property="og:description" content="Vérificateur de nombres premiers gratuit. Entrez n&#39;importe quel entier positif pour savoir instantanément s&#39;il est premier. Affiche également tous les diviseurs et la factorisation première.">
+<meta property="og:url" content="https://mikaio.dev/fr/primechecker/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Vérificateur de nombres premiers : ce nombre est-il premier ?","url":"https://mikaio.dev/fr/primechecker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Vérificateur de nombres premiers gratuit. Entrez n'importe quel entier positif pour savoir instantanément s'il est premier. Affiche également tous les diviseurs et la factorisation première."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Vérificateur de nombres premiers","item":"https://mikaio.dev/fr/primechecker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce qu'un nombre premier ?","acceptedAnswer":{"@type":"Answer","text":"Un nombre premier est un entier positif supérieur à 1 qui n'a pas de diviseur positif autre que 1 et lui-même. Les premiers nombres premiers sont 2, 3, 5, 7, 11, 13, 17, 19, 23 et 29. Le nombre 1 n'est pas considéré comme premier par les conventions modernes."}},{"@type":"Question","name":"Qu'est-ce que la factorisation première ?","acceptedAnswer":{"@type":"Answer","text":"Tout entier supérieur à 1 peut être exprimé comme un produit de nombres premiers d’exactement une manière (le théorème fondamental de l’arithmétique). Par exemple, 60 = 2 × 2 × 3 × 5."}},{"@type":"Question","name":"Quel nombre puis-je vérifier ?","acceptedAnswer":{"@type":"Answer","text":"L'outil fonctionne efficacement pour des nombres allant jusqu'à environ 10 millions en utilisant la division d'essai. Le traitement de très grands nombres peut prendre un certain temps."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/primechecker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/primechecker/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/primechecker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/primechecker/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/primechecker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/primechecker/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/primechecker/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Vérificateur de nombres premiers</span></nav>
+  <h1>Vérificateur de nombres premiers</h1>
+  <p class="lead">Entrez un entier positif pour vérifier s&#39;il est premier et voir ses diviseurs et sa factorisation première.</p>
+  <section class="widget" id="tool"><form id="prime-form"><div class="row"><div class="field"><label for="prime-n">Numéro</label><input type="number" id="prime-n" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="big" id="prime-out">—</span></div><div id="prime-factors" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Ce nombre est-il premier ?</h2>
+<p>Un nombre premier est l’un des concepts les plus fondamentaux en mathématiques : un entier positif supérieur à 1 qui ne peut être divisé également par un nombre autre que 1 et lui-même. Déterminer si un nombre donné est premier est une question qui fascine les mathématiciens depuis des millénaires et qui reste pratiquement importante dans la cryptographie moderne. Cet outil y répond instantanément pour tout nombre que vous saisissez et affiche également la liste complète des diviseurs et la factorisation première.</p>
+<h2>Qu&#39;est-ce qui rend un nombre premier ?</h2>
+<p>La définition est simple : un entier positif est premier si ses seuls diviseurs positifs sont 1 et lui-même. Le nombre 7 est premier car il ne peut être divisé que par 1 et 7. Le nombre 8 n&#39;est pas premier — il est également divisible par 2 et 4. Le nombre 1 est un cas particulier : selon les conventions mathématiques modernes, il n&#39;est pas considéré comme premier, car l&#39;inclure briserait le caractère unique de la factorisation première.</p>
+<p>Les premiers nombres premiers sont 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47. Notez que 2 est le seul nombre premier pair, car tout autre nombre pair est divisible par 2.</p>
+<h2>Tests de primalité à plus grande échelle</h2>
+<p>La division par essais, la méthode utilisée par cet outil, fonctionne parfaitement pour des nombres allant jusqu&#39;à des millions, mais devient peu pratique pour les nombres vraiment énormes utilisés dans la cryptographie du monde réel, qui peuvent atteindre des centaines de chiffres. Pour cela, les mathématiciens et les informaticiens utilisent des tests probabilistes de primalité, tels que le test de Miller-Rabin, qui ne peuvent pas garantir qu&#39;un nombre est premier avec une certitude absolue, mais peuvent exclure la composition avec une probabilité d&#39;erreur si faible qu&#39;elle est considérée comme négligeable en pratique – plus petite, en fait, que le risque qu&#39;une erreur matérielle se produise au cours du même calcul. Comprendre d&#39;abord la division par première instance est la bonne base avant de comprendre pourquoi ces méthodes probabilistes plus rapides étaient nécessaires.</p>
+<h2>Factorisation première</h2>
+<p>Le théorème fondamental de l&#39;arithmétique stipule que tout entier supérieur à 1 peut être exprimé comme un produit de nombres premiers d&#39;exactement une manière, dans l&#39;ordre des facteurs près. C&#39;est ce qu&#39;on appelle la factorisation première. Par exemple : 12 = 2 × 2 × 3, écrit 2² × 3. Le nombre 360 ​​= 2³ × 3² × 5. Trouver la factorisation première d&#39;un nombre signifie le décomposer en ses composantes premières, ce qui révèle sa structure mathématique.</p>
+<h2>Pourquoi les nombres premiers sont importants</h2>
+<p>Les nombres premiers sont les éléments constitutifs de tous les nombres entiers : chaque nombre composé (non premier) peut être construit en multipliant les nombres premiers entre eux. Cela les place au cœur de la théorie des nombres, la branche des mathématiques concernée par les propriétés des nombres entiers.</p>
+<p>Dans l&#39;informatique moderne, la difficulté de prendre en compte de grands nombres dans leurs principaux composants constitue le fondement du cryptage RSA, qui sécurise la plupart des communications cryptées sur Internet. Deux grands nombres premiers sont multipliés ensemble pour créer une clé publique. La prise en compte de ce produit dans ses nombres premiers – sans les connaître à l’avance – est irréalisable sur le plan informatique pour des nombres suffisamment grands.</p>
+<h2>Comment fonctionne le chèque</h2>
+<p>L&#39;outil utilise la division par essai : il teste si le nombre est divisible par un nombre entier compris entre 2 et la racine carrée du nombre. Si un tel diviseur existe, le nombre est composé et l&#39;outil enregistre ses facteurs. S’il n’en existe pas, le nombre est premier. La limite de la racine carrée fonctionne car si un nombre n a un facteur supérieur à √n, il doit également avoir un facteur correspondant inférieur à √n, nous pouvons donc nous arrêter à la racine carrée.</p>
+<h2>Un exemple concret rapide</h2>
+<p>Prenez le nombre 91. Il est impair, non divisible par 3 (9+1=10, pas un multiple de 3) et ne se termine pas par 0 ou 5, donc les petits tests évidents suggèrent tous qu&#39;il pourrait être premier - mais vérifier la division par 7 révèle 91 ÷ 7 = 13 exactement, donc 91 est en fait composite, avec une factorisation première 7 × 13. Il s&#39;agit d&#39;un exemple classique utilisé pour illustrer pourquoi « il ne semble divisible par rien ». &quot;évident&quot; n&#39;est pas la même chose que &quot;il est premier&quot; : le seul moyen fiable d&#39;en être sûr est de vérifier chaque diviseur candidat jusqu&#39;à la racine carrée, exactement ce que cet outil fait automatiquement et instantanément.</p>
+<h2>Utilisations quotidiennes</h2>
+<p>Bien que les nombres premiers revêtent une profonde importance mathématique dans la cryptographie et la théorie des nombres, leurs utilisations quotidiennes incluent des énigmes, des exercices pédagogiques et des défis de programmation. Les étudiants qui étudient la divisibilité, les facteurs et les multiples doivent souvent vérifier la primalité et trouver des factorisations dans le cadre d&#39;exercices arithmétiques.</p>
+<h2>Comment utiliser le vérificateur</h2>
+<p>Type any positive integer into the box and the result appears immediately: whether the number is prime, and if not, its complete list of divisors and its prime factorization broken down into individual prime powers. There is no practical limit on the size of number you can check for everyday use, since the trial-division method this tool uses handles numbers well into the millions and beyond almost instantly.</p>
+<h2>Les nombres premiers sont infinis</h2>
+<p>Euclide a prouvé il y a plus de deux mille ans qu’il n’existe pas de plus grand nombre premier – la liste est interminable. His proof is a beautiful piece of ancient logic: assume for a moment that there were only finitely many primes, multiply them all together, and add one. The resulting number cannot be divided evenly by any prime on the original list, since dividing by any of them always leaves a remainder of one, so either this new number is itself prime, or it has some other prime factor that was missing from the supposedly complete list — either way, contradicting the assumption that the list was complete. Cet argument élégant, qui ne nécessite aucune mathématique avancée, reste l’une des preuves les plus célèbres de l’histoire du sujet.</p>
+<h2>Privé et instantané</h2>
+<p>Le calcul s&#39;exécute entièrement dans votre navigateur, de sorte que le résultat apparaît dès l&#39;instant où vous tapez et aucun numéro que vous saisissez n&#39;est jamais envoyé à un serveur, enregistré ou partagé.</p>
+    <section class="faq"><h2>FAQ du vérificateur principal</h2><dl><dt>Qu&#39;est-ce qu&#39;un nombre premier ?</dt><dd>Un nombre premier est un entier positif supérieur à 1 qui n&#39;a pas de diviseur positif autre que 1 et lui-même. Les premiers nombres premiers sont 2, 3, 5, 7, 11, 13, 17, 19, 23 et 29. Le nombre 1 n&#39;est pas considéré comme premier par les conventions modernes.</dd><dt>Qu&#39;est-ce que la factorisation première ?</dt><dd>Tout entier supérieur à 1 peut être exprimé comme un produit de nombres premiers d’exactement une manière (le théorème fondamental de l’arithmétique). Par exemple, 60 = 2 × 2 × 3 × 5.</dd><dt>Quel nombre puis-je vérifier ?</dt><dd>L&#39;outil fonctionne efficacement pour des nombres allant jusqu&#39;à environ 10 millions en utilisant la division d&#39;essai. Le traitement de très grands nombres peut prendre un certain temps.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/primechecker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/primechecker/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/primechecker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/primechecker/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/primechecker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/primechecker/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/primechecker/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"number":"Numéro"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/primechecker.js" defer></script>
+</body>
+</html>

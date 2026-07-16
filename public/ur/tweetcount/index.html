@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ٹویٹر / ایکس کریکٹر کاؤنٹر - اپنے ٹویٹ کی لمبائی شمار کریں۔</title>
+<meta name="description" content="مفت ٹویٹر/ ایکس کریکٹر کاؤنٹر۔ یو آر ایل نارملائزیشن کے ساتھ ٹویٹ کی لمبائی شمار کرتا ہے (ہر یو آر ایل = 23 حروف)۔ 280 حروف کی حد کے لیے کلر کوڈڈ حد کا اشارہ۔">
+<link rel="canonical" href="https://mikaio.dev/ur/tweetcount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tweetcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tweetcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tweetcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tweetcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tweetcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tweetcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tweetcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tweetcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tweetcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tweetcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tweetcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ٹویٹر / ایکس کریکٹر کاؤنٹر - اپنے ٹویٹ کی لمبائی شمار کریں۔">
+<meta property="og:description" content="مفت ٹویٹر/ ایکس کریکٹر کاؤنٹر۔ یو آر ایل نارملائزیشن کے ساتھ ٹویٹ کی لمبائی شمار کرتا ہے (ہر یو آر ایل = 23 حروف)۔ 280 حروف کی حد کے لیے کلر کوڈڈ حد کا اشارہ۔">
+<meta property="og:url" content="https://mikaio.dev/ur/tweetcount/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"ٹویٹر / ایکس کریکٹر کاؤنٹر - اپنے ٹویٹ کی لمبائی شمار کریں۔","url":"https://mikaio.dev/ur/tweetcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"مفت ٹویٹر/ ایکس کریکٹر کاؤنٹر۔ یو آر ایل نارملائزیشن کے ساتھ ٹویٹ کی لمبائی شمار کرتا ہے (ہر یو آر ایل = 23 حروف)۔ 280 حروف کی حد کے لیے کلر کوڈڈ حد کا اشارہ۔"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"ٹویٹر / ایکس کریکٹر کاؤنٹر","item":"https://mikaio.dev/ur/tweetcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ٹویٹر یو آر ایل کو 23 حروف میں کیوں شمار کرتا ہے؟","acceptedAnswer":{"@type":"Answer","text":"ٹویٹر اپنے t.co شارٹنر کے ذریعے ہر یو آر ایل کو خود بخود لپیٹ دیتا ہے، جو ایسے لنکس تیار کرتا ہے جو ہمیشہ 23 حروف طویل ہوتے ہیں۔ لہذا چاہے آپ کا URL 10 حروف کا ہو یا 200 حروف، یہ آپ کی 280-حروف کی حد میں بالکل 23 شمار ہوتا ہے۔"}},{"@type":"Question","name":"ٹویٹر / ایکس کریکٹر کی حد کیا ہے؟","acceptedAnswer":{"@type":"Answer","text":"ایک ٹویٹ یا X پوسٹ کے لیے معیاری حروف کی حد 280 حروف ہے۔ ٹویٹر بلیو / ایکس پریمیم سبسکرائبرز کو لمبی پوسٹس تک رسائی حاصل ہو سکتی ہے (25,000 حروف تک)، لیکن مفت کی حد 280 ہے۔"}},{"@type":"Question","name":"کیا ایموجیز کو ایک کردار کے طور پر شمار کیا جاتا ہے؟","acceptedAnswer":{"@type":"Answer","text":"زیادہ تر معیاری ایموجیز ٹویٹر کے گنتی کے نظام میں 2 حروف کے طور پر شمار ہوتے ہیں کیونکہ وہ یونیکوڈ سروگیٹ جوڑے استعمال کرتے ہیں۔ یہ کاؤنٹر JavaScript کی تار کی لمبائی کا استعمال کرتا ہے، جو کچھ ایموجی کے امتزاج کے لیے ٹویٹر کی درست گنتی سے تھوڑا مختلف ہو سکتا ہے۔"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/tweetcount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>ٹویٹر / ایکس کریکٹر کاؤنٹر</span></nav>
+  <h1>ٹویٹر / ایکس کریکٹر کاؤنٹر</h1>
+  <p class="lead">اپنی ٹویٹ کو نیچے ٹائپ کریں یا پیسٹ کریں۔ URLs کو خود بخود 23 حروف میں شمار کیا جاتا ہے، جو Twitter کے t.co لنک کو مختصر کرنے والے رویے سے مماثل ہے۔</p>
+  <section class="widget" id="tool"><form id="tweet-form"><div class="field"><label for="tweet-text">ٹویٹ / پوسٹ ٹیکسٹ</label><textarea id="tweet-text" rows="5" placeholder="کیا ہو رہا ہے؟"></textarea></div><div class="result" id="tweet-out" style="text-align:left"></div></form></section>
+  <article class="content">
+    <h2>اپنی پوسٹ کی لمبائی کو اس طرح شمار کریں جس طرح X اصل میں اسے شمار کرتا ہے۔</h2>
+<p>280 حروف کی حد اس وقت تک آسان لگتی ہے جب تک کہ آپ لکھنا شروع کر دیں اور ایموجی کا احساس نہ کر لیں، لنکس اور مخصوص لہجے والے حروف اس طرح سے شمار نہیں ہوتے جس طرح آپ کی توقع ہوگی۔ یہ کاؤنٹر X کے (سابقہ ​​ٹویٹر کے) اصل گنتی کے اصولوں کو اتنا ہی قریب سے آئینہ دار کرتا ہے جتنا کہ ایک براؤزر ٹول کر سکتا ہے، جس میں پلیٹ فارم کا URLs کا مخصوص علاج بھی شامل ہے، لہذا آپ جو نمبر یہاں دیکھ رہے ہیں وہ اس سے میل کھاتا ہے جو آپ کمپوز باکس میں دیکھیں گے نہ کہ سادہ کرداروں کی گنتی جس سے آپ اندازہ لگاتے ہیں کہ آیا کوئی پوسٹ واقعی فٹ ہو گی۔</p>
+<h2>اسے استعمال کرنے کا طریقہ</h2>
+<p>اپنی پوسٹ کو باکس میں ٹائپ کریں یا پیسٹ کریں اور کریکٹر کی گنتی فوری طور پر نیچے ظاہر ہوتی ہے، رنگ کوڈڈ بار کے ساتھ 280-حروف کی حد کے خلاف دکھایا جاتا ہے جو آپ کے قریب آتے ہی سبز اور نارنجی سے سرخ ہو جاتا ہے اور پھر حد سے تجاوز کر جاتا ہے۔ آپ کے شامل کردہ کسی بھی URL کا خود بخود پتہ چل جاتا ہے اور اسے بالکل 23 حروف کے طور پر شمار کیا جاتا ہے، جو پلیٹ فارم کے لنک کو مختصر کرنے والے رویے سے مماثل ہوتا ہے، قطع نظر اس سے کہ اصل لنک کتنا ہی لمبا ہو۔ بقیہ کریکٹر الاؤنس اپ ڈیٹس آپ کے ٹائپ کرتے ہی رہتے ہیں، لہذا آپ اندھا لکھنے اور صرف آخر میں چیک کرنے کے بجائے نمبر دیکھتے ہوئے اپنے الفاظ کو تراش سکتے یا بڑھا سکتے ہیں۔</p>
+<h2>یو آر ایل ہمیشہ 23 حروف میں کیوں شمار ہوتے ہیں۔</h2>
+<p>X خود بخود اپنے سسٹم کے ذریعے پوسٹ کیے گئے ہر لنک کو اپنی t.co شارٹننگ سروس کے ساتھ لپیٹ دیتا ہے، اور ہر لنک، چاہے اصل پتہ کتنا ہی لمبا یا چھوٹا ہو، بالکل اسی مقررہ لمبائی کا t.co لنک بن جاتا ہے۔ یہی وجہ ہے کہ ایک مختصر، صاف ایڈریس کے لنک پر مشتمل ایک پوسٹ اور ٹریکنگ پیرامیٹرز سے بھرے ایک بہت بڑے URL کے لنک پر مشتمل ایک پوسٹ کے لیے مصنف کو بالکل اتنے ہی حروف کی قیمت ہوتی ہے — 23، فی الحال — 280-حروف والے بجٹ کے مقابلے میں۔ یہ ٹول آپ کے متن میں URLs کا پتہ لگا کر اور ہر ایک کو اس کی لغوی طوالت کے بجائے 23 حروف کے طور پر شمار کر کے اس طرز عمل کو نقل کرتا ہے، لہذا آپ جو شمار یہاں دیکھتے ہیں اس سے میل کھاتا ہے جب آپ پوسٹ کرتے ہیں تو اصل میں کیا ہوتا ہے۔</p>
+<h2>ایموجی اور سروگیٹ جوڑی کا نرالا</h2>
+<p>ایموجی کرداروں کی گنتی میں ایک حقیقی شکن ڈالتے ہیں کیونکہ وہ اندرونی طور پر کیسے محفوظ ہوتے ہیں۔ زیادہ تر جدید ایموجی، خاص طور پر نئے یا زیادہ پیچیدہ، کی نمائندگی اس کا استعمال کرتے ہوئے کی جاتی ہے جسے سروگیٹ جوڑا کہا جاتا ہے — ایک کے بجائے دو بنیادی کوڈ یونٹس — جس کا مطلب ہے کہ وہ اکثر ایسے نظاموں میں ایک کے بجائے دو حروف کے طور پر شمار ہوتے ہیں جو سٹرنگ کی لمبائی کی پیمائش کرتے ہیں جس طرح JavaScript اور بہت سی دوسری زبانیں کرتے ہیں۔ X کے اپنے گنتی کے نظام کے یہاں اپنے مخصوص اصول ہیں جو کبھی کبھار کسی براؤزر کے مقامی سٹرنگ کی لمبائی کے حساب سے غیر معمولی ایموجی کے امتزاج، پرچم کی ترتیب یا ترمیم کرنے والے جیسے سکن ٹون سلیکٹرز کے ساتھ ایموجی سے تھوڑا ہٹ سکتے ہیں۔ روزمرہ کی زیادہ تر پوسٹس کے لیے یہ فرق پوشیدہ ہے، لیکن اگر آپ حد کے بالکل کنارے پر ہیں اور کئی ایموجی استعمال کر رہے ہیں، تو یہ درست حتمی کردار تک کاؤنٹ ڈاؤن پر بھروسہ کرنے کے بجائے ایک چھوٹا سا بفر چھوڑنے کے قابل ہے۔</p>
+<h2>کردار کی حد کا ارتقاء</h2>
+<p>ٹویٹر نے 140 حروف کی حد کے ساتھ لانچ کیا، ایک اعداد و شمار کو جان بوجھ کر منتخب کیا گیا ہے تاکہ ایک ٹویٹ کے علاوہ ایک صارف نام ایک واحد SMS ٹیکسٹ میسج کی 160-حروف کی حد کے اندر ہو، کیونکہ یہ سروس اصل میں ٹیکسٹ میسجنگ پر زیادہ سے زیادہ کام کرنے کے لیے بنائی گئی تھی۔ اعداد و شمار کے ظاہر ہونے کے بعد 2017 میں یہ حد دگنی ہو کر 280 حروف تک پہنچ گئی تھی کہ بہت سے صارفین، خاص طور پر وہ زبانوں میں لکھتے ہیں جنہیں ایک ہی خیال کے اظہار کے لیے زیادہ حروف کی ضرورت ہوتی ہے، مستقل طور پر کمرے سے باہر ہو رہے تھے۔ ادائیگی کرنے والے سبسکرائبرز کے لیے اعلی کردار کی حدیں بعد میں آئیں، لیکن 280-حروف کی مفت حد جس کے خلاف یہ انسداد اقدامات کرتا ہے وہ معیاری ہے جس کے لیے زیادہ تر پوسٹس لکھی جاتی ہیں۔</p>
+<h2>280 حروف کے اندر مضبوطی سے لکھنا</h2>
+<p>چونکہ ہر کردار ایک سخت حد کے خلاف شمار ہوتا ہے، اس لیے جو مصنفین باقاعدگی سے پوسٹ کرتے ہیں وہ معنی کھوئے بغیر تراشنے کی عادتیں پیدا کرتے ہیں: &quot;کیونکہ&quot; کو &quot;bc&quot; یا &quot;&amp;&quot; سے صرف اس صورت میں تبدیل کرنا جب ٹون اس کے مطابق ہو، فلر الفاظ کو کاٹنا جو کچھ بھی نہیں ڈالتے ہیں، اور کسی لنک یا ہیش ٹیگ کو بالکل آخر تک منتقل کرتے ہیں، لہذا اگر حتمی تراش کی ضرورت ہو تو سب سے پہلے کاٹنا ضروری ہے۔ جب آپ لکھتے ہیں تو لائیو گنتی دیکھنا، بجائے اس کے کہ پہلے پوری سوچ کو کمپوز کریں اور بعد میں یہ دریافت کریں کہ یہ چالیس حروف بہت لمبا ہے، اس قسم کی سخت ایڈیٹنگ سے بہت کم مایوسی ہوتی ہے، کیوں کہ آپ بالکل دیکھ سکتے ہیں کہ اس کے ارتکاب سے پہلے ایک ریورڈنگ دراصل کتنی جگہ بچاتی ہے۔</p>
+<h2>تھریڈز اور ملٹی پوسٹ ڈرافٹ</h2>
+<p>جب ایک سوچ 280 حروف میں فٹ نہیں ہوتی ہے، تو عام طریقہ یہ ہے کہ ہر چیز کو زبردستی ایک میں ڈالنے کے بجائے اسے منسلک پوسٹس کے دھاگے میں تقسیم کیا جائے۔ پہلے کسی اور جگہ تھریڈ کا مسودہ تیار کرنا اور اس کاؤنٹر کے ذریعے ہر منصوبہ بند پوسٹ کو انفرادی طور پر چلانا یہ چیک کرنے کا ایک قابل اعتماد طریقہ ہے کہ دھاگے کا ہر ٹکڑا آرام سے فٹ بیٹھتا ہے، بشمول &quot;1/&quot; اسٹائل نمبرنگ کے سابقہ ​​کے لیے چند فالتو حروف اگر آپ ایک کا استعمال کرتے ہیں، اس سے پہلے کہ آپ ان کو ایک کے بعد ایک پوسٹ کرنا شروع کریں، بجائے اس کے کہ درمیانی تھریڈ کو دریافت کریں کہ ایک پوسٹ کو پہلے سے شروع کرنے کے بعد آپ کو ایک عجیب و غریب سہ ماہی شروع کرنے کی ضرورت ہے۔</p>
+<h2>نجی اور فوری</h2>
+<p>جیسا کہ آپ ٹائپ کرتے ہیں سب کچھ آپ کے اپنے براؤزر میں چلتا ہے، لہذا آپ کی ڈرافٹ پوسٹ کبھی بھی اپ لوڈ، لاگ یا کسی کے ساتھ شیئر نہیں کی جاتی ہے، اور ایک بار جب آپ صفحہ سے باہر تشریف لے جاتے ہیں تو کچھ بھی محفوظ نہیں ہوتا ہے۔ یہ لوڈ ہونے کے بعد آف لائن کام کرتا ہے، جب بھی آپ کو پوسٹ کرنے سے پہلے فوری، درست کردار کی جانچ کی ضرورت ہو تو تیار ہے۔</p>
+    <section class="faq"><h2>ٹویٹر کریکٹر کاؤنٹر اکثر پوچھے گئے سوالات</h2><dl><dt>ٹویٹر یو آر ایل کو 23 حروف میں کیوں شمار کرتا ہے؟</dt><dd>ٹویٹر اپنے t.co شارٹنر کے ذریعے ہر یو آر ایل کو خود بخود لپیٹ دیتا ہے، جو ایسے لنکس تیار کرتا ہے جو ہمیشہ 23 حروف طویل ہوتے ہیں۔ لہذا چاہے آپ کا URL 10 حروف کا ہو یا 200 حروف، یہ آپ کی 280-حروف کی حد میں بالکل 23 شمار ہوتا ہے۔</dd><dt>ٹویٹر / ایکس کریکٹر کی حد کیا ہے؟</dt><dd>ایک ٹویٹ یا X پوسٹ کے لیے معیاری حروف کی حد 280 حروف ہے۔ ٹویٹر بلیو / ایکس پریمیم سبسکرائبرز کو لمبی پوسٹس تک رسائی حاصل ہو سکتی ہے (25,000 حروف تک)، لیکن مفت کی حد 280 ہے۔</dd><dt>کیا ایموجیز کو ایک کردار کے طور پر شمار کیا جاتا ہے؟</dt><dd>زیادہ تر معیاری ایموجیز ٹویٹر کے گنتی کے نظام میں 2 حروف کے طور پر شمار ہوتے ہیں کیونکہ وہ یونیکوڈ سروگیٹ جوڑے استعمال کرتے ہیں۔ یہ کاؤنٹر JavaScript کی تار کی لمبائی کا استعمال کرتا ہے، جو کچھ ایموجی کے امتزاج کے لیے ٹویٹر کی درست گنتی سے تھوڑا مختلف ہو سکتا ہے۔</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/tweetcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/freetools.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ur";window.__T={"text":"ٹویٹ / پوسٹ ٹیکسٹ","whatshappening":"کیا ہو رہا ہے؟"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tweetcount.js" defer></script>
+</body>
+</html>

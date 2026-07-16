@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>जीसीडी कैलकुलेटर - कई संख्याओं का सबसे बड़ा सामान्य भाजक</title>
+<meta name="description" content="निःशुल्क जीसीडी कैलकुलेटर। संख्याओं के किसी भी समूह का सबसे बड़ा सामान्य भाजक (जीसीडी/जीसीएफ/एचसीएफ) खोजें। एलसीएम भी दिखाता है। आपके ब्राउज़र में तुरंत परिणाम।">
+<link rel="canonical" href="https://mikaio.dev/hi/gcdcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gcdcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gcdcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/gcdcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gcdcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gcdcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/gcdcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/gcdcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gcdcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gcdcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/gcdcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gcdcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="जीसीडी कैलकुलेटर - कई संख्याओं का सबसे बड़ा सामान्य भाजक">
+<meta property="og:description" content="निःशुल्क जीसीडी कैलकुलेटर। संख्याओं के किसी भी समूह का सबसे बड़ा सामान्य भाजक (जीसीडी/जीसीएफ/एचसीएफ) खोजें। एलसीएम भी दिखाता है। आपके ब्राउज़र में तुरंत परिणाम।">
+<meta property="og:url" content="https://mikaio.dev/hi/gcdcalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"जीसीडी कैलकुलेटर - कई संख्याओं का सबसे बड़ा सामान्य भाजक","url":"https://mikaio.dev/hi/gcdcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"निःशुल्क जीसीडी कैलकुलेटर। संख्याओं के किसी भी समूह का सबसे बड़ा सामान्य भाजक (जीसीडी/जीसीएफ/एचसीएफ) खोजें। एलसीएम भी दिखाता है। आपके ब्राउज़र में तुरंत परिणाम।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"जीसीडी कैलकुलेटर","item":"https://mikaio.dev/hi/gcdcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"जीसीडी क्या है?","acceptedAnswer":{"@type":"Answer","text":"महानतम समापवर्तक (जीसीडी), जिसे महानतम समापवर्तक (जीसीएफ) या उच्चतम समापवर्तक (एचसीएफ) भी कहा जाता है, सबसे बड़ा धनात्मक पूर्णांक है जो सभी दी गई संख्याओं को बिना किसी शेषफल के विभाजित करता है। जीसीडी(12, 18) = 6."}},{"@type":"Question","name":"जीसीडी का उपयोग किस लिए किया जाता है?","acceptedAnswer":{"@type":"Answer","text":"जीसीडी का उपयोग भिन्नों को सरल बनाने के लिए किया जाता है - अंश और हर को उनके जीसीडी से विभाजित करें। इसका उपयोग क्रिप्टोग्राफी, कंप्यूटर विज्ञान एल्गोरिदम और इंजीनियरिंग में गियर दांतों की पिच निर्धारित करने में भी किया जाता है।"}},{"@type":"Question","name":"यदि संख्याओं में कोई उभयनिष्ठ गुणनखंड न हो तो क्या होगा?","acceptedAnswer":{"@type":"Answer","text":"यदि दो संख्याओं में 1 के अलावा कोई उभयनिष्ठ गुणनखंड नहीं है, तो उनकी GCD 1 है और उन्हें सहअभाज्य या अपेक्षाकृत अभाज्य कहा जाता है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/gcdcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/gcdcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/gcdcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gcdcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>जीसीडी कैलकुलेटर</span></nav>
+  <h1>जीसीडी कैलकुलेटर</h1>
+  <p class="lead">उनका सबसे बड़ा सामान्य भाजक खोजने के लिए अल्पविराम से अलग की गई दो या अधिक संख्याएँ दर्ज करें।</p>
+  <section class="widget" id="tool"><form id="gcd-form"><div class="field"><label for="gcd-nums">संख्याएँ (अल्पविराम से अलग)</label><input type="text" id="gcd-nums" placeholder="e.g. 48, 36, 24" inputmode="numeric"></div><div class="result"><span class="hint">जीसीडी: </span><span class="big" id="gcd-out">—</span></div><div id="gcd-lcm-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>किसी भी संख्या का सबसे बड़ा सामान्य भाजक खोजें</h2>
+<p>सबसे बड़ा सामान्य भाजक (जीसीडी) - जिसे सबसे बड़ा सामान्य कारक (जीसीएफ) या उच्चतम सामान्य कारक (एचसीएफ) भी कहा जाता है - वह सबसे बड़ी संख्या है जो सभी दी गई संख्याओं को बिना कोई शेष छोड़े विभाजित करती है। अल्पविराम से अलग किए गए दो या अधिक नंबर दर्ज करें और यूक्लिडियन एल्गोरिदम का उपयोग करके जीसीडी की तुरंत गणना की जाती है।</p>
+<h2>परिभाषा और उदाहरण</h2>
+<ul>
+<li>जीसीडी(12, 18) = 6 - क्योंकि 6 वह सबसे बड़ी संख्या है जो 12 और 18 दोनों को विभाजित करती है।</li>
+<li>जीसीडी(48, 36, 24) = 12 - तीनों को विभाजित करने वाली सबसे बड़ी संख्या।</li>
+<li>जीसीडी(7, 13) = 1 - ये सहअभाज्य हैं (1 के अलावा कोई सामान्य कारक नहीं)।</li>
+</ul>
+<h2>यूक्लिडियन एल्गोरिथ्म</h2>
+<p>जीसीडी की गणना के लिए सबसे प्रसिद्ध विधि यूक्लिडियन एल्गोरिदम है, जिसका वर्णन यूक्लिड ने अपने तत्वों में लगभग 300 ईसा पूर्व किया था। एल्गोरिथ्म बताता है कि GCD(a, b) = GCD(b, a mod b), और b = 0 तक दोहराता है। उदाहरण के लिए: GCD(48, 36) → GCD(36, 12) → GCD(12, 0) = 12.</p>
+<h2>भिन्नों को सरल बनाना</h2>
+<p>जीसीडी का सबसे आम रोजमर्रा का उपयोग भिन्नों को न्यूनतम पदों तक सरल बनाना है। 48/72 को सरल बनाने के लिए, GCD(48, 72) = 24 की गणना करें, फिर दोनों को 24: 2/3 से विभाजित करें। परिणाम पूरी तरह से कम हो गया है क्योंकि अंश और हर अब सहअभाज्य हैं।</p>
+<h2>क्रिप्टोग्राफी</h2>
+<p>आरएसए एन्क्रिप्शन, एल्गोरिथ्म जो अधिकांश इंटरनेट संचार को सुरक्षित करता है, मूल रूप से जीसीडी और कोप्राइम संख्याओं से जुड़े संख्या सिद्धांत पर निर्भर करता है। आरएसए कुंजी पीढ़ी एल्गोरिदम को दो बड़े अभाज्य संख्याओं का चयन करने की आवश्यकता होती है, जो हमेशा एक-दूसरे और उनके उत्पादों के सहअभाज्य होते हैं।</p>
+<h2>चीज़ों को समान समूहों में बाँटना</h2>
+<p>जीसीडी का एक बहुत ही व्यावहारिक उपयोग विभिन्न आकारों के संग्रहों को यथासंभव समान समूहों की सबसे बड़ी संख्या में विभाजित करना है, जिसमें कुछ भी नहीं बचा है। यदि आपके पास 48 सेब और 36 संतरे हैं और आप बिना बचे हुए सभी फलों का उपयोग करके समान फलों की टोकरियाँ बनाना चाहते हैं, तो आप टोकरियों की सबसे बड़ी संख्या जीसीडी (48, 36) = 12 बना सकते हैं, प्रत्येक में 4 सेब और 3 संतरे होंगे। यही तर्क कपड़े या लकड़ी की लंबाई को बराबर टुकड़ों में काटने, अलग-अलग आकार के कमरों में कुर्सियों को समान पंक्तियों में व्यवस्थित करने, या विभागों में बजट को यथासंभव सबसे बड़ी समान किश्तों में विभाजित करने पर लागू होता है।</p>
+<h2>इंजीनियरिंग</h2>
+<p>मैकेनिकल इंजीनियरिंग में, दो गियर पर दांतों की जीसीडी यह निर्धारित करती है कि दांतों की एक ही जोड़ी कितनी बार मिलती है। यदि गियर ए में 48 दांत हैं और गियर बी में 36 दांत हैं, तो जीसीडी(48, 36) = 12, यानी गियर ए पर हर 12 दांत और गियर बी पर हर 12 दांत के साथ एक जाल।</p>
+<h2>कैलकुलेटर का उपयोग कैसे करें</h2>
+<p>अपने नंबरों को अल्पविराम से अलग किए गए बॉक्स में टाइप करें - दो नंबर, या जितने आप चाहें। प्रेस कैलकुलेट करें और पूरे सेट की जीसीडी चरण-दर-चरण यूक्लिडियन कटौती के साथ तुरंत दिखाई देती है ताकि आप इसे ब्लैक बॉक्स के रूप में मानने के बजाय यह देख सकें कि उत्तर तक कैसे पहुंचा गया था। एक एकल संख्या, या संख्याएं जो 1 से अधिक कोई सामान्य कारक साझा नहीं करती हैं, दर्ज करना शालीनता से संभाला जाता है: उपकरण बाद वाले मामले में केवल 1 की जीसीडी की रिपोर्ट करता है, यह पुष्टि करता है कि संख्याएं सहअभाज्य हैं।</p>
+<h2>यूक्लिडियन एल्गोरिदम इतना कुशल क्यों है?</h2>
+<p>यूक्लिड की विधि से पहले, जीसीडी खोजने का मतलब था प्रत्येक संख्या के प्रत्येक कारक को सूचीबद्ध करना और उनमें से सबसे बड़े को चुनना - छोटी संख्याओं के लिए व्यावहारिक लेकिन बड़ी संख्याओं के लिए निराशाजनक रूप से धीमा। यूक्लिडियन एल्गोरिथ्म इसके बजाय बार-बार बड़ी संख्या को छोटी संख्या से विभाजित करने के शेष भाग से बदल देता है, जिससे समस्या तेजी से कम हो जाती है। किसी भी यथार्थवादी आकार की दो संख्याओं के लिए, यह आम तौर पर पचास चरणों से भी कम समय में समाप्त हो जाती है, यही कारण है कि यह आज भी सिखाई जाने वाली मानक विधि बनी हुई है और लगभग हर कैलकुलेटर, स्प्रेडशीट फ़ंक्शन और प्रोग्रामिंग भाषा लाइब्रेरी में बनाई गई है जो जीसीडी की गणना करती है।</p>
+<h2>दो से अधिक संख्याओं तक विस्तार</h2>
+<p>जब आप तीन या अधिक संख्याएँ दर्ज करते हैं, तो कैलकुलेटर को नए एल्गोरिदम की आवश्यकता नहीं होती है - यह बस दो-संख्या वाले मामले को बार-बार लागू करता है। पूरी सूची की जीसीडी तीसरी के साथ संयुक्त पहले दो नंबरों की जीसीडी के बराबर होती है, और इसी तरह: जीसीडी(ए, बी, सी) = जीसीडी(जीसीडी(ए, बी), सी)। यह काम करता है क्योंकि कोई भी संख्या जो ए, बी और सी को विभाजित करती है, उसे पहले उनमें से किसी भी जोड़ी के जीसीडी को विभाजित करना होगा, इसलिए एक समय में सूची दो को कम करने से कभी भी जानकारी नहीं खोती है। यह इस बात का एक अच्छा उदाहरण है कि कैसे एक साधारण बिल्डिंग ब्लॉक - दो-नंबर जीसीडी - एक मनमाने ढंग से लंबी सूची को संभालने के लिए सफाई से स्केल करता है।</p>
+<h2>सहअभाज्य संख्याएँ और 1 की जीसीडी आपको क्या बताती है</h2>
+<p>जब कैलकुलेटर 1 की जीसीडी रिपोर्ट करता है, तो आपके द्वारा दर्ज किए गए नंबरों को सहअभाज्य या अपेक्षाकृत अभाज्य कहा जाता है, जिसका अर्थ है कि वे 1 से बड़ा कोई कारक साझा नहीं करते हैं, भले ही प्रत्येक में व्यक्तिगत रूप से कई कारक हो सकते हैं। उदाहरण के लिए, 8 और 15 सहअभाज्य हैं, भले ही 8 = 2×2×2 और 15 = 3×5 - वे किसी भी समान अभाज्य बिल्डिंग ब्लॉक को साझा नहीं करते हैं। सह-प्राथमिकता संख्या सिद्धांत और क्रिप्टोग्राफी में लगातार दिखाई देती है, क्योंकि कई एल्गोरिदम उन संख्याओं के चयन पर भरोसा करते हैं जो छिपी हुई सामान्य संरचना को साझा न करने की गारंटी देते हैं।</p>
+<h2>एक कारगर उदाहरण, चरण दर चरण</h2>
+<p>जीसीडी(48, 18) के लिए यूक्लिडियन एल्गोरिथम को क्रियान्वित होते हुए देखें। सबसे पहले, 48 = 2×18 + 12, इसलिए समस्या GCD(18, 12) बन जाती है। अगला, 18 = 1×12 + 6, इसलिए यह GCD(12, 6) बन जाता है। अंत में, 12 = 2×6 + 0, इसलिए शेषफल शून्य पर पहुँच जाता है और अंतिम गैर-शून्य शेषफल, 6, जीसीडी है। एल्गोरिथ्म का प्रत्येक चरण शामिल संख्याओं को तेजी से सिकोड़ता है, यही कारण है कि यह बहुत बड़ी संख्याओं के लिए भी केवल कुछ ही चरणों में समाप्त होता है, प्रत्येक कारक को सूचीबद्ध करने के विपरीत, जो संख्या बढ़ने के साथ तेजी से धीमा हो जाता है।</p>
+<h2>निजी और तत्काल</h2>
+<p>सभी गणनाएं पूरी तरह से यूक्लिडियन एल्गोरिदम का उपयोग करके आपके ब्राउज़र में चलती हैं, इसलिए परिणाम आपके टाइप करते ही तुरंत दिखाई देता है और आपके द्वारा दर्ज किया गया कोई भी नंबर कभी भी सर्वर पर नहीं भेजा जाता है, लॉग इन किया जाता है या साझा किया जाता है। पृष्ठ लोड होने के बाद यह ऑफ़लाइन काम करता है, और जैसे ही आप टैब बंद करते हैं या पुनः लोड करते हैं तो प्रत्येक गणना खारिज हो जाती है।</p>
+    <section class="faq"><h2>जीसीडी कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>जीसीडी क्या है?</dt><dd>महानतम समापवर्तक (जीसीडी), जिसे महानतम समापवर्तक (जीसीएफ) या उच्चतम समापवर्तक (एचसीएफ) भी कहा जाता है, सबसे बड़ा धनात्मक पूर्णांक है जो सभी दी गई संख्याओं को बिना किसी शेषफल के विभाजित करता है। जीसीडी(12, 18) = 6.</dd><dt>जीसीडी का उपयोग किस लिए किया जाता है?</dt><dd>जीसीडी का उपयोग भिन्नों को सरल बनाने के लिए किया जाता है - अंश और हर को उनके जीसीडी से विभाजित करें। इसका उपयोग क्रिप्टोग्राफी, कंप्यूटर विज्ञान एल्गोरिदम और इंजीनियरिंग में गियर दांतों की पिच निर्धारित करने में भी किया जाता है।</dd><dt>यदि संख्याओं में कोई उभयनिष्ठ गुणनखंड न हो तो क्या होगा?</dt><dd>यदि दो संख्याओं में 1 के अलावा कोई उभयनिष्ठ गुणनखंड नहीं है, तो उनकी GCD 1 है और उन्हें सहअभाज्य या अपेक्षाकृत अभाज्य कहा जाता है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/gcdcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/gcdcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/gcdcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gcdcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"numbers":"संख्याएँ (अल्पविराम से अलग)","placeholder":"e.g. 48, 36, 24","gcd":"जीसीडी:"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/gcdcalc.js" defer></script>
+</body>
+</html>

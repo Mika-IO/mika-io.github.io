@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora del número de semana: ¿qué semana del año es?</title>
+<meta name="description" content="Calculadora de números de semana gratuita. Encuentre el número de semana ISO para cualquier fecha. Consulta qué semana del año es hoy o cualquier fecha que elijas.">
+<link rel="canonical" href="https://mikaio.dev/es/weeknumber/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/weeknumber/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/weeknumber/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/weeknumber/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/weeknumber/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/weeknumber/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/weeknumber/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/weeknumber/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/weeknumber/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/weeknumber/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/weeknumber/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/weeknumber/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora del número de semana: ¿qué semana del año es?">
+<meta property="og:description" content="Calculadora de números de semana gratuita. Encuentre el número de semana ISO para cualquier fecha. Consulta qué semana del año es hoy o cualquier fecha que elijas.">
+<meta property="og:url" content="https://mikaio.dev/es/weeknumber/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora del número de semana: ¿qué semana del año es?","url":"https://mikaio.dev/es/weeknumber/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Calculadora de números de semana gratuita. Encuentre el número de semana ISO para cualquier fecha. Consulta qué semana del año es hoy o cualquier fecha que elijas."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Número de semana","item":"https://mikaio.dev/es/weeknumber/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuál es el número de semana ISO?","acceptedAnswer":{"@type":"Answer","text":"ISO 8601 define una semana como el inicio del lunes. La semana 1 es la semana que contiene el primer jueves del año, lo que significa que los primeros días de enero pueden pertenecer a la semana 52 o 53 del año anterior."}},{"@type":"Question","name":"¿Por qué a veces la semana 1 comienza en diciembre?","acceptedAnswer":{"@type":"Answer","text":"Debido a que las semanas ISO comienzan el lunes, algunos años tienen un jueves a principios de enero, lo que hace que la semana 1 comience a fines de diciembre del año anterior."}},{"@type":"Question","name":"¿Cuántas semanas hay en un año?","acceptedAnswer":{"@type":"Answer","text":"La mayoría de los años tienen 52 semanas ISO. Algunos años tienen 53 semanas cuando el año comienza o termina en jueves."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/weeknumber/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/weeknumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/weeknumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/weeknumber/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/weeknumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/weeknumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/weeknumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/weeknumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/weeknumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/weeknumber/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Número de semana</span></nav>
+  <h1>Número de semana</h1>
+  <p class="lead">Seleccione una fecha para ver su número de semana ISO y el rango de fechas para esa semana.</p>
+  <section class="widget" id="tool"><div id="wn-app"><div class="row"><div class="field"><label for="wn-date">Fecha</label><input type="date" id="wn-date"></div></div><div class="result"><span class="hint">Número de semana: </span><span class="big" id="wn-week">—</span></div><div id="wn-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>¿Qué semana del año es?</h2>
+<p>Saber el número de la semana es una necesidad común en la gestión de proyectos, nóminas, logística, programación escolar y cualquier contexto en el que las personas se comuniquen sobre el tiempo en unidades semanales en lugar de fechas específicas. &quot;Nos vemos en la semana 32&quot; es una forma perfectamente natural de programar las cosas una vez que sabes qué fechas cubre la semana 32. Esta herramienta le muestra el número de semana ISO para cualquier fecha y el rango de lunes a domingo que abarca esa semana.</p>
+<h2>El estándar semanal ISO 8601</h2>
+<p>El número de semana que muestra esta herramienta sigue el estándar internacional ISO 8601, que es la definición más utilizada en empresas y gobierno. Según ISO 8601, una semana siempre comienza en lunes y termina en domingo. La semana 1 se define como la semana que contiene el primer jueves del año. Esta definición garantiza que cada año tenga 52 o 53 semanas completas.</p>
+<p>Debido a la regla de inicio del lunes, los primeros días de enero a veces caen en la semana 52 o 53 del año anterior, y los últimos días de diciembre a veces caen en la semana 1 del año siguiente. Esto sorprende a las personas que lo encuentran por primera vez, pero tiene perfecto sentido lógico una vez que se comprende la definición.</p>
+<h2>¿Por qué 52 o 53 semanas?</h2>
+<p>Un año calendario tiene 365 días (366 en un año bisiesto), y 365 dividido por 7 da 52 semanas y un día. Ese día adicional, o dos días en un año bisiesto, significa el día de la semana en el que cae el 1 de enero en turnos de uno o dos cada año. Cuando este cambio hace que aparezca un jueves tanto a principios de enero como a finales de diciembre, el año tiene una semana número 53.</p>
+<h2>Usos en negocios y logística</h2>
+<p>Los equipos de cadena de suministro y fabricación a menudo planifican en números semanales porque se corresponden claramente con los cronogramas de entrega. &quot;Entrega en la semana 14&quot; significa algo específico sin tener que nombrar las fechas exactas, y todos los que usan la misma definición ISO están en la misma página del calendario.</p>
+<p>Los sistemas de nómina frecuentemente procesan ejecuciones en ciclos semanales y hacen referencia a ellos por número de semana con fines de auditoría. Los departamentos de recursos humanos realizan un seguimiento de las vacaciones anuales en semanas. Los directores de proyecto dividen los diagramas de Gantt en semanas numeradas. Los informes financieros a veces utilizan semanas ISO para mantener la coherencia entre años.</p>
+<h2>Calendarios escolares y académicos</h2>
+<p>Las universidades y escuelas de muchos países europeos numeran sus semanas de enseñanza, por lo que &quot;las tareas de la semana 5 vencen&quot; es el lenguaje estándar. Los estudiantes de países donde los números de las semanas son menos comunes a veces tienen dificultades para traducir estas comunicaciones en fechas reales, lo que hace que una calculadora de números de las semanas sea especialmente útil.</p>
+<h2>Encontrar rápidamente la semana actual</h2>
+<p>Abra la herramienta hoy y el valor predeterminado será la fecha actual, mostrándole inmediatamente qué semana del año es. Si desea saber en qué semana cae una fecha específica (para planificar una reunión, verificar una fecha de entrega o verificar un hito del proyecto), simplemente elija la fecha y la respuesta será instantánea.</p>
+<h2>Semanas ISO versus la convención de EE. UU.</h2>
+<p>No todos los sistemas de numeración de semanas coinciden. El estándar ISO 8601 que sigue esta herramienta comienza las semanas en lunes y ancla la semana 1 al primer jueves del año, pero los Estados Unidos comúnmente usan una convención diferente donde las semanas comienzan en domingo y la semana 1 es simplemente la semana que contiene el 1 de enero, independientemente del día de la semana que caiga. Los dos sistemas pueden diferir en un número de semana completo cerca del inicio y el final del año, lo que es una fuente frecuente de confusión en los equipos internacionales. Si un colega cita un número de semana que parece distinto de lo que muestra esta herramienta, comprobar qué convención está utilizando suele resolverlo de inmediato.</p>
+<h2>Un ejemplo trabajado</h2>
+<p>Tomemos como ejemplo el 1 de enero de 2024, que cayó en lunes. Según ISO 8601, el primer jueves de 2024 fue el 4 de enero, y la semana que contiene ese jueves (del lunes 1 de enero al domingo 7 de enero) es la semana 1. Compárelo con el 31 de diciembre de 2023, un domingo: pertenece a la semana 52 de 2023, aunque se encuentra justo en el límite del año calendario, porque la semana ISO que lo contiene comenzó el día de Navidad y no llega a la primera semana del año nuevo que contiene el jueves. Trabajar a mano en un ejemplo como este es la forma más clara de internalizar la regla, aunque la herramienta, naturalmente, lo hace instantáneamente para cualquier fecha que elija.</p>
+<h2>Usos en negocios y logística, continuación</h2>
+<p>Más allá de los calendarios de entrega, los informes financieros a veces utilizan semanas ISO para lograr coherencia entre años, ya que una comparación de la &quot;semana 23&quot; alinea el mismo punto relativo en el año independientemente del día de la semana en el que comienza un mes determinado, algo que una simple comparación de &quot;cifras de junio&quot; no puede garantizar, ya que junio tiene un número diferente de semanas laborales dependiendo de cómo caen sus fechas.</p>
+<h2>Calendarios escolares y académicos, continuación.</h2>
+<p>Esto importa más allá de las asignaciones: los estudiantes de intercambio, los solicitantes internacionales y los empleados remotos que tratan con una institución o empleador europeo a menudo necesitan traducir rápidamente los plazos semanales a su propio calendario, y no coincidir la convención ISO con una convención local diferente es una manera fácil de enviar algo una semana antes o después.</p>
+<h2>Por qué el estándar se estableció el lunes y el jueves</h2>
+<p>La elección del lunes como inicio de la semana ISO y el primer jueves del año como ancla para la semana 1 no es arbitraria. Anclar al jueves garantiza que la semana 1 siempre contenga la mayoría de sus días en el año nuevo en lugar del anterior; dado que una semana tiene siete días, cualquiera que sea el día en que caiga el jueves, al menos cuatro de los siete días de esa semana pertenecen al nuevo año. Esta es una elección de diseño deliberada que mantiene la numeración intuitiva: la semana 1 realmente se siente como la primera semana propiamente dicha del año en lugar de un final perdido de la anterior, a diferencia de algunas convenciones regionales más flexibles que pueden convertir la semana 1 en un año con solo uno o dos de sus días en realidad.</p>
+<h2>Privado</h2>
+<p>La herramienta utiliza sólo el cálculo de fecha local de su navegador, basado en las mismas reglas ISO 8601 descritas anteriormente, por lo que nada sobre las fechas que verifica se envía a un servidor, se registra o se comparte.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre el número de semana</h2><dl><dt>¿Cuál es el número de semana ISO?</dt><dd>ISO 8601 define una semana como el inicio del lunes. La semana 1 es la semana que contiene el primer jueves del año, lo que significa que los primeros días de enero pueden pertenecer a la semana 52 o 53 del año anterior.</dd><dt>¿Por qué a veces la semana 1 comienza en diciembre?</dt><dd>Debido a que las semanas ISO comienzan el lunes, algunos años tienen un jueves a principios de enero, lo que hace que la semana 1 comience a fines de diciembre del año anterior.</dd><dt>¿Cuántas semanas hay en un año?</dt><dd>La mayoría de los años tienen 52 semanas ISO. Algunos años tienen 53 semanas cuando el año comienza o termina en jueves.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/weeknumber/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/weeknumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/weeknumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/weeknumber/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/weeknumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/weeknumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/weeknumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/weeknumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/weeknumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/weeknumber/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"date":"Fecha","week_label":"Número de semana","weeklabel":"Semana"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/weeknumber.js" defer></script>
+</body>
+</html>

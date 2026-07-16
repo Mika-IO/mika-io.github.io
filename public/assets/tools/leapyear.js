@@ -9,9 +9,9 @@
   function calc(){
     var y=parseInt(inp.value,10);
     if(isNaN(y)){out.textContent='—';if(next)next.textContent='';return;}
-    out.textContent=isLeap(y)?y+' is a leap year ✓':y+' is not a leap year';
+    out.textContent=isLeap(y)?y+T('isleap',' is a leap year ✓'):y+T('isnotleap',' is not a leap year');
     var n=y+1;while(!isLeap(n))n++;
-    if(next)next.textContent='Next leap year: '+n;
+    if(next)next.textContent=T('nextleap','Next leap year: ')+n;
   }
   if(inp)inp.addEventListener('input',calc);
   calc();

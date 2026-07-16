@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>সময় ক্যালকুলেটর - ঘন্টা, মিনিট এবং সেকেন্ড যোগ এবং বিয়োগ করুন</title>
+<meta name="description" content="ফ্রি টাইম ক্যালকুলেটর। ঘন্টা, মিনিট এবং সেকেন্ড সহজেই যোগ বা বিয়োগ করুন। মোট কাজের সময়, ভ্রমণের সময় এবং সময়কাল গণনার জন্য দুর্দান্ত।">
+<link rel="canonical" href="https://mikaio.dev/bn/timecalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/timecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/timecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/timecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/timecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/timecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/timecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/timecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/timecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/timecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/timecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/timecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="সময় ক্যালকুলেটর - ঘন্টা, মিনিট এবং সেকেন্ড যোগ এবং বিয়োগ করুন">
+<meta property="og:description" content="ফ্রি টাইম ক্যালকুলেটর। ঘন্টা, মিনিট এবং সেকেন্ড সহজেই যোগ বা বিয়োগ করুন। মোট কাজের সময়, ভ্রমণের সময় এবং সময়কাল গণনার জন্য দুর্দান্ত।">
+<meta property="og:url" content="https://mikaio.dev/bn/timecalc/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"সময় ক্যালকুলেটর - ঘন্টা, মিনিট এবং সেকেন্ড যোগ এবং বিয়োগ করুন","url":"https://mikaio.dev/bn/timecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"ফ্রি টাইম ক্যালকুলেটর। ঘন্টা, মিনিট এবং সেকেন্ড সহজেই যোগ বা বিয়োগ করুন। মোট কাজের সময়, ভ্রমণের সময় এবং সময়কাল গণনার জন্য দুর্দান্ত।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"সময় ক্যালকুলেটর","item":"https://mikaio.dev/bn/timecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"আমি কি 24 ঘন্টার বেশি প্রবেশ করতে পারি?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ। ঘন্টার ক্ষেত্র যেকোন ধনাত্মক পূর্ণসংখ্যা গ্রহণ করে, তাই আপনি একাধিক দিন জুড়ে কাজ করা মোট ঘন্টা গণনা করতে পারেন।"}},{"@type":"Question","name":"ফলাফল নেতিবাচক হলে কি হবে?","acceptedAnswer":{"@type":"Answer","text":"বিয়োগ করলে নেতিবাচক ফলাফল পাওয়া যায়, ক্যালকুলেটর এটিকে একটি বিয়োগ চিহ্ন দিয়ে উপসর্গ দেখায়।"}},{"@type":"Question","name":"আমি কিভাবে মোট কাজের ঘন্টা গণনা করব?","acceptedAnswer":{"@type":"Answer","text":"সময় A হিসাবে আপনার শুরুর সময় লিখুন (মধ্যরাত থেকে ঘন্টা, যেমন সকাল 9 টা 0মি), সময় B হিসাবে আপনার শেষ সময়, এবং বিয়োগ করুন। ফলাফল আপনার ঘন্টা কাজ."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/timecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timecalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>সময় ক্যালকুলেটর</span></nav>
+  <h1>সময় ক্যালকুলেটর</h1>
+  <p class="lead">দুটি সময়কাল লিখুন এবং সেগুলি যোগ বা বিয়োগ করতে বেছে নিন।</p>
+  <section class="widget" id="tool"><form id="tc-form"><div class="row"><div class="field"><label for="tc-h1">সময় এ</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h1" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m1" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s1" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div><div class="field" style="align-self:flex-end;padding-bottom:0.5rem"><select id="tc-op"><option value="+">+</option><option value="-">−</option></select></div><div class="field"><label for="tc-h2">সময় বি</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h2" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m2" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s2" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div></div><div class="result"><span class="hint">ফলাফল: </span><span class="big" id="tc-out">—</span></div></form></section>
+  <article class="content">
+    <h2>সহজে সময়কাল যোগ করুন এবং বিয়োগ করুন</h2>
+<p>আপনি পাটিগণিতকে আঘাত না করা পর্যন্ত সময় যোগ বা বিয়োগ করা সহজ বলে মনে হয়। ঘন্টা, মিনিট এবং সেকেন্ড বেস-10 এর পরিবর্তে একটি বেস-60 সিস্টেম ব্যবহার করে, যার মানে স্বাভাবিক মানসিক পাটিগণিত সরাসরি প্রযোজ্য নয়। 1 ঘন্টা 30 মিনিটের সাথে 2 ঘন্টা 45 মিনিট যোগ করলে 4 ঘন্টা 15 মিনিট পাওয়া যায়, 4:75 নয়। এই ক্যালকুলেটর স্বয়ংক্রিয়ভাবে রূপান্তর পরিচালনা করে — প্রতিটি সময়কালের জন্য ঘন্টা, মিনিট এবং সেকেন্ড লিখুন, যোগ বা বিয়োগ চয়ন করুন এবং সঠিকভাবে ফর্ম্যাট করা ফলাফল অবিলম্বে প্রদর্শিত হবে।</p>
+<h2>একটি সময় ক্যালকুলেটর জন্য সাধারণ ব্যবহার</h2>
+<p><strong>মোট কাজের সময়</strong>: আপনি যদি সকাল 8:30 থেকে দুপুর 12:15 পর্যন্ত কাজ করেন এবং তারপর 1:00 PM থেকে 5:45 PM পর্যন্ত কাজ করেন, তাহলে আপনার মোট সময় পেতে দুটি সেশন যোগ করুন। সকালের জন্য 3 ঘন্টা 45 মিনিট এবং বিকেলের জন্য 4 ঘন্টা 45 মিনিট লিখুন; মোট 8 ঘন্টা 30 মিনিট।</p>
+<p><strong>ভ্রমণের সময়</strong>: মোট ভ্রমণ সময়ের মধ্যে ড্রাইভিং, হাঁটা এবং ট্রানজিট অংশ যোগ করা একটি ঘন ঘন ব্যবহার। 45 মিনিট, 20 মিনিট এবং 1 ঘন্টা 10 মিনিটের তিনটি পৃথক পা যোগফল 2 ঘন্টা 15 মিনিট।</p>
+<p><strong>প্রজেক্ট ট্র্যাকিং</strong>: একটি দিন বা সপ্তাহ জুড়ে বিভিন্ন কাজে ব্যয় করা সময়ের যোগফল মোট বিলযোগ্য ঘন্টা দেয়। ফ্রিল্যান্সার এবং ঠিকাদাররা প্রায়ই ঘন্টা এবং মিনিটের মধ্যে সময় ট্র্যাক করে এবং একাধিক এন্ট্রি যোগ করার প্রয়োজন হয়।</p>
+<p><strong>খেলাধুলা এবং প্রতিযোগিতা</strong>: ল্যাপ টাইম তুলনা করা, রেসের স্টেজ টাইম যোগ করা, অথবা একজন প্রতিযোগীর কতটা সময় মেক আপ করতে হবে তা হিসেব করা।</p>
+<p><strong>রান্না</strong>: বিভিন্ন পয়েন্ট থেকে শুরু করে বিভিন্ন রান্নার সময় সহ একাধিক খাবারের সময়গুলি যোগ করে ট্র্যাক করা যেতে পারে।</p>
+<h2>বেস -60 সিস্টেম</h2>
+<p>সময় প্রাচীন ব্যাবিলনীয় গণিত থেকে উত্তরাধিকারসূত্রে প্রাপ্ত সেক্সজেসিমাল (বেস-60) পাটিগণিত ব্যবহার করে। এক মিনিটে 60 সেকেন্ড এবং এক ঘন্টায় 60 মিনিট, তাই সেকেন্ড থেকে মিনিটে নিয়ে যাওয়া 60 এ ঘটে, 100 এ নয়। এই কারণেই সাধারণ দশমিক যোগ সময়ের জন্য ভুল ফলাফল দেয়: 45 মিনিট + 30 মিনিট = 75 মিনিট = 1 ঘন্টা 15 মিনিট, 0.75 ঘন্টা নয়।</p>
+<p>ক্যালকুলেটর সমস্ত ইনপুটকে মোট সেকেন্ডে রূপান্তর করে, সেকেন্ডে পাটিগণিত সম্পাদন করে, তারপর প্রদর্শনের জন্য ঘন্টা, মিনিট এবং সেকেন্ডে রূপান্তর করে। এই পদ্ধতিটি প্রবেশ করা মান নির্বিশেষে সমস্ত বহন এবং ধার সঠিকভাবে পরিচালনা করে।</p>
+<h2>নেতিবাচক ফলাফল</h2>
+<p>বিয়োগ করার সময়, যদি সময় A সময় B এর থেকে কম হয় তবে ফলাফল নেতিবাচক — উদাহরণস্বরূপ, আপনি যদি 1 ঘন্টা থেকে 3 ঘন্টা বিয়োগ করেন তবে আপনি বিয়োগ 2 ঘন্টা পাবেন। ক্যালকুলেটর একটি বিয়োগ চিহ্ন উপসর্গ সহ পরম মান প্রদর্শন করে। আপনি একটি বাজেট বা লক্ষ্যমাত্রার কত সময় বেশি তা বোঝার জন্য এটি কার্যকর হতে পারে।</p>
+<h2>24 পেরিয়ে ঘন্টা</h2>
+<p>একটি ঘড়ির বিপরীতে, ঘন্টার ক্ষেত্রটি যেকোনো অ-ঋণাত্মক পূর্ণসংখ্যা গ্রহণ করে, তাই আপনি 48 ঘন্টা, 100 ঘন্টা বা তার বেশি সময়কালের সাথে কাজ করতে পারেন। এটি বহু-দিনের প্রজেক্ট ট্র্যাকিং, মোট ম্যারাথন বিভক্ত সময়, বা অন্য কোনও বড়-স্কেল সময়ের পাটিগণিতের জন্য দরকারী।</p>
+<h2>কিভাবে ক্যালকুলেটর ব্যবহার করবেন</h2>
+<p>আপনার প্রথম সময়কালের জন্য ঘন্টা, মিনিট এবং সেকেন্ড লিখুন, যোগ বা বিয়োগ করবেন কিনা তা চয়ন করুন, তারপর একইভাবে দ্বিতীয় সময়কাল লিখুন। ফলাফল অবিলম্বে সঠিকভাবে বহন করা ঘন্টা, মিনিট এবং সেকেন্ডে প্রদর্শিত হয় — আপনাকে কখনই ম্যানুয়ালি কাজ করতে হবে না যে 75 মিনিট 1 ঘন্টা 15 মিনিট হিসাবে প্রদর্শিত হবে, যেহেতু ক্যালকুলেটর সর্বদা আপনার জন্য ফলাফলটিকে স্বাভাবিক করে তোলে।</p>
+<h2>কেন সহজ যোগ ভুল হয়</h2>
+<p>বিভ্রান্তির মূল হল যে &quot;1 ঘন্টা 45 মিনিট&quot; এর মতো একটি সময়কাল আসলে 1.45 নম্বর নয় - এটি 60 মিনিটের মধ্যে 1 ঘন্টা প্লাস 45, একটি মিশ্র-বেস মান যা দশমিক পাটিগণিত কখনও সরাসরি পরিচালনা করার জন্য ডিজাইন করা হয়নি। আপনি যদি শুধুমাত্র সংখ্যা যোগ করে 1:45 এবং 0:30 যোগ করার চেষ্টা করেন, তাহলে আপনি 1:75 পাবেন, যা মোটেও বৈধ সময় নয়। ক্যালকুলেটর সবকিছুকে একটি একক - মোট সেকেন্ডে রূপান্তর করে - সেই একটি সংখ্যায় সাধারণ গাণিতিক হিসাবে যোগ বা বিয়োগ করে এবং চূড়ান্ত প্রদর্শনের জন্য শুধুমাত্র ঘন্টা, মিনিট এবং সেকেন্ডে রূপান্তর করে এটিকে সম্পূর্ণভাবে এড়িয়ে যায়। এই &quot;একটি ইউনিটে রূপান্তর করুন, গণনা করুন, ফিরে রূপান্তর করুন&quot; প্যাটার্নটি যেকোন বেস-60 গাণিতিক সঠিকভাবে পরিচালনা করার জন্য আদর্শ, নির্ভরযোগ্য উপায় এবং আপনি যখনই গণনা টিপুন তখন পর্দার আড়ালে এটিই ঘটে।</p>
+<h2>খেলাধুলা এবং রান্না</h2>
+<p>ল্যাপ টাইম তুলনা করা, মাল্টি-স্টেজ রেস জুড়ে স্টেজ টাইম যোগ করা, বা বাকি দূরত্বে একজন প্রতিযোগীকে কতটা সময় কাটাতে হবে তা নির্ধারণ করা সবই খেলাধুলার সাধারণ ব্যবহার। রান্নাঘরে, বিভিন্ন পয়েন্টে শুরু হওয়া বিভিন্ন রান্নার সময় সহ বেশ কয়েকটি খাবার ট্র্যাক করা সহজ হয় যখন আপনি বেশ কয়েকটি পৃথক টাইমার দেখার পরিবর্তে এবং আপনার মাথায় পাটিগণিত করার পরিবর্তে অতিবাহিত সময়কালগুলি সরাসরি যোগ এবং বিয়োগ করতে পারেন।</p>
+<h2>মোট কাজের ঘন্টা, মাধ্যমে কাজ</h2>
+<p>আপনি যদি সকাল 8:30 থেকে দুপুর 12:15 পর্যন্ত এবং তারপরে আবার দুপুর 1:00 PM থেকে 5:45 PM পর্যন্ত কাজ করেন, দিনের জন্য আপনার মোট ঘন্টা কাজ করার অর্থ হল দুটি পৃথক সময়কাল যোগ করা: সকালের সেশনের জন্য 3 ঘন্টা 45 মিনিট এবং বিকেলের সেশনের জন্য 4 ঘন্টা 45 মিনিট। একসাথে যোগ করলে যা 8 ঘন্টা 30 মিনিটে আসে, 8:90 নয়, আপনি অসাবধান দশমিক যোগ থেকে পাবেন। ফ্রিল্যান্সার, ঠিকাদার এবং যে কেউ ঘন্টার মধ্যে বিলিং করে তারা এই সঠিক গণনাটি নিয়মিত চালায়, প্রায়শই একটি চালানের জন্য মোট পৌঁছানোর জন্য এক সপ্তাহ জুড়ে এই জাতীয় বেশ কয়েকটি সেশনের সারসংক্ষেপ করে এবং অনেকগুলি এন্ট্রি জুড়ে হাত দিয়ে করা হলে ছোট গাণিতিক স্লিপ দ্রুত হয়ে যায়।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>সমস্ত গণনা সম্পূর্ণরূপে আপনার ব্রাউজারে চলে, মোট সেকেন্ডে রূপান্তরিত হয় এবং সঠিকভাবে বহন করা ফলাফলের জন্য ফিরে আসে, তাই আপনার প্রবেশ করা কিছুই কখনও সার্ভারে পাঠানো হয় না, লগ করা বা শেয়ার করা হয়। এটি একবার লোড হলে অফলাইনে কাজ করে এবং আপনার গণনা করা কোনো সময়কালের কোনো রেকর্ড রাখে না।</p>
+    <section class="faq"><h2>সময় ক্যালকুলেটর FAQ</h2><dl><dt>আমি কি 24 ঘন্টার বেশি প্রবেশ করতে পারি?</dt><dd>হ্যাঁ। ঘন্টার ক্ষেত্র যেকোন ধনাত্মক পূর্ণসংখ্যা গ্রহণ করে, তাই আপনি একাধিক দিন জুড়ে কাজ করা মোট ঘন্টা গণনা করতে পারেন।</dd><dt>ফলাফল নেতিবাচক হলে কি হবে?</dt><dd>বিয়োগ করলে নেতিবাচক ফলাফল পাওয়া যায়, ক্যালকুলেটর এটিকে একটি বিয়োগ চিহ্ন দিয়ে উপসর্গ দেখায়।</dd><dt>আমি কিভাবে মোট কাজের ঘন্টা গণনা করব?</dt><dd>সময় A হিসাবে আপনার শুরুর সময় লিখুন (মধ্যরাত থেকে ঘন্টা, যেমন সকাল 9 টা 0মি), সময় B হিসাবে আপনার শেষ সময়, এবং বিয়োগ করুন। ফলাফল আপনার ঘন্টা কাজ.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/timecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"time_a":"সময় এ","time_b":"সময় বি","result":"ফলাফল"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/timecalc.js" defer></script>
+</body>
+</html>

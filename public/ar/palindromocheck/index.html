@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palindrome Checker - هل كلمتك أو عبارتك متناظرة؟</title>
+<meta name="description" content="مدقق متناظر مجاني. اختبر على الفور ما إذا كانت الكلمة أو العبارة أو الرقم يُقرأ بنفس الطريقة للأمام والخلف، متجاهلاً حالة الأحرف والمسافات وعلامات الترقيم.">
+<link rel="canonical" href="https://mikaio.dev/ar/palindromocheck/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/palindromocheck/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/palindromocheck/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/palindromocheck/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/palindromocheck/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/palindromocheck/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/palindromocheck/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/palindromocheck/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/palindromocheck/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/palindromocheck/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/palindromocheck/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/palindromocheck/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Palindrome Checker - هل كلمتك أو عبارتك متناظرة؟">
+<meta property="og:description" content="مدقق متناظر مجاني. اختبر على الفور ما إذا كانت الكلمة أو العبارة أو الرقم يُقرأ بنفس الطريقة للأمام والخلف، متجاهلاً حالة الأحرف والمسافات وعلامات الترقيم.">
+<meta property="og:url" content="https://mikaio.dev/ar/palindromocheck/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Palindrome Checker - هل كلمتك أو عبارتك متناظرة؟","url":"https://mikaio.dev/ar/palindromocheck/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"مدقق متناظر مجاني. اختبر على الفور ما إذا كانت الكلمة أو العبارة أو الرقم يُقرأ بنفس الطريقة للأمام والخلف، متجاهلاً حالة الأحرف والمسافات وعلامات الترقيم."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"مدقق متناظر","item":"https://mikaio.dev/ar/palindromocheck/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هو المتناظر؟","acceptedAnswer":{"@type":"Answer","text":"المتناظر هو كلمة أو عبارة أو رقم أو تسلسل يُقرأ بنفس الطريقة للأمام والخلف، مثل \"مستوى\" أو \"سيارة سباق\" أو \"رجل، خطة، قناة: بنما\"."}},{"@type":"Question","name":"هل يحسب المسافات وعلامات الترقيم؟","acceptedAnswer":{"@type":"Answer","text":"لا، يتجاهل المدقق الأحرف الكبيرة والمسافات وعلامات الترقيم، لذا \"هل رأيت سيارة أم قطة؟\" يتم التعرف عليه بشكل صحيح على أنه متناظر. فهو يقارن فقط الحروف والأرقام."}},{"@type":"Question","name":"هل يتم إرسال النص الخاص بي إلى أي مكان؟","acceptedAnswer":{"@type":"Answer","text":"لا، يتم التحقق على الفور في متصفحك، لذلك لا يتم تحميل أو تخزين أو مشاركة أي شيء تكتبه."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/palindromocheck/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/palindromocheck/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/palindromocheck/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/palindromocheck/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/palindromocheck/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/palindromocheck/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/palindromocheck/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/palindromocheck/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/palindromocheck/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/palindromocheck/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>مدقق متناظر</span></nav>
+  <h1>مدقق متناظر</h1>
+  <p class="lead">اكتب كلمة أو عبارة أو رقمًا واكتشف على الفور ما إذا كان متناظرًا أم لا. يتم تجاهل المسافات والأحرف الكبيرة وعلامات الترقيم.</p>
+  <section class="widget" id="tool"><div id="pal" data-yes="انها متناظرة!" data-no="ليس متناظرة" data-empty="في انتظار النص"><div class="field"><label for="pal-input">كلمة أو عبارة</label><textarea id="pal-input" placeholder="اكتب شيئًا مثل &quot;سيارة السباق&quot;..."></textarea></div><div class="result"><span class="big" id="pal-out">—</span></div></div></section>
+  <article class="content">
+    <h2>اكتشف على الفور ما إذا كان هناك شيء متناظر</h2>
+<p>المتناظر هو كلمة أو عبارة تُقرأ بنفس الطريقة للأمام والخلف، مثل &quot;مستوى&quot; أو &quot;ظهر&quot; أو &quot;سيارة سباق&quot;. إنها واحدة من أكثر المراوغات اللغوية إرضاءً، واكتشاف واحدة جيدة منها يشبه إلى حد ما العثور على نمط مخفي. لكن التحقق مما إذا كانت العبارة الأطول عبارة عن متناظرة يدويًا هو أمر تافه - عليك إزالة المسافات وعلامات الترقيم، وتجاهل الأحرف الكبيرة، ثم مقارنة الحروف من كلا الطرفين إلى الداخل دون أن تفقد مكانك. يقوم هذا المدقق بكل ذلك نيابةً عنك في اللحظة التي تكتب فيها. أدخل كلمة أو عبارة أو حتى رقمًا وسيخبرك على الفور ما إذا كان متناظرًا أم لا. يتم تشغيل كل شيء في متصفحك، وبالتالي فإن الإجابة تكون فورية ولا يتم تحميل أي شيء تكتبه على الإطلاق.</p>
+<p>لا يوجد شيء للضغط ولا شيء لإعداده. أثناء الكتابة في المربع، تقوم الأداة باستمرار بفحص النص الخاص بك وإظهار نتيجة واضحة: تأكيد أخضر إذا كان النص متناظرًا، أو ملاحظة حمراء إذا لم يكن كذلك. تعمل هذه التعليقات المباشرة على تسهيل التجربة أو تعديل العبارة أو اختبار قائمة المرشحين واحدًا تلو الآخر.</p>
+<h2>كيف يعمل الشيك</h2>
+<p>الجزء الذكي من فحص المتناظر هو تحديد ما يجب مقارنته. لن يقول أحد أن &quot;سيارة السباق&quot; ليست متناظرة فقط بسبب الحرف الكبير R والمسافة في المنتصف، لذا فإن المدقق الجيد يتجاهل أي شيء ليس حرفًا أو رقمًا. تقوم هذه الأداة أولاً بإزالة المسافات وعلامات الترقيم والرموز الأخرى، وتحويل كل شيء إلى أحرف صغيرة، مع ترك الحروف والأرقام الأساسية فقط. كما أنه يزيل علامات التشكيل بحيث يتم التعامل مع الإصدارات المُعلمة وغير المُشكلة من الحرف بنفس الطريقة. ثم يقوم ببساطة بمقارنة هذا التسلسل المنظف مع عكسه: إذا كان الاثنان متطابقين تمامًا، يكون لديك متناظر.</p>
+<p>وهذا هو السبب في أن العبارات التي لا تبدو وكأنها متناظرة للوهلة الأولى - مليئة بالمسافات والفواصل والأحرف الكبيرة - يتم التعرف عليها بشكل صحيح. السطر الشهير &quot;رجل، خطة، قناة: بنما&quot; يتحول إلى &quot;amanaplanacanalpanama&quot; بمجرد تنظيفه، والذي يُقرأ بشكل متطابق في كلا الاتجاهين. من خلال التركيز فقط على الحروف والأرقام، يطابق المدقق الطريقة التي يفكر بها الأشخاص بشكل طبيعي في المتناظرات بدلاً من التعثر بسبب التنسيق.</p>
+<h2>الكلمات والعبارات والأرقام</h2>
+<p>تأتي Palindromes بعدة نكهات، وهذه الأداة تتعامل معها جميعًا. أبسطها هي الكلمات المفردة التي تكتب بنفس الطريقة في كلا الاتجاهين، مثل &quot;civic&quot; و&quot;radar&quot; و&quot;kayak&quot; و&quot;rotor&quot;. ثم هناك عبارة أو جملة متناظرة، حيث تقرأ الجملة بأكملها بنفس الطريقة بمجرد تجاهل المسافات وعلامات الترقيم - &quot;هل رأيت سيارة أم قطة؟&quot; هو مثال كلاسيكي. يمكن أن تكون الأرقام متناظرة أيضًا: 1221 و90109 تقرأان نفس الشيء في الاتجاه المعاكس، وتظهر الأرقام المتناظرة في الرياضيات والألغاز الترفيهية. نظرًا لأن المدقق ينظر إلى كل من الحروف والأرقام، فإنه يعمل بشكل جيد مع المتناظر الرقمي كما هو الحال مع المتناظر اللفظي.</p>
+<p>يمكنك أيضًا استخدامه لاختبار الأخطاء الوشيكة. اكتب عبارة تشك في أنها قريبة، وستخبرك النتيجة الحمراء أو الخضراء الفورية ما إذا كان تغيير بسيط - تبديل كلمة أو إسقاط حرف - من شأنه أن يحولها إلى متناظرة حقيقية. إنه يحول التجربة والخطأ في صياغة متناظرة إلى شيء سريع وممتع.</p>
+<h2>لماذا تعتبر المتناظرات ممتعة ومفيدة؟</h2>
+<p>يتعرف معظم الناس على المتناظرات باعتبارها جزءًا من التلاعب بالألفاظ، وهنا يكمن سحرها. تظهر في الألغاز والأحاجي والكلمات المتقاطعة وألعاب الكلمات، ويعد التوصل إلى متناظرة طويلة ذات معنى إنجازًا حقيقيًا للإبداع استمتع به الكتّاب لعدة قرون. يستخدمها المعلمون لجعل التهجئة والقراءة ممتعة، حيث أن قراءة الكلمة بشكل عكسي تجبرك على النظر إلى كل حرف بعناية. غالبًا ما يجد الأطفال أسماءهم الخاصة أو كلماتهم القصيرة التي تكون متناظرة، وهو ما يمثل متعة صغيرة.</p>
+<p>وبعيدًا عن المتعة، تظهر فكرة التناظر في أماكن أكثر جدية. في علوم الكمبيوتر، يعد التحقق مما إذا كان التسلسل متناظرًا بمثابة تمرين كلاسيكي للمبتدئين يعلم كيفية مقارنة العناصر من طرفي القائمة. في علم الأحياء، للتسلسلات المتناوبة للحمض النووي أهمية حقيقية في كيفية قراءة المادة الوراثية وقطعها. النسخة اليومية التي تختبرها هنا هي نفس الفكرة الأساسية - التماثل الذي يقرأ نفس الشيء في كلا الاتجاهين - وهو جزء من سبب كونه مفهومًا مُرضيًا.</p>
+<h2>خاصة وفورية ومجانية</h2>
+<p>لا يوجد أي اشتراك، ولا تكلفة ولا إعلانات في الطريق. المدقق بأكمله عبارة عن جزء صغير من التعليمات البرمجية التي يتم تشغيلها على جهازك الخاص، ولهذا السبب يستجيب للحظة التي تكتب فيها ويستمر في العمل دون اتصال بالإنترنت. لا يتم تحميل أو تخزين أو مشاركة أي شيء تدخله؛ النص الخاص بك موجود فقط على شاشتك ويختفي عند إعادة تحميل الصفحة.</p>
+<p>لاستخدامها، ما عليك سوى كتابة أو لصق كلمة أو عبارة أو رقم في المربع وقراءة النتيجة. نظرًا لتجاهل المسافات والأحرف الكبيرة وعلامات الترقيم، يمكنك إدخال النص تمامًا كما هو مكتوب والثقة في الإجابة. قم بتغيير النص في أي وقت وسيتم تحديث الحكم على الفور، حتى تتمكن من اختبار أي عدد تريده من الكلمات والعبارات والبحث عن المتناظرات التي تناسب قلبك. سواء كنت تقوم بتسوية نقاش ودي حول عبارة صعبة، أو التحقق من محاولتك لكتابة واحدة، أو مجرد فضول بشأن كلمة لفتت انتباهك، فإن الإجابة دائمًا ما تكون على بعد نظرة واحدة.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول مدقق Palindrome</h2><dl><dt>ما هو المتناظر؟</dt><dd>المتناظر هو كلمة أو عبارة أو رقم أو تسلسل يُقرأ بنفس الطريقة للأمام والخلف، مثل &quot;مستوى&quot; أو &quot;سيارة سباق&quot; أو &quot;رجل، خطة، قناة: بنما&quot;.</dd><dt>هل يحسب المسافات وعلامات الترقيم؟</dt><dd>لا، يتجاهل المدقق الأحرف الكبيرة والمسافات وعلامات الترقيم، لذا &quot;هل رأيت سيارة أم قطة؟&quot; يتم التعرف عليه بشكل صحيح على أنه متناظر. فهو يقارن فقط الحروف والأرقام.</dd><dt>هل يتم إرسال النص الخاص بي إلى أي مكان؟</dt><dd>لا، يتم التحقق على الفور في متصفحك، لذلك لا يتم تحميل أو تخزين أو مشاركة أي شيء تكتبه.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/palindromocheck/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/palindromocheck/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/palindromocheck/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/palindromocheck/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/palindromocheck/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/palindromocheck/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/palindromocheck/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/palindromocheck/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/palindromocheck/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/palindromocheck/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"input":"كلمة أو عبارة","placeholder":"اكتب شيئًا مثل \"سيارة السباق\"...","yes":"انها متناظرة!","no":"ليس متناظرة","empty":"في انتظار النص"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/palindromocheck.js" defer></script>
+</body>
+</html>

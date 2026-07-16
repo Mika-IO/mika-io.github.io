@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مترجم شفرة مورس - تحويل النص إلى شفرة مورس والعودة</title>
+<meta name="description" content="مترجم شفرة مورس مجانا. تحويل أي نص إلى نقاط وشرطات رمز مورس، أو فك تشفير رمز مورس مرة أخرى إلى نص. يتضمن تشغيل الصوت. يعمل بالكامل في المتصفح الخاص بك.">
+<link rel="canonical" href="https://mikaio.dev/ar/morsetranslator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/morsetranslator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/morsetranslator/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/morsetranslator/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/morsetranslator/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/morsetranslator/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/morsetranslator/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/morsetranslator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/morsetranslator/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/morsetranslator/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/morsetranslator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/morsetranslator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="مترجم شفرة مورس - تحويل النص إلى شفرة مورس والعودة">
+<meta property="og:description" content="مترجم شفرة مورس مجانا. تحويل أي نص إلى نقاط وشرطات رمز مورس، أو فك تشفير رمز مورس مرة أخرى إلى نص. يتضمن تشغيل الصوت. يعمل بالكامل في المتصفح الخاص بك.">
+<meta property="og:url" content="https://mikaio.dev/ar/morsetranslator/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"مترجم شفرة مورس - تحويل النص إلى شفرة مورس والعودة","url":"https://mikaio.dev/ar/morsetranslator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"مترجم شفرة مورس مجانا. تحويل أي نص إلى نقاط وشرطات رمز مورس، أو فك تشفير رمز مورس مرة أخرى إلى نص. يتضمن تشغيل الصوت. يعمل بالكامل في المتصفح الخاص بك."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"مورس كود المترجم","item":"https://mikaio.dev/ar/morsetranslator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هو رمز مورس؟","acceptedAnswer":{"@type":"Answer","text":"كود مورس هو نظام لتشفير الحروف والأرقام وعلامات الترقيم كتسلسل من النقاط والشرطات (أو الإشارات القصيرة والطويلة). تم تطويره في ثلاثينيات وأربعينيات القرن التاسع عشر لاستخدامه مع التلغراف الكهربائي. كل شخصية لها تسلسل نقطي فريد."}},{"@type":"Question","name":"كيف يمكنني فصل الحروف في شفرة مورس؟","acceptedAnswer":{"@type":"Answer","text":"يتم فصل الحروف بمسافة واحدة. يتم فصل الكلمات بشرطة مائلة / أو ثلاث مسافات. يقبل جهاز فك التشفير كلا الاتفاقيتين."}},{"@type":"Question","name":"هل يعمل تشغيل الصوت؟","acceptedAnswer":{"@type":"Answer","text":"نعم. تستخدم الأداة Web Audio API لإنشاء نغمات تتوافق مع النقاط والشرطات. النقاط هي نغمات قصيرة، والشرطات أطول بثلاث مرات. تأكد من تشغيل مستوى صوت جهازك."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/morsetranslator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/morsetranslator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/morsetranslator/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/morsetranslator/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/morsetranslator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/morsetranslator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/morsetranslator/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>مورس كود المترجم</span></nav>
+  <h1>مورس كود المترجم</h1>
+  <p class="lead">اكتب النص لرؤيته مترجمًا إلى رمز مورس. قم بلصق رمز مورس لفك تشفيره وإعادته إلى النص. انقر فوق تشغيل لسماع الرمز كصوت.</p>
+  <section class="widget" id="tool"><div id="morse-app"><div class="field"><label for="morse-in">نص للتشفير</label><textarea id="morse-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="اكتب رسالتك هنا..."></textarea></div><div class="result"><span class="hint">كود مورس: </span><span id="morse-out" style="word-break:break-all;letter-spacing:0.1em">—</span></div><button id="morse-play" class="btn secondary" style="margin-top:0.5rem">◀ تشغيل الصوت</button><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="morse-decode-in">كود مورس لفك التشفير</label><textarea id="morse-decode-in" rows="2" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="e.g. .... . .-.. .-.. ---"></textarea></div><div class="result"><span class="hint">نص تم فك شفرته: </span><span id="morse-decoded">—</span></div></div></section>
+  <article class="content">
+    <h2>الترجمة بين النص ورمز مورس</h2>
+<p>يعد رمز مورس أحد أكثر أنظمة التشفير شهرة في التاريخ. قامت نقاطها وشرطاتها المميزة بتوصيل الرسائل عبر القارات والمحيطات قبل وقت طويل من إمكانية نقل الصوت. يتم استخدامه اليوم في راديو الهواة، والطيران، وأجهزة الوصول، والثقافة الشعبية. يقوم هذا المترجم بتحويل أي نص إلى رمز مورس على الفور، وتشغيل الرمز كصوت، وفك تشفير رمز مورس مرة أخرى إلى نص عادي.</p>
+<h2>باستخدام المترجم</h2>
+<p>اكتب رسالتك في مربع التشفير وستظهر ترجمة مورس أسفلها مباشرة، باستخدام النقاط والشرطات مع حروف مفصولة بمسافة واحدة وكلمات مفصولة بشرطة مائلة، مما يتوافق تمامًا مع الاصطلاح الكتابي القياسي لمورس. اضغط على تشغيل لسماع الكود كنغمات صوتية يتم إنشاؤها مباشرة في متصفحك، وهي طريقة مفيدة حقًا للتدرب على التعرف على مورس عن طريق الأذن وليس عن طريق البصر فقط. وللذهاب في الاتجاه الآخر، الصق النقاط والشرطات في مربع فك التشفير، متبعًا نفس فواصل الحروف والكلمات، وسيظهر النص العادي المعادل على الفور.</p>
+<h2>تاريخ كود مورس</h2>
+<p>قام صامويل مورس وألفريد فيل بتطوير شفرة مورس في ثلاثينيات وأربعينيات القرن التاسع عشر لاستخدامها مع التلغراف الكهربائي، والذي يمكنه إرسال إشارات على شكل نبضات عبر أسلاك نحاسية طويلة. قام الرمز بتعيين كل حرف ورقم بنمط فريد من الإشارات القصيرة (النقاط) والإشارات الطويلة (الشرطات). تم تحسين الكود الأصلي، الذي يسمى الآن كود مورس الأمريكي، لاحقًا إلى كود مورس الدولي، والذي وحد نسب التوقيت ووسع مجموعة الأحرف. رمز مورس الدولي هو الإصدار المستخدم في جميع أنحاء العالم اليوم.</p>
+<p>تم اختيار إشارة الاستغاثة الشهيرة SOS - ثلاث نقاط، ثلاث شرطات، ثلاث نقاط (··· ─── ···) — لبساطتها وتناسقها، مما يجعل من السهل إرسالها حتى تحت الضغط.</p>
+<h2>ملاحظة حول تعلم مورس عن طريق الأذن</h2>
+<p>لا يقوم مشغلو مورس الماهرون بإحصاء النقاط والشرطات على الإطلاق - مع التدريب الكافي، يتم التعرف على كل حرف على الفور كنمط إيقاعي مميز، بنفس الطريقة التي يتعرف بها القارئ بطلاقة على الكلمة بأكملها في لمحة بدلاً من نطق كل حرف. يعد الاستماع إلى تشغيل الصوت من هذه الأداة بشكل متكرر، بدءًا من الكلمات القصيرة الشائعة، طريقة أكثر فاعلية لبناء هذا التعرف الإيقاعي من حفظ جدول مكتوب من النقاط والشرطات، ولهذا السبب يُنصح عالميًا تقريبًا متعلمو مورس الجادون بتدريب آذانهم قبل أعينهم.</p>
+<h2>كيف يعمل كود مورس</h2>
+<p>يحتوي كل حرف ورقم وعلامة ترقيم شائعة على تسلسل فريد من النقاط والشرطات. الحرف E هو مجرد نقطة واحدة، في حين أن الحرف T عبارة عن شرطة واحدة - الحروف الأكثر شيوعًا في اللغة الإنجليزية تحصل على أقصر الرموز. يتم الفصل بين الحروف بوقفة تساوي ثلاث نقاط. يتم فصل الكلمات بوقفة تساوي سبع نقاط. هيكل التوقيت هذا هو ما يسمح بنقل مورس بشكل مسموع، أو عن طريق الضوء، أو ميكانيكيًا.</p>
+<p>التوقيت القياسي هو:</p>
+<ul>
+<li>النقطة: 1 وحدة</li>
+<li>داش: 3 وحدات</li>
+<li>الفجوة بين عناصر نفس الحرف: 1 وحدة</li>
+<li>الفجوة بين الحروف: 3 وحدات</li>
+<li>الفجوة بين الكلمات: 7 وحدات</li>
+</ul>
+<h2>حيث لا يزال يستخدم رمز مورس</h2>
+<p>لا يزال مشغلو الراديو الهواة في جميع أنحاء العالم يستخدمون شفرة مورس للاتصالات بعيدة المدى، خاصة عندما تكون ظروف الانتشار سيئة. يخترق رمز مورس التداخل الذي قد يجعل الاتصال الصوتي مستحيلاً. لا تزال اختبارات الترخيص الدولية لهواة الراديو في العديد من البلدان تتضمن مكون شفرة مورس.</p>
+<p>يستخدم الطيران رمز مورس لإشارات الملاحة: تبث أجهزة الإرسال VOR (نطاق متعدد الاتجاهات VHF) وILS (نظام هبوط الأجهزة) معرفها في مورس على فترات منتظمة، مما يسمح للطيارين بالتحقق من أنهم يستخدمون navaid الصحيح.</p>
+<p>تستخدم تقنية إمكانية الوصول أحيانًا شفرة مورس كطريقة إدخال للأشخاص ذوي القدرة المحدودة على الحركة. يمكن لزر أو مفتاح واحد أن ينقل النقاط والشرطات، مما يسمح بإدخال النص الكامل بسرعات يمكن لمشغلي Morse الماهرين تحقيقها بسرعة مدهشة.</p>
+<h2>لماذا تم تصميم الكود بهذه الطريقة</h2>
+<p>تكمن عبقرية التصميم الأصلي في مطابقة طول الكود مع تردد الحرف: نظرًا لأن صامويل مورس وألفريد فيل درسا الحروف التي تظهر غالبًا في النص الإنجليزي، تم تخصيص أقصر إشارة ممكنة للحرف الأكثر شيوعًا، E، وهو نقطة واحدة، بينما حصل T، وهو الحرف التالي الأكثر شيوعًا، على شرطة واحدة. تم إعطاء الحروف النادرة مثل Q وX وZ أنماطًا أطول وأكثر تعقيدًا، حيث كان الهدف العام هو تقليل متوسط ​​الوقت اللازم لنقل النص العادي، وليس جعل كل حرف سريعًا بنفس القدر. هذا المبدأ نفسه - إعطاء رموز أقصر للرموز الأكثر تكرارًا - يظهر مرة أخرى بعد أكثر من قرن من الزمان في خوارزميات ضغط البيانات الحديثة، مما يجعل شفرة مورس سلفًا غير محتمل ولكنه حقيقي للأفكار المستخدمة في الحوسبة اليوم.</p>
+<h2>علامات الترقيم والإشارات</h2>
+<p>بالإضافة إلى الحروف والأرقام، تحدد شفرة مورس القياسية أيضًا أنماط علامات الترقيم الشائعة مثل النقاط والفواصل وعلامات الاستفهام، ولهذا السبب يستطيع هذا المترجم التعامل مع الجمل بأكملها بدلاً من الكلمات المفردة. بالإضافة إلى ذلك، يستخدم مشغلو الراديو الهواة تسلسلات مجمعة خاصة تسمى prosigns للتحكم في تدفق المحادثة عبر الهواء - تسلسل يعني &quot;نهاية الرسالة&quot;، على سبيل المثال، أو يعني &quot;دعوة للإرسال&quot; - والتي يتم إرسالها كسلسلة واحدة غير منقطعة من النقاط والشرطات بدلاً من أحرف منفصلة، ​​وهي طبقة من الاصطلاحات التي لا تحاول هذه الأداة فك تشفيرها تلقائيًا ولكن من الجدير معرفة وجودها إذا واجهتها.</p>
+<h2>خاصة وفورية</h2>
+<p>تتم جميع عمليات الترجمة بالكامل في متصفحك، لذا يتم التشفير وفك التشفير بشكل فوري ولا يتم إرسال أي نص تكتبه إلى أي خادم، سواء تم تسجيله أو مشاركته.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول كود مورس</h2><dl><dt>ما هو رمز مورس؟</dt><dd>كود مورس هو نظام لتشفير الحروف والأرقام وعلامات الترقيم كتسلسل من النقاط والشرطات (أو الإشارات القصيرة والطويلة). تم تطويره في ثلاثينيات وأربعينيات القرن التاسع عشر لاستخدامه مع التلغراف الكهربائي. كل شخصية لها تسلسل نقطي فريد.</dd><dt>كيف يمكنني فصل الحروف في شفرة مورس؟</dt><dd>يتم فصل الحروف بمسافة واحدة. يتم فصل الكلمات بشرطة مائلة / أو ثلاث مسافات. يقبل جهاز فك التشفير كلا الاتفاقيتين.</dd><dt>هل يعمل تشغيل الصوت؟</dt><dd>نعم. تستخدم الأداة Web Audio API لإنشاء نغمات تتوافق مع النقاط والشرطات. النقاط هي نغمات قصيرة، والشرطات أطول بثلاث مرات. تأكد من تشغيل مستوى صوت جهازك.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/morsetranslator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/morsetranslator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/morsetranslator/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/morsetranslator/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/morsetranslator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/morsetranslator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/morsetranslator/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"text_input":"نص للتشفير","text_placeholder":"اكتب رسالتك هنا...","morse":"كود مورس","play_audio":"◀ تشغيل الصوت","morse_input":"كود مورس لفك التشفير","morse_placeholder":"e.g. .... . .-.. .-.. ---","decoded":"نص تم فك شفرته"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/morsetranslator.js" defer></script>
+</body>
+</html>

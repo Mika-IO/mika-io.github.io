@@ -68,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -117,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Compteur de Mots — comptez mots, caractères et temps de lecture","url":"https://mikaio.dev/fr/wordcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Compteur de mots gratuit en direct. Collez ou tapez du texte pour compter mots, caractères, phrases, paragraphes et temps de lecture estimé instantanément dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Compteur de Mots","item":"https://mikaio.dev/fr/wordcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment le temps de lecture est-il estimé ?","acceptedAnswer":{"@type":"Answer","text":"Le temps de lecture suppose une vitesse moyenne d'un adulte d'environ 200 mots par minute et arrondit à une minute au minimum. Les lecteurs plus rapides ou plus lents doivent l'ajuster."}},{"@type":"Question","name":"Comment les mots sont-ils comptés dans les langues sans espaces ?","acceptedAnswer":{"@type":"Answer","text":"Pour les écritures comme le chinois et le japonais, qui ne séparent pas les mots par des espaces, chaque caractère compte pour une unité, ce qui correspond assez bien à la façon dont ces langues mesurent la longueur."}},{"@type":"Question","name":"Mon texte est-il stocké quelque part ?","acceptedAnswer":{"@type":"Answer","text":"Non. Tout le comptage se fait dans votre navigateur pendant que vous tapez. Votre texte n'est jamais envoyé à un serveur, enregistré ni partagé."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navigation du site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wordcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wordcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wordcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wordcount/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/wordcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wordcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/wordcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wordcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wordcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wordcount/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Compteur de Mots</span></nav>
@@ -154,8 +157,9 @@ textarea{min-height:120px;resize:vertical}
   <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wordcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wordcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wordcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wordcount/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/wordcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wordcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/wordcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wordcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wordcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wordcount/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
-  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"placeholder":"Commencez à taper ou collez votre texte ici…","words":"Mots","characters":"Caractères","chars_nospace":"Caractères (sans espaces)","sentences":"Phrases","paragraphs":"Paragraphes","reading_time":"Temps de lecture (min)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/wordcount.js" defer></script>
 </body>
 </html>

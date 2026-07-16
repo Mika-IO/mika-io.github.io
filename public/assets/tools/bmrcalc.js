@@ -12,7 +12,7 @@
     var kg=wu==='lb'?w*0.453592:w;
     var cm=hu==='in'?h*2.54:h;
     var bmr=10*kg+6.25*cm-5*age+(sex==='m'?5:-161);
-    if(out)out.textContent=Math.round(bmr).toLocaleString()+' kcal/day';
+    if(out)out.textContent=Math.round(bmr).toLocaleString(window.__LANG||undefined)+' kcal/day';
   }
   document.querySelectorAll('#bmr-weight,#bmr-wunit,#bmr-height,#bmr-hunit,#bmr-age,#bmr-sex').forEach(function(el){el.addEventListener('input',calc);el.addEventListener('change',calc);});
   calc();

@@ -3,20 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GCD Calculator — Greatest Common Divisor of multiple numbers</title>
-<meta name="description" content="Free GCD calculator. Find the Greatest Common Divisor (GCD/GCF/HCF) of any set of numbers. Also shows the LCM. Instant results in your browser.">
+<title>Calculateur GCD — Plus grand diviseur commun de plusieurs nombres</title>
+<meta name="description" content="Calculateur GCD gratuit. Trouvez le plus grand diviseur commun (PGCD/GCF/HCF) de n’importe quel ensemble de nombres. Affiche également le LCM. Résultats instantanés dans votre navigateur.">
 <link rel="canonical" href="https://mikaio.dev/fr/gcdcalc/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gcdcalc/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gcdcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/gcdcalc/">
   <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gcdcalc/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gcdcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/gcdcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/gcdcalc/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gcdcalc/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gcdcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/gcdcalc/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gcdcalc/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="GCD Calculator — Greatest Common Divisor of multiple numbers">
-<meta property="og:description" content="Free GCD calculator. Find the Greatest Common Divisor (GCD/GCF/HCF) of any set of numbers. Also shows the LCM. Instant results in your browser.">
+<meta property="og:title" content="Calculateur GCD — Plus grand diviseur commun de plusieurs nombres">
+<meta property="og:description" content="Calculateur GCD gratuit. Trouvez le plus grand diviseur commun (PGCD/GCF/HCF) de n’importe quel ensemble de nombres. Affiche également le LCM. Résultats instantanés dans votre navigateur.">
 <meta property="og:url" content="https://mikaio.dev/fr/gcdcalc/">
 <meta property="og:locale" content="fr">
 <meta name="twitter:card" content="summary">
@@ -64,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -110,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"GCD Calculator — Greatest Common Divisor of multiple numbers","url":"https://mikaio.dev/fr/gcdcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free GCD calculator. Find the Greatest Common Divisor (GCD/GCF/HCF) of any set of numbers. Also shows the LCM. Instant results in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"GCD Calculator","item":"https://mikaio.dev/fr/gcdcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the GCD?","acceptedAnswer":{"@type":"Answer","text":"The Greatest Common Divisor (GCD), also called Greatest Common Factor (GCF) or Highest Common Factor (HCF), is the largest positive integer that divides all given numbers without a remainder. GCD(12, 18) = 6."}},{"@type":"Question","name":"What is GCD used for?","acceptedAnswer":{"@type":"Answer","text":"GCD is used to simplify fractions — divide numerator and denominator by their GCD. It is also used in cryptography, computer science algorithms, and determining the pitch of gear teeth in engineering."}},{"@type":"Question","name":"What if the numbers share no common factor?","acceptedAnswer":{"@type":"Answer","text":"If two numbers share no common factor other than 1, their GCD is 1 and they are called coprime or relatively prime."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur GCD — Plus grand diviseur commun de plusieurs nombres","url":"https://mikaio.dev/fr/gcdcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur GCD gratuit. Trouvez le plus grand diviseur commun (PGCD/GCF/HCF) de n’importe quel ensemble de nombres. Affiche également le LCM. Résultats instantanés dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur PGCD","item":"https://mikaio.dev/fr/gcdcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce que le PGCD ?","acceptedAnswer":{"@type":"Answer","text":"Le plus grand diviseur commun (PGCD), également appelé plus grand facteur commun (GCF) ou plus grand facteur commun (HCF), est le plus grand entier positif qui divise tous les nombres donnés sans reste. PGCD(12, 18) = 6."}},{"@type":"Question","name":"A quoi sert GCD ?","acceptedAnswer":{"@type":"Answer","text":"GCD est utilisé pour simplifier les fractions – diviser le numérateur et le dénominateur par leur GCD. Il est également utilisé dans la cryptographie, les algorithmes informatiques et la détermination du pas des dents d'engrenage en ingénierie."}},{"@type":"Question","name":"Et si les chiffres n’avaient aucun facteur commun ?","acceptedAnswer":{"@type":"Answer","text":"Si deux nombres ne partagent aucun facteur commun autre que 1, leur PGCD est 1 et ils sont appelés premiers entre eux ou relativement premiers."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navigation du site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gcdcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/gcdcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/gcdcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gcdcalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>GCD Calculator</span></nav>
-  <h1>GCD Calculator</h1>
-  <p class="lead">Enter two or more numbers separated by commas to find their Greatest Common Divisor.</p>
-  <section class="widget" id="tool"><form id="gcd-form"><div class="field"><label for="gcd-nums">Numbers (comma-separated)</label><input type="text" id="gcd-nums" placeholder="e.g. 48, 36, 24" inputmode="numeric"></div><div class="result"><span class="hint">GCD: </span><span class="big" id="gcd-out">—</span></div><div id="gcd-lcm-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur PGCD</span></nav>
+  <h1>Calculateur PGCD</h1>
+  <p class="lead">Entrez deux nombres ou plus séparés par des virgules pour trouver leur plus grand diviseur commun.</p>
+  <section class="widget" id="tool"><form id="gcd-form"><div class="field"><label for="gcd-nums">Chiffres (séparés par des virgules)</label><input type="text" id="gcd-nums" placeholder="e.g. 48, 36, 24" inputmode="numeric"></div><div class="result"><span class="hint">PGCD : </span><span class="big" id="gcd-out">—</span></div><div id="gcd-lcm-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
   <article class="content">
     <h2>Trouvez le plus grand diviseur commun de n&#39;importe quels nombres</h2>
 <p>Le plus grand diviseur commun (PGCD) — aussi appelé plus grand commun facteur — est le plus grand nombre qui divise tous les nombres donnés sans laisser de reste. Saisissez deux nombres ou plus, séparés par des virgules, et le PGCD se calcule instantanément à l&#39;aide de l&#39;algorithme d&#39;Euclide.</p>
@@ -153,13 +160,14 @@ textarea{min-height:120px;resize:vertical}
 <p>Observons l&#39;algorithme d&#39;Euclide à l&#39;œuvre pour PGCD(48, 18). D&#39;abord, 48 = 2×18 + 12, donc le problème devient PGCD(18, 12). Ensuite, 18 = 1×12 + 6, donc il devient PGCD(12, 6). Enfin, 12 = 2×6 + 0, donc le reste atteint zéro et le dernier reste non nul, 6, est le PGCD. Chaque étape de l&#39;algorithme réduit rapidement les nombres en jeu, ce qui explique précisément pourquoi il se termine en seulement une poignée d&#39;étapes, même pour de très grands nombres, contrairement au fait de lister tous les diviseurs, qui ralentit rapidement à mesure que les nombres grandissent.</p>
 <h2>Privé et instantané</h2>
 <p>Tous les calculs s&#39;exécutent entièrement dans votre navigateur à l&#39;aide de l&#39;algorithme d&#39;Euclide, si bien que le résultat apparaît à l&#39;instant où vous tapez, et qu&#39;aucun nombre que vous saisissez n&#39;est jamais envoyé à un serveur, enregistré ou partagé. L&#39;outil fonctionne hors ligne une fois la page chargée, et chaque calcul est effacé dès que vous fermez ou rechargez l&#39;onglet.</p>
-    <section class="faq"><h2>GCD calculator FAQ</h2><dl><dt>What is the GCD?</dt><dd>The Greatest Common Divisor (GCD), also called Greatest Common Factor (GCF) or Highest Common Factor (HCF), is the largest positive integer that divides all given numbers without a remainder. GCD(12, 18) = 6.</dd><dt>What is GCD used for?</dt><dd>GCD is used to simplify fractions — divide numerator and denominator by their GCD. It is also used in cryptography, computer science algorithms, and determining the pitch of gear teeth in engineering.</dd><dt>What if the numbers share no common factor?</dt><dd>If two numbers share no common factor other than 1, their GCD is 1 and they are called coprime or relatively prime.</dd></dl></section>
+    <section class="faq"><h2>FAQ sur le calculateur GCD</h2><dl><dt>Qu&#39;est-ce que le PGCD ?</dt><dd>Le plus grand diviseur commun (PGCD), également appelé plus grand facteur commun (GCF) ou plus grand facteur commun (HCF), est le plus grand entier positif qui divise tous les nombres donnés sans reste. PGCD(12, 18) = 6.</dd><dt>A quoi sert GCD ?</dt><dd>GCD est utilisé pour simplifier les fractions – diviser le numérateur et le dénominateur par leur GCD. Il est également utilisé dans la cryptographie, les algorithmes informatiques et la détermination du pas des dents d&#39;engrenage en ingénierie.</dd><dt>Et si les chiffres n’avaient aucun facteur commun ?</dt><dd>Si deux nombres ne partagent aucun facteur commun autre que 1, leur PGCD est 1 et ils sont appelés premiers entre eux ou relativement premiers.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gcdcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/gcdcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/gcdcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gcdcalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
-  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"numbers":"Chiffres (séparés par des virgules)","placeholder":"e.g. 48, 36, 24","gcd":"PGCD :"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/gcdcalc.js" defer></script>
 </body>
 </html>

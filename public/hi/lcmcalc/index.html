@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>एलसीएम कैलकुलेटर - कई संख्याओं का लघुत्तम समापवर्त्य</title>
+<meta name="description" content="मुफ़्त एलसीएम कैलकुलेटर। संख्याओं के किसी भी समूह का लघुत्तम समापवर्त्य (LCM) ज्ञात कीजिए। जीसीडी भी दिखाता है। आपके ब्राउज़र में तुरंत परिणाम।">
+<link rel="canonical" href="https://mikaio.dev/hi/lcmcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/lcmcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/lcmcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/lcmcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/lcmcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/lcmcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/lcmcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/lcmcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/lcmcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/lcmcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/lcmcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/lcmcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="एलसीएम कैलकुलेटर - कई संख्याओं का लघुत्तम समापवर्त्य">
+<meta property="og:description" content="मुफ़्त एलसीएम कैलकुलेटर। संख्याओं के किसी भी समूह का लघुत्तम समापवर्त्य (LCM) ज्ञात कीजिए। जीसीडी भी दिखाता है। आपके ब्राउज़र में तुरंत परिणाम।">
+<meta property="og:url" content="https://mikaio.dev/hi/lcmcalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"एलसीएम कैलकुलेटर - कई संख्याओं का लघुत्तम समापवर्त्य","url":"https://mikaio.dev/hi/lcmcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त एलसीएम कैलकुलेटर। संख्याओं के किसी भी समूह का लघुत्तम समापवर्त्य (LCM) ज्ञात कीजिए। जीसीडी भी दिखाता है। आपके ब्राउज़र में तुरंत परिणाम।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"एलसीएम कैलकुलेटर","item":"https://mikaio.dev/hi/lcmcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"लघुत्तम समापवर्त्य क्या है?","acceptedAnswer":{"@type":"Answer","text":"संख्याओं के समूह का एलसीएम सबसे छोटा धनात्मक पूर्णांक है जो उन सभी से विभाज्य है। उदाहरण के लिए, 4 और 6 का LCM 12 है, क्योंकि 12, 4 और 6 दोनों से विभाज्य सबसे छोटी संख्या है।"}},{"@type":"Question","name":"इसका उपयोग किस लिए किया जाता है?","acceptedAnswer":{"@type":"Answer","text":"विभिन्न हरों के साथ भिन्नों को जोड़ते समय एलसीएम का उपयोग किया जाता है - सामान्य हर प्राप्त करने के लिए हरों का एलसीएम ज्ञात करें। यह शेड्यूलिंग समस्याओं में भी दिखाई देता है जहां घटनाएँ अलग-अलग अंतराल पर दोहराई जाती हैं।"}},{"@type":"Question","name":"एलसीएम और जीसीडी के बीच क्या अंतर है?","acceptedAnswer":{"@type":"Answer","text":"GCD (महानतम समापवर्तक) वह सबसे बड़ी संख्या है जो दी गई सभी संख्याओं को विभाजित करती है। LCM उन सभी से विभाज्य सबसे छोटी संख्या है। वे संबंधित हैं: एलसीएम(ए,बी) = ए×बी / जीसीडी(ए,बी)।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/lcmcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/lcmcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/lcmcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/lcmcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/lcmcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/lcmcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/lcmcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/lcmcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/lcmcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/lcmcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>एलसीएम कैलकुलेटर</span></nav>
+  <h1>एलसीएम कैलकुलेटर</h1>
+  <p class="lead">दो या दो से अधिक संख्याओं को अल्पविराम से अलग करके उनका लघुत्तम समापवर्तक ज्ञात करने के लिए दर्ज करें।</p>
+  <section class="widget" id="tool"><form id="lcm-form"><div class="field"><label for="lcm-nums">संख्याएँ (अल्पविराम से अलग)</label><input type="text" id="lcm-nums" placeholder="e.g. 12, 18, 24" inputmode="numeric"></div><div class="result"><span class="hint">एलसीएम: </span><span class="big" id="lcm-out">—</span></div><div id="lcm-gcd-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>किसी भी संख्या का लघुत्तम समापवर्त्य ज्ञात कीजिए</h2>
+<p>लघुत्तम समापवर्त्य (LCM) - जिसे न्यूनतम समापवर्त्य या पुर्तगाली में मिनिमो मल्टिप्लो कॉमम (MMC) भी कहा जाता है - सबसे छोटा धनात्मक पूर्णांक है जो किसी दिए गए सेट में सभी संख्याओं द्वारा समान रूप से विभाज्य है। अल्पविराम से अलग किए गए दो या अधिक संख्याएं दर्ज करें और बोनस के रूप में ग्रेटेस्ट कॉमन डिवाइजर (जीसीडी) के साथ एलसीएम तुरंत दिखाई देता है।</p>
+<h2>परिभाषा और उदाहरण</h2>
+<p>संख्याओं के समूह का एलसीएम वह सबसे छोटी संख्या है जिसे उन सभी को बिना किसी शेषफल के विभाजित किया जाता है।</p>
+<ul>
+<li>एलसीएम(4, 6) = 12 - क्योंकि 12 ÷ 4 = 3 और 12 ÷ 6 = 2, और दोनों के लिए कोई छोटी संख्या काम नहीं करती।</li>
+<li>एलसीएम (3, 5) = 15 - क्योंकि 3 और 5 सहअभाज्य हैं (कोई सामान्य कारक नहीं हैं), उनका एलसीएम केवल उनका उत्पाद है।</li>
+<li>एलसीएम(12, 18, 24) = 72 - तीनों से विभाज्य सबसे छोटी संख्या।</li>
+</ul>
+<h2>एलसीएम की गणना कैसे की जाती है</h2>
+<p>सबसे कुशल विधि एलसीएम और जीसीडी के बीच संबंध का उपयोग करती है: एलसीएम(ए, बी) = |ए × बी| / जीसीडी(ए, बी)। दो से अधिक संख्याओं के लिए, एलसीएम की गणना जोड़ीवार की जाती है: एलसीएम(ए, बी, सी) = एलसीएम(एलसीएम(ए, बी), सी)।</p>
+<p>जीसीडी की गणना यूक्लिडियन एल्गोरिदम का उपयोग करके की जाती है, जो बार-बार बड़ी संख्या को छोटी संख्या से विभाजित करती है और शेषफल तब तक लेती है जब तक कि शेष शून्य न हो जाए। अंतिम गैर-शून्य शेषफल GCD है।</p>
+<h2>भिन्न-भिन्न हर वाली भिन्नों को जोड़ना</h2>
+<p>एलसीएम का सबसे आम दैनिक अनुप्रयोग भिन्न अंकगणित में होता है। 1/4 और 1/6 जोड़ने के लिए, आपको एक उभयनिष्ठ हर की आवश्यकता होगी। 4 और 6 का एलसीएम 12 है, इसलिए: 1/4 = 3/12 और 1/6 = 2/12, 5/12 देते हैं। एलसीएम का उपयोग करने से तुरंत सबसे छोटा रूप मिल जाता है, जबकि किसी अन्य सामान्य गुणक (जैसे 24) का उपयोग करने से ऐसा परिणाम मिलता है जिसे अभी भी सरलीकरण की आवश्यकता है।</p>
+<h2>शेड्यूलिंग और चक्र</h2>
+<p>एलसीएम शेड्यूलिंग समस्याओं में प्रकट होता है जहां घटनाएं अलग-अलग अंतराल पर दोहराई जाती हैं। यदि बस A हर 12 मिनट पर और बस B हर 18 मिनट पर चलती है, और दोनों सुबह 8:00 बजे प्रस्थान करती हैं, तो वे अगली बार एक साथ कब प्रस्थान करेंगी? एलसीएम(12, 18) = 36, इसलिए वे अगली बार 8:36 पूर्वाह्न पर संपाती होंगे।</p>
+<p>इसी तरह, यांत्रिक प्रणालियों में गियर में दांतों की गिनती होती है जहां एलसीएम निर्धारित करता है कि वही दांत दोबारा कब जुड़ेंगे। विभिन्न चक्र समय पर काम करने वाली मशीनों वाली उत्पादन लाइनें सिंक्रनाइज़ेशन बिंदु खोजने के लिए एलसीएम का उपयोग करती हैं।</p>
+<h2>बिना बर्बादी के स्टॉक करना</h2>
+<p>एलसीएम एक बहुत ही ठोस खरीदारी समस्या का भी समाधान करता है: यदि हॉट डॉग 10 के पैक में आते हैं और बन्स 8 के पैक में आते हैं, तो आपको प्रत्येक के कितने पैक खरीदने की ज़रूरत है ताकि आपके पास बिल्कुल समान संख्या में हॉट डॉग और बन हों और कोई भी न बचे? उत्तर सबसे छोटी संख्या है जिसे 10 और 8 दोनों समान रूप से विभाजित करते हैं, जो एलसीएम (10, 8) = 40 है - इसलिए आप 4 पैक हॉट डॉग और 5 पैक बन्स खरीदेंगे। यह सटीक परिदृश्य, और इसमें किन्हीं दो अलग-अलग आकार के पैकों से जुड़ी अनगिनत विविधताएं तब दिखाई देती हैं, जब आप अलग-अलग मात्रा में बेची गई दो चीजों का मिलान करने की कोशिश कर रहे होते हैं।</p>
+<h2>संगीत सिद्धांत</h2>
+<p>संगीत में, एलसीएम निर्धारित करता है कि लयबद्ध पैटर्न कब दोहराए जाते हैं। 4 बीट्स के पैटर्न के विरुद्ध बजाए गए 3 बीट्स का एक पैटर्न डाउनबीट्स के दोबारा संयोग से पहले एलसीएम(3, 4) = 12 बीट्स का एक चक्र बनाता है। यह बहु लयात्मक संगीत का आधार है।</p>
+<h2>कैलकुलेटर का उपयोग कैसे करें</h2>
+<p>अल्पविराम से अलग की गई दो या अधिक संख्याएँ दर्ज करें और एलसीएम तुरंत इसकी गणना करने के लिए उपयोग की जाने वाली जीसीडी के साथ दिखाई देता है। सबमिट करने के लिए कुछ भी नहीं है और आप कितनी संख्याओं को सूचीबद्ध कर सकते हैं इसकी कोई सीमा नहीं है - कैलकुलेटर पर्दे के पीछे पूरे सेट को जोड़ी में कम कर देता है, इसलिए पांच या छह संख्याओं की सूची को एक जोड़ी के रूप में आसानी से नियंत्रित किया जाता है। किसी भी संख्या को बदलने से परिणाम तुरंत अपडेट हो जाता है, जिससे यह पता लगाना आसान हो जाता है कि सेट में एक और संख्या जोड़ने से एलसीएम कैसे बदल जाता है।</p>
+<h2>एलसीएम और जीसीडी एक ही सिक्के के दो पहलू क्यों हैं?</h2>
+<p>लघुत्तम समापवर्त्य और महानतम समापवर्तक दो संख्याओं के बीच समान संबंध के विपरीत सिरों का वर्णन करते हैं, और स्पष्ट पहचान एलसीएम(ए, बी) × जीसीडी(ए, बी) = ए × बी उन्हें सीधे जोड़ती है। सहज रूप से, जीसीडी उन सभी चीज़ों को हटा देता है जो दो संख्याओं में समान होती हैं, जबकि एलसीएम सबसे छोटी संख्या होती है जो इतनी बड़ी होती है कि इसमें वह सब कुछ शामिल हो सकता है जिसकी दोनों संख्याओं को आवश्यकता होती है। क्योंकि यूक्लिडियन एल्गोरिदम के माध्यम से जीसीडी की गणना करना बड़ी संख्याओं के लिए भी तेज़ है, और जीसीडी ज्ञात होने के बाद एलसीएम सूत्र को केवल एक अतिरिक्त गुणा और विभाजन की आवश्यकता होती है, यह अप्रत्यक्ष मार्ग सीधे गुणकों के माध्यम से खोज करने से कहीं तेज़ है, खासकर जब संख्याएं बढ़ती हैं।</p>
+<h2>चरण दर चरण एक काम किया गया उदाहरण</h2>
+<p>एलसीएम(21,6) लीजिए। पहले GCD खोजें: 21 = 3×6 + 3, फिर 6 = 2×3 + 0, इसलिए GCD(21, 6) = 3। फिर सूत्र लागू करें: LCM(21, 6) = (21 × 6) / 3 = 126 / 3 = 42। आप इसे सीधे जाँच सकते हैं - 42 ÷ 21 = 2 और 42 ÷ 6 = 7, दोनों पूर्ण संख्याएँ, और कोई भी छोटी धनात्मक संख्या 21 और 6 दोनों से समान रूप से विभाजित नहीं होती है। यह दो-चरणीय प्रक्रिया, पहले जीसीडी और फिर एक एकल गुणा और भाग, वही है जो कैलकुलेटर आपके द्वारा देखे जाने वाले परिणामों के तुरंत बाद करता है।</p>
+<h2>अंशों और अनुसूचियों से परे रोजमर्रा की परिस्थितियाँ</h2>
+<p>एलसीएम चुपचाप उन स्थितियों में प्रकट होता है जिन्हें लोग हमेशा गणित की समस्या के रूप में लेबल नहीं करते हैं। रेसिपी स्केलिंग के लिए अलग-अलग पैक आकारों में बेची जाने वाली दो सामग्रियों की पूरी मात्रा की आवश्यकता होती है, अलग-अलग गिनती के बक्से में आने वाली वस्तुओं से समान गुडी बैग पैक करना, या शुरुआत में दो अलग-अलग लंबाई वाले राउंड लाइन के साथ गेम के कितने राउंड की गणना करना - ये सभी छिपी हुई एलसीएम समस्याएं हैं। जब भी आपको सबसे छोटी मात्रा, समय या गणना की आवश्यकता होती है जो एक साथ दो या दो से अधिक दोहराई जाने वाली आवश्यकताओं को पूरा करती है, तो एलसीएम वह संख्या है जिसे आप ढूंढ रहे हैं।</p>
+<h2>निजी और तत्काल</h2>
+<p>सभी गणनाएँ पूरी तरह से आपके ब्राउज़र में यूक्लिडियन एल्गोरिदम का उपयोग करके चलती हैं, इसलिए आपके द्वारा दर्ज की गई कोई भी चीज़ कभी भी अपलोड, लॉग या साझा नहीं की जाती है। जैसे ही आप टाइप करते हैं तो परिणाम तुरंत दिखाई देता है, पृष्ठ लोड होने के बाद यह ऑफ़लाइन काम करता है, और जैसे ही आप टैब बंद करते हैं या पुनः लोड करते हैं तो प्रत्येक नंबर गायब हो जाता है।</p>
+    <section class="faq"><h2>एलसीएम कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>लघुत्तम समापवर्त्य क्या है?</dt><dd>संख्याओं के समूह का एलसीएम सबसे छोटा धनात्मक पूर्णांक है जो उन सभी से विभाज्य है। उदाहरण के लिए, 4 और 6 का LCM 12 है, क्योंकि 12, 4 और 6 दोनों से विभाज्य सबसे छोटी संख्या है।</dd><dt>इसका उपयोग किस लिए किया जाता है?</dt><dd>विभिन्न हरों के साथ भिन्नों को जोड़ते समय एलसीएम का उपयोग किया जाता है - सामान्य हर प्राप्त करने के लिए हरों का एलसीएम ज्ञात करें। यह शेड्यूलिंग समस्याओं में भी दिखाई देता है जहां घटनाएँ अलग-अलग अंतराल पर दोहराई जाती हैं।</dd><dt>एलसीएम और जीसीडी के बीच क्या अंतर है?</dt><dd>GCD (महानतम समापवर्तक) वह सबसे बड़ी संख्या है जो दी गई सभी संख्याओं को विभाजित करती है। LCM उन सभी से विभाज्य सबसे छोटी संख्या है। वे संबंधित हैं: एलसीएम(ए,बी) = ए×बी / जीसीडी(ए,बी)।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/lcmcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/lcmcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/lcmcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/lcmcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/lcmcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/lcmcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/lcmcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/lcmcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/lcmcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/lcmcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"numbers":"संख्याएँ (अल्पविराम से अलग)","placeholder":"e.g. 12, 18, 24","lcm":"एलसीएम:"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/lcmcalc.js" defer></script>
+</body>
+</html>

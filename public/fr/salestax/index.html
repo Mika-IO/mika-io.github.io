@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sales Tax Calculator — add or remove VAT from any price</title>
-<meta name="description" content="Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.">
+<title>Calculateur de taxe de vente : ajoutez ou supprimez la TVA de n&#39;importe quel prix</title>
+<meta name="description" content="Calculateur de taxe de vente gratuit. Saisissez un prix et un taux de taxe pour ajouter la taxe à un prix net ou l&#39;extraire d&#39;un prix brut. Fonctionne pour la TVA, la TPS et tout pourcentage.">
 <link rel="canonical" href="https://mikaio.dev/fr/salestax/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/salestax/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/salestax/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/salestax/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/salestax/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/salestax/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/salestax/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/salestax/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/salestax/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/salestax/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/salestax/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/salestax/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sales Tax Calculator — add or remove VAT from any price">
-<meta property="og:description" content="Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.">
+<meta property="og:title" content="Calculateur de taxe de vente : ajoutez ou supprimez la TVA de n&#39;importe quel prix">
+<meta property="og:description" content="Calculateur de taxe de vente gratuit. Saisissez un prix et un taux de taxe pour ajouter la taxe à un prix net ou l&#39;extraire d&#39;un prix brut. Fonctionne pour la TVA, la TPS et tout pourcentage.">
 <meta property="og:url" content="https://mikaio.dev/fr/salestax/">
 <meta property="og:locale" content="fr">
 <meta name="twitter:card" content="summary">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Sales Tax Calculator — add or remove VAT from any price","url":"https://mikaio.dev/fr/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Sales Tax Calculator","item":"https://mikaio.dev/fr/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between adding and extracting tax?","acceptedAnswer":{"@type":"Answer","text":"Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was."}},{"@type":"Question","name":"What tax rates should I use?","acceptedAnswer":{"@type":"Answer","text":"Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign."}},{"@type":"Question","name":"Is anything I type uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de taxe de vente : ajoutez ou supprimez la TVA de n'importe quel prix","url":"https://mikaio.dev/fr/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur de taxe de vente gratuit. Saisissez un prix et un taux de taxe pour ajouter la taxe à un prix net ou l'extraire d'un prix brut. Fonctionne pour la TVA, la TPS et tout pourcentage."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de taxe de vente","item":"https://mikaio.dev/fr/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle est la différence entre ajouter et extraire une taxe ?","acceptedAnswer":{"@type":"Answer","text":"L'ajout de taxes prend un prix net (le prix avant taxe) et calcule le prix brut que vous payez. L'extraction de taxe fait l'inverse : vous saisissez le prix brut déjà TTC et le calculateur calcule quelle part de taxe et quel était le montant avant taxe."}},{"@type":"Question","name":"Quels taux d'imposition dois-je utiliser ?","acceptedAnswer":{"@type":"Answer","text":"Utilisez le tarif en vigueur dans votre pays ou région. Des exemples courants incluent une TVA de 20 % au Royaume-Uni, 19 % en Allemagne, une TPS de 10 % en Australie et des taux de taxe de vente variables selon les États américains. Entrez le nombre sans le signe de pourcentage."}},{"@type":"Question","name":"Est-ce que quelque chose que je tape est téléchargé ?","acceptedAnswer":{"@type":"Answer","text":"Non. Tout s'exécute dans votre navigateur sans aucun serveur impliqué. Les chiffres que vous saisissez disparaissent lorsque vous fermez la page."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navigation du site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Sales Tax Calculator</span></nav>
-  <h1>Sales Tax Calculator</h1>
-  <p class="lead">Enter the amount and the tax rate, then choose whether to add tax to a net price or extract it from a gross amount. All three figures — net, tax, and gross — update as you type.</p>
-  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">Amount</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">Tax rate %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">Mode</label><select id="tax-mode"><option value="add">Add tax to price</option><option value="remove">Extract tax from price</option></select></div></div><div class="result"><span class="hint">Net (pre-tax): </span><b id="tax-net">—</b> · <span class="hint">Tax amount: </span><b id="tax-tax">—</b> · <span class="hint">Gross (total): </span><span class="big" id="tax-gross">—</span></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur de taxe de vente</span></nav>
+  <h1>Calculateur de taxe de vente</h1>
+  <p class="lead">Saisissez le montant et le taux de taxe, puis choisissez si vous souhaitez ajouter la taxe à un prix net ou l&#39;extraire d&#39;un montant brut. Les trois chiffres – net, fiscal et brut – sont mis à jour au fur et à mesure que vous tapez.</p>
+  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">Montant</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">Taux d&#39;imposition %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">Mode</label><select id="tax-mode"><option value="add">Ajouter la taxe au prix</option><option value="remove">Extraire la taxe du prix</option></select></div></div><div class="result"><span class="hint">Net (avant impôts): </span><b id="tax-net">—</b> · <span class="hint">Montant de la taxe: </span><b id="tax-tax">—</b> · <span class="hint">Brut (total): </span><span class="big" id="tax-gross">—</span></div></form></section>
   <article class="content">
     <h2>Ajouter la taxe à un prix ou l&#39;extraire d&#39;un total</h2>
 <p>Taxe de vente, TVA, TPS — peu importe comment elle s&#39;appelle dans votre pays, l&#39;arithmétique est toujours l&#39;une de deux opérations : ajouter un pourcentage de taxe à un prix net pour obtenir le montant brut qu&#39;un acheteur paie, ou travailler à rebours depuis un prix brut pour découvrir combien de celui-ci est de la taxe. Cette calculatrice gère les deux instantanément. Entrez le montant, le taux de taxe et choisissez un mode ; le net, le montant de taxe et le brut se mettent à jour pendant que vous tapez.</p>
@@ -144,13 +150,14 @@ textarea{min-height:120px;resize:vertical}
 <h2>Privé, instantané et gratuit</h2>
 <p>Aucune donnée que vous entrez n&#39;est envoyée nulle part. La calculatrice est un petit morceau de JavaScript qui s&#39;exécute entièrement sur votre appareil. Elle fonctionne hors ligne, répond instantanément et ne nécessite aucun compte ou inscription. Fermez l&#39;onglet et chaque nombre que vous avez tapé disparaît.</p>
 <p>Utilisez cet outil chaque fois que vous tarifez un produit, réconciliez un reçu ou avez besoin de séparer la composante fiscale d&#39;un total. Les trois sorties — net, taxe et brut — vous donnent l&#39;image complète en une seule vue.</p>
-    <section class="faq"><h2>Sales tax calculator FAQ</h2><dl><dt>What is the difference between adding and extracting tax?</dt><dd>Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was.</dd><dt>What tax rates should I use?</dt><dd>Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign.</dd><dt>Is anything I type uploaded?</dt><dd>No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page.</dd></dl></section>
+    <section class="faq"><h2>FAQ sur le calculateur de taxe de vente</h2><dl><dt>Quelle est la différence entre ajouter et extraire une taxe ?</dt><dd>L&#39;ajout de taxes prend un prix net (le prix avant taxe) et calcule le prix brut que vous payez. L&#39;extraction de taxe fait l&#39;inverse : vous saisissez le prix brut déjà TTC et le calculateur calcule quelle part de taxe et quel était le montant avant taxe.</dd><dt>Quels taux d&#39;imposition dois-je utiliser ?</dt><dd>Utilisez le tarif en vigueur dans votre pays ou région. Des exemples courants incluent une TVA de 20 % au Royaume-Uni, 19 % en Allemagne, une TPS de 10 % en Australie et des taux de taxe de vente variables selon les États américains. Entrez le nombre sans le signe de pourcentage.</dd><dt>Est-ce que quelque chose que je tape est téléchargé ?</dt><dd>Non. Tout s&#39;exécute dans votre navigateur sans aucun serveur impliqué. Les chiffres que vous saisissez disparaissent lorsque vous fermez la page.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
-  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"amount":"Montant","rate":"Taux d'imposition %","mode":"Mode","add_tax":"Ajouter la taxe au prix","remove_tax":"Extraire la taxe du prix","net":"Net (avant impôts)","tax":"Montant de la taxe","gross":"Brut (total)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/salestax.js" defer></script>
 </body>
 </html>

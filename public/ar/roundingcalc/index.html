@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rounding Calculator — round numbers to any decimal place</title>
-<meta name="description" content="Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.">
+<title>حاسبة التقريب - تقريب الأرقام إلى أي منزلة عشرية</title>
+<meta name="description" content="حاسبة التقريب المجانية. قم بتقريب أي رقم إلى عدد مختار من المنازل العشرية، أو قم بتقريبه لأعلى أو لأسفل، على الفور وبدقة في متصفحك.">
 <link rel="canonical" href="https://mikaio.dev/ar/roundingcalc/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/roundingcalc/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/roundingcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/roundingcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/roundingcalc/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/roundingcalc/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/roundingcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/roundingcalc/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/roundingcalc/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/roundingcalc/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/roundingcalc/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/roundingcalc/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Rounding Calculator — round numbers to any decimal place">
-<meta property="og:description" content="Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.">
+<meta property="og:title" content="حاسبة التقريب - تقريب الأرقام إلى أي منزلة عشرية">
+<meta property="og:description" content="حاسبة التقريب المجانية. قم بتقريب أي رقم إلى عدد مختار من المنازل العشرية، أو قم بتقريبه لأعلى أو لأسفل، على الفور وبدقة في متصفحك.">
 <meta property="og:url" content="https://mikaio.dev/ar/roundingcalc/">
 <meta property="og:locale" content="ar">
 <meta name="twitter:card" content="summary">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Rounding Calculator — round numbers to any decimal place","url":"https://mikaio.dev/ar/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"Rounding Calculator","item":"https://mikaio.dev/ar/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do the decimal places mean?","acceptedAnswer":{"@type":"Answer","text":"The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred."}},{"@type":"Question","name":"What is the difference between the three methods?","acceptedAnswer":{"@type":"Answer","text":"Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes."}},{"@type":"Question","name":"How are exact halves handled?","acceptedAnswer":{"@type":"Answer","text":"When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة التقريب - تقريب الأرقام إلى أي منزلة عشرية","url":"https://mikaio.dev/ar/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"حاسبة التقريب المجانية. قم بتقريب أي رقم إلى عدد مختار من المنازل العشرية، أو قم بتقريبه لأعلى أو لأسفل، على الفور وبدقة في متصفحك."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة التقريب","item":"https://mikaio.dev/ar/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ماذا تعني المنازل العشرية؟","acceptedAnswer":{"@type":"Answer","text":"عدد المنازل العشرية هو عدد الأرقام التي يجب الاحتفاظ بها بعد العلامة العشرية. أدخل 2 للتقريب إلى أجزاء من مائة، أو 0 للتقريب إلى رقم صحيح، أو رقم سالب مثل -2 للتقريب إلى أقرب مائة."}},{"@type":"Question","name":"ما الفرق بين الطرق الثلاثة؟","acceptedAnswer":{"@type":"Answer","text":"التقريب إلى الأقرب يذهب إلى أي قيمة أقرب، لأعلى أو لأسفل. يذهب التقريب للأعلى (السقف) دائمًا إلى القيمة الأعلى، والتقريب للأسفل (الأرضية) دائمًا إلى القيمة الأقل، وهو ما يهم لأشياء مثل التسعير أو تركيب العناصر في الصناديق."}},{"@type":"Question","name":"كيف يتم التعامل مع النصفين بالضبط؟","acceptedAnswer":{"@type":"Answer","text":"عندما تكون القيمة في المنتصف تمامًا، يتم التقريب إلى الأقرب إلى الرقم الأعلى، وهي القاعدة اليومية الأكثر شيوعًا. اختر التقريب لأعلى أو التقريب للأسفل بشكل صريح إذا كنت تريد التحكم في ذلك."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ar/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="التنقل في الموقع">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>Rounding Calculator</span></nav>
-  <h1>Rounding Calculator</h1>
-  <p class="lead">Enter a number and the decimal places you want, then choose to round to nearest, up, or down. The result updates as you type.</p>
-  <section class="widget" id="tool"><form id="rnd"><div class="row"><div class="field"><label for="rnd-num">Number</label><input type="number" id="rnd-num" step="any" inputmode="decimal"></div><div class="field"><label for="rnd-places">Decimal places</label><input type="number" id="rnd-places" value="0" step="1"></div><div class="field"><label for="rnd-mode">Method</label><select id="rnd-mode"><option value="near">Round to nearest</option><option value="up">Round up</option><option value="down">Round down</option></select></div></div><div class="result"><span class="hint">Rounded: </span><span class="big" id="rnd-out">—</span></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة التقريب</span></nav>
+  <h1>حاسبة التقريب</h1>
+  <p class="lead">أدخل رقمًا والمنازل العشرية التي تريدها، ثم اختر التقريب إلى الأقرب أو لأعلى أو لأسفل. يتم تحديث النتيجة أثناء الكتابة.</p>
+  <section class="widget" id="tool"><form id="rnd"><div class="row"><div class="field"><label for="rnd-num">رقم</label><input type="number" id="rnd-num" step="any" inputmode="decimal"></div><div class="field"><label for="rnd-places">المنازل العشرية</label><input type="number" id="rnd-places" value="0" step="1"></div><div class="field"><label for="rnd-mode">الطريقة</label><select id="rnd-mode"><option value="near">جولة إلى الأقرب</option><option value="up">تقريب</option><option value="down">تقريب إلى أسفل</option></select></div></div><div class="result"><span class="hint">مدور: </span><span class="big" id="rnd-out">—</span></div></form></section>
   <article class="content">
     <h2>قرّب أي رقم بالطريقة التي تحتاجها تماماً</h2>
 <p>يبدو التقريب بسيطاً حتى تضطر للقيام به بعناية. هل يصبح 2.675 هو 2.68 أم 2.67؟ وماذا يعني التقريب إلى أقرب مئة، أو الاحتفاظ بثلاث خانات عشرية؟ وهل &quot;التقريب للأعلى&quot; هو نفسه &quot;التقريب إلى الأقرب&quot;؟ إن إتقان هذه الأمور مهم كلما احتجت إلى تنسيق رقم للعملات أو القياسات أو الدرجات أو التقارير، ومن السهل جداً الخطأ فيه. تزيل حاسبة التقريب هذه كل التخمين. أدخل رقماً، اختر عدد الخانات العشرية التي تريدها، حدد طريقة التقريب، وستظهر النتيجة فوراً. تعمل الأداة بالكامل داخل متصفحك، لذا تظهر الإجابة لحظة الكتابة ولا يُرفَع أي شيء تدخله إلى الإنترنت.</p>
@@ -142,13 +148,14 @@ textarea{min-height:120px;resize:vertical}
 <h2>خصوصية وفورية ومجانية</h2>
 <p>لا يوجد تسجيل ولا تكلفة ولا إعلانات تعترض طريقك. الحاسبة بالكامل هي قطعة صغيرة من التعليمات البرمجية تعمل على جهازك الخاص، ولهذا تستجيب لحظة الكتابة وتستمر في العمل دون اتصال بالإنترنت. لا يُحمَّل أي شيء تدخله أو يُخزَّن أو يُشارك؛ فالأرقام موجودة فقط على شاشتك وتختفي عند إعادة تحميل الصفحة.</p>
 <p>لاستخدامها، أدخل رقمك وحدد الخانات العشرية واختر طريقة واقرأ النتيجة المقرَّبة. غيّر أي إدخال في أي وقت وستواكب الإجابة التغيير، مما يتيح لك تقريب رقم واحد أو استكشاف كيف تؤثر الإعدادات المختلفة على نفس الرقم بقدر ما تشاء.</p>
-    <section class="faq"><h2>Rounding calculator FAQ</h2><dl><dt>What do the decimal places mean?</dt><dd>The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred.</dd><dt>What is the difference between the three methods?</dt><dd>Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes.</dd><dt>How are exact halves handled?</dt><dd>When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that.</dd></dl></section>
+    <section class="faq"><h2>الأسئلة الشائعة حول حاسبة التقريب</h2><dl><dt>ماذا تعني المنازل العشرية؟</dt><dd>عدد المنازل العشرية هو عدد الأرقام التي يجب الاحتفاظ بها بعد العلامة العشرية. أدخل 2 للتقريب إلى أجزاء من مائة، أو 0 للتقريب إلى رقم صحيح، أو رقم سالب مثل -2 للتقريب إلى أقرب مائة.</dd><dt>ما الفرق بين الطرق الثلاثة؟</dt><dd>التقريب إلى الأقرب يذهب إلى أي قيمة أقرب، لأعلى أو لأسفل. يذهب التقريب للأعلى (السقف) دائمًا إلى القيمة الأعلى، والتقريب للأسفل (الأرضية) دائمًا إلى القيمة الأقل، وهو ما يهم لأشياء مثل التسعير أو تركيب العناصر في الصناديق.</dd><dt>كيف يتم التعامل مع النصفين بالضبط؟</dt><dd>عندما تكون القيمة في المنتصف تمامًا، يتم التقريب إلى الأقرب إلى الرقم الأعلى، وهي القاعدة اليومية الأكثر شيوعًا. اختر التقريب لأعلى أو التقريب للأسفل بشكل صريح إذا كنت تريد التحكم في ذلك.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
-  <p><a href="/glossary.html">كل الأدوات</a></p></footer>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"number":"رقم","places":"المنازل العشرية","mode":"الطريقة","nearest":"جولة إلى الأقرب","up":"تقريب","down":"تقريب إلى أسفل","result":"مدور"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/roundingcalc.js" defer></script>
 </body>
 </html>

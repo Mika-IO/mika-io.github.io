@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de temps : ajoutez et soustrayez des heures, des minutes et des secondes</title>
+<meta name="description" content="Calculateur de temps libre. Ajoutez ou soustrayez facilement des heures, des minutes et des secondes. Idéal pour calculer le total des heures de travail, les temps de trajet et les durées.">
+<link rel="canonical" href="https://mikaio.dev/fr/timecalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/timecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/timecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/timecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/timecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/timecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/timecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/timecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/timecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/timecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/timecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/timecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculateur de temps : ajoutez et soustrayez des heures, des minutes et des secondes">
+<meta property="og:description" content="Calculateur de temps libre. Ajoutez ou soustrayez facilement des heures, des minutes et des secondes. Idéal pour calculer le total des heures de travail, les temps de trajet et les durées.">
+<meta property="og:url" content="https://mikaio.dev/fr/timecalc/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de temps : ajoutez et soustrayez des heures, des minutes et des secondes","url":"https://mikaio.dev/fr/timecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur de temps libre. Ajoutez ou soustrayez facilement des heures, des minutes et des secondes. Idéal pour calculer le total des heures de travail, les temps de trajet et les durées."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de temps","item":"https://mikaio.dev/fr/timecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Puis-je participer plus de 24 heures ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Le champ Heures accepte tout entier positif, vous pouvez donc calculer le total des heures travaillées sur plusieurs jours."}},{"@type":"Question","name":"Et si le résultat est négatif ?","acceptedAnswer":{"@type":"Answer","text":"Si la soustraction donne un résultat négatif, la calculatrice l'affiche préfixé par un signe moins."}},{"@type":"Question","name":"Comment calculer le total des heures de travail ?","acceptedAnswer":{"@type":"Answer","text":"Entrez votre heure de début comme heure A (heures à partir de minuit, par exemple 9h 0m pour 9 heures du matin), votre heure de fin comme heure B et choisissez soustraire. Le résultat est vos heures travaillées."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timecalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/timecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timecalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur de temps</span></nav>
+  <h1>Calculateur de temps</h1>
+  <p class="lead">Entrez deux durées et choisissez de les ajouter ou de les soustraire.</p>
+  <section class="widget" id="tool"><form id="tc-form"><div class="row"><div class="field"><label for="tc-h1">Heure A</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h1" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m1" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s1" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div><div class="field" style="align-self:flex-end;padding-bottom:0.5rem"><select id="tc-op"><option value="+">+</option><option value="-">−</option></select></div><div class="field"><label for="tc-h2">Temps B</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h2" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m2" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s2" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div></div><div class="result"><span class="hint">Résultat: </span><span class="big" id="tc-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Ajoutez et soustrayez facilement des durées</h2>
+<p>Ajouter ou soustraire du temps semble simple jusqu&#39;à ce que vous atteigniez l&#39;arithmétique. Les heures, les minutes et les secondes utilisent un système en base 60 plutôt qu&#39;en base 10, ce qui signifie que le calcul mental habituel ne s&#39;applique pas directement. En ajoutant 2 heures 45 minutes à 1 heure 30 minutes, on obtient 4 heures 15 minutes et non 4h75. Cette calculatrice gère la conversion automatiquement : entrez les heures, les minutes et les secondes pour chaque durée, choisissez ajouter ou soustraire, et le résultat correctement formaté apparaît instantanément.</p>
+<h2>Utilisations courantes d&#39;un calculateur de temps</h2>
+<p><strong>Total des heures de travail</strong> : Si vous avez travaillé de 8h30 à 12h15 puis de 13h00 à 17h45, additionnez les deux séances pour obtenir votre total. Saisissez 3 heures 45 minutes pour le matin et 4 heures 45 minutes pour l&#39;après-midi ; le total est de 8 heures 30 minutes.</p>
+<p><strong>Durée du trajet</strong> : l&#39;ajout de segments de conduite, de marche et de transports en commun à la durée totale du trajet est une utilisation fréquente. Trois étapes distinctes de 45 minutes, 20 minutes et 1 heure 10 minutes totalisent 2 heures 15 minutes.</p>
+<p><strong>Suivi du projet</strong> : la somme du temps passé sur différentes tâches au cours d&#39;une journée ou d&#39;une semaine donne le nombre total d&#39;heures facturables. Les pigistes et les entrepreneurs suivent souvent le temps en heures et en minutes et doivent additionner plusieurs entrées.</p>
+<p><strong>Sports et compétition</strong> : comparer les temps au tour, additionner les temps d&#39;étape dans une course ou calculer le temps qu&#39;un concurrent doit rattraper.</p>
+<p><strong>Cuisson</strong> : plusieurs plats avec des temps de cuisson différents commençant à différents moments peuvent être suivis en ajoutant les temps écoulés.</p>
+<h2>Le système base 60</h2>
+<p>Le temps utilise l’arithmétique sexagésimale (base 60), héritée des anciennes mathématiques babyloniennes. Il y a 60 secondes dans une minute et 60 minutes dans une heure, donc le passage des secondes aux minutes se produit à 60, pas à 100. C&#39;est pourquoi une simple addition décimale produit des résultats erronés pour le temps : 45 minutes + 30 minutes = 75 minutes = 1 heure 15 minutes, pas 0,75 heure.</p>
+<p>La calculatrice convertit toutes les entrées en secondes totales, effectue l&#39;arithmétique en secondes, puis reconvertit en heures, minutes et secondes pour l&#39;affichage. Cette approche gère correctement tous les portages et emprunts, quelles que soient les valeurs saisies.</p>
+<h2>Résultats négatifs</h2>
+<p>Lors de la soustraction, si le temps A est inférieur au temps B, le résultat est négatif — par exemple, si vous soustrayez 3 heures d&#39;1 heure, vous obtenez moins 2 heures. La calculatrice affiche la valeur absolue avec un préfixe de signe moins. Cela peut être utile pour comprendre combien de temps vous avez dépassé un budget ou un objectif.</p>
+<h2>Horaires au-delà de 24</h2>
+<p>Contrairement à une horloge, le champ des heures accepte tout nombre entier non négatif, vous pouvez donc travailler sur des durées de 48 heures, 100 heures ou plus. Ceci est utile pour le suivi de projets sur plusieurs jours, les temps intermédiaires totaux de marathon ou tout autre calcul temporel à grande échelle.</p>
+<h2>Comment utiliser la calculatrice</h2>
+<p>Saisissez les heures, les minutes et les secondes de votre première durée, choisissez si vous souhaitez les ajouter ou les soustraire, puis saisissez la deuxième durée de la même manière. Le résultat apparaît immédiatement en heures, minutes et secondes correctement calculées. Vous n&#39;avez jamais besoin de déterminer manuellement que 75 minutes doivent s&#39;afficher comme 1 heure 15 minutes, puisque la calculatrice normalise toujours le résultat pour vous.</p>
+<h2>Pourquoi un simple ajout ne va pas</h2>
+<p>La racine de la confusion est qu’une durée comme « 1 heure 45 minutes » n’est pas vraiment le nombre 1,45 – c’est 1 heure plus 45 sur 60 minutes, une valeur de base mixte que l’arithmétique décimale n’a jamais été conçue pour gérer directement. Si vous essayiez d&#39;ajouter 1:45 et 0:30 en additionnant simplement les chiffres, vous obtiendriez 1:75, ce qui n&#39;est pas du tout une heure valide. La calculatrice évite complètement cela en convertissant tout en une seule unité - le nombre total de secondes - en effectuant l&#39;addition ou la soustraction comme une arithmétique ordinaire sur ce nombre, et en reconvertissant uniquement en heures, minutes et secondes pour l&#39;affichage final. Ce modèle « convertir en une unité, calculer, reconvertir » est le moyen standard et fiable de gérer correctement toute arithmétique en base 60, et c&#39;est exactement ce qui se passe dans les coulisses à chaque fois que vous appuyez sur calculer.</p>
+<h2>Sport et cuisine</h2>
+<p>Comparer les temps au tour, additionner les temps d&#39;étape sur une course à plusieurs étapes ou déterminer le temps qu&#39;un concurrent doit rattraper sur la distance restante sont autant d&#39;utilisations courantes dans le sport. Dans la cuisine, suivre plusieurs plats avec des temps de cuisson différents qui ont commencé à différents moments est plus facile lorsque vous pouvez ajouter et soustraire directement les durées écoulées plutôt que de regarder plusieurs minuteries distinctes et de faire le calcul dans votre tête.</p>
+<h2>Heures totales de travail travaillées</h2>
+<p>Si vous avez travaillé de 8h30 à 12h15 puis de 13h00 à 17h45, calculer votre total d&#39;heures pour la journée revient à ajouter deux durées distinctes : 3 heures 45 minutes pour la séance du matin et 4 heures 45 minutes pour celle de l&#39;après-midi. Au total, cela fait 8 heures 30 minutes, et non les 8h90 que vous obtiendriez en additionnant des décimales par négligence. Les indépendants, les entrepreneurs et toute personne facturant à l&#39;heure effectuent régulièrement ce calcul exact, additionnant souvent plusieurs de ces sessions au cours d&#39;une semaine pour arriver au total d&#39;une facture, et les petites erreurs arithmétiques s&#39;accumulent rapidement lorsqu&#39;elles sont effectuées à la main sur de nombreuses entrées.</p>
+<h2>Privé et instantané</h2>
+<p>Tous les calculs s&#39;exécutent entièrement dans votre navigateur, convertis en secondes totales et inversement pour des résultats correctement transmis, de sorte que rien de ce que vous saisissez n&#39;est jamais envoyé à un serveur, enregistré ou partagé. Il fonctionne hors ligne une fois chargé et ne conserve aucune trace de la durée que vous calculez.</p>
+    <section class="faq"><h2>FAQ sur le calculateur de temps</h2><dl><dt>Puis-je participer plus de 24 heures ?</dt><dd>Oui. Le champ Heures accepte tout entier positif, vous pouvez donc calculer le total des heures travaillées sur plusieurs jours.</dd><dt>Et si le résultat est négatif ?</dt><dd>Si la soustraction donne un résultat négatif, la calculatrice l&#39;affiche préfixé par un signe moins.</dd><dt>Comment calculer le total des heures de travail ?</dt><dd>Entrez votre heure de début comme heure A (heures à partir de minuit, par exemple 9h 0m pour 9 heures du matin), votre heure de fin comme heure B et choisissez soustraire. Le résultat est vos heures travaillées.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timecalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/timecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"time_a":"Heure A","time_b":"Temps B","result":"Résultat"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/timecalc.js" defer></script>
+</body>
+</html>

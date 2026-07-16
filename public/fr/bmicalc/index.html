@@ -68,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -117,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur d'IMC — Indice de Masse Corporelle (métrique et impérial)","url":"https://mikaio.dev/fr/bmicalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur d'IMC gratuit. Saisissez votre taille et votre poids en unités métriques ou impériales pour obtenir instantanément votre Indice de Masse Corporelle et sa catégorie, dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur d'IMC","item":"https://mikaio.dev/fr/bmicalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle est une fourchette d'IMC saine ?","acceptedAnswer":{"@type":"Answer","text":"Pour la plupart des adultes, un IMC compris entre 18,5 et 24,9 correspond à un poids santé. En dessous de 18,5, on parle d'insuffisance pondérale ; de 25 à 29,9, de surpoids ; et 30 ou plus entre dans la catégorie de l'obésité."}},{"@type":"Question","name":"L'IMC est-il fiable pour tout le monde ?","acceptedAnswer":{"@type":"Answer","text":"L'IMC est un outil de dépistage utile, mais il ne mesure pas directement la masse grasse. Les personnes très musclées, les sportifs, les personnes âgées et certains groupes ethniques peuvent nécessiter une autre interprétation : considérez le résultat comme un point de départ, pas comme un diagnostic."}},{"@type":"Question","name":"Cet outil enregistre-t-il mes données ?","acceptedAnswer":{"@type":"Answer","text":"Non. Le calcul s'effectue entièrement dans votre navigateur et rien de ce que vous saisissez n'est envoyé, enregistré ni partagé."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navigation du site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/bmicalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/bmicalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/bmicalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/bmicalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/bmicalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/bmicalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/bmicalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/bmicalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/bmicalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/bmicalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur d&#39;IMC</span></nav>
@@ -161,8 +164,9 @@ textarea{min-height:120px;resize:vertical}
   <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/bmicalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/bmicalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/bmicalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/bmicalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/bmicalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/bmicalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/bmicalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/bmicalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/bmicalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/bmicalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
-  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"units":"Unités","metric":"Métrique (cm, kg)","imperial":"Impérial (in, lb)","height_cm":"Taille (cm)","weight_kg":"Poids (kg)","height_in":"Taille (pouces)","weight_lb":"Poids (livres)","calculate":"Calculer l'IMC","under":"Insuffisance pondérale","normal":"Poids santé","over":"Surpoids","obese":"Obésité"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/bmicalc.js" defer></script>
 </body>
 </html>

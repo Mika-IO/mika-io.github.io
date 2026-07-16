@@ -12,6 +12,6 @@
     if(cssEl)cssEl.textContent='background: '+css+';';
   }
   [c1,c2,type,angle].forEach(function(el){if(el){el.addEventListener('input',update);el.addEventListener('change',update);}});
-  if(copyBtn)copyBtn.addEventListener('click',function(){var t=cssEl?cssEl.textContent:'';if(t&&navigator.clipboard)navigator.clipboard.writeText(t).then(function(){copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent='Copy CSS';},2000);});});
+  if(copyBtn)copyBtn.addEventListener('click',function(){var t=cssEl?cssEl.textContent:'';if(t&&navigator.clipboard)navigator.clipboard.writeText(t).then(function(){copyBtn.textContent=T('copied','Copied!');setTimeout(function(){copyBtn.textContent=T('copycss','Copy CSS');},2000);});});
   update();
 })();

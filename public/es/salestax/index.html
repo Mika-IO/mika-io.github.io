@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de impuestos sobre las ventas: agregue o elimine el IVA de cualquier precio</title>
+<meta name="description" content="Calculadora de impuestos sobre las ventas gratuita. Ingrese un precio y una tasa impositiva para agregar impuestos a un precio neto o extraerlos de un precio bruto. Funciona para IVA, GST y cualquier porcentaje.">
+<link rel="canonical" href="https://mikaio.dev/es/salestax/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/salestax/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/salestax/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/salestax/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/salestax/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/salestax/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/salestax/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/salestax/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/salestax/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/salestax/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/salestax/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/salestax/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de impuestos sobre las ventas: agregue o elimine el IVA de cualquier precio">
+<meta property="og:description" content="Calculadora de impuestos sobre las ventas gratuita. Ingrese un precio y una tasa impositiva para agregar impuestos a un precio neto o extraerlos de un precio bruto. Funciona para IVA, GST y cualquier porcentaje.">
+<meta property="og:url" content="https://mikaio.dev/es/salestax/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de impuestos sobre las ventas: agregue o elimine el IVA de cualquier precio","url":"https://mikaio.dev/es/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Calculadora de impuestos sobre las ventas gratuita. Ingrese un precio y una tasa impositiva para agregar impuestos a un precio neto o extraerlos de un precio bruto. Funciona para IVA, GST y cualquier porcentaje."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Calculadora de impuestos sobre las ventas","item":"https://mikaio.dev/es/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuál es la diferencia entre agregar y extraer impuestos?","acceptedAnswer":{"@type":"Answer","text":"Al agregar impuestos se toma un precio neto (el precio antes de impuestos) y se calcula el precio bruto que usted paga. La extracción de impuestos hace lo contrario: ingresa el precio bruto que ya incluye impuestos y la calculadora calcula cuánto es impuesto y cuál fue el monto antes de impuestos."}},{"@type":"Question","name":"¿Qué tipos impositivos debo utilizar?","acceptedAnswer":{"@type":"Answer","text":"Utilice cualquier tarifa que se aplique en su país o región. Los ejemplos comunes incluyen el 20% de IVA en el Reino Unido, el 19% en Alemania, el 10% de GST en Australia y diferentes tasas de impuestos sobre las ventas según el estado de EE. UU. Ingrese el número sin el signo de porcentaje."}},{"@type":"Question","name":"¿Se ha subido algo de lo que escribo?","acceptedAnswer":{"@type":"Answer","text":"No. Todo se ejecuta en su navegador sin ningún servidor involucrado. Las cifras que ingresas desaparecen cuando cierras la página."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Calculadora de impuestos sobre las ventas</span></nav>
+  <h1>Calculadora de impuestos sobre las ventas</h1>
+  <p class="lead">Ingrese el monto y la tasa impositiva, luego elija si agregar el impuesto a un precio neto o extraerlo de un monto bruto. Las tres cifras (netas, impositivas y brutas) se actualizan a medida que escribe.</p>
+  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">Cantidad</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">Tasa impositiva %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">Modo</label><select id="tax-mode"><option value="add">Añadir impuestos al precio</option><option value="remove">Extraer impuestos del precio</option></select></div></div><div class="result"><span class="hint">Neto (antes de impuestos): </span><b id="tax-net">—</b> · <span class="hint">Monto del impuesto: </span><b id="tax-tax">—</b> · <span class="hint">Bruto (total): </span><span class="big" id="tax-gross">—</span></div></form></section>
+  <article class="content">
+    <h2>Añadir impuestos a un precio o extraerlo de un total</h2>
+<p>Impuesto sobre las ventas, IVA, GST: como se llame en su país, la aritmética es siempre una de dos operaciones: agregar un porcentaje de impuesto a un precio neto para obtener el monto bruto que paga un comprador, o trabajar hacia atrás a partir de un precio bruto para averiguar cuánto es impuesto. Esta calculadora maneja ambos al instante. Ingrese el monto, la tasa impositiva y elija un modo; el importe neto, el importe del impuesto y el importe bruto se actualizan a medida que escribe.</p>
+<p>Comprender qué dirección necesita es el primer paso. Si usted es un vendedor que fija el precio de un producto y desea que el precio mostrado sea el monto antes de impuestos con los impuestos agregados al finalizar la compra, elija &quot;agregar impuestos&quot;. Si recibió un recibo o una factura y desea saber cuánto de ese total fue impuesto, elija &quot;extraer impuesto&quot;. Ambas son necesidades cotidianas y ambas se derivan de la misma fórmula simple.</p>
+<h2>Cómo usar la calculadora</h2>
+<p>Ingrese el precio en el campo de monto. Para el modo &quot;agregar impuestos&quot;, este es el precio (neto) antes de impuestos. Para el modo &quot;extraer impuesto&quot;, este es el precio total (bruto) que ves en el recibo. Luego, ingrese la tasa impositiva como un número simple; por ejemplo, ingrese 20 para una tasa del 20%. Elija el modo en el menú desplegable y lea los tres valores de salida: neto (antes de impuestos), el monto del impuesto en sí y bruto (total con impuestos). El resultado se actualiza instantáneamente con cada pulsación de tecla.</p>
+<h2>Las fórmulas detrás de esto</h2>
+<p>Al sumar los impuestos, el precio bruto es igual al precio neto multiplicado por uno más la tasa dividida por cien. Un artículo de £100 al 20% se convierte en £120. La parte del impuesto es de £20.</p>
+<p>Al extraer el impuesto, el precio neto es igual al precio bruto dividido por uno más la tasa dividida por cien. Un total de £120 al 20% da un neto de £100 y un impuesto de £20. Ese paso de división es en el que la gente suele equivocarse: dividir por 1,20, sin restar el 20% del bruto directamente, lo que daría una respuesta diferente e incorrecta.</p>
+<h2>Tipos impositivos comunes en todo el mundo</h2>
+<p>Las tasas impositivas varían enormemente según el país e incluso dentro de los países. En el Reino Unido, el tipo estándar del IVA es del 20%, con tipos reducidos del 5% para algunos artículos. Alemania aplica el 19% a la mayoría de los bienes y el 7% a alimentos y libros. Australia cobra un 10% de GST sobre la mayoría de los bienes y servicios. Canadá tiene un GST federal del 5% más tasas provinciales. En Estados Unidos no existe ningún impuesto federal sobre las ventas; las tasas las establecen los estados y localidades y varían desde el 0% en algunos estados hasta más del 10% en algunas ciudades cuando se combinan. Verifique siempre la tarifa que se aplica a su situación específica antes de utilizarla para cualquier propósito oficial.</p>
+<h2>Cuando la recaudación de impuestos es más importante</h2>
+<p>El cálculo del extracto de impuestos es particularmente útil cuando se concilian cuentas, se reclama el IVA soportado como empresa o se intenta comparar precios en diferentes mercados donde algunos precios se muestran con impuestos y otros sin ellos. También surge en finanzas personales cuando se desea comprender el verdadero costo antes de impuestos de algo, como al comparar ofertas en las que un vendedor muestra un precio con impuestos incluidos y otro muestra uno sin impuestos.</p>
+<h2>Tasas compuestas e impuestos múltiples</h2>
+<p>Algunas transacciones están sujetas a más de un impuesto; por ejemplo, una estadía en un hotel que conlleva tanto un impuesto estatal como un impuesto local. Para manejar esto, calcule el primer impuesto sobre el precio neto y luego aplique el segundo impuesto a ese total intermedio, tratándolo como el nuevo &quot;neto&quot;. El orden generalmente no importa cuando ambas tasas se aplican a la misma base, pero sí importa cuando los impuestos se aplican secuencialmente a una base creciente. Para tasas combinadas simples, puede simplemente sumar los porcentajes antes de ingresarlos si ambos se aplican al mismo monto base.</p>
+<h2>Un ejemplo trabajado en ambos sentidos.</h2>
+<p>Supongamos que un portátil tiene un precio de £850 netos y el tipo de IVA aplicable es del 20%. Sumado de impuestos: £850 × 1,20 = £1020 brutos, de los cuales £170 son impuestos. Ahora supongamos que le entregan un recibo que muestra £1,020 como total y necesita saber el precio antes de impuestos de sus cuentas. Extracción de impuestos: £1.020 ÷ 1,20 = £850 netos, de nuevo con £170 de impuestos. Ambas direcciones describen la misma transacción, lo cual es una forma útil de comprobar su propia aritmética: cualquiera que sea la dirección que calcule primero, la conversión en sentido contrario debería devolverlo al punto de partida.</p>
+<p>Un error común es tomar directamente el 20% de la cifra bruta y llamarlo impuesto, lo que para 1.020 libras sugeriría erróneamente 204 libras en lugar de las 170 libras correctas. The error creeps in because the 20% rate is defined relative to the net price, not the gross one, so it must be applied before tax is added, or removed via division rather than a flat percentage subtraction afterwards. Esta calculadora siempre utiliza la relación correcta, por lo que puedes confiar en las cifras sin tener que volver a derivar la fórmula cada vez.</p>
+<h2>Privado, instantáneo y gratuito</h2>
+<p>Ningún dato que usted ingrese se envía a ninguna parte. La calculadora es una pequeña pieza de JavaScript que se ejecuta completamente en su dispositivo. Funciona sin conexión, responde al instante y no requiere ninguna cuenta ni registro. Cierra la pestaña y todos los números que escribiste desaparecerán.</p>
+<p>Utilice esta herramienta siempre que fije el precio de un producto, concilie un recibo o necesite separar el componente impositivo de un total. Los tres resultados (neto, impositivo y bruto) le brindan una imagen completa en una sola vista.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre la calculadora de impuestos sobre las ventas</h2><dl><dt>¿Cuál es la diferencia entre agregar y extraer impuestos?</dt><dd>Al agregar impuestos se toma un precio neto (el precio antes de impuestos) y se calcula el precio bruto que usted paga. La extracción de impuestos hace lo contrario: ingresa el precio bruto que ya incluye impuestos y la calculadora calcula cuánto es impuesto y cuál fue el monto antes de impuestos.</dd><dt>¿Qué tipos impositivos debo utilizar?</dt><dd>Utilice cualquier tarifa que se aplique en su país o región. Los ejemplos comunes incluyen el 20% de IVA en el Reino Unido, el 19% en Alemania, el 10% de GST en Australia y diferentes tasas de impuestos sobre las ventas según el estado de EE. UU. Ingrese el número sin el signo de porcentaje.</dd><dt>¿Se ha subido algo de lo que escribo?</dt><dd>No. Todo se ejecuta en su navegador sin ningún servidor involucrado. Las cifras que ingresas desaparecen cuando cierras la página.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"amount":"Cantidad","rate":"Tasa impositiva %","mode":"Modo","add_tax":"Añadir impuestos al precio","remove_tax":"Extraer impuestos del precio","net":"Neto (antes de impuestos)","tax":"Monto del impuesto","gross":"Bruto (total)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/salestax.js" defer></script>
+</body>
+</html>

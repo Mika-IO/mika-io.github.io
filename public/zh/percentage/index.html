@@ -68,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -117,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"百分比计算器 — 求某数的百分比、增减变化等","url":"https://mikaio.dev/zh/percentage/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费百分比计算器。求一个数的百分之几、一个数是另一个数的百分之几，并即时计算百分比的增加或减少。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"百分比计算器","item":"https://mikaio.dev/zh/percentage/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"怎样求一个数的百分比？","acceptedAnswer":{"@type":"Answer","text":"把百分比除以 100，再乘以这个数。例如，150 的 20% 是 0.20 × 150 = 30。上面的第一个框会自动替你计算。"}},{"@type":"Question","name":"百分比变化是怎么算的？","acceptedAnswer":{"@type":"Answer","text":"用新值减去原始值，除以原始值的绝对值，再乘以 100。结果为正表示增加，为负表示减少。"}},{"@type":"Question","name":"计算器会对结果四舍五入吗？","acceptedAnswer":{"@type":"Answer","text":"为便于阅读，结果保留两位小数，并按你的语言格式显示。底层计算使用完整精度。"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="网站导航">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/percentage/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/percentage/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/percentage/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/percentage/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/percentage/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/percentage/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/percentage/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/percentage/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/percentage/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/percentage/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>百分比计算器</span></nav>
@@ -152,8 +155,9 @@ textarea{min-height:120px;resize:vertical}
   <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/percentage/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/percentage/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/percentage/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/percentage/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/percentage/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/percentage/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/percentage/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/percentage/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/percentage/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/percentage/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
-  <p><a href="/glossary.html">全部工具</a></p></footer>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"t1_title":"某数的百分之几是多少？","t1_p":"百分比（%）","t1_n":"的数值","t1_out":"结果","t2_title":"一个数是另一个数的百分之几？","t2_a":"这个数","t2_b":"占总数","t2_out":"占","t3_title":"百分比增加或减少","t3_x":"原始值","t3_y":"新值","t3_out":"变化"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/percentage.js" defer></script>
 </body>
 </html>

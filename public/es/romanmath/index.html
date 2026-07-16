@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convertidor de números romanos: convierte números a números romanos</title>
+<meta name="description" content="Conversor de números romanos gratuito. Convierta cualquier número del 1 al 3999 a números romanos o vuelva a convertir números romanos a decimales. Instantáneo y preciso.">
+<link rel="canonical" href="https://mikaio.dev/es/romanmath/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/romanmath/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/romanmath/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/romanmath/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/romanmath/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/romanmath/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/romanmath/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/romanmath/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/romanmath/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/romanmath/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/romanmath/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/romanmath/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Convertidor de números romanos: convierte números a números romanos">
+<meta property="og:description" content="Conversor de números romanos gratuito. Convierta cualquier número del 1 al 3999 a números romanos o vuelva a convertir números romanos a decimales. Instantáneo y preciso.">
+<meta property="og:url" content="https://mikaio.dev/es/romanmath/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Convertidor de números romanos: convierte números a números romanos","url":"https://mikaio.dev/es/romanmath/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Conversor de números romanos gratuito. Convierta cualquier número del 1 al 3999 a números romanos o vuelva a convertir números romanos a decimales. Instantáneo y preciso."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Convertidor de números romanos","item":"https://mikaio.dev/es/romanmath/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuál es el rango de los números romanos?","acceptedAnswer":{"@type":"Answer","text":"Los números romanos estándar representan números del 1 al 3999. El número 4.000 requeriría un símbolo (M̄) con una barra que no es estándar. Esta calculadora admite del 1 al 3999."}},{"@type":"Question","name":"¿Cuáles son los símbolos de los números romanos?","acceptedAnswer":{"@type":"Answer","text":"I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Notación sustractiva: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900."}},{"@type":"Question","name":"¿Cuándo se utilizan los números romanos hoy en día?","acceptedAnswer":{"@type":"Answer","text":"Los números romanos aparecen en las esferas de los relojes, títulos de capítulos de libros, secuelas de películas (Rocky IV), números del Super Bowl (Super Bowl LVII), números de años en películas y monumentos, y formato de esquema."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/romanmath/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/romanmath/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/romanmath/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/romanmath/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/romanmath/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/romanmath/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/romanmath/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/romanmath/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/romanmath/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/romanmath/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Convertidor de números romanos</span></nav>
+  <h1>Convertidor de números romanos</h1>
+  <p class="lead">Ingrese un número decimal para convertir a números romanos o ingrese números romanos para convertir a decimal.</p>
+  <section class="widget" id="tool"><form id="roman-form"><div class="row"><div class="field"><label for="roman-dec">Numero decimal</label><input type="number" id="roman-dec" min="1" max="3999" step="1" inputmode="numeric"></div></div><div class="result"><span class="hint">Número romano: </span><span class="big" id="roman-out">—</span></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="roman-in">Número romano a decimal</label><input type="text" id="roman-in" style="text-transform:uppercase" maxlength="20"></div><div class="result"><span class="hint">Numero decimal: </span><span class="big" id="roman-dec-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Convertir entre números decimales y números romanos</h2>
+<p>Los números romanos se han utilizado durante más de dos milenios y siguen encontrándose ampliamente en la actualidad: en las esferas de los relojes, en títulos de películas y libros, en el Super Bowl, en documentos legales y en monumentos. Este conversor funciona en ambas direcciones: ingrese un número decimal para obtener su equivalente en números romanos, o escriba números romanos para convertirlos nuevamente a decimales.</p>
+<h2>El sistema de numeración romana.</h2>
+<p>Los números romanos utilizan siete letras latinas como símbolos: I (1), V (5), X (10), L (50), C (100), D (500) y M (1000). Los números se forman combinando estos símbolos siguiendo dos reglas principales:</p>
+<p><strong>Notación aditiva</strong>: Los símbolos se colocan de mayor a menor y se suman sus valores. III = 1+1+1 = 3. VIII = 5+1+1+1 = 8. XIII = 10+3 = 13.</p>
+<p><strong>Notación sustractiva</strong>: cuando un símbolo de valor menor aparece antes que uno más grande, se resta. Esto evita secuencias de cuatro símbolos repetidos. Los pares sustractivos son: IV = 4 (no IIII), IX = 9 (no VIIII), XL = 40, XC = 90, CD = 400, CM = 900.</p>
+<h2>Ejemplos completos</h2>
+<ul>
+<li>MMXXIV = 2000+20+4 = 2024 (el año 2024)</li>
+<li>XLII = 40+2 = 42</li>
+<li>CDXCIX = 400+90+9 = 499</li>
+<li>MCMXCIX = 1000+900+90+9 = 1999</li>
+<li>MMMDCCCLXXXVIII = 3888 (el número romano estándar más largo)</li>
+</ul>
+<h2>Dónde aparecen los números romanos hoy</h2>
+<p><strong>Relojes y relojes</strong>: Muchas esferas de relojes tradicionales utilizan números romanos para las horas. Tenga en cuenta que IV a veces se escribe como IIII en los relojes por simetría visual.</p>
+<p><strong>Cine y televisión</strong>: los años de producción de películas y programas de televisión suelen aparecer en números romanos en los créditos finales. Las secuelas de películas los utilizan con frecuencia: Rocky IV, Star Wars Episodio IV.</p>
+<p><strong>Deportes</strong>: El Super Bowl se numera con números romanos desde el Super Bowl V. Los Juegos Olímpicos también utilizan números romanos para sus juegos numerados.</p>
+<p><strong>Monarquía y papado</strong>: Los gobernantes con el mismo nombre se distinguen por ordinales en números romanos: Isabel II, Papa Juan XXIII, Enrique VIII.</p>
+<p><strong>Esquemas y listas</strong>: Los esquemas formales (I. II. III. A. B. C. i. ii. iii.) utilizan números romanos para los números de sección principales.</p>
+<p><strong>Arquitectura y monumentos</strong>: los números de los años en las piedras angulares, monumentos y edificios públicos están tallados tradicionalmente en números romanos.</p>
+<h2>Una nota sobre formularios no estándar</h2>
+<p>No todos los números romanos que encuentre siguen las estrictas reglas sustractivas que utiliza este conversor. Históricamente, los propios romanos no siempre fueron consistentes, y todavía verás IIII en lugar de IV en algunas esferas de reloj simplemente por equilibrio visual frente a VIII, o formas solo aditivas en inscripciones más antiguas. Esta herramienta sigue la convención moderna estándar (la que se enseña en las escuelas y se utiliza en publicaciones, créditos cinematográficos y documentos formales) que siempre prefiere la forma sustractiva más corta. Si escribe una variante no estándar como IIII, trate cualquier resultado inesperado como una señal de que la entrada no estaba en formato estándar y no como un error en la conversión misma.</p>
+<h2>Limitaciones de los números romanos</h2>
+<p>Los números romanos no tienen símbolo para el cero, ni forma de representar fracciones ni aritmética sencilla: multiplicar dos números romanos a mano es laborioso. Esta es la razón por la que el sistema fue reemplazado gradualmente por el sistema posicional hindú-árabe (los dígitos del 0 al 9) a efectos de cálculo.</p>
+<h2>Cómo utilizar el convertidor</h2>
+<p>Escriba un número decimal en el primer campo para ver su forma de número romano aparecer instantáneamente, o escriba números romanos en el segundo campo para convertirlos nuevamente a un número decimal. Ambas direcciones se actualizan en vivo a medida que escribe, por lo que puede avanzar y retroceder libremente: ingrese 1999, vea aparecer MCMXCIX, luego edítelo ligeramente y observe cómo el valor decimal cambia para coincidir. El convertidor acepta números romanos de notación sustractiva estándar, que cubren todos los números enteros desde 1 hasta 3999, el límite práctico tradicional del sistema clásico.</p>
+<h2>Conversión de decimal a romano, paso a paso</h2>
+<p>La conversión funciona haciendo coincidir repetidamente el valor romano más grande posible con lo que queda del número, restándolo y siguiendo adelante. Para 1994: el valor más grande que se ajusta es 1000 (M), quedando 994; luego 900 ajustes (CM), quedando 94; luego 90 ajustes (XC), quedando 4; luego 4 ajustes (IV), dejando 0. Al leer los símbolos en orden se obtiene MCMXCIV. Este enfoque codicioso de dar primero lo más grande siempre produce la forma estándar correcta porque el sistema romano fue diseñado de manera que ninguna combinación más pequeña de símbolos pueda representar el mismo valor de manera más compacta.</p>
+<h2>Conversión de romano a decimal, paso a paso</h2>
+<p>En sentido contrario, el convertidor lee el número romano de izquierda a derecha y suma el valor de cada símbolo, excepto cuando un símbolo va seguido inmediatamente de uno más grande, en cuyo caso se resta. Para MCMXCIV: M (1000) va seguida de C, que es más pequeña, así que agregue 1000; A C (100) le sigue M, que es más grande, así que resta 100; Se añade M (1000); A X (10) le sigue C, más grande, por lo que se resta 10; se añade C (100); A I (1) le sigue V, mayor, por lo que se resta 1; Se añade V (5). Sumar 1000 − 100 + 1000 − 10 + 100 − 1 + 5 da 1994, que coincide exactamente con el número original.</p>
+<h2>Por qué no existe el año cero ni el cero romano</h2>
+<p>Una peculiaridad que vale la pena conocer es que el sistema de números romanos no tiene ningún símbolo para el cero: el concepto no se había formalizado cuando se desarrolló el sistema, y los números romanos fueron diseñados exclusivamente para contar y registrar cantidades, no para el tipo de aritmética posicional que permite un cero. Esta es también la razón por la que el calendario histórico salta directamente del año 1 a. C. al 1 d. C. sin ningún año cero entre ellos, una peculiaridad que todavía causa confusión en ocasiones al calcular el lapso exacto entre fechas antiguas.</p>
+<h2>Privado e instantáneo</h2>
+<p>La conversión se ejecuta completamente en su navegador en ambas direcciones, por lo que los resultados aparecen en el instante en que escribe y los números que ingresa nunca se cargan, registran o comparten. Funciona sin conexión una vez que se ha cargado la página.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre números romanos</h2><dl><dt>¿Cuál es el rango de los números romanos?</dt><dd>Los números romanos estándar representan números del 1 al 3999. El número 4.000 requeriría un símbolo (M̄) con una barra que no es estándar. Esta calculadora admite del 1 al 3999.</dd><dt>¿Cuáles son los símbolos de los números romanos?</dt><dd>I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Notación sustractiva: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900.</dd><dt>¿Cuándo se utilizan los números romanos hoy en día?</dt><dd>Los números romanos aparecen en las esferas de los relojes, títulos de capítulos de libros, secuelas de películas (Rocky IV), números del Super Bowl (Super Bowl LVII), números de años en películas y monumentos, y formato de esquema.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/romanmath/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/romanmath/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/romanmath/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/romanmath/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/romanmath/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/romanmath/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/romanmath/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/romanmath/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/romanmath/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/romanmath/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"decimal":"Numero decimal","roman":"Número romano","roman_to_dec":"Número romano a decimal"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/romanmath.js" defer></script>
+</body>
+</html>

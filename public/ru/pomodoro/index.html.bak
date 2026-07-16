@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pomodoro Timer — 25-минутный таймер фокусировки для учебы и работы.</title>
+<meta name="description" content="Бесплатный таймер Помидора. 25-минутные фокус-сессии с 5-минутными короткими перерывами и 15-минутными длинными перерывами. Никакой регистрации не требуется. Запускается в вашем браузере со звуковыми оповещениями.">
+<link rel="canonical" href="https://mikaio.dev/ru/pomodoro/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/pomodoro/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/pomodoro/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/pomodoro/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/pomodoro/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/pomodoro/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/pomodoro/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/pomodoro/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/pomodoro/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/pomodoro/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/pomodoro/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/pomodoro/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pomodoro Timer — 25-минутный таймер фокусировки для учебы и работы.">
+<meta property="og:description" content="Бесплатный таймер Помидора. 25-минутные фокус-сессии с 5-минутными короткими перерывами и 15-минутными длинными перерывами. Никакой регистрации не требуется. Запускается в вашем браузере со звуковыми оповещениями.">
+<meta property="og:url" content="https://mikaio.dev/ru/pomodoro/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Pomodoro Timer — 25-минутный таймер фокусировки для учебы и работы.","url":"https://mikaio.dev/ru/pomodoro/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный таймер Помидора. 25-минутные фокус-сессии с 5-минутными короткими перерывами и 15-минутными длинными перерывами. Никакой регистрации не требуется. Запускается в вашем браузере со звуковыми оповещениями."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Таймер Помидора","item":"https://mikaio.dev/ru/pomodoro/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что такое техника Помидора?","acceptedAnswer":{"@type":"Answer","text":"Техника Помидора, разработанная Франческо Чирилло в конце 1980-х годов, чередует 25-минутные целенаправленные рабочие занятия с короткими перерывами. После четырех сеансов делается более длительный перерыв. Название происходит от кухонного таймера в форме помидора."}},{"@type":"Question","name":"Могу ли я изменить продолжительность таймера?","acceptedAnswer":{"@type":"Answer","text":"В этой реализации используется классическая продолжительность: 25 минут сосредоточения, 5-минутные короткие перерывы и 15-минутный длинный перерыв после каждых четырех занятий. Доказано, что такая продолжительность позволяет поддерживать внимание в течение длительных периодов работы."}},{"@type":"Question","name":"Услышу ли я звук, когда таймер закончится?","acceptedAnswer":{"@type":"Answer","text":"Да, таймер воспроизводит короткое звуковое оповещение с помощью API веб-аудио. Убедитесь, что громкость вашего устройства включена."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Таймер Помидора</span></nav>
+  <h1>Таймер Помидора</h1>
+  <p class="lead">Нажмите «Начать», чтобы начать 25-минутный фокус-сессию. По истечении времени воспроизводится звук, и таймер автоматически переключается на 5-минутный перерыв. После четырех сеансов предлагается более длительный 15-минутный перерыв.</p>
+  <section class="widget" id="tool"><div id="pom-app" style="text-align:center"><div id="pom-phase" style="font-size:1rem;margin-bottom:0.5rem;opacity:0.7">Готов сосредоточиться</div><div id="pom-display" style="font-size:4rem;font-weight:700;font-variant-numeric:tabular-nums">25:00</div><div style="margin:1rem 0;display:flex;gap:0.5rem;justify-content:center"><button id="pom-start" class="btn">Старт</button><button id="pom-reset" class="btn secondary">Сброс</button></div><div id="pom-count" style="opacity:0.6;font-size:0.9rem"></div></div></section>
+  <article class="content">
+    <h2>25-минутная техника концентрации, изменившая работу миллионов людей</h2>
+<p>Техника Помодоро — один из самых распространённых в мире методов управления временем. Разработанная Франческо Чирилло в конце 1980-х и названная в честь кухонного таймера в форме помидора, она строится на простом наблюдении: человеческий мозг удерживает глубокий фокус лучше короткими рывками, чем длинными непрерывными отрезками. Работая структурированными 25-минутными интервалами, разделёнными короткими паузами, можно поддерживать высокую концентрацию на протяжении всего долгого дня без умственного истощения, возникающего от непрерывного изматывающего труда.</p>
+<h2>Как работает таймер Помодоро</h2>
+<p>Нажмите &quot;Старт&quot;, чтобы начать 25-минутную сессию концентрации — один &quot;помодоро&quot;. В течение этого времени работайте над одной задачей и избегайте любых отвлечений. Когда 25 минут истекут, прозвучит сигнал, и таймер автоматически переключится на короткий 5-минутный перерыв. Используйте этот перерыв, чтобы встать, размяться или дать отдых глазам. После четырёх помодоро предлагается более долгий 15-минутный перерыв, чтобы мозг мог усвоить обработанную информацию.</p>
+<h2>Наука о внимании и отдыхе</h2>
+<p>Исследования когнитивной работоспособности неизменно показывают, что устойчивое внимание со временем ухудшается. После примерно 25–30 минут сосредоточенной работы частота ошибок начинает расти, а продуктивность падает, даже если человек чувствует, что всё ещё концентрируется. Короткие, осознанные перерывы противодействуют этому эффекту, давая префронтальной коре время закрепить информацию и сбросить внимание. Техника Помодоро оформляет это в рутину, чтобы перерывы происходили надёжно, а не только тогда, когда вы уже слишком устали.</p>
+<p>Техника также использует психологию обязательства. Знание, что нужно сохранять концентрацию всего 25 минут — а не всё утро, — снижает энергию, требуемую для начала сложной задачи. Прокрастинация часто возникает из-за воспринимаемой огромности задачи; разбиение её на 25-минутные куски делает её управляемой.</p>
+<h2>Отслеживание сессий во времени</h2>
+<p>Помимо отдельного дня многие практики Помодоро находят реальную ценность в отслеживании того, сколько сессий они завершают за недели и месяцы, поскольку сам подсчёт становится простой, честной мерой сосредоточенных усилий, обмануть которую куда сложнее, чем смутное ощущение &quot;сегодня я усердно работал&quot;. Увидеть цепочку из четырёх-пяти завершённых помодоро в трудный день, даже если сама задача всё ещё кажется незавершённой, — это конкретное напоминание о том, что реальное, устойчивое усилие было приложено, что особенно важно для творческой или исследовательской работы без чёткого конца, где готовый результат может быть в днях или неделях впереди, а ежедневный прогресс иначе трудно увидеть.</p>
+<h2>Практические советы для эффективных сессий Помодоро</h2>
+<p>Прежде чем запускать таймер, запишите, над чем вы будете работать. Чёткое намерение на ближайшие 25 минут убирает принятие решений из самой сессии. Если во время помодоро возникает отвлекающая мысль, запишите её на листок и вернитесь к ней после окончания сессии, а не действуйте по ней немедленно.</p>
+<p>Строго ограничивайте перерыв пятью минутами. Желание продлить его естественно, но подрывает ритм. После четырёх сессий 15-минутный длинный перерыв — подходящее время для короткой прогулки или приёма пищи, что помогает закрепить память и восстановить бодрость для следующего блока сессий.</p>
+<p>Техника лучше всего работает для задач, требующих устойчивой концентрации: письма, программирования, учёбы, чтения, дизайнерской работы или любой формы глубокого творческого или аналитического труда. Она хуже подходит для сильно совместной работы, где прерывания неизбежны по своей природе.</p>
+<h2>Студенты и учащиеся</h2>
+<p>Студенты, готовящиеся к экзаменам, часто принимают технику Помодоро, потому что она даёт конкретную структуру для сессий повторения материала. Вместо того чтобы сидеть за столом три неопределённых часа и постепенно терять фокус, студент работает 25 минут, отдыхает 5 и отслеживает свои сессии. Восемь помодоро за день представляют четыре часа по-настоящему сфокусированной учёбы — куда эффективнее восьми часов рассеянного полувнимания.</p>
+<h2>Как пользоваться таймером</h2>
+<p>Нажмите &quot;старт&quot;, чтобы начать 25-минутный блок концентрации, затем просто работайте, пока не прозвучит сигнал. Больше ничего настраивать не нужно, и создавать учётную запись не требуется — таймер автоматически переводит вас в короткий перерыв, а затем обратно в следующий блок концентрации, циклически повторяя этот паттерн, пока вы не решите остановиться, причём после каждой четвёртой сессии автоматически предлагается более долгий перерыв.</p>
+<h2>Подстройка техники под свой собственный ритм</h2>
+<p>Хотя 25 минут концентрации и 5 минут отдыха — классическое соотношение, на котором остановился Чирилло, многие люди подстраивают тайминг под свою собственную продолжительность внимания и характер работы: некоторые находят, что 50-минутные блоки концентрации с 10-минутными перерывами лучше подходят для глубокой, непрерываемой творческой работы, тогда как другие, занятые более раздробленными задачами, предпочитают более короткие 15-минутные рывки. Базовый принцип, который важнее точных цифр, — это дисциплина работы единым, ничем не отвлекаемым блоком, за которым следует настоящий, осознанный перерыв; конкретное соотношение — лишь отправная точка, которую стоит скорректировать, когда вы почувствуете, как на самом деле ведёт себя ваша собственная концентрация.</p>
+<h2>Где техника даёт сбой</h2>
+<p>Техника Помодоро — не универсальное лекарство для любого вида работы. Сильно совместные задачи, где прерывания — неотъемлемая, неизбежная часть работы (поддержка клиентов, живое устранение неполадок, парное программирование в открытом пространстве), плохо укладываются в жёсткие 25-минутные блоки, и попытка навязать им эту структуру может создать больше трения, чем фокуса. Она также лучше всего работает для задач, которые можно осмысленно начать и остановить; по-настоящему непрерываемое состояние творческого потока, которое обрывает 25-минутный будильник посреди мысли, возможно, лучше обслуживается более длинным и свободным блоком времени. Знать, когда не стоит использовать технику, так же полезно, как знать, как пользоваться ею хорошо.</p>
+<h2>Приватно и всегда готов</h2>
+<p>Этот таймер работает полностью в вашем браузере, поэтому здесь нет учётной записи, слежки и никакие данные никуда не отправляются — перезагрузите страницу в любой момент, чтобы начать новый цикл.</p>
+    <section class="faq"><h2>Часто задаваемые вопросы о Помидоре</h2><dl><dt>Что такое техника Помидора?</dt><dd>Техника Помидора, разработанная Франческо Чирилло в конце 1980-х годов, чередует 25-минутные целенаправленные рабочие занятия с короткими перерывами. После четырех сеансов делается более длительный перерыв. Название происходит от кухонного таймера в форме помидора.</dd><dt>Могу ли я изменить продолжительность таймера?</dt><dd>В этой реализации используется классическая продолжительность: 25 минут сосредоточения, 5-минутные короткие перерывы и 15-минутный длинный перерыв после каждых четырех занятий. Доказано, что такая продолжительность позволяет поддерживать внимание в течение длительных периодов работы.</dd><dt>Услышу ли я звук, когда таймер закончится?</dt><dd>Да, таймер воспроизводит короткое звуковое оповещение с помощью API веб-аудио. Убедитесь, что громкость вашего устройства включена.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pomodoro/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/pomodoro/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/pomodoro/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/pomodoro/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/pomodoro/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/pomodoro/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/pomodoro/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/pomodoro/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/pomodoro/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/pomodoro/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/pomodoro.js" defer></script>
+</body>
+</html>

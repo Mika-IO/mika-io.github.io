@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Répéteur de texte - répétez n&#39;importe quel texte ou mot plusieurs fois</title>
+<meta name="description" content="Répéteur de texte gratuit. Répétez un mot, une phrase ou une ligne autant de fois que vous le souhaitez, avec un saut de ligne, un espace ou une virgule entre les copies, puis copiez le résultat instantanément.">
+<link rel="canonical" href="https://mikaio.dev/fr/textrepeater/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textrepeater/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/textrepeater/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/textrepeater/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/textrepeater/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/textrepeater/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/textrepeater/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/textrepeater/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textrepeater/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/textrepeater/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/textrepeater/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textrepeater/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Répéteur de texte - répétez n&#39;importe quel texte ou mot plusieurs fois">
+<meta property="og:description" content="Répéteur de texte gratuit. Répétez un mot, une phrase ou une ligne autant de fois que vous le souhaitez, avec un saut de ligne, un espace ou une virgule entre les copies, puis copiez le résultat instantanément.">
+<meta property="og:url" content="https://mikaio.dev/fr/textrepeater/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Répéteur de texte - répétez n'importe quel texte ou mot plusieurs fois","url":"https://mikaio.dev/fr/textrepeater/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Répéteur de texte gratuit. Répétez un mot, une phrase ou une ligne autant de fois que vous le souhaitez, avec un saut de ligne, un espace ou une virgule entre les copies, puis copiez le résultat instantanément."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Répétiteur de texte","item":"https://mikaio.dev/fr/textrepeater/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"À quoi peut servir un répéteur de texte ?","acceptedAnswer":{"@type":"Answer","text":"Les utilisations courantes incluent le remplissage de données de test, la création de lignes répétées pour une feuille de calcul ou un document, la création de modèles pour les publications sociales et la création rapide de longues chaînes sans appuyer sur une touche. Choisir « nouvelle ligne » entre les copies vous donne une entrée par ligne."}},{"@type":"Question","name":"Y a-t-il une limite au nombre de répétitions possibles ?","acceptedAnswer":{"@type":"Answer","text":"Pour des raisons de performances, la sortie est limitée à une très grande longueur, ce qui est bien supérieur aux besoins d'une utilisation quotidienne. Si vous atteignez la majuscule, réduisez le nombre de répétitions ou raccourcissez le texte."}},{"@type":"Question","name":"Mon SMS est-il envoyé quelque part ?","acceptedAnswer":{"@type":"Answer","text":"Non. La répétition se produit instantanément dans votre navigateur, donc rien de ce que vous tapez n'est téléchargé, stocké ou partagé."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textrepeater/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textrepeater/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textrepeater/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textrepeater/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/textrepeater/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textrepeater/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textrepeater/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textrepeater/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textrepeater/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textrepeater/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Répétiteur de texte</span></nav>
+  <h1>Répétiteur de texte</h1>
+  <p class="lead">Tapez votre texte, définissez combien de fois vous souhaitez le répéter et choisissez ce qui se passe entre les copies. Le résultat se construit instantanément.</p>
+  <section class="widget" id="tool"><form id="tr"><div class="field"><label for="tr-input">Texte à répéter</label><textarea id="tr-input" placeholder="Tapez un mot, une phrase ou une ligne…"></textarea></div><div class="row"><div class="field"><label for="tr-times">Répéter les temps</label><input type="number" id="tr-times" value="10" min="0" step="1"></div><div class="field"><label for="tr-sep">Entre les copies</label><select id="tr-sep"><option value="newline">Nouvelle ligne</option><option value="space">Espace</option><option value="comma">Virgule</option><option value="none">Rien</option></select></div></div><div class="field"><label for="tr-out">Résultat</label><textarea id="tr-out" readonly></textarea></div><button type="button" class="btn" data-copy="#tr-out" data-copied="Copié!">Copier le résultat</button></form></section>
+  <article class="content">
+    <h2>Répétez n&#39;importe quel texte autant de fois que nécessaire</h2>
+<p>Copier et coller le même mot ou la même ligne encore et encore est fastidieux et sujet aux erreurs. Que vous ayez besoin d&#39;une centaine de lignes identiques pour une feuille de calcul, d&#39;un bloc de texte d&#39;espace réservé répété, d&#39;une longue chaîne pour un test rapide ou d&#39;une exécution de la même phrase pour une publication sociale, le faire à la main fait perdre du temps et il est facile de perdre le compte. Ce répéteur de texte fait tout le travail en une seule étape : tapez votre texte, choisissez le nombre de copies que vous souhaitez, choisissez ce qui doit passer entre elles, et le résultat répété se construit instantanément. Tout s&#39;exécute dans votre navigateur, donc c&#39;est immédiat, fonctionne hors ligne et rien de ce que vous tapez n&#39;est jamais téléchargé.</p>
+<p>L&#39;outil est délibérément flexible quant à ce qui se trouve entre chaque copie. Vous pouvez séparer les répétitions par un saut de ligne, de sorte que chaque copie se trouve sur sa propre ligne, ce qui est idéal pour créer des données de liste. Vous pouvez utiliser un espace pour les regrouper sous la forme d&#39;une longue ligne de mots, une virgule pour créer une liste séparée par des virgules ou rien du tout pour coller les copies en une seule chaîne continue. Étant donné que la sortie est mise à jour à mesure que vous modifiez un paramètre, vous pouvez voir exactement ce que vous obtenez et le modifier jusqu&#39;à ce qu&#39;il soit correct.</p>
+<h2>Comment l&#39;utiliser</h2>
+<p>Commencez par taper ou coller le texte que vous souhaitez répéter dans la première case. Il peut s&#39;agir d&#39;un seul mot, d&#39;une phrase, d&#39;une phrase complète ou même d&#39;un bloc de plusieurs lignes. Ensuite, définissez combien de fois il doit être répété. Choisissez ensuite le séparateur qui correspond à votre objectif dans la liste déroulante. Le résultat apparaît immédiatement dans la zone inférieure et le bouton Copier le place dans votre presse-papiers, prêt à être collé là où vous en avez besoin.</p>
+<p>Tout est recalculé en direct, il n&#39;y a donc aucun bouton sur lequel appuyer pour générer et rien à réinitialiser. Modifiez le nombre de répétitions et la sortie augmente ou diminue instantanément ; changez le séparateur et regardez la disposition passer d’une colonne soignée à une seule ligne. Quand cela semble correct, copiez-le et vous avez terminé.</p>
+<h2>Utilisations courantes</h2>
+<p>La raison la plus fréquente pour laquelle les gens répètent un texte est la création de données de test ou d’échantillons. Les développeurs et les utilisateurs de feuilles de calcul ont souvent besoin de plusieurs lignes de même valeur pour tester une formule, une mise en page ou une importation, et les générer en une seule étape est bien plus rapide que de copier une cellule des centaines de fois. Choisir un saut de ligne comme séparateur vous donne exactement une entrée par ligne, prête à être collée directement dans une colonne de feuille de calcul ou dans un fichier texte.</p>
+<p>Les rédacteurs et les concepteurs utilisent la répétition pour créer des blocs d&#39;espace réservé, pour remplir un espace tout en testant une mise en page ou pour voir à quoi ressemble un élément répété. Sur les réseaux sociaux, un mot ou un emoji répété est parfois utilisé pour mettre l’accent ou comme motif ludique, et le construire ici est plus rapide et plus ordonné que d’écraser une clé. Les personnes qui apprennent ou s’entraînent utilisent également la répétition : copier une ligne plusieurs fois peut être un moyen simple de percer une phrase, et avoir les copies disposées proprement aide. Quelle que soit la raison, le schéma est le même : vous disposez d’un seul morceau de texte et vous avez besoin de plusieurs copies identiques disposées d’une manière particulière.</p>
+<h2>Choosing the right separator</h2>
+<p>Le séparateur est ce qui transforme une pile de copies en quelque chose d&#39;utile, cela vaut donc la peine d&#39;y réfléchir un instant. Un saut de ligne est le choix le plus polyvalent pour les données structurées, car la plupart des programmes traitent une ligne comme un seul élément ; collez le résultat dans une feuille de calcul et chaque copie atterrit dans sa propre cellule dans une colonne. Une virgule crée le type de liste séparée par des virgules que de nombreux systèmes attendent pour les balises, les valeurs ou les options. Un espace est préférable lorsque vous souhaitez que les copies se lisent comme une ligne de texte fluide plutôt que comme une liste. Et ne rien choisir du tout est utile lorsque vous avez besoin d&#39;une seule chaîne ininterrompue, par exemple pour tester comment un champ gère une valeur très longue.</p>
+<p>Si vous n&#39;êtes pas sûr de ce dont vous avez besoin, essayez-en un et regardez le résultat. Étant donné que tout se met à jour instantanément, changer de séparateur ne coûte rien et vous pouvez comparer les mises en page côte à côte jusqu&#39;à ce que l&#39;une corresponde à ce que l&#39;on attend à l&#39;étape suivante.</p>
+<h2>Une note sur la taille</h2>
+<p>Pour que l&#39;outil reste rapide et que votre navigateur reste réactif, la sortie a une limite supérieure généreuse sur sa longueur totale. Ce plafond est bien plus élevé que ce qu&#39;exige toute tâche quotidienne, il est donc peu probable que vous le remarquiez, mais il vous protège de demander accidentellement un résultat si énorme qu&#39;il figerait la page. Si vous atteignez la limite, réduisez simplement le nombre de répétitions ou raccourcissez le texte que vous répétez, et l&#39;outil générera le résultat le plus large possible dans cette limite de sécurité.</p>
+<h2>Privé, instantané et gratuit</h2>
+<p>Il n&#39;y a pas d&#39;inscription, pas de frais et pas d&#39;attente. L&#39;ensemble du répéteur est un petit morceau de code qui s&#39;exécute sur votre propre appareil, c&#39;est pourquoi il répond dès que vous tapez et continue de fonctionner sans connexion Internet. Rien de ce que vous saisissez n&#39;est téléchargé, stocké ou partagé ; le texte et sa sortie répétée n&#39;existent que sur votre écran et disparaissent lorsque vous rechargez la page.</p>
+<p>Pour l&#39;utiliser, tapez votre texte, définissez le nombre de répétitions, choisissez un séparateur et copiez le résultat. Ajustez n&#39;importe quel paramètre à tout moment et la sortie suit le rythme, vous pouvez donc la façonner avec précision et saisir exactement le texte répété dont vous avez besoin.</p>
+    <section class="faq"><h2>FAQ sur le répéteur de texte</h2><dl><dt>À quoi peut servir un répéteur de texte ?</dt><dd>Les utilisations courantes incluent le remplissage de données de test, la création de lignes répétées pour une feuille de calcul ou un document, la création de modèles pour les publications sociales et la création rapide de longues chaînes sans appuyer sur une touche. Choisir « nouvelle ligne » entre les copies vous donne une entrée par ligne.</dd><dt>Y a-t-il une limite au nombre de répétitions possibles ?</dt><dd>Pour des raisons de performances, la sortie est limitée à une très grande longueur, ce qui est bien supérieur aux besoins d&#39;une utilisation quotidienne. Si vous atteignez la majuscule, réduisez le nombre de répétitions ou raccourcissez le texte.</dd><dt>Mon SMS est-il envoyé quelque part ?</dt><dd>Non. La répétition se produit instantanément dans votre navigateur, donc rien de ce que vous tapez n&#39;est téléchargé, stocké ou partagé.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textrepeater/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textrepeater/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textrepeater/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textrepeater/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/textrepeater/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textrepeater/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textrepeater/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textrepeater/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textrepeater/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textrepeater/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"input":"Texte à répéter","placeholder":"Tapez un mot, une phrase ou une ligne…","times":"Répéter les temps","separator":"Entre les copies","newline":"Nouvelle ligne","space":"Espace","comma":"Virgule","none":"Rien","output":"Résultat","copy":"Copier le résultat","copied":"Copié!"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/textrepeater.js" defer></script>
+</body>
+</html>

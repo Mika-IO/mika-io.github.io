@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decodificador de JWT</title>
+<meta name="description" content="Decodificador de JWT gratuito.">
+<link rel="canonical" href="https://mikaio.dev/pt/jwtdecoder/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/jwtdecoder/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/jwtdecoder/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/jwtdecoder/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/jwtdecoder/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/jwtdecoder/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/jwtdecoder/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/jwtdecoder/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/jwtdecoder/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/jwtdecoder/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/jwtdecoder/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/jwtdecoder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Decodificador de JWT">
+<meta property="og:description" content="Decodificador de JWT gratuito.">
+<meta property="og:url" content="https://mikaio.dev/pt/jwtdecoder/">
+<meta property="og:locale" content="pt">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Decodificador de JWT","url":"https://mikaio.dev/pt/jwtdecoder/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Decodificador de JWT gratuito."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Decodificador de JWT","item":"https://mikaio.dev/pt/jwtdecoder/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e um JWT?","acceptedAnswer":{"@type":"Answer","text":"JSON Web Token e um padrao aberto (RFC 7519). JWTs sao usados para autenticacao."}},{"@type":"Question","name":"E seguro colar meu JWT aqui?","acceptedAnswer":{"@type":"Answer","text":"Use cautela com JWTs de producao. Este decodificador e executado inteiramente no navegador sem upload para servidor."}},{"@type":"Question","name":"Quais sao as tres partes de um JWT?","acceptedAnswer":{"@type":"Answer","text":"Cabecalho (algoritmo e tipo), Payload (claims como sub, iat, exp), Assinatura."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegação do site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/jwtdecoder/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/jwtdecoder/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/jwtdecoder/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/jwtdecoder/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/jwtdecoder/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/jwtdecoder/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/jwtdecoder/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/jwtdecoder/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/jwtdecoder/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/jwtdecoder/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Decodificador de JWT</span></nav>
+  <h1>Decodificador de JWT</h1>
+  <p class="lead">Cole um JWT para decodificar e inspecionar o cabecalho, claims de payload e expiracao.</p>
+  <section class="widget" id="tool"><div id="jd-app"><div class="field"><label for="jd-token">Token JWT</label><textarea id="jd-token" rows="4" style="width:100%;font-family:monospace;font-size:0.8rem;padding:0.5rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text)" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea></div><button class="btn" id="jd-go">Decodificar</button><div id="jd-out" style="margin-top:0.75rem;display:grid;gap:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>Para que serve o decodificador JWT</h2>
+<p>Cole um JSON Web Token (JWT) para decodificar o cabeçalho, as declarações de carga útil e a expiração. Tudo roda no seu navegador.</p>
+<p>Essa é a versão resumida e, para muitos visitantes, é a única parte de que precisam - a ferramenta fica no topo desta página, funciona imediatamente e nada abaixo é de leitura obrigatória. O resto desta página está aqui para os momentos em que a resposta por si só não é suficiente: quando você quer saber como a ferramenta realmente funciona, onde ela deixa de ser confiável e o que fazer com o resultado depois de obtê-lo.</p>
+<h2>Como usar</h2>
+<p>Os controles são deliberadamente poucos. Você verá 2 controles:</p>
+<ul>
+<li><strong>Token JWT</strong></li>
+<li><strong>Decodificar</strong></li>
+</ul>
+<p>Preencha o que se aplica a você e o resultado será atualizado. Nada é obrigatório no sentido de ser enviado em qualquer lugar — se mudar de ideia, edite o valor e leia a nova resposta. Não há etapa de salvamento, caixa de diálogo de confirmação e nenhuma maneira de errar permanentemente, portanto, tentar diversas variações para ver como o resultado se move não é apenas permitido, mas geralmente é a maneira mais informativa de usar uma ferramenta como essa.</p>
+<p>Tudo roda dentro do seu próprio navegador. Nada do que você digita é carregado, nada é armazenado entre as visitas, não há conta para criar e não há rastreamento para recusar. Depois que esta página for carregada, ela não precisará da rede novamente, portanto continuará funcionando se sua conexão cair.</p>
+<h2>Por que existe uma página como esta</h2>
+<p>Pequenos utilitários ganham seu lugar por estarem disponíveis no momento em que você precisa deles, sem necessidade de instalação, login ou fluxo de integração de cinco etapas. O valor está inteiramente em quão pouco atrito existe entre querer a resposta e obtê-la.</p>
+<p>A web está cheia de ferramentas que resolvem um problema de trinta segundos, exigindo primeiro um endereço de e-mail, uma decisão sobre cookies e quatro segundos de publicidade. Essa troca fazia sentido para alguém, mas não fazia sentido para quem apenas queria o número. Esta página assume a posição oposta: sem inscrição, sem intersticial, sem upsell e sem motivo para sair depois de ter o que procurava.</p>
+<h2>O que o resultado diz e o que não diz</h2>
+<p>Tudo acontece localmente no seu navegador. Depois que a página é carregada, ela não precisa de mais acesso à rede, por isso funciona em um avião, no wifi de um hotel que parou de fingir ou com a conexão totalmente desligada.</p>
+<p>Vale a pena ser explícito quanto aos limites, porque as ferramentas são rotineiramente confiáveis ​​além do ponto em que merecem. Este é honesto em suas informações: forneça valores precisos e você terá uma ferramenta precisa. Ele não pode dizer se os valores que você forneceu foram os corretos para usar, se você fez a pergunta certa ou se o contexto ao qual você está aplicando a resposta tem algo importante que as entradas nunca capturaram. Esse julgamento permanece com você e é a parte que realmente importa.</p>
+<h2>Onde se encaixa em um fluxo de trabalho real</h2>
+<p>Ferramentas como essa raramente fazem todo o trabalho. Mais frequentemente, o decodificador jwt é uma etapa no meio de algo maior: você precisava dessa figura para poder continuar com o que estava realmente fazendo. Isso molda a forma como a página é construída. Abre rápido, não interrompe, não pede para você se comprometer com nada e sai do caminho no momento em que você tem o que veio buscar.</p>
+<p>Isso também significa que você deve se sentir à vontade para usá-lo repetidamente, e não com cuidado. Não há custo para uma segunda tentativa e nenhuma penalidade para uma primeira tentativa errada, então o caminho mais rápido para uma boa resposta geralmente é tentar uma resposta aproximada, observar o resultado e ajustar. As pessoas tendem a tratar as ferramentas como se cada uso fosse caro, um hábito herdado do software que as tornou caras. Este não.</p>
+<h2>Erros comuns que vale a pena evitar</h2>
+<p>A primeira é confiar em um resultado cuja entrada você não verificou. Uma ferramenta não pode saber que você quis digitar um número e digitou outro, e apresentará a resposta errada com exatamente a mesma confiança que a resposta certa. Leia suas entradas antes de confiar na saída – leva dois segundos e detecta a maior parte do que está errado.</p>
+<p>A segunda é tratar um número como resposta a uma pergunta que nunca foi feita. Cada ferramenta nesta página responde a algo restrito e específico. Aplicá-lo a uma pergunta próxima, mas diferente, é a forma mais comum pela qual as pessoas acabam sendo enganadas por uma ferramenta que funcionou perfeitamente o tempo todo. Se você não tiver certeza de que a pergunta corresponde à pergunta que a ferramenta responde, essa incerteza é o sinal útil, não um obstáculo.</p>
+<p>As perguntas frequentes abaixo cobrem os casos que surgem com mais frequência, incluindo aqueles em que a resposta honesta é que esta não é a ferramenta certa para o que você está tentando fazer.</p>
+<h2>Trabalhando offline e em qualquer dispositivo</h2>
+<p>A página é um único documento independente. Não há estrutura para download, nenhuma fonte obtida de terceiros e nenhum sinalizador de análise disparado em segundo plano, e é por isso que ele carrega rapidamente em uma conexão ruim e por que não custa nada mantê-lo aberto em uma guia à qual você retorna ocasionalmente. Funciona da mesma forma em um telefone, tablet e desktop; o layout se adapta, o comportamento não.</p>
+<p>Como não há nenhum servidor envolvido no trabalho real, também não há serviço a ser desativado, nenhum limite de taxa a ser atingido e nenhuma mudança silenciosa no comportamento enviada de outro lugar. O que você carregou é o que funciona. Se você quiser ter certeza disso, abra o código-fonte da página - toda a implementação está ali, em formato legível, o que é uma afirmação que poucas ferramentas desse tipo podem fazer.</p>
+<h2>Uma nota sobre precisão</h2>
+<p>Os resultados são calculados com aritmética padrão de precisão dupla e exibidos em um número razoável de casas, em vez de em cada dígito que o hardware pode produzir. Um número mostrado com duas casas decimais não afirma ter precisão de duas casas decimais - está afirmando que os dados que você forneceu, considerados pelo valor nominal, produzem esse número. A precisão na exibição e a exatidão no mundo real são coisas diferentes, e combiná-las é a maneira mais comum pela qual uma ferramenta correta produz uma decisão errada.</p>
+<p>Se um resultado parecer errado, verifique as entradas antes de duvidar da aritmética. Na prática, a esmagadora maioria das respostas surpreendentes vem de um valor inserido na unidade errada, de um separador decimal lido de forma diferente do pretendido ou de um campo deixado como padrão quando deveria ter sido alterado. Isso não é uma crítica a ninguém – é simplesmente onde residem os erros, e saber onde procurar primeiro economiza muito tempo.</p>
+    <section class="faq"><h2>FAQ JWT</h2><dl><dt>O que e um JWT?</dt><dd>JSON Web Token e um padrao aberto (RFC 7519). JWTs sao usados para autenticacao.</dd><dt>E seguro colar meu JWT aqui?</dt><dd>Use cautela com JWTs de producao. Este decodificador e executado inteiramente no navegador sem upload para servidor.</dd><dt>Quais sao as tres partes de um JWT?</dt><dd>Cabecalho (algoritmo e tipo), Payload (claims como sub, iat, exp), Assinatura.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/jwtdecoder/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/jwtdecoder/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/jwtdecoder/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/jwtdecoder/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/jwtdecoder/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/jwtdecoder/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/jwtdecoder/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/jwtdecoder/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/jwtdecoder/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/jwtdecoder/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas as ferramentas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="pt";window.__T={"token":"Token JWT","decode":"Decodificar"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/jwtdecoder.js" defer></script>
+</body>
+</html>

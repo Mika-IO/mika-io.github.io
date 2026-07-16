@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حرفی کاؤنٹر - کسی بھی لفظ یا متن میں حرف شمار کریں۔</title>
+<meta name="description" content="مفت حرفی کاؤنٹر۔ کسی بھی انگریزی لفظ یا متن میں حرفوں کی تعداد کو فوری طور پر شمار کریں۔ شاعری، گیت کے بول، اور ہائیکو لکھنے کے لیے مفید ہے۔">
+<link rel="canonical" href="https://mikaio.dev/ur/syllablecount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/syllablecount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/syllablecount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/syllablecount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/syllablecount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/syllablecount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/syllablecount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/syllablecount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/syllablecount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/syllablecount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/syllablecount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/syllablecount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حرفی کاؤنٹر - کسی بھی لفظ یا متن میں حرف شمار کریں۔">
+<meta property="og:description" content="مفت حرفی کاؤنٹر۔ کسی بھی انگریزی لفظ یا متن میں حرفوں کی تعداد کو فوری طور پر شمار کریں۔ شاعری، گیت کے بول، اور ہائیکو لکھنے کے لیے مفید ہے۔">
+<meta property="og:url" content="https://mikaio.dev/ur/syllablecount/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حرفی کاؤنٹر - کسی بھی لفظ یا متن میں حرف شمار کریں۔","url":"https://mikaio.dev/ur/syllablecount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"مفت حرفی کاؤنٹر۔ کسی بھی انگریزی لفظ یا متن میں حرفوں کی تعداد کو فوری طور پر شمار کریں۔ شاعری، گیت کے بول، اور ہائیکو لکھنے کے لیے مفید ہے۔"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"نحوی کاؤنٹر","item":"https://mikaio.dev/ur/syllablecount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"حرف شمار کیسے کام کرتا ہے؟","acceptedAnswer":{"@type":"Answer","text":"یہ ٹول عام انگریزی صوتی اصولوں کا استعمال کرتے ہوئے نحو کا تخمینہ لگاتا ہے: حرفی گروپوں کی گنتی، خاموش-ای اور عام لاحقوں کے لیے مستثنیات کا اطلاق۔ یہ ایک تخمینہ ہے اور غیر معمولی الفاظ کے لیے لغت سے تھوڑا سا مختلف ہو سکتا ہے۔"}},{"@type":"Question","name":"ایک حرف کیا ہے؟","acceptedAnswer":{"@type":"Answer","text":"ایک حرف تلفظ کی ایک اکائی ہے جس میں ایک ہی آواز ہوتی ہے۔ لفظ \"بلی\" کا ایک حرف ہے۔ \"پانی\" کے دو ہیں (واٹر ٹیر)؛ \"تعلیم\" کے پانچ ہیں (ed-u-ca-tion)۔"}},{"@type":"Question","name":"کیا یہ ہائیکو کے لیے اچھا ہے؟","acceptedAnswer":{"@type":"Answer","text":"جی ہاں ایک روایتی ہائیکو میں تین سطروں میں 5-7-5 حرف ہوتے ہیں۔ ہر سطر کو الگ الگ لکھیں اور گنتی چیک کریں۔"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/syllablecount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/syllablecount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/syllablecount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/syllablecount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/syllablecount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>نحوی کاؤنٹر</span></nav>
+  <h1>نحوی کاؤنٹر</h1>
+  <p class="lead">حرفوں اور الفاظ کو شمار کرنے کے لیے متن ٹائپ کریں یا پیسٹ کریں۔ ہائیکو، سونیٹ، گانے کے بول، اور میٹر کی جانچ کے لیے مفید ہے۔</p>
+  <section class="widget" id="tool"><div id="syl-app"><textarea id="syl-text" rows="4" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="انگریزی متن کو یہاں ٹائپ یا پیسٹ کریں…"></textarea><div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">حروف تہجی</div><div class="big" id="syl-count">0</div></div><div><div class="hint">الفاظ</div><div class="big" id="syl-words">0</div></div></div></div></section>
+  <article class="content">
+    <h2>کسی بھی متن میں حرف شمار کریں۔</h2>
+<p>نحو کی گنتی ہر اس شخص کے لیے ضروری ہے جو میٹرڈ آیت، گانے کے بول، یا تحریر کی کسی بھی شکل کے ساتھ کام کرتا ہے جہاں تال اہمیت رکھتا ہے۔ ہائیکو کو تین سطروں میں بالکل 5-7-5 حرفوں کی ضرورت ہوتی ہے۔ سونیٹ میٹر کے مخصوص نمونوں کی پیروی کرتے ہیں۔ گانے کے بول موسیقی کی دھڑکنوں کے لیے حرفوں کے مطابق ہوتے ہیں۔ یہ ٹول کسی بھی انگریزی متن کے لیے نحو کی گنتی کا فوری تخمینہ لگاتا ہے، اس لیے آپ گنتی کے بجائے الفاظ پر توجہ مرکوز کر سکتے ہیں۔</p>
+<h2>ایک حرف کیا ہے؟</h2>
+<p>ایک حرف تلفظ کی ایک اکائی ہے جو ایک ہی آواز کے ارد گرد ترتیب دی جاتی ہے۔ ہر لفظ کو حرفوں میں توڑا جا سکتا ہے:</p>
+<ul>
+<li>&quot;بلی&quot; → 1 حرف (بلی)</li>
+<li>&quot;پانی&quot; → 2 حرف (wa-ter)</li>
+<li>&quot;خوبصورت&quot; → 3 حرف (beau-ti-ful)</li>
+<li>&quot;تعلیم&quot; → 5 حرف (ed-u-ca-tion)</li>
+<li>&quot;ناقابل تصور&quot; → 6 حرف (un-i-mag-i-na-ble)</li>
+</ul>
+<p>کسی لفظ میں حرفوں کی تعداد کا انحصار مختلف حرفوں کی تعداد پر ہوتا ہے — نہ کہ حرفوں کی تعداد پر۔ لفظ &quot;بیک&quot; میں دو حرفی حروف (a اور e) ہیں لیکن صرف ایک حرفی آواز ہے، جو اسے ایک حرف بناتی ہے۔</p>
+<h2>کاؤنٹر کیسے کام کرتا ہے۔</h2>
+<p>یہ ٹول نحو کا اندازہ لگانے کے لیے عام انگریزی صوتی اصول استعمال کرتا ہے:</p>
+<ol>
+<li>ملحقہ سروں کے گروپس شمار کریں (ہر گروپ تقریباً ایک حرف ہے)</li>
+<li>الفاظ کے آخر میں سائلنٹ ای کے لیے منہا کریں (مثال کے طور پر، &quot;کیک&quot; 1 حرف ہے، 2 نہیں)</li>
+<li>عام لاحقوں کے لیے گھٹائیں جیسے &quot;-ed&quot; جو اکثر خاموش رہتے ہیں۔</li>
+<li>فی لفظ کم از کم ایک حرف یقینی بنائیں</li>
+</ol>
+<p>یہ طریقہ زیادہ تر عام انگریزی الفاظ کے لیے ایک اچھا تخمینہ ہے۔ کچھ فاسد الفاظ اور مناسب اسم ان کی لغت کے تلفظ سے قدرے مختلف شمار کیے جا سکتے ہیں۔</p>
+<h2>تخلیقی تحریر میں استعمال ہوتا ہے۔</h2>
+<p><strong>ہائیکو</strong>: ایک جاپانی شاعرانہ شکل روایتی طور پر انگریزی میں 5-7-5 حرفوں کے ساتھ تین سطری نظم کے طور پر درآمد کی جاتی ہے۔ ہائیکو فارم کو احتیاط سے حرف شمار کرنے کی ضرورت ہے۔ یہ ٹول ہر لائن کی تصدیق کرنا آسان بناتا ہے۔</p>
+<p><strong>Iambic pentameter</strong>: شیکسپیئر کے ترجیحی میٹر میں 10 حرف فی سطر ایک غیر دباؤ والے پیٹرن میں ہوتے ہیں (da-DUM پانچ بار دہرایا جاتا ہے)۔ حرفوں کی گنتی یہ جانچنے کا پہلا قدم ہے کہ آیا کوئی لائن میٹر پر فٹ بیٹھتی ہے۔</p>
+<p><strong>گانے کے بول</strong>: ہر حرف ایک بیٹ یا نوٹ پر نقشہ بناتا ہے۔ اس بات کو یقینی بنانے کے لیے کہ الفاظ راگ کے مطابق ہوں گیت نگار نحو کو گنتے ہیں۔ ایک ایسی آیت جو اچھی طرح سے گاتی ہے اس کے حرف موسیقی کی دھڑکنوں میں یکساں طور پر تقسیم ہوتے ہیں۔</p>
+<p><strong>لیمرکس</strong>: AABBA شاعری اسکیم میں روایتی شکل میں 8-8-5-5-8 حرفوں کی لائنیں ہیں۔</p>
+<p><strong>ریپس اور ہپ ہاپ</strong>: ریپ میں بہاؤ زیادہ تر الفاظ کی کثافت اور پیٹرن کے بارے میں ہے۔ بہت سے ریپر جان بوجھ کر ایک بار میں زیادہ سلیبلز باندھتے ہیں ایک اثر کے لیے جسے ملٹی سلیبک رائمنگ یا ڈبل ​​ٹائم کہتے ہیں۔</p>
+<h2>شاعری میں میٹر چیک کرنا</h2>
+<p>کلاسیکی انگلش میٹر نحو کو اسٹریسڈ (/) اور غیر اسٹریسڈ (u) میں تقسیم کرتا ہے۔ سب سے زیادہ عام پیٹرن ہیں:</p>
+<ul>
+<li><strong>Iambic</strong>: uU (غیر تناؤ کے بغیر)، جیسا کہ &quot;to BE، یا NOT to BE&quot;</li>
+<li><strong>Trochaic</strong>: Uu (دباؤ کے بغیر)، جیسا کہ &quot;TI-ger، TI-ger، Burn-ing BRIGHT&quot; میں</li>
+<li><strong>ڈیکٹائلک</strong>: یوو (دباؤ-غیر دباؤ-غیر دباؤ)</li>
+<li><strong>بے حسی</strong>: uuU (غیر تناؤ کے بغیر دباؤ والا</li>
+</ul>
+<p>ان نمونوں میں سے کسی کا تجزیہ کرنے کے لیے حرفوں کی گنتی لازمی شرط ہے۔</p>
+<h2>کاؤنٹر کا استعمال کیسے کریں۔</h2>
+<p>کسی بھی انگریزی متن کو باکس میں ٹائپ کریں یا چسپاں کریں اور اس کے فوراً نیچے کل حرف شماری کی تازہ کاری کریں، اس کے ساتھ فی لفظ کی خرابی کے ساتھ جب آپ کو پورے حوالے کے بجائے کسی مخصوص لائن کو چیک کرنے کی ضرورت ہو۔ یہ لائیو فیڈ بیک بالکل وہی ہے جو آپ ہائیکو جیسی سخت شکل میں ڈرافٹ کرتے وقت چاہتے ہیں، جہاں چھ حرفوں سے پانچ تک ایک ہی سطر حاصل کرنے کا مطلب ہے کہ ہر ایک تبدیلی کے بعد اپنی انگلیوں پر گننے کے بجائے لفظ بہ لفظ ترمیم کرنا اور حقیقی وقت میں گنتی دیکھنا۔</p>
+<h2>کیوں خودکار گنتی واقعی مشکل ہے۔</h2>
+<p>انگریزی ہجے تلفظ کے لیے ایک مشہور طور پر ناقابل اعتبار رہنما ہے، یہی وجہ ہے کہ حرف کی گنتی صرف حرفِ حرف شمار نہیں کر سکتی۔ خاموش حروف، ڈائیگراف جہاں دو سروں سے ایک آواز نکلتی ہے، اور دوسری زبانوں سے ان کے اپنے ہجے کنونشن کے ساتھ مستعار الفاظ یہ سب ہجے اور حرف شمار کے درمیان تعلق کو متضاد بنانے کی سازش کرتے ہیں۔ اصول پر مبنی طریقہ یہ ٹول استعمال کرتا ہے — سر کے گروپوں کو گننا، پھر خاموش اختتام اور عام لاحقوں کے لیے ایڈجسٹ کرنا — روزمرہ کے انگریزی الفاظ کی بھاری اکثریت کو درست بناتا ہے، لیکن مٹھی بھر غیر معمولی الفاظ، نام، اور مستعار اصطلاحات لغت کے سرکاری حرف شمار سے قدرے مختلف ہو سکتے ہیں، صرف اس لیے کہ انگریزی کے ایک چھوٹے سے مقررہ اصولوں کے سوا ہزار سالوں سے زیادہ کا کوئی مجموعہ نہیں ہو سکتا۔ دوسری زبانوں سے قرض لینا۔</p>
+<h2>نحو اور پڑھنے کے قابل فارمولے۔</h2>
+<p>شاعری کے علاوہ، نحو کی گنتی کئی معروف پڑھنے کے قابل فارمولوں کے لیے کلیدی ان پٹ ہے۔ Flesch-Kincaid ریڈنگ ایزی اور گریڈ لیول کے فارمولے دونوں اوسط جملے کی لمبائی کے ساتھ ساتھ ہر لفظ کے اوسط حرفوں کا استعمال کرتے ہیں تاکہ اندازہ لگایا جا سکے کہ کسی فقرے کو پڑھنا کتنا مشکل ہے — زیادہ کثیر حرفی الفاظ کے اسکور کے ساتھ متن زیادہ مشکل ہے، موٹے طور پر اس وجدان کا سراغ لگانا جو &quot;استعمال&quot; پڑھتا ہے &quot;استعمال&quot; سے زیادہ مشکل ہے حالانکہ دونوں کا مطلب ایک ہی ہے۔ لکھنے والے پڑھنے کی ایک مخصوص سطح کا مقصد رکھتے ہیں، جیسے کہ عام سامعین یا نوجوان قارئین کے لیے مواد، اکثر نحو کے بھاری حصئوں کی جانچ پڑتال کرتے ہیں اور جہاں حرف کی تعداد زیادہ ہوتی ہے وہاں الفاظ کے انتخاب کو آسان بناتے ہیں۔</p>
+<h2>حروف کی گنتی بذریعہ کان بمقابلہ قاعدہ</h2>
+<p>کسی ناواقف لفظ میں حرف شمار کرنے کا سب سے قابل اعتماد طریقہ یہ ہے کہ اسے بلند آواز میں کہیں اور محسوس کریں کہ آپ کا جبڑا کہاں گرتا ہے یا آپ کی سانس رکتی ہے — ان لمحات میں سے ہر ایک تقریباً ایک حرف کو نشان زد کرتا ہے۔ اصول پر مبنی نقطہ نظر جیسا کہ یہ ٹول vowel-group گنتی کے ذریعے تقریباً اسی وجدان کا استعمال کرتا ہے، جو انگریزی الفاظ کی بھاری اکثریت کے لیے صحیح طور پر کام کرتا ہے لیکن کبھی کبھار غیر معمولی ادھار لینے یا ناموں کے لیے بولے جانے والے ورژن سے متفق نہیں ہوتا، کیونکہ ہجے کے اصولوں کا کوئی مقررہ سیٹ انگریزی تلفظ کے ہر فقرے کو مکمل طور پر حاصل نہیں کرتا ہے۔</p>
+<h2>نجی اور فوری</h2>
+<p>کاؤنٹر مکمل طور پر آپ کے براؤزر میں چلتا ہے، لہٰذا آپ کے ٹائپ کرتے ہی نتائج فوری طور پر اپ ڈیٹ ہو جاتے ہیں اور آپ کے داخل کردہ کوئی بھی متن کہیں بھیجا، لاگ یا شیئر نہیں کیا جاتا ہے۔</p>
+    <section class="faq"><h2>نحوی جوابی سوالات</h2><dl><dt>حرف شمار کیسے کام کرتا ہے؟</dt><dd>یہ ٹول عام انگریزی صوتی اصولوں کا استعمال کرتے ہوئے نحو کا تخمینہ لگاتا ہے: حرفی گروپوں کی گنتی، خاموش-ای اور عام لاحقوں کے لیے مستثنیات کا اطلاق۔ یہ ایک تخمینہ ہے اور غیر معمولی الفاظ کے لیے لغت سے تھوڑا سا مختلف ہو سکتا ہے۔</dd><dt>ایک حرف کیا ہے؟</dt><dd>ایک حرف تلفظ کی ایک اکائی ہے جس میں ایک ہی آواز ہوتی ہے۔ لفظ &quot;بلی&quot; کا ایک حرف ہے۔ &quot;پانی&quot; کے دو ہیں (واٹر ٹیر)؛ &quot;تعلیم&quot; کے پانچ ہیں (ed-u-ca-tion)۔</dd><dt>کیا یہ ہائیکو کے لیے اچھا ہے؟</dt><dd>جی ہاں ایک روایتی ہائیکو میں تین سطروں میں 5-7-5 حرف ہوتے ہیں۔ ہر سطر کو الگ الگ لکھیں اور گنتی چیک کریں۔</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/syllablecount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/syllablecount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/syllablecount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/syllablecount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/syllablecount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/freetools.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ur";window.__T={"placeholder":"انگریزی متن کو یہاں ٹائپ یا پیسٹ کریں…","syllables":"حروف تہجی","words":"الفاظ"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/syllablecount.js" defer></script>
+</body>
+</html>

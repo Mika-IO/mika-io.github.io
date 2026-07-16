@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ट्विटर / एक्स कैरेक्टर काउंटर - अपने ट्वीट की लंबाई गिनें</title>
+<meta name="description" content="निःशुल्क ट्विटर/एक्स कैरेक्टर काउंटर। यूआरएल सामान्यीकरण के साथ ट्वीट की लंबाई की गणना करता है (प्रत्येक यूआरएल = 23 वर्ण)। 280-वर्ण सीमा के लिए रंग-कोडित सीमा संकेतक।">
+<link rel="canonical" href="https://mikaio.dev/hi/tweetcount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tweetcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tweetcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tweetcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tweetcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tweetcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tweetcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tweetcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tweetcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tweetcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tweetcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tweetcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ट्विटर / एक्स कैरेक्टर काउंटर - अपने ट्वीट की लंबाई गिनें">
+<meta property="og:description" content="निःशुल्क ट्विटर/एक्स कैरेक्टर काउंटर। यूआरएल सामान्यीकरण के साथ ट्वीट की लंबाई की गणना करता है (प्रत्येक यूआरएल = 23 वर्ण)। 280-वर्ण सीमा के लिए रंग-कोडित सीमा संकेतक।">
+<meta property="og:url" content="https://mikaio.dev/hi/tweetcount/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"ट्विटर / एक्स कैरेक्टर काउंटर - अपने ट्वीट की लंबाई गिनें","url":"https://mikaio.dev/hi/tweetcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"निःशुल्क ट्विटर/एक्स कैरेक्टर काउंटर। यूआरएल सामान्यीकरण के साथ ट्वीट की लंबाई की गणना करता है (प्रत्येक यूआरएल = 23 वर्ण)। 280-वर्ण सीमा के लिए रंग-कोडित सीमा संकेतक।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"ट्विटर/एक्स कैरेक्टर काउंटर","item":"https://mikaio.dev/hi/tweetcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ट्विटर यूआरएल को 23 अक्षरों में क्यों गिनता है?","acceptedAnswer":{"@type":"Answer","text":"ट्विटर स्वचालित रूप से प्रत्येक यूआरएल को अपने t.co शॉर्टनर के माध्यम से लपेटता है, जो हमेशा 23 अक्षर लंबे लिंक बनाता है। तो चाहे आपका URL 10 वर्णों का हो या 200 वर्णों का, यह आपकी 280-वर्ण सीमा के लिए ठीक 23 के रूप में गिना जाता है।"}},{"@type":"Question","name":"ट्विटर/एक्स अक्षर सीमा क्या है?","acceptedAnswer":{"@type":"Answer","text":"एकल ट्वीट या एक्स पोस्ट के लिए मानक वर्ण सीमा 280 वर्ण है। ट्विटर ब्लू/एक्स प्रीमियम ग्राहकों के पास लंबी पोस्ट (25,000 अक्षरों तक) तक पहुंच हो सकती है, लेकिन मुफ्त सीमा 280 है।"}},{"@type":"Question","name":"क्या इमोजी को एक वर्ण के रूप में गिना जाता है?","acceptedAnswer":{"@type":"Answer","text":"अधिकांश मानक इमोजी ट्विटर की गिनती प्रणाली में 2 अक्षरों के रूप में गिने जाते हैं क्योंकि वे यूनिकोड सरोगेट जोड़े का उपयोग करते हैं। यह काउंटर जावास्क्रिप्ट की स्ट्रिंग लंबाई का उपयोग करता है, जो कुछ इमोजी संयोजनों के लिए ट्विटर की सटीक गिनती से थोड़ा भिन्न हो सकता है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>ट्विटर/एक्स कैरेक्टर काउंटर</span></nav>
+  <h1>ट्विटर/एक्स कैरेक्टर काउंटर</h1>
+  <p class="lead">अपना ट्वीट नीचे टाइप करें या पेस्ट करें। ट्विटर के t.co लिंक-शॉर्टिंग व्यवहार से मेल खाते हुए, यूआरएल को स्वचालित रूप से 23 अक्षरों के रूप में गिना जाता है।</p>
+  <section class="widget" id="tool"><form id="tweet-form"><div class="field"><label for="tweet-text">ट्वीट/पोस्ट टेक्स्ट</label><textarea id="tweet-text" rows="5" placeholder="क्या हो रहा है?"></textarea></div><div class="result" id="tweet-out" style="text-align:left"></div></form></section>
+  <article class="content">
+    <h2>अपनी पोस्ट की लंबाई उसी तरह गिनें जैसे X वास्तव में उसे गिनता है</h2>
+<p>280-वर्ण की सीमा तब तक सरल लगती है जब तक आप लिखना शुरू नहीं करते हैं और महसूस करते हैं कि इमोजी, लिंक और कुछ उच्चारण वाले वर्ण आपकी अपेक्षा के अनुरूप नहीं हैं। यह काउंटर एक्स (पूर्व में ट्विटर) के वास्तविक गिनती नियमों को ब्राउज़र टूल के समान बारीकी से प्रतिबिंबित करता है, जिसमें प्लेटफ़ॉर्म के यूआरएल के विशिष्ट उपचार भी शामिल हैं, इसलिए जो संख्या आप यहां देखते हैं वह मेल खाता है जो आप कंपोज़ बॉक्स में देखेंगे न कि एक भोली चरित्र गणना से जो आपको अनुमान लगाने पर मजबूर कर देती है कि कोई पोस्ट वास्तव में फिट होगी या नहीं।</p>
+<h2>इसका उपयोग कैसे करें</h2>
+<p>अपनी पोस्ट टाइप करें या बॉक्स में पेस्ट करें और वर्ण संख्या तुरंत नीचे दिखाई देगी, जो कि रंग-कोडित बार के साथ 280-वर्ण सीमा के सामने दिखाई देती है, जो आपके पास आते ही हरे से एम्बर और नारंगी से लाल रंग में बदल जाती है और फिर सीमा से अधिक हो जाती है। आपके द्वारा शामिल किया गया कोई भी यूआरएल स्वचालित रूप से पता लगाया जाता है और बिल्कुल 23 अक्षरों के रूप में गिना जाता है, जो प्लेटफ़ॉर्म के लिंक-छोटा करने के व्यवहार से मेल खाता है, भले ही वास्तविक लिंक कितना भी लंबा हो। शेष वर्ण भत्ता अपडेट आपके टाइप करते ही लाइव हो जाते हैं, इसलिए आप केवल अंत में जाँचने और ब्लाइंड लिखने के बजाय संख्या को देखते हुए अपने शब्दों को ट्रिम या विस्तारित कर सकते हैं।</p>
+<h2>यूआरएल हमेशा 23 अक्षरों में क्यों गिने जाते हैं?</h2>
+<p>X स्वचालित रूप से अपने सिस्टम के माध्यम से पोस्ट किए गए प्रत्येक लिंक को अपनी t.co शॉर्टिंग सेवा के साथ लपेटता है, और प्रत्येक लिंक, चाहे मूल पता कितना भी लंबा या छोटा हो, बिल्कुल समान निश्चित लंबाई का t.co लिंक बन जाता है। यही कारण है कि एक संक्षिप्त, साफ पते के लिंक वाली पोस्ट और ट्रैकिंग मापदंडों से भरे एक विशाल यूआरएल के लिंक वाली पोस्ट में लेखक को 280-वर्ण के बजट के मुकाबले बिल्कुल समान वर्ण - 23, वर्तमान में - की लागत आती है। यह टूल आपके टेक्स्ट में यूआरएल का पता लगाकर और प्रत्येक को उसकी शाब्दिक लंबाई के बजाय 23 अक्षरों के रूप में गिनकर उस व्यवहार को दोहराता है, इसलिए जो गिनती आप यहां देखते हैं वह मेल खाती है जब आप पोस्ट करते हैं तो वास्तव में क्या होता है।</p>
+<h2>इमोजी और सरोगेट जोड़ी विचित्र है</h2>
+<p>इमोजी पात्रों की गिनती में वास्तविक झुर्रियां डालते हैं क्योंकि वे आंतरिक रूप से कैसे संग्रहीत होते हैं। अधिकांश आधुनिक इमोजी, विशेष रूप से नए या अधिक जटिल वाले, को सरोगेट जोड़ी - एक के बजाय दो अंतर्निहित कोड इकाइयों - का उपयोग करके दर्शाया जाता है, जिसका अर्थ है कि वे अक्सर उन प्रणालियों में एक के बजाय दो वर्णों के रूप में गिने जाते हैं जो स्ट्रिंग की लंबाई को जावास्क्रिप्ट और कई अन्य भाषाओं की तरह मापते हैं। एक्स की अपनी गिनती प्रणाली के अपने विशिष्ट नियम हैं जो कभी-कभी असामान्य इमोजी संयोजनों, ध्वज अनुक्रमों या त्वचा टोन चयनकर्ताओं जैसे संशोधक के साथ इमोजी के लिए ब्राउज़र की मूल स्ट्रिंग लंबाई गणना से थोड़ा भिन्न हो सकते हैं। रोज़मर्रा की अधिकांश पोस्टों के लिए यह अंतर अदृश्य है, लेकिन यदि आप सीमा के बिल्कुल किनारे पर हैं और कई इमोजी का उपयोग कर रहे हैं, तो सटीक अंतिम वर्ण तक गिनती पर भरोसा करने के बजाय एक छोटा बफर छोड़ना उचित है।</p>
+<h2>चरित्र सीमा का विकास</h2>
+<p>ट्विटर ने 140-अक्षर की सीमा के साथ लॉन्च किया, एक ट्वीट और उपयोगकर्ता नाम को एकल एसएमएस टेक्स्ट संदेश की 160-वर्ण सीमा के भीतर फिट करने के लिए जानबूझकर चुना गया एक आंकड़ा, क्योंकि सेवा मूल रूप से टेक्स्ट मैसेजिंग के साथ-साथ वेब पर भी काम करने के लिए डिज़ाइन की गई थी। डेटा से पता चला कि 2017 में यह सीमा दोगुनी होकर 280 अक्षरों तक हो गई थी कि कई उपयोगकर्ता, विशेष रूप से उन भाषाओं में लिखने वाले जिन्हें एक ही विचार व्यक्त करने के लिए अधिक अक्षरों की आवश्यकता होती है, लगातार जगह से बाहर हो रहे थे। भुगतान करने वाले ग्राहकों के लिए उच्च वर्ण सीमाएँ बाद में आईं, लेकिन मुफ़्त 280-वर्ण सीमा, जिसके विरुद्ध यह काउंटर मापता है, वह मानक बनी हुई है जिसके लिए अधिकांश पोस्ट लिखे जाते हैं।</p>
+<h2>280 अक्षरों में कसकर लिखना</h2>
+<p>क्योंकि प्रत्येक चरित्र एक कठिन सीमा के अंतर्गत गिना जाता है, जो लेखक नियमित रूप से पोस्ट करते हैं वे अर्थ खोए बिना ट्रिम करने की आदत विकसित करते हैं: &quot;क्योंकि&quot; को &quot;बीसी&quot; या &quot;&amp;&quot; के साथ &quot;और&quot; के साथ बदलना, केवल तभी जब टोन उपयुक्त हो, पूरक शब्दों को काटना जो कुछ भी नहीं जोड़ते हैं, और एक लिंक या हैशटैग को बहुत अंत तक ले जाना ताकि अंतिम ट्रिम की आवश्यकता होने पर इसे काटना पहली बात हो। लिखते समय लाइव गिनती देखने से, पहले पूरे विचार लिखने और बाद में पता लगाने के बजाय कि यह चालीस अक्षर बहुत लंबा है, इस तरह के तंग संपादन को बहुत कम निराशाजनक बनाता है, क्योंकि आप देख सकते हैं कि वास्तव में एक पुनर्लेखन वास्तव में कितनी जगह बचाता है।</p>
+<h2>थ्रेड्स और मल्टी-पोस्ट ड्राफ्ट</h2>
+<p>जब एक भी विचार 280 अक्षरों में फिट नहीं बैठता है, तो सामान्य दृष्टिकोण यह है कि इसे सब कुछ एक में मजबूर करने के बजाय जुड़े हुए पोस्ट के धागे में विभाजित किया जाए। पहले किसी थ्रेड को कहीं और ड्राफ्ट करना और इस काउंटर के माध्यम से प्रत्येक नियोजित पोस्ट को व्यक्तिगत रूप से चलाना यह जांचने का एक विश्वसनीय तरीका है कि थ्रेड का प्रत्येक टुकड़ा आराम से फिट बैठता है, यदि आप एक का उपयोग करते हैं तो &quot;1/&quot; स्टाइल नंबरिंग उपसर्ग के लिए कुछ अतिरिक्त अक्षर भी शामिल हैं, इससे पहले कि आप उन्हें एक के बाद एक पोस्ट करना शुरू करें, बजाय थ्रेड के मध्य में यह पता लगाने के कि एक पोस्ट को एक अजीब अंतिम-सेकंड ट्रिम की आवश्यकता है जब आपने पहले से ही पहले वाले को प्रकाशित करना शुरू कर दिया हो।</p>
+<h2>निजी और तत्काल</h2>
+<p>जैसे ही आप टाइप करते हैं सब कुछ आपके अपने ब्राउज़र में चलता है, इसलिए आपका ड्राफ्ट पोस्ट कभी भी अपलोड, लॉग इन या किसी के साथ साझा नहीं किया जाता है, और पृष्ठ से दूर जाने पर कुछ भी सहेजा नहीं जाता है। एक बार लोड होने के बाद यह ऑफ़लाइन काम करता है, जब भी आपको पोस्ट करने से पहले त्वरित, सटीक चरित्र जांच की आवश्यकता होती है तो यह तैयार हो जाता है।</p>
+    <section class="faq"><h2>ट्विटर चरित्र काउंटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>ट्विटर यूआरएल को 23 अक्षरों में क्यों गिनता है?</dt><dd>ट्विटर स्वचालित रूप से प्रत्येक यूआरएल को अपने t.co शॉर्टनर के माध्यम से लपेटता है, जो हमेशा 23 अक्षर लंबे लिंक बनाता है। तो चाहे आपका URL 10 वर्णों का हो या 200 वर्णों का, यह आपकी 280-वर्ण सीमा के लिए ठीक 23 के रूप में गिना जाता है।</dd><dt>ट्विटर/एक्स अक्षर सीमा क्या है?</dt><dd>एकल ट्वीट या एक्स पोस्ट के लिए मानक वर्ण सीमा 280 वर्ण है। ट्विटर ब्लू/एक्स प्रीमियम ग्राहकों के पास लंबी पोस्ट (25,000 अक्षरों तक) तक पहुंच हो सकती है, लेकिन मुफ्त सीमा 280 है।</dd><dt>क्या इमोजी को एक वर्ण के रूप में गिना जाता है?</dt><dd>अधिकांश मानक इमोजी ट्विटर की गिनती प्रणाली में 2 अक्षरों के रूप में गिने जाते हैं क्योंकि वे यूनिकोड सरोगेट जोड़े का उपयोग करते हैं। यह काउंटर जावास्क्रिप्ट की स्ट्रिंग लंबाई का उपयोग करता है, जो कुछ इमोजी संयोजनों के लिए ट्विटर की सटीक गिनती से थोड़ा भिन्न हो सकता है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"text":"ट्वीट/पोस्ट टेक्स्ट","whatshappening":"क्या हो रहा है?"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tweetcount.js" defer></script>
+</body>
+</html>

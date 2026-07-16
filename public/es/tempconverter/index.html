@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convertidor de temperatura: Celsius, Fahrenheit, Kelvin</title>
+<meta name="description" content="Convertidor de temperatura libre. Convierta temperaturas entre Celsius, Fahrenheit, Kelvin y Rankine al instante. Vea las cuatro escalas a la vez.">
+<link rel="canonical" href="https://mikaio.dev/es/tempconverter/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tempconverter/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tempconverter/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tempconverter/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tempconverter/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tempconverter/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tempconverter/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tempconverter/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tempconverter/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tempconverter/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tempconverter/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tempconverter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Convertidor de temperatura: Celsius, Fahrenheit, Kelvin">
+<meta property="og:description" content="Convertidor de temperatura libre. Convierta temperaturas entre Celsius, Fahrenheit, Kelvin y Rankine al instante. Vea las cuatro escalas a la vez.">
+<meta property="og:url" content="https://mikaio.dev/es/tempconverter/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Convertidor de temperatura: Celsius, Fahrenheit, Kelvin","url":"https://mikaio.dev/es/tempconverter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Convertidor de temperatura libre. Convierta temperaturas entre Celsius, Fahrenheit, Kelvin y Rankine al instante. Vea las cuatro escalas a la vez."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Convertidor de temperatura","item":"https://mikaio.dev/es/tempconverter/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuál es el punto de ebullición del agua en cada escala?","acceptedAnswer":{"@type":"Answer","text":"100 °C = 212 °F = 373,15 K = 671,67 °R"}},{"@type":"Question","name":"¿Qué es el cero absoluto?","acceptedAnswer":{"@type":"Answer","text":"El cero absoluto es la temperatura teórica más baja: 0 K = -273,15 °C = -459,67 °F = 0 °R. En el cero absoluto, el movimiento molecular cesaría."}},{"@type":"Question","name":"¿Cuándo los grados Celsius y Fahrenheit dan la misma lectura?","acceptedAnswer":{"@type":"Answer","text":"A -40°. Tanto −40°C como −40°F tienen la misma temperatura."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tempconverter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tempconverter/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tempconverter/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/tempconverter/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tempconverter/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tempconverter/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tempconverter/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tempconverter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tempconverter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tempconverter/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Convertidor de temperatura</span></nav>
+  <h1>Convertidor de temperatura</h1>
+  <p class="lead">Ingrese una temperatura y seleccione la escala de entrada para ver el equivalente en las cuatro escalas de temperatura.</p>
+  <section class="widget" id="tool"><form id="temp-form"><div class="row"><div class="field"><label for="temp-val">Temperatura</label><input type="number" id="temp-val" step="any" inputmode="decimal"></div><div class="field"><label for="temp-from">Escala de entrada</label><select id="temp-from"><option value="c">Celsius (°C)</option><option value="f">Fahrenheit (°F)</option><option value="k">Kelvin(K)</option><option value="r">Rankine (°R)</option></select></div></div><div class="result"><div style="display:flex;gap:2rem;flex-wrap:wrap"><div><div class="hint">Celsius</div><div class="big" id="temp-c">—</div></div><div><div class="hint">Fahrenheit</div><div class="big" id="temp-f">—</div></div><div><div class="hint">Kelvin</div><div class="big" id="temp-k">—</div></div><div><div class="hint">Rankine</div><div class="big" id="temp-r">—</div></div></div></div></form></section>
+  <article class="content">
+    <h2>Convertir temperaturas entre todas las escalas principales.</h2>
+<p>La temperatura se mide en varias escalas diferentes y la conversión entre ellas es una necesidad frecuente: los pronósticos meteorológicos utilizan grados Celsius en la mayor parte del mundo y grados Fahrenheit en Estados Unidos; el trabajo científico utiliza Kelvin; La ingeniería y la aviación a veces utilizan Rankine. Ingrese una temperatura en cualquier escala y vea el equivalente en las cuatro a la vez.</p>
+<h2>Las cuatro escalas de temperatura.</h2>
+<p><strong>Celsius (°C)</strong>: La escala más utilizada a nivel mundial. Definido por el punto de congelación del agua (0°C) y el punto de ebullición del agua (100°C) a presión atmosférica estándar. El estándar SI para la medición diaria de la temperatura.</p>
+<p><strong>Fahrenheit (°F)</strong>: Se utiliza principalmente en los Estados Unidos. El agua se congela a 32°F y hierve a 212°F. La escala fue definida por Daniel Gabriel Fahrenheit en 1724. El desplazamiento de 32 grados y el lapso de 180 grados entre la congelación y la ebullición parecen arbitrarios porque los puntos de calibración originales eran 0°F (una mezcla de salmuera/sal/agua/hielo) y 96°F (temperatura del cuerpo humano, aproximadamente).</p>
+<p><strong>Kelvin (K)</strong>: La unidad base SI para temperatura termodinámica. Kelvin comienza en el cero absoluto (0 K = −273,15 °C) y utiliza el mismo tamaño de grados que Celsius. No tiene valores negativos. Los científicos utilizan Kelvin en física, química y astronomía porque representa directamente la temperatura termodinámica sin compensaciones.</p>
+<p><strong>Rankine (°R)</strong>: Se utiliza en algunos contextos de ingeniería en EE. UU. Al igual que Kelvin, comienza en el cero absoluto, pero utiliza grados del tamaño de Fahrenheit. 0°R = 0 K = −459,67°F. Rara vez se encuentra fuera de la termodinámica de ingeniería estadounidense.</p>
+<h2>Temperaturas de referencia clave</h2>
+<p>| Evento | Celsius | Fahrenheit | Kelvin |</p>
+<p>|---|---|---|---|</p>
+<p>| Cero absoluto | −273,15 | −459,67 | 0 |</p>
+<p>| El agua se congela | 0 | 32 | 273,15 |</p>
+<p>| Cuerpo humano | 37 | 98,6 | 310,15 |</p>
+<p>| El agua hierve | 100 | 212 | 373,15 |</p>
+<p>| La superficie del sol | ~5.500 | ~9,932 | ~5.773 |</p>
+<h2>Fórmulas de conversión</h2>
+<p><strong>Celsius a Fahrenheit</strong>: °F = (°C × 9/5) + 32</p>
+<p><strong>Fahrenheit a Celsius</strong>: °C = (°F − 32) × 5/9</p>
+<p><strong>Celsius a Kelvin</strong>: K = °C + 273,15</p>
+<p><strong>Kelvin a Celsius</strong>: °C = K − 273,15</p>
+<h2>La curiosidad −40</h2>
+<p>A -40°, tanto Celsius como Fahrenheit dan la misma lectura numérica. Esto se debe a que las escalas tienen diferentes puntos cero pero sus valores se cruzan en este punto. Para temperaturas inferiores a -40°, los valores Fahrenheit son numéricamente superiores a los Celsius; por encima de -40°, los valores Celsius son numéricamente más altos.</p>
+<h2>Cómo utilizar el convertidor</h2>
+<p>Escriba un valor en cualquiera de los cuatro campos de temperatura y los otros tres se actualizarán inmediatamente, convertidos utilizando las fórmulas exactas que relacionan cada escala. No es necesario recordar qué fórmula se aplica a qué par de escalas: ingrese la temperatura del horno en grados Fahrenheit y lea el equivalente en grados Celsius al instante, o compare un valor Kelvin de un libro de texto de ciencias con la lectura en grados Celsius diaria a la que está acostumbrado.</p>
+<h2>Por qué los números de Fahrenheit parecen tan extraños</h2>
+<p>El punto de congelación de 32 grados y la diferencia de 180 grados hasta el punto de ebullición en la escala Fahrenheit parecen arbitrarios hasta que se conoce su origen. Daniel Gabriel Fahrenheit calibró su báscula en 1724 utilizando dos puntos de referencia que tenían sentido para él en ese momento: 0 °F se basaba en la temperatura estable más fría que podía reproducir de manera confiable con una mezcla de hielo, agua y sal, y 96 °F pretendía aproximarse a la temperatura del cuerpo humano. Los refinamientos posteriores cambiaron ligeramente los valores exactos (la temperatura corporal ahora se mide como 98,6 °F en lugar de 96 °F), pero los números de aspecto extraño de la escala son un fósil directo de esos puntos de referencia del siglo XVIII, a diferencia de Celsius, que fue diseñado desde el principio en torno a los hitos limpios y memorables del agua congelada y hirviendo.</p>
+<h2>Por qué los científicos prefieren Kelvin</h2>
+<p>Kelvin no es solo Celsius con un punto de partida diferente por conveniencia: existe porque los cálculos termodinámicos, particularmente aquellos que involucran las leyes de los gases y la energía, funcionan correctamente solo cuando la temperatura se mide desde el verdadero cero absoluto, el punto en el que el movimiento molecular teóricamente se detiene por completo. Usar Celsius o Fahrenheit en estas fórmulas requeriría agregar constantemente correcciones de compensación, mientras que Kelvin elimina el problema de compensación por completo al comenzar en cero, donde cero en realidad significa &quot;sin energía térmica&quot;. Esta es la razón por la que Kelvin no tiene valores negativos en el uso normal y por la que los problemas de física y química se formulan en Kelvin por defecto.</p>
+<h2>Rankine, la cuarta escala olvidada</h2>
+<p>Rankine rara vez aparece fuera de rincones específicos de la ingeniería estadounidense, pero llena un vacío real: combina el punto cero de Kelvin (cero absoluto verdadero) con el tamaño en grados de Fahrenheit, lo cual es conveniente para los cálculos termodinámicos realizados en un contexto de ingeniería estadounidense donde Fahrenheit ya es la unidad de trabajo para las temperaturas cotidianas. Debido a que Rankine comienza en el cero absoluto como Kelvin, las fórmulas que requieren una escala de temperatura absoluta funcionan correctamente en Rankine sin necesidad de una corrección de compensación, al mismo tiempo que producen números cuya escala resulta familiar para alguien acostumbrado a pensar en Fahrenheit. Aparece principalmente en la termodinámica de la ingeniería mecánica y aeroespacial de EE. UU. y rara vez se ve en ningún otro lugar.</p>
+<h2>Una forma rápida de estimar de Celsius a Fahrenheit en tu cabeza</h2>
+<p>Cuando se viaja y se consulta el pronóstico del tiempo en el extranjero, un rápido atajo mental es duplicar la cifra Celsius y sumar 30, algo que no es matemáticamente exacto, pero sí lo suficientemente cercano como para decidir qué ponerse. Duplicar 20 °C da 40, más 30 es 70, frente a los 68 °F exactos, una diferencia lo suficientemente pequeña como para no importar en los propósitos cotidianos, ya sea decidirse por una chaqueta o preparar el horno con una receta extranjera. Naturalmente, esta calculadora proporciona la cifra exacta, pero vale la pena conocer la versión mental rápida para los muchos momentos en los que no tienes un dispositivo a mano.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todas las conversiones se ejecutan completamente en su navegador, por lo que los resultados se actualizan instantáneamente a medida que escribe, y ningún valor de temperatura que ingresa se envía a un servidor, se registra o se comparte.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre temperatura</h2><dl><dt>¿Cuál es el punto de ebullición del agua en cada escala?</dt><dd>100 °C = 212 °F = 373,15 K = 671,67 °R</dd><dt>¿Qué es el cero absoluto?</dt><dd>El cero absoluto es la temperatura teórica más baja: 0 K = -273,15 °C = -459,67 °F = 0 °R. En el cero absoluto, el movimiento molecular cesaría.</dd><dt>¿Cuándo los grados Celsius y Fahrenheit dan la misma lectura?</dt><dd>A -40°. Tanto −40°C como −40°F tienen la misma temperatura.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tempconverter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tempconverter/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tempconverter/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/tempconverter/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tempconverter/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tempconverter/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tempconverter/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tempconverter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tempconverter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tempconverter/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"temp":"Temperatura","from":"Escala de entrada","celsiusc":"Celsius (°C)","fahrenheitf":"Fahrenheit (°F)","kelvink":"Kelvin(K)","rankiner":"Rankine (°R)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tempconverter.js" defer></script>
+</body>
+</html>

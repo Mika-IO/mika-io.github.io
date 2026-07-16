@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sales Tax Calculator — add or remove VAT from any price</title>
-<meta name="description" content="Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.">
+<title>销售税计算器 - 在任何价格中添加或删除增值税</title>
+<meta name="description" content="免费销售税计算器。输入价格和税率以向净价添加税款或从总价中提取税款。适用于增值税、商品及服务税和任何百分比。">
 <link rel="canonical" href="https://mikaio.dev/zh/salestax/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/salestax/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/salestax/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/salestax/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/salestax/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/salestax/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/salestax/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/salestax/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/salestax/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/salestax/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/salestax/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/salestax/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sales Tax Calculator — add or remove VAT from any price">
-<meta property="og:description" content="Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.">
+<meta property="og:title" content="销售税计算器 - 在任何价格中添加或删除增值税">
+<meta property="og:description" content="免费销售税计算器。输入价格和税率以向净价添加税款或从总价中提取税款。适用于增值税、商品及服务税和任何百分比。">
 <meta property="og:url" content="https://mikaio.dev/zh/salestax/">
 <meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Sales Tax Calculator — add or remove VAT from any price","url":"https://mikaio.dev/zh/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Sales Tax Calculator","item":"https://mikaio.dev/zh/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between adding and extracting tax?","acceptedAnswer":{"@type":"Answer","text":"Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was."}},{"@type":"Question","name":"What tax rates should I use?","acceptedAnswer":{"@type":"Answer","text":"Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign."}},{"@type":"Question","name":"Is anything I type uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"销售税计算器 - 在任何价格中添加或删除增值税","url":"https://mikaio.dev/zh/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费销售税计算器。输入价格和税率以向净价添加税款或从总价中提取税款。适用于增值税、商品及服务税和任何百分比。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"销售税计算器","item":"https://mikaio.dev/zh/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"加税和提取税有什么区别？","acceptedAnswer":{"@type":"Answer","text":"加税采用净价（税前价格）并计算您支付的总价。提取税费则相反：您输入已包含税费的总价格，计算器会计算出税费的多少以及税前金额是多少。"}},{"@type":"Question","name":"我应该使用什么税率？","acceptedAnswer":{"@type":"Answer","text":"使用您所在国家或地区适用的任何费率。常见的例子包括英国 20% 的增值税、德国 19% 的增值税、澳大利亚 10% 的商品及服务税以及美国各州不同的销售税率。输入不带百分号的数字。"}},{"@type":"Question","name":"我输入的内容是否已上传？","acceptedAnswer":{"@type":"Answer","text":"不会。一切都在您的浏览器中运行，不涉及服务器。当您关闭页面时，您输入的数字就会消失。"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="网站导航">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Sales Tax Calculator</span></nav>
-  <h1>Sales Tax Calculator</h1>
-  <p class="lead">Enter the amount and the tax rate, then choose whether to add tax to a net price or extract it from a gross amount. All three figures — net, tax, and gross — update as you type.</p>
-  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">Amount</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">Tax rate %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">Mode</label><select id="tax-mode"><option value="add">Add tax to price</option><option value="remove">Extract tax from price</option></select></div></div><div class="result"><span class="hint">Net (pre-tax): </span><b id="tax-net">—</b> · <span class="hint">Tax amount: </span><b id="tax-tax">—</b> · <span class="hint">Gross (total): </span><span class="big" id="tax-gross">—</span></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>销售税计算器</span></nav>
+  <h1>销售税计算器</h1>
+  <p class="lead">输入金额和税率，然后选择是在净价中加税还是从总金额中提取税款。所有三个数字（净额、税额和总额）都会在您输入时更新。</p>
+  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">金额</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">税率%</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">模式</label><select id="tax-mode"><option value="add">在价格中添加税费</option><option value="remove">从价格中提取税款</option></select></div></div><div class="result"><span class="hint">净额（税前）: </span><b id="tax-net">—</b> · <span class="hint">税额: </span><b id="tax-tax">—</b> · <span class="hint">毛额（总计）: </span><span class="big" id="tax-gross">—</span></div></form></section>
   <article class="content">
     <h2>在价格上加税或从总额中提取税额</h2>
 <p>销售税、增值税、消费税——无论你所在国家怎么称呼它，涉及的算术无非两种操作之一：在净价上加上税金百分比以获得购买方支付的毛额，或者从毛额中反算出其中有多少是税额。本计算器可以即时完成这两种计算。输入金额和税率，选择模式；净价、税额和毛额会随着你的输入即时更新。</p>
@@ -144,13 +150,14 @@ textarea{min-height:120px;resize:vertical}
 <h2>隐私、即时、免费</h2>
 <p>你输入的任何数据都不会被发送到任何地方。计算器是一小段完全在你设备上运行的 JavaScript。它离线工作、即时响应，不需要任何账户或注册。关闭标签页后，你输入的所有数字都会消失。</p>
 <p>在为产品定价、核对收据或需要从总额中分离税款时，随时使用本工具。三个输出——净价、税额和毛额——在一个视图中为你展现完整的画面。</p>
-    <section class="faq"><h2>Sales tax calculator FAQ</h2><dl><dt>What is the difference between adding and extracting tax?</dt><dd>Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was.</dd><dt>What tax rates should I use?</dt><dd>Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign.</dd><dt>Is anything I type uploaded?</dt><dd>No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page.</dd></dl></section>
+    <section class="faq"><h2>销售税计算器常见问题解答</h2><dl><dt>加税和提取税有什么区别？</dt><dd>加税采用净价（税前价格）并计算您支付的总价。提取税费则相反：您输入已包含税费的总价格，计算器会计算出税费的多少以及税前金额是多少。</dd><dt>我应该使用什么税率？</dt><dd>使用您所在国家或地区适用的任何费率。常见的例子包括英国 20% 的增值税、德国 19% 的增值税、澳大利亚 10% 的商品及服务税以及美国各州不同的销售税率。输入不带百分号的数字。</dd><dt>我输入的内容是否已上传？</dt><dd>不会。一切都在您的浏览器中运行，不涉及服务器。当您关闭页面时，您输入的数字就会消失。</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/salestax/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
-  <p><a href="/glossary.html">全部工具</a></p></footer>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"amount":"金额","rate":"税率%","mode":"模式","add_tax":"在价格中添加税费","remove_tax":"从价格中提取税款","net":"净额（税前）","tax":"税额","gross":"毛额（总计）"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/salestax.js" defer></script>
 </body>
 </html>

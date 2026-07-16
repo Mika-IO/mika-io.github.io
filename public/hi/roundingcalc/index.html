@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>पूर्णांकन कैलक्यूलेटर - संख्याओं को किसी भी दशमलव स्थान तक पूर्णांकित करें</title>
+<meta name="description" content="मुफ़्त राउंडिंग कैलकुलेटर. किसी भी संख्या को दशमलव स्थानों की चुनी हुई संख्या में गोल करें, या अपने ब्राउज़र में तुरंत और सटीक रूप से ऊपर या नीचे गोल करें।">
+<link rel="canonical" href="https://mikaio.dev/hi/roundingcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/roundingcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/roundingcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/roundingcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/roundingcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/roundingcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/roundingcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/roundingcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/roundingcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/roundingcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/roundingcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/roundingcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="पूर्णांकन कैलक्यूलेटर - संख्याओं को किसी भी दशमलव स्थान तक पूर्णांकित करें">
+<meta property="og:description" content="मुफ़्त राउंडिंग कैलकुलेटर. किसी भी संख्या को दशमलव स्थानों की चुनी हुई संख्या में गोल करें, या अपने ब्राउज़र में तुरंत और सटीक रूप से ऊपर या नीचे गोल करें।">
+<meta property="og:url" content="https://mikaio.dev/hi/roundingcalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"पूर्णांकन कैलक्यूलेटर - संख्याओं को किसी भी दशमलव स्थान तक पूर्णांकित करें","url":"https://mikaio.dev/hi/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त राउंडिंग कैलकुलेटर. किसी भी संख्या को दशमलव स्थानों की चुनी हुई संख्या में गोल करें, या अपने ब्राउज़र में तुरंत और सटीक रूप से ऊपर या नीचे गोल करें।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"गोलाई कैलक्यूलेटर","item":"https://mikaio.dev/hi/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"दशमलव स्थानों का क्या मतलब है?","acceptedAnswer":{"@type":"Answer","text":"दशमलव स्थानों की संख्या दशमलव बिंदु के बाद कितने अंक रखने के लिए है। सौवें तक पूर्णांक बनाने के लिए 2 दर्ज करें, पूर्ण संख्या तक पूर्णांक बनाने के लिए 0, या निकटतम सौ तक पूर्णांकित करने के लिए -2 जैसी ऋणात्मक संख्या दर्ज करें।"}},{"@type":"Question","name":"तीनों विधियों में क्या अंतर है?","acceptedAnswer":{"@type":"Answer","text":"राउंड टू नियरेस्ट उस मान पर जाता है जो ऊपर या नीचे, करीब है। राउंड अप (सीलिंग) हमेशा उच्च मूल्य पर जाता है, और राउंड डाउन (फ्लोर) हमेशा कम मूल्य पर जाता है, जो मूल्य निर्धारण या वस्तुओं को बक्से में फिट करने जैसी चीजों के लिए मायने रखता है।"}},{"@type":"Question","name":"सटीक हिस्सों को कैसे संभाला जाता है?","acceptedAnswer":{"@type":"Answer","text":"जब कोई मान बिल्कुल आधा बैठता है, तो निकटतम का चक्कर उच्च संख्या में चला जाता है, जो सबसे परिचित रोजमर्रा का नियम है। यदि आपको इसे नियंत्रित करने की आवश्यकता है तो स्पष्ट रूप से राउंड अप या राउंड डाउन चुनें।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>गोलाई कैलक्यूलेटर</span></nav>
+  <h1>गोलाई कैलक्यूलेटर</h1>
+  <p class="lead">एक संख्या और दशमलव स्थान जो आप चाहते हैं दर्ज करें, फिर निकटतम, ऊपर या नीचे तक पूर्णांकित करना चुनें। आपके टाइप करते ही परिणाम अपडेट हो जाता है।</p>
+  <section class="widget" id="tool"><form id="rnd"><div class="row"><div class="field"><label for="rnd-num">संख्या</label><input type="number" id="rnd-num" step="any" inputmode="decimal"></div><div class="field"><label for="rnd-places">दशमलव स्थान</label><input type="number" id="rnd-places" value="0" step="1"></div><div class="field"><label for="rnd-mode">विधि</label><select id="rnd-mode"><option value="near">निकटतम तक गोल करें</option><option value="up">गोल करना</option><option value="down">नीचे गोल करें</option></select></div></div><div class="result"><span class="hint">गोलाकार: </span><span class="big" id="rnd-out">—</span></div></form></section>
+  <article class="content">
+    <h2>किसी भी संख्या को बिल्कुल वैसे ही गोल करें, जैसे आपको चाहिए</h2>
+<p>गोल करना तब तक सरल लगता है जब तक आपको इसे सावधानी से नहीं करना पड़ता। क्या 2.675 को 2.68 या 2.67 हो जाना चाहिए? निकटतम सौ तक पूर्णांकित करने, या तीन दशमलव स्थान रखने का क्या मतलब है? और क्या &quot;राउंड अप&quot; &quot;राउंड टू नियरेस्ट&quot; के समान है? जब भी पैसे, माप, ग्रेड या रिपोर्टिंग के लिए किसी नंबर को व्यवस्थित करने की आवश्यकता होती है, तो ये सही होना मायने रखता है और इसे छोड़ना आसान होता है। यह पूर्णांकन कैलकुलेटर अनुमान को समाप्त कर देता है। एक संख्या दर्ज करें, चुनें कि आप कितने दशमलव स्थान चाहते हैं, पूर्णांकन विधि चुनें, और यह तुरंत परिणाम दिखाता है। सब कुछ आपके ब्राउज़र में चलता है, इसलिए आपके टाइप करते ही उत्तर प्रकट हो जाता है और आपके द्वारा दर्ज किया गया कुछ भी अपलोड नहीं होता है।</p>
+<p>उपकरण आपको इस बात पर पूरा नियंत्रण देता है कि परिणाम कितना सटीक होना चाहिए और यह किस दिशा में जाना चाहिए। वह संयोजन - दशमलव स्थानों की संख्या और पूर्णांक विधि - अनिवार्य रूप से प्रत्येक पूर्णांक कार्य को कवर करता है जिसे आप पूरा करने की संभावना रखते हैं, एक मूल्य को दो दशमलव तक कम करने से लेकर एक बड़े अंक को निकटतम हजार तक पूर्णांकित करने तक।</p>
+<h2>इसका उपयोग कैसे करना है</h2>
+<p>वह संख्या दर्ज करके प्रारंभ करें जिसे आप पूर्णांकित करना चाहते हैं। फिर रखने के लिए दशमलव स्थानों की संख्या निर्धारित करें: सौवें तक 2 राउंड, दसवें तक 1, और पूर्ण संख्या के लिए 0 राउंड। आप नकारात्मक मान का भी उपयोग कर सकते हैं - उदाहरण के लिए, -2 दर्ज करके, निकटतम सौ तक पूर्णांक, और -3 को निकटतम हजार तक - जो बड़े आंकड़ों के लिए उपयोगी है। अंत में, विधि चुनें: निकटतम से गोल, ऊपर से गोल, या नीचे तक गोल। जैसे ही आप इनमें से कोई भी बदलाव करते हैं तो परिणाम लाइव अपडेट हो जाता है, इसलिए आप बिना कुछ भी दबाए तरीकों या परिशुद्धताओं की एक साथ तुलना कर सकते हैं।</p>
+<p>क्योंकि यह तुरंत पुनर्गणना करता है, इसका पता लगाना आसान है। यह देखने के लिए कि परिणाम कैसे बदलता है, शून्य, एक और दो दशमलव स्थानों पर समान संख्या आज़माएँ, या यह देखने के लिए तीन तरीकों के बीच स्विच करें कि वे एक मान के लिए कितनी दूर हो सकते हैं।</p>
+<h2>तीन गोल करने की विधियाँ</h2>
+<p><strong>राउंड टू नियरेस्ट</strong> वह रोजमर्रा का राउंडिंग है जिसे ज्यादातर लोग स्कूल में सीखते हैं। यह संख्या को उस अनुमत मान के करीब ले जाता है - यदि बचा हुआ भाग आधा या अधिक है तो ऊपर, यदि कम है तो नीचे। यह सही विकल्प है जब आप किसी संख्या का किसी दिए गए परिशुद्धता के साथ सबसे साफ-सुथरा, सबसे सटीक प्रतिनिधित्व चाहते हैं, जैसे कि माप या औसत प्रदर्शित करना।</p>
+<p><strong>राउंड अप</strong>, जिसे सीलिंग लेना भी कहा जाता है, हमेशा उच्च मूल्य पर ले जाता है, चाहे संख्या कितनी भी करीब क्यों न हो। जब भी किसी शेष का मतलब है कि आपको एक पूरी अतिरिक्त इकाई की आवश्यकता है, तो आप यही चाहते हैं: लोगों के एक समूह के लिए कितनी बसों की आवश्यकता है, पेंट के कितने टिन खरीदने हैं, या एक दस्तावेज़ कितने पेज भरेगा, यह तय करना। यहां तक ​​कि एक छोटा सा बचा हुआ सामान भी जमा हो जाता है, क्योंकि आप एक टिन का नौ-दसवां हिस्सा नहीं खरीद सकते।</p>
+<p><strong>राउंड डाउन</strong>, जिसे फ़्लोर लेना भी कहा जाता है, हमेशा निचले मूल्य पर जाता है। यह उन स्थितियों के लिए उपयुक्त है जहां आप केवल पूर्ण इकाइयों की गिनती कर सकते हैं और शेष को छोड़ दिया जाता है: आप एक बजट के भीतर कितनी संपूर्ण वस्तुएं खरीद सकते हैं, या सामान का ढेर कितने पूर्ण बक्से भर देगा। ऊपर और नीचे के बीच का चुनाव सटीकता के बारे में नहीं है बल्कि वास्तविक दुनिया की स्थिति आपको किस रास्ते पर जाने के लिए मजबूर करती है इसके बारे में है।</p>
+<h2>तरीका क्यों मायने रखता है</h2>
+<p>इन तरीकों के बीच का अंतर आश्चर्यजनक रूप से बड़ा हो सकता है, और गलत को चुनने से वास्तविक गलतियाँ होती हैं। मान लीजिए आपको 41 लोगों को ऐसे वाहनों में ले जाना है जिनमें प्रत्येक में 10 लोग हों। विभाजित करने पर 4.1 मिलता है, लेकिन निकटतम तक चक्कर लगाने पर 4 वाहन मिलेंगे - एक व्यक्ति को पीछे छोड़ते हुए। सही ढंग से पूर्णांकित करने पर 5 मिलता है। पैसे में, कीमत को कम करने पर चुपचाप प्रत्येक लेनदेन पर एक सेंट का एक अंश खो सकता है, जो हजारों बिक्री में जुड़ जाता है। इस बारे में विचार-विमर्श करना कि क्या आप निकटतम, ऊपर या नीचे, दशमलव स्थानों की संख्या की तुलना में अक्सर अधिक महत्वपूर्ण होते हैं, क्योंकि यह दर्शाता है कि संख्या को वास्तव में क्या करना है।</p>
+<p>सटीक आधे का मामला भी है, क्लासिक &quot;क्या 2.5 2 या 3 बन जाता है?&quot; सवाल। इस कैलकुलेटर का राउंड-टू-नियर ठीक आधा भाग ऊपर की ओर भेजता है, जो सबसे व्यापक रूप से सिखाया जाने वाला और सहज ज्ञान युक्त नियम है। यदि आपकी स्थिति को एक अलग उपचार की आवश्यकता है, तो आप आधे रास्ते के नियम पर भरोसा करने के बजाय दिशा को स्पष्ट करने के लिए बस राउंड अप या राउंड डाउन का चयन कर सकते हैं।</p>
+<h2>रोजमर्रा के उपयोग</h2>
+<p>गोलाई लगातार बढ़ती रहती है। खरीदार और कैशियर पैसे को दशमलव के दो स्थानों तक पूर्णांकित करते हैं। छात्र मापों और परिणामों को महत्वपूर्ण अंकों की एक समझदार संख्या में गोल करते हैं। आँकड़ों की रिपोर्टिंग करने वाला कोई भी व्यक्ति उन्हें पढ़ने योग्य बनाने के लिए बड़ी संख्याओं को निकटतम सौ, हज़ार या मिलियन तक ले जाता है। कुक स्केल और मात्राओं को गोल करते हैं, बिल्डर माप को व्यावहारिक इकाइयों तक गोल करते हैं, और स्प्रेडशीट उपयोगकर्ता लंबे समय तक चलने वाले दशमलव से बचने के लिए राउंड करते हैं। क्योंकि आप परिशुद्धता और दिशा दोनों को नियंत्रित करते हैं, एक ही उपकरण आपको कोई सूत्र याद रखे बिना इन सभी को संभालता है।</p>
+<h2>निजी, तत्काल और मुफ़्त</h2>
+<p>इसमें कोई साइन-अप नहीं है, कोई लागत नहीं है और रास्ते में कोई विज्ञापन नहीं है। संपूर्ण कैलकुलेटर कोड का एक छोटा टुकड़ा है जो आपके अपने डिवाइस पर चलता है, यही कारण है कि यह आपके टाइप करते ही तुरंत प्रतिक्रिया देता है और बिना इंटरनेट कनेक्शन के काम करता रहता है। आपके द्वारा दर्ज किया गया कुछ भी अपलोड, संग्रहीत या साझा नहीं किया जाता है; नंबर केवल आपकी स्क्रीन पर मौजूद होते हैं और जब आप पृष्ठ को पुनः लोड करते हैं तो गायब हो जाते हैं।</p>
+<p>इसका उपयोग करने के लिए, अपना नंबर दर्ज करें, दशमलव स्थान सेट करें, एक विधि चुनें और पूर्णांकित परिणाम पढ़ें। किसी भी समय किसी भी इनपुट को बदलें और उत्तर की गति बनी रहेगी, ताकि आप जितनी बार चाहें, एक ही आंकड़े को गोल कर सकें या पता लगा सकें कि अलग-अलग सेटिंग्स एक ही नंबर को कैसे प्रभावित करती हैं।</p>
+    <section class="faq"><h2>पूर्णांकन कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>दशमलव स्थानों का क्या मतलब है?</dt><dd>दशमलव स्थानों की संख्या दशमलव बिंदु के बाद कितने अंक रखने के लिए है। सौवें तक पूर्णांक बनाने के लिए 2 दर्ज करें, पूर्ण संख्या तक पूर्णांक बनाने के लिए 0, या निकटतम सौ तक पूर्णांकित करने के लिए -2 जैसी ऋणात्मक संख्या दर्ज करें।</dd><dt>तीनों विधियों में क्या अंतर है?</dt><dd>राउंड टू नियरेस्ट उस मान पर जाता है जो ऊपर या नीचे, करीब है। राउंड अप (सीलिंग) हमेशा उच्च मूल्य पर जाता है, और राउंड डाउन (फ्लोर) हमेशा कम मूल्य पर जाता है, जो मूल्य निर्धारण या वस्तुओं को बक्से में फिट करने जैसी चीजों के लिए मायने रखता है।</dd><dt>सटीक हिस्सों को कैसे संभाला जाता है?</dt><dd>जब कोई मान बिल्कुल आधा बैठता है, तो निकटतम का चक्कर उच्च संख्या में चला जाता है, जो सबसे परिचित रोजमर्रा का नियम है। यदि आपको इसे नियंत्रित करने की आवश्यकता है तो स्पष्ट रूप से राउंड अप या राउंड डाउन चुनें।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"number":"संख्या","places":"दशमलव स्थान","mode":"विधि","nearest":"निकटतम तक गोल करें","up":"गोल करना","down":"नीचे गोल करें","result":"गोलाकार"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/roundingcalc.js" defer></script>
+</body>
+</html>

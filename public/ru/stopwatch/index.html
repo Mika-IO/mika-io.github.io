@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stopwatch Online — free browser stopwatch with lap times</title>
-<meta name="description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<title>Секундомер онлайн — бесплатный браузерный секундомер с указанием времени круга</title>
+<meta name="description" content="Бесплатный онлайн-секундомер с точностью до миллисекунды. Запуск, пауза, запись времени круга и сброс. Загрузка не требуется. Работает полностью в вашем браузере.">
 <link rel="canonical" href="https://mikaio.dev/ru/stopwatch/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/stopwatch/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/stopwatch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/stopwatch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/stopwatch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/stopwatch/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/stopwatch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/stopwatch/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/stopwatch/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/stopwatch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/stopwatch/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/stopwatch/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Stopwatch Online — free browser stopwatch with lap times">
-<meta property="og:description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<meta property="og:title" content="Секундомер онлайн — бесплатный браузерный секундомер с указанием времени круга">
+<meta property="og:description" content="Бесплатный онлайн-секундомер с точностью до миллисекунды. Запуск, пауза, запись времени круга и сброс. Загрузка не требуется. Работает полностью в вашем браузере.">
 <meta property="og:url" content="https://mikaio.dev/ru/stopwatch/">
 <meta property="og:locale" content="ru">
 <meta name="twitter:card" content="summary">
@@ -63,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -109,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch Online — free browser stopwatch with lap times","url":"https://mikaio.dev/ru/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Stopwatch","item":"https://mikaio.dev/ru/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate is the browser stopwatch?","acceptedAnswer":{"@type":"Answer","text":"The stopwatch uses the browser's high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device."}},{"@type":"Question","name":"Will it stop if I switch tabs?","acceptedAnswer":{"@type":"Answer","text":"Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results."}},{"@type":"Question","name":"Can I use this on a mobile phone?","acceptedAnswer":{"@type":"Answer","text":"Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Секундомер онлайн — бесплатный браузерный секундомер с указанием времени круга","url":"https://mikaio.dev/ru/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный онлайн-секундомер с точностью до миллисекунды. Запуск, пауза, запись времени круга и сброс. Загрузка не требуется. Работает полностью в вашем браузере."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Секундомер","item":"https://mikaio.dev/ru/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Насколько точен секундомер браузера?","acceptedAnswer":{"@type":"Answer","text":"Секундомер использует таймер производительности браузера с высоким разрешением, точность которого в нормальных условиях составляет менее миллисекунды. Для официального хронометража, где требуется точная точность, используйте сертифицированное устройство хронометража."}},{"@type":"Question","name":"Остановится ли это, если я переключу вкладки?","acceptedAnswer":{"@type":"Answer","text":"Браузеры могут ограничивать работу JavaScript на фоновых вкладках, что может повлиять на точность, если вы отключитесь. Держите вкладку секундомера активной для достижения наилучших результатов."}},{"@type":"Question","name":"Могу ли я использовать это на мобильном телефоне?","acceptedAnswer":{"@type":"Answer","text":"Да, секундомер полностью сенсорный и работает на смартфонах и планшетах."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Навигация по сайту">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Stopwatch</span></nav>
-  <h1>Stopwatch</h1>
-  <p class="lead">Press Start to begin timing. Press Lap to record split times without stopping. Press Reset to clear everything.</p>
-  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">Start</button><button id="sw-lap" class="btn secondary" disabled>Lap</button><button id="sw-reset" class="btn secondary" disabled>Reset</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Секундомер</span></nav>
+  <h1>Секундомер</h1>
+  <p class="lead">Нажмите Старт, чтобы начать отсчет времени. Нажмите Lap, чтобы записать промежуточное время без остановки. Нажмите Reset, чтобы очистить все.</p>
+  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">Старт</button><button id="sw-lap" class="btn secondary" disabled>Круг</button><button id="sw-reset" class="btn secondary" disabled>Сброс</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
   <article class="content">
     <h2>Точный секундомер прямо в вашем браузере</h2>
 <p>Для точного замера времени раньше приходилось носить с собой специальный секундомер. Теперь любое устройство с браузером может служить этой цели. Этот онлайн-секундомер полностью работает в вашем браузере, используя таймер высокого разрешения, записывает времена кругов и отображает прошедшее время в минутах, секундах и миллисекундах. Ничего не нужно скачивать или устанавливать.</p>
@@ -148,13 +156,14 @@ textarea{min-height:120px;resize:vertical}
 <p>Если вы случайно нажмёте «Сброс» до того, как сохраните нужные времена кругов, отмены нет — счёт немедленно возвращается к нулю. Для любого сеанса, где история кругов действительно важна, стоит записывать ключевые сплиты по мере их возникновения, а не полагаться исключительно на экранный список, который сохранится до самого конца.</p>
 <h2>Конфиденциальность и постоянная доступность</h2>
 <p>Никакие данные никуда не отправляются, секундомер полностью работает в вашем браузере, работает офлайн после загрузки страницы и не требует учётной записи — перезагрузите страницу в любое время, чтобы сбросить всё обратно к нулю.</p>
-    <section class="faq"><h2>Stopwatch FAQ</h2><dl><dt>How accurate is the browser stopwatch?</dt><dd>The stopwatch uses the browser&#39;s high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device.</dd><dt>Will it stop if I switch tabs?</dt><dd>Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results.</dd><dt>Can I use this on a mobile phone?</dt><dd>Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets.</dd></dl></section>
+    <section class="faq"><h2>Часто задаваемые вопросы по секундомеру</h2><dl><dt>Насколько точен секундомер браузера?</dt><dd>Секундомер использует таймер производительности браузера с высоким разрешением, точность которого в нормальных условиях составляет менее миллисекунды. Для официального хронометража, где требуется точная точность, используйте сертифицированное устройство хронометража.</dd><dt>Остановится ли это, если я переключу вкладки?</dt><dd>Браузеры могут ограничивать работу JavaScript на фоновых вкладках, что может повлиять на точность, если вы отключитесь. Держите вкладку секундомера активной для достижения наилучших результатов.</dd><dt>Могу ли я использовать это на мобильном телефоне?</dt><dd>Да, секундомер полностью сенсорный и работает на смартфонах и планшетах.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/stopwatch/">Русский</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
-  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"start":"Старт","lap":"Круг","reset":"Сброс","stop":"Стоп"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/stopwatch.js" defer></script>
 </body>
 </html>

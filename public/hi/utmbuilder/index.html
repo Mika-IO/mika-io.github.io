@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>यूटीएम बिल्डर - ट्रैक करने योग्य अभियान यूआरएल बनाएं</title>
+<meta name="description" content="निःशुल्क यूटीएम बिल्डर। Google Analytics और अन्य एनालिटिक्स प्लेटफ़ॉर्म के लिए UTM-टैग किए गए URL बनाएं। ईमेल, सोशल मीडिया और सशुल्क अभियानों से ट्रैफ़िक ट्रैक करें।">
+<link rel="canonical" href="https://mikaio.dev/hi/utmbuilder/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/utmbuilder/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/utmbuilder/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/utmbuilder/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/utmbuilder/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/utmbuilder/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/utmbuilder/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/utmbuilder/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/utmbuilder/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/utmbuilder/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/utmbuilder/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/utmbuilder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="यूटीएम बिल्डर - ट्रैक करने योग्य अभियान यूआरएल बनाएं">
+<meta property="og:description" content="निःशुल्क यूटीएम बिल्डर। Google Analytics और अन्य एनालिटिक्स प्लेटफ़ॉर्म के लिए UTM-टैग किए गए URL बनाएं। ईमेल, सोशल मीडिया और सशुल्क अभियानों से ट्रैफ़िक ट्रैक करें।">
+<meta property="og:url" content="https://mikaio.dev/hi/utmbuilder/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"यूटीएम बिल्डर - ट्रैक करने योग्य अभियान यूआरएल बनाएं","url":"https://mikaio.dev/hi/utmbuilder/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"निःशुल्क यूटीएम बिल्डर। Google Analytics और अन्य एनालिटिक्स प्लेटफ़ॉर्म के लिए UTM-टैग किए गए URL बनाएं। ईमेल, सोशल मीडिया और सशुल्क अभियानों से ट्रैफ़िक ट्रैक करें।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"यूटीएम लिंक बिल्डर","item":"https://mikaio.dev/hi/utmbuilder/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"यूटीएम पैरामीटर क्या हैं?","acceptedAnswer":{"@type":"Answer","text":"UTM (अर्चिन ट्रैकिंग मॉड्यूल) पैरामीटर एक URL में जोड़े गए टैग हैं जो Google Analytics जैसे एनालिटिक्स प्लेटफ़ॉर्म को बताते हैं कि ट्रैफ़िक कहाँ से आया, किस माध्यम का उपयोग किया गया और किस अभियान ने इसे चलाया।"}},{"@type":"Question","name":"कौन से पैरामीटर आवश्यक हैं?","acceptedAnswer":{"@type":"Answer","text":"स्रोत, माध्यम और अभियान तीन आवश्यक पैरामीटर हैं। शब्द (सशुल्क खोज कीवर्ड के लिए प्रयुक्त) और सामग्री (ए/बी परीक्षण के लिए प्रयुक्त) वैकल्पिक हैं।"}},{"@type":"Question","name":"क्या यूटीएम पैरामीटर केस-संवेदी हैं?","acceptedAnswer":{"@type":"Answer","text":"हाँ। \"ईमेल\" और \"ईमेल\" को अलग-अलग स्रोतों के रूप में ट्रैक किया जाता है। अपने सभी अभियानों में लगातार लोअरकेस नामकरण परंपराओं का उपयोग करें।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/utmbuilder/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/utmbuilder/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/utmbuilder/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/utmbuilder/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/utmbuilder/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/utmbuilder/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/utmbuilder/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/utmbuilder/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/utmbuilder/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/utmbuilder/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>यूटीएम लिंक बिल्डर</span></nav>
+  <h1>यूटीएम लिंक बिल्डर</h1>
+  <p class="lead">ट्रैक करने योग्य यूटीएम लिंक बनाने के लिए यूआरएल और अभियान पैरामीटर भरें।</p>
+  <section class="widget" id="tool"><div id="utm-app"><div class="row"><div class="field"><label for="utm-url">वेबसाइट यूआरएल</label><input type="url" id="utm-url" placeholder="https://example.com/page"></div></div><div class="row"><div class="field"><label for="utm-source">यूटीएम स्रोत</label><input type="text" id="utm-source" placeholder="न्यूज़लेटर"></div><div class="field"><label for="utm-medium">यूटीएम माध्यम</label><input type="text" id="utm-medium" placeholder="ईमेल"></div><div class="field"><label for="utm-campaign">यूटीएम अभियान</label><input type="text" id="utm-campaign" placeholder="ग्रीष्म_बिक्री"></div></div><div class="row"><div class="field"><label for="utm-term">यूटीएम अवधि (वैकल्पिक)</label><input type="text" id="utm-term" placeholder="दौड़ने+जूते"></div><div class="field"><label for="utm-content">यूटीएम सामग्री (वैकल्पिक)</label><input type="text" id="utm-content" placeholder="cta_बटन"></div></div><div id="utm-out" style="margin-top:1rem;word-break:break-all;font-size:0.9rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);min-height:3rem"></div><button id="utm-copy" class="btn secondary" style="margin-top:0.5rem">लिंक कॉपी करें</button></div></section>
+  <article class="content">
+    <h2>सटीक अभियान ट्रैकिंग के लिए यूटीएम-टैग किए गए यूआरएल बनाएं</h2>
+<p>UTM पैरामीटर Google Analytics जैसे एनालिटिक्स प्लेटफ़ॉर्म को यह बताने का मानक तरीका है कि वेबसाइट ट्रैफ़िक कहाँ से आता है। यूटीएम टैग के बिना, आपके ईमेल न्यूज़लेटर, आपके सोशल मीडिया पोस्ट और आपके भुगतान किए गए विज्ञापनों से आने वाला ट्रैफ़िक एनालिटिक्स में एक जैसा दिखता है - सभी को &quot;प्रत्यक्ष&quot; के रूप में वर्गीकृत किया गया है या सामान्य रेफरल श्रेणियों में रखा गया है। यूटीएम टैग के साथ, आप सटीक रूप से जानते हैं कि कौन सा अभियान, कौन सा माध्यम और कौन सा स्रोत प्रत्येक आगंतुक को प्रेरित करता है।</p>
+<h2>यूटीएम पैरामीटर क्या हैं?</h2>
+<p>यूटीएम का मतलब अर्चिन ट्रैकिंग मॉड्यूल है। अर्चिन सॉफ्टवेयर 2005 में Google द्वारा अधिग्रहित एक वेब एनालिटिक्स कंपनी थी, और इसका ट्रैकिंग मॉड्यूल Google Analytics का आधार बन गया। यूटीएम नामकरण उद्योग मानक के रूप में अटका हुआ है, भले ही अर्चिन को ही बंद कर दिया गया था।</p>
+<p>यूटीएम पैरामीटर एक क्वेरी स्ट्रिंग के रूप में यूआरएल से जुड़े कुंजी-मूल्य जोड़े हैं। उदाहरण के लिए:</p>
+<p>https://example.com/sale?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=summer_sale</p>
+<p>जब कोई इस लिंक पर क्लिक करता है और आपकी वेबसाइट पर आता है, तो Google Analytics (या कोई अन्य एनालिटिक्स प्लेटफ़ॉर्म जो UTM का समर्थन करता है) विज़िट डेटा के साथ सभी तीन मापदंडों को रिकॉर्ड करता है।</p>
+<h2>पांच यूटीएम पैरामीटर</h2>
+<p><strong>utm_source</strong> (आवश्यक): पहचानता है कि ट्रैफ़िक कहाँ से आता है। उदाहरण: न्यूज़लेटर, फेसबुक, गूगल, लिंक्डइन, ट्विटर, इंस्टाग्राम, पॉडकास्ट।</p>
+<p><strong>utm_medium</strong> (आवश्यक): मार्केटिंग चैनल या तंत्र का वर्णन करता है। उदाहरण: ईमेल, सोशल, सीपीसी (मूल्य-प्रति-क्लिक), ऑर्गेनिक, रेफरल, बैनर, संबद्ध।</p>
+<p><strong>utm_campaign</strong> (आवश्यक): विशिष्ट मार्केटिंग अभियान को नाम देता है। उदाहरण: समर_सेल_2024, प्रोडक्ट_लॉन्च_v2, ब्रांड_अवेयरनेस_क्यू1।</p>
+<p><strong>utm_term</strong> (वैकल्पिक): विज्ञापन को ट्रिगर करने वाले कीवर्ड की पहचान करने के लिए मुख्य रूप से भुगतान की गई खोज के लिए उपयोग किया जाता है। उदाहरण: दौड़ने+जूते, सर्वोत्तम+सीआरएम+सॉफ्टवेयर।</p>
+<p><strong>utm_content</strong> (वैकल्पिक): ए/बी परीक्षण के लिए या एक ही अभियान में एकाधिक लिंक के बीच अंतर करने के लिए उपयोग किया जाता है। उदाहरण: सीटीए_बटन, हीरो_इमेज, फूटर_लिंक, वर्जन_ए।</p>
+<h2>यूटीएम नामकरण के लिए सर्वोत्तम अभ्यास</h2>
+<p><strong>संगति महत्वपूर्ण है</strong>: utm_source=Email और utm_source=email को दो अलग-अलग स्रोतों के रूप में माना जाता है। एक नामकरण परंपरा स्थापित करें और अपने पूरे संगठन में इसका पालन करें।</p>
+<p><strong>लोअरकेस का उपयोग करें</strong>: अधिकांश टीमें अंडरस्कोर या हाइफ़न के साथ ऑल-लोअरकेस का उपयोग करती हैं। रिक्त स्थान से बचें (यदि आवश्यक हो तो + या %20 का उपयोग करें, लेकिन इस तरह के उपकरण स्वचालित रूप से एन्कोडिंग को संभालते हैं)।</p>
+<p><strong>वर्णनात्मक लेकिन संक्षिप्त रहें</strong>: utm_campaign=summer_sale_2024 आपको utm_campaign=campaign1 से अधिक बताता है।</p>
+<p><strong>आंतरिक लिंक पर यूटीएम का उपयोग न करें</strong>: यूटीएम पैरामीटर Google Analytics में सत्र को रीसेट करते हैं। यूटीएम के साथ आंतरिक लिंक गलत तरीके से ट्रैफ़िक का श्रेय देंगे।</p>
+<h2>सामान्य अभियान URL उदाहरण</h2>
+<p>न्यूज़लेटर: utm_source=न्यूज़लेटर&amp;utm_medium=ईमेल&amp;utm_campaign=weekly_digest</p>
+<p>फेसबुक विज्ञापन: utm_source=facebook&amp;utm_medium=cpc&amp;utm_campaign=brand_awareness</p>
+<p>लिंक्डइन पोस्ट: utm_source=linkedin&amp;utm_medium=social&amp;utm_campaign=product_launch</p>
+<p>फ़्लायर पर QR कोड: utm_source=print_flyer&amp;utm_medium=qr_code&amp;utm_campaign=event_2024</p>
+<h2>बिल्डर का उपयोग कैसे करें</h2>
+<p>अपना गंतव्य यूआरएल दर्ज करें और स्रोत, माध्यम और अभियान फ़ील्ड भरें, यदि आपके अभियान को उनकी आवश्यकता है तो शब्द और सामग्री जोड़ें, और पूरा टैग किया गया यूआरएल तुरंत दिखाई देता है, सही ढंग से एन्कोड किया गया है और ईमेल, विज्ञापन प्लेटफ़ॉर्म या सामाजिक पोस्ट में कॉपी करने के लिए तैयार है। इसे इस तरह से बनाने से दो सबसे आम गलतियाँ दूर हो जाती हैं जो लोग हाथ से यूटीएम लिंक टाइप करते हैं: एक पैरामीटर नाम में एक टाइपो जिसे एनालिटिक्स चुपचाप पहचानने में विफल रहता है, और असंगत पूंजीकरण जो एक रिपोर्ट में एक ट्रैफ़िक स्रोत को कई अलग-अलग दिखने वाले स्रोतों में विभाजित करता है।</p>
+<h2>आपके द्वारा चुने गए सटीक नामों की तुलना में निरंतरता अधिक क्यों मायने रखती है</h2>
+<p>एनालिटिक्स प्लेटफ़ॉर्म यूटीएम मूल्यों को उनके अर्थ की व्याख्या करने के बजाय शाब्दिक स्ट्रिंग के रूप में मानते हैं, इसलिए &quot;न्यूज़लेटर&quot;, &quot;न्यूज़लेटर&quot; और &quot;न्यूज़_लेटर&quot; को तीन पूरी तरह से अलग स्रोतों के रूप में दर्ज किया जाता है, भले ही रिपोर्ट पढ़ने वाला एक इंसान उन्हें एक ही चीज़ के रूप में पहचान लेगा। यह सबसे आम तरीका है जिससे यूटीएम ट्रैकिंग बड़ी मार्केटिंग टीमों के अंदर चुपचाप टूट जाती है: हर कोई इस अवधारणा पर सहमत है लेकिन कोई भी सटीक वर्तनी को लागू नहीं करता है, और महीनों बाद एनालिटिक्स रिपोर्ट को एक दर्जन लगभग डुप्लिकेट पंक्तियों में विभाजित कर दिया जाता है, जिनका मतलब एक ही अभियान है। अपने पहले अभियान से पहले एक नामकरण परंपरा पर निर्णय लेना, और टीम के प्रत्येक सदस्य को समान मूल्यों के साथ एक ही टूल के माध्यम से लिंक बनाना, तथ्य के बाद डेटा को साफ़ करने की कोशिश करने की तुलना में इसे कहीं अधिक विश्वसनीय रूप से रोकता है।</p>
+<h2>यूटीएम टैग और प्लेटफ़ॉर्म-नेटिव ट्रैकिंग</h2>
+<p>Google विज्ञापन और Facebook विज्ञापन सहित कुछ विज्ञापन प्लेटफ़ॉर्म अपने स्वयं के स्वचालित टैगिंग सिस्टम (gclid, fbclid) की पेशकश करते हैं जो मैन्युअल रूप से निर्मित UTM मापदंडों के साथ डुप्लिकेट या विरोध कर सकते हैं यदि दोनों का उपयोग एक ही लिंक पर लापरवाही से किया जाता है। सामान्य सर्वोत्तम अभ्यास यह है कि प्लेटफ़ॉर्म के ऑटो-टैगिंग को व्यापक अभियान-स्तरीय कहानी के लिए यूटीएम पैरामीटर का उपयोग करते समय प्लेटफ़ॉर्म-विशिष्ट एट्रिब्यूशन को संभालने दें - स्रोत, माध्यम और अभियान का नाम - क्योंकि यूटीएम पैरामीटर एक ऐसी टैगिंग योजना है जिसे लगभग हर एनालिटिक्स प्लेटफ़ॉर्म लगातार समझता है, भले ही विज्ञापन नेटवर्क वास्तव में क्लिक प्रदान करता हो।</p>
+<h2>लॉन्च से पहले अपने UTM लिंक का ऑडिट करना</h2>
+<p>किसी अभियान के लाइव होने से पहले, प्रत्येक यूटीएम-टैग किए गए लिंक का ठीक उसी तरह परीक्षण करना उचित है, जिस तरह एक प्राप्तकर्ता इसका सामना करेगा: पूर्ण यूआरएल को एक निजी ब्राउज़र विंडो में पेस्ट करें और पुष्टि करें कि यह टैग बरकरार के साथ इच्छित पृष्ठ पर आता है, क्योंकि कुछ सामग्री प्रबंधन प्रणालियाँ और लिंक शॉर्टनर रीडायरेक्ट के दौरान क्वेरी पैरामीटर को चुपचाप हटा देते हैं। एक अभियान जो बिल्डर में पूरी तरह से टैग किया हुआ दिखता है, लेकिन रीडायरेक्ट श्रृंखला में कहीं अपने यूटीएम पैरामीटर खो देता है, उसे एनालिटिक्स में &quot;प्रत्यक्ष&quot; ट्रैफ़िक के रूप में रिपोर्ट किया जाएगा, जिससे टैग द्वारा प्रदान किए जाने वाले सटीक एट्रिब्यूशन को चुपचाप मिटा दिया जाएगा।</p>
+<h2>साझा नामकरण संदर्भ रखना</h2>
+<p>utm_source और utm_medium - &quot;ईमेल&quot;, न कि &quot;ईमेल&quot; या &quot;ई-मेल&quot; के लिए सटीक अनुमोदित मानों को सूचीबद्ध करने वाला एक सरल साझा संदर्भ दस्तावेज़ रखने से बड़ी टीमों को लाभ होता है - ताकि अभियान लिंक बनाने वाला प्रत्येक व्यक्ति, चाहे वे किसी भी उपकरण का उपयोग करें, यूटीएम मान उत्पन्न करता है जो समय के साथ लगभग डुप्लिकेट में विभाजित होने के बजाय एनालिटिक्स रिपोर्ट में समान पंक्तियों में साफ-साफ रोल करता है।</p>
+<h2>निजी और तत्काल</h2>
+<p>यूआरएल पूरी तरह से आपके ब्राउज़र में बनाया गया है, इसलिए जैसे ही आप टाइप करते हैं यह तुरंत दिखाई देता है और आपके द्वारा दर्ज किया गया कुछ भी कभी भी किसी सर्वर पर नहीं भेजा जाता है, लॉग इन किया जाता है या साझा किया जाता है।</p>
+    <section class="faq"><h2>यूटीएम बिल्डर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>यूटीएम पैरामीटर क्या हैं?</dt><dd>UTM (अर्चिन ट्रैकिंग मॉड्यूल) पैरामीटर एक URL में जोड़े गए टैग हैं जो Google Analytics जैसे एनालिटिक्स प्लेटफ़ॉर्म को बताते हैं कि ट्रैफ़िक कहाँ से आया, किस माध्यम का उपयोग किया गया और किस अभियान ने इसे चलाया।</dd><dt>कौन से पैरामीटर आवश्यक हैं?</dt><dd>स्रोत, माध्यम और अभियान तीन आवश्यक पैरामीटर हैं। शब्द (सशुल्क खोज कीवर्ड के लिए प्रयुक्त) और सामग्री (ए/बी परीक्षण के लिए प्रयुक्त) वैकल्पिक हैं।</dd><dt>क्या यूटीएम पैरामीटर केस-संवेदी हैं?</dt><dd>हाँ। &quot;ईमेल&quot; और &quot;ईमेल&quot; को अलग-अलग स्रोतों के रूप में ट्रैक किया जाता है। अपने सभी अभियानों में लगातार लोअरकेस नामकरण परंपराओं का उपयोग करें।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/utmbuilder/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/utmbuilder/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/utmbuilder/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/utmbuilder/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/utmbuilder/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/utmbuilder/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/utmbuilder/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/utmbuilder/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/utmbuilder/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/utmbuilder/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"url":"वेबसाइट यूआरएल","source":"यूटीएम स्रोत","medium":"यूटीएम माध्यम","campaign":"यूटीएम अभियान","term":"यूटीएम अवधि","content":"यूटीएम सामग्री","optional":"वैकल्पिक","eg_source":"न्यूज़लेटर","eg_medium":"ईमेल","eg_campaign":"ग्रीष्म_बिक्री","eg_term":"दौड़ने+जूते","eg_content":"cta_बटन","copy":"लिंक कॉपी करें","copied":"नकल की गई!","copylink":"लिंक की प्रतिलिपि करें","fillhint":"लिंक जनरेट करने के लिए URL, स्रोत, माध्यम और अभियान भरें।"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/utmbuilder.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мировое время — сравнивайте текущее время в городах по всему миру.</title>
+<meta name="description" content="Бесплатные мировые часы. Сравните текущее местное время в нескольких городах одновременно. Регистрация не требуется. Обновления каждую секунду в вашем браузере.">
+<link rel="canonical" href="https://mikaio.dev/ru/worldclock/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/worldclock/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/worldclock/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/worldclock/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/worldclock/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/worldclock/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/worldclock/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/worldclock/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/worldclock/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/worldclock/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/worldclock/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/worldclock/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Мировое время — сравнивайте текущее время в городах по всему миру.">
+<meta property="og:description" content="Бесплатные мировые часы. Сравните текущее местное время в нескольких городах одновременно. Регистрация не требуется. Обновления каждую секунду в вашем браузере.">
+<meta property="og:url" content="https://mikaio.dev/ru/worldclock/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Мировое время — сравнивайте текущее время в городах по всему миру.","url":"https://mikaio.dev/ru/worldclock/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатные мировые часы. Сравните текущее местное время в нескольких городах одновременно. Регистрация не требуется. Обновления каждую секунду в вашем браузере."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Мировое время","item":"https://mikaio.dev/ru/worldclock/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Насколько точны мировые часы?","acceptedAnswer":{"@type":"Answer","text":"Время определяется на основе системных часов вашего устройства и базы данных часовых поясов IANA, встроенной в современные браузеры. Они точны до секунды, если часы вашего устройства настроены правильно."}},{"@type":"Question","name":"Влияет ли переход на летнее время на результаты?","acceptedAnswer":{"@type":"Answer","text":"Да, Intl API браузера автоматически учитывает правила перехода на летнее время для каждого часового пояса, поэтому отображаемое время всегда правильное, независимо от времени года."}},{"@type":"Question","name":"Могу ли я сравнить более трех городов?","acceptedAnswer":{"@type":"Answer","text":"Инструмент показывает сразу три города для более наглядного сравнения. Чтобы сравнить больше, просто измените один из раскрывающихся списков на другой город."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/worldclock/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/worldclock/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/worldclock/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/worldclock/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/worldclock/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/worldclock/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/worldclock/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/worldclock/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/worldclock/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/worldclock/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Мировое время</span></nav>
+  <h1>Мировое время</h1>
+  <p class="lead">Выберите до трех городов, чтобы сравнить текущее местное время. Часы обновляются каждую секунду.</p>
+  <section class="widget" id="tool"><div id="wc-app"><div class="row"><div class="field"><label for="wc-city1">Город 1</label><select id="wc-city1"></select></div><div class="field"><label for="wc-city2">Город 2</label><select id="wc-city2"></select></div><div class="field"><label for="wc-city3">Город 3</label><select id="wc-city3"></select></div></div><div id="wc-out" class="result" style="flex-direction:column;gap:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>Мгновенно сравнивайте местное время по всему миру</h2>
+<p>Планируете ли вы встречу с коллегой в Токио, звоните другу в Нью-Йорк или проверяете, когда начинается прямая трансляция в вашем часовом поясе, знание того, сколько сейчас времени в другом месте, имеет значение. Мировые часы позволяют сравнивать текущее местное время в нескольких городах одновременно, не прибегая к мысленным арифметическим действиям. Выберите города из раскрывающихся списков, и текущее время появится немедленно, обновляясь каждую секунду, поэтому вы всегда увидите живое и точное сравнение, а не снимок, который устаревает, как только вы отводите взгляд.</p>
+<h2>Как его использовать</h2>
+<p>Выберите город в каждом из трех раскрывающихся меню. Как только вы сделаете выбор, ниже появятся часы этого города, тикающие в реальном времени наряду с другими. Не нужно ничего отправлять и ничего настраивать, кроме выбора интересующих вас мест — измените любой раскрывающийся список в любой момент, и отображение мгновенно обновится. Три значения по умолчанию установлены для широко используемых эталонных городов, но вы можете заменить любой из них на любой другой город в списке, чтобы построить точное сравнение, которое вам нужно, будь то два побережья одной и той же страны или три континента одновременно.</p>
+<h2>Почему сравнивать время сложнее, чем кажется</h2>
+<p>Часовые пояса — это не просто вопрос подсчета часов на карте. Политические границы, а не равномерно расположенные меридианы, определяют, где заканчивается одна зона и начинается другая, поэтому соседние регионы могут находиться на расстоянии нескольких часов друг от друга или, в некоторых случаях, разделять одну зону, несмотря на то, что они находятся далеко друг от друга географически. Вдобавок ко всему, многие страны переводят свои часы вперед или назад для перехода на летнее время, и не все они делают это в одни и те же даты — Северное и Южное полушария смещены на шесть месяцев, некоторые страны вообще не соблюдают этого, а точные даты перехода могут различаться даже в соседних странах, которые это делают. Добавьте несколько мест, в которых используются необычные получасовые или 45-минутные отклонения от стандартного времени, и ручные расчеты станут настоящим источником пропущенных встреч и поздних звонков.</p>
+<h2>Как часы остаются точными</h2>
+<p>Этот инструмент позволяет обойти всю эту сложность, полагаясь на базу данных часовых поясов, встроенную в ваш веб-браузер, тот же мировой стандарт, который используется в календарях, телефонах и операционных системах. Каждый город, который вы можете выбрать, сопоставляется с его официальным идентификатором часового пояса, и браузер определяет правильное текущее смещение для этого места в данный момент, автоматически учитывая правила перехода на летнее время и любые исторические особенности. Это означает, что отображаемое время всегда соответствует сегодняшней дате, и вам не нужно помнить, соблюдает ли конкретная страна летнее время. Единственное требование – правильность установки часов вашего устройства, поскольку каждое сравнение рассчитывается относительно них.</p>
+<h2>Где помогают мировые часы</h2>
+<p>Международные команды живут именно таким сравнением. Планирование звонка в три офиса, проверка того, вероятно ли, что коллега все еще за своим столом, или определение последнего разумного часа для отправки сообщения, на которое требуется ответ в тот же день, — все это повседневные задачи, которые быстрый взгляд на мировые часы решает за секунды. Путешественники используют его, чтобы узнать, когда можно безопасно позвонить семье домой, журналисты и трейдеры используют его для отслеживания часов работы рынков в финансовых центрах, а любители прямых спортивных трансляций или трансляций событий используют его, чтобы перевести время начала или премьеры в свой местный час.</p>
+<p>Это одинаково полезно и для личных моментов — выяснить, рано или поздно звонить родственнику за границу, запланировать видеочат с другом, уехавшим за границу, или просто удовлетворить любопытство по поводу того, что сейчас происходит на другом конце планеты.</p>
+<h2>Частный, мгновенный и бесплатный</h2>
+<p>Нет никакой регистрации, никаких затрат и никакой рекламы. Все часы работают как небольшой фрагмент кода на вашем устройстве, считывая системное время и применяя встроенные в браузер правила часового пояса, поэтому они работают мгновенно и продолжают идти даже без подключения к Интернету после загрузки страницы. Ничего о том, какие города вы выбираете, не загружается, не регистрируется и не передается.</p>
+<p>Чтобы использовать его, выберите свои города из трех раскрывающихся списков и наблюдайте за обновлением времени в прямом эфире, секунда за секундой. Поменяйте любой город в любое время, чтобы сравнить разные наборы мест, и полагайтесь на дисплей, который каждый раз правильно обрабатывает летнее время и особенности часового пояса.</p>
+<h2>Краткая история поясного времени</h2>
+<p>До конца девятнадцатого века в каждом городе фактически сохранялось собственное местное время, основанное на солнечном свете, что делало расписание поездов и междугороднюю связь настоящей головной болью — два города, находящиеся всего в нескольких десятках километров друг от друга, могли расходиться во времени на несколько минут. Распространение железных дорог и телеграфа вынудило мир перейти к стандартизированным часовым поясам, а международная конференция в 1884 году установила систему зон, основанных на долготе, отсчитываемых от Гринвича, которая, после многих местных корректировок, до сих пор лежит в основе того, как работают мировые часы на этой странице сегодня. Понимание этой истории объясняет, почему границы зон следуют границам стран, а не четким линиям долготы: они были проведены для практического и политического удобства, а не для математической аккуратности. Несколько мест даже компенсируются нестандартными 30 или 45 минутами, а не полным часом, что является напоминанием о том, что вся система, хотя сейчас и глобально скоординирована, все еще представляет собой лоскутное одеяло национальных решений, наложенных поверх международной структуры.</p>
+    <section class="faq"><h2>Мировое время: часто задаваемые вопросы</h2><dl><dt>Насколько точны мировые часы?</dt><dd>Время определяется на основе системных часов вашего устройства и базы данных часовых поясов IANA, встроенной в современные браузеры. Они точны до секунды, если часы вашего устройства настроены правильно.</dd><dt>Влияет ли переход на летнее время на результаты?</dt><dd>Да, Intl API браузера автоматически учитывает правила перехода на летнее время для каждого часового пояса, поэтому отображаемое время всегда правильное, независимо от времени года.</dd><dt>Могу ли я сравнить более трех городов?</dt><dd>Инструмент показывает сразу три города для более наглядного сравнения. Чтобы сравнить больше, просто измените один из раскрывающихся списков на другой город.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/worldclock/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/worldclock/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/worldclock/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/worldclock/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/worldclock/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/worldclock/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/worldclock/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/worldclock/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/worldclock/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/worldclock/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"city1":"Город 1","city2":"Город 2","city3":"Город 3"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/worldclock.js" defer></script>
+</body>
+</html>

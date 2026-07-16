@@ -9,8 +9,14 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textdiff/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/textdiff/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/textdiff/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/textdiff/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/textdiff/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/textdiff/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/textdiff/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textdiff/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/textdiff/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/textdiff/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textdiff/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Text Diff Tool — compare two texts side by side">
@@ -62,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Text Diff Tool — compare two texts side by side","url":"https://mikaio.dev/en/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Text Diff Tool","item":"https://mikaio.dev/en/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the diff work?","acceptedAnswer":{"@type":"Answer","text":"The tool compares the two texts word by word. Words present in B but not in A are shown in green (added). Words in A but not in B are shown in red (removed)."}},{"@type":"Question","name":"Is this a real diff like git diff?","acceptedAnswer":{"@type":"Answer","text":"This is a simple word-level diff for quick comparison. For character-level or line-level diffs as used in programming, dedicated tools like git diff or diff(1) are more appropriate."}},{"@type":"Question","name":"Is my text stored?","acceptedAnswer":{"@type":"Answer","text":"No. The comparison runs entirely in your browser. Nothing is sent to any server."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Site navigation">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Text Diff Tool</span></nav>
@@ -152,11 +161,12 @@ textarea{min-height:120px;resize:vertical}
 <p>All comparisons run entirely in your browser using the Longest Common Subsequence algorithm, so results appear instantly and no text you paste is ever sent to any server, logged or shared.</p>
     <section class="faq"><h2>Text diff FAQ</h2><dl><dt>How does the diff work?</dt><dd>The tool compares the two texts word by word. Words present in B but not in A are shown in green (added). Words in A but not in B are shown in red (removed).</dd><dt>Is this a real diff like git diff?</dt><dd>This is a simple word-level diff for quick comparison. For character-level or line-level diffs as used in programming, dedicated tools like git diff or diff(1) are more appropriate.</dd><dt>Is my text stored?</dt><dd>No. The comparison runs entirely in your browser. Nothing is sent to any server.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
-  <p><a href="/glossary.html">All tools</a></p></footer>
+  <p><a href="/freetools.html">All tools</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="en";window.__T={"text_a":"Original text","text_b":"New text","placeholder_a":"Paste original text here…","placeholder_b":"Paste new or revised text here…"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/textdiff.js" defer></script>
 </body>
 </html>

@@ -3,18 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Text Diff Tool — compare two texts side by side</title>
-<meta name="description" content="Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly.">
+<title>文本比较工具 — 并排比较两个文本</title>
+<meta name="description" content="免费文本差异工具。比较两个文本并突出它们之间的差异。立即查找添加、删除和更改的单词。">
 <link rel="canonical" href="https://mikaio.dev/zh/textdiff/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textdiff/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/textdiff/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/textdiff/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/textdiff/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/textdiff/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/textdiff/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/textdiff/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textdiff/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/textdiff/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/textdiff/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textdiff/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Text Diff Tool — compare two texts side by side">
-<meta property="og:description" content="Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly.">
+<meta property="og:title" content="文本比较工具 — 并排比较两个文本">
+<meta property="og:description" content="免费文本差异工具。比较两个文本并突出它们之间的差异。立即查找添加、删除和更改的单词。">
 <meta property="og:url" content="https://mikaio.dev/zh/textdiff/">
 <meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
@@ -62,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -108,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Text Diff Tool — compare two texts side by side","url":"https://mikaio.dev/zh/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"Free text diff tool. Compare two texts and highlight the differences between them. Find added, removed, and changed words instantly."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Text Diff Tool","item":"https://mikaio.dev/zh/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the diff work?","acceptedAnswer":{"@type":"Answer","text":"The tool compares the two texts word by word. Words present in B but not in A are shown in green (added). Words in A but not in B are shown in red (removed)."}},{"@type":"Question","name":"Is this a real diff like git diff?","acceptedAnswer":{"@type":"Answer","text":"This is a simple word-level diff for quick comparison. For character-level or line-level diffs as used in programming, dedicated tools like git diff or diff(1) are more appropriate."}},{"@type":"Question","name":"Is my text stored?","acceptedAnswer":{"@type":"Answer","text":"No. The comparison runs entirely in your browser. Nothing is sent to any server."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"文本比较工具 — 并排比较两个文本","url":"https://mikaio.dev/zh/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费文本差异工具。比较两个文本并突出它们之间的差异。立即查找添加、删除和更改的单词。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"文本差异工具","item":"https://mikaio.dev/zh/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"差异是如何工作的？","acceptedAnswer":{"@type":"Answer","text":"该工具逐字比较两个文本。 B 中存在但 A 中不存在的单词显示为绿色（已添加）。 A 中但 B 中没有的单词显示为红色（已删除）。"}},{"@type":"Question","name":"这是像 git diff 这样的真正差异吗？","acceptedAnswer":{"@type":"Answer","text":"这是一个简单的字级差异，用于快速比较。对于编程中使用的字符级或行级差异，像 git diff 或 diff(1) 这样的专用工具更合适。"}},{"@type":"Question","name":"我的文本被存储了吗？","acceptedAnswer":{"@type":"Answer","text":"不会。比较完全在您的浏览器中运行。没有任何内容发送到任何服务器。"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="网站导航">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Text Diff Tool</span></nav>
-  <h1>Text Diff Tool</h1>
-  <p class="lead">Paste two versions of a text in the boxes below to see what changed between them.</p>
-  <section class="widget" id="tool"><div id="td-app"><div class="row"><div class="field"><label for="td-a">Original text</label><textarea id="td-a" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Paste original text here…"></textarea></div><div class="field"><label for="td-b">New text</label><textarea id="td-b" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Paste new or revised text here…"></textarea></div></div><div id="td-out" style="margin-top:1rem;font-family:monospace;font-size:0.85rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);white-space:pre-wrap;line-height:1.7"></div></div></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>文本差异工具</span></nav>
+  <h1>文本差异工具</h1>
+  <p class="lead">将文本的两个版本粘贴到下面的框中，以查看它们之间发生了什么变化。</p>
+  <section class="widget" id="tool"><div id="td-app"><div class="row"><div class="field"><label for="td-a">原文</label><textarea id="td-a" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="将原文粘贴到此处..."></textarea></div><div class="field"><label for="td-b">新文本</label><textarea id="td-b" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="在此处粘贴新的或修订的文本..."></textarea></div></div><div id="td-out" style="margin-top:1rem;font-family:monospace;font-size:0.85rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);white-space:pre-wrap;line-height:1.7"></div></div></section>
   <article class="content">
     <h2>比较两段文本，找出差异</h2>
 <p>无论你是在校对修改后的文档、检查合同中的变更、比较两个版本的文章，还是验证复制粘贴是否准确，文本差异对比工具都能通过精确高亮显示变更内容来节省时间。将原始文本粘贴到第一个框中，新版本粘贴到第二个框中，差异会立即被标记出来。</p>
@@ -150,13 +159,14 @@ textarea{min-height:120px;resize:vertical}
 <p>在将差异对比结果用于重要用途之前——一份法律文件、一次评分作业——先在两个框中粘贴一个小的已知变更，确认工具准确无误地高亮了该变更，就像你会在使用新的厨房秤之前用已知重量测试它一样。</p>
 <h2>隐私与即时性</h2>
 <p>所有比较完全在你的浏览器中使用最长公共子序列算法运行，结果即时出现，你粘贴的任何文本都不会被发送到任何服务器、记录或共享。</p>
-    <section class="faq"><h2>Text diff FAQ</h2><dl><dt>How does the diff work?</dt><dd>The tool compares the two texts word by word. Words present in B but not in A are shown in green (added). Words in A but not in B are shown in red (removed).</dd><dt>Is this a real diff like git diff?</dt><dd>This is a simple word-level diff for quick comparison. For character-level or line-level diffs as used in programming, dedicated tools like git diff or diff(1) are more appropriate.</dd><dt>Is my text stored?</dt><dd>No. The comparison runs entirely in your browser. Nothing is sent to any server.</dd></dl></section>
+    <section class="faq"><h2>文本差异常见问题解答</h2><dl><dt>差异是如何工作的？</dt><dd>该工具逐字比较两个文本。 B 中存在但 A 中不存在的单词显示为绿色（已添加）。 A 中但 B 中没有的单词显示为红色（已删除）。</dd><dt>这是像 git diff 这样的真正差异吗？</dt><dd>这是一个简单的字级差异，用于快速比较。对于编程中使用的字符级或行级差异，像 git diff 或 diff(1) 这样的专用工具更合适。</dd><dt>我的文本被存储了吗？</dt><dd>不会。比较完全在您的浏览器中运行。没有任何内容发送到任何服务器。</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/textdiff/">中文</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
-  <p><a href="/glossary.html">全部工具</a></p></footer>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"text_a":"原文","text_b":"新文本","placeholder_a":"将原文粘贴到此处...","placeholder_b":"在此处粘贴新的或修订的文本..."};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/textdiff.js" defer></script>
 </body>
 </html>

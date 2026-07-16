@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة الطلاء - ما هي كمية الطلاء التي تحتاجها؟</title>
+<meta name="description" content="حاسبة الطلاء المجانية. أدخل أبعاد جدارك وعدد الطبقات وتغطية الطلاء لحساب عدد لترات الطلاء التي تحتاجها بالضبط.">
+<link rel="canonical" href="https://mikaio.dev/ar/paintcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/paintcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/paintcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/paintcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/paintcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/paintcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/paintcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/paintcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/paintcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/paintcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/paintcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/paintcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حاسبة الطلاء - ما هي كمية الطلاء التي تحتاجها؟">
+<meta property="og:description" content="حاسبة الطلاء المجانية. أدخل أبعاد جدارك وعدد الطبقات وتغطية الطلاء لحساب عدد لترات الطلاء التي تحتاجها بالضبط.">
+<meta property="og:url" content="https://mikaio.dev/ar/paintcalc/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة الطلاء - ما هي كمية الطلاء التي تحتاجها؟","url":"https://mikaio.dev/ar/paintcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"حاسبة الطلاء المجانية. أدخل أبعاد جدارك وعدد الطبقات وتغطية الطلاء لحساب عدد لترات الطلاء التي تحتاجها بالضبط."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة الطلاء","item":"https://mikaio.dev/ar/paintcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هو معدل التغطية الذي يجب أن أستخدمه؟","acceptedAnswer":{"@type":"Answer","text":"تغطي معظم دهانات الجدران الداخلية القياسية 10-12 مترًا مربعًا لكل لتر للطبقة الأولى. قد تغطي الدهانات المتميزة أكثر من ذلك. تحقق من علبة الطلاء لمعرفة التغطية المعلنة من قبل الشركة المصنعة."}},{"@type":"Question","name":"هل يجب أن أضيف المزيد مقابل الهدر؟","acceptedAnswer":{"@type":"Answer","text":"نعم. أضف 10-15% للقطع والانسكابات واللمسات النهائية. الآلة الحاسبة تعطي الحد الأدنى النظري؛ الاستخدام الحقيقي هو دائما أكثر قليلا."}},{"@type":"Question","name":"ماذا عن الأبواب والنوافذ؟","acceptedAnswer":{"@type":"Answer","text":"اطرح مساحة الأبواب والنوافذ من إجمالي مساحة الجدار قبل الدخول إليها، أو ببساطة استخدم النتيجة كتقدير مبالغ فيه قليلاً مما يوفر حاجزًا مفيدًا."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/paintcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/paintcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/paintcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/paintcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/paintcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/paintcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/paintcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/paintcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/paintcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/paintcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة الطلاء</span></nav>
+  <h1>حاسبة الطلاء</h1>
+  <p class="lead">أدخل أبعاد الجدار وعدد الجدران والطبقات ومعدل تغطية الطلاء لمعرفة مقدار الطلاء الذي تحتاجه.</p>
+  <section class="widget" id="tool"><form id="paint-form"><div class="row"><div class="field"><label for="paint-w">العرض</label><input type="number" id="paint-w" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="paint-h">الارتفاع</label><input type="number" id="paint-h" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="paint-unit">وحدة</label><select id="paint-unit"><option value="m">m</option><option value="ft">ft</option></select></div><div class="field"><label for="paint-walls">عدد الجدران</label><input type="number" id="paint-walls" step="1" min="1" value="1" inputmode="numeric"></div><div class="field"><label for="paint-coats">معاطف</label><input type="number" id="paint-coats" step="1" min="1" value="2" inputmode="numeric"></div><div class="field"><label for="paint-cov">التغطية (م²/لتر)</label><input type="number" id="paint-cov" step="any" min="0" value="10" inputmode="decimal"></div></div><div class="result"><span class="hint">الطلاء مطلوب: </span><span class="big" id="paint-out">—</span></div></form></section>
+  <article class="content">
+    <h2>احسب بالضبط مقدار الطلاء الذي تحتاجه</h2>
+<p>شراء كمية قليلة جدًا من الطلاء يعني رحلة محبطة في منتصف المشروع إلى متجر الأجهزة، وليس هناك ما يضمن أن الدفعة الجديدة ستتطابق تمامًا مع اللون. شراء الكثير من الأشياء يهدر المال ويخلق مشاكل في التخلص منه. تمنحك حاسبة الطلاء هذه المبلغ المناسب للشراء لأي مشروع طلاء من خلال الأخذ في الاعتبار حجم الجدار وعدد الطبقات ومعدل تغطية الطلاء الخاص بك.</p>
+<h2>كيف يعمل الحساب</h2>
+<p>المعادلة واضحة: المساحة الإجمالية = العرض × الارتفاع × عدد الجدران. إجمالي الطلاء المطلوب = المساحة الإجمالية × عدد الطبقات ÷ معدل التغطية لكل لتر. يغطي الطلاء الداخلي القياسي حوالي 10-12 مترًا مربعًا لكل لتر لكل طبقة. تحتاج معظم الغرف إلى طبقتين للحصول على مظهر احترافي.</p>
+<p>مثال: غرفة بها 4 جدران، عرض كل منها 4 أمتار وارتفاعها 2.5 متر، وتحتاج إلى طبقتين من الطلاء بمساحة 10 متر مربع لكل لتر:</p>
+<ul>
+<li>المساحة الإجمالية = 4 × (4 × 2.5) = 40 م²</li>
+<li>الطلاء المطلوب = 40 × 2 ÷ 10 = 8 لتر</li>
+</ul>
+<h2>مثال عملي، ممتد</h2>
+<p>خذ نفس الغرفة من المثال السابق - أربعة جدران، عرض كل منها 4 أمتار وارتفاعها 2.5 متر، وتحتاج إلى طبقتين - ولكن الآن قم بالتبديل من المستحلب القياسي الذي يغطي 10 أمتار مربعة لكل لتر إلى مستحلب ممتاز يغطي 14 مترًا مربعًا لكل لتر. تظل مساحة الجدار الإجمالية 40 مترًا مربعًا في كلتا الحالتين، لكن الطلاء المطلوب ينخفض ​​من 40 × 2 ÷ 10 = 8 لتر إلى 40 × 2 ÷ 14 ≈ 5.7 لتر، مما يوفر أكثر من لترين فقط من اختيار منتج ذو تغطية أفضل. ما إذا كان هذا التوفير يبرر السعر الأعلى لكل لتر من الطلاء الفاخر، فهي عملية حسابية تسهل هذه الأداة التحقق منها مباشرةً، بدلاً من التخمين.</p>
+<h2>معدلات التغطية حسب نوع الطلاء</h2>
+<p>تختلف التغطية بشكل كبير حسب نوع الطلاء وجودته:</p>
+<ul>
+<li><strong>المستحلب الداخلي للميزانية</strong>: 8-10 متر مربع للتر الواحد</li>
+<li><strong>المستحلب الداخلي القياسي</strong>: 10-12 مترًا مربعًا لكل لتر</li>
+<li><strong>المستحلب الداخلي المتميز</strong>: 12-14 مترًا مربعًا للتر الواحد</li>
+<li><strong>الطلاء الخارجي</strong>: 8-12 مترًا مربعًا للتر الواحد (أقل بسبب كون الأسطح أقل سلاسة)</li>
+<li><strong>الطبقة السفلية/البرايمر</strong>: 10-12 مترًا مربعًا لكل لتر</li>
+<li><strong>خشب لامع/خشب ساتان (أعمال خشبية)</strong>: 16-20 مترًا مربعًا لكل لتر (سطح أملس يمتص أقل)</li>
+</ul>
+<p>تحقق دائمًا من التغطية المعلنة من قبل الشركة المصنعة على علبة الطلاء، حيث أن هذا هو الرقم الأكثر موثوقية لهذا المنتج المحدد.</p>
+<h2>عدد المعاطف</h2>
+<p>بالنسبة لمعظم مشاريع طلاء الجدران، فإن طبقتين تعطي أفضل نتيجة. قد لا توفر طبقة واحدة تغطية كاملة ومتساوية — قد ترى اللون الأصلي أو الطلاء التمهيدي من خلال بقع رقيقة. أحيانًا تكون هناك حاجة إلى ثلاث طبقات عند الانتقال من لون داكن جدًا إلى لون فاتح جدًا، أو عند تطبيق اللون الأحمر أو الأصفر (الألوان ذات العتامة المنخفضة بشكل ملحوظ).</p>
+<p>تحتاج الأسقف عادةً إلى طبقة واحدة من طلاء السقف (مصممة لتغطية عالية ومقاومة للتنقيط) أو طبقتين للحصول على مظهر جديد ومشرق للغاية.</p>
+<h2>المحاسبة عن الأبواب والنوافذ والنفايات</h2>
+<p>تقوم الآلة الحاسبة بحساب إجمالي مساحة الجدار دون طرح الفتحات. لأغراض التخطيط، من المقبول عادةً استخدام المساحة الإجمالية ومعالجة الطلاء الإضافي كمخزن مؤقت لما يلي:</p>
+<ul>
+<li>الفتحات (الأبواب والنوافذ) التي لن يتم دهانها بدهان الجدران</li>
+<li>النفايات الناتجة عن تحميل الأسطوانة أو الفرشاة</li>
+<li>الانسكابات والقطرات</li>
+<li>عمل اللمسات النهائية</li>
+</ul>
+<p>إذا كنت تريد حسابًا أكثر دقة، قم بقياس مساحة الباب والنافذة واطرحها قبل إدخال أبعاد الجدار.</p>
+<h2>اختيار كميات الطلاء</h2>
+<p>يُباع الطلاء عادةً في علب سعة 1 لتر، و2.5 لتر، و5 لتر، و10 لتر. قم دائمًا بالتقريب إلى حجم القصدير التالي المتاح. على سبيل المثال، إذا أظهر الحساب 8.2 لترًا، قم بشراء علبتين سعة 5 لترات (إجمالي 10 لترات) بدلاً من علبة سعة 5 لترات وأربعة علب سعة 1 لتر، وهو أكثر تكلفة للتر الواحد. يمكن تخزين الطلاء المتبقي من أجل اللمسات النهائية إذا تم إغلاقه بشكل صحيح.</p>
+<h2>كيفية استخدام الآلة الحاسبة</h2>
+<p>أدخل عرض وارتفاع كل جدار، أو متوسط حجم الجدار وعدد الجدران، بالإضافة إلى عدد الطبقات التي تخطط لتطبيقها ومعدل التغطية المحدد للطلاء. يظهر إجمالي اللترات المطلوبة على الفور، ويؤدي تعديل أي قيمة إلى إعادة حسابها على الفور، مما يجعل من السهل مقارنة كيف أن التحول من طلاء الميزانية إلى الطلاء المتميز ذو التغطية الأفضل من شأنه أن يغير الكمية التي تحتاج إلى شرائها.</p>
+<h2>لماذا يهم التقريب إلى حجم القصدير التالي؟</h2>
+<p>نظرًا لأن الطلاء يباع بأحجام ثابتة من القصدير بدلاً من اللتر المحدد، فإن الإجابة العملية على &quot;كم أحتاج&quot; هي دائمًا حجم القصدير التالي من الرقم المحسوب، وليس الرقم نفسه. على سبيل المثال، شراء علبة سعة 5 لتر وعلبة سعة 1 لتر لتغطية متطلبات 8.2 لتر، عادة ما يكون أكثر تكلفة لكل لتر وأكثر إهدارًا من مجرد شراء علبتين سعة 5 لتر، نظرًا لأن العلب الأكبر حجمًا تقدم دائمًا سعرًا أفضل لكل لتر والطلاء المتبقي مفيد حقًا لعمليات اللمسات المستقبلية إذا تم تخزينها بشكل صحيح. إن التعامل مع مخرجات الآلة الحاسبة كحد أدنى بدلاً من أن يكون هدفًا محددًا، والتقريب بسخاء، يتجنب الخطأ الأكثر شيوعًا عند شراء الطلاء: النفاد مع وجود جدار واحد متبقي وعدم القدرة على مطابقة الصبغة الدقيقة للدفعة المفتوحة بالفعل والمستخدمة جزئيًا.</p>
+<h2>خاصة وفورية</h2>
+<p>يتم تشغيل جميع الحسابات بالكامل في متصفحك، لذلك يتم تحديث النتيجة على الفور عندما تقوم بضبط أي مدخلات ولا يتم إرسال أي قياسات تدخلها إلى الخادم، أو يتم تسجيلها أو مشاركتها، وتعمل دون اتصال بمجرد تحميل الصفحة، وتكون جاهزة عندما تقف في ممر الطلاء محاولًا تحديد عدد العلب التي ستلتقطها.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول حاسبة الطلاء</h2><dl><dt>ما هو معدل التغطية الذي يجب أن أستخدمه؟</dt><dd>تغطي معظم دهانات الجدران الداخلية القياسية 10-12 مترًا مربعًا لكل لتر للطبقة الأولى. قد تغطي الدهانات المتميزة أكثر من ذلك. تحقق من علبة الطلاء لمعرفة التغطية المعلنة من قبل الشركة المصنعة.</dd><dt>هل يجب أن أضيف المزيد مقابل الهدر؟</dt><dd>نعم. أضف 10-15% للقطع والانسكابات واللمسات النهائية. الآلة الحاسبة تعطي الحد الأدنى النظري؛ الاستخدام الحقيقي هو دائما أكثر قليلا.</dd><dt>ماذا عن الأبواب والنوافذ؟</dt><dd>اطرح مساحة الأبواب والنوافذ من إجمالي مساحة الجدار قبل الدخول إليها، أو ببساطة استخدم النتيجة كتقدير مبالغ فيه قليلاً مما يوفر حاجزًا مفيدًا.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/paintcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/paintcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/paintcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/paintcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/paintcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/paintcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/paintcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/paintcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/paintcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/paintcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"width":"العرض","height":"الارتفاع","unit":"وحدة","walls":"عدد الجدران","coats":"معاطف","coverage":"التغطية (م²/لتر)","result":"الطلاء مطلوب"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/paintcalc.js" defer></script>
+</body>
+</html>

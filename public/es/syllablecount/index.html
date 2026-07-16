@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contador de sílabas: cuenta las sílabas de cualquier palabra o texto</title>
+<meta name="description" content="Contador de sílabas libres. Cuente el número de sílabas de cualquier palabra o texto en inglés al instante. Útil para poesía, letras de canciones y escritura de haiku.">
+<link rel="canonical" href="https://mikaio.dev/es/syllablecount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/syllablecount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/syllablecount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/syllablecount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/syllablecount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/syllablecount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/syllablecount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/syllablecount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/syllablecount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/syllablecount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/syllablecount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/syllablecount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contador de sílabas: cuenta las sílabas de cualquier palabra o texto">
+<meta property="og:description" content="Contador de sílabas libres. Cuente el número de sílabas de cualquier palabra o texto en inglés al instante. Útil para poesía, letras de canciones y escritura de haiku.">
+<meta property="og:url" content="https://mikaio.dev/es/syllablecount/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Contador de sílabas: cuenta las sílabas de cualquier palabra o texto","url":"https://mikaio.dev/es/syllablecount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Contador de sílabas libres. Cuente el número de sílabas de cualquier palabra o texto en inglés al instante. Útil para poesía, letras de canciones y escritura de haiku."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Contador de sílabas","item":"https://mikaio.dev/es/syllablecount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cómo funciona el recuento de sílabas?","acceptedAnswer":{"@type":"Answer","text":"La herramienta estima sílabas utilizando reglas fonéticas comunes en inglés: contar grupos de vocales, aplicar excepciones para la e muda y sufijos comunes. Es una estimación y puede diferir ligeramente de un diccionario para palabras inusuales."}},{"@type":"Question","name":"¿Qué es una sílaba?","acceptedAnswer":{"@type":"Answer","text":"Una sílaba es una unidad de pronunciación que contiene un solo sonido vocálico. La palabra \"gato\" tiene una sílaba; \"agua\" tiene dos (agua); \"educación\" tiene cinco (ed-u-ca-ción)."}},{"@type":"Question","name":"¿Esto es bueno para el haiku?","acceptedAnswer":{"@type":"Answer","text":"Sí. Un haiku tradicional tiene 5-7-5 sílabas en tres líneas. Escribe cada línea por separado y verifica el recuento."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/syllablecount/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/syllablecount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/syllablecount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/syllablecount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/syllablecount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Contador de sílabas</span></nav>
+  <h1>Contador de sílabas</h1>
+  <p class="lead">Escriba o pegue texto para contar sílabas y palabras. Útil para haiku, sonetos, letras de canciones y comprobación de métricas.</p>
+  <section class="widget" id="tool"><div id="syl-app"><textarea id="syl-text" rows="4" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Escriba o pegue el texto en inglés aquí..."></textarea><div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">Sílabas</div><div class="big" id="syl-count">0</div></div><div><div class="hint">Palabras</div><div class="big" id="syl-words">0</div></div></div></div></section>
+  <article class="content">
+    <h2>Contar sílabas en cualquier texto.</h2>
+<p>El conteo de sílabas es esencial para cualquiera que trabaje con versos medidos, letras de canciones o cualquier forma de escritura donde el ritmo importe. El haiku requiere exactamente 5-7-5 sílabas en tres líneas. Los sonetos siguen patrones métricos específicos. Las letras de las canciones ajustan las sílabas a los ritmos musicales. Esta herramienta calcula instantáneamente el recuento de sílabas de cualquier texto en inglés, para que puedas concentrarte en las palabras en lugar de contarlas.</p>
+<h2>¿Qué es una sílaba?</h2>
+<p>Una sílaba es una unidad de pronunciación organizada en torno a un solo sonido vocálico. Cada palabra se puede dividir en sílabas:</p>
+<ul>
+<li>&quot;gato&quot; → 1 sílaba (gato)</li>
+<li>&quot;agua&quot; → 2 sílabas (agua)</li>
+<li>&quot;hermoso&quot; → 3 sílabas (beau-ti-ful)</li>
+<li>&quot;educación&quot; → 5 sílabas (ed-u-ca-tion)</li>
+<li>&quot;inimaginable&quot; → 6 sílabas (un-i-mag-i-na-ble)</li>
+</ul>
+<p>El número de sílabas de una palabra depende del número de sonidos vocálicos distintos, no del número de letras vocálicas. La palabra &quot;bake&quot; tiene dos letras vocales (a y e) pero solo un sonido vocálico, lo que la convierte en una sílaba.</p>
+<h2>Como funciona el contador</h2>
+<p>La herramienta utiliza reglas fonéticas comunes en inglés para estimar sílabas:</p>
+<ol>
+<li>Contar grupos de vocales adyacentes (cada grupo tiene aproximadamente una sílaba)</li>
+<li>Resta para la e muda al final de las palabras (por ejemplo, &quot;pastel&quot; tiene 1 sílaba, no 2)</li>
+<li>Resta los sufijos comunes como &quot;-ed&quot;, que a menudo son silenciosos.</li>
+<li>Asegúrese de tener al menos una sílaba por palabra.</li>
+</ol>
+<p>Este método es una buena aproximación para las palabras inglesas más comunes. Algunas palabras irregulares y nombres propios pueden contarse de manera ligeramente diferente a la pronunciación del diccionario.</p>
+<h2>Usos en escritura creativa</h2>
+<p><strong>Haiku</strong>: una forma poética japonesa tradicionalmente importada al inglés como un poema de tres líneas con 5-7-5 sílabas. La forma haiku requiere un cuidadoso conteo de sílabas; Esta herramienta facilita la verificación de cada línea.</p>
+<p><strong>Pentámetro yámbico</strong>: la métrica preferida de Shakespeare tiene 10 sílabas por línea en un patrón átono-acentuado (da-DUM repetido cinco veces). Contar sílabas es el primer paso para comprobar si una línea se ajusta al metro.</p>
+<p><strong>Letras de canciones</strong>: cada sílaba se asigna a un ritmo o nota. Los letristas cuentan las sílabas para asegurarse de que las palabras encajen con la melodía. Un verso que canta bien tiene sílabas distribuidas uniformemente en los ritmos musicales.</p>
+<p><strong>Limericks</strong>: El esquema de rima AABBA tiene versos de 8-8-5-5-8 sílabas en la forma tradicional.</p>
+<p><strong>Raps y hip-hop</strong>: la fluidez en el rap tiene que ver en gran medida con la densidad y el patrón de las sílabas. Muchos raperos incluyen deliberadamente más sílabas en un compás para lograr un efecto llamado rima multisilábica o doble tiempo.</p>
+<h2>Comprobando el metro en la poesía.</h2>
+<p>La métrica inglesa clásica divide las sílabas en acentuadas (/) y átonas (u). Los patrones más comunes son:</p>
+<ul>
+<li><strong>Yámbico</strong>: uU (átono-acentuado), como en &quot;SER o NO SER&quot;</li>
+<li><strong>Trocaico</strong>: Uu (estresado-sin estrés), como en &quot;TI-ger, TI-ger, BURN-ing BRIGHT&quot;</li>
+<li><strong>Dactílico</strong>: Uuu (estresado-sin estrés-sin estrés)</li>
+<li><strong>Anapéstico</strong>: uuU (sin estrés-sin estrés-estresado)</li>
+</ul>
+<p>Contar sílabas es el requisito previo esencial para analizar cualquiera de estos patrones.</p>
+<h2>Cómo utilizar el contador</h2>
+<p>Escriba o pegue cualquier texto en inglés en el cuadro y el recuento total de sílabas se actualizará inmediatamente debajo, junto con un desglose por palabra cuando necesite verificar una línea específica en lugar de un pasaje completo. Esta retroalimentación en vivo es exactamente lo que desea al redactar en una forma estricta como el haiku, donde obtener una sola línea de seis sílabas a cinco significa editar palabra por palabra y observar el conteo en tiempo real en lugar de contar con los dedos después de cada cambio.</p>
+<h2>Por qué el conteo automático es realmente difícil</h2>
+<p>La ortografía inglesa es una guía famosa para la pronunciación, que es exactamente la razón por la que contar sílabas no puede simplemente contar letras vocales. Las letras mudas, los dígrafos donde dos vocales producen un sonido y las palabras tomadas de otros idiomas con sus propias convenciones ortográficas conspiran para hacer que la relación entre la ortografía y el recuento de sílabas sea inconsistente. El enfoque basado en reglas que utiliza esta herramienta (contar grupos de vocales y luego ajustar las terminaciones mudas y los sufijos comunes) consigue que la inmensa mayoría de las palabras cotidianas en inglés sean correctas, pero un puñado de palabras, nombres y términos prestados inusuales pueden diferir ligeramente del recuento de sílabas oficial de un diccionario, simplemente porque ningún conjunto pequeño de reglas puede capturar todas las excepciones que el inglés ha acumulado durante mil años de préstamos de otros idiomas.</p>
+<h2>Sílabas y fórmulas de legibilidad.</h2>
+<p>Más allá de la poesía, el conteo de sílabas es un elemento clave para varias fórmulas de legibilidad bien conocidas. Las fórmulas Flesch-Kincaid Reading Ease y Grade Level utilizan sílabas promedio por palabra junto con la longitud promedio de oración para estimar qué tan difícil es leer un pasaje: el texto con más palabras de varias sílabas califica como más difícil, siguiendo aproximadamente la intuición de que &quot;utilizar&quot; lecturas es más difícil que &quot;usar&quot;, aunque ambas signifiquen lo mismo. Los escritores que buscan un nivel de lectura específico, como contenido para una audiencia general o lectores jóvenes, a menudo revisan pasajes con muchas sílabas y simplifican la elección de palabras cuando el número de sílabas es alto.</p>
+<h2>Contar sílabas de oído o por regla</h2>
+<p>La forma más confiable de contar sílabas en una palabra desconocida es decirla en voz alta y sentir dónde se te cae la mandíbula o se detiene la respiración; cada uno de esos momentos marca aproximadamente una sílaba. Los enfoques basados ​​en reglas como el que utiliza esta herramienta se aproximan a la misma intuición a través del conteo de grupos de vocales, que funciona correctamente para la abrumadora mayoría de las palabras en inglés, pero ocasionalmente no está de acuerdo con la versión hablada para préstamos o nombres inusuales, ya que ningún conjunto fijo de reglas de ortografía captura perfectamente todas las peculiaridades de la pronunciación en inglés.</p>
+<h2>Privado e instantáneo</h2>
+<p>El contador se ejecuta completamente en su navegador, por lo que los resultados se actualizan instantáneamente a medida que escribe y ningún texto que ingresa se envía a ninguna parte, se registra o se comparte.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre el contador de sílabas</h2><dl><dt>¿Cómo funciona el recuento de sílabas?</dt><dd>La herramienta estima sílabas utilizando reglas fonéticas comunes en inglés: contar grupos de vocales, aplicar excepciones para la e muda y sufijos comunes. Es una estimación y puede diferir ligeramente de un diccionario para palabras inusuales.</dd><dt>¿Qué es una sílaba?</dt><dd>Una sílaba es una unidad de pronunciación que contiene un solo sonido vocálico. La palabra &quot;gato&quot; tiene una sílaba; &quot;agua&quot; tiene dos (agua); &quot;educación&quot; tiene cinco (ed-u-ca-ción).</dd><dt>¿Esto es bueno para el haiku?</dt><dd>Sí. Un haiku tradicional tiene 5-7-5 sílabas en tres líneas. Escribe cada línea por separado y verifica el recuento.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/syllablecount/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/syllablecount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/syllablecount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/syllablecount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/syllablecount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"placeholder":"Escriba o pegue el texto en inglés aquí...","syllables":"Sílabas","words":"Palabras"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/syllablecount.js" defer></script>
+</body>
+</html>

@@ -3,18 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pomodoro Timer — 25-minute focus timer for studying and work</title>
-<meta name="description" content="Free Pomodoro timer. 25-minute focus sessions with 5-minute short breaks and 15-minute long breaks. No signup needed. Runs in your browser with sound alerts.">
+<title>Pomodoro Timer — 25-минутный таймер фокусировки для учебы и работы.</title>
+<meta name="description" content="Бесплатный таймер Помидора. 25-минутные фокус-сессии с 5-минутными короткими перерывами и 15-минутными длинными перерывами. Никакой регистрации не требуется. Запускается в вашем браузере со звуковыми оповещениями.">
 <link rel="canonical" href="https://mikaio.dev/ru/pomodoro/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/pomodoro/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/pomodoro/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/pomodoro/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/pomodoro/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/pomodoro/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/pomodoro/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/pomodoro/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/pomodoro/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/pomodoro/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/pomodoro/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/pomodoro/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Pomodoro Timer — 25-minute focus timer for studying and work">
-<meta property="og:description" content="Free Pomodoro timer. 25-minute focus sessions with 5-minute short breaks and 15-minute long breaks. No signup needed. Runs in your browser with sound alerts.">
+<meta property="og:title" content="Pomodoro Timer — 25-минутный таймер фокусировки для учебы и работы.">
+<meta property="og:description" content="Бесплатный таймер Помидора. 25-минутные фокус-сессии с 5-минутными короткими перерывами и 15-минутными длинными перерывами. Никакой регистрации не требуется. Запускается в вашем браузере со звуковыми оповещениями.">
 <meta property="og:url" content="https://mikaio.dev/ru/pomodoro/">
 <meta property="og:locale" content="ru">
 <meta name="twitter:card" content="summary">
@@ -62,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -108,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Pomodoro Timer — 25-minute focus timer for studying and work","url":"https://mikaio.dev/ru/pomodoro/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Free Pomodoro timer. 25-minute focus sessions with 5-minute short breaks and 15-minute long breaks. No signup needed. Runs in your browser with sound alerts."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Pomodoro Timer","item":"https://mikaio.dev/ru/pomodoro/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Pomodoro Technique?","acceptedAnswer":{"@type":"Answer","text":"Developed by Francesco Cirillo in the late 1980s, the Pomodoro Technique alternates 25-minute focused work sessions with short breaks. After four sessions a longer break is taken. The name comes from a tomato-shaped kitchen timer."}},{"@type":"Question","name":"Can I change the timer durations?","acceptedAnswer":{"@type":"Answer","text":"This implementation uses the classic durations: 25 minutes of focus, 5-minute short breaks, and a 15-minute long break after every four sessions. These durations are evidence-backed for sustaining attention over long work periods."}},{"@type":"Question","name":"Will I hear a sound when the timer ends?","acceptedAnswer":{"@type":"Answer","text":"Yes, the timer plays a short audio alert using the Web Audio API. Make sure your device volume is on."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Pomodoro Timer — 25-минутный таймер фокусировки для учебы и работы.","url":"https://mikaio.dev/ru/pomodoro/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный таймер Помидора. 25-минутные фокус-сессии с 5-минутными короткими перерывами и 15-минутными длинными перерывами. Никакой регистрации не требуется. Запускается в вашем браузере со звуковыми оповещениями."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Таймер Помидора","item":"https://mikaio.dev/ru/pomodoro/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что такое техника Помидора?","acceptedAnswer":{"@type":"Answer","text":"Техника Помидора, разработанная Франческо Чирилло в конце 1980-х годов, чередует 25-минутные целенаправленные рабочие занятия с короткими перерывами. После четырех сеансов делается более длительный перерыв. Название происходит от кухонного таймера в форме помидора."}},{"@type":"Question","name":"Могу ли я изменить продолжительность таймера?","acceptedAnswer":{"@type":"Answer","text":"В этой реализации используется классическая продолжительность: 25 минут сосредоточения, 5-минутные короткие перерывы и 15-минутный длинный перерыв после каждых четырех занятий. Доказано, что такая продолжительность позволяет поддерживать внимание в течение длительных периодов работы."}},{"@type":"Question","name":"Услышу ли я звук, когда таймер закончится?","acceptedAnswer":{"@type":"Answer","text":"Да, таймер воспроизводит короткое звуковое оповещение с помощью API веб-аудио. Убедитесь, что громкость вашего устройства включена."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Навигация по сайту">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pomodoro/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/pomodoro/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/pomodoro/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/pomodoro/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/pomodoro/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/pomodoro/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/pomodoro/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/pomodoro/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/pomodoro/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/pomodoro/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Pomodoro Timer</span></nav>
-  <h1>Pomodoro Timer</h1>
-  <p class="lead">Click Start to begin a 25-minute focus session. A sound plays when time is up and the timer automatically switches to a 5-minute break. After four sessions, a longer 15-minute break is offered.</p>
-  <section class="widget" id="tool"><div id="pom-app" style="text-align:center"><div id="pom-phase" style="font-size:1rem;margin-bottom:0.5rem;opacity:0.7">Ready to focus</div><div id="pom-display" style="font-size:4rem;font-weight:700;font-variant-numeric:tabular-nums">25:00</div><div style="margin:1rem 0;display:flex;gap:0.5rem;justify-content:center"><button id="pom-start" class="btn">Start</button><button id="pom-reset" class="btn secondary">Reset</button></div><div id="pom-count" style="opacity:0.6;font-size:0.9rem"></div></div></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Таймер Помидора</span></nav>
+  <h1>Таймер Помидора</h1>
+  <p class="lead">Нажмите «Начать», чтобы начать 25-минутный фокус-сессию. По истечении времени воспроизводится звук, и таймер автоматически переключается на 5-минутный перерыв. После четырех сеансов предлагается более длительный 15-минутный перерыв.</p>
+  <section class="widget" id="tool"><div id="pom-app" style="text-align:center"><div id="pom-phase" style="font-size:1rem;margin-bottom:0.5rem;opacity:0.7">Готов сосредоточиться</div><div id="pom-display" style="font-size:4rem;font-weight:700;font-variant-numeric:tabular-nums">25:00</div><div style="margin:1rem 0;display:flex;gap:0.5rem;justify-content:center"><button id="pom-start" class="btn">Старт</button><button id="pom-reset" class="btn secondary">Сброс</button></div><div id="pom-count" style="opacity:0.6;font-size:0.9rem"></div></div></section>
   <article class="content">
     <h2>25-минутная техника концентрации, изменившая работу миллионов людей</h2>
 <p>Техника Помодоро — один из самых распространённых в мире методов управления временем. Разработанная Франческо Чирилло в конце 1980-х и названная в честь кухонного таймера в форме помидора, она строится на простом наблюдении: человеческий мозг удерживает глубокий фокус лучше короткими рывками, чем длинными непрерывными отрезками. Работая структурированными 25-минутными интервалами, разделёнными короткими паузами, можно поддерживать высокую концентрацию на протяжении всего долгого дня без умственного истощения, возникающего от непрерывного изматывающего труда.</p>
@@ -144,13 +153,14 @@ textarea{min-height:120px;resize:vertical}
 <p>Техника Помодоро — не универсальное лекарство для любого вида работы. Сильно совместные задачи, где прерывания — неотъемлемая, неизбежная часть работы (поддержка клиентов, живое устранение неполадок, парное программирование в открытом пространстве), плохо укладываются в жёсткие 25-минутные блоки, и попытка навязать им эту структуру может создать больше трения, чем фокуса. Она также лучше всего работает для задач, которые можно осмысленно начать и остановить; по-настоящему непрерываемое состояние творческого потока, которое обрывает 25-минутный будильник посреди мысли, возможно, лучше обслуживается более длинным и свободным блоком времени. Знать, когда не стоит использовать технику, так же полезно, как знать, как пользоваться ею хорошо.</p>
 <h2>Приватно и всегда готов</h2>
 <p>Этот таймер работает полностью в вашем браузере, поэтому здесь нет учётной записи, слежки и никакие данные никуда не отправляются — перезагрузите страницу в любой момент, чтобы начать новый цикл.</p>
-    <section class="faq"><h2>Pomodoro FAQ</h2><dl><dt>What is the Pomodoro Technique?</dt><dd>Developed by Francesco Cirillo in the late 1980s, the Pomodoro Technique alternates 25-minute focused work sessions with short breaks. After four sessions a longer break is taken. The name comes from a tomato-shaped kitchen timer.</dd><dt>Can I change the timer durations?</dt><dd>This implementation uses the classic durations: 25 minutes of focus, 5-minute short breaks, and a 15-minute long break after every four sessions. These durations are evidence-backed for sustaining attention over long work periods.</dd><dt>Will I hear a sound when the timer ends?</dt><dd>Yes, the timer plays a short audio alert using the Web Audio API. Make sure your device volume is on.</dd></dl></section>
+    <section class="faq"><h2>Часто задаваемые вопросы о Помидоре</h2><dl><dt>Что такое техника Помидора?</dt><dd>Техника Помидора, разработанная Франческо Чирилло в конце 1980-х годов, чередует 25-минутные целенаправленные рабочие занятия с короткими перерывами. После четырех сеансов делается более длительный перерыв. Название происходит от кухонного таймера в форме помидора.</dd><dt>Могу ли я изменить продолжительность таймера?</dt><dd>В этой реализации используется классическая продолжительность: 25 минут сосредоточения, 5-минутные короткие перерывы и 15-минутный длинный перерыв после каждых четырех занятий. Доказано, что такая продолжительность позволяет поддерживать внимание в течение длительных периодов работы.</dd><dt>Услышу ли я звук, когда таймер закончится?</dt><dd>Да, таймер воспроизводит короткое звуковое оповещение с помощью API веб-аудио. Убедитесь, что громкость вашего устройства включена.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pomodoro/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/pomodoro/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/pomodoro/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/pomodoro/">Русский</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pomodoro/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/pomodoro/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/pomodoro/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/pomodoro/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/pomodoro/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/pomodoro/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/pomodoro/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/pomodoro/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/pomodoro/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/pomodoro/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
-  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"start":"Старт","reset":"Сброс","ready":"Готов сосредоточиться","focus":"Время фокусировки","short_break":"Короткий перерыв","long_break":"Длинный перерыв","sessions":"Сеансы завершены"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/pomodoro.js" defer></script>
 </body>
 </html>

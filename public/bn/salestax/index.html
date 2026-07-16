@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>বিক্রয় কর ক্যালকুলেটর - যেকোন মূল্য থেকে ভ্যাট যোগ করুন বা সরান</title>
+<meta name="description" content="বিনামূল্যে বিক্রয় কর ক্যালকুলেটর। একটি নেট মূল্যে ট্যাক্স যোগ করতে একটি মূল্য এবং একটি করের হার লিখুন বা এটি একটি মোট মূল্য থেকে বের করুন৷ ভ্যাট, জিএসটি এবং যেকোনো শতাংশের জন্য কাজ করে।">
+<link rel="canonical" href="https://mikaio.dev/bn/salestax/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/salestax/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/salestax/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/salestax/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/salestax/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/salestax/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/salestax/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/salestax/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/salestax/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/salestax/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/salestax/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/salestax/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="বিক্রয় কর ক্যালকুলেটর - যেকোন মূল্য থেকে ভ্যাট যোগ করুন বা সরান">
+<meta property="og:description" content="বিনামূল্যে বিক্রয় কর ক্যালকুলেটর। একটি নেট মূল্যে ট্যাক্স যোগ করতে একটি মূল্য এবং একটি করের হার লিখুন বা এটি একটি মোট মূল্য থেকে বের করুন৷ ভ্যাট, জিএসটি এবং যেকোনো শতাংশের জন্য কাজ করে।">
+<meta property="og:url" content="https://mikaio.dev/bn/salestax/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"বিক্রয় কর ক্যালকুলেটর - যেকোন মূল্য থেকে ভ্যাট যোগ করুন বা সরান","url":"https://mikaio.dev/bn/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে বিক্রয় কর ক্যালকুলেটর। একটি নেট মূল্যে ট্যাক্স যোগ করতে একটি মূল্য এবং একটি করের হার লিখুন বা এটি একটি মোট মূল্য থেকে বের করুন৷ ভ্যাট, জিএসটি এবং যেকোনো শতাংশের জন্য কাজ করে।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"সেলস ট্যাক্স ক্যালকুলেটর","item":"https://mikaio.dev/bn/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ট্যাক্স যোগ এবং নিষ্কাশন মধ্যে পার্থক্য কি?","acceptedAnswer":{"@type":"Answer","text":"ট্যাক্স যোগ করার জন্য একটি নেট মূল্য লাগে — ট্যাক্সের আগে মূল্য — এবং আপনি যে মোট মূল্য প্রদান করেন তা গণনা করে। ট্যাক্স উত্তোলন করলে বিপরীত হয়: আপনি ট্যাক্স সহ ইতিমধ্যেই মোট মূল্য লিখুন এবং ক্যালকুলেটর এটির কতটা ট্যাক্স এবং প্রাক-ট্যাক্সের পরিমাণ কত ছিল তা নির্ধারণ করে।"}},{"@type":"Question","name":"আমি কি ট্যাক্স হার ব্যবহার করা উচিত?","acceptedAnswer":{"@type":"Answer","text":"আপনার দেশ বা অঞ্চলে যে হার প্রযোজ্য তা ব্যবহার করুন। সাধারণ উদাহরণগুলির মধ্যে রয়েছে যুক্তরাজ্যে 20% ভ্যাট, জার্মানিতে 19%, অস্ট্রেলিয়ায় 10% GST এবং মার্কিন রাজ্যের বিভিন্ন বিক্রয় করের হার। শতাংশ চিহ্ন ছাড়া নম্বর লিখুন।"}},{"@type":"Question","name":"আমি আপলোড টাইপ কিছু?","acceptedAnswer":{"@type":"Answer","text":"না। আপনার ব্রাউজারে কোন সার্ভার জড়িত না থাকলে সবকিছু চলে। আপনি পৃষ্ঠাটি বন্ধ করার সময় আপনি যে পরিসংখ্যানগুলি প্রবেশ করেন তা অদৃশ্য হয়ে যায়।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>সেলস ট্যাক্স ক্যালকুলেটর</span></nav>
+  <h1>সেলস ট্যাক্স ক্যালকুলেটর</h1>
+  <p class="lead">পরিমাণ এবং করের হার লিখুন, তারপরে নেট মূল্যে ট্যাক্স যোগ করবেন নাকি মোট পরিমাণ থেকে এটি বের করবেন তা চয়ন করুন। তিনটি পরিসংখ্যান — নেট, ট্যাক্স এবং গ্রস — আপনি টাইপ করার সাথে সাথে আপডেট করুন৷</p>
+  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">পরিমাণ</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">করের হার %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">মোড</label><select id="tax-mode"><option value="add">দামে ট্যাক্স যোগ করুন</option><option value="remove">মূল্য থেকে ট্যাক্স উত্তোলন</option></select></div></div><div class="result"><span class="hint">নেট (প্রি-ট্যাক্স): </span><b id="tax-net">—</b> · <span class="hint">করের পরিমাণ: </span><b id="tax-tax">—</b> · <span class="hint">স্থূল (মোট): </span><span class="big" id="tax-gross">—</span></div></form></section>
+  <article class="content">
+    <h2>একটি মূল্যে কর যোগ করুন বা মোট থেকে এটি বের করুন</h2>
+<p>সেলস ট্যাক্স, ভ্যাট, জিএসটি — আপনার দেশে যা-ই বলা হোক না কেন, পাটিগণিত সর্বদা দুটি ক্রিয়াকলাপের মধ্যে একটি: একজন ক্রেতা যে পরিমাণ অর্থ প্রদান করেন তা পেতে একটি নিট মূল্যের সাথে ট্যাক্স শতাংশ যোগ করা, বা এর কতটা ট্যাক্স তা খুঁজে বের করতে মোট মূল্য থেকে পিছনে কাজ করা। এই ক্যালকুলেটর তাত্ক্ষণিকভাবে উভয়ই পরিচালনা করে। পরিমাণ, করের হার লিখুন এবং একটি মোড নির্বাচন করুন; আপনি টাইপ করার সাথে সাথে নেট, করের পরিমাণ এবং মোট আপডেট।</p>
+<p>আপনার কোন দিকটি প্রয়োজন তা বোঝা প্রথম পদক্ষেপ। আপনি যদি একজন বিক্রেতা হন একটি পণ্যের মূল্য নির্ধারণ করেন এবং আপনি চেকআউটের সময় যোগ করা ট্যাক্স সহ প্রি-ট্যাক্সের পরিমাণ হতে চান, তাহলে &quot;ট্যাক্স যোগ করুন&quot; বেছে নিন। আপনি যদি একটি রসিদ বা একটি চালান পেয়ে থাকেন এবং জানতে চান যে মোট কত ট্যাক্স ছিল, তাহলে &quot;এক্সট্রাক্ট ট্যাক্স&quot; বেছে নিন। উভয়ই দৈনন্দিন প্রয়োজন এবং উভয়ই একই সহজ সূত্র থেকে অনুসরণ করে।</p>
+<h2>কিভাবে ক্যালকুলেটর ব্যবহার করবেন</h2>
+<p>পরিমাণ ক্ষেত্রে মূল্য লিখুন। &quot;কর যোগ করুন&quot; মোডের জন্য এটি হল প্রাক-কর (নেট) মূল্য৷ &quot;এক্সট্রাক্ট ট্যাক্স&quot; মোডের জন্য এটি হল মোট (মোট) মূল্য যা আপনি রসিদে দেখতে পাচ্ছেন। এরপরে, একটি সরল সংখ্যা হিসাবে ট্যাক্সের হার লিখুন — উদাহরণস্বরূপ, 20% হারের জন্য 20 লিখুন। ড্রপডাউন থেকে মোডটি বেছে নিন এবং তিনটি আউটপুট মান পড়ুন: নেট (প্রি-ট্যাক্স), ট্যাক্সের পরিমাণ নিজেই এবং স্থূল (কর সহ মোট)। ফলাফল প্রতিটি কীস্ট্রোকের সাথে সাথে সাথে রিফ্রেশ করে।</p>
+<h2>এর পেছনের সূত্রগুলো</h2>
+<p>ট্যাক্স যোগ করার সময়, স্থূল মূল্য এক দ্বারা গুণিত এবং একশ দ্বারা ভাগ করা হারের সমান হয়। একটি £100 আইটেম 20% এ £120 হয়ে যায়। ট্যাক্স অংশ £20.</p>
+<p>কর উত্তোলন করার সময়, নিট মূল্য এক দ্বারা ভাগ করলে মোট মূল্যের সমান হয় এবং সেই হারকে একশ দিয়ে ভাগ করা হয়। একটি £120 মোট 20% £100 এর নেট এবং £20 ট্যাক্স দেয়। এই বিভাজন ধাপটি হল যেটি মানুষ প্রায়শই ভুল করে — 1.20 দ্বারা ভাগ করা, সরাসরি মোটের 20% বিয়োগ না করা, যা একটি ভিন্ন এবং ভুল উত্তর দেবে।</p>
+<h2>সারা বিশ্বে সাধারণ করের হার</h2>
+<p>করের হার দেশ অনুসারে এবং এমনকি দেশের মধ্যেও ব্যাপকভাবে পরিবর্তিত হয়। ইউনাইটেড কিংডমে স্ট্যান্ডার্ড ভ্যাট হার হল 20%, কিছু আইটেমের উপর 5% হার কমানো হয়েছে। জার্মানি বেশিরভাগ পণ্যের ক্ষেত্রে 19% এবং খাবার এবং বইয়ের ক্ষেত্রে 7% প্রয়োগ করে৷ অস্ট্রেলিয়া বেশিরভাগ পণ্য ও পরিষেবার উপর 10% GST চার্জ করে। কানাডার একটি ফেডারেল জিএসটি 5% প্লাস প্রাদেশিক হার রয়েছে। মার্কিন যুক্তরাষ্ট্রে কোন ফেডারেল বিক্রয় কর নেই; হারগুলি রাজ্য এবং স্থানীয় এলাকাগুলির দ্বারা সেট করা হয় এবং কিছু রাজ্যে 0% থেকে কিছু শহরে 10% এরও বেশি একত্রিত হলে। যেকোনো অফিসিয়াল উদ্দেশ্যে ব্যবহার করার আগে আপনার নির্দিষ্ট পরিস্থিতিতে প্রযোজ্য হারটি সর্বদা যাচাই করুন।</p>
+<h2>কর উত্তোলন করার সময় সবচেয়ে গুরুত্বপূর্ণ</h2>
+<p>এক্সট্রাক্ট-ট্যাক্স গণনা বিশেষভাবে উপযোগী হয় যখন আপনি অ্যাকাউন্টগুলি সমন্বয় করছেন, একটি ব্যবসা হিসাবে ইনপুট ভ্যাট দাবি করছেন, বা বিভিন্ন বাজার জুড়ে মূল্য তুলনা করার চেষ্টা করছেন যেখানে কিছু দাম ট্যাক্সের সাথে দেখানো হয়েছে এবং অন্যগুলি ছাড়া। এটি ব্যক্তিগত অর্থের ক্ষেত্রেও উঠে আসে যখন আপনি কোনো কিছুর প্রকৃত প্রি-ট্যাক্স খরচ বুঝতে চান, যেমন অফারগুলির তুলনা করার সময় যেখানে একজন বিক্রেতা কর-অন্তর্ভুক্ত মূল্য দেখায় এবং অন্য একজন কর-এক্সক্লুসিভ মূল্য দেখায়।</p>
+<h2>চক্রবৃদ্ধি হার এবং একাধিক কর</h2>
+<p>কিছু লেনদেন একাধিক ট্যাক্সের সাপেক্ষে — যেমন একটি হোটেলে থাকার জন্য যেখানে রাষ্ট্রীয় কর এবং স্থানীয় কর উভয়ই বহন করা হয়। এটি পরিচালনা করতে, নেট মূল্যের উপর প্রথম কর গণনা করুন এবং তারপরে নতুন &quot;নেট&quot; হিসাবে বিবেচনা করে সেই মধ্যবর্তী মোটের উপর দ্বিতীয় কর প্রয়োগ করুন। যখন উভয় হার একই বেসে প্রযোজ্য হয় তখন অর্ডারটি কোন ব্যাপার না, কিন্তু ক্রমবর্ধমান বেসে ট্যাক্স প্রয়োগ করা হলে এটি গুরুত্বপূর্ণ। সাধারণ সমন্বিত হারের জন্য, যদি তারা উভয়ই একই বেস পরিমাণে প্রযোজ্য হয় তবে আপনি সেগুলি প্রবেশ করার আগে একসাথে শতাংশ যোগ করতে পারেন।</p>
+<h2>উভয় উপায়ে একটি কার্যকর উদাহরণ</h2>
+<p>ধরুন একটি ল্যাপটপের মূল্য £850 নেট এবং প্রযোজ্য ভ্যাট হার 20%। ট্যাক্স যোগ করা: £850 × 1.20 = £1,020 গ্রস, যার £170 ট্যাক্স। এখন ধরুন এর পরিবর্তে আপনাকে একটি রসিদ দেওয়া হয়েছে যেখানে মোট £1,020 দেখানো হয়েছে এবং আপনার অ্যাকাউন্টের জন্য প্রাক-ট্যাক্স মূল্য জানতে হবে। ট্যাক্স বের করা: £1,020 ÷ 1.20 = £850 নেট, আবার £170 ট্যাক্স সহ। উভয় দিকই একই লেনদেন বর্ণনা করে, যা আপনার নিজের গাণিতিক পরীক্ষা করার একটি কার্যকর উপায় — আপনি যে দিকটি প্রথমে গণনা করুন না কেন, অন্য উপায়ে রূপান্তরিত করলে আপনি যেখানে শুরু করেছিলেন সেখানে ফিরে আসবে।</p>
+<p>একটি সাধারণ ভুল হল স্থূল অঙ্কের 20% সরাসরি নেওয়া এবং তাকে ট্যাক্স বলা, যা £1,020 এর জন্য ভুলভাবে সঠিক £170 এর পরিবর্তে £204 প্রস্তাব করবে। ত্রুটিটি আরও বেড়ে যায় কারণ 20% হার নেট মূল্যের সাথে সাপেক্ষে সংজ্ঞায়িত করা হয়, স্থূল নয়, তাই ট্যাক্স যোগ করার আগে এটি অবশ্যই প্রয়োগ করা উচিত, বা পরে ফ্ল্যাট শতাংশ বিয়োগের পরিবর্তে বিভাজনের মাধ্যমে সরানো উচিত। এই ক্যালকুলেটর সর্বদা সঠিক সম্পর্ক ব্যবহার করে, তাই আপনি প্রতিবার সূত্রটি পুনরায় প্রাপ্ত না করেই পরিসংখ্যানের উপর নির্ভর করতে পারেন।</p>
+<h2>ব্যক্তিগত, তাত্ক্ষণিক এবং বিনামূল্যে</h2>
+<p>আপনার প্রবেশ করা কোন ডেটা কোথাও পাঠানো হয় না। ক্যালকুলেটর হল জাভাস্ক্রিপ্টের একটি ছোট অংশ যা সম্পূর্ণরূপে আপনার ডিভাইসে চলে। এটি অফলাইনে কাজ করে, তাৎক্ষণিকভাবে সাড়া দেয় এবং কোনো অ্যাকাউন্ট বা নিবন্ধনের প্রয়োজন হয় না। ট্যাব বন্ধ করুন এবং আপনার টাইপ করা প্রতিটি নম্বর চলে গেছে।</p>
+<p>যখনই আপনি একটি পণ্যের মূল্য নির্ধারণ করেন, একটি রসিদ সমন্বয় করেন বা মোট থেকে ট্যাক্স উপাদান আলাদা করার প্রয়োজন হয় তখন এই টুলটি ব্যবহার করুন। তিনটি আউটপুট - নেট, ট্যাক্স এবং গ্রস - আপনাকে একটি একক দৃশ্যে সম্পূর্ণ ছবি দেয়।</p>
+    <section class="faq"><h2>বিক্রয় কর ক্যালকুলেটর FAQ</h2><dl><dt>ট্যাক্স যোগ এবং নিষ্কাশন মধ্যে পার্থক্য কি?</dt><dd>ট্যাক্স যোগ করার জন্য একটি নেট মূল্য লাগে — ট্যাক্সের আগে মূল্য — এবং আপনি যে মোট মূল্য প্রদান করেন তা গণনা করে। ট্যাক্স উত্তোলন করলে বিপরীত হয়: আপনি ট্যাক্স সহ ইতিমধ্যেই মোট মূল্য লিখুন এবং ক্যালকুলেটর এটির কতটা ট্যাক্স এবং প্রাক-ট্যাক্সের পরিমাণ কত ছিল তা নির্ধারণ করে।</dd><dt>আমি কি ট্যাক্স হার ব্যবহার করা উচিত?</dt><dd>আপনার দেশ বা অঞ্চলে যে হার প্রযোজ্য তা ব্যবহার করুন। সাধারণ উদাহরণগুলির মধ্যে রয়েছে যুক্তরাজ্যে 20% ভ্যাট, জার্মানিতে 19%, অস্ট্রেলিয়ায় 10% GST এবং মার্কিন রাজ্যের বিভিন্ন বিক্রয় করের হার। শতাংশ চিহ্ন ছাড়া নম্বর লিখুন।</dd><dt>আমি আপলোড টাইপ কিছু?</dt><dd>না। আপনার ব্রাউজারে কোন সার্ভার জড়িত না থাকলে সবকিছু চলে। আপনি পৃষ্ঠাটি বন্ধ করার সময় আপনি যে পরিসংখ্যানগুলি প্রবেশ করেন তা অদৃশ্য হয়ে যায়।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"amount":"পরিমাণ","rate":"করের হার %","mode":"মোড","add_tax":"দামে ট্যাক্স যোগ করুন","remove_tax":"মূল্য থেকে ট্যাক্স উত্তোলন","net":"নেট (প্রি-ট্যাক্স)","tax":"করের পরিমাণ","gross":"স্থূল (মোট)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/salestax.js" defer></script>
+</body>
+</html>

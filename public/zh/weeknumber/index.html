@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>周数计算器 — 这是一年中的第几周？</title>
+<meta name="description" content="免费周数计算器。查找任意日期的 ISO 周数。查看今天是一年中的第几周或您选择的任何日期。">
+<link rel="canonical" href="https://mikaio.dev/zh/weeknumber/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/weeknumber/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/weeknumber/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/weeknumber/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/weeknumber/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/weeknumber/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/weeknumber/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/weeknumber/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/weeknumber/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/weeknumber/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/weeknumber/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/weeknumber/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="周数计算器 — 这是一年中的第几周？">
+<meta property="og:description" content="免费周数计算器。查找任意日期的 ISO 周数。查看今天是一年中的第几周或您选择的任何日期。">
+<meta property="og:url" content="https://mikaio.dev/zh/weeknumber/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"周数计算器 — 这是一年中的第几周？","url":"https://mikaio.dev/zh/weeknumber/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费周数计算器。查找任意日期的 ISO 周数。查看今天是一年中的第几周或您选择的任何日期。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"周数","item":"https://mikaio.dev/zh/weeknumber/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ISO 周数是多少？","acceptedAnswer":{"@type":"Answer","text":"ISO 8601 将一周定义为从星期一开始。第 1 周是包含一年中第一个星期四的周，这意味着 1 月的第一天可能属于上一年的第 52 或 53 周。"}},{"@type":"Question","name":"为什么第一周有时从 12 月开始？","acceptedAnswer":{"@type":"Answer","text":"由于 ISO 周从星期一开始，因此有些年份在一月初有一个星期四，这使得第一周在前一年的 12 月下旬开始。"}},{"@type":"Question","name":"一年有多少周？","acceptedAnswer":{"@type":"Answer","text":"大多数年份有 52 个 ISO 周。有些年份有 53 周，一年以星期四开始或结束。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/weeknumber/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/weeknumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/weeknumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/weeknumber/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/weeknumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/weeknumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/weeknumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/weeknumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/weeknumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/weeknumber/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>周数</span></nav>
+  <h1>周数</h1>
+  <p class="lead">选择一个日期以查看其 ISO 周数以及该周的日期范围。</p>
+  <section class="widget" id="tool"><div id="wn-app"><div class="row"><div class="field"><label for="wn-date">日期</label><input type="date" id="wn-date"></div></div><div class="result"><span class="hint">周数: </span><span class="big" id="wn-week">—</span></div><div id="wn-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>现在是一年中的第几周？</h2>
+<p>了解周数是项目管理、薪资、后勤、学校安排以及人们以周为单位而不是特定日期交流时间的任何环境中的常见需求。一旦您知道第 32 周涵盖哪些日期，“让我们在第 32 周见面”是一种非常自然的安排事情的方式。此工具向您显示任何日期的 ISO 周数以及该周的周一到周日范围。</p>
+<h2>ISO 8601 周标准</h2>
+<p>该工具显示的周数遵循 ISO 8601 国际标准，这是企业和政府中使用最广泛的定义。根据 ISO 8601，一周始终从星期一开始，到星期日结束。第 1 周定义为包含一年中第一个星期四的周。此定义确保每年有 52 或 53 个完整周。</p>
+<p>由于周一开始规则，一月的前几天有时会落在上一年的第 52 或 53 周，而 12 月的最后几天有时会落在下一年的第一周。这会让第一次遇到它的人感到惊讶，但一旦你理解了它的定义，就完全合乎逻辑了。</p>
+<h2>Why 52 or 53 weeks?</h2>
+<p>日历年有 365 天（闰年有 366 天），365 除以 7 得到 52 周和一天。额外的一天（即闰年中的两天）是指每年 1 月 1 日轮班一到两天的那一周。当这种转变导致 1 月初和 12 月底都出现星期四时，这一年就有了 53 周。</p>
+<h2>在商业和物流中的用途</h2>
+<p>供应链和制造团队通常以周数进行计划，因为它们与交付时间表完全一致。 “第 14 周交付”意味着特定的事情，无需指定确切的日期，并且使用相同 ISO 定义的每个人都在同一日历页面上。</p>
+<p>薪资系统经常按周周期处理运行，并按周数引用它们以进行审计。人力资源部门以周为单位跟踪年假。项目经理将甘特图分成编号的周。财务报告有时使用 ISO 周来保持跨年的一致性。</p>
+<h2>学校和学术日历</h2>
+<p>许多欧洲国家的大学和学校都会计算教学周数，因此“第 5 周作业到期”是标准语言。来自周数不太常见的国家/地区的学生有时很难将这些信息转化为实际日期，这使得周数计算器特别有用。</p>
+<h2>快速查找当前星期</h2>
+<p>今天打开该工具，它默认为当前日期，立即向您显示现在是一年中的第几周。如果您想知道特定日期属于哪一周（用于计划会议、检查交付日期或验证项目里程碑），只需选择日期即可立即得到答案。</p>
+<h2>ISO 周与美国惯例</h2>
+<p>并非每个周编号系统都一致。该工具遵循的 ISO 8601 标准从周一开始，并将第 1 周固定为一年中的第一个周四，但美国通常使用不同的约定，其中周从周日开始，第 1 周只是包含 1 月 1 日的那一周，无论该周是哪个工作日。这两个系统可能会在年初和年底出现整整一周的差异，这是国际团队中经常出现的混乱根源。如果同事引用的周数似乎与该工具显示的内容无关，那么检查他们正在使用的约定通常可以立即解决问题。</p>
+<h2>一个有效的例子</h2>
+<p>以 2024 年 1 月 1 日为例，这一天是星期一。根据 ISO 8601，2024 年的第一个星期四是 1 月 4 日，包含该星期四的一周（1 月 1 日星期一到 1 月 7 日星期日）是第 1 周。与 2023 年 12 月 31 日星期日相比，它属于 2023 年的第 52 周，尽管它正好位于日历年的边界，因为包含它的 ISO 周从圣诞节开始，并且不会到达新年的第一个包含星期四的周。手动完成这样的示例是内化规则的最清晰方法，尽管该工具自然会在您选择的任何日期立即执行此操作。</p>
+<h2>在商业和物流中的用途（续）</h2>
+<p>除了交付时间表之外，财务报告有时会使用 ISO 周数来保持跨年的一致性，因为无论给定月份从哪个工作日开始，“第 23 周”比较都会排列一年中的相同相对点 - 简单的“6 月数字”比较无法保证这一点，因为 6 月的工作周数不同，具体取决于其日期的排列方式。</p>
+<h2>学校和学术日历（续）</h2>
+<p>这超出了作业的范围：与欧洲机构或雇主打交道的交换生、国际申请者和远程员工通常需要将基于周的截止日期快速转换为自己的日历，而将 ISO 惯例与不同的本地惯例不匹配是提前或推迟一周提交内容的简单方法。</p>
+<h2>为什么该标准在周一和周四结算</h2>
+<p>选择星期一作为 ISO 周的开始以及一年中的第一个星期四作为第一周的锚点并不是任意的。锚定到星期四可以保证第一周始终包含新年的大部分天数，而不是旧的一年 - 因为一周有 7 天，无论星期四是哪一天，该周的 7 天中至少有 4 天属于新年。这是一个经过深思熟虑的设计选择，可以保持编号的直观性：第一周确实感觉像是一年中的第一个正确的周，而不是前一周的杂散尾端，这与一些宽松的区域公约不同，这些公约可以将第一周交给一年，而实际上只有一两天在其中。</p>
+<h2>私人的</h2>
+<p>该工具仅使用浏览器的本地日期计算（基于上述相同的 ISO 8601 规则），因此您检查的日期不会发送到服务器、记录或共享。</p>
+    <section class="faq"><h2>周数常见问题解答</h2><dl><dt>ISO 周数是多少？</dt><dd>ISO 8601 将一周定义为从星期一开始。第 1 周是包含一年中第一个星期四的周，这意味着 1 月的第一天可能属于上一年的第 52 或 53 周。</dd><dt>为什么第一周有时从 12 月开始？</dt><dd>由于 ISO 周从星期一开始，因此有些年份在一月初有一个星期四，这使得第一周在前一年的 12 月下旬开始。</dd><dt>一年有多少周？</dt><dd>大多数年份有 52 个 ISO 周。有些年份有 53 周，一年以星期四开始或结束。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/weeknumber/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/weeknumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/weeknumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/weeknumber/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/weeknumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/weeknumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/weeknumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/weeknumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/weeknumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/weeknumber/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"date":"日期","week_label":"周数","weeklabel":"星期"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/weeknumber.js" defer></script>
+</body>
+</html>

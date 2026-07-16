@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pierre Papier Ciseaux — jouer contre un ordinateur en ligne</title>
+<meta name="description" content="Jeu Pierre Papier Ciseaux en ligne gratuit. Jouez contre l&#39;ordinateur, consultez instantanément les résultats et suivez votre score. Aucun téléchargement ni inscription requis.">
+<link rel="canonical" href="https://mikaio.dev/fr/rockpaperscissors/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/rockpaperscissors/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/rockpaperscissors/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/rockpaperscissors/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/rockpaperscissors/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/rockpaperscissors/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/rockpaperscissors/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/rockpaperscissors/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/rockpaperscissors/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/rockpaperscissors/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/rockpaperscissors/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/rockpaperscissors/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pierre Papier Ciseaux — jouer contre un ordinateur en ligne">
+<meta property="og:description" content="Jeu Pierre Papier Ciseaux en ligne gratuit. Jouez contre l&#39;ordinateur, consultez instantanément les résultats et suivez votre score. Aucun téléchargement ni inscription requis.">
+<meta property="og:url" content="https://mikaio.dev/fr/rockpaperscissors/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Pierre Papier Ciseaux — jouer contre un ordinateur en ligne","url":"https://mikaio.dev/fr/rockpaperscissors/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Jeu Pierre Papier Ciseaux en ligne gratuit. Jouez contre l'ordinateur, consultez instantanément les résultats et suivez votre score. Aucun téléchargement ni inscription requis."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Ciseaux à papier pierre","item":"https://mikaio.dev/fr/rockpaperscissors/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment l'ordinateur choisit-il ?","acceptedAnswer":{"@type":"Answer","text":"L'ordinateur choisit Pierre, Papier ou Ciseaux avec une probabilité égale à l'aide d'un générateur de nombres aléatoires, ce qui en fait un adversaire juste et imprévisible."}},{"@type":"Question","name":"Existe-t-il une stratégie pour gagner ?","acceptedAnswer":{"@type":"Answer","text":"Contre un adversaire véritablement aléatoire, il n’y a pas de stratégie garantie : chaque résultat a la même probabilité. Le plaisir réside dans la psychologie et la lecture de modèles qui accompagnent les adversaires humains."}},{"@type":"Question","name":"Mon score est-il réinitialisé ?","acceptedAnswer":{"@type":"Answer","text":"Le score se réinitialise lorsque vous rechargez la page. Il suit les victoires, les défaites et les nuls pour la session en cours."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rockpaperscissors/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/rockpaperscissors/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rockpaperscissors/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/rockpaperscissors/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/rockpaperscissors/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rockpaperscissors/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rockpaperscissors/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rockpaperscissors/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rockpaperscissors/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/rockpaperscissors/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Ciseaux à papier pierre</span></nav>
+  <h1>Ciseaux à papier pierre</h1>
+  <p class="lead">Choisissez Pierre, Papier ou Ciseaux et voyez si vous pouvez battre l&#39;ordinateur. Votre score est suivi au fil des tours.</p>
+  <section class="widget" id="tool"><div id="rps-app" style="text-align:center"><div class="row" style="justify-content:center;gap:1rem;margin-bottom:1.5rem"><button class="btn rps-btn" data-choice="rock" style="font-size:2.5rem;padding:0.75rem 1.25rem">✊</button><button class="btn rps-btn" data-choice="paper" style="font-size:2.5rem;padding:0.75rem 1.25rem">🖐</button><button class="btn rps-btn" data-choice="scissors" style="font-size:2.5rem;padding:0.75rem 1.25rem">✌️</button></div><div id="rps-result" style="font-size:1.1rem;min-height:5rem;padding:1rem;background:var(--surface,#f5f5f5);border-radius:0.75rem;margin-bottom:1rem">Choisissez votre déménagement !</div><div id="rps-score" style="display:flex;justify-content:center;gap:2rem;font-size:0.95rem"><span>Vous : <b id="rps-pw">0</b></span><span>Processeur : <b id="rps-cw">0</b></span><span>Dessiner : <b id="rps-d">0</b></span></div></div></section>
+  <article class="content">
+    <h2>Le jeu de mains le plus ancien au monde</h2>
+<p>Rock Paper Scissors est l’un des jeux les plus universellement reconnus au monde. Deux joueurs révèlent simultanément l&#39;une des trois formes de main – un poing fermé pour la pierre, une paume plate pour le papier ou deux doigts étendus pour les ciseaux – et un ensemble de règles simples décide qui gagne. La roche écrase les ciseaux, les ciseaux coupent le papier, le papier recouvre la roche. Malgré cette apparente simplicité, le jeu a inspiré des décennies de recherche en théorie des jeux, en psychologie et en stratégie concurrentielle, et a été utilisé dans de nombreux domaines, des conflits sur les terrains de jeux aux litiges juridiques entre entreprises réglant des désaccords sur la maison de vente aux enchères qui gérerait une vente immobilière.</p>
+<p>Le jeu trouve ses racines en Chine, où une version appelée shushiling apparaît dans des documents écrits remontant à la dynastie Han, il y a environ deux mille ans. De Chine, il s&#39;est répandu au Japon, où il est devenu connu sous le nom de jan-ken-pon et a évolué vers le format à trois gestes que la plupart des gens reconnaissent aujourd&#39;hui. Les commerçants et les missionnaires européens ont introduit le jeu vers l&#39;ouest au cours des XVIIe et XVIIIe siècles et, au XXe siècle, il s&#39;était répandu pratiquement aux quatre coins du monde. La World Rock Paper Scissors Society a été fondée en 1918 à Toronto et organise encore aujourd&#39;hui des championnats du monde annuels, avec des parrainages, des prix en argent et des concurrents venant de dizaines de pays.</p>
+<h2>Comment fonctionne le jeu dans le navigateur</h2>
+<p>Cette version de Rock Paper Scissors vous oppose à un adversaire informatique qui choisit son mouvement de manière complètement aléatoire avec une probabilité égale pour les trois options. Il n&#39;y a pas de biais caché, pas d&#39;algorithme d&#39;apprentissage et pas de mémoire des tours précédents. Chaque jeu est statistiquement indépendant. Cliquez sur l’un des trois boutons emoji – poing, main ouverte ou doigts en ciseaux – et le résultat apparaît immédiatement. Un score courant sous le tableau indique combien de tours vous avez gagnés, combien l&#39;ordinateur en a gagné et combien se sont terminés par un match nul.</p>
+<p>Le caractère aléatoire est implémenté à l&#39;aide de la fonction Math.random intégrée au navigateur, qui génère un nombre pseudo-aléatoire et le mappe à l&#39;un des trois choix. Bien qu’il ne s’agisse pas d’un hasard cryptographiquement sécurisé, c’est tout à fait suffisant pour un jeu où la distribution des résultats est ce qui compte. Chaque choix apparaît environ un tiers du temps sur plusieurs tours, ce qui est exactement ce qu&#39;un adversaire équitable devrait faire.</p>
+<h2>Stratégie contre un adversaire aléatoire</h2>
+<p>En termes mathématiques stricts, aucune stratégie ne surpasse le jeu aléatoire lorsque votre adversaire joue également au hasard. Chacun des neuf résultats possibles du tour (trois choix pour vous, trois pour l&#39;adversaire) a une probabilité égale d&#39;un neuvième. Sur ces neuf résultats, exactement trois aboutissent à un match nul, trois à une victoire pour vous et trois à une défaite, donnant à chaque équipe une chance sur trois de gagner un tour donné. Quelle que soit la séquence de mouvements que vous effectuez, le taux de victoire attendu contre un adversaire véritablement aléatoire est précisément d&#39;un tiers.</p>
+<p>Bien entendu, cette réalité mathématique n’empêche pas les gens d’essayer, et cela fait partie de leur attrait. Le cerveau recherche naturellement des modèles, même dans des données aléatoires, et de nombreux joueurs se convainquent d&#39;avoir identifié une tendance dans les choix de l&#39;ordinateur alors que ce qu&#39;ils voient en réalité n&#39;est qu&#39;un bruit statistique normal. Sur une centaine de tours, le nombre de victoires, de défaites et de nuls se regroupera autour de trente-trois chacun, avec des fluctuations à la fois supérieures et inférieures à ces attentes. Les séries courtes sembleront toujours déséquilibrées, car les séquences aléatoires sont véritablement grumeleuses plutôt que parfaitement alternées.</p>
+<p>Cependant, contre des adversaires humains, la stratégie devient bien réelle. Les recherches en sciences cognitives et en économie comportementale ont montré que les gens ne sont pas aléatoires. Ils présentent des préjugés prévisibles : ils ont tendance à répéter un coup gagnant, à abandonner un coup perdant et à choisir la pierre plus souvent que le papier ou les ciseaux dès leur tout premier lancer. Les acteurs compétitifs exploitent ces tendances. La psychologie du jeu devient une sorte de négociation rapide et silencieuse sur ce que chaque joueur pense que l’autre est susceptible de faire ensuite.</p>
+<h2>Ciseaux à papier pierre compétitifs</h2>
+<p>Les tournois professionnels Pierre Papier Ciseaux existent et attirent de sérieux concurrents. Les championnats du monde de la RPS Society ont lieu depuis 2002, avec des centaines de participants payant des frais d&#39;inscription et concourant via des tranches éliminatoires. Aux niveaux les plus élevés, les concurrents étudient leurs adversaires sur plusieurs tours, à la recherche de tout écart par rapport au jeu aléatoire qu&#39;ils pourraient exploiter. Certains joueurs prétendent être capables de provoquer des réponses particulières par leur langage corporel, leurs signaux verbaux ou le rythme du compte à rebours. D’autres adoptent volontairement une stratégie rigoureusement aléatoire, justement pour priver leurs adversaires de tout signal exploitable.</p>
+<p>Les utilisations notables du jeu en dehors du terrain de jeu incluent une affaire judiciaire de 2006 en Floride où un juge a ordonné à deux cabinets d&#39;avocats qui ne parvenaient pas à s&#39;entendre sur un lieu de réunion de régler le différend avec Rock Paper Scissors. Christie&#39;s et Sotheby&#39;s, les célèbres maisons de ventes aux enchères, ont été invitées par une société japonaise à concourir pour un lot de peintures impressionnistes utilisant le jeu. Christie&#39;s a consulté les filles de son président, qui lui ont conseillé d&#39;y aller avec des ciseaux car, selon elles, tout le monde mène toujours avec du rock. Ils ont gagné.</p>
+<h2>Utiliser le suivi des scores</h2>
+<p>L&#39;affichage des scores sous les boutons vous donne un décompte des victoires, des victoires de l&#39;ordinateur et des tirages pour votre session en cours. Ceci est utile si vous souhaitez suivre vos résultats sur un échantillon significatif de jeux. Quelques dizaines de tours suffisent pour voir si la répartition s&#39;approche du ratio attendu d&#39;un tiers, et regarder le score évoluer en temps réel est une expérience étonnamment engageante, même contre un adversaire aléatoire. Si vous souhaitez repartir à zéro, rechargez simplement la page et les compteurs sont remis à zéro.</p>
+    <section class="faq"><h2>FAQ sur les ciseaux à papier pierre</h2><dl><dt>Comment l&#39;ordinateur choisit-il ?</dt><dd>L&#39;ordinateur choisit Pierre, Papier ou Ciseaux avec une probabilité égale à l&#39;aide d&#39;un générateur de nombres aléatoires, ce qui en fait un adversaire juste et imprévisible.</dd><dt>Existe-t-il une stratégie pour gagner ?</dt><dd>Contre un adversaire véritablement aléatoire, il n’y a pas de stratégie garantie : chaque résultat a la même probabilité. Le plaisir réside dans la psychologie et la lecture de modèles qui accompagnent les adversaires humains.</dd><dt>Mon score est-il réinitialisé ?</dt><dd>Le score se réinitialise lorsque vous rechargez la page. Il suit les victoires, les défaites et les nuls pour la session en cours.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rockpaperscissors/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/rockpaperscissors/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rockpaperscissors/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/rockpaperscissors/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/rockpaperscissors/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rockpaperscissors/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rockpaperscissors/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rockpaperscissors/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rockpaperscissors/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/rockpaperscissors/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"you":"Vous","cpu":"Ordinateur","draw":"Dessiner","win":"Vous gagnez ! 🎉","lose":"L'ordinateur gagne 🤖","tie":"C'est un match nul ! 🤝","chooseyourmove":"Choisissez votre déménagement !","you2":"Vous :","cpu2":"Processeur :","draw2":"Dessiner :"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/rockpaperscissors.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ہیش جنریٹر — SHA-256, SHA-1, MD5 ہیش کیلکولیٹر</title>
+<meta name="description" content="مفت ہیش جنریٹر۔ اپنے براؤزر میں کسی بھی ٹیکسٹ ان پٹ کے لیے فوری طور پر SHA-256، SHA-1، اور MD5 ہیش کا حساب لگائیں۔ کہیں بھی کوئی ڈیٹا نہیں بھیجا جاتا ہے۔">
+<link rel="canonical" href="https://mikaio.dev/ur/hashgenerator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/hashgenerator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/hashgenerator/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/hashgenerator/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/hashgenerator/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/hashgenerator/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/hashgenerator/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/hashgenerator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/hashgenerator/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/hashgenerator/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/hashgenerator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/hashgenerator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ہیش جنریٹر — SHA-256, SHA-1, MD5 ہیش کیلکولیٹر">
+<meta property="og:description" content="مفت ہیش جنریٹر۔ اپنے براؤزر میں کسی بھی ٹیکسٹ ان پٹ کے لیے فوری طور پر SHA-256، SHA-1، اور MD5 ہیش کا حساب لگائیں۔ کہیں بھی کوئی ڈیٹا نہیں بھیجا جاتا ہے۔">
+<meta property="og:url" content="https://mikaio.dev/ur/hashgenerator/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"ہیش جنریٹر — SHA-256, SHA-1, MD5 ہیش کیلکولیٹر","url":"https://mikaio.dev/ur/hashgenerator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"مفت ہیش جنریٹر۔ اپنے براؤزر میں کسی بھی ٹیکسٹ ان پٹ کے لیے فوری طور پر SHA-256، SHA-1، اور MD5 ہیش کا حساب لگائیں۔ کہیں بھی کوئی ڈیٹا نہیں بھیجا جاتا ہے۔"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"ہیش جنریٹر","item":"https://mikaio.dev/ur/hashgenerator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ایک ہیش کیا ہے؟","acceptedAnswer":{"@type":"Answer","text":"ایک کرپٹوگرافک ہیش فنکشن کوئی بھی ان پٹ لیتا ہے اور ایک مقررہ لمبائی کا آؤٹ پٹ (ہیش یا ڈائجسٹ) تیار کرتا ہے۔ ایک ہی ان پٹ ہمیشہ ایک ہی آؤٹ پٹ پیدا کرتا ہے، لیکن یہاں تک کہ ایک حرف کی تبدیلی بھی بالکل مختلف ہیش پیدا کرتی ہے۔"}},{"@type":"Question","name":"SHA-256 کس لیے استعمال ہوتا ہے؟","acceptedAnswer":{"@type":"Answer","text":"SHA-256 بٹ کوائن مائننگ، SSL/TLS سرٹیفکیٹس، فائل کی سالمیت کی تصدیق، پاس ورڈ اسٹوریج (نمک کے ساتھ) اور ڈیجیٹل دستخطوں میں استعمال ہوتا ہے۔"}},{"@type":"Question","name":"کیا MD5 اب بھی محفوظ ہے؟","acceptedAnswer":{"@type":"Answer","text":"حفاظتی مقاصد کے لیے MD5 کو خفیہ طور پر محفوظ نہیں سمجھا جاتا ہے — تصادم (ایک ہی ہیش بنانے والے دو مختلف ان پٹ) پیدا کیے جا سکتے ہیں۔ یہ اب بھی غیر حفاظتی مقاصد جیسے فائل چیکسم کے لیے استعمال ہوتا ہے۔"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/hashgenerator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/hashgenerator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/hashgenerator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/hashgenerator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/hashgenerator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/hashgenerator/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/hashgenerator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/hashgenerator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/hashgenerator/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/hashgenerator/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>ہیش جنریٹر</span></nav>
+  <h1>ہیش جنریٹر</h1>
+  <p class="lead">اس کی کرپٹوگرافک ہیشز بنانے کے لیے ٹیکسٹ کو ٹائپ کریں یا پیسٹ کریں۔</p>
+  <section class="widget" id="tool"><div id="hash-app"><textarea id="hash-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="ہیش میں متن ٹائپ کریں یا پیسٹ کریں…"></textarea><div style="margin-top:0.75rem"><div style="margin-bottom:0.5rem"><div class="hint">SHA-256</div><div id="hash-sha256" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div><div style="margin-bottom:0.5rem"><div class="hint">SHA-1</div><div id="hash-sha1" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div><div><div class="hint">MD5 (تقریبا)</div><div id="hash-md5" style="font-family:monospace;font-size:0.8rem;word-break:break-all;padding:0.5rem;background:rgba(255,255,255,0.04);border-radius:0.4rem">—</div></div></div></div></section>
+  <article class="content">
+    <h2>کسی بھی متن کے لیے کرپٹوگرافک ہیش تیار کریں۔</h2>
+<p>ایک ہیش فنکشن کوئی بھی ان پٹ لیتا ہے اور ایک مقررہ لمبائی والا فنگر پرنٹ تیار کرتا ہے جسے ہیش یا ڈائجسٹ کہتے ہیں۔ ایک ہی ان پٹ ہمیشہ ایک ہی آؤٹ پٹ پیدا کرتا ہے، لیکن یہاں تک کہ ایک کریکٹر کی تبدیلی بھی بالکل مختلف ہیش پیدا کرتی ہے - ایک خاصیت جسے برفانی اثر کہا جاتا ہے۔ یہ ٹول آپ کے داخل کردہ کسی بھی متن کے لیے SHA-256، SHA-1، اور MD5 ہیشز تیار کرتا ہے، مکمل طور پر آپ کے براؤزر میں شمار کیا جاتا ہے۔</p>
+<h2>SHA-256، SHA-1 اور MD5 کا موازنہ</h2>
+<p>SHA-256، SHA-2 خاندان کا حصہ، 64 ہیکساڈیسیمل حروف کے طور پر لکھا ہوا 256 بٹ ہیش تیار کرتا ہے اور اسے تمام موجودہ ایپلی کیشنز کے لیے خفیہ طور پر محفوظ سمجھا جاتا ہے، یہی وجہ ہے کہ یہ آج کل نئے سسٹمز کے لیے پہلے سے طے شدہ انتخاب ہے۔ SHA-1 ایک مختصر 160 بٹ ہیش تیار کرتا ہے اور اسے 2017 سے سیکیورٹی مقاصد کے لیے فرسودہ کر دیا گیا ہے، جب محققین نے یہ ظاہر کیا کہ ایک ہی ہیش کو تیار کرنے کے لیے دو مختلف ان پٹس کو جان بوجھ کر تیار کیا جا سکتا ہے - ایک تصادم جو ان ضمانتوں کو نقصان پہنچاتا ہے جو الگورتھم فراہم کرنے کے لیے تھا، حالانکہ یہ خود ہی کچھ پرانے حصوں میں موجود ہے اور سسٹم میں موجود ہے۔ اس سے دور MD5 اس سے بھی چھوٹا 128 بٹ ہیش تیار کرتا ہے اور اسے خفیہ طور پر ٹوٹا ہوا سمجھا جاتا ہے: جدید ہارڈ ویئر کے ساتھ تصادم جان بوجھ کر اور جلدی سے پیدا کیا جا سکتا ہے، اس لیے MD5 آج صرف غیر سیکیورٹی مقاصد کے لیے موزوں ہے جیسے بنیادی فائل چیکسمس یا تیز ڈیٹا بیس تلاش کرنے کے لیے جہاں ایک مخالف تیار کرنے والا نقصان دہ تصادم کا باعث نہیں ہے۔</p>
+<h2>ہیش فنکشنز کس کے لیے استعمال ہوتے ہیں؟</h2>
+<p><strong>فائل کی سالمیت</strong>: ڈاؤن لوڈ ویب سائٹس ہر فائل کی SHA-256 ہیش شائع کرتی ہیں۔ ڈاؤن لوڈ کرنے کے بعد، آپ ہیش کی گنتی کرتے ہیں اور اس کا موازنہ شائع شدہ قیمت سے کرتے ہیں۔ اگر وہ مماثل ہیں تو، فائل کو ٹرانزٹ میں خراب یا چھیڑ چھاڑ نہیں کیا گیا تھا۔</p>
+<p><strong>پاس ورڈ اسٹوریج</strong>: ویب سائٹس کو کبھی بھی سادہ متن والے پاس ورڈز کو اسٹور نہیں کرنا چاہیے۔ اس کے بجائے، وہ ایک ہیش (مثالی طور پر SHA-256 یا بے ترتیب نمک کے ساتھ bcrypt) اسٹور کرتے ہیں اور موازنہ کے لیے آپ کی لاگ ان کوشش کو ہیش کرتے ہیں۔</p>
+<p><strong>ڈیجیٹل دستخط</strong>: کسی دستاویز پر دستخط کرنے میں اسے ہیش کرنا اور نجی کلید کے ساتھ ہیش کو خفیہ کرنا شامل ہے۔ وصول کنندہ عوامی کلید کا استعمال کرتے ہوئے ہیش کی تصدیق کر سکتا ہے۔</p>
+<p><strong>بِٹ کوائن مائننگ</strong>: SHA-256 بٹ کوائن کے پروف آف ورک الگورتھم میں استعمال ہوتا ہے۔ کان کنوں کو لازمی طور پر ایک ان پٹ (nonce) تلاش کرنا چاہیے جو صفر کی ایک مخصوص تعداد سے شروع ہونے والی ہیش پیدا کرے۔</p>
+<p><strong>ورژن کنٹرول</strong>: Git ذخیرہ میں موجود ہر کمٹ، فائل اور آبجیکٹ کی شناخت کے لیے SHA-1 (SHA-256 میں منتقل کیا جا رہا ہے) کا استعمال کرتا ہے۔ ہیش منفرد شناخت کنندہ ہے۔</p>
+<h2>برفانی تودے کا اثر</h2>
+<p>کرپٹوگرافک ہیش فنکشنز کی ایک خاص خاصیت یہ ہے کہ ان پٹ کی چھوٹی تبدیلیاں بھی ڈرامائی طور پر مختلف آؤٹ پٹ پیدا کرتی ہیں:</p>
+<p>&quot;ہیلو&quot; → SHA-256: 185f8db3...</p>
+<p>&quot;ہیلو&quot; → SHA-256: 2cf24dba...</p>
+<p>صرف کیپٹلائزیشن میں مختلف ہونے کے باوجود دونوں ہیشز کا کوئی ظاہری تعلق نہیں ہے۔ یہ برفانی تودے کا اثر ہے۔</p>
+<h2>ایک طرفہ فنکشن</h2>
+<p>ہیشز یک طرفہ ہیں: آپ ان پٹ سے ہیش کی گنتی کر سکتے ہیں، لیکن آپ ہیش سے ان پٹ بازیافت کرنے کے عمل کو ریورس نہیں کر سکتے۔ ہیش کو &quot;کریک&quot; کرنے کا واحد طریقہ یہ ہے کہ بہت سے ان پٹس (بروٹ فورس یا لغت کا حملہ) آزمائیں اور دیکھیں کہ کون سا ہیش تیار کرتا ہے۔</p>
+<h2>ٹول کا استعمال کیسے کریں۔</h2>
+<p>کسی بھی متن کو ان پٹ باکس میں ٹائپ کریں یا پیسٹ کریں اور تینوں ہیشز — SHA-256، SHA-1 اور MD5 — اس کے فوراً نیچے ظاہر ہوتے ہیں، ہر کی اسٹروک کے ساتھ دوبارہ حساب لگاتے ہوئے۔ اس سے فائل کے شائع شدہ چیکسم کی توثیق کرنا، متن کے ایک ٹکڑے کے لیے فوری منفرد شناخت کنندہ بنانا، یا صرف یہ دریافت کرنا کہ برفانی تودے کا اثر ایک وقت میں آپ کے ان پٹ ایک حرف میں ترمیم کرکے اور ہر ہیش کی تبدیلی کو مکمل طور پر دیکھ کر کیسے برتاؤ کرتا ہے۔</p>
+<h2>آپ ہیش کو ریورس کیوں نہیں کر سکتے</h2>
+<p>ایک کرپٹوگرافک ہیش فنکشن کو جان بوجھ کر ایک خاص طریقے سے معلومات کو تباہ کرنے کے لیے ڈیزائن کیا گیا ہے: یہ کسی بھی لمبائی کا ان پٹ لیتا ہے اور اسے ایک مقررہ، مختصر آؤٹ پٹ تک دباتا ہے، اس سے کہیں زیادہ معلومات کو ضائع کر دیتا ہے۔ چونکہ لاتعداد مختلف ان پٹ نظریاتی طور پر ایک ہی شارٹ آؤٹ پٹ تک کم کر سکتے ہیں، اس لیے ہیش سے اصل ان پٹ کو بازیافت کرنے کے لیے کوئی انوکھا الٹا آپریشن نہیں ہے — یہ عمل صرف ایک سمت میں کام کرتا ہے۔ ان پٹ کو تلاش کرنے کا واحد طریقہ یہ ہے کہ ایک کے بعد ایک امیدوار کے ان پٹس کو آزمایا جائے اور یہ چیک کیا جائے کہ آیا ان میں سے کوئی بھی میچ کرتا ہے، یہی وجہ ہے کہ پاس ورڈز کو براہ راست اسٹور کرنے کے بجائے ہیش کرنا کارآمد ہے: یہاں تک کہ اگر ہیش چوری ہو جائے تو اس سے اصل پاس ورڈ کی بازیافت ایک اچھے منتخب ہیش الگورتھم اور کافی لمبے پاس ورڈ کے لیے کمپیوٹیشنل طور پر ناممکن ہے۔</p>
+<h2>کام کے لیے صحیح ہیش کا انتخاب کرنا</h2>
+<p>آج سیکیورٹی سے متعلق کسی بھی چیز کے لیے — پاس ورڈ اسٹوریج، ڈیجیٹل دستخط، اس بات کی تصدیق کرنا کہ ڈاؤن لوڈ کی گئی فائل کے ساتھ چھیڑ چھاڑ نہیں کی گئی — SHA-256 یا SHA-2 یا SHA-3 فیملی کا ایک مضبوط رکن مناسب انتخاب ہے، کیونکہ SHA-1 اور MD5 دونوں کمزوریوں کو جانتے ہیں جن کا ایک پرعزم حملہ آور فائدہ اٹھا سکتا ہے۔ SHA-1 اور MD5 صرف ان سیاق و سباق میں کارآمد رہتے ہیں جہاں سیکیورٹی بالکل بھی اہم نہیں ہے: حادثاتی بدعنوانی کو پکڑنے کے لیے ایک فوری چیکسم، کیش تلاش کرنے کے لیے ایک مختصر منفرد کلید بنانے کا تیز طریقہ، یا پرانے سسٹم کے ساتھ مطابقت جسے اپ ڈیٹ نہیں کیا گیا ہے۔ جب کسی بھی اہم چیز کے لیے استعمال کرنے کے بارے میں شک ہو تو، SHA-256 تقریبا ہمیشہ محفوظ ڈیفالٹ ہوتا ہے۔</p>
+<h2>نجی اور فوری</h2>
+<p>SHA-256 اور SHA-1 کا حساب براؤزر کے بلٹ ان ویب کرپٹو API کا استعمال کرتے ہوئے کیا جاتا ہے، اور MD5 کا حساب خالص JavaScript کے نفاذ کے ذریعے کیا جاتا ہے، لہذا ہر ہیش فوری طور پر ظاہر ہوتا ہے اور آپ جو بھی متن داخل کرتے ہیں وہ کہیں بھی نہیں، لاگ یا شیئر کیا جاتا ہے، اور صفحہ لوڈ ہونے کے بعد یہ آف لائن کام کرتا ہے، اس کی کوئی حد نہیں ہے کہ آپ کو کتنی لاگت کی کوئی حد نہیں ہوگی۔</p>
+    <section class="faq"><h2>ہیش جنریٹر کے اکثر پوچھے گئے سوالات</h2><dl><dt>ایک ہیش کیا ہے؟</dt><dd>ایک کرپٹوگرافک ہیش فنکشن کوئی بھی ان پٹ لیتا ہے اور ایک مقررہ لمبائی کا آؤٹ پٹ (ہیش یا ڈائجسٹ) تیار کرتا ہے۔ ایک ہی ان پٹ ہمیشہ ایک ہی آؤٹ پٹ پیدا کرتا ہے، لیکن یہاں تک کہ ایک حرف کی تبدیلی بھی بالکل مختلف ہیش پیدا کرتی ہے۔</dd><dt>SHA-256 کس لیے استعمال ہوتا ہے؟</dt><dd>SHA-256 بٹ کوائن مائننگ، SSL/TLS سرٹیفکیٹس، فائل کی سالمیت کی تصدیق، پاس ورڈ اسٹوریج (نمک کے ساتھ) اور ڈیجیٹل دستخطوں میں استعمال ہوتا ہے۔</dd><dt>کیا MD5 اب بھی محفوظ ہے؟</dt><dd>حفاظتی مقاصد کے لیے MD5 کو خفیہ طور پر محفوظ نہیں سمجھا جاتا ہے — تصادم (ایک ہی ہیش بنانے والے دو مختلف ان پٹ) پیدا کیے جا سکتے ہیں۔ یہ اب بھی غیر حفاظتی مقاصد جیسے فائل چیکسم کے لیے استعمال ہوتا ہے۔</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/hashgenerator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/hashgenerator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/hashgenerator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/hashgenerator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/hashgenerator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/hashgenerator/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/hashgenerator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/hashgenerator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/hashgenerator/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/hashgenerator/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/freetools.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ur";window.__T={"placeholder":"ہیش میں متن ٹائپ کریں یا پیسٹ کریں…","sha256":"SHA-256","sha1":"SHA-1","md5approximate":"MD5 (تقریبا)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/hashgenerator.js" defer></script>
+</body>
+</html>

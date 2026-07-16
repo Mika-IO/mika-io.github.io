@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>অক্টাল কনভার্টার - বাইনারি, অক্টাল, দশমিক এবং হেক্সের মধ্যে রূপান্তর করুন</title>
+<meta name="description" content="বিনামূল্যে অক্টাল রূপান্তরকারী টুল. বেস 2 (বাইনারী), বেস 8 (অক্টাল), বেস 10 (ডেসিমেল), এবং বেস 16 (হেক্স) এর মধ্যে যেকোনো সংখ্যাকে অবিলম্বে রূপান্তর করুন।">
+<link rel="canonical" href="https://mikaio.dev/bn/octalconverter/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/octalconverter/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/octalconverter/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/octalconverter/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/octalconverter/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/octalconverter/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/octalconverter/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/octalconverter/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/octalconverter/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/octalconverter/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/octalconverter/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/octalconverter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="অক্টাল কনভার্টার - বাইনারি, অক্টাল, দশমিক এবং হেক্সের মধ্যে রূপান্তর করুন">
+<meta property="og:description" content="বিনামূল্যে অক্টাল রূপান্তরকারী টুল. বেস 2 (বাইনারী), বেস 8 (অক্টাল), বেস 10 (ডেসিমেল), এবং বেস 16 (হেক্স) এর মধ্যে যেকোনো সংখ্যাকে অবিলম্বে রূপান্তর করুন।">
+<meta property="og:url" content="https://mikaio.dev/bn/octalconverter/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"অক্টাল কনভার্টার - বাইনারি, অক্টাল, দশমিক এবং হেক্সের মধ্যে রূপান্তর করুন","url":"https://mikaio.dev/bn/octalconverter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে অক্টাল রূপান্তরকারী টুল. বেস 2 (বাইনারী), বেস 8 (অক্টাল), বেস 10 (ডেসিমেল), এবং বেস 16 (হেক্স) এর মধ্যে যেকোনো সংখ্যাকে অবিলম্বে রূপান্তর করুন।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"অক্টাল নম্বর কনভার্টার","item":"https://mikaio.dev/bn/octalconverter/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"অক্টাল (বেস 8) কি?","acceptedAnswer":{"@type":"Answer","text":"অক্টাল হল একটি সংখ্যা পদ্ধতি যা 8টি সংখ্যা ব্যবহার করে: 0 থেকে 7। এটি সাধারণত বাইনারি ডেটার একটি কম্প্যাক্ট উপস্থাপনা হিসাবে কম্পিউটিংয়ে ব্যবহৃত হয়, যেহেতু প্রতিটি অক্টাল ডিজিট ঠিক তিনটি বাইনারি ডিজিটে ম্যাপ করে।"}},{"@type":"Question","name":"আমি কিভাবে দশমিককে অক্টালে রূপান্তর করব?","acceptedAnswer":{"@type":"Answer","text":"একটি দশমিক সংখ্যাকে অক্টালে রূপান্তর করতে, বারবার সংখ্যাটিকে 8 দ্বারা ভাগ করুন এবং অবশিষ্টগুলি রেকর্ড করুন। অবশিষ্টাংশগুলি নীচে থেকে উপরে পড়লে অক্টাল উপস্থাপনা পাওয়া যায়। উদাহরণস্বরূপ, 255 ÷ 8 = 31 অবশিষ্ট 7, 31 ÷ 8 = 3 অবশিষ্ট 7, 3 ÷ 8 = 0 অবশিষ্ট 3, সুতরাং দশমিকে 255 অক্টালে 377।"}},{"@type":"Question","name":"কিভাবে এই টুল হেক্সাডেসিমাল ইনপুট পরিচালনা করে?","acceptedAnswer":{"@type":"Answer","text":"এই টুলটি 0-9 সংখ্যা এবং অক্ষর A-F (কেস-সংবেদনশীল) সহ স্ট্যান্ডার্ড হেক্সাডেসিমেল ইনপুট গ্রহণ করে। এটি প্রথমে আপনার হেক্স মানটিকে তার দশমিক সমতুল্যে রূপান্তর করে, তারপর স্বয়ংক্রিয়ভাবে বাইনারি এবং অক্টাল উপস্থাপনা গ্রহণ করে।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/octalconverter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/octalconverter/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/octalconverter/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/octalconverter/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/octalconverter/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/octalconverter/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/octalconverter/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/octalconverter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/octalconverter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/octalconverter/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>অক্টাল নম্বর কনভার্টার</span></nav>
+  <h1>অক্টাল নম্বর কনভার্টার</h1>
+  <p class="lead">বাইনারি, অক্টাল, দশমিক বা হেক্সাডেসিমেলে যেকোনো সংখ্যা লিখুন এবং তাৎক্ষণিকভাবে চারটি উপস্থাপনা দেখুন।</p>
+  <section class="widget" id="tool"><form id="tool-form" onsubmit="return false;"><div class="input-group"><label for="oct-input-value" id="oct-lbl-value">মান</label><input type="text" id="oct-input-value" placeholder="e.g. 255" autocomplete="off" /></div><div class="input-group"><label for="oct-input-base" id="oct-lbl-base">ইনপুট বেস</label><select id="oct-input-base"><option value="10">দশমিক (বেস 10)</option><option value="2">বাইনারি (বেস 2)</option><option value="8">অক্টাল (বেস 8)</option><option value="16">হেক্সাডেসিমেল (বেস 16)</option></select></div><button type="submit" id="oct-btn-convert">রূপান্তর করুন</button><div id="oct-result" class="result-grid" style="display:none"><div class="result-row"><span class="result-label">বাইনারি (বেস 2)</span><span class="result-value" id="oct-out-bin"></span></div><div class="result-row"><span class="result-label">অক্টাল (বেস 8)</span><span class="result-value" id="oct-out-oct"></span></div><div class="result-row"><span class="result-label">দশমিক (বেস 10)</span><span class="result-value" id="oct-out-dec"></span></div><div class="result-row"><span class="result-label">হেক্সাডেসিমেল (বেস 16)</span><span class="result-value" id="oct-out-hex"></span></div></div><p id="oct-error" class="tool-error" style="display:none"></p></form></section>
+  <article class="content">
+    <h2>বাইনারি, অক্টাল, দশমিক এবং হেক্সাডেসিমেলের মধ্যে রূপান্তর করুন</h2>
+<p>কম্পিউটারগুলি মৌলিকভাবে সবকিছুকে বাইনারি হিসাবে উপস্থাপন করে — এক এবং শূন্যের ক্রম — কিন্তু বাইনারি মানুষের পক্ষে পড়তে এবং লিখতে ক্লান্তিকর, তাই আরও বেশ কয়েকটি সংখ্যার ভিত্তিগুলি আরও সুবিধাজনক সংক্ষিপ্ত হস্ত হিসাবে ব্যবহার করা হয়। অক্টাল (বেস 8) এবং হেক্সাডেসিমেল (বেস 16) দুটি সবচেয়ে সাধারণ, বিশেষভাবে বেছে নেওয়া হয়েছে কারণ তারা একটি পরিষ্কার, যান্ত্রিক উপায়ে বাইনারি থেকে এবং থেকে রূপান্তর করে। এই টুলটি আপনার প্রবেশ করা যেকোন সংখ্যাকে, চারটি সাধারণ ঘাঁটির যেকোন একটিতে, একই সাথে অন্য সমস্ত সংখ্যায় রূপান্তরিত করে। আপনার ইনপুট যে বেসটিতে লেখা আছে তা বেছে নিন, মান টাইপ করুন এবং প্রতিটি উপস্থাপনা অবিলম্বে প্রদর্শিত হবে।</p>
+<h2>কিভাবে কনভার্টার ব্যবহার করবেন</h2>
+<p>সংখ্যা-বেস অনুশীলনের মাধ্যমে কাজ করা ছাত্রদের জন্য এটি বিশেষভাবে সুবিধাজনক, বিকাশকারীরা একটি মান ডিবাগ করে যা একটি লগ ফাইলে হেক্স হিসাবে প্রদর্শিত হয় কিন্তু দশমিকে চেক করা প্রয়োজন, অথবা যে কেউ একটি নির্দিষ্ট সংখ্যা ভিন্ন বেসে লেখা দেখায় সে সম্পর্কে আগ্রহী।</p>
+<p>ড্রপডাউন থেকে আপনার ইনপুট নম্বরটি যে বেসটিতে লেখা আছে তা নির্বাচন করুন — দশমিক, বাইনারি, অক্টাল বা হেক্সাডেসিমাল — তারপর ক্ষেত্রের মধ্যে মান টাইপ করুন এবং কনভার্ট টিপুন। চারটি উপস্থাপনা একসাথে প্রদর্শিত হয়: বাইনারি, অক্টাল, দশমিক এবং হেক্সাডেসিমেল, তাই আপনি দ্বিতীয় ধাপ ছাড়াই যেটি প্রয়োজন তা পড়তে পারেন। হেক্সাডেসিমেল ইনপুট A থেকে F ডিজিটের জন্য বড় এবং ছোট হাতের উভয় অক্ষর গ্রহণ করে এবং ফলাফলটি সর্বদা স্পষ্টতার জন্য বড় হাতের অক্ষরে দেখানো হয়।</p>
+<h2>অক্টাল এবং হেক্সাডেসিমেল কেন বিদ্যমান</h2>
+<p>বাইনারি সংখ্যাগুলি খুব দ্রুত দীর্ঘ হয় — বাইনারিতে দশমিক সংখ্যা 255 হল 11111111, একটি মোটামুটি পরিমিত সংখ্যার জন্য আটটি সংখ্যা — যা তাদের চোখ দিয়ে পড়তে, লিখতে এবং তুলনা করতে ত্রুটি-প্রবণ করে তোলে। ঠিক এই সমস্যাটি সমাধান করার জন্য অক্টাল এবং হেক্সাডেসিমেল বিদ্যমান, কারণ উভয় ঘাঁটি দুটির শক্তি: 8 হল 2³ এবং 16 হল 2⁴। এর মানে হল প্রতিটি অক্টাল ডিজিট ঠিক তিনটি বাইনারি ডিজিটের সাথে মিলে যায়, এবং প্রতিটি হেক্সাডেসিমেল ডিজিট ঠিক চারটির সাথে মিলে যায়, তাই বাইনারি এবং উভয়ের মধ্যে রূপান্তর করা প্রকৃত পাটিগণিতের পরিবর্তে একটি সাধারণ গ্রুপিং অনুশীলন। 11111111 কে ডান থেকে তিনটি সেটে গোষ্ঠীভুক্ত করলে 1111111 পাওয়া যায়, যা 3, 7, 7 অক্টাল — 377। একই সংখ্যাকে চারটির সেটে গোষ্ঠীবদ্ধ করলে 1111 1111 পাওয়া যায়, যা হেক্সাডেসিমেলে F, F — FF।</p>
+<h2>হাত দিয়ে দশমিককে অন্য বেসে রূপান্তর করা হচ্ছে</h2>
+<p>একটি দশমিক সংখ্যাকে ক্যালকুলেটর ছাড়া অন্য বেসে রূপান্তর করতে, বারবার লক্ষ্য বেস দ্বারা ভাগ করুন এবং অবশিষ্টগুলি রেকর্ড করুন। 255 কে অক্টালে রূপান্তর করা হচ্ছে: 255 ÷ 8 = 31 অবশিষ্ট 7; 31 ÷ 8 = 3 অবশিষ্ট 7; 3 ÷ 8 = 0 অবশিষ্ট 3. শেষ বিভাগ থেকে প্রথম ভাগে অবশিষ্টাংশ পড়লে 377 পাওয়া যায়। একই প্রক্রিয়া যেকোন বেসে রূপান্তরিত হয় — বাইনারির জন্য বারবার 2 দ্বারা ভাগ করুন, হেক্সাডেসিমেলের জন্য 16 দ্বারা ভাগ করুন — এবং এই টুলটি একই সময়ে তিনটি লক্ষ্য বেসের যে কোনোটির জন্য অবিলম্বে এই গণনাটি সম্পাদন করে।</p>
+<h2>যেখানে প্রতিটি বেস আসলে ব্যবহৃত হয়</h2>
+<p>বাইনারি হল ডিজিটাল লজিকের স্থানীয় ভাষা এবং বিটওয়াইজ অপারেশন, ফ্ল্যাগ এবং নিম্ন-স্তরের হার্ডওয়্যার আচরণ নিয়ে আলোচনা করার সময় সরাসরি ব্যবহার করা হয়। প্রারম্ভিক কম্পিউটিংয়ে অক্টাল ঐতিহাসিকভাবে গুরুত্বপূর্ণ ছিল, বিশেষ করে এমন সিস্টেমে যেখানে শব্দের আকার তিন বিটের একাধিক ছিল, এবং এটি আজও ইউনিক্স এবং লিনাক্স ফাইলের অনুমতি স্বরলিপিতে দেখা যায়, যেখানে 755-এর মতো অনুমতি একটি কমপ্যাক্ট অক্টাল আকারে মালিক, গোষ্ঠী এবং প্রত্যেকের জন্য বিট পড়তে, লিখতে এবং কার্যকর করার বর্ণনা করে। আধুনিক সফ্টওয়্যারে দুটির মধ্যে হেক্সাডেসিমেল এখন পর্যন্ত সবচেয়ে সাধারণ, ওয়েব ডিজাইনের রঙের কোডে (#FF5733), মেমরি অ্যাড্রেস, ত্রুটি কোড এবং ডিবাগিং টুলগুলিতে কাঁচা বাইট ডেটা প্রদর্শনের একটি কম্প্যাক্ট উপায় হিসাবে প্রদর্শিত হয়, কারণ বাইনারির সাথে এর চার-বিট-প্রতি-ডিজিটের সম্পর্ক সামান্য অনুশীলনের মাধ্যমে চোখের দ্বারা রূপান্তরকে তুলনামূলকভাবে সহজ করে তোলে।</p>
+<h2>চারটি ভিত্তি জুড়ে একটি কার্যকর উদাহরণ</h2>
+<p>দশমিক সংখ্যা 100 নিন। বাইনারিতে, এটি 1100100 — বারবার 2 দ্বারা ভাগ করে এবং অবশিষ্টাংশগুলি নীচে থেকে উপরে পড়ার মাধ্যমে পাওয়া যায়। অক্টালে, সেই বাইনারি সংখ্যাগুলিকে ডান থেকে তিনটি সেটে (1 100 100) গোষ্ঠীবদ্ধ করলে 1, 4, 4 পাওয়া যায়, তাই দশমিকে 100 অক্টালে 144 হয়। হেক্সাডেসিমেলে, চার (0110 0100) সেটে 6 এবং 4 দেওয়া হয়, তাই হেক্সে 100 দশমিক 64 হয়। ইনপুট বেস হিসাবে নির্বাচিত দশমিক সহ এই রূপান্তরকারীর মাধ্যমে 100 চালানোর ফলে তিনটিই একবারে নিশ্চিত হয়, যা একটি বড় সংখ্যার জন্য এটির উপর নির্ভর করার আগে গ্রুপিং পদ্ধতিতে আস্থা তৈরি করার একটি ভাল উপায় যেখানে হাত দিয়ে পরীক্ষা করা ক্লান্তিকর হবে। বিপরীত দিক একইভাবে কাজ করে: একটি বাইনারি, অক্টাল বা হেক্স মান পেস্ট করুন, ম্যাচিং ইনপুট বেস নির্বাচন করুন, এবং টুলটি একই গ্রুপিং এবং অবস্থানগত-মানের নিয়মগুলি ব্যবহার করে দশমিক মান সহ অন্যান্য তিনটি উপস্থাপনা বের করে। এটি আপনার আসল সংখ্যা যে দিকেই থাকুক না কেন এটিকে সমানভাবে কার্যকর করে তোলে, কোন রূপান্তর সূত্রটি কোন জোড়া বেসের ক্ষেত্রে প্রযোজ্য তা মনে না রেখে, অথবা আপনার মাথায় সরাসরি বিভাজন এবং গ্রুপিং নিয়মের চারটি ভিন্ন সেট রাখুন।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>রূপান্তর সম্পূর্ণরূপে আপনার ব্রাউজারে স্ট্যান্ডার্ড পূর্ণসংখ্যার গাণিতিক ব্যবহার করে সঞ্চালিত হয়, তাই আপনি রূপান্তর চাপলেই ফলাফল প্রদর্শিত হয় এবং আপনার প্রবেশ করা কোনো মান কখনও সার্ভারে পাঠানো হয় না, লগ করা বা শেয়ার করা হয়। পৃষ্ঠাটি লোড হয়ে গেলে এটি অফলাইনে কাজ করে, যখনই কোর্সওয়ার্ক, ডিবাগিং বা কৌতূহলের মধ্যে একটি বেস-রূপান্তর সমস্যা আসে তখনই এটি প্রস্তুত, কোন অ্যাকাউন্ট ছাড়াই, কোন খরচ নেই এবং আপনি কত সংখ্যায় রূপান্তর করবেন তার কোন সীমা নেই, একের পর এক, যতদিন আপনার প্রয়োজন হবে।</p>
+    <section class="faq"><h2>অক্টাল কনভার্টার FAQ</h2><dl><dt>অক্টাল (বেস 8) কি?</dt><dd>অক্টাল হল একটি সংখ্যা পদ্ধতি যা 8টি সংখ্যা ব্যবহার করে: 0 থেকে 7। এটি সাধারণত বাইনারি ডেটার একটি কম্প্যাক্ট উপস্থাপনা হিসাবে কম্পিউটিংয়ে ব্যবহৃত হয়, যেহেতু প্রতিটি অক্টাল ডিজিট ঠিক তিনটি বাইনারি ডিজিটে ম্যাপ করে।</dd><dt>আমি কিভাবে দশমিককে অক্টালে রূপান্তর করব?</dt><dd>একটি দশমিক সংখ্যাকে অক্টালে রূপান্তর করতে, বারবার সংখ্যাটিকে 8 দ্বারা ভাগ করুন এবং অবশিষ্টগুলি রেকর্ড করুন। অবশিষ্টাংশগুলি নীচে থেকে উপরে পড়লে অক্টাল উপস্থাপনা পাওয়া যায়। উদাহরণস্বরূপ, 255 ÷ 8 = 31 অবশিষ্ট 7, 31 ÷ 8 = 3 অবশিষ্ট 7, 3 ÷ 8 = 0 অবশিষ্ট 3, সুতরাং দশমিকে 255 অক্টালে 377।</dd><dt>কিভাবে এই টুল হেক্সাডেসিমাল ইনপুট পরিচালনা করে?</dt><dd>এই টুলটি 0-9 সংখ্যা এবং অক্ষর A-F (কেস-সংবেদনশীল) সহ স্ট্যান্ডার্ড হেক্সাডেসিমেল ইনপুট গ্রহণ করে। এটি প্রথমে আপনার হেক্স মানটিকে তার দশমিক সমতুল্যে রূপান্তর করে, তারপর স্বয়ংক্রিয়ভাবে বাইনারি এবং অক্টাল উপস্থাপনা গ্রহণ করে।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/octalconverter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/octalconverter/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/octalconverter/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/octalconverter/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/octalconverter/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/octalconverter/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/octalconverter/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/octalconverter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/octalconverter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/octalconverter/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"label1":"মান","label2":"ইনপুট বেস","btn":"রূপান্তর করুন","decimalbase10":"দশমিক (বেস 10)","binarybase2":"বাইনারি (বেস 2)","octalbase8":"অক্টাল (বেস 8)","hexadecimalbase16":"হেক্সাডেসিমেল (বেস 16)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/octalconverter.js" defer></script>
+</body>
+</html>

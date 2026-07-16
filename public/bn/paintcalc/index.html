@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>পেইন্ট ক্যালকুলেটর - আপনার কত পেইন্ট প্রয়োজন?</title>
+<meta name="description" content="বিনামূল্যে পেইন্ট ক্যালকুলেটর। আপনার কত লিটার পেইন্ট প্রয়োজন তা গণনা করতে আপনার দেয়ালের মাত্রা, কোটের সংখ্যা এবং পেইন্ট কভারেজ লিখুন।">
+<link rel="canonical" href="https://mikaio.dev/bn/paintcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/paintcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/paintcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/paintcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/paintcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/paintcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/paintcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/paintcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/paintcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/paintcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/paintcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/paintcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="পেইন্ট ক্যালকুলেটর - আপনার কত পেইন্ট প্রয়োজন?">
+<meta property="og:description" content="বিনামূল্যে পেইন্ট ক্যালকুলেটর। আপনার কত লিটার পেইন্ট প্রয়োজন তা গণনা করতে আপনার দেয়ালের মাত্রা, কোটের সংখ্যা এবং পেইন্ট কভারেজ লিখুন।">
+<meta property="og:url" content="https://mikaio.dev/bn/paintcalc/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"পেইন্ট ক্যালকুলেটর - আপনার কত পেইন্ট প্রয়োজন?","url":"https://mikaio.dev/bn/paintcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে পেইন্ট ক্যালকুলেটর। আপনার কত লিটার পেইন্ট প্রয়োজন তা গণনা করতে আপনার দেয়ালের মাত্রা, কোটের সংখ্যা এবং পেইন্ট কভারেজ লিখুন।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"পেইন্ট ক্যালকুলেটর","item":"https://mikaio.dev/bn/paintcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"আমি কি কভারেজ হার ব্যবহার করা উচিত?","acceptedAnswer":{"@type":"Answer","text":"বেশিরভাগ আদর্শ অভ্যন্তরীণ দেয়াল পেইন্ট প্রথম কোটের জন্য প্রতি লিটারে 10-12 m² কভার করে। প্রিমিয়াম পেইন্ট আরও কভার করতে পারে। প্রস্তুতকারকের বর্ণিত কভারেজের জন্য পেইন্ট টিনটি পরীক্ষা করুন।"}},{"@type":"Question","name":"আমি অপচয়ের জন্য অতিরিক্ত যোগ করা উচিত?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ। অফকাট, স্পিল এবং টাচ-আপের জন্য 10-15% যোগ করুন। ক্যালকুলেটর তাত্ত্বিক সর্বনিম্ন দেয়; বাস্তব ব্যবহার সবসময় সামান্য বেশি হয়."}},{"@type":"Question","name":"দরজা এবং জানালা সম্পর্কে কি?","acceptedAnswer":{"@type":"Answer","text":"প্রবেশের আগে মোট প্রাচীর এলাকা থেকে দরজা এবং জানালার ক্ষেত্রফল বিয়োগ করুন, অথবা ফলাফলটিকে সামান্য অতিরিক্ত অনুমান হিসাবে ব্যবহার করুন যা দরকারী বাফার প্রদান করে।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/paintcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/paintcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/paintcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/paintcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/paintcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/paintcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/paintcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/paintcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/paintcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/paintcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>পেইন্ট ক্যালকুলেটর</span></nav>
+  <h1>পেইন্ট ক্যালকুলেটর</h1>
+  <p class="lead">আপনার কতটা পেইন্ট দরকার তা দেখতে দেয়ালের মাত্রা, দেয়ালের সংখ্যা, কোট এবং পেইন্ট কভারেজ রেট লিখুন।</p>
+  <section class="widget" id="tool"><form id="paint-form"><div class="row"><div class="field"><label for="paint-w">প্রস্থ</label><input type="number" id="paint-w" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="paint-h">উচ্চতা</label><input type="number" id="paint-h" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="paint-unit">ইউনিট</label><select id="paint-unit"><option value="m">m</option><option value="ft">ft</option></select></div><div class="field"><label for="paint-walls">দেয়ালের সংখ্যা</label><input type="number" id="paint-walls" step="1" min="1" value="1" inputmode="numeric"></div><div class="field"><label for="paint-coats">কোট</label><input type="number" id="paint-coats" step="1" min="1" value="2" inputmode="numeric"></div><div class="field"><label for="paint-cov">কভারেজ (m²/লিটার)</label><input type="number" id="paint-cov" step="any" min="0" value="10" inputmode="decimal"></div></div><div class="result"><span class="hint">পেইন্ট প্রয়োজন: </span><span class="big" id="paint-out">—</span></div></form></section>
+  <article class="content">
+    <h2>আপনি ঠিক কত পেইন্ট প্রয়োজন গণনা</h2>
+<p>খুব কম পেইন্ট কেনা মানে হার্ডওয়্যারের দোকানে হতাশাজনক মিড-প্রজেক্ট ট্রিপ, এবং নতুন ব্যাচটি পুরোপুরি রঙে মিলবে এমন কোনো নিশ্চয়তা নেই। অত্যধিক কেনাকাটা অর্থ অপচয় করে এবং নিষ্পত্তি সমস্যা তৈরি করে। এই পেইন্ট ক্যালকুলেটর আপনাকে প্রাচীরের আকার, কোটের সংখ্যা এবং আপনার পেইন্টের কভারেজ রেট বিবেচনা করে যেকোনো পেইন্টিং প্রকল্পের জন্য কেনার জন্য সঠিক পরিমাণ দেয়।</p>
+<h2>কিভাবে গণনা কাজ করে</h2>
+<p>সূত্রটি সোজা: মোট এলাকা = প্রস্থ × উচ্চতা × দেয়ালের সংখ্যা। মোট পেইন্টের প্রয়োজন = মোট এলাকা × কোটের সংখ্যা ÷ প্রতি লিটার কভারেজের হার। একটি আদর্শ অভ্যন্তরীণ পেইন্ট প্রতি লিটার প্রতি কোটে প্রায় 10-12 m² কভার করে। পেশাদার চেহারার ফিনিশিংয়ের জন্য বেশিরভাগ ঘরে দুটি কোট প্রয়োজন।</p>
+<p>উদাহরণ: 4টি দেয়াল সহ একটি কক্ষ, প্রতিটি 4 মিটার চওড়া এবং 2.5 মিটার উঁচু, প্রতি লিটারে 10 m² কভার করার জন্য 2 কোট পেইন্টের প্রয়োজন:</p>
+<ul>
+<li>মোট এলাকা = 4 × (4 × 2.5) = 40 m²</li>
+<li>পেইন্টের প্রয়োজন = 40 × 2 ÷ 10 = 8 লিটার</li>
+</ul>
+<h2>একটি কাজের উদাহরণ, বর্ধিত</h2>
+<p>আগের উদাহরণ থেকে একই রুম নিন — চারটি দেয়াল, প্রতিটি 4 মিটার চওড়া এবং 2.5 মিটার উঁচু, দুটি কোট প্রয়োজন — কিন্তু এখন প্রতি লিটারে 10 বর্গ মিটার কভার করা একটি প্রিমিয়াম ইমালসন থেকে 14 বর্গ মিটার প্রতি লিটারে প্রিমিয়ামে পরিবর্তন করুন৷ মোট দেয়ালের ক্ষেত্রফল যেকোনও উপায়ে 40 বর্গ মিটারে থাকে, তবে পেইন্টের প্রয়োজন 40 × 2 ÷ 10 = 8 লিটার থেকে 40 × 2 ÷ 14 ≈ 5.7 লিটারে নেমে আসে, একটি ভাল আচ্ছাদন পণ্য বেছে নেওয়া থেকে সম্পূর্ণরূপে দুই লিটারের বেশি সাশ্রয় হয়৷ সেভিং প্রিমিয়াম পেইন্টের প্রতি লিটার উচ্চ মূল্যকে ন্যায্যতা দেয় কিনা তা হল এই টুলটি অনুমান করার পরিবর্তে সরাসরি চেক করা সহজ করে তোলে।</p>
+<h2>পেইন্ট টাইপ দ্বারা কভারেজ হার</h2>
+<p>পেইন্টের ধরন এবং মানের দ্বারা কভারেজ উল্লেখযোগ্যভাবে পরিবর্তিত হয়:</p>
+<ul>
+<li><strong>বাজেট অভ্যন্তরীণ ইমালসন</strong>: 8-10 m² প্রতি লিটার</li>
+<li><strong>স্ট্যান্ডার্ড ইন্টেরিয়র ইমালসন</strong>: 10-12 m² প্রতি লিটার</li>
+<li><strong>প্রিমিয়াম ইন্টেরিয়র ইমালসন</strong>: 12-14 m² প্রতি লিটার</li>
+<li><strong>বাহ্যিক পেইন্ট</strong>: প্রতি লিটারে 8-12 m² (সারফেস কম মসৃণ হওয়ার কারণে কম)</li>
+<li><strong>আন্ডারকোট/প্রাইমার</strong>: 10-12 m² প্রতি লিটার</li>
+<li>**গ্লস/সাটিনউড (কাঠের কাজ): 16-20 m² প্রতি লিটার (মসৃণ পৃষ্ঠ কম শোষণ করে)</li>
+</ul>
+<p>সর্বদা পেইন্ট টিনে প্রস্তুতকারকের বর্ণিত কভারেজ পরীক্ষা করুন, কারণ এটি সেই নির্দিষ্ট পণ্যের জন্য সবচেয়ে নির্ভরযোগ্য চিত্র।</p>
+<h2>কোট সংখ্যা</h2>
+<p>বেশিরভাগ প্রাচীর পেইন্টিং প্রকল্পের জন্য, দুটি কোট সর্বোত্তম ফলাফল দেয়। একটি কোট সম্পূর্ণ, এমনকি কভারেজ প্রদান করতে পারে না - আপনি পাতলা দাগের মাধ্যমে আসল রঙ বা প্রাইমার দেখতে পারেন। খুব গাঢ় রঙ থেকে খুব হালকা রঙে যাওয়ার সময়, বা লাল বা হলুদ (কুখ্যাতভাবে কম অস্বচ্ছতা সহ রং) প্রয়োগ করার সময় তিনটি কোট প্রয়োজন হয়।</p>
+<p>সিলিংগুলিতে সাধারণত সিলিং পেইন্ট সহ একটি কোট (যা উচ্চ কভারেজ এবং ড্রিপ প্রতিরোধের জন্য তৈরি করা হয়) বা খুব তাজা, উজ্জ্বল চেহারার জন্য দুটি কোট প্রয়োজন।</p>
+<h2>দরজা, জানালা, এবং বর্জ্য জন্য অ্যাকাউন্টিং</h2>
+<p>ক্যালকুলেটর খোলার বিয়োগ না করে স্থূল প্রাচীর এলাকা গণনা করে। পরিকল্পনার উদ্দেশ্যে, স্থূল এলাকা ব্যবহার করা এবং অতিরিক্ত পেইন্টকে বাফার হিসাবে বিবেচনা করা সাধারণত গ্রহণযোগ্য:</p>
+<ul>
+<li>খোলা (দরজা এবং জানালা) যা দেয়াল পেইন্ট দিয়ে আঁকা হবে না</li>
+<li>রোলার বা ব্রাশ লোড করা থেকে বর্জ্য</li>
+<li>ছিটকে পড়া এবং ড্রিপস</li>
+<li>টাচ আপ কাজ</li>
+</ul>
+<p>আপনি যদি আরও সুনির্দিষ্ট গণনা করতে চান তবে আপনার দরজা এবং জানালার জায়গাগুলি পরিমাপ করুন এবং প্রাচীরের মাত্রা প্রবেশ করার আগে সেগুলি বিয়োগ করুন।</p>
+<h2>পেইন্ট পরিমাণ নির্বাচন</h2>
+<p>পেইন্ট সাধারণত 1-লিটার, 2.5-লিটার, 5-লিটার এবং 10-লিটার টিনে বিক্রি হয়। সর্বদা পরবর্তী উপলব্ধ টিনের আকার পর্যন্ত বৃত্তাকার. উদাহরণস্বরূপ, যদি হিসাবটি 8.2 লিটার দেখায়, তাহলে 5-লিটার টিন এবং চারটি 1-লিটার টিনের পরিবর্তে দুটি 5-লিটার টিন (মোট 10 লিটার) কিনুন, যা প্রতি লিটারে বেশি ব্যয়বহুল। সঠিকভাবে সিল করা হলে অবশিষ্ট পেইন্ট টাচ-আপের জন্য সংরক্ষণ করা যেতে পারে।</p>
+<h2>কিভাবে ক্যালকুলেটর ব্যবহার করবেন</h2>
+<p>প্রতিটি দেয়ালের প্রস্থ এবং উচ্চতা, অথবা একটি গড় প্রাচীরের আকার এবং দেয়ালের সংখ্যা, আপনি কতগুলি কোট প্রয়োগ করার পরিকল্পনা করছেন এবং আপনার পেইন্টের বিবৃত কভারেজ রেট সহ লিখুন। প্রয়োজনীয় মোট লিটার অবিলম্বে উপস্থিত হয়, এবং যে কোনও মান সামঞ্জস্য করলে তা তাৎক্ষণিকভাবে পুনঃগণনা করা হয়, যা তুলনা করা সহজ করে তোলে যে বাজেট পেইন্ট থেকে একটি প্রিমিয়াম পেইন্টে আরও ভাল কভারেজের সাথে স্যুইচ করা আপনাকে কতটা কিনতে হবে তা পরিবর্তন করবে।</p>
+<h2>কেন পরবর্তী টিনের আকারে রাউন্ডিং করা গুরুত্বপূর্ণ</h2>
+<p>যেহেতু পেইন্ট সঠিক লিটারের পরিবর্তে নির্দিষ্ট টিনের আকারে বিক্রি হয়, তাই &quot;আমার কতটা প্রয়োজন&quot; এর ব্যবহারিক উত্তর সর্বদা গণনা করা চিত্র থেকে পরবর্তী টিনের আকার হয়, চিত্রটি নয়। 8.2-লিটারের প্রয়োজন মেটাতে একটি 5-লিটার টিন এবং 1-লিটার টিন কেনা, উদাহরণস্বরূপ, সাধারণত দুটি 5-লিটার টিন কেনার চেয়ে লিটার প্রতি বেশি ব্যয়বহুল এবং বেশি অপচয় হয়, যেহেতু বড় টিনগুলি প্রায় সবসময়ই প্রতি লিটারে একটি ভাল দাম দেয় এবং অবশিষ্ট পেইন্টগুলি ভবিষ্যতের প্রো টাচ-আপগুলির জন্য সত্যিকার অর্থে উপযোগী। ক্যালকুলেটরের আউটপুটকে সঠিক লক্ষ্যের পরিবর্তে ন্যূনতম হিসাবে বিবেচনা করা এবং উদারভাবে রাউন্ডিং করা, একক সবচেয়ে সাধারণ পেইন্ট কেনার ভুলকে এড়িয়ে যায়: একটি প্রাচীর বাকি রেখে দৌড়ানো এবং ইতিমধ্যে খোলা, আংশিকভাবে-ব্যবহৃত ব্যাচের সঠিক রঙের সাথে মেলাতে অক্ষম হওয়া।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>সমস্ত গণনা সম্পূর্ণরূপে আপনার ব্রাউজারে চলে, তাই ফলাফলগুলি অবিলম্বে আপডেট হয় যখন আপনি কোনও ইনপুট সামঞ্জস্য করেন এবং আপনার প্রবেশ করা কোনও পরিমাপ কখনও কোনও সার্ভারে পাঠানো হয় না, লগ করা হয় বা ভাগ করা হয় এবং এটি অফলাইনে কাজ করে একবার পৃষ্ঠাটি লোড হয়ে গেলে, প্রস্তুত যখনই আপনি পেইন্ট আইলে দাঁড়িয়ে কতগুলি টিন নেওয়ার সিদ্ধান্ত নেওয়ার চেষ্টা করেন।</p>
+    <section class="faq"><h2>পেইন্ট ক্যালকুলেটর FAQ</h2><dl><dt>আমি কি কভারেজ হার ব্যবহার করা উচিত?</dt><dd>বেশিরভাগ আদর্শ অভ্যন্তরীণ দেয়াল পেইন্ট প্রথম কোটের জন্য প্রতি লিটারে 10-12 m² কভার করে। প্রিমিয়াম পেইন্ট আরও কভার করতে পারে। প্রস্তুতকারকের বর্ণিত কভারেজের জন্য পেইন্ট টিনটি পরীক্ষা করুন।</dd><dt>আমি অপচয়ের জন্য অতিরিক্ত যোগ করা উচিত?</dt><dd>হ্যাঁ। অফকাট, স্পিল এবং টাচ-আপের জন্য 10-15% যোগ করুন। ক্যালকুলেটর তাত্ত্বিক সর্বনিম্ন দেয়; বাস্তব ব্যবহার সবসময় সামান্য বেশি হয়.</dd><dt>দরজা এবং জানালা সম্পর্কে কি?</dt><dd>প্রবেশের আগে মোট প্রাচীর এলাকা থেকে দরজা এবং জানালার ক্ষেত্রফল বিয়োগ করুন, অথবা ফলাফলটিকে সামান্য অতিরিক্ত অনুমান হিসাবে ব্যবহার করুন যা দরকারী বাফার প্রদান করে।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/paintcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/paintcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/paintcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/paintcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/paintcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/paintcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/paintcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/paintcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/paintcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/paintcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"width":"প্রস্থ","height":"উচ্চতা","unit":"ইউনিট","walls":"দেয়ালের সংখ্যা","coats":"কোট","coverage":"কভারেজ (m²/লিটার)","result":"পেইন্ট প্রয়োজন"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/paintcalc.js" defer></script>
+</body>
+</html>

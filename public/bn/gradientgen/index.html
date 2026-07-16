@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS গ্রেডিয়েন্ট জেনারেটর — সুন্দর CSS গ্রেডিয়েন্ট তৈরি করুন</title>
+<meta name="description" content="বিনামূল্যে CSS গ্রেডিয়েন্ট জেনারেটর. যেকোনো রং দিয়ে লিনিয়ার এবং রেডিয়াল গ্রেডিয়েন্ট তৈরি করুন এবং সঙ্গে সঙ্গে CSS কোড পান। কোন সাইন আপ প্রয়োজন.">
+<link rel="canonical" href="https://mikaio.dev/bn/gradientgen/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gradientgen/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gradientgen/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/gradientgen/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gradientgen/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gradientgen/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/gradientgen/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/gradientgen/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gradientgen/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gradientgen/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/gradientgen/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gradientgen/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSS গ্রেডিয়েন্ট জেনারেটর — সুন্দর CSS গ্রেডিয়েন্ট তৈরি করুন">
+<meta property="og:description" content="বিনামূল্যে CSS গ্রেডিয়েন্ট জেনারেটর. যেকোনো রং দিয়ে লিনিয়ার এবং রেডিয়াল গ্রেডিয়েন্ট তৈরি করুন এবং সঙ্গে সঙ্গে CSS কোড পান। কোন সাইন আপ প্রয়োজন.">
+<meta property="og:url" content="https://mikaio.dev/bn/gradientgen/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"CSS গ্রেডিয়েন্ট জেনারেটর — সুন্দর CSS গ্রেডিয়েন্ট তৈরি করুন","url":"https://mikaio.dev/bn/gradientgen/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে CSS গ্রেডিয়েন্ট জেনারেটর. যেকোনো রং দিয়ে লিনিয়ার এবং রেডিয়াল গ্রেডিয়েন্ট তৈরি করুন এবং সঙ্গে সঙ্গে CSS কোড পান। কোন সাইন আপ প্রয়োজন."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"CSS গ্রেডিয়েন্ট জেনারেটর","item":"https://mikaio.dev/bn/gradientgen/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"একটি CSS গ্রেডিয়েন্ট কি?","acceptedAnswer":{"@type":"Answer","text":"একটি CSS গ্রেডিয়েন্ট হল দুই বা ততোধিক রঙের মধ্যে একটি মসৃণ রূপান্তর, যা CSS এর ব্যাকগ্রাউন্ড বা ব্যাকগ্রাউন্ড-ইমেজ প্রপার্টি ব্যবহার করে কোনো ইমেজ ফাইল ছাড়াই সংজ্ঞায়িত করা হয়।"}},{"@type":"Question","name":"রৈখিক এবং রেডিয়াল মধ্যে পার্থক্য কি?","acceptedAnswer":{"@type":"Answer","text":"একটি প্রদত্ত কোণে একটি সরল রেখায় একটি রৈখিক গ্রেডিয়েন্ট রূপান্তর। একটি রেডিয়াল গ্রেডিয়েন্ট বৃত্তাকার বা উপবৃত্তাকার আকারে একটি কেন্দ্র বিন্দু থেকে বাইরের দিকে বিকিরণ করে।"}},{"@type":"Question","name":"আমি কি দুইটির বেশি রং ব্যবহার করতে পারি?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ, CSS একাধিক রঙের স্টপ সমর্থন করে। এই জেনারেটর দুটি রং ব্যবহার করে; আরও জটিল গ্রেডিয়েন্টের জন্য, CSS কোডে ম্যানুয়ালি অতিরিক্ত কালার স্টপ যোগ করুন।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gradientgen/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gradientgen/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gradientgen/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gradientgen/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gradientgen/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/gradientgen/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/gradientgen/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gradientgen/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gradientgen/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gradientgen/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>CSS গ্রেডিয়েন্ট জেনারেটর</span></nav>
+  <h1>CSS গ্রেডিয়েন্ট জেনারেটর</h1>
+  <p class="lead">দুটি রং বেছে নিন, গ্রেডিয়েন্টের ধরন এবং কোণ চয়ন করুন এবং আপনার প্রকল্পের জন্য CSS কোডটি অনুলিপি করুন।</p>
+  <section class="widget" id="tool"><div id="grad-app"><div class="row"><div class="field"><label for="grad-c1">রঙ 1</label><input type="color" id="grad-c1" value="#667eea" style="width:60px;height:44px;border:none;background:none;cursor:pointer"></div><div class="field"><label for="grad-c2">রঙ 2</label><input type="color" id="grad-c2" value="#764ba2" style="width:60px;height:44px;border:none;background:none;cursor:pointer"></div><div class="field"><label for="grad-type">টাইপ</label><select id="grad-type"><option value="linear">রৈখিক</option><option value="radial">রেডিয়াল</option></select></div><div class="field"><label for="grad-angle">কোণ (°)</label><input type="number" id="grad-angle" value="135" min="0" max="360" step="1"></div></div><div id="grad-preview" style="height:120px;border-radius:0.75rem;margin-top:1rem;background:linear-gradient(135deg,#667eea,#764ba2)"></div><div id="grad-css" style="margin-top:0.75rem;font-family:monospace;font-size:0.85rem;padding:0.5rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);word-break:break-all"></div><button id="grad-copy" class="btn secondary" style="margin-top:0.5rem">CSS কপি করুন</button></div></section>
+  <article class="content">
+    <h2>কোন ডিজাইন টুল ছাড়াই অত্যাশ্চর্য CSS গ্রেডিয়েন্ট তৈরি করুন</h2>
+<p>গ্রেডিয়েন্ট হল একটি ওয়েবসাইটে ভিজ্যুয়াল গভীরতা এবং আধুনিক নান্দনিকতা যোগ করার সবচেয়ে কার্যকর উপায়গুলির মধ্যে একটি। CSS গ্রেডিয়েন্টের জন্য কোনো ইমেজ ফাইলের প্রয়োজন হয় না এবং তাৎক্ষণিকভাবে লোড হয় কারণ সেগুলি ব্রাউজার দ্বারা তৈরি হয়। এই জেনারেটর আপনাকে রং বাছাই করে এবং কোণ সামঞ্জস্য করে দৃশ্যত একটি গ্রেডিয়েন্ট ডিজাইন করতে দেয়, তারপর এটি ব্যবহার করার জন্য আপনার প্রয়োজনীয় সঠিক CSS কোডটি কপি করে।</p>
+<h2>CSS গ্রেডিয়েন্টের প্রকারভেদ</h2>
+<p><strong>লিনিয়ার গ্রেডিয়েন্ট</strong> এক রঙ থেকে অন্য রঙে সরল রেখায় রূপান্তর। কোণ দিক নির্ধারণ করে: 0° নীচে থেকে উপরে যায়, 90° বাম থেকে ডানে যায়, 180° উপরে থেকে নীচে যায় এবং 270° ডান থেকে বামে যায়। ডিজাইনের জন্য সবচেয়ে সাধারণ কোণগুলি হল 135° (তির্যক) এবং 90° (অনুভূমিক)। 0° এবং 360° এর মধ্যে যেকোনো কোণ বৈধ।</p>
+<p>CSS: লিনিয়ার-গ্রেডিয়েন্ট(135deg, #667eea, #764ba2)</p>
+<p><strong>রেডিয়াল গ্রেডিয়েন্ট</strong> একটি কেন্দ্র বিন্দু থেকে বৃত্তাকার বা উপবৃত্তাকার আকারে বাইরের দিকে নির্গত হয়। এগুলি স্পটলাইট প্রভাব, বোতাম হোভার স্টেট এবং কেন্দ্রীভূত ফোকাল উপাদানগুলির জন্য দরকারী।</p>
+<p>CSS: রেডিয়াল-গ্রেডিয়েন্ট (বৃত্ত, #667eea, #764ba2)</p>
+<h2>প্রতিটি আধুনিক ব্রাউজারে গ্রেডিয়েন্টের জন্য সমর্থন</h2>
+<p>রৈখিক এবং রেডিয়াল গ্রেডিয়েন্টগুলি সমস্ত আধুনিক ব্রাউজারে কোনও বিক্রেতা উপসর্গ ছাড়াই সমর্থিত। Safari এবং Chrome-এর পুরানো সংস্করণে একবার সঠিকভাবে রেন্ডার করার জন্য গ্রেডিয়েন্টের জন্য একটি -ওয়েবকিট- উপসর্গের প্রয়োজন ছিল, প্রাথমিক দিনগুলির একটি অবশিষ্ট ছিল যখন CSS গ্রেডিয়েন্ট সিনট্যাক্স এখনও মানসম্মত করা হচ্ছিল, কিন্তু এটি এখন অনেক বছর ধরে সাধারণ ব্যবহারে কোনো ব্রাউজারের জন্য প্রয়োজনীয় ছিল না, তাই এই জেনারেটরটি পরিবর্তন ছাড়াই সর্বত্র কাজ করে।</p>
+<h2>আরো রং যোগ করা স্টপ</h2>
+<p>জেনারেটর দুটি রঙ ব্যবহার করে, কিন্তু CSS গ্রেডিয়েন্ট যেকোনো অবস্থানে যে কোনো সংখ্যক রঙের স্টপ সমর্থন করে। মাঝপথে একটি তৃতীয় রঙ যোগ করতে:</p>
+<p>লিনিয়ার-গ্রেডিয়েন্ট(135deg, #667eea 0%, #ff6b6b 50%, #764ba2 100%)</p>
+<p>যেখানে রূপান্তর ঘটবে তা নিয়ন্ত্রণ করতে আপনি নির্দিষ্ট শতাংশে স্টপগুলিও নির্দিষ্ট করতে পারেন:</p>
+<p>লিনিয়ার-গ্রেডিয়েন্ট(90deg, #000000 0%, #000000 50%, #ff0000 50%, #ff0000 100%)</p>
+<p>এটি একটি গ্রেডিয়েন্টের পরিবর্তে একটি তীক্ষ্ণ বিভাজন তৈরি করে — নির্দিষ্ট নকশা প্রভাবের জন্য দরকারী।</p>
+<h2>জনপ্রিয় গ্রেডিয়েন্ট প্যালেট</h2>
+<p>কিছু ভাল-প্রিয় গ্রেডিয়েন্ট সমন্বয়:</p>
+<ul>
+<li><strong>সমুদ্র</strong>: #2193b0 → #6dd5ed</li>
+<li><strong>সূর্যাস্ত</strong>: #FF512F → #DD2476</li>
+<li><strong>বন</strong>: #134E5E → #71B280</li>
+<li><strong>বেগুনি স্বপ্ন</strong>: #667eea → #764ba2</li>
+<li><strong>ফায়ার</strong>: #f7971e → #ffd200</li>
+<li><strong>রাতের আকাশ</strong>: #0f0c29 → #302b63 → #24243e</li>
+</ul>
+<h2>CSS এ গ্রেডিয়েন্ট ব্যবহার করা</h2>
+<p>ব্যাকগ্রাউন্ড শর্টহ্যান্ড প্রোপার্টি বা ব্যাকগ্রাউন্ড-ইমেজ প্রোপার্টি গ্রেডিয়েন্ট ফাংশন সরাসরি গ্রহণ করে:</p>
+<p>হেডার {</p>
+<p>পটভূমি: লিনিয়ার-গ্রেডিয়েন্ট(135deg, #667eea, #764ba2);</p>
+<p>}</p>
+<p>উন্নত CSS কৌশল ব্যবহার করে পাঠ্য, সীমানা এবং মাস্ক স্তরগুলিতে গ্রেডিয়েন্টও প্রয়োগ করা যেতে পারে।</p>
+<h2>ইমেজ সঙ্গে গ্রেডিয়েন্ট সমন্বয়</h2>
+<p>CSS একাধিক পটভূমি স্তর ব্যবহার করে একটি পটভূমি চিত্রের সাথে একটি গ্রেডিয়েন্ট একত্রিত করার অনুমতি দেয়:</p>
+<p>.নায়ক {</p>
+<p>পটভূমি: লিনিয়ার-গ্রেডিয়েন্ট(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(&#39;photo.jpg&#39;) কেন্দ্র/কভার;</p>
+<p>}</p>
+<p>এটি একটি চিত্রের উপর একটি আধা-স্বচ্ছ গাঢ় গ্রেডিয়েন্ট ওভারলে করে, হিরো বিভাগে পাঠ্য পাঠযোগ্যতা উন্নত করে।</p>
+<h2>কিভাবে জেনারেটর ব্যবহার করবেন</h2>
+<p>রঙ চয়নকারী ব্যবহার করে আপনার দুটি রঙ চয়ন করুন, স্থানান্তরের দিক নির্ধারণ করতে কোণ স্লাইডারটি সামঞ্জস্য করুন এবং পূর্বরূপ আপডেটগুলি লাইভ করুন যাতে আপনি এটিকে কোথাও ব্যবহার করার আগে গ্রেডিয়েন্টটি ঠিক কেমন দেখায় তা দেখতে পারেন৷ একবার এটি সঠিক দেখায়, এক ক্লিকে জেনারেট করা CSS কোডটি অনুলিপি করুন এবং এটি সরাসরি আপনার স্টাইলশীটে পেস্ট করুন — এখানে কোনও রপ্তানি পদক্ষেপ নেই, ডাউনলোড করার জন্য কোনও চিত্র নেই এবং কোনও বিল্ড প্রক্রিয়া জড়িত নেই৷</p>
+<h2>কেন সিএসএস গ্রেডিয়েন্ট ইমেজ গ্রেডিয়েন্টকে হারায়</h2>
+<p>CSS গ্রেডিয়েন্টগুলি ভালভাবে সমর্থিত হওয়ার আগে, ডিজাইনারদের একটি ওয়েবসাইটে একটি ব্যবহার করার জন্য একটি PNG বা JPEG ইমেজ ফাইল হিসাবে একটি গ্রেডিয়েন্ট রপ্তানি করতে হয়েছিল, যা ডাউনলোড করার জন্য একটি অতিরিক্ত ফাইল যুক্ত করেছে, পৃষ্ঠার ওজন বৃদ্ধি করেছে এবং চিত্রটি যত্ন সহকারে বড় আকারে রপ্তানি করা না হলে উচ্চ-রেজোলিউশনের স্ক্রিনে ঝাপসা দেখায়। একটি CSS গ্রেডিয়েন্ট ব্রাউজার নিজেই স্ক্রীনের যে রেজোলিউশনে প্রয়োজন তার দ্বারা গণনা করা হয়, তাই এটি সর্বদা নিখুঁতভাবে তীক্ষ্ণ, কোনো অতিরিক্ত ফাইল ছাড়াই যেকোন আকারে স্কেল করে এবং একটি ছবি পুনরায় রপ্তানি করার পরিবর্তে কোডের কয়েকটি অক্ষর সম্পাদনা করে তাৎক্ষণিকভাবে পরিবর্তন করা যেতে পারে। এই কারণেই কার্যত প্রতিটি আধুনিক ওয়েবসাইট এই ধরনের প্রভাবের জন্য চিত্র ফাইলের পরিবর্তে CSS গ্রেডিয়েন্ট ব্যবহার করে।</p>
+<h2>একসঙ্গে ভালো কাজ করে এমন রং নির্বাচন করা</h2>
+<p>একটি গ্রেডিয়েন্ট পালিশ হিসাবে পড়া হয় যখন দুটি রঙ নির্বিচারে সংঘর্ষের পরিবর্তে কিছু চাক্ষুষ যুক্তি ভাগ করে। একটি সাধারণ, নির্ভরযোগ্য পদ্ধতি হল একটি শান্ত, সমন্বিত অনুভূতির জন্য কালার হুইলে একসাথে কাছাকাছি থাকা দুটি রঙ (একটি অনুরূপ জোড়া, যেমন নীল বেগুনিতে চলে যাওয়া) বা দুটি রঙ যা একে অপরের বিপরীতে বসে (একটি পরিপূরক জুটি, যেমন কমলা থেকে নীল) একটি সাহসী, উচ্চ-কন্ট্রাস্ট চেহারার জন্য। দুটি রঙের হালকাতাকে যুক্তিসঙ্গতভাবে একই রাখা একটি মসৃণ চেহারার রূপান্তর তৈরি করে, যখন হালকাতার একটি বড় পার্থক্য - একটি গাঢ় নেভি একটি ফ্যাকাশে হলুদে, উদাহরণস্বরূপ - একটি আরও নাটকীয়, উচ্চ-শক্তি গ্রেডিয়েন্ট তৈরি করে। লাইভ প্রিভিউতে সরাসরি পরীক্ষা করা বিমূর্ত রঙের তত্ত্ব সম্পর্কে যুক্তির চেয়ে দ্রুততর, যেহেতু আপনি অবিলম্বে দেখতে পাবেন যে আপনার নির্দিষ্ট নকশার জন্য একটি জোড়া কাজ করে কিনা।</p>
+<h2>পাঠ্য এবং অন্যান্য উপাদানের গ্রেডিয়েন্ট</h2>
+<p>সাধারণ পটভূমির বাইরে, <code>background-clip: text</code> এবং একটি স্বচ্ছ পাঠ্য রঙের সংমিশ্রণ ব্যবহার করে পাঠ্যে গ্রেডিয়েন্ট প্রয়োগ করা যেতে পারে, শিরোনাম এবং লোগোগুলির জন্য একটি জনপ্রিয় প্রভাব যা একটি চিত্র ফাইলের আশ্রয় না নিয়ে একটি রঙিন, নজরকাড়া চিকিত্সা চায়৷ একই অন্তর্নিহিত গ্রেডিয়েন্ট সিনট্যাক্স বর্ডারগুলিতেও কাজ করে এবং আরও উন্নত আকৃতির প্রভাবের জন্য CSS মাস্কের সাথে একত্রিত করা যেতে পারে, যদিও এই কৌশলগুলির জন্য একটি সাধারণ ব্যাকগ্রাউন্ড গ্রেডিয়েন্টের তুলনায় একটু বেশি সমর্থনকারী CSS প্রয়োজন। এই জেনারেটর থেকে আপনার পছন্দের গ্রেডিয়েন্ট হয়ে গেলে, এটি জানার মতো যে একই রঙের স্টপগুলি দৃশ্যত সামঞ্জস্যপূর্ণ ডিজাইনের জন্য এই বিভিন্ন প্রভাবগুলির মধ্যে কয়েকটিতে পুনরায় ব্যবহার করা যেতে পারে।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>সবকিছুই সম্পূর্ণরূপে আপনার ব্রাউজারে চলে, তাই আপনি রং বা কোণ সামঞ্জস্য করার সাথে সাথে প্রিভিউ আপডেট হয় এবং আপনার ডিজাইন করা গ্রেডিয়েন্ট সম্পর্কে কিছুই কখনও সার্ভারে পাঠানো, লগ করা বা শেয়ার করা হয় না।</p>
+    <section class="faq"><h2>গ্রেডিয়েন্ট জেনারেটর FAQ</h2><dl><dt>একটি CSS গ্রেডিয়েন্ট কি?</dt><dd>একটি CSS গ্রেডিয়েন্ট হল দুই বা ততোধিক রঙের মধ্যে একটি মসৃণ রূপান্তর, যা CSS এর ব্যাকগ্রাউন্ড বা ব্যাকগ্রাউন্ড-ইমেজ প্রপার্টি ব্যবহার করে কোনো ইমেজ ফাইল ছাড়াই সংজ্ঞায়িত করা হয়।</dd><dt>রৈখিক এবং রেডিয়াল মধ্যে পার্থক্য কি?</dt><dd>একটি প্রদত্ত কোণে একটি সরল রেখায় একটি রৈখিক গ্রেডিয়েন্ট রূপান্তর। একটি রেডিয়াল গ্রেডিয়েন্ট বৃত্তাকার বা উপবৃত্তাকার আকারে একটি কেন্দ্র বিন্দু থেকে বাইরের দিকে বিকিরণ করে।</dd><dt>আমি কি দুইটির বেশি রং ব্যবহার করতে পারি?</dt><dd>হ্যাঁ, CSS একাধিক রঙের স্টপ সমর্থন করে। এই জেনারেটর দুটি রং ব্যবহার করে; আরও জটিল গ্রেডিয়েন্টের জন্য, CSS কোডে ম্যানুয়ালি অতিরিক্ত কালার স্টপ যোগ করুন।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gradientgen/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gradientgen/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gradientgen/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gradientgen/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gradientgen/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/gradientgen/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/gradientgen/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gradientgen/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gradientgen/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gradientgen/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"color1":"রঙ 1","color2":"রঙ 2","type":"টাইপ","linear":"রৈখিক","radial":"রেডিয়াল","angle":"কোণ (°)","copy_css":"CSS কপি করুন","copied":"কপি করা !","copycss":"CSS কপি করুন"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/gradientgen.js" defer></script>
+</body>
+</html>

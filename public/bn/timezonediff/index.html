@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>টাইম জোন ডিফারেন্স ক্যালকুলেটর — যেকোনো দুই টাইম জোনের মধ্যে ঘণ্টা</title>
+<meta name="description" content="বিনামূল্যে সময় অঞ্চল পার্থক্য ক্যালকুলেটর. বিশ্বব্যাপী যেকোনো দুটি শহর বা সময় অঞ্চলের মধ্যে সঠিক সময়ের পার্থক্য খুঁজুন। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।">
+<link rel="canonical" href="https://mikaio.dev/bn/timezonediff/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/timezonediff/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/timezonediff/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/timezonediff/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/timezonediff/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/timezonediff/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/timezonediff/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/timezonediff/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/timezonediff/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/timezonediff/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/timezonediff/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/timezonediff/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="টাইম জোন ডিফারেন্স ক্যালকুলেটর — যেকোনো দুই টাইম জোনের মধ্যে ঘণ্টা">
+<meta property="og:description" content="বিনামূল্যে সময় অঞ্চল পার্থক্য ক্যালকুলেটর. বিশ্বব্যাপী যেকোনো দুটি শহর বা সময় অঞ্চলের মধ্যে সঠিক সময়ের পার্থক্য খুঁজুন। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।">
+<meta property="og:url" content="https://mikaio.dev/bn/timezonediff/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"টাইম জোন ডিফারেন্স ক্যালকুলেটর — যেকোনো দুই টাইম জোনের মধ্যে ঘণ্টা","url":"https://mikaio.dev/bn/timezonediff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে সময় অঞ্চল পার্থক্য ক্যালকুলেটর. বিশ্বব্যাপী যেকোনো দুটি শহর বা সময় অঞ্চলের মধ্যে সঠিক সময়ের পার্থক্য খুঁজুন। আপনার ব্রাউজারে তাত্ক্ষণিক ফলাফল।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"টাইম জোন ডিফারেন্স ক্যালকুলেটর","item":"https://mikaio.dev/bn/timezonediff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ডেলাইট সেভিং টাইম কি ফলাফলকে প্রভাবিত করে?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ। পার্থক্যটি বর্তমান UTC অফসেটগুলি ব্যবহার করে গণনা করা হয়, যা ইতিমধ্যেই যেকোনো সক্রিয় দিবালোক সংরক্ষণের সময় সমন্বয় অন্তর্ভুক্ত করে।"}},{"@type":"Question","name":"কেন বছরের মধ্যে পার্থক্য পরিবর্তন হয়?","acceptedAnswer":{"@type":"Answer","text":"যখন একটি অঞ্চল দিবালোক সংরক্ষণ পর্যবেক্ষণ করে এবং অন্যটি করে না, বা যখন তারা বিভিন্ন তারিখে পরিবর্তিত হয়, তখন তাদের মধ্যে অফসেট এক ঘন্টার মধ্যে পরিবর্তন হয়।"}},{"@type":"Question","name":"উভয় শহর একই সময় অঞ্চলে থাকলে কি হবে?","acceptedAnswer":{"@type":"Answer","text":"পার্থক্য 0 ঘন্টা হবে।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timezonediff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timezonediff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timezonediff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timezonediff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timezonediff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timezonediff/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/timezonediff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timezonediff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timezonediff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timezonediff/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>টাইম জোন ডিফারেন্স ক্যালকুলেটর</span></nav>
+  <h1>টাইম জোন ডিফারেন্স ক্যালকুলেটর</h1>
+  <p class="lead">তাদের মধ্যে বর্তমান সময়ের পার্থক্য দেখতে দুটি সময় অঞ্চল নির্বাচন করুন৷</p>
+  <section class="widget" id="tool"><div id="tzd-app"><div class="row"><div class="field"><label for="tzd-tz1">সময় অঞ্চল 1</label><select id="tzd-tz1"></select></div><div class="field"><label for="tzd-tz2">টাইম জোন 2</label><select id="tzd-tz2"></select></div></div><div class="result"><span class="hint">পার্থক্য: </span><span class="big" id="tzd-out">—</span></div><div id="tzd-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>যেকোনো দুটি শহরের মধ্যে সময়ের পার্থক্য গণনা করুন</h2>
+<p>আপনি একটি আন্তর্জাতিক কলের ব্যবস্থা করছেন, একটি বিশ্বব্যাপী ইভেন্ট ট্র্যাক করছেন বা দুটি শহরকে কত ঘন্টা আলাদা করে তা নিয়ে কেবল কৌতূহলী, একটি সময় অঞ্চল পার্থক্য ক্যালকুলেটর আপনাকে তাত্ক্ষণিকভাবে উত্তর দেয়৷ দুটি অবস্থান নির্বাচন করুন এবং টুলটি তাদের মধ্যে বর্তমান অফসেট ঘন্টার মধ্যে দেখায়, বর্তমানে কার্যকর যে কোনো দিবালোক সংরক্ষণ সময়ের জন্য অ্যাকাউন্টিং।</p>
+<h2>কেন টাইম জোনের পার্থক্য পরিবর্তিত হয়</h2>
+<p>বিশ্বকে প্রায় 40টি স্বতন্ত্র টাইম জোনে বিভক্ত করা হয়েছে, প্রত্যেকটি সমন্বিত ইউনিভার্সাল টাইম (UTC) এর অফসেট দ্বারা সংজ্ঞায়িত করা হয়েছে। বেশিরভাগ অফসেট পুরো ঘন্টা, যদিও কিছু দেশ আধা-ঘণ্টা বা কোয়ার্টার-ঘন্টা অফসেট ব্যবহার করে — ভারত হল UTC+5:30, নেপাল হল UTC+5:45, এবং বেশ কয়েকটি অস্ট্রেলিয়ান রাজ্য UTC+9:30 এবং UTC+10:30 ব্যবহার করে।</p>
+<p>ডেলাইট সেভিং টাইম (DST) বিষয়টিকে আরও জটিল করে তোলে। যখন একটি অবস্থান ডিএসটি পর্যবেক্ষণ করে এবং অন্যটি না করে, তাদের মধ্যে কার্যকর অফসেট পরিবর্তিত হয়। মার্কিন যুক্তরাষ্ট্র এবং বেশিরভাগ ইউরোপ উভয়ই ডিএসটি পালন করে, তবে তারা বিভিন্ন তারিখে পরিবর্তিত হয়: মার্কিন যুক্তরাষ্ট্র মার্চ এবং নভেম্বরে পরিবর্তন হয় যখন ইউরোপ মার্চ এবং অক্টোবরের শেষ দিকে পরিবর্তিত হয়। এই পরিবর্তনের তারিখগুলির মধ্যে সময়কালে, US-ইউরোপ অফসেট বছরের বাকি সময়ের থেকে এক ঘন্টা আলাদা।</p>
+<h2>ভ্রমণকারীদের জন্য ব্যবহারিক ব্যবহার</h2>
+<p>একটি আন্তর্জাতিক ভ্রমণের আগে, সময়ের পার্থক্য জানা আপনাকে জেট ল্যাগের জন্য মানসিকভাবে প্রস্তুত করতে এবং আপনার প্রথম কয়েক দিনের পরিকল্পনা করতে সহায়তা করে। একজন ভ্রমণকারী নিউইয়র্ক থেকে লন্ডনে ফ্লাইটে 5 ঘন্টা (বা DST এর উপর নির্ভর করে বছরের নির্দিষ্ট অংশে 6 ঘন্টা) লাভ করে। ট্রিপ চলাকালীন বাড়িতে কল করার পরিকল্পনার জন্য জানতে হবে কখন এটি একই সময়ে উভয় স্থানে একটি যুক্তিসঙ্গত ঘন্টা।</p>
+<h2>দূরবর্তী কাজ এবং বিশ্বব্যাপী দল</h2>
+<p>দূরবর্তী দলগুলি ক্রমবর্ধমানভাবে একাধিক সময় অঞ্চল বিস্তৃত করে, অফসেট সচেতনতাকে অপরিহার্য করে তোলে। অনেক দল একটি মূল ওভারল্যাপ উইন্ডো স্থাপন করে — যখন বেশিরভাগ সদস্য একই সাথে স্বাভাবিক কাজের সময়ের মধ্যে থাকে। একটি 5-ঘন্টার পার্থক্য এখনও 2-3 ঘন্টা ওভারল্যাপ উইন্ডোর অনুমতি দিতে পারে; 12-ঘন্টার পার্থক্যের জন্য কাউকে তাদের কর্মদিবসের প্রান্তে থাকতে হবে।</p>
+<p>সময়সূচী সরঞ্জাম, ক্যালেন্ডার অ্যাপ্লিকেশন, এবং প্রকল্প পরিচালনার প্ল্যাটফর্মগুলি স্বয়ংক্রিয়ভাবে সময় অঞ্চলগুলি পরিচালনা করে, তবে অন্তর্নিহিত অফসেট বোঝা আপনাকে সফ্টওয়্যারের উপর নির্ভর না করে সময়সূচী সম্পর্কে যুক্তি দিতে সহায়তা করে।</p>
+<h2>আর্থিক বাজার</h2>
+<p>স্টক এক্সচেঞ্জগুলি নির্দিষ্ট স্থানীয় সময় অঞ্চলে কাজ করে: নিউ ইয়র্ক স্টক এক্সচেঞ্জ পূর্ব সময় সকাল 9:30 এ, লন্ডন স্টক এক্সচেঞ্জ 8:00 AM GMT এ এবং টোকিও স্টক এক্সচেঞ্জ সকাল 9:00 AM JST এ খোলে। অন্যান্য সময় অঞ্চলের ব্যবসায়ীদের জানতে হবে যে এই খোলার সময়গুলি স্থানীয়ভাবে কী বোঝায়, বিশেষ করে ফিউচার এবং বৈদেশিক মুদ্রার বাজারের জন্য যা প্রায় অবিচ্ছিন্নভাবে কাজ করে।</p>
+<h2>এভিয়েশন এবং লজিস্টিকস</h2>
+<p>এয়ারলাইনগুলি প্রস্থান এবং আগমনের বিমানবন্দরে স্থানীয় সময় সময়সূচী প্রকাশ করে, যার মানে একটি ফ্লাইট নিউ ইয়র্ক থেকে রাত 11 টায় ছেড়ে যায় এবং পরের দিন সকাল 11 টায় লন্ডনে পৌঁছাতে 7 ঘন্টা সময় লাগে, আপাত 12 নয়। একইভাবে মালবাহী লজিস্টিকগুলির জন্য কাস্টমস ডকুমেন্টেশন, পচনশীল পণ্য-ডেলিভারি-ট্র্যাকিং এবং উইন্ডোতে টাইমজোন সচেতনতা প্রয়োজন।</p>
+<h2>আন্তর্জাতিক তারিখ রেখা</h2>
+<p>সময় অঞ্চলের পার্থক্যের একটি চরম ঘটনা হল প্রশান্ত মহাসাগরের আন্তর্জাতিক তারিখ রেখা। এটিকে পূর্ব দিকে অতিক্রম করা আপনাকে এক ক্যালেন্ডার দিন পিছনে নিয়ে যায়; এটিকে অতিক্রম করে পশ্চিম দিকে আপনাকে একদিন এগিয়ে নিয়ে যাবে। তারিখ রেখার কাছাকাছি কিছু দ্বীপ রাষ্ট্রের অস্বাভাবিক অফসেট রয়েছে: কিরিবাতি (UTC+14) আমেরিকান সামোয়া (UTC-12) থেকে 26 ঘন্টা এগিয়ে, যদিও তারা ভৌগলিকভাবে তুলনামূলকভাবে কাছাকাছি।</p>
+<h2>কিভাবে ক্যালকুলেটর ব্যবহার করবেন</h2>
+<p>ড্রপডাউনগুলি থেকে দুটি অবস্থান নির্বাচন করুন এবং তাদের মধ্যে বর্তমান অফসেট অবিলম্বে প্রদর্শিত হবে, ইতিমধ্যে প্রতিটি স্থানে প্রযোজ্য যে কোনো ডেলাইট সেভিং নিয়মগুলির জন্য ইতিমধ্যেই হিসাব করা হচ্ছে৷ কারণ গণনাটি আজকের তারিখের উপর ভিত্তি করে করা হয়েছে, যদি কোনো অবস্থানে দিবালোক সংরক্ষণ দেখা যায় তাহলে বছরের একটি ভিন্ন অংশে এটিকে আবার দেখুন, যেহেতু দুটি নির্দিষ্ট শহরের মধ্যে অফসেটটি ঋতুর উপর নির্ভর করে এক ঘণ্টার মধ্যেও স্থানান্তরিত হতে পারে এমনকি যখন কোনো শহরের নিজস্ব ঘড়িও পরিবর্তন হয় না।</p>
+<h2>অনেক টাইম জোন জুড়ে একটি মিটিং শিডিউল করা</h2>
+<p>তিন বা ততোধিক সময় অঞ্চল জুড়ে একটি একক মিটিংয়ের সময় সমন্বয় করা একটি টাইম জোন ক্যালকুলেটরের সবচেয়ে সাধারণ ব্যবহারিক ব্যবহারগুলির মধ্যে একটি। সাধারণ পদ্ধতি হল প্রতিটি অংশগ্রহণকারীর অবস্থান জুড়ে যুক্তিসঙ্গত কাজের সময়ের সবচেয়ে সংকীর্ণ ওভারল্যাপ খুঁজে বের করা, তারপর প্রতিটি অঞ্চলের বর্তমান ডেলাইট সেভিং স্ট্যাটাসের বিপরীতে সেই ওভারল্যাপটি পরীক্ষা করুন, যেহেতু জানুয়ারিতে কাজ করা সময়টি জুলাইয়ের মধ্যে অংশীদারের সময়সূচীর তুলনায় এক ঘন্টার মধ্যে পরিবর্তন হতে পারে যদি দুটি অবস্থান ভিন্ন তারিখে তাদের ঘড়ি পরিবর্তন করে বা কেউ ডেলাইট সেভিং আদৌ পালন না করে। যে দলগুলি টাইম জোন জুড়ে নিয়মিত মিলিত হয় তারা প্রায়শই এই ঋতুগত প্রবাহকে এড়াতে বিশেষভাবে পুনরাবৃত্ত মিটিংগুলির জন্য একটি নির্দিষ্ট UTC সময়ে স্থির করে, প্রতিটি অংশগ্রহণকারীর ক্যালেন্ডার সফ্টওয়্যার স্বয়ংক্রিয়ভাবে স্থানীয় রূপান্তর পরিচালনা করতে দেয়।</p>
+<h2>আধা-ঘণ্টা এবং কোয়ার্টার-ঘন্টা অফসেট</h2>
+<p>বিশ্বের বেশিরভাগ সময় অঞ্চল UTC থেকে পুরো-ঘণ্টার অফসেটে বসে, এই কারণেই বেশিরভাগ শহরগুলির মধ্যে রূপান্তর করা সহজ ঘন্টার পাটিগণিত। মুষ্টিমেয় কিছু অঞ্চল কোনো ভৌগলিক প্রয়োজনের পরিবর্তে ঐতিহাসিক বা রাজনৈতিক কারণে এই প্যাটার্নটি ভঙ্গ করেছে: ভারতের UTC+5:30 অফসেট স্বাধীনতার সময় আংশিকভাবে দেশের বিস্তীর্ণ পূর্ব-পশ্চিম সীমানা জুড়ে প্রায় মাঝপথে একক সময়ে বসার জন্য বেছে নেওয়া হয়েছিল, নেপালের UTC+5:45 অফসেটকে প্রায়শই প্রতিবেশী থেকে আলাদা করা হয় এবং ভারতের পছন্দের সময় থেকে আলাদা করা হয়। কানাডার নিউফাউন্ডল্যান্ড UTC-3:30 ব্যবহার করে, আটলান্টিক কানাডার বাকি অংশ থেকে আধা ঘন্টা অফসেট। এই ভগ্নাংশ অফসেটগুলি ঠিক কেন একটি নির্ভরযোগ্য টাইম জোন টুলকে প্রতিটি অফসেটকে একটি রাউন্ড নম্বর বলে ধরে নেওয়ার পরিবর্তে মিনিটের পাশাপাশি ঘন্টাগুলি পরিচালনা করতে হবে।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>বর্তমান UTC অফসেটগুলি নির্ধারণ করতে টুলটি আপনার ব্রাউজারের অন্তর্নির্মিত Intl API ব্যবহার করে, তাই ফলাফলগুলি অবিলম্বে প্রদর্শিত হয় এবং আপনি যে অবস্থানগুলি পরীক্ষা করেন সে সম্পর্কে কোনও ডেটা কখনও কোথাও পাঠানো, লগ করা বা ভাগ করা হয় না৷</p>
+    <section class="faq"><h2>সময় অঞ্চল FAQ</h2><dl><dt>ডেলাইট সেভিং টাইম কি ফলাফলকে প্রভাবিত করে?</dt><dd>হ্যাঁ। পার্থক্যটি বর্তমান UTC অফসেটগুলি ব্যবহার করে গণনা করা হয়, যা ইতিমধ্যেই যেকোনো সক্রিয় দিবালোক সংরক্ষণের সময় সমন্বয় অন্তর্ভুক্ত করে।</dd><dt>কেন বছরের মধ্যে পার্থক্য পরিবর্তন হয়?</dt><dd>যখন একটি অঞ্চল দিবালোক সংরক্ষণ পর্যবেক্ষণ করে এবং অন্যটি করে না, বা যখন তারা বিভিন্ন তারিখে পরিবর্তিত হয়, তখন তাদের মধ্যে অফসেট এক ঘন্টার মধ্যে পরিবর্তন হয়।</dd><dt>উভয় শহর একই সময় অঞ্চলে থাকলে কি হবে?</dt><dd>পার্থক্য 0 ঘন্টা হবে।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timezonediff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timezonediff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timezonediff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timezonediff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timezonediff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timezonediff/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/timezonediff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timezonediff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timezonediff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timezonediff/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"zone1":"সময় অঞ্চল 1","zone2":"টাইম জোন 2","difference":"পার্থক্য"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/timezonediff.js" defer></script>
+</body>
+</html>

@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sales Tax Calculator — add or remove VAT from any price</title>
-<meta name="description" content="Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.">
+<title>سیلز ٹیکس کیلکولیٹر - کسی بھی قیمت سے VAT شامل یا ہٹا دیں۔</title>
+<meta name="description" content="مفت سیلز ٹیکس کیلکولیٹر۔ خالص قیمت میں ٹیکس شامل کرنے یا اسے مجموعی قیمت سے نکالنے کے لیے قیمت اور ٹیکس کی شرح درج کریں۔ VAT، GST، اور کسی بھی فیصد کے لیے کام کرتا ہے۔">
 <link rel="canonical" href="https://mikaio.dev/ur/salestax/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/salestax/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/salestax/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/salestax/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/salestax/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/salestax/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/salestax/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/salestax/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/salestax/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/salestax/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/salestax/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/salestax/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sales Tax Calculator — add or remove VAT from any price">
-<meta property="og:description" content="Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.">
+<meta property="og:title" content="سیلز ٹیکس کیلکولیٹر - کسی بھی قیمت سے VAT شامل یا ہٹا دیں۔">
+<meta property="og:description" content="مفت سیلز ٹیکس کیلکولیٹر۔ خالص قیمت میں ٹیکس شامل کرنے یا اسے مجموعی قیمت سے نکالنے کے لیے قیمت اور ٹیکس کی شرح درج کریں۔ VAT، GST، اور کسی بھی فیصد کے لیے کام کرتا ہے۔">
 <meta property="og:url" content="https://mikaio.dev/ur/salestax/">
 <meta property="og:locale" content="ur">
 <meta name="twitter:card" content="summary">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Sales Tax Calculator — add or remove VAT from any price","url":"https://mikaio.dev/ur/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Sales Tax Calculator","item":"https://mikaio.dev/ur/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between adding and extracting tax?","acceptedAnswer":{"@type":"Answer","text":"Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was."}},{"@type":"Question","name":"What tax rates should I use?","acceptedAnswer":{"@type":"Answer","text":"Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign."}},{"@type":"Question","name":"Is anything I type uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"سیلز ٹیکس کیلکولیٹر - کسی بھی قیمت سے VAT شامل یا ہٹا دیں۔","url":"https://mikaio.dev/ur/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"مفت سیلز ٹیکس کیلکولیٹر۔ خالص قیمت میں ٹیکس شامل کرنے یا اسے مجموعی قیمت سے نکالنے کے لیے قیمت اور ٹیکس کی شرح درج کریں۔ VAT، GST، اور کسی بھی فیصد کے لیے کام کرتا ہے۔"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"سیلز ٹیکس کیلکولیٹر","item":"https://mikaio.dev/ur/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ٹیکس شامل کرنے اور نکالنے میں کیا فرق ہے؟","acceptedAnswer":{"@type":"Answer","text":"ٹیکس شامل کرنے سے خالص قیمت لگتی ہے — ٹیکس سے پہلے کی قیمت — اور اس مجموعی قیمت کا حساب لگاتا ہے جو آپ ادا کرتے ہیں۔ ٹیکس نکالنے سے الٹا ہوتا ہے: آپ پہلے سے ٹیکس سمیت مجموعی قیمت درج کرتے ہیں اور کیلکولیٹر یہ بتاتا ہے کہ اس میں سے کتنا ٹیکس ہے اور ٹیکس سے پہلے کی رقم کتنی تھی۔"}},{"@type":"Question","name":"مجھے کس ٹیکس کی شرح استعمال کرنی چاہیے؟","acceptedAnswer":{"@type":"Answer","text":"آپ کے ملک یا علاقے میں جو بھی شرح لاگو ہوتی ہے اسے استعمال کریں۔ عام مثالوں میں برطانیہ میں 20% VAT، جرمنی میں 19%، آسٹریلیا میں 10% GST، اور امریکی ریاست کے لحاظ سے سیلز ٹیکس کی مختلف شرحیں شامل ہیں۔ فیصد کے نشان کے بغیر نمبر درج کریں۔"}},{"@type":"Question","name":"کیا میں نے کچھ بھی اپ لوڈ کیا ہے؟","acceptedAnswer":{"@type":"Answer","text":"نہیں، ہر چیز آپ کے براؤزر میں چلتی ہے جس میں سرور شامل نہیں ہے۔ آپ کے درج کردہ اعداد و شمار صفحہ بند ہونے پر غائب ہو جاتے ہیں۔"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="سائٹ نیویگیشن">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/salestax/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Sales Tax Calculator</span></nav>
-  <h1>Sales Tax Calculator</h1>
-  <p class="lead">Enter the amount and the tax rate, then choose whether to add tax to a net price or extract it from a gross amount. All three figures — net, tax, and gross — update as you type.</p>
-  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">Amount</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">Tax rate %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">Mode</label><select id="tax-mode"><option value="add">Add tax to price</option><option value="remove">Extract tax from price</option></select></div></div><div class="result"><span class="hint">Net (pre-tax): </span><b id="tax-net">—</b> · <span class="hint">Tax amount: </span><b id="tax-tax">—</b> · <span class="hint">Gross (total): </span><span class="big" id="tax-gross">—</span></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>سیلز ٹیکس کیلکولیٹر</span></nav>
+  <h1>سیلز ٹیکس کیلکولیٹر</h1>
+  <p class="lead">رقم اور ٹیکس کی شرح درج کریں، پھر منتخب کریں کہ آیا خالص قیمت میں ٹیکس شامل کرنا ہے یا اسے مجموعی رقم سے نکالنا ہے۔ تینوں اعداد و شمار — خالص، ٹیکس، اور مجموعی — جیسے جیسے آپ ٹائپ کرتے ہیں اپ ڈیٹ کریں۔</p>
+  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">رقم</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">ٹیکس کی شرح %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">موڈ</label><select id="tax-mode"><option value="add">قیمت میں ٹیکس شامل کریں۔</option><option value="remove">قیمت سے ٹیکس نکالیں۔</option></select></div></div><div class="result"><span class="hint">خالص (قبل از ٹیکس): </span><b id="tax-net">—</b> · <span class="hint">ٹیکس کی رقم: </span><b id="tax-tax">—</b> · <span class="hint">مجموعی (کل): </span><span class="big" id="tax-gross">—</span></div></form></section>
   <article class="content">
     <h2>قیمت پر ٹیکس شامل کریں یا کل رقم سے نکالیں</h2>
 <p>سیلز ٹیکس، ویلیو ایڈڈ ٹیکس یعنی وی اے ٹی، جی ایس ٹی، آپ کے ملک میں اسے جو بھی کہا جائے، حساب کتاب ہمیشہ دو میں سے ایک عمل ہوتا ہے: ٹیکس کی فیصد کو خالص قیمت پر شامل کر کے وہ کل رقم حاصل کرنا جو خریدار ادا کرتا ہے، یا کل رقم سے پیچھے کی طرف کام کرنا تاکہ معلوم ہو کہ اس میں سے کتنی ٹیکس کی مقدار تھی۔ یہ کیلکولیٹر دونوں عمل فوری طور پر کرتا ہے۔ رقم درج کریں، ٹیکس کی شرح منتخب کریں، اور موڈ چنیں؛ خالص، ٹیکس کی مقدار، اور کل رقم آپ کے ٹائپ کرتے ہی اپ ڈیٹ ہو جاتی ہے۔</p>
@@ -144,13 +150,14 @@ textarea{min-height:120px;resize:vertical}
 <h2>نجی، فوری اور مفت</h2>
 <p>آپ جو بھی ڈیٹا درج کرتے ہیں وہ کہیں بھی نہیں بھیجا جاتا۔ کیلکولیٹر جاوا اسکرپٹ کا ایک چھوٹا سا ٹکڑا ہے جو مکمل طور پر آپ کے آلے پر چلتا ہے۔ یہ آف لائن کام کرتا ہے، فوری جواب دیتا ہے، اور کسی اکاؤنٹ یا رجسٹریشن کی ضرورت نہیں ہے۔ ٹیب بند کریں اور آپ نے جو بھی نمبر ٹائپ کیے تھے وہ ختم ہو گئے۔</p>
 <p>یہ ٹول جب بھی آپ کسی مصنوعات کی قیمت طے کریں، کسی رسید کی تصدیق کریں، یا کل رقم میں سے ٹیکس کا حصہ الگ کرنا چاہیں، استعمال کریں۔ تینوں آؤٹ پٹ خالص، ٹیکس، اور کل آپ کو ایک ہی نظارے میں مکمل تصویر دیتے ہیں۔</p>
-    <section class="faq"><h2>Sales tax calculator FAQ</h2><dl><dt>What is the difference between adding and extracting tax?</dt><dd>Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was.</dd><dt>What tax rates should I use?</dt><dd>Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign.</dd><dt>Is anything I type uploaded?</dt><dd>No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page.</dd></dl></section>
+    <section class="faq"><h2>سیلز ٹیکس کیلکولیٹر اکثر پوچھے گئے سوالات</h2><dl><dt>ٹیکس شامل کرنے اور نکالنے میں کیا فرق ہے؟</dt><dd>ٹیکس شامل کرنے سے خالص قیمت لگتی ہے — ٹیکس سے پہلے کی قیمت — اور اس مجموعی قیمت کا حساب لگاتا ہے جو آپ ادا کرتے ہیں۔ ٹیکس نکالنے سے الٹا ہوتا ہے: آپ پہلے سے ٹیکس سمیت مجموعی قیمت درج کرتے ہیں اور کیلکولیٹر یہ بتاتا ہے کہ اس میں سے کتنا ٹیکس ہے اور ٹیکس سے پہلے کی رقم کتنی تھی۔</dd><dt>مجھے کس ٹیکس کی شرح استعمال کرنی چاہیے؟</dt><dd>آپ کے ملک یا علاقے میں جو بھی شرح لاگو ہوتی ہے اسے استعمال کریں۔ عام مثالوں میں برطانیہ میں 20% VAT، جرمنی میں 19%، آسٹریلیا میں 10% GST، اور امریکی ریاست کے لحاظ سے سیلز ٹیکس کی مختلف شرحیں شامل ہیں۔ فیصد کے نشان کے بغیر نمبر درج کریں۔</dd><dt>کیا میں نے کچھ بھی اپ لوڈ کیا ہے؟</dt><dd>نہیں، ہر چیز آپ کے براؤزر میں چلتی ہے جس میں سرور شامل نہیں ہے۔ آپ کے درج کردہ اعداد و شمار صفحہ بند ہونے پر غائب ہو جاتے ہیں۔</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/salestax/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/salestax/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
-  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+  <p><a href="/freetools.html">تمام ٹولز</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ur";window.__T={"amount":"رقم","rate":"ٹیکس کی شرح %","mode":"موڈ","add_tax":"قیمت میں ٹیکس شامل کریں۔","remove_tax":"قیمت سے ٹیکس نکالیں۔","net":"خالص (قبل از ٹیکس)","tax":"ٹیکس کی رقم","gross":"مجموعی (کل)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/salestax.js" defer></script>
 </body>
 </html>

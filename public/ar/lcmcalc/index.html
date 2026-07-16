@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة LCM — المضاعف المشترك الأصغر للأرقام المتعددة</title>
+<meta name="description" content="آلة حاسبة LCM مجانية. ابحث عن المضاعف المشترك الأصغر (LCM) لأي مجموعة من الأرقام. يظهر أيضًا GCD. نتائج فورية في متصفحك.">
+<link rel="canonical" href="https://mikaio.dev/ar/lcmcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/lcmcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/lcmcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/lcmcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/lcmcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/lcmcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/lcmcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/lcmcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/lcmcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/lcmcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/lcmcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/lcmcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حاسبة LCM — المضاعف المشترك الأصغر للأرقام المتعددة">
+<meta property="og:description" content="آلة حاسبة LCM مجانية. ابحث عن المضاعف المشترك الأصغر (LCM) لأي مجموعة من الأرقام. يظهر أيضًا GCD. نتائج فورية في متصفحك.">
+<meta property="og:url" content="https://mikaio.dev/ar/lcmcalc/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة LCM — المضاعف المشترك الأصغر للأرقام المتعددة","url":"https://mikaio.dev/ar/lcmcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"آلة حاسبة LCM مجانية. ابحث عن المضاعف المشترك الأصغر (LCM) لأي مجموعة من الأرقام. يظهر أيضًا GCD. نتائج فورية في متصفحك."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة LCM","item":"https://mikaio.dev/ar/lcmcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هو المضاعف المشترك الأصغر؟","acceptedAnswer":{"@type":"Answer","text":"المضاعف المشترك الأصغر لمجموعة من الأرقام هو أصغر عدد صحيح موجب يقبل القسمة عليها جميعًا. على سبيل المثال، المضاعف المشترك الأصغر للأعداد 4 و6 هو 12، لأن 12 هو أصغر عدد يقبل القسمة على 4 و6."}},{"@type":"Question","name":"ما هو استخدامه ل؟","acceptedAnswer":{"@type":"Answer","text":"يتم استخدام المضاعف المشترك الأصغر عند جمع الكسور ذات المقامات المختلفة — ابحث عن المضاعف المشترك الأصغر للمقامات للحصول على المقام المشترك. ويظهر أيضًا في مشكلات الجدولة حيث تتكرر الأحداث على فترات زمنية مختلفة."}},{"@type":"Question","name":"ما هو الفرق بين LCM وGCD؟","acceptedAnswer":{"@type":"Answer","text":"GCD (القاسم المشترك الأكبر) هو أكبر رقم يقسم جميع الأرقام المعطاة. LCM هو أصغر عدد يقبل القسمة عليها جميعًا. وهي مرتبطة: LCM(a,b) = a×b / GCD(a,b)."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/lcmcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/lcmcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/lcmcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/lcmcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/lcmcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/lcmcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/lcmcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/lcmcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/lcmcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/lcmcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة LCM</span></nav>
+  <h1>حاسبة LCM</h1>
+  <p class="lead">أدخل رقمين أو أكثر مفصولين بفواصل للعثور على المضاعف المشترك الأصغر.</p>
+  <section class="widget" id="tool"><form id="lcm-form"><div class="field"><label for="lcm-nums">الأرقام (مفصولة بفواصل)</label><input type="text" id="lcm-nums" placeholder="e.g. 12, 18, 24" inputmode="numeric"></div><div class="result"><span class="hint">إل سي إم: </span><span class="big" id="lcm-out">—</span></div><div id="lcm-gcd-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>ابحث عن المضاعف المشترك الأصغر لأي رقم</h2>
+<p>المضاعف المشترك الأصغر (LCM) - ويسمى أيضًا الحد الأدنى للمضاعف المشترك أو باللغة البرتغالية Mínimo Múltiplo Comum (MMC) - هو أصغر عدد صحيح موجب قابل للقسمة بالتساوي على جميع الأرقام في مجموعة معينة. أدخل رقمين أو أكثر مفصولين بفواصل وسيظهر LCM على الفور، بالإضافة إلى القاسم المشترك الأكبر (GCD) كمكافأة.</p>
+<h2>التعريف والأمثلة</h2>
+<p>المضاعف المشترك الأصغر لمجموعة من الأرقام هو أصغر عدد تنقسم إليه جميعها دون باقي.</p>
+<ul>
+<li>م م م (4، 6) = 12 — لأن 12 ÷ 4 = 3 و12 ÷ 6 = 2، ولا يوجد رقم أصغر يصلح لكليهما.</li>
+<li>LCM(3, 5) = 15 — نظرًا لأن 3 و5 من العناصر الأولية (لا يوجد بينهما عوامل مشتركة)، فإن LCM الخاص بهم هو ببساطة منتجهم.</li>
+<li>م م (12، 18، 24) = 72 — أصغر عدد يقبل القسمة على الثلاثة.</li>
+</ul>
+<h2>كيف يتم حساب LCM</h2>
+<p>تستخدم الطريقة الأكثر فعالية العلاقة بين LCM وGCD: LCM(a, b) = |a × b| / جي سي دي (أ، ب). لأكثر من رقمين، يتم حساب LCM بشكل زوجي: LCM(a, b, c) = LCM(LCM(a, b), c).</p>
+<p>يتم حساب GCD باستخدام الخوارزمية الإقليدية، التي تقسم الرقم الأكبر بشكل متكرر على الأصغر وتأخذ الباقي حتى يصبح الباقي صفرًا. آخر ما تبقى غير الصفر هو GCD.</p>
+<h2>جمع الكسور ذات المقامات المختلفة</h2>
+<p>التطبيق اليومي الأكثر شيوعًا للمضاعف المشترك الأصغر هو في حساب الكسور. لإضافة 1/4 و1/6، تحتاج إلى قاسم مشترك. المضاعف المشترك الأصغر للعددين 4 و6 هو 12، لذا: 1/4 = 3/12 و1/6 = 2/12، أي 5/12. يؤدي استخدام المضاعف المشترك الأصغر إلى الحصول على الصورة الأكثر اختزالًا على الفور، في حين أن استخدام أي مضاعف مشترك آخر (مثل 24) يعطي نتيجة لا تزال بحاجة إلى التبسيط.</p>
+<h2>الجدولة والدورات</h2>
+<p>يظهر LCM في مشاكل الجدولة حيث تتكرر الأحداث على فترات زمنية مختلفة. إذا كانت الحافلة A تعمل كل 12 دقيقة والحافلة B كل 18 دقيقة، وكلاهما يغادران الساعة 8:00 صباحًا، فمتى ستغادران في نفس الوقت بعد ذلك؟ LCM(12, 18) = 36، لذا فإنهما يتزامنان بعد ذلك في الساعة 8:36 صباحًا.</p>
+<p>وبالمثل، تحتوي التروس في الأنظمة الميكانيكية على عدد أسنان حيث يحدد LCM متى تتشابك نفس الأسنان مرة أخرى. تستخدم خطوط الإنتاج ذات الآلات التي تعمل في أوقات دورات مختلفة LCM للعثور على نقاط التزامن.</p>
+<h2>تخزين دون هدر</h2>
+<p>يحل LCM أيضًا مشكلة تسوق ملموسة للغاية: إذا كانت النقانق تأتي في عبوات مكونة من 10 قطع والكعك تأتي في عبوات مكونة من 8 قطع، فما عدد العبوات التي تحتاج إلى شرائها بحيث ينتهي بك الأمر بالحصول على نفس العدد تمامًا من النقانق والكعك دون أن يتبقى منها شيء؟ الإجابة هي أصغر رقم يمكن تقسيمه بالتساوي بين 10 و8، وهو LCM(10, 8) = 40 — لذا يمكنك شراء 4 علب من النقانق و5 علب من الكعك. يظهر هذا السيناريو بالضبط، وعدد لا يحصى من الاختلافات التي تتضمن أي عبوتين مختلفتين الحجم، عندما تحاول مطابقة شيئين يتم بيعهما بكميات مختلفة.</p>
+<h2>نظرية الموسيقى</h2>
+<p>في الموسيقى، يحدد LCM متى تتكرر الأنماط الإيقاعية. يؤدي تشغيل نمط من 3 نبضات مقابل نمط من 4 نبضات إلى إنشاء دورة من LCM(3, 4) = 12 نبضة قبل أن تتزامن الضربات المتشائمة مرة أخرى. هذا هو أساس الموسيقى متعددة الإيقاعات.</p>
+<h2>كيفية استخدام الآلة الحاسبة</h2>
+<p>أدخل رقمين أو أكثر مفصولين بفواصل وسيظهر LCM على الفور، إلى جانب GCD المستخدم لحسابه. لا يوجد شيء لتقديمه ولا يوجد حد لعدد الأرقام التي يمكنك إدراجها - تعمل الآلة الحاسبة على تقليل المجموعة بأكملها بشكل ثنائي خلف الكواليس، لذلك يتم التعامل مع قائمة مكونة من خمسة أو ستة أرقام بنفس سهولة التعامل مع الزوج. يؤدي تغيير أي رقم إلى تحديث النتيجة على الفور، مما يجعل من السهل استكشاف كيف يؤدي إضافة رقم آخر إلى مجموعة إلى تغيير LCM.</p>
+<h2>لماذا LCM وGCD وجهان لعملة واحدة؟</h2>
+<p>يصف المضاعف المشترك الأصغر والمقسوم المشترك الأكبر الطرفين المتقابلين لنفس العلاقة بين رقمين، والهوية الأنيقة LCM(a, b) × GCD(a, b) = a × b تربطهم مباشرة. بشكل بديهي، يقوم GCD بإزالة كل ما هو مشترك بين رقمين، في حين أن LCM هو أصغر رقم كبير بما يكفي لاحتواء كل ما يحتاجه كلا الرقمين. نظرًا لأن حساب GCD عبر الخوارزمية الإقليدية يكون سريعًا حتى بالنسبة للأعداد الكبيرة، وتحتاج صيغة LCM فقط إلى عملية ضرب وقسمة إضافية واحدة بمجرد معرفة GCD، فإن هذا المسار غير المباشر أسرع بكثير من البحث من خلال المضاعفات مباشرة، خاصة مع نمو الأرقام.</p>
+<h2>مثال عملي خطوة بخطوة</h2>
+<p>خذ LCM(21، 6). أولًا ابحث عن GCD: 21 = 3×6 + 3، ثم 6 = 2×3 + 0، وبالتالي GCD(21, 6) = 3. ثم قم بتطبيق الصيغة: LCM(21, 6) = (21 × 6) / 3 = 126 / 3 = 42. يمكنك التحقق من ذلك مباشرة — 42 ÷ 21 = 2 و42 ÷ 6 = 7، كلا العددين الصحيحين، ولا يقسم أي رقم موجب أصغر بالتساوي على 21 و6. هذه العملية المكونة من خطوتين، GCD أولاً ثم الضرب والقسمة مرة واحدة، هي بالضبط ما تنفذه الآلة الحاسبة فورًا وراء النتائج التي تراها.</p>
+<h2>المواقف اليومية وراء الكسور والجداول الزمنية</h2>
+<p>يظهر LCM بهدوء في المواقف التي لا يصفها الأشخاص دائمًا بأنها مسألة رياضية. يتطلب توسيع نطاق الوصفة كميات كاملة من مكونين يتم بيعهما بأحجام عبوات مختلفة، أو تعبئة أكياس هدايا متطابقة من العناصر التي تأتي في صناديق بأعداد مختلفة، أو تحديد عدد جولات اللعبة مع جولتين مختلفتين الطول تصطف احتياطيًا في البداية - كل هذه مشاكل LCM مقنعة. عندما تحتاج إلى أصغر كمية أو وقت أو عدد يلبي اثنين أو أكثر من متطلبات التكرار في وقت واحد، فإن LCM هو الرقم الذي تبحث عنه.</p>
+<h2>خاصة وفورية</h2>
+<p>يتم تشغيل جميع الحسابات بالكامل في متصفحك باستخدام الخوارزمية الإقليدية، لذلك لا يتم تحميل أي شيء تدخله أو تسجيله أو مشاركته. تظهر النتيجة في اللحظة التي تكتب فيها، وتعمل دون اتصال بمجرد تحميل الصفحة، ويختفي كل رقم في اللحظة التي تغلق فيها علامة التبويب أو تعيد تحميلها.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول حاسبة LCM</h2><dl><dt>ما هو المضاعف المشترك الأصغر؟</dt><dd>المضاعف المشترك الأصغر لمجموعة من الأرقام هو أصغر عدد صحيح موجب يقبل القسمة عليها جميعًا. على سبيل المثال، المضاعف المشترك الأصغر للأعداد 4 و6 هو 12، لأن 12 هو أصغر عدد يقبل القسمة على 4 و6.</dd><dt>ما هو استخدامه ل؟</dt><dd>يتم استخدام المضاعف المشترك الأصغر عند جمع الكسور ذات المقامات المختلفة — ابحث عن المضاعف المشترك الأصغر للمقامات للحصول على المقام المشترك. ويظهر أيضًا في مشكلات الجدولة حيث تتكرر الأحداث على فترات زمنية مختلفة.</dd><dt>ما هو الفرق بين LCM وGCD؟</dt><dd>GCD (القاسم المشترك الأكبر) هو أكبر رقم يقسم جميع الأرقام المعطاة. LCM هو أصغر عدد يقبل القسمة عليها جميعًا. وهي مرتبطة: LCM(a,b) = a×b / GCD(a,b).</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/lcmcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/lcmcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/lcmcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/lcmcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/lcmcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/lcmcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/lcmcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/lcmcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/lcmcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/lcmcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"numbers":"الأرقام (مفصولة بفواصل)","placeholder":"e.g. 12, 18, 24","lcm":"إل سي إم:"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/lcmcalc.js" defer></script>
+</body>
+</html>

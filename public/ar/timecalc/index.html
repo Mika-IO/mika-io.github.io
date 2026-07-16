@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة الوقت - إضافة وطرح الساعات والدقائق والثواني</title>
+<meta name="description" content="حاسبة وقت الفراغ. إضافة أو طرح الساعات والدقائق والثواني بسهولة. رائعة لحساب إجمالي ساعات العمل وأوقات السفر والمدد.">
+<link rel="canonical" href="https://mikaio.dev/ar/timecalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/timecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/timecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/timecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/timecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/timecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/timecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/timecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/timecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/timecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/timecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/timecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حاسبة الوقت - إضافة وطرح الساعات والدقائق والثواني">
+<meta property="og:description" content="حاسبة وقت الفراغ. إضافة أو طرح الساعات والدقائق والثواني بسهولة. رائعة لحساب إجمالي ساعات العمل وأوقات السفر والمدد.">
+<meta property="og:url" content="https://mikaio.dev/ar/timecalc/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة الوقت - إضافة وطرح الساعات والدقائق والثواني","url":"https://mikaio.dev/ar/timecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"حاسبة وقت الفراغ. إضافة أو طرح الساعات والدقائق والثواني بسهولة. رائعة لحساب إجمالي ساعات العمل وأوقات السفر والمدد."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة الوقت","item":"https://mikaio.dev/ar/timecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل يمكنني الدخول لأكثر من 24 ساعة؟","acceptedAnswer":{"@type":"Answer","text":"نعم. يقبل حقل الساعات أي عدد صحيح موجب، حتى تتمكن من حساب إجمالي ساعات العمل خلال عدة أيام."}},{"@type":"Question","name":"وماذا لو كانت النتيجة سلبية؟","acceptedAnswer":{"@type":"Answer","text":"إذا أعطى الطرح نتيجة سلبية، فستعرض الآلة الحاسبة النتيجة مسبوقة بعلامة الطرح."}},{"@type":"Question","name":"كيف أحسب إجمالي ساعات العمل؟","acceptedAnswer":{"@type":"Answer","text":"أدخل وقت البدء بالتوقيت أ (الساعات من منتصف الليل، على سبيل المثال 9 ساعات و0 دقيقة للساعة 9 صباحًا)، ووقت الانتهاء بالتوقيت ب، ثم اختر طرح. والنتيجة هي ساعات العمل الخاصة بك."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timecalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/timecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timecalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة الوقت</span></nav>
+  <h1>حاسبة الوقت</h1>
+  <p class="lead">أدخل فترتين زمنيتين واختر إضافتهما أو طرحهما.</p>
+  <section class="widget" id="tool"><form id="tc-form"><div class="row"><div class="field"><label for="tc-h1">الوقت أ</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h1" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m1" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s1" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div><div class="field" style="align-self:flex-end;padding-bottom:0.5rem"><select id="tc-op"><option value="+">+</option><option value="-">−</option></select></div><div class="field"><label for="tc-h2">الوقت ب</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h2" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m2" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s2" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div></div><div class="result"><span class="hint">النتيجة: </span><span class="big" id="tc-out">—</span></div></form></section>
+  <article class="content">
+    <h2>إضافة وطرح فترات زمنية بسهولة</h2>
+<p>تبدو إضافة الوقت أو طرحه أمرًا بسيطًا حتى تصل إلى العملية الحسابية. تستخدم الساعات والدقائق والثواني نظام الأساس 60 بدلاً من الأساس 10، مما يعني أن الحساب الذهني المعتاد لا ينطبق بشكل مباشر. إضافة ساعتين و45 دقيقة إلى ساعة و30 دقيقة يعطينا 4 ساعات و15 دقيقة، وليس 4:75. تتعامل هذه الآلة الحاسبة مع التحويل تلقائيًا — أدخل الساعات والدقائق والثواني لكل مدة، واختر إضافة أو طرح، وستظهر النتيجة المنسقة بشكل صحيح على الفور.</p>
+<h2>الاستخدامات الشائعة لآلة حاسبة الوقت</h2>
+<p><strong>إجمالي ساعات العمل</strong>: إذا كنت تعمل من 8:30 صباحًا إلى 12:15 ظهرًا ثم من 1:00 ظهرًا إلى 5:45 مساءً، قم بإضافة الجلستين للحصول على الإجمالي. أدخل 3 ساعات و45 دقيقة للصباح و4 ساعات و45 دقيقة لفترة ما بعد الظهر؛ المجموع 8 ساعات و 30 دقيقة.</p>
+<p><strong>وقت السفر</strong>: تعد إضافة قطاعات القيادة والمشي والعبور إلى إجمالي وقت الرحلة أمرًا متكرر الاستخدام. ثلاث مراحل منفصلة مدتها 45 دقيقة و20 دقيقة وساعة و10 دقائق مجموعها ساعتين و15 دقيقة.</p>
+<p><strong>تتبع المشروع</strong>: إن جمع الوقت المستغرق في المهام المختلفة على مدار يوم أو أسبوع يعطي إجمالي الساعات القابلة للفوترة. غالبًا ما يتتبع المستقلون والمقاولون الوقت بالساعات والدقائق ويحتاجون إلى جمع إدخالات متعددة.</p>
+<p><strong>الرياضة والمنافسة</strong>: مقارنة أوقات الدورات، أو جمع أوقات المرحلة في السباق، أو حساب مقدار الوقت الذي يحتاجه المنافس لتعويضه.</p>
+<p><strong>الطهي</strong>: يمكن تتبع أطباق متعددة بأوقات طهي مختلفة تبدأ من نقاط مختلفة عن طريق إضافة الأوقات المنقضية.</p>
+<h2>نظام القاعدة 60</h2>
+<p>يستخدم الزمن الحساب الستيني (الأساس 60)، الموروث من الرياضيات البابلية القديمة. هناك 60 ثانية في الدقيقة و60 دقيقة في الساعة، لذا فإن النقل من ثانية إلى دقيقة يحدث عند 60، وليس عند 100. ولهذا السبب فإن عملية الإضافة العشرية البسيطة تنتج نتائج خاطئة للوقت: 45 دقيقة + 30 دقيقة = 75 دقيقة = ساعة و15 دقيقة، وليس 0.75 ساعة.</p>
+<p>تقوم الآلة الحاسبة بتحويل جميع المدخلات إلى إجمالي الثواني، وإجراء العمليات الحسابية بالثواني، ثم التحويل مرة أخرى إلى الساعات والدقائق والثواني للعرض. يتعامل هذا الأسلوب مع جميع عمليات الحمل والاقتراض بشكل صحيح بغض النظر عن القيم المدخلة.</p>
+<h2>نتائج سلبية</h2>
+<p>عند الطرح، إذا كان الوقت A أقل من الوقت B، تكون النتيجة سلبية - على سبيل المثال، إذا طرحت 3 ساعات من ساعة واحدة، فستحصل على ناقص ساعتين. تعرض الآلة الحاسبة القيمة المطلقة ببادئة علامة الطرح. يمكن أن يكون هذا مفيدًا لفهم مقدار الوقت الذي تجاوزت فيه الميزانية أو الهدف.</p>
+<h2>ساعات تتجاوز 24</h2>
+<p>على عكس الساعة، يقبل حقل الساعات أي عدد صحيح غير سالب، بحيث يمكنك العمل لمدة 48 ساعة، أو 100 ساعة، أو أكثر. يعد هذا مفيدًا لتتبع المشروع لعدة أيام، أو إجمالي أوقات تقسيم الماراثون، أو أي حساب زمني آخر واسع النطاق.</p>
+<h2>كيفية استخدام الآلة الحاسبة</h2>
+<p>أدخل الساعات والدقائق والثواني للمدة الأولى، واختر ما إذا كنت تريد الإضافة أو الطرح، ثم أدخل المدة الثانية بنفس الطريقة. تظهر النتيجة على الفور في الساعات والدقائق والثواني المسجلة بشكل صحيح - لن تحتاج أبدًا إلى العمل يدويًا على أن 75 دقيقة يجب أن تظهر كساعة و15 دقيقة، نظرًا لأن الآلة الحاسبة تعمل دائمًا على تسوية النتيجة لك.</p>
+<h2>لماذا تسوء عملية الإضافة البسيطة</h2>
+<p>أصل هذا الالتباس هو أن مدة مثل &quot;ساعة و45 دقيقة&quot; ليست في الواقع الرقم 1.45 - إنها ساعة واحدة بالإضافة إلى 45 من 60 دقيقة، وهي قيمة أساسية مختلطة لم يتم تصميم الحساب العشري للتعامل معها بشكل مباشر. إذا حاولت إضافة 1:45 و0:30 بمجرد إضافة الأرقام، فستحصل على 1:75، وهو وقت غير صالح على الإطلاق. تتجنب الآلة الحاسبة ذلك تمامًا عن طريق تحويل كل شيء إلى وحدة واحدة - إجمالي الثواني - وإجراء عمليات الجمع أو الطرح كعملية حسابية عادية على هذا الرقم الواحد، والتحويل مرة أخرى إلى الساعات والدقائق والثواني فقط للعرض النهائي. يعد نمط &quot;التحويل إلى وحدة واحدة، والحساب، والتحويل مرة أخرى&quot; هو الطريقة القياسية والموثوقة للتعامل مع أي عملية حسابية ذات أساس 60 بشكل صحيح، وهذا بالضبط ما يحدث خلف الكواليس في كل مرة تضغط فيها على &quot;حساب&quot;.</p>
+<h2>الرياضة والطبخ</h2>
+<p>إن مقارنة أوقات الدورة، أو جمع أوقات المرحلة عبر سباق متعدد المراحل، أو حساب مقدار الوقت الذي يحتاجه المنافس لتعويض المسافة المتبقية، كلها استخدامات شائعة في الرياضة. في المطبخ، يكون تتبع عدة أطباق بأوقات طهي مختلفة تبدأ من نقاط مختلفة أسهل عندما يمكنك إضافة وطرح الفترات المنقضية مباشرة بدلاً من مشاهدة عدة مؤقتات منفصلة وإجراء العمليات الحسابية في رأسك.</p>
+<h2>إجمالي ساعات العمل التي تم العمل عليها</h2>
+<p>إذا كنت تعمل من الساعة 8:30 صباحًا إلى 12:15 ظهرًا ثم مرة أخرى من 1:00 ظهرًا إلى 5:45 مساءً، فإن حساب إجمالي ساعات اليوم يعني إضافة فترتين منفصلتين: 3 ساعات و45 دقيقة للجلسة الصباحية و4 ساعات و45 دقيقة لجلسة بعد الظهر. مجموع ذلك يصل إلى 8 ساعات و30 دقيقة، وليس 8:90 التي ستحصل عليها من الجمع العشري المهمل. يقوم المستقلون والمقاولون وأي شخص يقوم بإعداد الفواتير بالساعة بإجراء هذه العملية الحسابية الدقيقة بانتظام، وغالبًا ما يقومون بجمع العديد من هذه الجلسات على مدار أسبوع للوصول إلى إجمالي الفاتورة، وتتراكم القصاصات الحسابية الصغيرة بسرعة عند إجرائها يدويًا عبر العديد من الإدخالات.</p>
+<h2>خاصة وفورية</h2>
+<p>يتم تشغيل جميع الحسابات بالكامل في متصفحك، ويتم تحويلها إلى إجمالي الثواني والعودة للحصول على نتائج تم تنفيذها بشكل صحيح، لذلك لا يتم إرسال أي شيء تدخله إلى الخادم أو تسجيله أو مشاركته. إنه يعمل دون اتصال بالإنترنت بمجرد تحميله ولا يحتفظ بأي سجل لأي مدة تحسبها.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول حاسبة الوقت</h2><dl><dt>هل يمكنني الدخول لأكثر من 24 ساعة؟</dt><dd>نعم. يقبل حقل الساعات أي عدد صحيح موجب، حتى تتمكن من حساب إجمالي ساعات العمل خلال عدة أيام.</dd><dt>وماذا لو كانت النتيجة سلبية؟</dt><dd>إذا أعطى الطرح نتيجة سلبية، فستعرض الآلة الحاسبة النتيجة مسبوقة بعلامة الطرح.</dd><dt>كيف أحسب إجمالي ساعات العمل؟</dt><dd>أدخل وقت البدء بالتوقيت أ (الساعات من منتصف الليل، على سبيل المثال 9 ساعات و0 دقيقة للساعة 9 صباحًا)، ووقت الانتهاء بالتوقيت ب، ثم اختر طرح. والنتيجة هي ساعات العمل الخاصة بك.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timecalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/timecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"time_a":"الوقت أ","time_b":"الوقت ب","result":"النتيجة"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/timecalc.js" defer></script>
+</body>
+</html>

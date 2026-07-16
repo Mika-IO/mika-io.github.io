@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>世界时钟 — 比较世界各地城市的当前时间</title>
+<meta name="description" content="免费世界时钟。同时比较多个城市的当前当地时间。无需注册。浏览器中每秒更新一次。">
+<link rel="canonical" href="https://mikaio.dev/zh/worldclock/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/worldclock/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/worldclock/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/worldclock/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/worldclock/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/worldclock/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/worldclock/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/worldclock/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/worldclock/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/worldclock/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/worldclock/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/worldclock/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="世界时钟 — 比较世界各地城市的当前时间">
+<meta property="og:description" content="免费世界时钟。同时比较多个城市的当前当地时间。无需注册。浏览器中每秒更新一次。">
+<meta property="og:url" content="https://mikaio.dev/zh/worldclock/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"世界时钟 — 比较世界各地城市的当前时间","url":"https://mikaio.dev/zh/worldclock/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费世界时钟。同时比较多个城市的当前当地时间。无需注册。浏览器中每秒更新一次。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"世界时钟","item":"https://mikaio.dev/zh/worldclock/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"世界时钟有多准确？","acceptedAnswer":{"@type":"Answer","text":"这些时间源自您设备的系统时钟和现代浏览器内置的 IANA 时区数据库。只要您设备的时钟设置正确，它们就精确到秒。"}},{"@type":"Question","name":"夏令时会影响结果吗？","acceptedAnswer":{"@type":"Answer","text":"是的，浏览器的 Intl API 自动考虑每个时区的夏令时规则，因此无论一年中的什么时间，显示的时间始终是正确的。"}},{"@type":"Question","name":"我可以比较三个以上的城市吗？","acceptedAnswer":{"@type":"Answer","text":"该工具同时显示三个城市，以便进行清晰的比较。要进行更多比较，只需将其中一个下拉菜单更改为其他城市即可。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/worldclock/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/worldclock/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/worldclock/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/worldclock/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/worldclock/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/worldclock/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/worldclock/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/worldclock/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/worldclock/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/worldclock/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>世界时钟</span></nav>
+  <h1>世界时钟</h1>
+  <p class="lead">最多选择三个城市并排比较它们当前的当地时间。时钟每秒更新一次。</p>
+  <section class="widget" id="tool"><div id="wc-app"><div class="row"><div class="field"><label for="wc-city1">城市1</label><select id="wc-city1"></select></div><div class="field"><label for="wc-city2">城市2</label><select id="wc-city2"></select></div><div class="field"><label for="wc-city3">城市3</label><select id="wc-city3"></select></div></div><div id="wc-out" class="result" style="flex-direction:column;gap:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>即时比较世界各地当地时间</h2>
+<p>无论您是安排与东京同事的会议、给纽约的朋友打电话，还是查看您所在时区的现场活动何时开始，了解其他地方的时间都很重要。 The world clock lets you compare the current local times in multiple cities simultaneously without doing any mental arithmetic.从下拉列表中选择城市，当前时间会立即出现，每秒更新一次，因此您始终会看到实时、准确的比较，而不是在您移开视线时就变得陈旧的快照。</p>
+<h2>如何使用</h2>
+<p>Choose a city from each of the three dropdown menus. As soon as you make a selection, that city&#39;s clock appears below, ticking in real time alongside the others.除了选择您关心的位置之外，无需提交任何内容，也无需配置任何内容 - 随时更改任何下拉菜单，显示会立即更新。这三个默认值设置为广泛使用的参考城市，但您可以将其中任何一个城市替换为列表中的任何其他城市，以建立所需的精确比较，无论是同一国家/地区的两个海岸还是三个大陆。</p>
+<h2>为什么比较时间比看起来更难</h2>
+<p>时区不仅仅是从地图上计算小时数的问题。政治边界，而不是均匀分布的经络，决定了一个区域的结束位置和另一个区域的开始位置，因此相邻区域可以相距数小时，或者在少数情况下，尽管地理上相距很远，但仍共享一个区域。最重要的是，许多国家都会将时钟向前或向后调整夏令时，而且它们并不都在同一日期这样做——北半球和南半球相差六个月，一些国家根本不遵守夏令时，甚至在遵守夏令时的邻国之间，确切的转换日期也可能有所不同。再加上一些地方使用与标准时间不同寻常的半小时或 45 分钟偏移，手动计算就成为错过会议和迟到的真正根源。</p>
+<h2>时钟如何保持准确</h2>
+<p>该工具依靠网络浏览器内置的时区数据库（与日历、电话和操作系统相同的全球标准）来避免所有这些复杂性。您可以选择的每个城市都会映射到其官方时区标识符，浏览器会计算出该地点此时正确的当前偏移量，自动考虑夏令时规则和任何历史怪癖。这意味着显示的时间对于今天的日期来说始终是正确的，而无需记住特定国家/地区当前是否正在遵守夏令时。唯一的要求是您自己设备的时钟设置正确，因为每次比较都是相对于它计算的。</p>
+<h2>世界时钟的帮助</h2>
+<p>国际球队靠这种比较生存。在三个办公室之间安排通话、检查同事是否可能还在办公桌前，或者计算出发送需要当天回复的消息的最新合理时间，这些日常任务只需快速浏览一下世界时钟即可在几秒钟内解决。旅行者用它来了解何时可以安全地给家人打电话，记者和交易员用它来跟踪金融中心的市场开放时间，体育直播或流媒体赛事的粉丝用它来将开球或首映时间转换为他们自己的当地时间。</p>
+<p>它对于个人时刻同样有用——确定给海外亲戚打电话是否太早或太晚，计划与移居国外的朋友进行视频聊天，或者只是满足对地球另一端目前正在发生的事情的好奇心。</p>
+<h2>私密、即时且免费</h2>
+<p>无需注册，无需付费，也没有广告。整个时钟作为一小段代码在您自己的设备上运行，读取系统时间并应用浏览器的内置时区规则，因此即使页面加载后没有互联网连接，它也会立即工作并保持滴答作响。关于您选择的城市的任何内容都不会被上传、记录或共享。</p>
+<p>要使用它，请从三个下拉列表中选择您的城市，然后观看时间每秒实时更新。随时交换任何城市以比较不同的地点，并依靠显示屏每次都能正确处理夏令时和时区异常。</p>
+<h2>标准时间简史</h2>
+<p>在十九世纪末之前，每个城镇实际上都根据太阳来保留自己的当地时间，这使得铁路时刻表和长途通信成为一个真正令人头痛的问题——相距仅几十公里的两个城镇可能会出现几分钟的不一致。铁路和电报的普及迫使世界走向标准化时区，1884 年的一次国际会议建立了以格林威治为单位测量的基于经度的时区系统，此后经过多次本地调整，该系统至今仍然支撑着本页上的世界时钟的工作方式。了解历史可以解释为什么区域边界遵循国家边界，而不是清晰的经度线：它们是为了实用和政治上的方便而绘制的，而不是数学上的整洁。少数地方甚至用非标准的 30 或 45 分钟而不是一整小时来抵消，这提醒人们，整个系统虽然现在是全球协调的，但仍然是建立在国际框架之上的国家决策的拼凑而成。</p>
+    <section class="faq"><h2>世界时钟常见问题解答</h2><dl><dt>世界时钟有多准确？</dt><dd>这些时间源自您设备的系统时钟和现代浏览器内置的 IANA 时区数据库。只要您设备的时钟设置正确，它们就精确到秒。</dd><dt>夏令时会影响结果吗？</dt><dd>是的，浏览器的 Intl API 自动考虑每个时区的夏令时规则，因此无论一年中的什么时间，显示的时间始终是正确的。</dd><dt>我可以比较三个以上的城市吗？</dt><dd>该工具同时显示三个城市，以便进行清晰的比较。要进行更多比较，只需将其中一个下拉菜单更改为其他城市即可。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/worldclock/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/worldclock/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/worldclock/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/worldclock/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/worldclock/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/worldclock/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/worldclock/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/worldclock/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/worldclock/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/worldclock/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"city1":"城市1","city2":"城市2","city3":"城市3"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/worldclock.js" defer></script>
+</body>
+</html>

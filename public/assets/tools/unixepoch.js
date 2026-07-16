@@ -10,9 +10,9 @@
     if (!tsIn || !tsIn.value) { if(utcEl)utcEl.textContent='—'; if(localEl)localEl.textContent='—'; return; }
     var ts = parseInt(tsIn.value, 10);
     var d = new Date(ts * 1000);
-    if (isNaN(d.getTime())) { if(utcEl)utcEl.textContent='Invalid'; return; }
-    if (utcEl) utcEl.textContent = d.toUTCString();
-    if (localEl) localEl.textContent = d.toLocaleString();
+    if (isNaN(d.getTime())) { if(utcEl)utcEl.textContent=T('invalid','Invalid'); return; }
+    if (utcEl) utcEl.textContent = d.toLocaleString(window.__LANG||undefined,{timeZone:'UTC',dateStyle:'medium',timeStyle:'medium'})+' UTC';
+    if (localEl) localEl.textContent = d.toLocaleString(window.__LANG||undefined);
   }
   function dateToTs() {
     if (!dtIn || !dtIn.value) { if(tsOut)tsOut.textContent='—'; return; }

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Herramienta de diferenciación de texto: compara dos textos uno al lado del otro</title>
+<meta name="description" content="Herramienta de diferenciación de texto libre. Compara dos textos y resalta las diferencias entre ellos. Encuentre palabras agregadas, eliminadas y modificadas al instante.">
+<link rel="canonical" href="https://mikaio.dev/es/textdiff/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textdiff/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/textdiff/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/textdiff/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/textdiff/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/textdiff/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/textdiff/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/textdiff/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textdiff/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/textdiff/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/textdiff/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textdiff/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Herramienta de diferenciación de texto: compara dos textos uno al lado del otro">
+<meta property="og:description" content="Herramienta de diferenciación de texto libre. Compara dos textos y resalta las diferencias entre ellos. Encuentre palabras agregadas, eliminadas y modificadas al instante.">
+<meta property="og:url" content="https://mikaio.dev/es/textdiff/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Herramienta de diferenciación de texto: compara dos textos uno al lado del otro","url":"https://mikaio.dev/es/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Herramienta de diferenciación de texto libre. Compara dos textos y resalta las diferencias entre ellos. Encuentre palabras agregadas, eliminadas y modificadas al instante."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Herramienta de diferenciación de texto","item":"https://mikaio.dev/es/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cómo funciona la diferencia?","acceptedAnswer":{"@type":"Answer","text":"La herramienta compara los dos textos palabra por palabra. Las palabras presentes en B pero no en A se muestran en verde (agregadas). Las palabras en A pero no en B se muestran en rojo (eliminadas)."}},{"@type":"Question","name":"¿Es esta una diferencia real como git diff?","acceptedAnswer":{"@type":"Answer","text":"Esta es una diferencia simple a nivel de palabra para una comparación rápida. Para las diferencias a nivel de carácter o de línea como se usan en programación, las herramientas dedicadas como git diff o diff(1) son más apropiadas."}},{"@type":"Question","name":"¿Mi texto está almacenado?","acceptedAnswer":{"@type":"Answer","text":"No. La comparación se realiza completamente en su navegador. No se envía nada a ningún servidor."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Herramienta de diferenciación de texto</span></nav>
+  <h1>Herramienta de diferenciación de texto</h1>
+  <p class="lead">Pegue dos versiones de un texto en los cuadros siguientes para ver qué cambió entre ellas.</p>
+  <section class="widget" id="tool"><div id="td-app"><div class="row"><div class="field"><label for="td-a">Texto original</label><textarea id="td-a" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Pegue el texto original aquí..."></textarea></div><div class="field"><label for="td-b">Nuevo texto</label><textarea id="td-b" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Pegue aquí el texto nuevo o revisado..."></textarea></div></div><div id="td-out" style="margin-top:1rem;font-family:monospace;font-size:0.85rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);white-space:pre-wrap;line-height:1.7"></div></div></section>
+  <article class="content">
+    <h2>Compara dos textos y encuentra las diferencias.</h2>
+<p>Ya sea que esté revisando un documento revisado, verificando qué cambió en un contrato, comparando dos versiones de un ensayo o verificando que copiar y pegar fue correcto, una herramienta de diferenciación de texto ahorra tiempo al resaltar exactamente lo que cambió. Pega el texto original en el primer cuadro y la nueva versión en el segundo, y las diferencias se marcan al instante.</p>
+<h2>Cómo funciona la diferenciación a nivel de palabra</h2>
+<p>La herramienta utiliza el algoritmo de subsecuencia común más larga (LCS), el mismo algoritmo subyacente al comando Unix diff y git diff. Encuentra la secuencia más grande de palabras que aparecen en ambos textos en el mismo orden y luego marca todo lo que está fuera de esa secuencia como agregado o eliminado.</p>
+<p>Las palabras que se muestran en rojo y tachadas están en el original pero no en la nueva versión (eliminadas). Las palabras resaltadas en verde están en la nueva versión pero no en la original (agregada). Las palabras sin cambios aparecen en el texto normal.</p>
+<h2>Usos comunes para la comparación de texto</h2>
+<p><strong>Revisiones de documentos</strong>: cuando un colaborador devuelve un documento revisado, vea rápidamente exactamente qué palabras u oraciones cambiaron sin leer ambas versiones en su totalidad.</p>
+<p><strong>Revisión de contratos</strong>: los profesionales jurídicos utilizan diff para realizar un seguimiento de los cambios entre las versiones de los contratos. Un documento de &quot;línea roja&quot; o &quot;marcado&quot; es esencialmente una diferencia aplicada al texto legal.</p>
+<p><strong>Revisión académica</strong>: compare un primer borrador con un borrador revisado para verificar que las ediciones previstas se realizaron correctamente y que no se introdujeron cambios no deseados.</p>
+<p><strong>Revisión de código</strong>: si bien las diferencias de código se manejan mejor con herramientas como git diff (que opera línea por línea), una diferenciación a nivel de palabra puede ayudar al revisar documentación o comentarios.</p>
+<p><strong>Comprobación de plagio</strong>: compare un texto enviado con un original para detectar paráfrasis: palabras reordenadas o sustituidas que conservan el mismo significado.</p>
+<p><strong>Verificación de la traducción</strong>: compare un texto fuente con su traducción palabra por palabra para garantizar que esté completo (aunque esto es aproximado debido a las diferencias naturales del lenguaje).</p>
+<h2>Limitaciones de la diferenciación a nivel de palabra</h2>
+<p>Esta herramienta compara palabras sin comprender la semántica. Una oración completamente reescrita con el mismo significado aparecerá completamente eliminada y agregada. Para comprender la similitud semántica, se necesitan herramientas de procesamiento del lenguaje natural.</p>
+<p>La comparación tampoco distingue el formato, las mayúsculas o la puntuación dentro de las palabras a menos que formen parte de un token de palabra. &quot;Hola&quot; y &quot;hola&quot; se tratan como palabras diferentes.</p>
+<h2>Cómo utilizar la herramienta</h2>
+<p>Pegue el texto original en el primer cuadro y la versión revisada en el segundo, y la comparación aparecerá inmediatamente debajo, con las eliminaciones tachadas en rojo y las adiciones resaltadas en verde. No hay que presionar ningún botón para activar la comparación: se actualiza en vivo, por lo que puede pegar una nueva versión en cualquier momento y ver inmediatamente en qué se diferencia de la anterior.</p>
+<h2>Por qué la comparación a nivel de palabra, no a nivel de carácter</h2>
+<p>En teoría, una herramienta de diferenciación podría comparar carácter por carácter en lugar de palabra por palabra, pero ese enfoque produce resultados que son técnicamente precisos y prácticamente inútiles: corregir un solo error tipográfico en medio de una oración larga mostraría que casi todo el resto de la oración ha cambiado, porque cada carácter después de la corrección cambia de posición. En cambio, comparar a nivel de palabra significa que una sola palabra corregida se muestra como una eliminación y una adición, mientras que todo lo demás en la oración que en realidad no cambió se deja solo correctamente: una señal mucho más útil para un ser humano que intenta comprender lo que realmente se editó, que es exactamente el nivel de granularidad que interesa a la mayoría de las tareas reales de edición y corrección.</p>
+<h2>Leer una diferencia de manera eficiente</h2>
+<p>Al revisar una comparación larga, es útil buscar grupos de colores en lugar de leer cada palabra: un grupo apretado de rojo y verde uno al lado del otro generalmente indica una pequeña reformulación, mientras que una ejecución larga e ininterrumpida de un color indica un pasaje genuinamente nuevo o eliminado en lugar de una edición. Sentirse cómodo con este enfoque de escaneo de patrones es lo que permite a los editores y revisores legales experimentados procesar una revisión de varias páginas en unos pocos minutos en lugar de volver a leer todo el documento línea por línea.</p>
+<h2>Herramientas de diferenciación en software frente a prosa</h2>
+<p>Los programadores utilizan constantemente herramientas de diferenciación basadas en líneas como git diff, y vale la pena entender por qué una diferenciación a nivel de palabra como esta es una herramienta diferente y complementaria en lugar de un reemplazo. El código fuente está organizado naturalmente en líneas discretas, por lo que comparar línea por línea es la granularidad correcta: una línea modificada es una unidad lógica modificada. La prosa no tiene tales límites naturales; una sola oración puede abarcar varias líneas dependiendo del ancho de la ventana, y la unidad de cambio significativa es la palabra o frase, no dondequiera que se rompa una línea. Precisamente por eso, comparar prosa requiere un enfoque a nivel de palabra en lugar de reutilizar una herramienta de comparación basada en líneas y orientada a código.</p>
+<h2>Comparing translation drafts</h2>
+<p>Los editores y traductores bilingües a veces utilizan una diferencia a nivel de palabra para comparar dos versiones de una traducción del mismo texto fuente (por ejemplo, el borrador de un traductor humano con una versión traducida automáticamente, o dos revisiones sucesivas del mismo párrafo) para detectar rápidamente exactamente dónde divergen las opciones de palabras, sin necesidad de volver a leer el pasaje completo buscando la diferencia.</p>
+<h2>Una rápida comprobación de cordura antes de confiar en una diferencia</h2>
+<p>Antes de confiar en un resultado de diferenciación para algo importante (un documento legal, una tarea calificada), primero pegue un pequeño cambio conocido en los dos cuadros y confirme que la herramienta resalta exactamente ese cambio y nada más, de la misma manera que probaría una nueva báscula de cocina con un peso conocido antes de confiar en ella para una receta.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todas las comparaciones se ejecutan íntegramente en su navegador utilizando el algoritmo de subsecuencia común más larga, por lo que los resultados aparecen instantáneamente y ningún texto que pegue se envía a ningún servidor, se registra o se comparte.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre diferencias de texto</h2><dl><dt>¿Cómo funciona la diferencia?</dt><dd>La herramienta compara los dos textos palabra por palabra. Las palabras presentes en B pero no en A se muestran en verde (agregadas). Las palabras en A pero no en B se muestran en rojo (eliminadas).</dd><dt>¿Es esta una diferencia real como git diff?</dt><dd>Esta es una diferencia simple a nivel de palabra para una comparación rápida. Para las diferencias a nivel de carácter o de línea como se usan en programación, las herramientas dedicadas como git diff o diff(1) son más apropiadas.</dd><dt>¿Mi texto está almacenado?</dt><dd>No. La comparación se realiza completamente en su navegador. No se envía nada a ningún servidor.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"text_a":"Texto original","text_b":"Nuevo texto","placeholder_a":"Pegue el texto original aquí...","placeholder_b":"Pegue aquí el texto nuevo o revisado..."};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/textdiff.js" defer></script>
+</body>
+</html>

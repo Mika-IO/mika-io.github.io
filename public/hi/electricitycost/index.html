@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>बिजली लागत कैलकुलेटर - आपके उपकरण को चलाने में कितना खर्च आता है?</title>
+<meta name="description" content="मुफ़्त बिजली लागत कैलकुलेटर। दैनिक, मासिक और वार्षिक संचालन लागत देखने के लिए उपकरण की वाट क्षमता, प्रति दिन उपयोग के घंटे और अपनी बिजली की दर दर्ज करें।">
+<link rel="canonical" href="https://mikaio.dev/hi/electricitycost/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/electricitycost/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/electricitycost/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/electricitycost/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/electricitycost/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/electricitycost/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/electricitycost/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/electricitycost/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/electricitycost/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/electricitycost/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/electricitycost/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/electricitycost/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="बिजली लागत कैलकुलेटर - आपके उपकरण को चलाने में कितना खर्च आता है?">
+<meta property="og:description" content="मुफ़्त बिजली लागत कैलकुलेटर। दैनिक, मासिक और वार्षिक संचालन लागत देखने के लिए उपकरण की वाट क्षमता, प्रति दिन उपयोग के घंटे और अपनी बिजली की दर दर्ज करें।">
+<meta property="og:url" content="https://mikaio.dev/hi/electricitycost/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"बिजली लागत कैलकुलेटर - आपके उपकरण को चलाने में कितना खर्च आता है?","url":"https://mikaio.dev/hi/electricitycost/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त बिजली लागत कैलकुलेटर। दैनिक, मासिक और वार्षिक संचालन लागत देखने के लिए उपकरण की वाट क्षमता, प्रति दिन उपयोग के घंटे और अपनी बिजली की दर दर्ज करें।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"बिजली लागत कैलकुलेटर","item":"https://mikaio.dev/hi/electricitycost/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"मैं अपने उपकरण की वाट क्षमता का पता कैसे लगा सकता हूँ?","acceptedAnswer":{"@type":"Answer","text":"उपकरण के पीछे या नीचे लगे लेबल की जाँच करें, या इसे मैनुअल में देखें। उपकरण अपनी बिजली खपत को वाट (डब्ल्यू) या किलोवाट (किलोवाट) में सूचीबद्ध करते हैं। सामान्य उदाहरण: एलईडी बल्ब 8-15 वॉट, लैपटॉप 30-100 वॉट, रेफ्रिजरेटर 100-400 वॉट, एयर कंडीशनर 1000-3500 वॉट।"}},{"@type":"Question","name":"मुझे किस दर की बिजली का उपयोग करना चाहिए?","acceptedAnswer":{"@type":"Answer","text":"आपकी बिजली दर आपके उपयोगिता बिल पर निर्भर करती है, जिसे आमतौर पर सेंट या पेंस प्रति किलोवाट-घंटे (kWh) के रूप में व्यक्त किया जाता है। दरें देश और प्रदाता के अनुसार व्यापक रूप से भिन्न होती हैं। वैश्विक औसत लगभग 0.15 USD प्रति kWh है, लेकिन अमेरिकी दरें 0.10 से 0.35 तक हैं और यूरोपीय दरें और भी अधिक व्यापक रूप से भिन्न हैं।"}},{"@type":"Question","name":"लागत की गणना कैसे की जाती है?","acceptedAnswer":{"@type":"Answer","text":"kWh में खपत ऊर्जा = (वाट/1000) × घंटे प्रति दिन। प्रति दिन लागत = kWh × दर। मासिक लागत 30.44 दिन मानी जाती है; वार्षिक लागत 365 दिन मानती है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/electricitycost/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/electricitycost/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/electricitycost/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/electricitycost/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/electricitycost/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/electricitycost/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/electricitycost/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/electricitycost/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/electricitycost/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/electricitycost/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>बिजली लागत कैलकुलेटर</span></nav>
+  <h1>बिजली लागत कैलकुलेटर</h1>
+  <p class="lead">चलने की लागत देखने के लिए उपकरण की वाट क्षमता, आप इसे दिन में कितने घंटे उपयोग करते हैं, और प्रति kWh अपनी बिजली दर दर्ज करें।</p>
+  <section class="widget" id="tool"><form id="elec-form"><div class="row"><div class="field"><label for="elec-watts">पावर (वाट)</label><input type="number" id="elec-watts" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="elec-hours">प्रति दिन उपयोग किये गये घंटे</label><input type="number" id="elec-hours" step="any" min="0" max="24" value="8" inputmode="decimal"></div><div class="field"><label for="elec-rate">विद्युत दर (प्रति किलोवाट)</label><input type="number" id="elec-rate" step="any" min="0" value="0.15" inputmode="decimal"></div></div><div class="result"><span class="hint">दैनिक लागत: </span><b id="elec-day">—</b> · <span class="hint">मासिक लागत: </span><b id="elec-month">—</b> · <span class="hint">वार्षिक लागत: </span><span class="big" id="elec-year">—</span></div></form></section>
+  <article class="content">
+    <h2>पता लगाएं कि किसी उपकरण को चलाने में कितना खर्च आता है</h2>
+<p>बिजली के बिल अक्सर रहस्यमय शुल्क की तरह लगते हैं जब तक कि आप उन्हें व्यक्तिगत उपकरण स्तर तक नहीं तोड़ देते। एक बार जब आप जान जाते हैं कि कोई उपकरण कितने वॉट का है और वह दिन में कितने घंटे चलता है, तो आप सटीक रूप से गणना कर सकते हैं कि इसकी लागत क्या है। यह कैलकुलेटर उन तीन इनपुटों को लेता है - वाट क्षमता, प्रति दिन घंटे और आपकी बिजली दर - और तुरंत आपको दैनिक, मासिक और वार्षिक चलने की लागत दिखाता है।</p>
+<h2>किलोवाट-घंटे को समझना</h2>
+<p>बिजली किलोवाट-घंटे (kWh) में बेची जाती है। एक किलोवाट-घंटा वह ऊर्जा है जिसका उपयोग 1,000 वॉट के उपकरण द्वारा एक घंटे तक चलने या 100 वॉट के उपकरण द्वारा दस घंटे तक चलने के लिए किया जाता है। आपका बिजली बिल प्रति किलोवाट मूल्य बताता है - यह वह दर है जो आप उपभोग की गई ऊर्जा की प्रत्येक इकाई के लिए भुगतान करते हैं।</p>
+<p>सूत्र: खपत की गई ऊर्जा (kWh) = बिजली (वाट) ÷ 1000 × उपयोग के घंटे। लागत = ऊर्जा (किलोवाट) × दर प्रति किलोवाट। उदाहरण के लिए, प्रतिदिन 4 घंटे चलने वाला 2,000 वॉट का इलेक्ट्रिक हीटर प्रतिदिन 8 kWh का उपयोग करता है। 0.20 प्रति किलोवाट की दर से, इसकी लागत 1.60 प्रति दिन, 48 प्रति माह और लगभग 584 प्रति वर्ष है।</p>
+<h2>विशिष्ट उपकरण वाट क्षमता</h2>
+<p>विशिष्ट वाट क्षमता को जानने से आपको यह प्राथमिकता देने में मदद मिलती है कि बचत कहाँ देखनी है:</p>
+<ul>
+<li><strong>एलईडी लाइट बल्ब</strong>: 8-15 वॉट</li>
+<li><strong>सीएफएल लाइट बल्ब</strong>: 15-25 डब्ल्यू</li>
+<li><strong>लैपटॉप कंप्यूटर</strong>: 30-100 वॉट</li>
+<li><strong>डेस्कटॉप कंप्यूटर + मॉनिटर</strong>: 150-350 डब्ल्यू</li>
+<li><strong>रेफ्रिजरेटर</strong>: 100-400 वॉट (चलने का औसत, अधिकतम नहीं)</li>
+<li><strong>वॉशिंग मशीन</strong>: 500-2,000 डब्ल्यू</li>
+<li><strong>डिशवॉशर</strong>: 1,200-2,400 डब्ल्यू</li>
+<li><strong>माइक्रोवेव</strong>: 600-1,200 डब्ल्यू</li>
+<li><strong>इलेक्ट्रिक ओवन</strong>: 2,000-5,000 डब्ल्यू</li>
+<li><strong>एयर कंडीशनर (विंडो यूनिट)</strong>: 500-1,500 डब्ल्यू</li>
+<li><strong>एयर कंडीशनर (केंद्रीय, प्रति टन)</strong>: 1,200–2,400 डब्ल्यू</li>
+<li><strong>इलेक्ट्रिक केतली</strong>: 1,500-3,000 डब्ल्यू</li>
+<li><strong>हेयर ड्रायर</strong>: 1,000-2,500 डब्ल्यू</li>
+<li><strong>इलेक्ट्रिक वाहन चार्जर (स्तर 2)</strong>: 3,300-19,200 डब्ल्यू</li>
+</ul>
+<h2>जहां बिजली का खर्च सबसे ज्यादा होता है</h2>
+<p>अधिकांश घरों में, सबसे अधिक बिजली उपभोक्ता हीटिंग और कूलिंग (एचवीएसी), वॉटर हीटिंग, बड़े रसोई उपकरण (इलेक्ट्रिक रेंज/ओवन), और इलेक्ट्रिक ड्रायर हैं। ये टेलीविज़न, कंप्यूटर और फोन चार्जर जैसे इलेक्ट्रॉनिक्स के योगदान को कम कर देते हैं, जिन्हें अक्सर दोषी ठहराया जाता है लेकिन समग्र बिल में शायद ही कभी महत्वपूर्ण होते हैं।</p>
+<p>1,500 वॉट पर प्रतिदिन 8 घंटे चलने वाले एक एयर कंडीशनर की लागत 0.18/किलोवाट पर लगभग 2.16 प्रति दिन - लगभग 65 प्रति माह है। 5 घंटे के लिए 100 W पर एक टीवी की लागत 0.09 प्रति दिन - लगभग 2.70 प्रति माह है। पैमाने में अंतर दर्शाता है कि थर्मोस्टेट सेटिंग को बदलने से लाइट बंद करने की तुलना में अधिक बचत क्यों होती है।</p>
+<h2>दुनिया भर में बिजली की दरें</h2>
+<p>बिजली की दरें बहुत भिन्न होती हैं। संयुक्त राज्य अमेरिका में, आवासीय औसत लगभग 0.13-0.18 प्रति kWh है, लेकिन यह लुइसियाना में 0.10 से कम और हवाई और कैलिफोर्निया में 0.30 से अधिक है। जर्मनी में यह दर यूरोप में सबसे अधिक लगभग 0.35 प्रति kWh है। कई विकासशील देशों में दरें बहुत कम हैं, आंशिक रूप से क्योंकि बिजली पर सब्सिडी दी जाती है। सबसे सटीक परिणाम के लिए अपने वास्तविक बिल से दर दर्ज करें।</p>
+<h2>कैलकुलेटर का उपयोग कैसे करें</h2>
+<p>उपकरण की वाट क्षमता दर्ज करें - अधिकांश उपकरणों पर एक लेबल पर या मैनुअल में मुद्रित, या ऑनलाइन मॉडल नंबर खोजने पर पाया जाता है - साथ ही यह आमतौर पर कितने घंटे चलता है और हाल के बिल से प्रति किलोवाट-घंटे आपकी बिजली दर दर्ज करें। दैनिक, मासिक और वार्षिक लागत तुरंत दिखाई देती है, जैसे ही आप तीन इनपुट में से किसी एक को समायोजित करते हैं, अपडेट हो जाती है। कुछ &quot;क्या होगा अगर&quot; परिदृश्यों को आज़माना, जैसे कि उपयोग के घंटों को आधा करना, यह देखने का एक त्वरित तरीका है कि आदत में बदलाव वास्तव में केवल अंतर्ज्ञान के बजाय पैसे के लिए कितना मूल्यवान है।</p>
+<h2>स्टैंडबाय पावर और फैंटम लोड</h2>
+<p>कई उपकरण बंद होने पर भी थोड़ी मात्रा में बिजली खींचते रहते हैं लेकिन फिर भी प्लग इन रहते हैं, इस घटना को अक्सर स्टैंडबाय पावर या फैंटम लोड कहा जाता है। गेम कंसोल, सेट-टॉप बॉक्स, फोन चार्जर और रिमोट-कंट्रोल स्टैंडबाय मोड वाले उपकरण आम तौर पर घड़ी के चारों ओर मुट्ठी भर वाट खींचते हैं। व्यक्तिगत रूप से यह मामूली लगता है, लेकिन एक घर में हमेशा प्लग-इन किए जाने वाले दर्जनों उपकरणों में और दिन में 24 घंटे, साल में 365 दिन, फैंटम लोड एक बिल के ध्यान देने योग्य टुकड़े को जोड़ सकता है - अक्सर कुल आवासीय बिजली के उपयोग का 5 से 10 प्रतिशत होने का अनुमान लगाया जाता है। इस तरह के उपकरण की कम स्टैंडबाय वाट क्षमता को इस कैलकुलेटर के माध्यम से 24 घंटे दैनिक उपयोग के साथ चलाने से तुरंत पता चलता है कि यह अनप्लग करने लायक है या नहीं।</p>
+<h2>खरीदने से पहले उपकरणों की तुलना करें</h2>
+<p>वही कैलकुलेटर खरीदारी से पहले उपयोगी होता है, केवल खरीदारी के बाद नहीं। एक दुकान पर दो समान उपकरण अपने ऊर्जा लेबल पर अलग-अलग वाट क्षमता को सूचीबद्ध कर सकते हैं, और आपके उपयोग के अपेक्षित घंटों और स्थानीय दर पर कैलकुलेटर के माध्यम से प्रत्येक उम्मीदवार की वाट क्षमता को चलाने से एक अमूर्त स्पेक-शीट संख्या वास्तविक वार्षिक चलने वाली लागत में बदल जाती है, जिसकी तुलना आप सीधे दो मॉडलों के बीच मूल्य अंतर से कर सकते हैं। बहुत कम चलने वाली वाट क्षमता वाला थोड़ा अधिक महंगा उपकरण अक्सर एक या दो साल के भीतर अंतर का भुगतान कर देता है, जिसे किसी दुकान में अकेले स्टिकर की कीमतों की तुलना करते समय अनदेखा करना आसान होता है।</p>
+<h2>निजी और तत्काल</h2>
+<p>गणना पूरी तरह से आपके ब्राउज़र में चलती है, इसलिए जैसे ही आप किसी भी मूल्य को समायोजित करते हैं तो परिणाम तुरंत अपडेट हो जाते हैं, और आपके द्वारा दर्ज किया गया कोई भी वाट क्षमता, उपयोग या दर का कोई भी आंकड़ा कभी भी सर्वर पर भेजा, लॉग या साझा नहीं किया जाता है।</p>
+    <section class="faq"><h2>बिजली की लागत अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>मैं अपने उपकरण की वाट क्षमता का पता कैसे लगा सकता हूँ?</dt><dd>उपकरण के पीछे या नीचे लगे लेबल की जाँच करें, या इसे मैनुअल में देखें। उपकरण अपनी बिजली खपत को वाट (डब्ल्यू) या किलोवाट (किलोवाट) में सूचीबद्ध करते हैं। सामान्य उदाहरण: एलईडी बल्ब 8-15 वॉट, लैपटॉप 30-100 वॉट, रेफ्रिजरेटर 100-400 वॉट, एयर कंडीशनर 1000-3500 वॉट।</dd><dt>मुझे किस दर की बिजली का उपयोग करना चाहिए?</dt><dd>आपकी बिजली दर आपके उपयोगिता बिल पर निर्भर करती है, जिसे आमतौर पर सेंट या पेंस प्रति किलोवाट-घंटे (kWh) के रूप में व्यक्त किया जाता है। दरें देश और प्रदाता के अनुसार व्यापक रूप से भिन्न होती हैं। वैश्विक औसत लगभग 0.15 USD प्रति kWh है, लेकिन अमेरिकी दरें 0.10 से 0.35 तक हैं और यूरोपीय दरें और भी अधिक व्यापक रूप से भिन्न हैं।</dd><dt>लागत की गणना कैसे की जाती है?</dt><dd>kWh में खपत ऊर्जा = (वाट/1000) × घंटे प्रति दिन। प्रति दिन लागत = kWh × दर। मासिक लागत 30.44 दिन मानी जाती है; वार्षिक लागत 365 दिन मानती है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/electricitycost/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/electricitycost/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/electricitycost/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/electricitycost/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/electricitycost/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/electricitycost/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/electricitycost/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/electricitycost/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/electricitycost/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/electricitycost/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"watts":"पावर (वाट)","hours_day":"प्रति दिन उपयोग किये गये घंटे","rate":"विद्युत दर (प्रति किलोवाट)","daily":"दैनिक लागत","monthly":"मासिक लागत","annual":"वार्षिक लागत"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/electricitycost.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>是或否——随机决策者</title>
+<meta name="description" content="免费是或否生成器。提出问题并立即获得公平、随机的是或否答案，并进行统计。在浏览器中运行，无需应用程序。">
+<link rel="canonical" href="https://mikaio.dev/zh/yesorno/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/yesorno/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/yesorno/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/yesorno/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/yesorno/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/yesorno/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/yesorno/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/yesorno/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/yesorno/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/yesorno/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/yesorno/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/yesorno/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="是或否——随机决策者">
+<meta property="og:description" content="免费是或否生成器。提出问题并立即获得公平、随机的是或否答案，并进行统计。在浏览器中运行，无需应用程序。">
+<meta property="og:url" content="https://mikaio.dev/zh/yesorno/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"是或否——随机决策者","url":"https://mikaio.dev/zh/yesorno/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费是或否生成器。提出问题并立即获得公平、随机的是或否答案，并进行统计。在浏览器中运行，无需应用程序。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"是或否","item":"https://mikaio.dev/zh/yesorno/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"答案真的是随机的吗？","acceptedAnswer":{"@type":"Answer","text":"是的。每个答案都使用浏览器的加密安全随机生成器，每次给出“是”和“否”的机会均等 50%，并且不会记住之前的答案。"}},{"@type":"Question","name":"我什么时候应该使用是或否选择器？","acceptedAnswer":{"@type":"Answer","text":"它非常适合打破真正的关系，快速解决一个琐碎的选择，或者在你不断来回时推动自己做出决定。你对答案的反应通常会告诉你你真正想要什么。"}},{"@type":"Question","name":"它需要互联网吗？","acceptedAnswer":{"@type":"Answer","text":"不会。页面加载后，它完全在您的浏览器中运行，因此您可以在没有连接的情况下继续询问。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/yesorno/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/yesorno/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/yesorno/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/yesorno/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/yesorno/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/yesorno/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/yesorno/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/yesorno/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/yesorno/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/yesorno/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>是或否</span></nav>
+  <h1>是或否</h1>
+  <p class="lead">想一个问题，然后点击按钮以公平、随机地回答“是”或“否”。统计记录了答案的分布情况。</p>
+  <section class="widget" id="tool"><div id="yn" data-yes="是的" data-no="否"><div class="result"><span class="big" id="yn-result">有什么问题就问我</span></div><div class="row" style="justify-content:center"><button type="button" class="btn" id="yn-ask">问问题</button></div><div class="coin-tally"><span>是的<b id="yn-y">0</b></span><span>否<b id="yn-n">0</b></span></div></div></section>
+  <article class="content">
+    <h2>当你只需要一个直接的答案时</h2>
+<p>有些决定不值得长时间辩论。您应该点披萨吗？带伞吗？先发短信？尽管外面看起来有点灰暗，还是去散步？当一个选择真正平衡且风险很小时，最快的前进方式往往是让机会决定。这个“是或否”工具正是这样做的：思考你的问题，点击按钮，它会立即返回一个公平、随机的“是”或“否”。下面的实时统计记录了到目前为止答案的情况。一切都发生在您的浏览器中，因此答案会立即出现，您提出的任何问题都不会被记录或发送到任何地方。</p>
+<p>设计就像它回答的问题一样简单。有一个按钮。按下它，就会出现一个大的“是”或“否”，颜色为绿色或红色，因此判断一目了然。下面的两个计数器显示您收到的每个计数器的数量，如果您提出一系列问题或只是想知道多次点击后均匀分割的效果，这会很有用。无需设置任何内容，无需创建帐户，也无需杂乱的事物来分散您对手头决策的注意力。</p>
+<h2>答案是如何选择的</h2>
+<p>每个响应均由浏览器的加密安全随机数生成器生成，该随机数生成器与用于保护在线敏感任务的可信随机数来源相同。这意味着每个答案都是真正不可预测的，并且完全独立于之前的答案。是和否每一次都有百分之五十的机会，没有任何方向上的偏见，也没有对之前发生的事情的记忆。与翻阅自己的想法不同，你可能会无意识地倾向于你已经喜欢的答案，该工具根本没有偏好。</p>
+<p>因为它没有记忆，所以连续几个“是”答案不会使下一次点击时更有可能出现“否”。这是对机会的一个常见误解：赔率每次都会完全重置。通过统计，您可以很容易地看到这一点。仅就几个问题而言，分歧可能看起来不平衡，只有一个答案领先，但随着你不断提问，“是”和“否”的比例逐渐接近平衡。这是一个小型的实践演示，展示了随机性在短期和长期中的表现。</p>
+<h2>听凭机遇的惊人用处</h2>
+<p>将决定交给类似硬币的工具听起来很无聊，但它具有人们长期以来所依赖的真正的心理价值。秘诀并不在于机会会做出比你更好的选择，而在于答案出现的那一刻，你会注意到自己对此的感受。如果该工具说“是”，并且您感到一丝轻松，那么这种反应就是一个强有力的线索，表明“是”就是您一直秘密想要的。如果它说“不”，并且您立即想再次点击以获得不同的结果，那么您就已经了解到答案对您来说比您承认的更重要，并且也许值得比随机翻转更多。</p>
+<p>通过这种方式使用，“是”或“否”选择器不再是算命师，而是一面镜子。它非常适合打破真正的平局，无论哪种选择都可以，让自己摆脱无休止的琐事的反复，或者为平凡的一天增添一点俏皮的自发性。它还可以友好地解决争端，不会让任何人觉得自己在争论中输了，因为结果来自一个公正的来源，没有人可以控制。</p>
+<h2>适合的日常时刻</h2>
+<p>小决定堆积起来。首先要处理哪件琐事，是否吃甜点，今晚是呆在家里还是出去玩，是否要发送那个有点冒险的信息，两部同样优秀的电影中哪一部值得观看。这些都不值得使用电子表格，而为它们烦恼只会耗尽你可以花在其他地方的精力。快速、公正的“是”或“否”可以消除僵局，让你继续做事。</p>
+<p>在团体中也很方便。当一桌朋友无法达成一致且没有人强烈介意时，轻按一下即可公平地结束僵局。父母用它来让小选择感觉像是一场游戏，而不是一场谈判。教师和辅导员用它来决定谁先行动或是否尝试一个想法，以保持轻松的气氛。由于使用范围如此广泛，门槛如此之低，许多人都在这些小小的时刻使用这样的工具。</p>
+<h2>对更大的事情说一句温和的话</h2>
+<p>对于真正重要的决定——任何涉及你的健康、金钱、人际关系或安全的事情——随机的“是”或“否”并不是正确的工具，而且它也不会假装是。这些选择值得认真思考、良好的信息，有时还值得您信任的人的建议。该工具的闪光点恰恰在相反的领域：无数微小的、低风险的选择，其中错误决定的成本微不足道，而犹豫不决的成本是唯一真正的问题。了解自己面临哪种决策是充分利用决策的一部分。</p>
+<h2>私密、即时且免费</h2>
+<p>无需注册、无需付费、无需等待。整个工具是在您自己的设备上运行的一小段代码，这就是为什么它会在您点击时立即响应，并且即使没有互联网连接也能继续工作。关于您的问题的任何内容都不会被上传，因为您从未输入它们 - 您只需将问题记在心里并阅读判决即可。计数仅存在于您的屏幕上，并在您重新加载页面时重置。</p>
+<p>要使用它，请思考您的问题，按下按钮，然后阅读答案。您可以多次询问，每当您想检查运行分数时，请浏览一下“是”和“否”计数器，然后重新加载页面以重新开始。它是最简单的决策者，当您无法完全做出决定时，它总是做好准备。</p>
+    <section class="faq"><h2>是或否常见问题解答</h2><dl><dt>答案真的是随机的吗？</dt><dd>是的。每个答案都使用浏览器的加密安全随机生成器，每次给出“是”和“否”的机会均等 50%，并且不会记住之前的答案。</dd><dt>我什么时候应该使用是或否选择器？</dt><dd>它非常适合打破真正的关系，快速解决一个琐碎的选择，或者在你不断来回时推动自己做出决定。你对答案的反应通常会告诉你你真正想要什么。</dd><dt>它需要互联网吗？</dt><dd>不会。页面加载后，它完全在您的浏览器中运行，因此您可以在没有连接的情况下继续询问。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/yesorno/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/yesorno/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/yesorno/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/yesorno/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/yesorno/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/yesorno/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/yesorno/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/yesorno/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/yesorno/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/yesorno/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"ask":"问问题","yes":"是的","no":"否","ready":"有什么问题就问我"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/yesorno.js" defer></script>
+</body>
+</html>

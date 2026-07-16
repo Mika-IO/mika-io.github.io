@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>时区差计算器 — 任意两个时区之间的小时数</title>
+<meta name="description" content="免费时区差异计算器。查找全球任意两个城市或时区之间的确切小时差。浏览器中即时显示结果。">
+<link rel="canonical" href="https://mikaio.dev/zh/timezonediff/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/timezonediff/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/timezonediff/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/timezonediff/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/timezonediff/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/timezonediff/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/timezonediff/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/timezonediff/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/timezonediff/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/timezonediff/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/timezonediff/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/timezonediff/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="时区差计算器 — 任意两个时区之间的小时数">
+<meta property="og:description" content="免费时区差异计算器。查找全球任意两个城市或时区之间的确切小时差。浏览器中即时显示结果。">
+<meta property="og:url" content="https://mikaio.dev/zh/timezonediff/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"时区差计算器 — 任意两个时区之间的小时数","url":"https://mikaio.dev/zh/timezonediff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费时区差异计算器。查找全球任意两个城市或时区之间的确切小时差。浏览器中即时显示结果。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"时差计算器","item":"https://mikaio.dev/zh/timezonediff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"夏令时会影响结果吗？","acceptedAnswer":{"@type":"Answer","text":"是的。该差异是使用当前 UTC 偏移量计算的，其中已包括任何有效的夏令时调整。"}},{"@type":"Question","name":"为什么差异会逐年变化？","acceptedAnswer":{"@type":"Answer","text":"当一个区域实行夏令时而另一个区域不实行夏令时，或者当它们在不同的日期发生变化时，它们之间的偏移量会改变一小时。"}},{"@type":"Question","name":"如果两个城市位于同一时区怎么办？","acceptedAnswer":{"@type":"Answer","text":"差异将为 0 小时。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>时差计算器</span></nav>
+  <h1>时差计算器</h1>
+  <p class="lead">选择两个时区以查看它们之间的当前小时差。</p>
+  <section class="widget" id="tool"><div id="tzd-app"><div class="row"><div class="field"><label for="tzd-tz1">时区1</label><select id="tzd-tz1"></select></div><div class="field"><label for="tzd-tz2">时区2</label><select id="tzd-tz2"></select></div></div><div class="result"><span class="hint">差异: </span><span class="big" id="tzd-out">—</span></div><div id="tzd-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>计算任意两座城市之间的时差</h2>
+<p>无论你是要安排一通国际电话、跟踪一个全球性活动，还是仅仅好奇两座城市之间相差多少小时，时差计算器都能即时给出答案。选择两个地点，工具会以小时为单位显示它们之间的当前偏差，并自动考虑当前是否正在实行夏令时。</p>
+<h2>为什么时差会变化</h2>
+<p>全球被划分为大约 40 个不同的时区，每个时区以其与协调世界时（UTC）的偏差来定义。大多数偏差是整小时数，但一些国家使用半小时或十五分钟的偏差——印度是 UTC+5:30，尼泊尔是 UTC+5:45，澳大利亚的几个州使用 UTC+9:30 和 UTC+10:30。</p>
+<p>夏令时使情况进一步复杂化。当一个地点实行夏令时而另一个不实行的时候，它们之间的实际偏差就会改变。美国和欧洲大部分地区都实行夏令时，但它们在不同的日期切换：美国在三月和十一月切换，欧洲在三月末和十月切换。在这些切换日期之间的时段内，美欧之间的时差比一年中其余时间多或少一小时。</p>
+<h2>旅行者的实用指南</h2>
+<p>出国旅行前，了解时差有助于你为做好应对时差的心理准备并规划前几天的行程。从纽约飞到伦敦的航班在一年中某些时段会增加 5 小时（由于夏令 的不同日期而不同）。同时给家里的人打电话，，需要知道合理的时间。两地同时处于合适的时间。</p>
+<h2>远程工作和全球团队</h2>
+<p>远程团队越来越频繁地跨越时时 时，，了解时差变得至关重要。许多团队建立核心重叠时段——即大多数成员同时处于正常工作时间内的那几个小时。5 小时的时差可能仍允许 2-3 小时的重叠；12 小时的时差则要求有人在正常工作日的边缘工作。日程安排工具、日历应用程序和项目管理平台都能自动处理时区域，但理解其背后的偏差有助于你在不依赖软件的情况下推理日程安排。</p>
+<h2>金融市场</h2>
+<p>证券交易所按照特定的本地时区运营：纽约证券交易所在东部时间上午 9:30 开盘，伦敦证券交易所在格林尼治标准时间上午 8:00 开盘，东京证券交易所在日本标准时间上午 9:00 开盘。其他时区的交易者需要知道这些开盘时间在本地意味着什么，尤其是对于几乎连续 24 小时运的期货和外汇市场。</p>
+<h2>航空和物流</h2>
+<p>航空公司以当地时间时公布出发和到达机场的时间时间，这意味着一班从纽约晚上 11 点出发、第二天伦敦次日上午 11 点的航班历时 7 小时，而非表面上的 12 小时。货运物流同样需要时区意识来处理清关文件、易腐货物跟踪和准时交货窗口。</p>
+<p># 国际日期变更线</p>
+<p>时区差异的极端情况是太平洋中的国际日期变更线。向东越过这条线会将你回退一个日历日；向西越过则前进一天。一些靠近日期变更线的岛国拥有不寻常的偏差：基里巴斯（UTC+14）比美属萨摩亚（UTC-12）超前 26 小时，尽管它们在地理上相对接近。</p>
+<h2>如何使用本计算器</h2>
+<p>从下拉菜单中选择两个地点，它们之间的当前偏差会立即显示，已自动考虑当前适用的夏令时规则。由于计算基于今天的日期，如果某个地点实行夏令时，请在一年中的进行重新检查，因为两个特定城市之间的偏差可能会随季节变化一个小时，即使两座城市的时钟都未改变。</p>
+<h2>跨多个时区安排会议</h2>
+<p>在三个或更多时区之间协调一个统一的会议时间，是时区计算器最常见的实际用途之一。一般方法是找到所有参与者地点合理工作时间的最窄重叠区段，然后对照每个地区当前的夏令时状态检查该重叠区间，因为一个在一月合适的时间到了到了七月可能会相对于合作伙伴的日程偏移一小时——如果两个地点在不同的日期更换时钟或其中一个根本不实行夏令时。定期跨时区开会的团队通常会为经常性会议设定一个固定的 UTC 时间，专门用来避免这种季节性漂移，让每个参与者的日历软件自动处理本地时间转换。</p>
+<h2>半小时和十五分钟偏差</h2>
+<p>世界上大多数时区位于 UTC 的整小时偏移，这就是为什么大多数城市对之间的转换是简单的小时算术。少数地区出于历史或政治原因打破了这个模式而非地理上的必要性：印度的 UTC+5:30 偏移在独立时部分选定，以便坐在全国宽广东西跨度的中间点；尼泊尔的 UTC+5:45 偏移常被说是刻意选择以区别于邻国印度的时间；加拿大纽芬兰使用 UTC-3:30，比大西洋加拿大的其他地区偏移半小时。这些分数偏差正是为什么可靠的时区工具需要同时处理分钟和小时而非假设每个偏差都是整数。</p>
+<h2>隐私与即时性</h2>
+<p>本工具使用你浏览器内置的 Intl API 来确定当前的 UTC 偏差，因此结果即时出现，你检查的地点相关数据不会被发送到任何地方、记录或共享。</p>
+    <section class="faq"><h2>时区常见问题解答</h2><dl><dt>夏令时会影响结果吗？</dt><dd>是的。该差异是使用当前 UTC 偏移量计算的，其中已包括任何有效的夏令时调整。</dd><dt>为什么差异会逐年变化？</dt><dd>当一个区域实行夏令时而另一个区域不实行夏令时，或者当它们在不同的日期发生变化时，它们之间的偏移量会改变一小时。</dd><dt>如果两个城市位于同一时区怎么办？</dt><dd>差异将为 0 小时。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timezonediff/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/timezonediff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timezonediff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timezonediff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timezonediff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timezonediff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timezonediff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timezonediff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timezonediff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timezonediff/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/timezonediff.js" defer></script>
+</body>
+</html>

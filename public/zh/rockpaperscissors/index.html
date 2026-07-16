@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>剪刀石头布 — 在线与电脑对战</title>
+<meta name="description" content="免费在线剪刀石头布游戏。与电脑对战，立即查看结果并跟踪您的分数。无需下载或注册。">
+<link rel="canonical" href="https://mikaio.dev/zh/rockpaperscissors/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/rockpaperscissors/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/rockpaperscissors/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/rockpaperscissors/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/rockpaperscissors/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/rockpaperscissors/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/rockpaperscissors/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/rockpaperscissors/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/rockpaperscissors/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/rockpaperscissors/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/rockpaperscissors/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/rockpaperscissors/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="剪刀石头布 — 在线与电脑对战">
+<meta property="og:description" content="免费在线剪刀石头布游戏。与电脑对战，立即查看结果并跟踪您的分数。无需下载或注册。">
+<meta property="og:url" content="https://mikaio.dev/zh/rockpaperscissors/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"剪刀石头布 — 在线与电脑对战","url":"https://mikaio.dev/zh/rockpaperscissors/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费在线剪刀石头布游戏。与电脑对战，立即查看结果并跟踪您的分数。无需下载或注册。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"剪刀石头布","item":"https://mikaio.dev/zh/rockpaperscissors/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"电脑如何选择？","acceptedAnswer":{"@type":"Answer","text":"计算机使用随机数生成器以相同的概率选择石头、剪刀、布，使其成为一个公平且不可预测的对手。"}},{"@type":"Question","name":"有没有获胜的策略？","acceptedAnswer":{"@type":"Answer","text":"面对真正随机的对手，没有保证的策略——每个结果都有相同的概率。乐趣在于人类对手的心理和模式解读。"}},{"@type":"Question","name":"我的分数会重置吗？","acceptedAnswer":{"@type":"Answer","text":"当您重新加载页面时，分数会重置。它跟踪当前会话的胜利、失败和平局。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rockpaperscissors/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/rockpaperscissors/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rockpaperscissors/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/rockpaperscissors/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/rockpaperscissors/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rockpaperscissors/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rockpaperscissors/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rockpaperscissors/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rockpaperscissors/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/rockpaperscissors/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>剪刀石头布</span></nav>
+  <h1>剪刀石头布</h1>
+  <p class="lead">选择石头、剪刀、布，看看你是否能打败计算机。您的分数会在各轮中被追踪。</p>
+  <section class="widget" id="tool"><div id="rps-app" style="text-align:center"><div class="row" style="justify-content:center;gap:1rem;margin-bottom:1.5rem"><button class="btn rps-btn" data-choice="rock" style="font-size:2.5rem;padding:0.75rem 1.25rem">✊</button><button class="btn rps-btn" data-choice="paper" style="font-size:2.5rem;padding:0.75rem 1.25rem">🖐</button><button class="btn rps-btn" data-choice="scissors" style="font-size:2.5rem;padding:0.75rem 1.25rem">✌️</button></div><div id="rps-result" style="font-size:1.1rem;min-height:5rem;padding:1rem;background:var(--surface,#f5f5f5);border-radius:0.75rem;margin-bottom:1rem">选择你的行动！</div><div id="rps-score" style="display:flex;justify-content:center;gap:2rem;font-size:0.95rem"><span>你： <b id="rps-pw">0</b></span><span>中央处理器： <b id="rps-cw">0</b></span><span>绘制： <b id="rps-d">0</b></span></div></div></section>
+  <article class="content">
+    <h2>世界上最古老的手游</h2>
+<p>剪刀石头布是地球上最受普遍认可的游戏之一。两名玩家同时展示三种手形中的一种——紧握的拳头代表石头，平掌代表布，或两个伸出的手指代表剪刀——一套简单的规则决定谁获胜。石头压剪刀，剪刀剪布，布包石头。尽管表面上很简单，但这款游戏激发了数十年博弈论、心理学和竞争策略方面的研究，并且已被用于各种领域，从游乐场纠纷到公司之间解决拍卖行处理房地产销售分歧的法律纠纷。</p>
+<p>该游戏的根源可以追溯到中国，在大约两千多年前的汉代文字记录中就出现了一种名为“手食令”的版本。它从中国传播到日本，在日本被称为“jan-ken-pon”，并演变成今天大多数人认可的三手势格式。十七世纪和十八世纪期间，欧洲商人和传教士将这项运动带到了西方，到了二十世纪，它几乎传播到了全球每个角落。世界剪刀石头布协会于 1918 年在多伦多成立，至今仍每年举办世界锦标赛，提供赞助、奖金和来自数十个国家的参赛者。</p>
+<h2>游戏如何在浏览器中运行</h2>
+<p>此版本的石头剪刀布让您与计算机对手对战，该对手完全随机选择移动，所有三个选项的概率相同。没有隐藏的偏差，没有学习算法，也没有前几轮的记忆。每场比赛在统计上都是独立的。单击三个表情符号按钮之一（拳头、张开的手或剪刀手指），结果会立即显示。棋盘下方的运行分数记录您赢得了多少轮，计算机赢得了多少轮，以及有多少轮以平局结束。</p>
+<p>随机性是使用浏览器的内置 Math.random 函数实现的，该函数生成一个伪随机数并将其映射到三个选择之一。虽然这不是加密安全的随机性，但对于结果分布至关重要的游戏来说，这完全足够了。在许多回合中，每个选择出现的次数大约为三分之一，这正是公平对手应该做的。</p>
+<h2>针对随机对手的策略</h2>
+<p>从严格的数学术语来看，当你的对手也随机玩时，没有任何策略能够胜过随机游戏。九种可能的回合结果（你的三个选择，对手的三个选择）中的每一个都有九分之一的相同概率。在这九种结果中，恰好有三种结果是平局，三种结果是胜利，三种结果是失败，因此双方在任何一轮比赛中都有三分之一的机会获胜。无论您采取何种行动顺序，针对真正随机的对手的预期获胜率恰好是三分之一。</p>
+<p>当然，这种数学现实并不会阻止人们尝试，这也是吸引力的一部分。即使在随机数据中，大脑也会自然地寻找模式，许多玩家说服自己，他们已经识别出计算机选择的趋势，而实际上他们看到的是正常的统计噪声。超过一百轮比赛的胜负和平局数将集中在三十三场左右，波动幅度既有高于也有低于预期。短期运行总是看起来不平衡，因为随机序列实际上是块状的，而不是整齐地交替的。</p>
+<p>然而，面对人类对手时，策略就变得非常现实。认知科学和行为经济学的研究表明，人并不是随机的。他们表现出可预测的偏见：他们倾向于重复获胜的举动，放弃失败的举动，并且在第一次投掷时更多地选择石头而不是布或剪刀。竞争者会利用这些倾向。游戏的心理变成了一种快速、无声的协商，每个玩家都认为对方下一步可能会做什么。</p>
+<h2>竞技剪刀石头布</h2>
+<p>职业石头剪刀布锦标赛的存在并吸引了激烈的竞争者。世界 RPS 协会锦标赛自 2002 年开始举办，数百名参赛者支付报名费并通过淘汰赛进行竞争。在最高水平上，参赛者会在多轮比赛中研究对手，寻找他们可以利用的与随机比赛的任何偏差。一些玩家声称能够通过他们的肢体语言、言语暗示或倒计时的节奏来激发特定的反应。其他人则故意采取严格随机的策略，正是为了拒绝对手任何可利用的信号。</p>
+<p>该游戏在游乐场外的著名用途包括 2006 年佛罗里达州的一起法律案件，当时法官命令两家无法就见面地点达成一致的律师事务所解决与剪刀石头布的纠纷。著名拍卖行佳士得和苏富比曾受一家日本公司委托，利用该游戏竞拍一批印象派画作。佳士得咨询了董事长的女儿们，她们建议用剪刀，因为她们认为，每个人总是用石头来引导。他们赢了。</p>
+<h2>使用分数追踪器</h2>
+<p>按钮下方的分数显示为您提供当前会话的获胜、计算机获胜和平局的运行统计。如果您想跟踪有意义的游戏样本的结果，这非常有用。几十轮就足以查看分布是否接近预期的三分之一比率，并且即使对阵随机对手，实时观看比分变化也是一种令人惊讶的引人入胜的体验。如果您想重新开始，只需重新加载页面即可将计数器重置为零。</p>
+    <section class="faq"><h2>剪刀石头布常见问题解答</h2><dl><dt>电脑如何选择？</dt><dd>计算机使用随机数生成器以相同的概率选择石头、剪刀、布，使其成为一个公平且不可预测的对手。</dd><dt>有没有获胜的策略？</dt><dd>面对真正随机的对手，没有保证的策略——每个结果都有相同的概率。乐趣在于人类对手的心理和模式解读。</dd><dt>我的分数会重置吗？</dt><dd>当您重新加载页面时，分数会重置。它跟踪当前会话的胜利、失败和平局。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/rockpaperscissors/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/rockpaperscissors/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/rockpaperscissors/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/rockpaperscissors/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/rockpaperscissors/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/rockpaperscissors/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/rockpaperscissors/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/rockpaperscissors/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/rockpaperscissors/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/rockpaperscissors/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"you":"你","cpu":"电脑","draw":"抽奖","win":"你赢了！ 🎉","lose":"电脑赢了🤖","tie":"平局了！ 🤝","chooseyourmove":"选择你的行动！","you2":"你：","cpu2":"中央处理器：","draw2":"绘制："};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/rockpaperscissors.js" defer></script>
+</body>
+</html>

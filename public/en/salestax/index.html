@@ -9,8 +9,11 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/salestax/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/salestax/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/salestax/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/salestax/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/salestax/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/salestax/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/salestax/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/salestax/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/salestax/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/salestax/">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -114,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Sales Tax Calculator — add or remove VAT from any price","url":"https://mikaio.dev/en/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Sales Tax Calculator","item":"https://mikaio.dev/en/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between adding and extracting tax?","acceptedAnswer":{"@type":"Answer","text":"Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was."}},{"@type":"Question","name":"What tax rates should I use?","acceptedAnswer":{"@type":"Answer","text":"Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign."}},{"@type":"Question","name":"Is anything I type uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Site navigation">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Sales Tax Calculator</span></nav>
@@ -146,11 +152,12 @@ textarea{min-height:120px;resize:vertical}
 <p>Use this tool whenever you price a product, reconcile a receipt, or need to separate the tax component from a total. The three outputs — net, tax, and gross — give you the complete picture in a single view.</p>
     <section class="faq"><h2>Sales tax calculator FAQ</h2><dl><dt>What is the difference between adding and extracting tax?</dt><dd>Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was.</dd><dt>What tax rates should I use?</dt><dd>Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign.</dd><dt>Is anything I type uploaded?</dt><dd>No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
-  <p><a href="/glossary.html">All tools</a></p></footer>
+  <p><a href="/freetools.html">All tools</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="en";window.__T={"amount":"Amount","rate":"Tax rate %","mode":"Mode","add_tax":"Add tax to price","remove_tax":"Extract tax from price","net":"Net (pre-tax)","tax":"Tax amount","gross":"Gross (total)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/salestax.js" defer></script>
 </body>
 </html>

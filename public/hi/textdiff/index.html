@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>टेक्स्ट डिफ टूल - दो टेक्स्ट की एक साथ तुलना करें</title>
+<meta name="description" content="मुफ़्त टेक्स्ट डिफ टूल। दो पाठों की तुलना करें और उनके बीच के अंतरों पर प्रकाश डालें। जोड़े गए, हटाए गए और बदले गए शब्द तुरंत ढूंढें।">
+<link rel="canonical" href="https://mikaio.dev/hi/textdiff/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textdiff/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/textdiff/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/textdiff/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/textdiff/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/textdiff/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/textdiff/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/textdiff/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textdiff/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/textdiff/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/textdiff/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textdiff/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="टेक्स्ट डिफ टूल - दो टेक्स्ट की एक साथ तुलना करें">
+<meta property="og:description" content="मुफ़्त टेक्स्ट डिफ टूल। दो पाठों की तुलना करें और उनके बीच के अंतरों पर प्रकाश डालें। जोड़े गए, हटाए गए और बदले गए शब्द तुरंत ढूंढें।">
+<meta property="og:url" content="https://mikaio.dev/hi/textdiff/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"टेक्स्ट डिफ टूल - दो टेक्स्ट की एक साथ तुलना करें","url":"https://mikaio.dev/hi/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त टेक्स्ट डिफ टूल। दो पाठों की तुलना करें और उनके बीच के अंतरों पर प्रकाश डालें। जोड़े गए, हटाए गए और बदले गए शब्द तुरंत ढूंढें।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"टेक्स्ट डिफ टूल","item":"https://mikaio.dev/hi/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"अंतर कैसे काम करता है?","acceptedAnswer":{"@type":"Answer","text":"उपकरण दो पाठों की तुलना शब्द दर शब्द करता है। B में मौजूद लेकिन A में नहीं मौजूद शब्द हरे रंग में दिखाए गए हैं (जोड़े गए हैं)। A में लेकिन B में नहीं शब्द लाल रंग में दिखाए गए हैं (हटाए गए)।"}},{"@type":"Question","name":"क्या यह git diff जैसा वास्तविक अंतर है?","acceptedAnswer":{"@type":"Answer","text":"त्वरित तुलना के लिए यह एक सरल शब्द-स्तरीय अंतर है। प्रोग्रामिंग में उपयोग किए जाने वाले कैरेक्टर-लेवल या लाइन-लेवल डिफ के लिए, git diff या diff(1) जैसे समर्पित उपकरण अधिक उपयुक्त हैं।"}},{"@type":"Question","name":"क्या मेरा पाठ संग्रहीत है?","acceptedAnswer":{"@type":"Answer","text":"नहीं, तुलना पूरी तरह से आपके ब्राउज़र में चलती है। किसी भी सर्वर पर कुछ भी नहीं भेजा जाता है."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>टेक्स्ट डिफ टूल</span></nav>
+  <h1>टेक्स्ट डिफ टूल</h1>
+  <p class="lead">यह देखने के लिए कि उनके बीच क्या परिवर्तन हुआ है, नीचे दिए गए बक्सों में एक पाठ के दो संस्करण चिपकाएँ।</p>
+  <section class="widget" id="tool"><div id="td-app"><div class="row"><div class="field"><label for="td-a">मूल पाठ</label><textarea id="td-a" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="मूल पाठ यहाँ चिपकाएँ..."></textarea></div><div class="field"><label for="td-b">नया पाठ</label><textarea id="td-b" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="नया या संशोधित पाठ यहां चिपकाएँ..."></textarea></div></div><div id="td-out" style="margin-top:1rem;font-family:monospace;font-size:0.85rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);white-space:pre-wrap;line-height:1.7"></div></div></section>
+  <article class="content">
+    <h2>दो पाठों की तुलना करें और अंतर खोजें</h2>
+<p>चाहे आप किसी संशोधित दस्तावेज़ को प्रूफरीडिंग कर रहे हों, किसी अनुबंध में क्या बदलाव हुआ है इसकी जाँच कर रहे हों, किसी निबंध के दो संस्करणों की तुलना कर रहे हों, या यह सत्यापित कर रहे हों कि कॉपी-पेस्ट सटीक था, एक टेक्स्ट डिफ टूल वास्तव में जो बदला है उसे उजागर करके समय बचाता है। पहले बॉक्स में मूल पाठ और दूसरे में नया संस्करण चिपकाएँ, और अंतर तुरंत चिह्नित हो जाते हैं।</p>
+<h2>शब्द-स्तरीय अंतर कैसे काम करता है</h2>
+<p>यह टूल लॉन्गेस्ट कॉमन सबसीक्वेंस (एलसीएस) एल्गोरिदम का उपयोग करता है - यूनिक्स डिफ कमांड और गिट डिफ के अंतर्निहित समान एल्गोरिदम। यह दोनों पाठों में एक ही क्रम में दिखाई देने वाले शब्दों का सबसे बड़ा अनुक्रम ढूंढता है, फिर उस अनुक्रम के बाहर की सभी चीज़ों को जोड़े गए या हटाए गए के रूप में चिह्नित करता है।</p>
+<p>स्ट्राइकथ्रू के साथ लाल रंग में दिखाए गए शब्द मूल में हैं लेकिन नए संस्करण में नहीं (हटाए गए)। हरे रंग में हाइलाइट किए गए शब्द नए संस्करण में हैं लेकिन मूल (जोड़े गए) में नहीं हैं। अपरिवर्तित शब्द सामान्य पाठ में दिखाई देते हैं।</p>
+<h2>पाठ तुलना के लिए सामान्य उपयोग</h2>
+<p><strong>दस्तावेज़ संशोधन</strong>: जब कोई सहयोगी संशोधित दस्तावेज़ लौटाता है, तो तुरंत देखें कि दोनों संस्करणों को पूरा पढ़े बिना कौन से शब्द या वाक्य बदल गए हैं।</p>
+<p><strong>अनुबंध समीक्षा</strong>: कानूनी पेशेवर अनुबंध संस्करणों के बीच परिवर्तनों को ट्रैक करने के लिए अंतर का उपयोग करते हैं। एक &quot;रेडलाइन&quot; या &quot;मार्कअप&quot; दस्तावेज़ अनिवार्य रूप से कानूनी पाठ पर लागू होने वाला एक अंतर है।</p>
+<p><strong>अकादमिक प्रूफरीडिंग</strong>: यह सत्यापित करने के लिए कि इच्छित संपादन सही ढंग से किए गए थे और कोई अनपेक्षित परिवर्तन नहीं किया गया है, पहले ड्राफ्ट की तुलना संशोधित ड्राफ्ट से करें।</p>
+<p><strong>कोड समीक्षा</strong>: जबकि कोड अंतर को गिट डिफ (जो लाइन-बाय-लाइन संचालित करता है) जैसे टूल द्वारा सबसे अच्छी तरह से नियंत्रित किया जाता है, दस्तावेज़ीकरण या टिप्पणियों की समीक्षा करते समय एक शब्द-स्तरीय अंतर मदद कर सकता है।</p>
+<p><strong>साहित्यिक चोरी की जाँच</strong>: स्थानापन्न व्याख्या के लिए प्रस्तुत पाठ की तुलना मूल पाठ से करें - पुन: व्यवस्थित या प्रतिस्थापित शब्द जो समान अर्थ को संरक्षित करते हैं।</p>
+<p><strong>अनुवाद सत्यापन</strong>: पूर्णता सुनिश्चित करने के लिए किसी स्रोत पाठ की तुलना उसके शब्द-दर-शब्द अनुवाद से करें (हालाँकि प्राकृतिक भाषा अंतर के कारण यह अनुमानित है)।</p>
+<h2>शब्द-स्तर के अंतर की सीमाएँ</h2>
+<p>यह टूल शब्दार्थ को समझे बिना शब्दों की तुलना करता है। एक वाक्य जो पूरी तरह से एक ही अर्थ के साथ दोबारा लिखा गया है वह पूरी तरह से हटा दिया गया और जोड़ा हुआ दिखाई देगा। अर्थ संबंधी समानता को समझने के लिए प्राकृतिक भाषा प्रसंस्करण उपकरणों की आवश्यकता होती है।</p>
+<p>तुलना शब्दों के भीतर स्वरूपण, पूंजीकरण, या विराम चिह्न को तब तक अलग नहीं करती जब तक कि वे किसी शब्द टोकन का हिस्सा न हों। &quot;हैलो&quot; और &quot;हैलो&quot; को अलग-अलग शब्द माना जाता है।</p>
+<h2>टूल का उपयोग कैसे करें</h2>
+<p>मूल पाठ को पहले बॉक्स में और संशोधित संस्करण को दूसरे बॉक्स में चिपकाएँ, और तुलना तुरंत नीचे दिखाई देगी, जिसमें लाल रंग में हटाए गए और हरे रंग में हाइलाइट किए गए जोड़ होंगे। तुलना को ट्रिगर करने के लिए दबाने के लिए कोई बटन नहीं है - यह लाइव अपडेट होता है, इसलिए आप किसी भी समय एक नया संस्करण पेस्ट कर सकते हैं और तुरंत देख सकते हैं कि यह पहले से कैसे भिन्न है।</p>
+<h2>शब्द-स्तर पर तुलना क्यों, चरित्र-स्तर पर नहीं</h2>
+<p>एक भिन्न उपकरण सैद्धांतिक रूप से शब्द दर शब्द के बजाय वर्ण दर वर्ण तुलना कर सकता है, लेकिन वह दृष्टिकोण ऐसे परिणाम उत्पन्न करता है जो तकनीकी रूप से सटीक और व्यावहारिक रूप से बेकार हैं: एक लंबे वाक्य के बीच में एक टाइपो को ठीक करने से वाक्य का लगभग पूरा शेष भाग बदला हुआ दिखाई देगा, क्योंकि सुधार के बाद प्रत्येक वर्ण की स्थिति बदल जाती है। इसके बजाय शब्द स्तर पर तुलना करने का मतलब है कि एक एकल सही शब्द एक विलोपन और एक जोड़ के रूप में दिखता है, जबकि वाक्य में बाकी सब कुछ जो वास्तव में नहीं बदला है उसे सही ढंग से अकेला छोड़ दिया जाता है - यह समझने की कोशिश करने वाले मानव के लिए कहीं अधिक उपयोगी संकेत है कि वास्तव में क्या संपादित किया गया था, जो वास्तव में ग्रैन्युलैरिटी का स्तर है जो अधिकांश वास्तविक संपादन और प्रूफरीडिंग कार्यों की परवाह करता है।</p>
+<h2>अंतर को कुशलतापूर्वक पढ़ना</h2>
+<p>लंबी तुलना की समीक्षा करते समय, यह हर शब्द को पढ़ने के बजाय रंग के समूहों को स्कैन करने में मदद करता है: एक दूसरे के बगल में लाल और हरे रंग का एक तंग समूह आमतौर पर एक छोटे से पुनर्लेखन को इंगित करता है, जबकि एक रंग का लंबे समय तक निर्बाध रूप से चलना एक संपादन के बजाय वास्तव में नए या हटाए गए मार्ग को इंगित करता है। इस पैटर्न-स्कैनिंग दृष्टिकोण के साथ सहज होने से अनुभवी संपादकों और कानूनी समीक्षकों को संपूर्ण दस्तावेज़ को पंक्ति दर पंक्ति दोबारा पढ़ने के बजाय कुछ ही मिनटों में एक बहु-पृष्ठ रेडलाइन संसाधित करने की सुविधा मिलती है।</p>
+<h2>सॉफ़्टवेयर बनाम गद्य में भिन्न उपकरण</h2>
+<p>प्रोग्रामर लगातार git diff जैसे लाइन-आधारित diff टूल का उपयोग करते हैं, और यह समझने लायक है कि इस तरह का शब्द-स्तरीय diff एक प्रतिस्थापन के बजाय एक अलग, पूरक उपकरण क्यों है। स्रोत कोड स्वाभाविक रूप से अलग-अलग रेखाओं में व्यवस्थित होता है, इसलिए लाइन दर लाइन की तुलना करना सही ग्रैन्युलैरिटी है - एक बदली हुई लाइन तर्क की एक बदली हुई इकाई है। गद्य में ऐसी कोई प्राकृतिक रेखा सीमा नहीं है; एक वाक्य खिड़की की चौड़ाई के आधार पर कई पंक्तियों में लपेटा जा सकता है, और परिवर्तन की सार्थक इकाई शब्द या वाक्यांश है, न कि जहां भी कोई रेखा टूटती है। यही कारण है कि गद्य की तुलना करने के लिए कोड-उन्मुख, लाइन-आधारित अंतर उपकरण का पुन: उपयोग करने के बजाय शब्द-स्तरीय दृष्टिकोण की आवश्यकता होती है।</p>
+<h2>अनुवाद ड्राफ्ट की तुलना करना</h2>
+<p>द्विभाषी संपादक और अनुवादक कभी-कभी एक ही स्रोत पाठ के अनुवाद के दो संस्करणों की तुलना करने के लिए शब्द-स्तरीय अंतर का उपयोग करते हैं - उदाहरण के लिए, मशीन-अनुवादित संस्करण के खिलाफ एक मानव अनुवादक का मसौदा, या एक ही पैराग्राफ के दो लगातार संशोधन - तुरंत पता लगाने के लिए कि शब्द विकल्प कहां भिन्न होते हैं, अंतर की तलाश में पूरे मार्ग को दोबारा पढ़ने की आवश्यकता के बिना।</p>
+<h2>किसी अंतर पर भरोसा करने से पहले एक त्वरित विवेक जांच</h2>
+<p>किसी महत्वपूर्ण चीज़ के लिए भिन्न परिणाम पर भरोसा करने से पहले - एक कानूनी दस्तावेज़, एक वर्गीकृत असाइनमेंट - पहले दो बक्सों में एक छोटा सा ज्ञात परिवर्तन चिपकाएँ और पुष्टि करें कि टूल बिल्कुल उसी परिवर्तन को हाइलाइट करता है और कुछ नहीं, उसी तरह जैसे आप एक नुस्खा के लिए उस पर भरोसा करने से पहले ज्ञात वजन के साथ एक नए रसोई पैमाने का परीक्षण करेंगे।</p>
+<h2>निजी और तत्काल</h2>
+<p>सभी तुलनाएं पूरी तरह से आपके ब्राउज़र में लॉन्गेस्ट कॉमन सबसीक्वेंस एल्गोरिदम का उपयोग करके चलती हैं, इसलिए परिणाम तुरंत दिखाई देते हैं और आपके द्वारा पेस्ट किया गया कोई भी टेक्स्ट कभी भी किसी सर्वर पर नहीं भेजा जाता है, लॉग इन किया जाता है या साझा किया जाता है।</p>
+    <section class="faq"><h2>पाठ भिन्न FAQ</h2><dl><dt>अंतर कैसे काम करता है?</dt><dd>उपकरण दो पाठों की तुलना शब्द दर शब्द करता है। B में मौजूद लेकिन A में नहीं मौजूद शब्द हरे रंग में दिखाए गए हैं (जोड़े गए हैं)। A में लेकिन B में नहीं शब्द लाल रंग में दिखाए गए हैं (हटाए गए)।</dd><dt>क्या यह git diff जैसा वास्तविक अंतर है?</dt><dd>त्वरित तुलना के लिए यह एक सरल शब्द-स्तरीय अंतर है। प्रोग्रामिंग में उपयोग किए जाने वाले कैरेक्टर-लेवल या लाइन-लेवल डिफ के लिए, git diff या diff(1) जैसे समर्पित उपकरण अधिक उपयुक्त हैं।</dd><dt>क्या मेरा पाठ संग्रहीत है?</dt><dd>नहीं, तुलना पूरी तरह से आपके ब्राउज़र में चलती है। किसी भी सर्वर पर कुछ भी नहीं भेजा जाता है.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"text_a":"मूल पाठ","text_b":"नया पाठ","placeholder_a":"मूल पाठ यहाँ चिपकाएँ...","placeholder_b":"नया या संशोधित पाठ यहां चिपकाएँ..."};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/textdiff.js" defer></script>
+</body>
+</html>

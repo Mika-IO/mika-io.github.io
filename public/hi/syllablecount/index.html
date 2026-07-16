@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>शब्दांश गणक - किसी भी शब्द या पाठ में शब्दांशों की गिनती करें</title>
+<meta name="description" content="निःशुल्क शब्दांश काउंटर. किसी भी अंग्रेजी शब्द या पाठ में अक्षरों की संख्या तुरंत गिनें। कविता, गीत के बोल और हाइकु लेखन के लिए उपयोगी।">
+<link rel="canonical" href="https://mikaio.dev/hi/syllablecount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/syllablecount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/syllablecount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/syllablecount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/syllablecount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/syllablecount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/syllablecount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/syllablecount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/syllablecount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/syllablecount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/syllablecount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/syllablecount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="शब्दांश गणक - किसी भी शब्द या पाठ में शब्दांशों की गिनती करें">
+<meta property="og:description" content="निःशुल्क शब्दांश काउंटर. किसी भी अंग्रेजी शब्द या पाठ में अक्षरों की संख्या तुरंत गिनें। कविता, गीत के बोल और हाइकु लेखन के लिए उपयोगी।">
+<meta property="og:url" content="https://mikaio.dev/hi/syllablecount/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"शब्दांश गणक - किसी भी शब्द या पाठ में शब्दांशों की गिनती करें","url":"https://mikaio.dev/hi/syllablecount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"निःशुल्क शब्दांश काउंटर. किसी भी अंग्रेजी शब्द या पाठ में अक्षरों की संख्या तुरंत गिनें। कविता, गीत के बोल और हाइकु लेखन के लिए उपयोगी।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"शब्दांश काउंटर","item":"https://mikaio.dev/hi/syllablecount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"शब्दांश गिनती कैसे काम करती है?","acceptedAnswer":{"@type":"Answer","text":"उपकरण सामान्य अंग्रेजी ध्वन्यात्मक नियमों का उपयोग करके अक्षरों का अनुमान लगाता है: स्वर समूहों की गिनती, साइलेंट-ई और सामान्य प्रत्ययों के लिए अपवाद लागू करना। यह एक अनुमान है और असामान्य शब्दों के लिए शब्दकोश से थोड़ा भिन्न हो सकता है।"}},{"@type":"Question","name":"एक शब्दांश क्या है?","acceptedAnswer":{"@type":"Answer","text":"शब्दांश उच्चारण की एक इकाई है जिसमें एक स्वर ध्वनि होती है। \"बिल्ली\" शब्द में एक शब्दांश है; \"पानी\" में दो (वा-टेर) हैं; \"शिक्षा\" में पाँच (ed-u-ca-tion) हैं।"}},{"@type":"Question","name":"क्या यह हाइकु के लिए अच्छा है?","acceptedAnswer":{"@type":"Answer","text":"हाँ। एक पारंपरिक हाइकु में तीन पंक्तियों में 5-7-5 शब्दांश होते हैं। प्रत्येक पंक्ति को अलग-अलग लिखें और गिनती जांचें।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/syllablecount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/syllablecount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/syllablecount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/syllablecount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/syllablecount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>शब्दांश काउंटर</span></nav>
+  <h1>शब्दांश काउंटर</h1>
+  <p class="lead">अक्षरों और शब्दों को गिनने के लिए टेक्स्ट टाइप या पेस्ट करें। हाइकु, सॉनेट, गीत के बोल और मीटर चेकिंग के लिए उपयोगी।</p>
+  <section class="widget" id="tool"><div id="syl-app"><textarea id="syl-text" rows="4" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="यहां अंग्रेजी टेक्स्ट टाइप या पेस्ट करें..."></textarea><div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">शब्दांश</div><div class="big" id="syl-count">0</div></div><div><div class="hint">शब्द</div><div class="big" id="syl-words">0</div></div></div></div></section>
+  <article class="content">
+    <h2>किसी भी पाठ में शब्दांश गिनें</h2>
+<p>छंदबद्ध छंद, गीत के बोल, या लेखन के किसी भी रूप में जहां लय मायने रखती है, के साथ काम करने वाले किसी भी व्यक्ति के लिए शब्दांश गिनती आवश्यक है। हाइकु के लिए तीन पंक्तियों में बिल्कुल 5-7-5 अक्षरों की आवश्यकता होती है। सॉनेट विशिष्ट मीटर पैटर्न का पालन करते हैं। गाने के बोल संगीतमय धुनों के साथ अक्षरों में फिट होते हैं। यह टूल किसी भी अंग्रेजी पाठ के लिए शब्दांश गणना का तुरंत अनुमान लगाता है, ताकि आप गिनती के बजाय शब्दों पर ध्यान केंद्रित कर सकें।</p>
+<h2>एक शब्दांश क्या है?</h2>
+<p>एक शब्दांश एक एकल स्वर ध्वनि के आसपास व्यवस्थित उच्चारण की एक इकाई है। प्रत्येक शब्द को शब्दांशों में तोड़ा जा सकता है:</p>
+<ul>
+<li>&quot;बिल्ली&quot; → 1 अक्षर (बिल्ली)</li>
+<li>&quot;पानी&quot; → 2 अक्षर (वा-टेर)</li>
+<li>&quot;खूबसूरत&quot; → 3 अक्षर (खूबसूरत)</li>
+<li>&quot;शिक्षा&quot; → 5 अक्षर (ed-u-ca-tion)</li>
+<li>&quot;अकल्पनीय&quot; → 6 अक्षर (un-i-mag-i-na-ble)</li>
+</ul>
+<p>किसी शब्द में अक्षरों की संख्या अलग-अलग स्वर ध्वनियों की संख्या पर निर्भर करती है - स्वर अक्षरों की संख्या पर नहीं। शब्द &quot;बेक&quot; में दो स्वर अक्षर (ए और ई) हैं लेकिन केवल एक स्वर ध्वनि है, जो इसे एक शब्दांश बनाती है।</p>
+<h2>काउंटर कैसे काम करता है</h2>
+<p>उपकरण अक्षरों का अनुमान लगाने के लिए सामान्य अंग्रेजी ध्वन्यात्मक नियमों का उपयोग करता है:</p>
+<ol>
+<li>आसन्न स्वरों के समूहों की गणना करें (प्रत्येक समूह लगभग एक अक्षर है)</li>
+<li>शब्दों के अंत में साइलेंट-ई के लिए घटाएँ (उदाहरण के लिए, &quot;केक&quot; 1 अक्षर है, 2 नहीं)</li>
+<li>&quot;-एड&quot; जैसे सामान्य प्रत्ययों को घटाएं जो अक्सर मौन रहते हैं</li>
+<li>प्रति शब्द कम से कम एक अक्षर सुनिश्चित करें</li>
+</ol>
+<p>यह विधि अधिकांश सामान्य अंग्रेजी शब्दों के लिए एक अच्छा अनुमान है। कुछ अनियमित शब्दों और व्यक्तिवाचक संज्ञाओं को उनके शब्दकोश उच्चारण से थोड़ा अलग ढंग से गिना जा सकता है।</p>
+<h2>रचनात्मक लेखन में उपयोग</h2>
+<p><strong>हाइकु</strong>: एक जापानी काव्य रूप जिसे पारंपरिक रूप से 5-7-5 अक्षरों वाली तीन पंक्तियों की कविता के रूप में अंग्रेजी में आयात किया जाता है। हाइकु फॉर्म में सावधानीपूर्वक शब्दांश गिनती की आवश्यकता होती है; यह उपकरण प्रत्येक पंक्ति को सत्यापित करना आसान बनाता है।</p>
+<p><strong>आयंबिक पेंटामीटर</strong>: शेक्सपियर के पसंदीदा मीटर में अनस्ट्रेस्ड-स्ट्रेस्ड पैटर्न में प्रति पंक्ति 10 अक्षर होते हैं (दा-दम पांच बार दोहराया जाता है)। अक्षरों को गिनना यह जांचने का पहला कदम है कि कोई रेखा मीटर पर फिट बैठती है या नहीं।</p>
+<p><strong>गाने के बोल</strong>: प्रत्येक शब्दांश एक बीट या नोट को दर्शाता है। यह सुनिश्चित करने के लिए कि शब्द माधुर्य में फिट हों, गीतकार शब्दांशों की गिनती करते हैं। एक कविता जो अच्छी तरह से गाती है, उसके शब्दांश संगीत की लय में समान रूप से वितरित होते हैं।</p>
+<p><strong>लिमरिक्स</strong>: AABBA कविता योजना में पारंपरिक रूप में 8-8-5-5-8 अक्षरों की पंक्तियाँ हैं।</p>
+<p><strong>रैप्स और हिप-हॉप</strong>: रैप में प्रवाह काफी हद तक शब्दांश घनत्व और पैटर्न के बारे में है। कई रैपर्स मल्टीसिलेबिक राइमिंग या डबल-टाइम नामक प्रभाव के लिए जानबूझकर अधिक सिलेबल्स को एक बार में पैक करते हैं।</p>
+<h2>शायरी में मीटर चेक करना</h2>
+<p>शास्त्रीय अंग्रेजी मीटर अक्षरों को स्ट्रेस्ड (/) और अनस्ट्रेस्ड (यू) में विभाजित करता है। सबसे आम पैटर्न हैं:</p>
+<ul>
+<li><strong>आयंबिक</strong>: यूयू (अनस्ट्रेस्ड-स्ट्रेस्ड), जैसे कि &quot;बीई होना, या न होना&quot;</li>
+<li><strong>ट्रोकैइक</strong>: यूयू (तनावग्रस्त-अस्थिर), जैसा कि &quot;टीआई-जीईआर, टीआई-जीईआर, बर्न-इंग ब्राइट&quot; में है</li>
+<li><strong>डैक्टिलिक</strong>: उउउ (तनावग्रस्त-अस्थिर-अस्थिर)</li>
+<li><strong>एनापेस्टिक</strong>: यूयूयू (अनस्ट्रेस्ड-अनस्ट्रेस्ड-स्ट्रेस्ड)</li>
+</ul>
+<p>इनमें से किसी भी पैटर्न का विश्लेषण करने के लिए अक्षरों की गिनती आवश्यक शर्त है।</p>
+<h2>काउंटर का उपयोग कैसे करें</h2>
+<p>किसी भी अंग्रेजी पाठ को बॉक्स में टाइप या पेस्ट करें और कुल शब्दांश गिनती तुरंत उसके नीचे अपडेट हो जाती है, साथ ही प्रति-शब्द विश्लेषण के साथ जब आपको पूरे मार्ग के बजाय एक विशिष्ट पंक्ति की जांच करने की आवश्यकता होती है। यह लाइव फीडबैक बिल्कुल वही है जो आप हाइकु जैसे सख्त प्रारूप में प्रारूप तैयार करते समय चाहते हैं, जहां छह अक्षरों से पांच तक एक पंक्ति प्राप्त करने का अर्थ है शब्द दर शब्द संपादित करना और हर बदलाव के बाद अपनी उंगलियों पर गिनती करने के बजाय वास्तविक समय में गिनती देखना।</p>
+<h2>स्वचालित गिनती वास्तव में कठिन क्यों है?</h2>
+<p>अंग्रेजी वर्तनी उच्चारण के लिए एक प्रसिद्ध अविश्वसनीय मार्गदर्शिका है, यही कारण है कि शब्दांश गिनती केवल स्वर अक्षरों की गिनती नहीं कर सकती है। मूक अक्षर, डिग्राफ जहां दो स्वर एक ध्वनि बनाते हैं, और अपनी वर्तनी परंपराओं के साथ अन्य भाषाओं से उधार लिए गए शब्द, सभी वर्तनी और शब्दांश गणना के बीच संबंध को असंगत बनाने की साजिश रचते हैं। यह उपकरण जिस नियम-आधारित दृष्टिकोण का उपयोग करता है - स्वर समूहों की गिनती, फिर मौन अंत और सामान्य प्रत्ययों के लिए समायोजन - रोजमर्रा के अंग्रेजी शब्दों के भारी बहुमत को सही करता है, लेकिन मुट्ठी भर असामान्य शब्द, नाम और उधार लिए गए शब्द शब्दकोश की आधिकारिक शब्दांश गिनती से थोड़ा भिन्न हो सकते हैं, सिर्फ इसलिए कि नियमों का कोई भी छोटा सेट हर अपवाद को पकड़ नहीं सकता है जिसे अंग्रेजी ने अन्य भाषाओं से उधार लेने के एक हजार वर्षों में जमा किया है।</p>
+<h2>शब्दांश और पठनीयता सूत्र</h2>
+<p>कविता से परे, शब्दांश गिनती कई प्रसिद्ध पठनीय सूत्रों के लिए एक महत्वपूर्ण इनपुट है। फ्लेश-किनकैड पढ़ने में आसानी और ग्रेड लेवल फॉर्मूले दोनों औसत वाक्य लंबाई के साथ प्रति शब्द औसत अक्षरों का उपयोग करते हैं ताकि यह अनुमान लगाया जा सके कि एक अनुच्छेद को पढ़ना कितना मुश्किल है - अधिक बहु-अक्षर वाले शब्दों वाला पाठ अधिक कठिन होता है, मोटे तौर पर अंतर्ज्ञान को ट्रैक करता है कि &quot;उपयोग&quot; को &quot;उपयोग&quot; से अधिक कठिन पढ़ा जाता है, भले ही दोनों का मतलब एक ही बात हो। एक विशिष्ट पढ़ने के स्तर का लक्ष्य रखने वाले लेखक, जैसे कि सामान्य दर्शकों या युवा पाठकों के लिए सामग्री, अक्सर शब्दांश-भारी अंशों की जांच करते हैं और जहां शब्दांश गिनती अधिक होती है, वहां शब्द चयन को सरल बनाते हैं।</p>
+<h2>शब्दांशों को कान से गिनना बनाम नियम से गिनना</h2>
+<p>किसी अपरिचित शब्द में अक्षरों को गिनने का सबसे विश्वसनीय तरीका अभी भी इसे ज़ोर से बोलना और महसूस करना है कि आपका जबड़ा कहाँ झुकता है या आपकी सांस रुकती है - उनमें से प्रत्येक क्षण लगभग एक अक्षर को चिह्नित करता है। नियम-आधारित दृष्टिकोण जैसे कि यह उपकरण स्वर-समूह गिनती के माध्यम से उसी अंतर्ज्ञान का उपयोग करता है, जो अंग्रेजी शब्दों के भारी बहुमत के लिए सही ढंग से काम करता है लेकिन कभी-कभी असामान्य उधार या नामों के लिए बोले गए संस्करण से असहमत होता है, क्योंकि वर्तनी नियमों का कोई भी निश्चित सेट अंग्रेजी उच्चारण के हर विचित्रता को पूरी तरह से पकड़ नहीं पाता है।</p>
+<h2>निजी और तत्काल</h2>
+<p>काउंटर पूरी तरह से आपके ब्राउज़र में चलता है, इसलिए जैसे ही आप टाइप करते हैं परिणाम तुरंत अपडेट हो जाते हैं और आपके द्वारा दर्ज किया गया कोई भी टेक्स्ट कभी भी कहीं भी नहीं भेजा जाता है, लॉग इन किया जाता है या साझा किया जाता है।</p>
+    <section class="faq"><h2>शब्दांश काउंटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>शब्दांश गिनती कैसे काम करती है?</dt><dd>उपकरण सामान्य अंग्रेजी ध्वन्यात्मक नियमों का उपयोग करके अक्षरों का अनुमान लगाता है: स्वर समूहों की गिनती, साइलेंट-ई और सामान्य प्रत्ययों के लिए अपवाद लागू करना। यह एक अनुमान है और असामान्य शब्दों के लिए शब्दकोश से थोड़ा भिन्न हो सकता है।</dd><dt>एक शब्दांश क्या है?</dt><dd>शब्दांश उच्चारण की एक इकाई है जिसमें एक स्वर ध्वनि होती है। &quot;बिल्ली&quot; शब्द में एक शब्दांश है; &quot;पानी&quot; में दो (वा-टेर) हैं; &quot;शिक्षा&quot; में पाँच (ed-u-ca-tion) हैं।</dd><dt>क्या यह हाइकु के लिए अच्छा है?</dt><dd>हाँ। एक पारंपरिक हाइकु में तीन पंक्तियों में 5-7-5 शब्दांश होते हैं। प्रत्येक पंक्ति को अलग-अलग लिखें और गिनती जांचें।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/syllablecount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/syllablecount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/syllablecount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/syllablecount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/syllablecount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"placeholder":"यहां अंग्रेजी टेक्स्ट टाइप या पेस्ट करें...","syllables":"शब्दांश","words":"शब्द"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/syllablecount.js" defer></script>
+</body>
+</html>

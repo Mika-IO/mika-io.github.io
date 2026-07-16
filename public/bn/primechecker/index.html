@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>প্রাইম নম্বর পরীক্ষক - এই সংখ্যাটি কি মৌলিক?</title>
+<meta name="description" content="বিনামূল্যে প্রাইম নম্বর পরীক্ষক। যে কোন ধনাত্মক পূর্ণসংখ্যাটি তাৎক্ষণিকভাবে খুঁজে বের করতে লিখুন যে এটি মৌলিক কিনা। এছাড়াও সমস্ত ভাজক এবং প্রধান গুণনীয়ক দেখায়।">
+<link rel="canonical" href="https://mikaio.dev/bn/primechecker/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/primechecker/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/primechecker/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/primechecker/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/primechecker/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/primechecker/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/primechecker/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/primechecker/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/primechecker/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/primechecker/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/primechecker/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/primechecker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="প্রাইম নম্বর পরীক্ষক - এই সংখ্যাটি কি মৌলিক?">
+<meta property="og:description" content="বিনামূল্যে প্রাইম নম্বর পরীক্ষক। যে কোন ধনাত্মক পূর্ণসংখ্যাটি তাৎক্ষণিকভাবে খুঁজে বের করতে লিখুন যে এটি মৌলিক কিনা। এছাড়াও সমস্ত ভাজক এবং প্রধান গুণনীয়ক দেখায়।">
+<meta property="og:url" content="https://mikaio.dev/bn/primechecker/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"প্রাইম নম্বর পরীক্ষক - এই সংখ্যাটি কি মৌলিক?","url":"https://mikaio.dev/bn/primechecker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে প্রাইম নম্বর পরীক্ষক। যে কোন ধনাত্মক পূর্ণসংখ্যাটি তাৎক্ষণিকভাবে খুঁজে বের করতে লিখুন যে এটি মৌলিক কিনা। এছাড়াও সমস্ত ভাজক এবং প্রধান গুণনীয়ক দেখায়।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"প্রাইম নম্বর পরীক্ষক","item":"https://mikaio.dev/bn/primechecker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"মৌলিক সংখ্যা কি?","acceptedAnswer":{"@type":"Answer","text":"একটি মৌলিক সংখ্যা হল 1 এর চেয়ে বড় একটি ধনাত্মক পূর্ণসংখ্যা যার 1 এবং নিজে ছাড়া অন্য কোন ধনাত্মক ভাজক নেই। প্রথম প্রাইমগুলি হল 2, 3, 5, 7, 11, 13, 17, 19, 23 এবং 29৷ আধুনিক নিয়ম অনুসারে 1 নম্বরটিকে প্রাইম হিসাবে বিবেচনা করা হয় না৷"}},{"@type":"Question","name":"প্রাইম ফ্যাক্টরাইজেশন কি?","acceptedAnswer":{"@type":"Answer","text":"1-এর বেশি প্রতিটি পূর্ণসংখ্যাকে মৌলিক সংখ্যার গুণফল হিসেবে প্রকাশ করা যেতে পারে ঠিক একভাবে (পাটিগণিতের মৌলিক উপপাদ্য)। উদাহরণস্বরূপ, 60 = 2 × 2 × 3 × 5।"}},{"@type":"Question","name":"আমি কত বড় সংখ্যা চেক করতে পারি?","acceptedAnswer":{"@type":"Answer","text":"টুলটি ট্রায়াল ডিভিশন ব্যবহার করে প্রায় 10 মিলিয়ন পর্যন্ত সংখ্যার জন্য দক্ষতার সাথে কাজ করে। খুব বড় সংখ্যা প্রক্রিয়া করতে একটি মুহূর্ত নিতে পারে."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/primechecker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/primechecker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/primechecker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/primechecker/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/primechecker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/primechecker/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/primechecker/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>প্রাইম নম্বর পরীক্ষক</span></nav>
+  <h1>প্রাইম নম্বর পরীক্ষক</h1>
+  <p class="lead">এটি মৌলিক কিনা তা পরীক্ষা করতে একটি ধনাত্মক পূর্ণসংখ্যা লিখুন এবং এর ভাজক এবং মৌলিক গুণিতক দেখুন।</p>
+  <section class="widget" id="tool"><form id="prime-form"><div class="row"><div class="field"><label for="prime-n">সংখ্যা</label><input type="number" id="prime-n" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="big" id="prime-out">—</span></div><div id="prime-factors" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>এই সংখ্যা মৌলিক?</h2>
+<p>একটি মৌলিক সংখ্যা হল গণিতের সবচেয়ে মৌলিক ধারণাগুলির মধ্যে একটি - 1 এর চেয়ে বড় একটি ধনাত্মক পূর্ণসংখ্যা যা 1 এবং নিজে থেকে অন্য কোন সংখ্যা দ্বারা সমানভাবে ভাগ করা যায় না। একটি প্রদত্ত সংখ্যা মৌলিক কিনা তা নির্ধারণ করা এমন একটি প্রশ্ন যা সহস্রাব্দ ধরে গণিতবিদদের মুগ্ধ করেছে এবং আধুনিক ক্রিপ্টোগ্রাফিতে কার্যত গুরুত্বপূর্ণ রয়েছে। এই টুলটি আপনার প্রবেশ করা যেকোন সংখ্যার জন্য তাৎক্ষণিকভাবে উত্তর দেয় এবং ভাজকের সম্পূর্ণ তালিকা এবং প্রাইম ফ্যাক্টরাইজেশনও দেখায়।</p>
+<h2>কোন সংখ্যাকে প্রাইম করে?</h2>
+<p>সংজ্ঞাটি সহজ: একটি ধনাত্মক পূর্ণসংখ্যা মৌলিক হয় যদি এর শুধুমাত্র ধনাত্মক ভাজক 1 এবং নিজেই হয়। 7 সংখ্যাটি মৌলিক কারণ এটি শুধুমাত্র 1 এবং 7 দ্বারা সমানভাবে ভাগ করা যেতে পারে। 8 নম্বরটি মৌলিক নয় - এটি 2 এবং 4 দ্বারাও বিভাজ্য। সংখ্যা 1 একটি বিশেষ ক্ষেত্রে: আধুনিক গাণিতিক নিয়ম অনুসারে এটিকে প্রাইম হিসাবে বিবেচনা করা হয় না, কারণ এটি অন্তর্ভুক্ত করে মৌলিক ফ্যাক্টরাইজেশনের স্বতন্ত্রতা ভঙ্গ করবে।</p>
+<p>প্রথম কয়েকটি মৌলিক সংখ্যা হল 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47। উল্লেখ্য যে 2 হল একমাত্র জোড় মৌলিক সংখ্যা, কারণ প্রতিটি জোড় সংখ্যা 2 দ্বারা বিভাজ্য।</p>
+<h2>বৃহত্তর স্কেলে প্রাথমিক পরীক্ষা</h2>
+<p>ট্রায়াল ডিভিশন, এই টুলটি যে পদ্ধতিটি ব্যবহার করে, তা মিলিয়ন পর্যন্ত সংখ্যার জন্য পুরোপুরি ভাল কাজ করে কিন্তু বাস্তব-বিশ্বের ক্রিপ্টোগ্রাফিতে ব্যবহৃত সত্যিকারের বিশাল সংখ্যার জন্য অবাস্তব হয়ে ওঠে, যা শত শত সংখ্যায় চলতে পারে। তাদের জন্য, গণিতবিদ এবং কম্পিউটার বিজ্ঞানীরা সম্ভাব্য প্রাথমিক পরীক্ষাগুলি ব্যবহার করেন, যেমন মিলার-রাবিন পরীক্ষা, যা একটি সংখ্যাকে পরম নিশ্চিততার সাথে প্রাইম বলে গ্যারান্টি দিতে পারে না তবে ত্রুটির সম্ভাবনার সাথে যৌগিকতা বাতিল করতে পারে এত কম যে এটি অনুশীলনে নগণ্য বলে বিবেচিত হয় - আসলে, একই সময়ে একটি হার্ডওয়্যার গণনা ত্রুটির সম্ভাবনার চেয়ে ছোট। কেন এই দ্রুত, সম্ভাব্য পদ্ধতিগুলির আদৌ প্রয়োজন ছিল তা উপলব্ধি করার আগে প্রথমে ট্রায়াল বিভাগ বোঝা সঠিক ভিত্তি।</p>
+<h2>প্রাইম ফ্যাক্টরাইজেশন</h2>
+<p>পাটিগণিতের মৌলিক উপপাদ্যটি বলে যে 1-এর বেশি প্রতিটি পূর্ণসংখ্যাকে মৌলিক সংখ্যার গুণফল হিসাবে প্রকাশ করা যেতে পারে ঠিক এক উপায়ে, কারণের ক্রম পর্যন্ত। একে প্রাইম ফ্যাক্টরাইজেশন বলা হয়। উদাহরণস্বরূপ: 12 = 2 × 2 × 3, 2² × 3 হিসাবে লিখিত। সংখ্যাটি 360 = 2³ × 3² × 5। একটি সংখ্যার মৌলিক গুণনীয়ক খোঁজার অর্থ হল এটিকে এর মৌলিক উপাদানগুলিতে ভেঙে ফেলা, যা এর গাণিতিক গঠন প্রকাশ করে।</p>
+<h2>কেন প্রাইম গুরুত্বপূর্ণ</h2>
+<p>প্রাইমগুলি হল সমস্ত পূর্ণসংখ্যার বিল্ডিং ব্লক — প্রতিটি যৌগিক (নন-প্রাইম) সংখ্যাকে প্রাইমগুলিকে একসাথে গুণ করে তৈরি করা যেতে পারে। এটি তাদের সংখ্যা তত্ত্বের কেন্দ্রবিন্দুতে পরিণত করে, পূর্ণসংখ্যার বৈশিষ্ট্যগুলির সাথে সম্পর্কিত গণিতের শাখা।</p>
+<p>আধুনিক কম্পিউটিংয়ে, বড় সংখ্যাকে তাদের প্রধান উপাদানগুলিতে ফ্যাক্টর করার অসুবিধা হল RSA এনক্রিপশনের ভিত্তি, যা ইন্টারনেটের বেশিরভাগ এনক্রিপ্ট করা যোগাযোগকে সুরক্ষিত করে। একটি পাবলিক কী তৈরি করতে দুটি বড় প্রাইমকে একসঙ্গে গুণ করা হয়। সেই পণ্যটিকে তার প্রাইমগুলিতে ফিরিয়ে আনা - সেগুলিকে আগে থেকে না জেনেই - যথেষ্ট বড় সংখ্যার জন্য গণনাগতভাবে অসম্ভব।</p>
+<h2>কিভাবে চেক কাজ করে</h2>
+<p>টুলটি ট্রায়াল ডিভিশন ব্যবহার করে: এটি পরীক্ষা করে যে সংখ্যাটি 2 থেকে সংখ্যার বর্গমূল পর্যন্ত যেকোনো পূর্ণসংখ্যা দ্বারা বিভাজ্য কিনা। যদি এই ধরনের কোনো ভাজক বিদ্যমান থাকে, তাহলে সংখ্যাটি যৌগিক এবং টুলটি তার গুণনীয়ক রেকর্ড করে। যদি কোনোটিই না থাকে তবে সংখ্যাটি মৌলিক। বর্গমূল সীমা কাজ করে কারণ একটি সংখ্যা n-এ √n-এর চেয়ে বড় একটি গুণনীয়ক থাকলে, এটিতে অবশ্যই √n-এর থেকে ছোট একটি অনুরূপ গুণনীয়ক থাকতে হবে, তাই আমরা বর্গমূলে থামতে পারি।</p>
+<h2>একটি দ্রুত কাজ উদাহরণ</h2>
+<p>91 সংখ্যাটি ধরুন। এটি বিজোড়, 3 দ্বারা বিভাজ্য নয় (9+1=10, 3 এর গুণিতক নয়), এবং 0 বা 5 তে শেষ হয় না, তাই ছোট, সুস্পষ্ট পরীক্ষাগুলি সবই ইঙ্গিত করে যে এটি মৌলিক হতে পারে — তবে 7 দ্বারা বিভাজন পরীক্ষা করলে 91 ÷ 7 = 13 ঠিক প্রকাশ পায়, তাই 91 প্রকৃতপক্ষে একটি যৌগিক শ্রেণীকরণ × 3 এর সাথে এই মৌলিক উদাহরণ ব্যবহার করা হয়। ব্যাখ্যা করুন কেন &quot;এটি সুস্পষ্ট কিছু দ্বারা বিভাজ্য দেখায় না&quot; &quot;এটি প্রাইম&quot; এর মতো নয়: নিশ্চিতভাবে জানার একমাত্র নির্ভরযোগ্য উপায় হল বর্গমূল পর্যন্ত প্রতিটি প্রার্থীর ভাজক পরীক্ষা করা, ঠিক এই টুলটি স্বয়ংক্রিয়ভাবে এবং তাত্ক্ষণিকভাবে কী করে।</p>
+<h2>প্রতিদিনের ব্যবহার</h2>
+<p>যদিও প্রাইমগুলির গভীর গাণিতিক গুরুত্ব ক্রিপ্টোগ্রাফি এবং সংখ্যা তত্ত্বে, দৈনন্দিন ব্যবহারের মধ্যে রয়েছে পাজল, শিক্ষামূলক অনুশীলন এবং প্রোগ্রামিং চ্যালেঞ্জ। বিভাজ্যতা, গুণনীয়ক এবং গুণিতক সম্পর্কে শেখার ছাত্রদের ঘন ঘন প্রাথমিকতা পরীক্ষা করতে হবে এবং গাণিতিক অনুশীলনের অংশ হিসাবে ফ্যাক্টরাইজেশন খুঁজে বের করতে হবে।</p>
+<h2>চেকার কিভাবে ব্যবহার করবেন</h2>
+<p>বাক্সে যেকোনো ধনাত্মক পূর্ণসংখ্যা টাইপ করুন এবং ফলাফলটি অবিলম্বে প্রদর্শিত হবে: সংখ্যাটি মৌলিক কিনা, এবং যদি না হয়, তার ভাজকের সম্পূর্ণ তালিকা এবং এর মৌলিক গুণিতক পৃথক মৌলিক শক্তিগুলিতে বিভক্ত। সংখ্যার আকারের কোন ব্যবহারিক সীমা নেই যা আপনি দৈনন্দিন ব্যবহারের জন্য পরীক্ষা করতে পারেন, যেহেতু ট্রায়াল-ডিভিশন পদ্ধতিটি ব্যবহার করে এই টুলটি লক্ষ লক্ষ এবং প্রায় তাৎক্ষণিকভাবে সংখ্যাগুলিকে ভালভাবে পরিচালনা করে।</p>
+<h2>প্রাইমগুলি অসীম</h2>
+<p>ইউক্লিড দুই হাজার বছর আগে প্রমাণ করেছিলেন যে কোনও বৃহত্তম মৌলিক সংখ্যা নেই - তালিকা চিরকাল চলে। তার প্রমাণ হল প্রাচীন যুক্তিবিদ্যার একটি সুন্দর অংশ: এক মুহুর্তের জন্য অনুমান করুন যে শুধুমাত্র সীমাবদ্ধভাবে অনেকগুলি প্রাইম ছিল, সেগুলিকে একসাথে গুণ করুন এবং একটি যোগ করুন। মূল তালিকার যেকোন মৌলিক দ্বারা প্রাপ্ত সংখ্যাটিকে সমানভাবে ভাগ করা যায় না, যেহেতু তাদের যেকোনো একটি দিয়ে ভাগ করলে সর্বদা একটি অবশিষ্ট থাকে, তাই হয় এই নতুন সংখ্যাটি নিজেই মৌলিক, অথবা এটির অন্য কোনো মৌলিক গুণনীয়ক রয়েছে যা অনুমিতভাবে সম্পূর্ণ তালিকা থেকে অনুপস্থিত ছিল - যেভাবেই হোক, তালিকাটি সম্পূর্ণ ছিল এমন ধারণার বিপরীত। এই মার্জিত যুক্তি, কোন উন্নত গণিতের প্রয়োজন নেই, বিষয়টির ইতিহাসে সবচেয়ে বিখ্যাত প্রমাণগুলির মধ্যে একটি।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>গণনাটি সম্পূর্ণরূপে আপনার ব্রাউজারে চলে, তাই ফলাফলটি আপনার টাইপ করার সাথে সাথেই প্রদর্শিত হবে এবং আপনি যে নম্বরটি লিখবেন তা কখনই কোনো সার্ভারে পাঠানো হয় না, লগ করা বা শেয়ার করা হয়।</p>
+    <section class="faq"><h2>প্রাইম চেকার FAQ</h2><dl><dt>মৌলিক সংখ্যা কি?</dt><dd>একটি মৌলিক সংখ্যা হল 1 এর চেয়ে বড় একটি ধনাত্মক পূর্ণসংখ্যা যার 1 এবং নিজে ছাড়া অন্য কোন ধনাত্মক ভাজক নেই। প্রথম প্রাইমগুলি হল 2, 3, 5, 7, 11, 13, 17, 19, 23 এবং 29৷ আধুনিক নিয়ম অনুসারে 1 নম্বরটিকে প্রাইম হিসাবে বিবেচনা করা হয় না৷</dd><dt>প্রাইম ফ্যাক্টরাইজেশন কি?</dt><dd>1-এর বেশি প্রতিটি পূর্ণসংখ্যাকে মৌলিক সংখ্যার গুণফল হিসেবে প্রকাশ করা যেতে পারে ঠিক একভাবে (পাটিগণিতের মৌলিক উপপাদ্য)। উদাহরণস্বরূপ, 60 = 2 × 2 × 3 × 5।</dd><dt>আমি কত বড় সংখ্যা চেক করতে পারি?</dt><dd>টুলটি ট্রায়াল ডিভিশন ব্যবহার করে প্রায় 10 মিলিয়ন পর্যন্ত সংখ্যার জন্য দক্ষতার সাথে কাজ করে। খুব বড় সংখ্যা প্রক্রিয়া করতে একটি মুহূর্ত নিতে পারে.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/primechecker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/primechecker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/primechecker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/primechecker/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/primechecker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/primechecker/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/primechecker/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"number":"সংখ্যা"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/primechecker.js" defer></script>
+</body>
+</html>

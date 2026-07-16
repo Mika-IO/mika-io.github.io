@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文本重复器 — 多次重复任何文本或单词</title>
+<meta name="description" content="自由文本中继器。根据需要多次重复单词、短语或行，在副本之间使用换行符、空格或逗号，然后立即复制结果。">
+<link rel="canonical" href="https://mikaio.dev/zh/textrepeater/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textrepeater/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/textrepeater/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/textrepeater/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/textrepeater/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/textrepeater/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/textrepeater/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/textrepeater/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textrepeater/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/textrepeater/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/textrepeater/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textrepeater/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="文本重复器 — 多次重复任何文本或单词">
+<meta property="og:description" content="自由文本中继器。根据需要多次重复单词、短语或行，在副本之间使用换行符、空格或逗号，然后立即复制结果。">
+<meta property="og:url" content="https://mikaio.dev/zh/textrepeater/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"文本重复器 — 多次重复任何文本或单词","url":"https://mikaio.dev/zh/textrepeater/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"自由文本中继器。根据需要多次重复单词、短语或行，在副本之间使用换行符、空格或逗号，然后立即复制结果。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"文本复读器","item":"https://mikaio.dev/zh/textrepeater/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"文本转发器可以用来做什么？","acceptedAnswer":{"@type":"Answer","text":"常见用途包括填充测试数据、为电子表格或文档构建重复行、为社交帖子创建模式以及无需按住某个键即可快速生成长字符串。在副本之间选择“换行”可为您提供每行一个条目。"}},{"@type":"Question","name":"重复次数有限制吗？","acceptedAnswer":{"@type":"Answer","text":"为了性能，输出的长度被限制在非常大的长度，这远远超过了日常使用的需要。如果达到上限，请减少重复次数或缩短文本。"}},{"@type":"Question","name":"我的短信发送到任何地方了吗？","acceptedAnswer":{"@type":"Answer","text":"不会。重复会立即在您的浏览器中发生，因此您输入的任何内容都不会被上传、存储或共享。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>文本复读器</span></nav>
+  <h1>文本复读器</h1>
+  <p class="lead">输入文本，设置重复次数，然后选择副本之间的内容。结果立即生成。</p>
+  <section class="widget" id="tool"><form id="tr"><div class="field"><label for="tr-input">要重复的文字</label><textarea id="tr-input" placeholder="输入单词、短语或行..."></textarea></div><div class="row"><div class="field"><label for="tr-times">重复次数</label><input type="number" id="tr-times" value="10" min="0" step="1"></div><div class="field"><label for="tr-sep">副本之间</label><select id="tr-sep"><option value="newline">新线</option><option value="space">空间</option><option value="comma">逗号</option><option value="none">什么都没有</option></select></div></div><div class="field"><label for="tr-out">结果</label><textarea id="tr-out" readonly></textarea></div><button type="button" class="btn" data-copy="#tr-out" data-copied="复制了！">复制结果</button></form></section>
+  <article class="content">
+    <h2>将任意文本重复任意次数</h2>
+<p>重复复制粘贴同一个词或同一行文字既枯燥又容易出错。无论你是需要为电子表格准备一百行相同数据、一段重复的占位文本、一个用于快速测试的长字符串，还是社交媒体帖子中的重复短语，手动做这些事浪费时间而且容易数错。本文本重复工具一步到位：输入你的文本，选择需要多少份副本，选择它们之间放什么分隔符，重复的结果即时生成。一切都在你的浏览器中运行，所以是即时的、可以离线工作、而且你输入的任何内容都不会被上传。</p>
+<p>本工具对每个副本之间放什么做了灵活的设计。你可以用换行符分隔副本，这样每个副本都在自己的行上——非常适合制作列表数据。你可以用空格将它们连成一行长长的文字，用逗号构建逗号分隔的列表，或什么都不放以将副本粘合成一个不间断的字符串。由于输出随你更改任何设定而更新，你可以准确看到即将得到的结果并调整至满意。</p>
+<h2>如何使用</h2>
+<p>首先在第一个框中输入或粘贴你想重复的文本。可以是单个词、一个短语、一个完整的句子甚至是多行文本块。接下来，设定要重复多少次。然后从下拉菜单中选择合适的分隔符。结果会立即出现在下方的框中，复制按钮可以将它放到剪贴板上，随时粘贴到你需要的地方。</p>
+<p>一切都实时重新计算，没有需要按的生成按钮，也不需要重置。改变重复次数，输出就会立即增长或缩减；切换分隔符，观看布局从整齐的列变为单行。看起来满意时，复制一下就完成了。</p>
+<h2>常见用途</h2>
+<p>人们重复文本最常见的原因是创建测试或样本数据。开发者和电子表格用户经常需要许多行相同值来试用公式、布局或导入功能，一步生成远比复制一个单元格数百次要快得多。选择换行符作为分隔符可以让你每行一个条目，随时粘贴到电子表格的列或文本文件中。</p>
+<p>写作者和设计师使用重复来构建占位块，在测试版面布局时填充空间，或查看重复元素的效果。在社交媒体上，重复的词或表情符号有时被用于强调或作为有趣的模式，在这里构建比反复按同一个键更快更整洁。学习或练习的人也会使用重复——将一行重复多次可以是记忆短语的简单方法，而整洁地排列副本有助于学习。无论原因如何，模式是一样的：你有一段文本，需要按特定方式排列的多份完全相同的副本。</p>
+<h2>选择合适的分隔符</h2>
+<p>分隔符是将一堆副本变成有用输出的关键，值得花点时间考虑。换行符是结构化数据最多功能的选择，因为大多数程序将一行视为一个条目；将结果粘贴到电子表格中，每个副本会落入自己的单元格沿列向下排列。逗号构建了许多系统用于标签、值或选项时期望的逗号分隔列表。空格最适合你希望副本读起来像一段流畅文本而非列表的情况。而什么都不放则在你需要单个不间断字符串时有用，例如测试某个字段如何处理一个非常长的值。</p>
+<p>如果你不确定需要哪个，试一个看看结果。由于一切都即时更新，切换分隔符没有任何代价，你可以比较布局直到找到下一步需要的那个。</p>
+<h2>关于大小的说明</h2>
+<p>为了保持工具快速和浏览器响应流畅，输出有一个总长度的宽松上限。这个上限远远高于任何日常任务所需，所以你不太可能注意到它，但它保护你免受意外请求一个巨大结果而导致页面冻结的情况。如果你确实达到了上限，只需减少重复次数或缩短正在重复的文本，工具将在安全范围内构建尽可能大的结果。</p>
+<h2>隐私、即时、免费</h2>
+<p>无需注册、无费用、无需等待。整个重复工具是一小段在你自己设备上运行的代码，所以它在你输入的瞬间响应，即使没有网络连接也能继续工作。你输入的任何内容都不会被上传、存储或共享；文本及其重复输出只存在于你的屏幕上，在你重新加载页面时消失。</p>
+<p>使用方法：输入你的文本，设定重复次数，选择分隔符，然后复制结果。随时调整任何设定，输出会同步更新，这样你可以精确塑造并拿到你需要的重复文本。</p>
+    <section class="faq"><h2>文本复读器常见问题解答</h2><dl><dt>文本转发器可以用来做什么？</dt><dd>常见用途包括填充测试数据、为电子表格或文档构建重复行、为社交帖子创建模式以及无需按住某个键即可快速生成长字符串。在副本之间选择“换行”可为您提供每行一个条目。</dd><dt>重复次数有限制吗？</dt><dd>为了性能，输出的长度被限制在非常大的长度，这远远超过了日常使用的需要。如果达到上限，请减少重复次数或缩短文本。</dd><dt>我的短信发送到任何地方了吗？</dt><dd>不会。重复会立即在您的浏览器中发生，因此您输入的任何内容都不会被上传、存储或共享。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textrepeater/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/textrepeater/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textrepeater/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textrepeater/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textrepeater/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textrepeater/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textrepeater/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textrepeater/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/textrepeater/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textrepeater/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/textrepeater.js" defer></script>
+</body>
+</html>

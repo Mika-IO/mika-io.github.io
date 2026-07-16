@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>লোন ক্যালকুলেটর - মাসিক পেমেন্ট এবং মোট সুদ</title>
+<meta name="description" content="বিনামূল্যে ঋণ ক্যালকুলেটর. আপনার মাসিক অর্থপ্রদান এবং প্রদত্ত মোট সুদ দেখতে ঋণের পরিমাণ, সুদের হার এবং মেয়াদ লিখুন। বন্ধকী, গাড়ি ঋণ এবং ব্যক্তিগত ঋণের জন্য কাজ করে।">
+<link rel="canonical" href="https://mikaio.dev/bn/loancalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/loancalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/loancalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/loancalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/loancalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/loancalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/loancalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/loancalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/loancalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/loancalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/loancalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/loancalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="লোন ক্যালকুলেটর - মাসিক পেমেন্ট এবং মোট সুদ">
+<meta property="og:description" content="বিনামূল্যে ঋণ ক্যালকুলেটর. আপনার মাসিক অর্থপ্রদান এবং প্রদত্ত মোট সুদ দেখতে ঋণের পরিমাণ, সুদের হার এবং মেয়াদ লিখুন। বন্ধকী, গাড়ি ঋণ এবং ব্যক্তিগত ঋণের জন্য কাজ করে।">
+<meta property="og:url" content="https://mikaio.dev/bn/loancalc/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"লোন ক্যালকুলেটর - মাসিক পেমেন্ট এবং মোট সুদ","url":"https://mikaio.dev/bn/loancalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে ঋণ ক্যালকুলেটর. আপনার মাসিক অর্থপ্রদান এবং প্রদত্ত মোট সুদ দেখতে ঋণের পরিমাণ, সুদের হার এবং মেয়াদ লিখুন। বন্ধকী, গাড়ি ঋণ এবং ব্যক্তিগত ঋণের জন্য কাজ করে।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"লোন ক্যালকুলেটর","item":"https://mikaio.dev/bn/loancalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"কি সূত্র ব্যবহার করা হয়?","acceptedAnswer":{"@type":"Answer","text":"মাসিক অর্থপ্রদান = P × [r(1+r)^n] / [(1+r)^n - 1], যেখানে P হল ঋণের পরিমাণ, r হল মাসিক সুদের হার (বার্ষিক / 12), এবং n হল মাসের সংখ্যা৷"}},{"@type":"Question","name":"আমি কি ধরনের ঋণ গণনা করতে পারি?","acceptedAnswer":{"@type":"Answer","text":"সূত্রটি যে কোনো স্ট্যান্ডার্ড অ্যামোর্টাইজিং লোনের ক্ষেত্রে প্রযোজ্য: বন্ধকী, গাড়ি ঋণ, ব্যক্তিগত ঋণ, ছাত্র ঋণ। শুধুমাত্র সুদ বা বেলুন ঋণের জন্য সূত্রটি আলাদা।"}},{"@type":"Question","name":"এই ফি বা বীমা অন্তর্ভুক্ত?","acceptedAnswer":{"@type":"Answer","text":"না, এটি শুধুমাত্র মূল এবং সুদ প্রদানের হিসাব করে। আপনার প্রকৃত মাসিক পেমেন্ট বেশি হতে পারে যদি এতে সম্পত্তি কর, বীমা বা অন্যান্য ফি অন্তর্ভুক্ত থাকে।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/loancalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/loancalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/loancalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/loancalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/loancalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>লোন ক্যালকুলেটর</span></nav>
+  <h1>লোন ক্যালকুলেটর</h1>
+  <p class="lead">আপনার মাসিক অর্থপ্রদান গণনা করতে ঋণের পরিমাণ, বার্ষিক সুদের হার এবং বছরের মেয়াদ লিখুন।</p>
+  <section class="widget" id="tool"><form id="loan-form"><div class="row"><div class="field"><label for="loan-amt">ঋণের পরিমাণ</label><input type="number" id="loan-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-rate">বার্ষিক সুদের হার %</label><input type="number" id="loan-rate" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-years">মেয়াদ (বছর)</label><input type="number" id="loan-years" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="hint">মাসিক পেমেন্ট: </span><span class="big" id="loan-monthly">—</span></div><div id="loan-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>আপনি ধার করার আগে আপনার ঋণ পরিশোধের হিসাব করুন</h2>
+<p>কোনও ঋণ নেওয়ার আগে — একটি বন্ধকী, গাড়ি ঋণ, ব্যক্তিগত ঋণ, বা ছাত্র ঋণ — মাসিক অর্থপ্রদান এবং মোট সুদের খরচ জানা আপনাকে একটি জ্ঞাত সিদ্ধান্ত নিতে সাহায্য করে। এই ক্যালকুলেটরটি আপনাকে প্রতি মাসে ঠিক কী অর্থ প্রদান করবে এবং ঋণের মোট কত খরচ হবে তা দেখাতে স্ট্যান্ডার্ড অ্যামোর্টাইজেশন সূত্র ব্যবহার করে।</p>
+<h2>ঋণ পরিশোধের সূত্র</h2>
+<p>একটি স্ট্যান্ডার্ড অ্যামোর্টাইজিং লোনের জন্য মাসিক পেমেন্ট সূত্রটি ব্যবহার করে গণনা করা হয়:</p>
+<p>M = P × [r(1+r)^n] / [(1+r)^n −1]</p>
+<p>কোথায়:</p>
+<ul>
+<li>M = মাসিক পেমেন্ট</li>
+<li>P = মূল (ঋণের পরিমাণ)</li>
+<li>r = মাসিক সুদের হার (বার্ষিক হার ÷ 12, দশমিক হিসাবে প্রকাশ করা হয়)</li>
+<li>n = মাসিক পেমেন্টের মোট সংখ্যা (বছর × 12)</li>
+</ul>
+<p>এই সূত্রটিকে অ্যামোর্টাইজেশন ফর্মুলা বলা হয় এবং এটি একটি নির্দিষ্ট পেমেন্ট তৈরি করে যা ঋণের মেয়াদে সুদ এবং মূল উভয়কেই কভার করে।</p>
+<h2>কিভাবে পরিশোধ কাজ করে</h2>
+<p>প্রতিটি মাসিক অর্থপ্রদানের সাথে, একটি অংশ সুদে যায় এবং একটি অংশ মূলকে হ্রাস করে। ঋণের মেয়াদের প্রথম দিকে, বেশিরভাগ অর্থপ্রদান সুদ হয় কারণ বকেয়া ব্যালেন্স বড়। ভারসাম্য হ্রাসের সাথে সাথে সুদের অংশ সঙ্কুচিত হয় এবং মূল অংশ বৃদ্ধি পায়। চূড়ান্ত অর্থপ্রদানের মাধ্যমে, এর প্রায় পুরোটাই মূল।</p>
+<p>30 বছরের জন্য 7% হারে $300,000 বন্ধকের জন্য:</p>
+<ul>
+<li>মাসিক অর্থপ্রদান: প্রায় $1,995</li>
+<li>30 বছরে মোট অর্থ প্রদান করা হয়েছে: $718,200</li>
+<li>মোট প্রদত্ত সুদ: $418,200 — মূল ঋণের পরিমাণের চেয়ে বেশি</li>
+</ul>
+<p>এটি ব্যাখ্যা করে কেন দীর্ঘ ঋণের শর্তাবলী সুদের ক্ষেত্রে এত বেশি খরচ হয়। একই হারে একটি 15-বছরের বন্ধকীতে একটি উচ্চ মাসিক অর্থপ্রদান রয়েছে তবে মোট সুদে নাটকীয়ভাবে সঞ্চয় করে।</p>
+<h2>সুদের হারের প্রভাব</h2>
+<p>সুদের হার পেমেন্ট এবং খরচের উপর একটি বড় প্রভাব ফেলে। 30 বছরের মধ্যে $200,000 ঋণে:</p>
+<ul>
+<li>4% এ: $955/মাস, $143,739 মোট সুদ</li>
+<li>6% এ: $1,199/মাস, $231,676 মোট সুদ</li>
+<li>8% এ: $1,468/মাস, $328,310 মোট সুদ</li>
+</ul>
+<p>একটি 2 শতাংশ পয়েন্ট বৃদ্ধি 30 বছরের মেয়াদে সুদের খরচ প্রায় দ্বিগুণ করে।</p>
+<h2>ঋণের প্রকারভেদ</h2>
+<p>এই ক্যালকুলেটর যেকোন স্ট্যান্ডার্ড অ্যামোর্টাইজিং লোনের জন্য কাজ করে:</p>
+<p><strong>মর্টগেজ</strong>: হোম লোন সাধারণত মার্কিন যুক্তরাষ্ট্রে 15 বা 30 বছর, যুক্তরাজ্য এবং কানাডায় 25-35 বছর চলে। ফিক্সড-রেট বন্ধকীতে পুরো মেয়াদ জুড়ে একই অর্থ প্রদান করা হয়; সামঞ্জস্যযোগ্য হার বন্ধকী একটি সূচকের সাথে পরিবর্তিত হয়।</p>
+<p><strong>অটো লোন</strong>: সাধারণত ৪৮-৮৪ মাস (৪-৭ বছর)। সংক্ষিপ্ত পদ মানে উচ্চ অর্থপ্রদান কিন্তু কম মোট সুদ।</p>
+<p><strong>ব্যক্তিগত ঋণ</strong>: সাধারণত 1-7 বছর। রেটগুলি ক্রেডিটযোগ্যতার উপর ভিত্তি করে ব্যাপকভাবে পরিবর্তিত হয়, চমৎকার ক্রেডিট এর জন্য 5% থেকে দুর্বল ক্রেডিট এর জন্য 30%+।</p>
+<p><strong>ছাত্র ঋণ</strong>: ইউএস ফেডারেল ছাত্র ঋণ বর্তমানে 5-8% নির্দিষ্ট হার বহন করে, আয়-ভিত্তিক পরিশোধের বিকল্পগুলির সাথে।</p>
+<h2>বাণিজ্য বন্ধের একটি কার্যকর উদাহরণ</h2>
+<p>6% বার্ষিক হারে $250,000 ধার নেওয়ার কথা বিবেচনা করুন। 30 বছরেরও বেশি সময় ধরে, মাসিক অর্থপ্রদান প্রায় $1,499, এবং ঋণের জীবনকালের জন্য প্রদত্ত মোট সুদের পরিমাণ প্রায় $289,600 - ধার করা মূল পরিমাণের চেয়ে বেশি। একই হারে 15 বছরেরও বেশি সময় ধরে, মাসিক অর্থপ্রদান প্রায় $2,110-এ বেড়েছে, প্রতি মাসে লক্ষণীয়ভাবে আরও বেশি, কিন্তু মোট সুদ প্রায় $129,800-এ নেমে এসেছে, যা 30 বছরের অঙ্কের অর্ধেকেরও কম। কোন শব্দই বস্তুনিষ্ঠভাবে সঠিক নয়; সঠিক পছন্দ নির্ভর করে কোন মাসিক অর্থপ্রদান আপনার বাজেটের সাথে খাপ খায় তার উপর নির্ভর করে আপনি সেই নমনীয়তার জন্য মোট কত খরচ গ্রহণ করতে ইচ্ছুক।</p>
+<h2>পরিকল্পনার জন্য ক্যালকুলেটর ব্যবহার করা</h2>
+<p>আপনি একাধিক উপায়ে এই ক্যালকুলেটর ব্যবহার করতে পারেন:</p>
+<ul>
+<li>পেমেন্ট কি হবে তা দেখতে আপনি যা ধার করতে চান তা লিখুন।</li>
+<li>পিছনের দিকে কাজ করুন: আপনি যদি প্রতি মাসে $X বহন করতে পারেন, তাহলে আপনি সর্বোচ্চ কতটা ধার নিতে পারেন তা দেখতে বিভিন্ন ঋণের পরিমাণ এবং হার চেষ্টা করুন।</li>
+<li>ঋণের মেয়াদ সম্পর্কে আরও সচেতন সিদ্ধান্ত নিতে বিভিন্ন মেয়াদে মোট সুদের তুলনা করুন।</li>
+</ul>
+<h2>কিভাবে ক্যালকুলেটর ব্যবহার করবেন</h2>
+<p>লোনের পরিমাণ, বার্ষিক সুদের হার এবং বছরের মেয়াদ লিখুন, এবং মাসিক অর্থপ্রদান অবিলম্বে প্রদর্শিত হবে, সেই সাথে আপনি ঋণের জীবনকালের জন্য যে পরিমাণ অর্থ প্রদান করবেন এবং মোট সুদের প্রতিনিধিত্ব করে। তিনটি ইনপুটের যেকোনো একটি সামঞ্জস্য করুন এবং প্রতিটি চিত্র তাত্ক্ষণিকভাবে পুনঃগণনা করে, যা তুলনা করা সহজ করে তোলে কিভাবে একটি সংক্ষিপ্ত মেয়াদ, একটি ভিন্ন হার, বা একটি বৃহত্তর ডাউন পেমেন্ট আপনি প্রকৃতপক্ষে যা প্রদান করেন তা পরিবর্তন করবে।</p>
+<h2>অতিরিক্ত অর্থপ্রদান এবং তাড়াতাড়ি ঋণ পরিশোধ করা</h2>
+<p>মূলের প্রতি অতিরিক্ত অর্থপ্রদান করা, এমনকি ছোটগুলিও, ঋণের মেয়াদ কমিয়ে দিতে পারে এবং মোট সুদকে যথেষ্ট পরিমাণে কমিয়ে দিতে পারে, কারণ মূলে প্রয়োগ করা প্রতিটি অতিরিক্ত ডলার ঋণের অবশিষ্ট জীবনের জন্য সুদ জমা বন্ধ করে দেয়। একটি সাধারণ দীর্ঘমেয়াদী বন্ধকীতে, প্রারম্ভিক বছরগুলিতে প্রতিটি মাসিক অর্থপ্রদানে একটি পরিমিত পরিমাণ যোগ করা - যখন ভারসাম্য এবং সেইজন্য সুদ সংগ্রহ তাদের সর্বোচ্চ হয় - পরে মেয়াদে একই অতিরিক্ত অর্থ প্রদানের তুলনায় একটি অতিমাত্রায় প্রভাব ফেলে৷ অনেক ঋণদাতা জরিমানা ছাড়াই অতিরিক্ত মূল অর্থ প্রদানের অনুমতি দেয়, যদিও কৌশলের উপর নির্ভর করার আগে এটি সর্বদা এটি নিশ্চিত করা মূল্যবান, যেহেতু কিছু ঋণ চুক্তি প্রাথমিক পরিশোধের ফি চার্জ করে।</p>
+<h2>পাশাপাশি ঋণ শর্তাবলী তুলনা</h2>
+<p>সম্ভবত এই ক্যালকুলেটরের সবচেয়ে মূল্যবান ব্যবহার হল একই ঋণের পরিমাণ বিভিন্ন শর্তে কীভাবে আচরণ করে তা তুলনা করা। একটি সংক্ষিপ্ত মেয়াদ মানে সর্বদা একটি উচ্চ মাসিক অর্থপ্রদান কিন্তু কম মোট সুদের খরচ, কারণ ব্যালেন্স দ্রুত পরিশোধ করা হয় এবং এর বিপরীতে সুদ সংগ্রহের জন্য কম সময় থাকে। একটি দীর্ঘমেয়াদী ছোট পেমেন্টের উপর একই পরিমাণ ছড়িয়ে দেয়, যা একটি ক্রয়কে মাসে মাসে সাশ্রয়ী করতে পারে, কিন্তু সামগ্রিকভাবে যথেষ্ট পরিমাণে অর্থ প্রদানের খরচে। এই ক্যালকুলেটরের মাধ্যমে একই প্রিন্সিপ্যাল ​​এবং রেট চালানো, বলুন, 15 বছর এবং তারপরে 30 বছর পাশাপাশি মাসিক সাশ্রয়যোগ্যতা এবং মোট খরচের মধ্যে বিমূর্ত না হয়ে লেনদেন বন্ধ করে দেয়, যেটি দীর্ঘমেয়াদী ঋণ চুক্তিতে স্বাক্ষর করার আগে ঠিক তুলনা করার মতো।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>সমস্ত গণনা সম্পূর্ণরূপে আপনার ব্রাউজারে স্ট্যান্ডার্ড অ্যামোর্টাইজেশন ফর্মুলা ব্যবহার করে চলে, তাই ফলাফলগুলি অবিলম্বে আপডেট হয় যখন আপনি কোনও ইনপুট সামঞ্জস্য করেন এবং আপনার লিখিত ঋণের পরিমাণ, হার বা শর্তাবলী কখনও সার্ভারে পাঠানো, লগ করা বা শেয়ার করা হয় না।</p>
+    <section class="faq"><h2>ঋণ ক্যালকুলেটর FAQ</h2><dl><dt>কি সূত্র ব্যবহার করা হয়?</dt><dd>মাসিক অর্থপ্রদান = P × [r(1+r)^n] / [(1+r)^n - 1], যেখানে P হল ঋণের পরিমাণ, r হল মাসিক সুদের হার (বার্ষিক / 12), এবং n হল মাসের সংখ্যা৷</dd><dt>আমি কি ধরনের ঋণ গণনা করতে পারি?</dt><dd>সূত্রটি যে কোনো স্ট্যান্ডার্ড অ্যামোর্টাইজিং লোনের ক্ষেত্রে প্রযোজ্য: বন্ধকী, গাড়ি ঋণ, ব্যক্তিগত ঋণ, ছাত্র ঋণ। শুধুমাত্র সুদ বা বেলুন ঋণের জন্য সূত্রটি আলাদা।</dd><dt>এই ফি বা বীমা অন্তর্ভুক্ত?</dt><dd>না, এটি শুধুমাত্র মূল এবং সুদ প্রদানের হিসাব করে। আপনার প্রকৃত মাসিক পেমেন্ট বেশি হতে পারে যদি এতে সম্পত্তি কর, বীমা বা অন্যান্য ফি অন্তর্ভুক্ত থাকে।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/loancalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/loancalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/loancalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/loancalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/loancalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"amount":"ঋণের পরিমাণ","rate":"বার্ষিক সুদের হার %","term":"মেয়াদ (বছর)","monthly":"মাসিক পেমেন্ট","total_paid":"মোট অর্থপ্রদান","total_interest":"মোট সুদ"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/loancalc.js" defer></script>
+</body>
+</html>

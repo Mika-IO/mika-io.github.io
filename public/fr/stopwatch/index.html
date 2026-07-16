@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chronomètre en ligne — chronomètre de navigateur gratuit avec temps au tour</title>
+<meta name="description" content="Chronomètre en ligne gratuit avec une précision à la milliseconde. Démarrez, mettez en pause, enregistrez les temps au tour et réinitialisez. Aucun téléchargement requis. Fonctionne entièrement dans votre navigateur.">
+<link rel="canonical" href="https://mikaio.dev/fr/stopwatch/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/stopwatch/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/stopwatch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/stopwatch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/stopwatch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/stopwatch/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/stopwatch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/stopwatch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/stopwatch/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/stopwatch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/stopwatch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/stopwatch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chronomètre en ligne — chronomètre de navigateur gratuit avec temps au tour">
+<meta property="og:description" content="Chronomètre en ligne gratuit avec une précision à la milliseconde. Démarrez, mettez en pause, enregistrez les temps au tour et réinitialisez. Aucun téléchargement requis. Fonctionne entièrement dans votre navigateur.">
+<meta property="og:url" content="https://mikaio.dev/fr/stopwatch/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Chronomètre en ligne — chronomètre de navigateur gratuit avec temps au tour","url":"https://mikaio.dev/fr/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Chronomètre en ligne gratuit avec une précision à la milliseconde. Démarrez, mettez en pause, enregistrez les temps au tour et réinitialisez. Aucun téléchargement requis. Fonctionne entièrement dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Chronomètre","item":"https://mikaio.dev/fr/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle est la précision du chronomètre du navigateur ?","acceptedAnswer":{"@type":"Answer","text":"Le chronomètre utilise la minuterie de performance haute résolution du navigateur, dont la précision est inférieure à la milliseconde dans des conditions normales. Pour le chronométrage officiel où une précision exacte est requise, utilisez un appareil de chronométrage certifié."}},{"@type":"Question","name":"Est-ce que ça s'arrêtera si je change d'onglet ?","acceptedAnswer":{"@type":"Answer","text":"Les navigateurs peuvent limiter JavaScript dans les onglets en arrière-plan, ce qui pourrait affecter la précision si vous quittez le navigateur. Gardez l'onglet du chronomètre actif pour de meilleurs résultats."}},{"@type":"Question","name":"Puis-je l'utiliser sur un téléphone mobile ?","acceptedAnswer":{"@type":"Answer","text":"Oui, le chronomètre est entièrement compatible tactile et fonctionne sur smartphones et tablettes."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Chronomètre</span></nav>
+  <h1>Chronomètre</h1>
+  <p class="lead">Appuyez sur Démarrer pour commencer le chronométrage. Appuyez sur Lap pour enregistrer des temps intermédiaires sans vous arrêter. Appuyez sur Réinitialiser pour tout effacer.</p>
+  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">Commencer</button><button id="sw-lap" class="btn secondary" disabled>Tour</button><button id="sw-reset" class="btn secondary" disabled>Réinitialiser</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
+  <article class="content">
+    <h2>Un chronomètre précis, directement dans votre navigateur</h2>
+<p>Chronométrer quelque chose avec précision signifiait autrefois porter un chronomètre dédié. Désormais, n’importe quel appareil doté d’un navigateur peut remplir cet objectif. Ce chronomètre en ligne fonctionne entièrement dans votre navigateur à l&#39;aide d&#39;une minuterie haute résolution, enregistre les temps au tour et affiche le temps écoulé en minutes, secondes et millisecondes. Il n&#39;y a rien à télécharger ou à installer.</p>
+<h2>Comment l&#39;utiliser</h2>
+<p>Appuyez sur le bouton Démarrer pour commencer le chronométrage. L&#39;écran compte en temps réel les minutes, les secondes et les millièmes de seconde. Pendant que le chronomètre fonctionne, appuyez sur Lap pour enregistrer le temps écoulé actuel sous forme de fractionnement. La liste des tours s&#39;accumule sous l&#39;écran, numérotant chaque fractionnement afin que vous puissiez les comparer. Appuyez sur Stop pour mettre le chronomètre en pause sans perdre le temps écoulé ou les enregistrements de tours. Appuyez à nouveau sur Démarrer pour continuer là où vous vous êtes arrêté. Appuyez sur Réinitialiser pour tout effacer et revenir à zéro.</p>
+<h2>Minuteries de précision et de navigateur</h2>
+<p>Les navigateurs modernes exposent un minuteur haute résolution via l&#39;API Performance, qui mesure le temps en fractions de milliseconde. C&#39;est beaucoup plus précis que la résolution d&#39;une milliseconde de l&#39;ancienne méthode Date.now(). En pratique, la précision de la minuterie est bien inférieure à la milliseconde sur la plupart des appareils, ce qui est plus que suffisant pour le chronométrage sportif, la cuisine, les présentations ou toute autre utilisation quotidienne. Pour un chronométrage légalement certifié dans les compétitions, utilisez toujours un appareil de chronométrage approuvé.</p>
+<p>Une limitation à connaître : si vous passez à un autre onglet de navigateur, les navigateurs peuvent limiter JavaScript en arrière-plan pour économiser des ressources. Cela pourrait entraîner un léger retard du chronomètre par rapport au temps réel écoulé. Gardez l&#39;onglet du chronomètre au point pour une meilleure précision.</p>
+<h2>Utilisations courantes</h2>
+<p>Les athlètes utilisent un chronomètre pour chronométrer les courses, les longueurs de natation, les intervalles de cyclisme ou tout exercice répétitif où la comparaison des temps intermédiaires est importante. L&#39;enregistrement des tours vous aide à voir si vous maintenez le rythme, si vous vous améliorez ou si vous diminuez. Les entraîneurs chronométrent plusieurs athlètes de manière séquentielle et comparent les résultats.</p>
+<p>Dans la cuisine, un chronomètre est plus flexible qu&#39;un compte à rebours lorsque vous jonglez avec plusieurs plats qui nécessitent chacun une durée différente. Vous commencez à chronométrer chaque plat dès son entrée et notez le temps au tour pour savoir combien de temps chacun a cuit.</p>
+<p>Les présentations et les discours bénéficient d’un minuteur. Savoir que vous êtes exactement à quatre minutes trente secondes vous aide à juger s&#39;il convient d&#39;étendre ou de condenser une section pour atteindre la durée cible.</p>
+<p>Les scientifiques et les étudiants qui effectuent des expériences de chronométrage apprécient la fonction tour, qui enregistre un point de données sans avoir à redémarrer le chronomètre pour l&#39;essai suivant.</p>
+<h2>Compatible avec le toucher et le clavier</h2>
+<p>Les boutons Démarrer, Tour et Réinitialiser fonctionnent avec des clics de souris et des tapotements de doigts. La mise en page s&#39;adapte parfaitement aux téléphones et aux tablettes.</p>
+<h2>Pourquoi un chronomètre de navigateur est vraiment précis</h2>
+<p>Il est utile de comprendre pourquoi on peut faire confiance à un outil gratuit exécuté sur une page Web pour tout ce qui va au-delà du timing occasionnel. Les navigateurs modernes exposent une minuterie haute résolution via l&#39;API Performance, distincte de l&#39;ancienne méthode Date.now(), plus grossière, capable de mesurer le temps en fractions de millisecondes plutôt qu&#39;en millisecondes entières. En pratique, cela signifie que le chronomètre dérive de moins d&#39;une milliseconde au cours d&#39;une session de chronométrage ordinaire, ce qui est plus que suffisant pour le sport, la cuisine, les présentations et le travail en laboratoire. Le seul inconvénient est que les navigateurs ralentissent délibérément JavaScript exécuté dans un onglet d&#39;arrière-plan pour économiser la batterie et le processeur. Garder l&#39;onglet du chronomètre actif et au point est donc la seule habitude qui préserve sa précision.</p>
+<h2>Temps au tour vs temps intermédiaires</h2>
+<p>Les passionnés de chronométrage font parfois la distinction entre un « temps au tour » (la durée de ce segment précis, indépendant des autres) et un « temps intermédiaire » (le temps cumulé écoulé à ce point de contrôle depuis le départ). Cet outil enregistre les temps intermédiaires – chaque temps enregistré correspond au temps total écoulé au moment où vous avez appuyé sur Lap – ce qui est la convention la plus courante en matière de chronométrage occasionnel et correspond à ce à quoi la plupart des gens s&#39;attendent lorsqu&#39;ils regardent un chronomètre en cours d&#39;exécution. Si vous avez besoin de durées de tour individuelles plutôt que de temps cumulés, soustrayez chaque temps enregistré de celui qui le précède.</p>
+<h2>Chronomètre vs minuterie intégrée à un téléphone</h2>
+<p>Chaque smartphone moderne est livré avec une application de chronomètre, il est donc juste de se demander pourquoi une application basée sur un navigateur vaut la peine d&#39;être utilisée à la place. La réponse honnête est la commodité plutôt que la précision supérieure : sur un ordinateur partagé, lors d&#39;un appel vidéo ou intégré dans un flux de travail déjà présent dans un onglet de navigateur, il est plus rapide d&#39;accéder à une page Web que de déverrouiller un téléphone et de trouver la bonne application, et la précision de synchronisation sous-jacente de l&#39;API Performance est comparable à celle obtenue par une application native pour toute utilisation quotidienne hors compétition.</p>
+<h2>Chronométrer plusieurs activités</h2>
+<p>Certaines situations nécessitent de suivre plusieurs choses à la fois : plusieurs plats cuisinés avec des heures de départ différentes ou plusieurs étapes de relais dans une course. Étant donné que ce chronomètre conserve un seul total cumulé plus une liste de tours, l&#39;approche pratique pour plusieurs activités simultanées consiste à ouvrir l&#39;outil dans des onglets de navigateur séparés, un par activité, chacun démarrant indépendamment au moment où sa propre activité commence.</p>
+<h2>Réinitialisation en cours de session</h2>
+<p>Si vous appuyez accidentellement sur Réinitialiser avant d&#39;enregistrer les temps au tour dont vous aviez besoin, il n&#39;y a pas d&#39;annulation : le décompte revient immédiatement à zéro. Pour toute séance où l&#39;historique des tours compte vraiment, il vaut la peine de noter les écarts clés au fur et à mesure qu&#39;ils se produisent plutôt que de se fier uniquement à la liste à l&#39;écran qui survit jusqu&#39;à la toute fin.</p>
+<h2>Privé et toujours disponible</h2>
+<p>Aucune donnée n&#39;est envoyée nulle part, le chronomètre s&#39;exécute entièrement dans votre navigateur, fonctionne hors ligne une fois la page chargée et ne nécessite aucun compte — rechargez la page à tout moment pour tout remettre à zéro.</p>
+    <section class="faq"><h2>FAQ sur le chronomètre</h2><dl><dt>Quelle est la précision du chronomètre du navigateur ?</dt><dd>Le chronomètre utilise la minuterie de performance haute résolution du navigateur, dont la précision est inférieure à la milliseconde dans des conditions normales. Pour le chronométrage officiel où une précision exacte est requise, utilisez un appareil de chronométrage certifié.</dd><dt>Est-ce que ça s&#39;arrêtera si je change d&#39;onglet ?</dt><dd>Les navigateurs peuvent limiter JavaScript dans les onglets en arrière-plan, ce qui pourrait affecter la précision si vous quittez le navigateur. Gardez l&#39;onglet du chronomètre actif pour de meilleurs résultats.</dd><dt>Puis-je l&#39;utiliser sur un téléphone mobile ?</dt><dd>Oui, le chronomètre est entièrement compatible tactile et fonctionne sur smartphones et tablettes.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"start":"Commencer","lap":"Tour","reset":"Réinitialiser","stop":"Arrêter"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/stopwatch.js" defer></script>
+</body>
+</html>

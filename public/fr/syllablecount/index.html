@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compteur de syllabes - comptez les syllabes dans n&#39;importe quel mot ou texte</title>
+<meta name="description" content="Compteur de syllabes gratuit. Comptez instantanément le nombre de syllabes dans n’importe quel mot ou texte anglais. Utile pour la poésie, les paroles de chansons et l’écriture de haïku.">
+<link rel="canonical" href="https://mikaio.dev/fr/syllablecount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/syllablecount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/syllablecount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/syllablecount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/syllablecount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/syllablecount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/syllablecount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/syllablecount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/syllablecount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/syllablecount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/syllablecount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/syllablecount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compteur de syllabes - comptez les syllabes dans n&#39;importe quel mot ou texte">
+<meta property="og:description" content="Compteur de syllabes gratuit. Comptez instantanément le nombre de syllabes dans n’importe quel mot ou texte anglais. Utile pour la poésie, les paroles de chansons et l’écriture de haïku.">
+<meta property="og:url" content="https://mikaio.dev/fr/syllablecount/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Compteur de syllabes - comptez les syllabes dans n'importe quel mot ou texte","url":"https://mikaio.dev/fr/syllablecount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Compteur de syllabes gratuit. Comptez instantanément le nombre de syllabes dans n’importe quel mot ou texte anglais. Utile pour la poésie, les paroles de chansons et l’écriture de haïku."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Compteur de syllabes","item":"https://mikaio.dev/fr/syllablecount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment fonctionne le décompte des syllabes ?","acceptedAnswer":{"@type":"Answer","text":"L'outil estime les syllabes en utilisant les règles phonétiques anglaises courantes : comptage des groupes de voyelles, application d'exceptions pour le e silencieux et les suffixes courants. Il s'agit d'une estimation qui peut différer légèrement d'un dictionnaire pour les mots inhabituels."}},{"@type":"Question","name":"Qu'est-ce qu'une syllabe ?","acceptedAnswer":{"@type":"Answer","text":"Une syllabe est une unité de prononciation contenant une seule voyelle. Le mot « chat » a une syllabe ; « eau » en a deux (eau) ; « éducation » en compte cinq (ed-u-ca-tion)."}},{"@type":"Question","name":"Est-ce bon pour le haïku ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Un haïku traditionnel comporte 5-7-5 syllabes réparties sur trois lignes. Écrivez chaque ligne séparément et vérifiez le décompte."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/syllablecount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/syllablecount/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/syllablecount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/syllablecount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/syllablecount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Compteur de syllabes</span></nav>
+  <h1>Compteur de syllabes</h1>
+  <p class="lead">Tapez ou collez du texte pour compter les syllabes et les mots. Utile pour les haïkus, les sonnets, les paroles de chansons et la vérification des compteurs.</p>
+  <section class="widget" id="tool"><div id="syl-app"><textarea id="syl-text" rows="4" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Tapez ou collez le texte anglais ici…"></textarea><div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">Syllabes</div><div class="big" id="syl-count">0</div></div><div><div class="hint">Mots</div><div class="big" id="syl-words">0</div></div></div></div></section>
+  <article class="content">
+    <h2>Comptez les syllabes dans n&#39;importe quel texte</h2>
+<p>Le comptage des syllabes est essentiel pour quiconque travaille avec des vers mesurés, des paroles de chansons ou toute forme d&#39;écriture où le rythme compte. Le haïku nécessite exactement 5-7-5 syllabes réparties sur trois lignes. Les sonnets suivent des modèles de mesure spécifiques. Les paroles des chansons s&#39;adaptent aux syllabes aux rythmes musicaux. Cet outil estime instantanément le nombre de syllabes de n&#39;importe quel texte anglais, afin que vous puissiez vous concentrer sur les mots plutôt que sur le comptage.</p>
+<h2>Qu&#39;est-ce qu&#39;une syllabe ?</h2>
+<p>Une syllabe est une unité de prononciation organisée autour d’une seule voyelle. Chaque mot peut être divisé en syllabes :</p>
+<ul>
+<li>&quot;chat&quot; → 1 syllabe (chat)</li>
+<li>&quot;eau&quot; → 2 syllabes (eau)</li>
+<li>&quot;beau&quot; → 3 syllabes (beau-ti-ful)</li>
+<li>&quot;éducation&quot; → 5 syllabes (ed-u-ca-tion)</li>
+<li>&quot;inimaginable&quot; → 6 syllabes (un-i-mag-i-na-ble)</li>
+</ul>
+<p>Le nombre de syllabes dans un mot dépend du nombre de voyelles distinctes et non du nombre de lettres de voyelles. Le mot « cuire » a deux voyelles (a et e) mais une seule voyelle, ce qui en fait une syllabe.</p>
+<h2>Comment fonctionne le compteur</h2>
+<p>L&#39;outil utilise des règles phonétiques anglaises courantes pour estimer les syllabes :</p>
+<ol>
+<li>Comptez les groupes de voyelles adjacentes (chaque groupe comprend environ une syllabe)</li>
+<li>Soustraire pour le e silencieux à la fin des mots (par exemple, &quot;gâteau&quot; est 1 syllabe, pas 2)</li>
+<li>Soustrayez les suffixes courants comme &quot;-ed&quot; qui sont souvent silencieux</li>
+<li>Assurez-vous d&#39;avoir au moins une syllabe par mot</li>
+</ol>
+<p>Cette méthode est une bonne approximation pour les mots anglais les plus courants. Certains mots irréguliers et noms propres peuvent être comptés légèrement différemment de leur prononciation dans le dictionnaire.</p>
+<h2>Utilisations en écriture créative</h2>
+<p><strong>Haïku</strong> : forme poétique japonaise traditionnellement importée en anglais sous la forme d&#39;un poème de trois vers comportant 5-7-5 syllabes. La forme haïku nécessite un comptage minutieux des syllabes ; cet outil facilite la vérification de chaque ligne.</p>
+<p><strong>Pentamètre iambique</strong> : la mesure préférée de Shakespeare comporte 10 syllabes par vers dans un motif non accentué-accentué (da-DUM répété cinq fois). Compter les syllabes est la première étape pour vérifier si une ligne correspond au mètre.</p>
+<p><strong>Paroles de la chanson</strong> : chaque syllabe correspond à un rythme ou à une note. Les paroliers comptent les syllabes pour s&#39;assurer que les mots correspondent à la mélodie. Un couplet qui chante bien a des syllabes réparties uniformément sur les rythmes musicaux.</p>
+<p><strong>Limericks</strong> : le schéma de rimes AABBA comporte des vers de 8-8-5-5-8 syllabes sous la forme traditionnelle.</p>
+<p><strong>Raps et hip-hop</strong> : le flow dans le rap est en grande partie une question de densité et de motif de syllabes. De nombreux rappeurs regroupent délibérément plus de syllabes dans une mesure pour un effet appelé rime multisyllabique ou double temps.</p>
+<h2>Vérification du compteur en poésie</h2>
+<p>Le mètre anglais classique divise les syllabes en accentuées (/) et non accentuées (u). Les modèles les plus courants sont :</p>
+<ul>
+<li><strong>Iambique</strong> : uU (non accentué-accentué), comme dans &quot;ÊTRE ou NE PAS ÊTRE&quot;</li>
+<li><strong>Trochaïque</strong> : Uu (accentué-non stressé), comme dans &quot;TI-ger, TI-ger, BURN-ing BRIGHT&quot;</li>
+<li><strong>Dactylique</strong> : Uuu (accentué-non stressé-non stressé)</li>
+<li><strong>Anapestic</strong> : uuU (non stressé-non stressé-stressé)</li>
+</ul>
+<p>Compter les syllabes est la condition préalable essentielle à l’analyse de l’un de ces modèles.</p>
+<h2>Comment utiliser le compteur</h2>
+<p>Tapez ou collez n&#39;importe quel texte anglais dans la zone et le nombre total de syllabes est mis à jour immédiatement en dessous, ainsi qu&#39;une répartition par mot lorsque vous devez vérifier une ligne spécifique plutôt qu&#39;un passage entier. Ce retour en direct est exactement ce que vous souhaitez lorsque vous rédigez sous une forme stricte comme le haïku, où obtenir une seule ligne de six syllabes à cinq signifie éditer mot par mot et regarder le décompte en temps réel plutôt que de compter sur vos doigts après chaque changement.</p>
+<h2>Pourquoi le comptage automatique est vraiment difficile</h2>
+<p>L’orthographe anglaise est un guide de prononciation notoirement peu fiable, c’est exactement pourquoi le comptage des syllabes ne peut pas simplement compter les voyelles. Les lettres muettes, les digraphes où deux voyelles produisent un son et les mots empruntés à d&#39;autres langues avec leurs propres conventions orthographiques conspirent tous pour rendre incohérente la relation entre l&#39;orthographe et le nombre de syllabes. L&#39;approche basée sur des règles utilisée par cet outil - compter les groupes de voyelles, puis ajuster les terminaisons silencieuses et les suffixes communs - permet d&#39;obtenir la grande majorité des mots anglais courants, mais une poignée de mots inhabituels, de noms et de termes empruntés peuvent différer légèrement du nombre officiel de syllabes d&#39;un dictionnaire, simplement parce qu&#39;aucun petit ensemble de règles ne peut capturer toutes les exceptions que l&#39;anglais a accumulées au cours de mille ans d&#39;emprunt à d&#39;autres langues.</p>
+<h2>Syllabes et formules de lisibilité</h2>
+<p>Au-delà de la poésie, le comptage des syllabes est un élément clé de plusieurs formules de lisibilité bien connues. Les formules Flesch-Kincaid Reading Ease et Grade Level utilisent toutes deux des syllabes moyennes par mot ainsi que la longueur moyenne des phrases pour estimer la difficulté d&#39;un passage à lire - un texte contenant plus de mots multisyllabiques est considéré comme plus difficile, suivant à peu près l&#39;intuition selon laquelle «utiliser» se lit comme plus difficile que «utiliser», même si les deux signifient la même chose. Les écrivains visant un niveau de lecture spécifique, comme un contenu destiné à un grand public ou à un jeune lectorat, vérifient souvent les passages riches en syllabes et simplifient le choix des mots là où le nombre de syllabes est élevé.</p>
+<h2>Compter les syllabes à l&#39;oreille ou par règle</h2>
+<p>Le moyen le plus fiable de compter les syllabes d’un mot inconnu reste de le dire à voix haute et de sentir où votre mâchoire tombe ou votre souffle s’arrête – chacun de ces moments marque environ une syllabe. Les approches basées sur des règles comme celle utilisée par cet outil se rapprochent de la même intuition grâce au comptage de groupes de voyelles, qui fonctionne correctement pour l&#39;écrasante majorité des mots anglais mais est parfois en désaccord avec la version parlée pour des emprunts ou des noms inhabituels, car aucun ensemble fixe de règles d&#39;orthographe ne capture parfaitement toutes les bizarreries de la prononciation anglaise.</p>
+<h2>Privé et instantané</h2>
+<p>Le compteur fonctionne entièrement dans votre navigateur, de sorte que les résultats sont mis à jour instantanément au fur et à mesure que vous tapez et aucun texte que vous saisissez n&#39;est jamais envoyé, enregistré ou partagé.</p>
+    <section class="faq"><h2>FAQ sur le compteur de syllabes</h2><dl><dt>Comment fonctionne le décompte des syllabes ?</dt><dd>L&#39;outil estime les syllabes en utilisant les règles phonétiques anglaises courantes : comptage des groupes de voyelles, application d&#39;exceptions pour le e silencieux et les suffixes courants. Il s&#39;agit d&#39;une estimation qui peut différer légèrement d&#39;un dictionnaire pour les mots inhabituels.</dd><dt>Qu&#39;est-ce qu&#39;une syllabe ?</dt><dd>Une syllabe est une unité de prononciation contenant une seule voyelle. Le mot « chat » a une syllabe ; « eau » en a deux (eau) ; « éducation » en compte cinq (ed-u-ca-tion).</dd><dt>Est-ce bon pour le haïku ?</dt><dd>Oui. Un haïku traditionnel comporte 5-7-5 syllabes réparties sur trois lignes. Écrivez chaque ligne séparément et vérifiez le décompte.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/syllablecount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/syllablecount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/syllablecount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/syllablecount/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/syllablecount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/syllablecount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/syllablecount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/syllablecount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/syllablecount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/syllablecount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"placeholder":"Tapez ou collez le texte anglais ici…","syllables":"Syllabes","words":"Mots"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/syllablecount.js" defer></script>
+</body>
+</html>

@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stopwatch Online — free browser stopwatch with lap times</title>
-<meta name="description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<title>Stopwatch Online - ساعة توقيت مجانية للمتصفح مع أوقات الدورة</title>
+<meta name="description" content="ساعة توقيت مجانية على الإنترنت بدقة ميلي ثانية. البدء والإيقاف المؤقت وتسجيل أوقات الدورة وإعادة الضبط. لا حاجة للتنزيل. يعمل بالكامل في المتصفح الخاص بك.">
 <link rel="canonical" href="https://mikaio.dev/ar/stopwatch/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/stopwatch/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/stopwatch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/stopwatch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/stopwatch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/stopwatch/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/stopwatch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/stopwatch/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/stopwatch/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/stopwatch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/stopwatch/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/stopwatch/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Stopwatch Online — free browser stopwatch with lap times">
-<meta property="og:description" content="Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser.">
+<meta property="og:title" content="Stopwatch Online - ساعة توقيت مجانية للمتصفح مع أوقات الدورة">
+<meta property="og:description" content="ساعة توقيت مجانية على الإنترنت بدقة ميلي ثانية. البدء والإيقاف المؤقت وتسجيل أوقات الدورة وإعادة الضبط. لا حاجة للتنزيل. يعمل بالكامل في المتصفح الخاص بك.">
 <meta property="og:url" content="https://mikaio.dev/ar/stopwatch/">
 <meta property="og:locale" content="ar">
 <meta name="twitter:card" content="summary">
@@ -63,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -109,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch Online — free browser stopwatch with lap times","url":"https://mikaio.dev/ar/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"Free online stopwatch with millisecond precision. Start, pause, record lap times, and reset. No download needed. Works entirely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"Stopwatch","item":"https://mikaio.dev/ar/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate is the browser stopwatch?","acceptedAnswer":{"@type":"Answer","text":"The stopwatch uses the browser's high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device."}},{"@type":"Question","name":"Will it stop if I switch tabs?","acceptedAnswer":{"@type":"Answer","text":"Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results."}},{"@type":"Question","name":"Can I use this on a mobile phone?","acceptedAnswer":{"@type":"Answer","text":"Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch Online - ساعة توقيت مجانية للمتصفح مع أوقات الدورة","url":"https://mikaio.dev/ar/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"ساعة توقيت مجانية على الإنترنت بدقة ميلي ثانية. البدء والإيقاف المؤقت وتسجيل أوقات الدورة وإعادة الضبط. لا حاجة للتنزيل. يعمل بالكامل في المتصفح الخاص بك."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"ساعة توقيت","item":"https://mikaio.dev/ar/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما مدى دقة ساعة توقيت المتصفح؟","acceptedAnswer":{"@type":"Answer","text":"تستخدم ساعة الإيقاف مؤقت الأداء عالي الدقة الخاص بالمتصفح، والذي تصل دقته إلى أقل من مللي ثانية في الظروف العادية. بالنسبة للتوقيت الرسمي الذي يتطلب الدقة الدقيقة، استخدم جهاز توقيت معتمد."}},{"@type":"Question","name":"هل سيتوقف إذا قمت بتبديل علامات التبويب؟","acceptedAnswer":{"@type":"Answer","text":"قد تقوم المتصفحات بخنق JavaScript في علامات تبويب الخلفية، مما قد يؤثر على الدقة إذا قمت بالتبديل بعيدًا. أبقِ علامة تبويب ساعة الإيقاف نشطة للحصول على أفضل النتائج."}},{"@type":"Question","name":"هل يمكنني استخدام هذا على الهاتف المحمول؟","acceptedAnswer":{"@type":"Answer","text":"نعم، ساعة الإيقاف متوافقة تمامًا مع اللمس وتعمل على الهواتف الذكية والأجهزة اللوحية."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ar/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="التنقل في الموقع">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>Stopwatch</span></nav>
-  <h1>Stopwatch</h1>
-  <p class="lead">Press Start to begin timing. Press Lap to record split times without stopping. Press Reset to clear everything.</p>
-  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">Start</button><button id="sw-lap" class="btn secondary" disabled>Lap</button><button id="sw-reset" class="btn secondary" disabled>Reset</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>ساعة توقيت</span></nav>
+  <h1>ساعة توقيت</h1>
+  <p class="lead">اضغط على ابدأ لبدء التوقيت. اضغط على Lap لتسجيل أوقات الانقسام دون توقف. اضغط على إعادة تعيين لمسح كل شيء.</p>
+  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">ابدأ</button><button id="sw-lap" class="btn secondary" disabled>اللفة</button><button id="sw-reset" class="btn secondary" disabled>إعادة تعيين</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
   <article class="content">
     <h2>ساعة إيقاف دقيقة في متصفحك مباشرة</h2>
 <p>كان قياس الوقت بدقة يعني في السابق حمل ساعة إيقاف مخصصة. الآن يمكن لأي جهاز بمتصفح أن يخدم هذا الغرض. تعمل ساعة الإيقاف الإلكترونية هذه بالكامل في متصفحك باستخدام مؤقت عالي الدقة، وتسجل أوقات اللفات، وتعرض الوقت المنقضي بالدقائق والثواني وأجزاء الثانية. لا يوجد شيء للتنزيل أو التثبيت.</p>
@@ -148,13 +156,14 @@ textarea{min-height:120px;resize:vertical}
 <p>إذا ضغطت على زر إعادة الضبط بالخطأ قبل حفظ أوقات اللفات التي كنت بحاجة إليها، فلا يوجد تراجع — يعود العداد إلى الصفر فوراً. لأي جلسة يهم فيها سجل اللفات فعلاً، يجدر تدوين الأوقات الجزئية الرئيسية أثناء حدوثها بدلاً من الاعتماد فقط على القائمة التي على الشاشة حتى النهاية.</p>
 <h2>خصوصية ومتاحة دائماً</h2>
 <p>لا تُرسَل أي بيانات إلى أي مكان، وتعمل ساعة الإيقاف بالكامل في متصفحك، وتعمل دون اتصال بمجرد تحميل الصفحة، ولا تتطلب أي حساب — أعد تحميل الصفحة في أي وقت لإعادة ضبط كل شيء إلى الصفر.</p>
-    <section class="faq"><h2>Stopwatch FAQ</h2><dl><dt>How accurate is the browser stopwatch?</dt><dd>The stopwatch uses the browser&#39;s high-resolution performance timer, which is accurate to well under a millisecond in normal conditions. For official timing where exact precision is required, use a certified timing device.</dd><dt>Will it stop if I switch tabs?</dt><dd>Browsers may throttle JavaScript in background tabs, which could affect accuracy if you switch away. Keep the stopwatch tab active for best results.</dd><dt>Can I use this on a mobile phone?</dt><dd>Yes, the stopwatch is fully touch-compatible and works on smartphones and tablets.</dd></dl></section>
+    <section class="faq"><h2>الأسئلة الشائعة حول ساعة الإيقاف</h2><dl><dt>ما مدى دقة ساعة توقيت المتصفح؟</dt><dd>تستخدم ساعة الإيقاف مؤقت الأداء عالي الدقة الخاص بالمتصفح، والذي تصل دقته إلى أقل من مللي ثانية في الظروف العادية. بالنسبة للتوقيت الرسمي الذي يتطلب الدقة الدقيقة، استخدم جهاز توقيت معتمد.</dd><dt>هل سيتوقف إذا قمت بتبديل علامات التبويب؟</dt><dd>قد تقوم المتصفحات بخنق JavaScript في علامات تبويب الخلفية، مما قد يؤثر على الدقة إذا قمت بالتبديل بعيدًا. أبقِ علامة تبويب ساعة الإيقاف نشطة للحصول على أفضل النتائج.</dd><dt>هل يمكنني استخدام هذا على الهاتف المحمول؟</dt><dd>نعم، ساعة الإيقاف متوافقة تمامًا مع اللمس وتعمل على الهواتف الذكية والأجهزة اللوحية.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
-  <p><a href="/glossary.html">كل الأدوات</a></p></footer>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"start":"ابدأ","lap":"اللفة","reset":"إعادة تعيين","stop":"توقف"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/stopwatch.js" defer></script>
 </body>
 </html>

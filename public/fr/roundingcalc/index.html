@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rounding Calculator — round numbers to any decimal place</title>
-<meta name="description" content="Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.">
+<title>Calculateur d&#39;arrondi - arrondissez les nombres à n&#39;importe quelle décimale</title>
+<meta name="description" content="Calculateur d&#39;arrondi gratuit. Arrondissez n&#39;importe quel nombre à un nombre de décimales choisi, ou arrondissez vers le haut ou vers le bas, instantanément et précisément dans votre navigateur.">
 <link rel="canonical" href="https://mikaio.dev/fr/roundingcalc/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/roundingcalc/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/roundingcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/roundingcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/roundingcalc/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/roundingcalc/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/roundingcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/roundingcalc/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/roundingcalc/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/roundingcalc/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/roundingcalc/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/roundingcalc/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Rounding Calculator — round numbers to any decimal place">
-<meta property="og:description" content="Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser.">
+<meta property="og:title" content="Calculateur d&#39;arrondi - arrondissez les nombres à n&#39;importe quelle décimale">
+<meta property="og:description" content="Calculateur d&#39;arrondi gratuit. Arrondissez n&#39;importe quel nombre à un nombre de décimales choisi, ou arrondissez vers le haut ou vers le bas, instantanément et précisément dans votre navigateur.">
 <meta property="og:url" content="https://mikaio.dev/fr/roundingcalc/">
 <meta property="og:locale" content="fr">
 <meta name="twitter:card" content="summary">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Rounding Calculator — round numbers to any decimal place","url":"https://mikaio.dev/fr/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Rounding Calculator","item":"https://mikaio.dev/fr/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do the decimal places mean?","acceptedAnswer":{"@type":"Answer","text":"The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred."}},{"@type":"Question","name":"What is the difference between the three methods?","acceptedAnswer":{"@type":"Answer","text":"Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes."}},{"@type":"Question","name":"How are exact halves handled?","acceptedAnswer":{"@type":"Answer","text":"When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur d'arrondi - arrondissez les nombres à n'importe quelle décimale","url":"https://mikaio.dev/fr/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur d'arrondi gratuit. Arrondissez n'importe quel nombre à un nombre de décimales choisi, ou arrondissez vers le haut ou vers le bas, instantanément et précisément dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur d'arrondi","item":"https://mikaio.dev/fr/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Que signifient les décimales ?","acceptedAnswer":{"@type":"Answer","text":"Le nombre de décimales correspond au nombre de chiffres à conserver après la virgule. Saisissez 2 pour arrondir au centième, 0 pour arrondir à un nombre entier ou un nombre négatif tel que -2 pour arrondir à la centaine la plus proche."}},{"@type":"Question","name":"Quelle est la différence entre les trois méthodes ?","acceptedAnswer":{"@type":"Answer","text":"L'arrondi au plus proche va à la valeur la plus proche, vers le haut ou vers le bas. L'arrondi vers le haut (plafond) va toujours à la valeur la plus élevée, et l'arrondi vers le bas (plancher) va toujours vers la valeur la plus basse, ce qui est important pour des choses comme le prix ou le placement des articles dans des boîtes."}},{"@type":"Question","name":"Comment les moitiés exactes sont-elles traitées ?","acceptedAnswer":{"@type":"Answer","text":"Lorsqu’une valeur se situe exactement à mi-chemin, l’arrondi au plus proche va au nombre le plus élevé, la règle quotidienne la plus familière. Choisissez d'arrondir explicitement vers le haut ou vers le bas si vous devez contrôler cela."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navigation du site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Rounding Calculator</span></nav>
-  <h1>Rounding Calculator</h1>
-  <p class="lead">Enter a number and the decimal places you want, then choose to round to nearest, up, or down. The result updates as you type.</p>
-  <section class="widget" id="tool"><form id="rnd"><div class="row"><div class="field"><label for="rnd-num">Number</label><input type="number" id="rnd-num" step="any" inputmode="decimal"></div><div class="field"><label for="rnd-places">Decimal places</label><input type="number" id="rnd-places" value="0" step="1"></div><div class="field"><label for="rnd-mode">Method</label><select id="rnd-mode"><option value="near">Round to nearest</option><option value="up">Round up</option><option value="down">Round down</option></select></div></div><div class="result"><span class="hint">Rounded: </span><span class="big" id="rnd-out">—</span></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur d&#39;arrondi</span></nav>
+  <h1>Calculateur d&#39;arrondi</h1>
+  <p class="lead">Entrez un nombre et les décimales souhaitées, puis choisissez d&#39;arrondir au plus proche, vers le haut ou vers le bas. Le résultat est mis à jour au fur et à mesure que vous tapez.</p>
+  <section class="widget" id="tool"><form id="rnd"><div class="row"><div class="field"><label for="rnd-num">Numéro</label><input type="number" id="rnd-num" step="any" inputmode="decimal"></div><div class="field"><label for="rnd-places">Décimales</label><input type="number" id="rnd-places" value="0" step="1"></div><div class="field"><label for="rnd-mode">Méthode</label><select id="rnd-mode"><option value="near">Arrondir au plus proche</option><option value="up">Arrondir</option><option value="down">Arrondir vers le bas</option></select></div></div><div class="result"><span class="hint">Arrondi: </span><span class="big" id="rnd-out">—</span></div></form></section>
   <article class="content">
     <h2>Arrondir n&#39;importe quel nombre, exactement comme vous le souhaitez</h2>
 <p>L&#39;arrondi semble simple jusqu&#39;à ce que vous deviez le faire avec précision. Faut-il que 2,675 devienne 2,68 ou 2,67 ? Que signifie arrondir au centième le plus proche, ou conserver trois décimales ? Et « arrondir vers le haut » est-il la même chose qu&#39;« arrondir au plus proche » ? Bien faire ces opérations est important chaque fois qu&#39;un nombre doit être nettoyé pour de l&#39;argent, des mesures, des notes ou des rapports, et c&#39;est facile de se tromper. Cette calculatrice d&#39;arrondi élimine les incertitudes. Entrez un nombre, choisissez combien de décimales vous voulez, sélectionnez la méthode d&#39;arrondi, et elle affiche le résultat instantanément. Tout s&#39;exécute dans votre navigateur, donc la réponse apparaît dès que vous tapez et rien de ce que vous entrez n&#39;est jamais téléchargé.</p>
@@ -142,13 +148,14 @@ textarea{min-height:120px;resize:vertical}
 <h2>Privé, instantané et gratuit</h2>
 <p>Il n&#39;y a pas d&#39;inscription, pas de frais et pas de publicités gênantes. Toute la calculatrice est un petit morceau de code qui s&#39;exécute sur votre propre appareil, c&#39;est pourquoi elle répond dès que vous tapez et continue de fonctionner sans connexion internet. Rien de ce que vous entrez n&#39;est téléchargé, stocké ou partagé ; les nombres n&#39;existent que sur votre écran et disparaissent lorsque vous rechargez la page.</p>
 <p>Pour l&#39;utiliser, entrez votre nombre, définissez les décimales, choisissez une méthode et lisez le résultat arrondi. Modifiez n&#39;importe quelle entrée à tout moment et la réponse suit, vous pouvez donc arrondir un seul chiffre ou explorer comment différents paramètres affectent le même nombre aussi souvent que vous le souhaitez.</p>
-    <section class="faq"><h2>Rounding calculator FAQ</h2><dl><dt>What do the decimal places mean?</dt><dd>The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred.</dd><dt>What is the difference between the three methods?</dt><dd>Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes.</dd><dt>How are exact halves handled?</dt><dd>When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that.</dd></dl></section>
+    <section class="faq"><h2>FAQ sur le calculateur d&#39;arrondi</h2><dl><dt>Que signifient les décimales ?</dt><dd>Le nombre de décimales correspond au nombre de chiffres à conserver après la virgule. Saisissez 2 pour arrondir au centième, 0 pour arrondir à un nombre entier ou un nombre négatif tel que -2 pour arrondir à la centaine la plus proche.</dd><dt>Quelle est la différence entre les trois méthodes ?</dt><dd>L&#39;arrondi au plus proche va à la valeur la plus proche, vers le haut ou vers le bas. L&#39;arrondi vers le haut (plafond) va toujours à la valeur la plus élevée, et l&#39;arrondi vers le bas (plancher) va toujours vers la valeur la plus basse, ce qui est important pour des choses comme le prix ou le placement des articles dans des boîtes.</dd><dt>Comment les moitiés exactes sont-elles traitées ?</dt><dd>Lorsqu’une valeur se situe exactement à mi-chemin, l’arrondi au plus proche va au nombre le plus élevé, la règle quotidienne la plus familière. Choisissez d&#39;arrondir explicitement vers le haut ou vers le bas si vous devez contrôler cela.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
-  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"number":"Numéro","places":"Décimales","mode":"Méthode","nearest":"Arrondir au plus proche","up":"Arrondir","down":"Arrondir vers le bas","result":"Arrondi"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/roundingcalc.js" defer></script>
 </body>
 </html>

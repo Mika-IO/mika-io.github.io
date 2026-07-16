@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unix Timestamp Converter — 将纪元时间转换为日期</title>
+<meta name="description" content="免费的 Unix 时间戳转换器。将 Unix 纪元时间转换为人类可读的日期和时间，或将任何日期转换回 Unix 时间戳。立即在您的浏览器中运行。">
+<link rel="canonical" href="https://mikaio.dev/zh/unixepoch/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/unixepoch/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/unixepoch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/unixepoch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/unixepoch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/unixepoch/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/unixepoch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/unixepoch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/unixepoch/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/unixepoch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/unixepoch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/unixepoch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Unix Timestamp Converter — 将纪元时间转换为日期">
+<meta property="og:description" content="免费的 Unix 时间戳转换器。将 Unix 纪元时间转换为人类可读的日期和时间，或将任何日期转换回 Unix 时间戳。立即在您的浏览器中运行。">
+<meta property="og:url" content="https://mikaio.dev/zh/unixepoch/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Unix Timestamp Converter — 将纪元时间转换为日期","url":"https://mikaio.dev/zh/unixepoch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费的 Unix 时间戳转换器。将 Unix 纪元时间转换为人类可读的日期和时间，或将任何日期转换回 Unix 时间戳。立即在您的浏览器中运行。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Unix 时间戳转换器","item":"https://mikaio.dev/zh/unixepoch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"什么是 Unix 时间戳？","acceptedAnswer":{"@type":"Answer","text":"Unix 时间戳是一个数字，表示自 1970 年 1 月 1 日 00:00:00 UTC（Unix 纪元）以来经过的秒数。它在计算中普遍用于表示没有时区歧义的时间点。"}},{"@type":"Question","name":"2038年问题是什么？","acceptedAnswer":{"@type":"Answer","text":"将 Unix 时间戳存储为 32 位有符号整数的旧系统只能表示 2038 年 1 月 19 日之前的日期。现代 64 位系统没有此限制。"}},{"@type":"Question","name":"如何转换毫秒？","acceptedAnswer":{"@type":"Answer","text":"有些系统使用毫秒而不是秒。将毫秒时间戳除以 1000 将其转换为秒，然后再在此处输入。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Unix 时间戳转换器</span></nav>
+  <h1>Unix 时间戳转换器</h1>
+  <p class="lead">输入 Unix 时间戳以将其转换为可读日期，或选择一个日期以将其转换为 Unix 时间戳。</p>
+  <section class="widget" id="tool"><div id="ue-app"><div class="row"><div class="field"><label for="ue-ts">Unix 时间戳（秒）</label><input type="number" id="ue-ts" placeholder="e.g. 1700000000" inputmode="numeric"></div></div><div class="result"><span class="hint">UTC 日期和时间: </span><b id="ue-utc">—</b></div><div class="result"><span class="hint">您当地时间: </span><b id="ue-local">—</b></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="ue-dt">将日期转换为时间戳</label><input type="datetime-local" id="ue-dt"></div><div class="result"><span class="hint">Unix时间戳: </span><span class="big" id="ue-tsout">—</span></div></div></section>
+  <article class="content">
+    <h2>将 Unix 时间戳转换为人类可读的日期</h2>
+<p>开发人员、数据库管理员以及使用日志文件或 API 的任何人都会经常遇到 Unix 时间戳——像 1700000000 这样的长数字，代表一个时间点。如果没有转换器，这些数字对大多数人来说毫无意义。该工具可立即将任何 Unix 时间戳转换为可读的日期和时间，并将任何日期转换回其 Unix 时间戳。</p>
+<h2>什么是 Unix 时间戳？</h2>
+<p>Unix 时间戳计算自 1970 年 1 月 1 日午夜（协调世界时 (UTC)）以来经过的秒数。这个时刻被称为 Unix 纪元，被选为 Unix 操作系统开发的参考点。每过去一秒，计数就会加一。时间戳 0 正好代表 UTC 时间 1970 年 1 月 1 日的午夜。时间戳 1700000000 表示 2023 年 11 月 14 日 22:13:20 UTC。</p>
+<p>Unix 时间戳的优点在于它们与时区无关。无论您身在世界何处，时间戳都代表完全相同的时刻。当转换为当地时间时，相同的时间戳在东京和纽约产生不同的时钟读数，但它们指的是相同的物理时刻。</p>
+<h2>如何使用转换器</h2>
+<p>要将时间戳转换为日期，请将时间戳数字粘贴到上方字段中。 UTC 日期和时间以及您当地的等效日期和时间都会立即显示。要将日期转换为时间戳，请使用下部的日期选择器，相应的时间戳会立即出现。</p>
+<h2>毫秒与秒</h2>
+<p>某些系统，特别是 Web 浏览器和 JavaScript 应用程序，使用毫秒而不是秒作为时间戳。 JavaScript Date.now() 调用会返回类似 1700000000000 的结果——这个数字比等效的 Unix 时间戳（以秒为单位）大大约 1000 倍。如果您的数字长度大约为 13 位，则可能以毫秒为单位：除以 1000 并输入结果。</p>
+<h2>2038年问题</h2>
+<p>早期的 Unix 系统将时间戳存储为 32 位有符号整数，最多可容纳 2,147,483,647 的值。该最大值对应于 2038 年 1 月 19 日 03:14:07 UTC。以 32 位整数存储时间戳的系统将在该日期溢出，这个问题有时称为 Y2K38。现代 64 位系统可以存储远远超过 2920 亿年的时间戳，这使得这个问题只出现在尚未更新的遗留软件中。</p>
+<h2>常见用途</h2>
+<p>时间戳出现在日志文件、数据库记录、API 响应、缓存标头、加密证书和无数其他上下文中。将它们转换为可读日期有助于调试、数据分析、合规性审核以及任何需要了解事件发生时间的情况。</p>
+<h2>为什么选择1970年作为起点</h2>
+<p>选择1970年1月1日本质上是一个实际的日期，而不是一个本身有意义的日期。 Unix 是在 20 世纪 60 年代末和 1970 年代初在贝尔实验室开发的，设计者需要一个足够新的参考点来保持数字的可管理性，但又足够早以覆盖操作系统可能的生命周期。四舍五入到 1970 年初非常方便。几十年后，这种任意选择已经深深嵌入：它是几乎所有编程语言、数据库和操作系统如何在内部表示时间的基础，尽管大多数程序员从来不需要直接考虑它。</p>
+<h2>无需转换器即可读取时间戳</h2>
+<p>通过一些练习，您可以在头脑中检查时间戳的完整性。除以 31,536,000（普通年份的秒数）即可得出自 1970 年以来的大致年数——例如，以 1.7 开头的十位时间戳大约对应于 2023 年，自 1970 年以来加上大约 53-54 年。这种粗略的心理估计是一种有用的方法，可以发现明显错误的时间戳，例如在您使用计算器之前，因为它实际上以毫秒为单位而相差 1000 倍的时间戳。</p>
+<h2>负时间戳</h2>
+<p>由于 Unix 时间戳只是从纪元开始的有符号秒数，因此 1970 年 1 月 1 日之前的日期表示为负数而不是不受支持。例如，时间戳 -86400 正好代表纪元前一天：1969 年 12 月 31 日。此转换器以与正值相同的方式处理负值，这对于处理早于计算时代但仍以 Unix 时间戳形式存储的历史记录或数据非常有用。</p>
+<h2>为什么时间戳与时区无关</h2>
+<p>将时刻存储为 Unix 时间戳而不是格式化日期字符串的最大优点是它在存储和计算过程中完全避开时区。时间戳准确地代表一个物理时刻，并且仅在向人显示时才转换为本地日历日期和时钟时间。这就是为什么数据库、API 和日志文件绝大多数存储时间戳而不是预先格式化的本地日期：不同时区的两台服务器可以完全放心地比较、排序和计算时间戳之间的差异，并且只需要在最后一步转换为人类可读的本地时间，就像此转换器在并排显示 UTC 和本地等效时间时所做的那样。</p>
+<h2>使用时间戳进行调试</h2>
+<p>开发人员在调试时不断使用这样的转换器。标有 1700000000 的服务器错误日志乍一看毫无意义，但转换它会立即告诉您错误是在工作时间、夜间还是在部署退出的确切时刻发生——这通常是将错误报告与导致错误的更改关联起来的最快方法。 API 响应、数据库审核列和缓存过期标头通常都存储时间戳而不是格式化日期，原因与存储引擎更喜欢它们的原因相同：简单的数字可以正确排序、比较和计算，没有区域设置或格式歧义，并且只需要在最终显示步骤中转换为人类友好的日期，这正是该工具所做的工作。</p>
+<h2>私人</h2>
+<p>一切都使用 JavaScript 的内置 Date 对象在浏览器中运行，因此双向转换都是即时的，并且您输入的时间戳或日期不会发送到服务器、记录或共享。</p>
+    <section class="faq"><h2>Unix 时间戳常见问题解答</h2><dl><dt>什么是 Unix 时间戳？</dt><dd>Unix 时间戳是一个数字，表示自 1970 年 1 月 1 日 00:00:00 UTC（Unix 纪元）以来经过的秒数。它在计算中普遍用于表示没有时区歧义的时间点。</dd><dt>2038年问题是什么？</dt><dd>将 Unix 时间戳存储为 32 位有符号整数的旧系统只能表示 2038 年 1 月 19 日之前的日期。现代 64 位系统没有此限制。</dd><dt>如何转换毫秒？</dt><dd>有些系统使用毫秒而不是秒。将毫秒时间戳除以 1000 将其转换为秒，然后再在此处输入。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"timestamp":"Unix 时间戳（秒）","utc":"UTC 日期和时间","local":"您当地时间","date_to_ts":"将日期转换为时间戳","ts_out":"Unix时间戳","utcnote":"世界标准时间","invalid":"无效"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/unixepoch.js" defer></script>
+</body>
+</html>

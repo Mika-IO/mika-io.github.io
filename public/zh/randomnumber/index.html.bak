@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>随机数生成器 — 选择任意范围内的一个数字</title>
+<meta name="description" content="免费随机数生成器。在任意最小值和最大值之间选择一个或多个随机数，并可以选择获得唯一结果。在浏览器中安全且即时。">
+<link rel="canonical" href="https://mikaio.dev/zh/randomnumber/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/randomnumber/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/randomnumber/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/randomnumber/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/randomnumber/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/randomnumber/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/randomnumber/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/randomnumber/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/randomnumber/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/randomnumber/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/randomnumber/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/randomnumber/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="随机数生成器 — 选择任意范围内的一个数字">
+<meta property="og:description" content="免费随机数生成器。在任意最小值和最大值之间选择一个或多个随机数，并可以选择获得唯一结果。在浏览器中安全且即时。">
+<meta property="og:url" content="https://mikaio.dev/zh/randomnumber/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"随机数生成器 — 选择任意范围内的一个数字","url":"https://mikaio.dev/zh/randomnumber/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费随机数生成器。在任意最小值和最大值之间选择一个或多个随机数，并可以选择获得唯一结果。在浏览器中安全且即时。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"随机数生成器","item":"https://mikaio.dev/zh/randomnumber/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"这些数字真的是随机的吗？","acceptedAnswer":{"@type":"Answer","text":"它们来自浏览器的加密安全随机生成器，因此范围内的每个数字都有相同的可能性，并且结果无法预测或重现。"}},{"@type":"Question","name":"“不重复”选项有什么作用？","acceptedAnswer":{"@type":"Answer","text":"打开独特结果后，每个生成的号码仅出现一次，这正是您抽奖、抽签或挑选不同获奖者所需要的。它要求范围至少与计数一样大。"}},{"@type":"Question","name":"可以离线使用吗？","acceptedAnswer":{"@type":"Answer","text":"是的。生成器完全在您的浏览器中运行，因此页面加载后无需互联网连接。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>随机数生成器</span></nav>
+  <h1>随机数生成器</h1>
+  <p class="lead">设置最小值和最大值，选择所需的数字并生成。使用独特的选项进行抽奖，其中号码不应重复。</p>
+  <section class="widget" id="tool"><form id="rng-form" data-too-many="对于这么多唯一数字来说范围太小"><div class="row"><div class="field"><label for="rng-min">最低</label><input type="number" id="rng-min" value="1" step="1"></div><div class="field"><label for="rng-max">最大</label><input type="number" id="rng-max" value="100" step="1"></div><div class="field"><label for="rng-count">有多少</label><input type="number" id="rng-count" value="1" min="1" step="1"></div></div><div class="field"><label><input type="checkbox" id="rng-unique"> 没有重复（唯一）</label></div><button class="btn" type="submit">生成</button><div class="result"><span class="big" id="rng-out">—</span></div></form></section>
+  <article class="content">
+    <h2>需要一个数字时,随时给你一个</h2>
+<p>有时候你就是需要一个没人刻意挑选过的数字。也许你在抽奖决定中奖者,挑一页要复习的内容,决定谁先出手,或者给一个游戏定个种子。这个随机数生成器正好能满足这个需求:设定最小值和最大值,说明你要几个数字,它会立刻生成出来。整个过程都在浏览器里完成,一点按钮结果就出现,你输入的任何内容都不会被发送到任何地方。</p>
+<p>控件刻意做得很直接。最小值和最大值框设定数字所在的区间,两端都包含在内,所以设定1到6,行为就和一个普通骰子完全一样。&quot;要几个&quot;框让你可以一次生成一整批,而不是一个一个来,一个复选框则用来在&quot;允许重复&quot;和&quot;强制每个数字都不同&quot;之间切换。点击生成后,结果会一起显示出来,随时可以读取或复制。</p>
+<h2>每个设置的作用</h2>
+<p><strong>最小值和最大值</strong>定义了可能出现的数字范围,两端都包含在内,所以选1和10,能返回1到10之间的任意整数。如果你不小心把较大的数字填在了前面,工具会悄悄替你调换过来,所以你永远不会因为区间颠倒而得到一个空结果。</p>
+<p><strong>要几个</strong>控制一次要生成多少个数字。留成1就是单次抽取,调大就能一次抽出好几个——适合选出多名中奖者、生成一组彩票式号码,或者制造测试数据。日常使用基本没有实际数量限制。</p>
+<p><strong>不重复</strong>是一个重要的开关。关闭时,每次抽取都是独立的,所以同一个数字可能出现不止一次,就像掷好几次骰子一样。打开后,每个数字一旦被抽中就会从池子里移除,所以这一批结果里每个数字都是唯一的。这正是公平抽奖或抓阄时需要的效果,同一张票不应该被抽中两次。如果你要求的唯一数字数量超过了这个区间能提供的上限,工具会明确告诉你,而不是无限循环下去。</p>
+<h2>随机数生成器能帮上什么忙</h2>
+<p>日常用途数不胜数。老师随机挑一个学生或一道题来保证公平。主播和社群管理者从编号列表里抽取抽奖中奖者。跑团主持人在手边没有实体骰子时用它来掷点数。父母用它来解决&quot;谁先来&quot;的争执,不用吵架。因为区间完全可调,同一个工具只要改两个数字,就能当硬币、骰子、百面转盘或抽奖机来用。</p>
+<p>对更实际的任务同样有用。开发者和测试人员用随机数来生成样本数据、挑选测试用例或打乱输入顺序。研究人员用它把参与者无偏地分配到不同组别。任何组织抽奖活动的人,都可以粘贴一份编号的参赛者名单,几秒钟内抽出不重复的中奖者,而且结果是真正公正的,因为没有任何人为干预。</p>
+<h2>为什么这些数字值得信赖</h2>
+<p>不是所有的&quot;随机&quot;都是平等的。很多简单的生成器用一个可预测的公式,表面上看起来随机而已。这个工具用的是浏览器内置的密码学安全随机数生成器——和用于保护网络上敏感操作的随机性来源相同。这意味着你选定区间内的每个数字出现的概率都相等,结果没法根据之前的结果预测出来,也没有人,包括你自己,能左右这个结果。</p>
+<p>有一个细节值得了解。为了保证每个值出现的概率完全相等,工具会丢弃并重新抽取那些少见的、原本会让某些数字概率略微偏高的原始值。这个&quot;拒绝采样&quot;的步骤对你来说是不可见的,但正是它保证了整个区间内真正均匀的分布,不会偏向数值较低或较高的一端。这正是&quot;看起来公平的随机&quot;和&quot;真正公平的随机&quot;之间的区别。</p>
+<p>因为没有记忆,连续出现的高数字不会让下一次出现低数字的概率增加,反之亦然。每次生成都是全新开始。如果你想亲自验证这一点,可以打开&quot;允许重复&quot;生成一大批,你会看到数字散布在整个区间里,没有任何规律,抽取次数越多分布越均匀。</p>
+<h2>私密、即时且免费</h2>
+<p>不需要账户,不收费,也不用等待。整个生成器是一小段运行在你自己设备上的代码,这也是它能立刻响应、断网也照常工作的原因。你生成的任何数字,以及你输入的任何区间,都不会被上传、记录或分享。屏幕上显示的内容只留在你的屏幕上,刷新页面就消失了。</p>
+<p>一个应对常见任务的小技巧:模拟一个骰子,把区间设为1到6;做标准彩票式抽奖,把区间设为1到49或1到60,打开不重复选项,数量设成要抽取的球数;要打乱一份编号列表,就生成同样数量的不重复数字,按顺序读出来当作新的排列。因为区间两端都包含在内,你永远不用为了凑数而加一或减一。</p>
+<p>使用时,设定最小值和最大值,选择要几个数字,决定是否允许重复,点击生成。随时修改任意数值,想再生成多少次都可以——每次点击都会给出一个全新、公正、靠得住的结果。</p>
+    <section class="faq"><h2>随机数生成器常见问题解答</h2><dl><dt>这些数字真的是随机的吗？</dt><dd>它们来自浏览器的加密安全随机生成器，因此范围内的每个数字都有相同的可能性，并且结果无法预测或重现。</dd><dt>“不重复”选项有什么作用？</dt><dd>打开独特结果后，每个生成的号码仅出现一次，这正是您抽奖、抽签或挑选不同获奖者所需要的。它要求范围至少与计数一样大。</dd><dt>可以离线使用吗？</dt><dd>是的。生成器完全在您的浏览器中运行，因此页面加载后无需互联网连接。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/randomnumber/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/randomnumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/randomnumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/randomnumber/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/randomnumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/randomnumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/randomnumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/randomnumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/randomnumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/randomnumber/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/randomnumber.js" defer></script>
+</body>
+</html>

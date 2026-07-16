@@ -9,6 +9,11 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/readingtime/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/readingtime/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/readingtime/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/readingtime/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/readingtime/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/readingtime/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/readingtime/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/readingtime/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/readingtime/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/readingtime/">
@@ -63,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -112,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Tempo de Leitura — quanto tempo para ler qualquer texto","url":"https://mikaio.dev/pt/readingtime/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"pt","description":"Calculadora de tempo de leitura gratuita. Cole qualquer texto para ver na hora a contagem de palavras, tempo estimado de leitura e tempo estimado de fala."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/pt/"},{"@type":"ListItem","position":2,"name":"Calculadora de Tempo de Leitura","item":"https://mikaio.dev/pt/readingtime/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual velocidade de leitura a calculadora assume?","acceptedAnswer":{"@type":"Answer","text":"A calculadora usa 238 palavras por minuto, que pesquisas sugerem ser a velocidade média de leitura silenciosa para adultos lendo prosa não técnica em inglês."}},{"@type":"Question","name":"Qual velocidade de fala é usada?","acceptedAnswer":{"@type":"Answer","text":"O tempo de fala é estimado a 150 palavras por minuto, que é um ritmo de fala natural confortável."}},{"@type":"Question","name":"Ela conta as palavras exatamente?","acceptedAnswer":{"@type":"Answer","text":"A contagem de palavras divide por espaços em branco e filtra segmentos vazios, que é o método padrão. Corresponde à maioria dos processadores de texto para prosa simples."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/pt/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/pt/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navegação do site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Início</a> › <span>Calculadora de Tempo de Leitura</span></nav>
@@ -148,11 +156,12 @@ textarea{min-height:120px;resize:vertical}
 <p>Seu texto nunca sai do seu navegador: a contagem de palavras e o cálculo do tempo acontecem inteiramente de forma local, então nenhum conteúdo que você cola é enviado, armazenado ou analisado por nenhum servidor.</p>
     <section class="faq"><h2>Perguntas frequentes do tempo de leitura</h2><dl><dt>Qual velocidade de leitura a calculadora assume?</dt><dd>A calculadora usa 238 palavras por minuto, que pesquisas sugerem ser a velocidade média de leitura silenciosa para adultos lendo prosa não técnica em inglês.</dd><dt>Qual velocidade de fala é usada?</dt><dd>O tempo de fala é estimado a 150 palavras por minuto, que é um ritmo de fala natural confortável.</dd><dt>Ela conta as palavras exatamente?</dt><dd>A contagem de palavras divide por espaços em branco e filtra segmentos vazios, que é o método padrão. Corresponde à maioria dos processadores de texto para prosa simples.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" aria-current="true" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Ferramentas de navegador gratuitas, rápidas e privadas · © 2026</p>
-  <p><a href="/glossary.html">Todas as ferramentas</a></p></footer>
+  <p><a href="/freetools.html">Todas as ferramentas</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="pt";window.__T={"paste_text":"Cole ou digite seu texto aqui…","words":"Palavras","reading_time":"Tempo de leitura","speaking_time":"Tempo de fala","min":"min"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/readingtime.js" defer></script>
 </body>
 </html>

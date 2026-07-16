@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de macronutriments – protéines, glucides et graisses provenant des calories quotidiennes</title>
+<meta name="description" content="Calculateur de macros gratuit. Entrez votre objectif calorique quotidien et votre objectif alimentaire pour obtenir les objectifs en matière de protéines, de glucides et de graisses en grammes et en calories.">
+<link rel="canonical" href="https://mikaio.dev/fr/macrocalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/macrocalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/macrocalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/macrocalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/macrocalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/macrocalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/macrocalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/macrocalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/macrocalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/macrocalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/macrocalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/macrocalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculateur de macronutriments – protéines, glucides et graisses provenant des calories quotidiennes">
+<meta property="og:description" content="Calculateur de macros gratuit. Entrez votre objectif calorique quotidien et votre objectif alimentaire pour obtenir les objectifs en matière de protéines, de glucides et de graisses en grammes et en calories.">
+<meta property="og:url" content="https://mikaio.dev/fr/macrocalc/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de macronutriments – protéines, glucides et graisses provenant des calories quotidiennes","url":"https://mikaio.dev/fr/macrocalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur de macros gratuit. Entrez votre objectif calorique quotidien et votre objectif alimentaire pour obtenir les objectifs en matière de protéines, de glucides et de graisses en grammes et en calories."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de macronutriments","item":"https://mikaio.dev/fr/macrocalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Que sont les macronutriments ?","acceptedAnswer":{"@type":"Answer","text":"Les macronutriments (macros) sont les trois principaux nutriments énergétiques : les glucides (4 cal/g), les protéines (4 cal/g) et les lipides (9 cal/g). Ils constituent l’essentiel de votre alimentation et fournissent toutes vos calories."}},{"@type":"Question","name":"De quelle quantité de protéines ai-je besoin ?","acceptedAnswer":{"@type":"Answer","text":"Directives générales : 0,8 g par kg de poids corporel pour les adultes sédentaires, 1,6 à 2,2 g/kg pour ceux qui font de la musculation. Les régimes riches en protéines (plus de 30 % des calories provenant des protéines) peuvent aider à préserver les muscles pendant la perte de poids."}},{"@type":"Question","name":"Qu’est-ce qu’une macro division céto ?","acceptedAnswer":{"@type":"Answer","text":"Un régime cétogène est généralement très riche en graisses (65 à 75 % des calories), modéré en protéines (20 à 30 %) et très faible en glucides (5 à 10 %, généralement moins de 50 g/jour). Cela oblige le corps à utiliser la graisse comme carburant principal (cétose)."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/macrocalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/macrocalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/macrocalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/macrocalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/macrocalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/macrocalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/macrocalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/macrocalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/macrocalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/macrocalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur de macronutriments</span></nav>
+  <h1>Calculateur de macronutriments</h1>
+  <p class="lead">Entrez votre objectif calorique quotidien et votre style de régime pour obtenir vos objectifs en matière de protéines, de glucides et de graisses en grammes.</p>
+  <section class="widget" id="tool"><form id="mc-form"><div class="row"><div class="field"><label for="mc-cal">Calories quotidiennes</label><input type="number" id="mc-cal" min="500" max="10000" step="1" placeholder="2000" inputmode="numeric"></div><div class="field"><label for="mc-goal">Objectif diététique</label><select id="mc-goal"><option value="balanced">Équilibré</option><option value="lowcarb">Faible teneur en glucides</option><option value="highprotein">Riche en protéines</option><option value="keto">Céto</option></select></div></div><div class="row" style="justify-content:center"><button class="btn" type="submit">Calculer</button></div></form><div id="mc-out" hidden class="result" style="text-align:left"></div></section>
+  <article class="content">
+    <h2>À quoi sert le calculateur de macronutriments</h2>
+<p>Entrez votre objectif calorique quotidien et votre style de régime pour obtenir vos objectifs en matière de protéines, de glucides et de graisses en grammes.</p>
+<p>Il s&#39;agit de la version courte, et pour de nombreux visiteurs, c&#39;est la seule partie dont ils ont besoin : l&#39;outil se trouve en haut de cette page, il fonctionne immédiatement et rien en dessous n&#39;est obligatoire. Le reste de cette page est là pour les moments où la réponse seule ne suffit pas : lorsque vous souhaitez savoir comment l&#39;estimation est réellement réalisée, où elle cesse d&#39;être fiable et que faire du résultat une fois que vous l&#39;avez.</p>
+<h2>Comment l&#39;utiliser</h2>
+<p>Les contrôles sont volontairement peu nombreux. Vous verrez 7 contrôles :</p>
+<ul>
+<li><strong>Calories quotidiennes</strong></li>
+<li><strong>Objectif diététique</strong></li>
+<li><strong>Équilibré</strong></li>
+<li><strong>Faible teneur en glucides</strong></li>
+<li><strong>Haute teneur en protéines</strong></li>
+<li><strong>Céto</strong></li>
+<li><strong>Calculer</strong></li>
+</ul>
+<p>Remplissez ce qui s&#39;applique à vous et les résultats sont mis à jour. Rien n&#39;est obligatoire dans le sens d&#39;être soumis n&#39;importe où — si vous changez d&#39;avis, modifiez la valeur et lisez la nouvelle réponse. Il n&#39;y a pas d&#39;étape de sauvegarde, pas de boîte de dialogue de confirmation et aucun moyen de se tromper de façon permanente, donc essayer plusieurs variantes pour voir comment le résultat évolue n&#39;est pas seulement autorisé, c&#39;est généralement la manière la plus informative d&#39;utiliser un outil comme celui-ci.</p>
+<p>Tout se déroule dans votre propre navigateur. Rien de ce que vous saisissez n&#39;est téléchargé, rien n&#39;est stocké entre les visites, il n&#39;y a aucun compte à créer et il n&#39;y a aucun suivi à refuser. Une fois cette page chargée, elle n&#39;a plus besoin du réseau, elle continue donc à fonctionner si votre connexion est interrompue.</p>
+<h2>Pourquoi une page comme celle-ci existe</h2>
+<p>Les chiffres de la santé filtrent des signaux et non des verdicts. Ils sont construits à partir de moyennes de population, ce qui signifie qu’ils décrivent ce qui tend à être vrai pour de grands groupes de personnes plutôt que ce qui est vrai pour vous en particulier. C&#39;est vraiment utile pour repérer quand quelque chose mérite d&#39;être examiné de plus près, et vraiment inutile pour remplacer quelqu&#39;un qui peut réellement vous examiner.</p>
+<p>Le Web regorge d&#39;outils qui résolvent un problème de trente secondes en exigeant d&#39;abord une adresse e-mail, une décision en matière de cookie et quatre secondes de publicité. Cet échange avait du sens pour quelqu&#39;un, mais il n&#39;avait pas de sens pour celui qui voulait simplement obtenir le numéro. Cette page prend la position opposée : pas d&#39;inscription, pas d&#39;interstitiel, pas de vente incitative et aucune raison de partir une fois que vous avez ce que vous êtes venu chercher.</p>
+<h2>Ce que le résultat vous dit et ne vous dit pas</h2>
+<p>Rien ici ne constitue un avis médical, et aucun résultat ne doit être utilisé pour démarrer, arrêter ou modifier un traitement. Les formules de ce type sont généralement dérivées de populations étudiées particulières et peuvent se comporter différemment pour des personnes extérieures à elles : différents âges, différentes compositions corporelles, différents antécédents. Si un résultat vous surprend ou vous inquiète, c&#39;est une raison pour en parler à un clinicien, pas une raison pour faire confiance à ce numéro plutôt qu&#39;à votre propre médecin.</p>
+<p>Il vaut la peine d’être explicite quant aux limites, car les outils sont généralement fiables au-delà du point où ils le méritent. Celui-ci est honnête dans ses entrées : donnez-lui des valeurs précises et il vous donne une estimation précise. Il ne peut pas vous dire si les valeurs que vous lui avez données étaient les bonnes, si vous avez posé la bonne question ou si le contexte auquel vous appliquez la réponse a quelque chose d&#39;important que les entrées n&#39;ont jamais capturé. Ce jugement reste avec vous, et c’est la partie qui compte réellement.</p>
+<h2>Où cela s&#39;intègre-t-il dans un véritable flux de travail</h2>
+<p>Des outils comme celui-ci font rarement tout le travail. Le plus souvent, le calculateur de macronutriments n’est qu’une étape au milieu de quelque chose de plus grand : vous aviez besoin de ce chiffre pour pouvoir continuer ce que vous faisiez réellement. Cela façonne la façon dont la page est construite. Il s&#39;ouvre rapidement, il n&#39;interrompt pas, il ne vous demande pas de vous engager sur quoi que ce soit et il s&#39;écarte dès que vous avez ce que vous êtes venu chercher.</p>
+<p>Cela signifie également que vous devriez vous sentir libre de l’utiliser à plusieurs reprises plutôt qu’avec précaution. Il n&#39;y a aucun coût pour une deuxième tentative et aucune pénalité pour une première réponse erronée, donc le chemin le plus rapide vers une bonne réponse est généralement d&#39;essayer une réponse approximative, d&#39;examiner le résultat et de l&#39;ajuster. Les gens ont tendance à traiter les outils comme si chaque utilisation était coûteuse, ce qui est une habitude héritée des logiciels qui les rendent coûteux. Celui-ci ne le fait pas.</p>
+<h2>Erreurs courantes à éviter</h2>
+<p>La première consiste à faire confiance à un résultat dont vous n’avez pas vérifié l’entrée. Un outil ne peut pas savoir que vous vouliez saisir un chiffre et en saisir un autre, et il présentera la mauvaise réponse avec exactement la même confiance que la bonne. Relisez vos entrées avant de vous fier à la sortie : cela prend deux secondes et détecte la plupart de ce qui ne va pas.</p>
+<p>La seconde consiste à traiter un chiffre comme une réponse à une question qui n’a jamais été posée. Chaque estimation sur cette page répond à quelque chose de précis et précis. L’appliquer à une question proche mais différente est la manière la plus courante pour les gens de se laisser tromper par un outil qui fonctionnait parfaitement tout le temps. Si vous n&#39;êtes pas sûr que la question que vous vous posez correspond à la question à laquelle l&#39;outil répond, cette incertitude est un signal utile et non un obstacle.</p>
+<p>Les questions fréquemment posées ci-dessous couvrent les cas qui reviennent le plus souvent, y compris ceux pour lesquels la réponse honnête est que ce n&#39;est pas le bon outil pour ce que vous essayez de faire.</p>
+<h2>Travailler hors ligne et sur n&#39;importe quel appareil</h2>
+<p>La page est un seul document autonome. Il n&#39;y a pas de framework à télécharger, pas de polices récupérées auprès d&#39;un tiers et pas de balise d&#39;analyse se déclenchant en arrière-plan, c&#39;est pourquoi il se charge rapidement sur une mauvaise connexion et pourquoi il ne coûte rien de rester ouvert dans un onglet auquel vous revenez occasionnellement. Cela fonctionne de la même manière sur un téléphone, une tablette et un ordinateur de bureau ; la mise en page s&#39;adapte, le comportement non.</p>
+<p>Puisqu&#39;aucun serveur n&#39;est impliqué dans le travail proprement dit, il n&#39;y a pas non plus de service à arrêter, aucune limite de débit à atteindre et aucun changement de comportement discret poussé d&#39;ailleurs. Ce que vous avez chargé est ce qui fonctionne. Si vous voulez en être certain, ouvrez la source de la page – toute l’implémentation est là sous une forme lisible, ce que très peu d’outils de ce type peuvent affirmer.</p>
+<h2>Une note sur l&#39;exactitude</h2>
+<p>Les résultats sont calculés avec une arithmétique standard à double précision et affichés dans un nombre raisonnable de positions plutôt que dans chaque chiffre que le matériel peut produire. Un chiffre affiché à deux décimales près ne prétend pas être précis à deux décimales près – il prétend que les entrées que vous avez fournies, prises à leur valeur nominale, produisent ce chiffre. La précision de l&#39;affichage et la précision dans le monde réel sont des choses différentes, et leur confusion est la manière la plus courante pour un outil correct de prendre une mauvaise décision.</p>
+<p>Si un résultat semble erroné, vérifiez les entrées avant de douter de l&#39;arithmétique. En pratique, l&#39;écrasante majorité des réponses surprenantes proviennent d&#39;une valeur saisie dans la mauvaise unité, d&#39;un séparateur décimal lu différemment de ce que vous souhaitiez, ou d&#39;un champ laissé par défaut alors qu&#39;il aurait dû être modifié. Ce n’est une critique envers personne – c’est simplement là où se trouvent les erreurs, et savoir où chercher en premier permet de gagner le plus de temps.</p>
+    <section class="faq"><h2>FAQ sur les macronutriments</h2><dl><dt>Que sont les macronutriments ?</dt><dd>Les macronutriments (macros) sont les trois principaux nutriments énergétiques : les glucides (4 cal/g), les protéines (4 cal/g) et les lipides (9 cal/g). Ils constituent l’essentiel de votre alimentation et fournissent toutes vos calories.</dd><dt>De quelle quantité de protéines ai-je besoin ?</dt><dd>Directives générales : 0,8 g par kg de poids corporel pour les adultes sédentaires, 1,6 à 2,2 g/kg pour ceux qui font de la musculation. Les régimes riches en protéines (plus de 30 % des calories provenant des protéines) peuvent aider à préserver les muscles pendant la perte de poids.</dd><dt>Qu’est-ce qu’une macro division céto ?</dt><dd>Un régime cétogène est généralement très riche en graisses (65 à 75 % des calories), modéré en protéines (20 à 30 %) et très faible en glucides (5 à 10 %, généralement moins de 50 g/jour). Cela oblige le corps à utiliser la graisse comme carburant principal (cétose).</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/macrocalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/macrocalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/macrocalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/macrocalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/macrocalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/macrocalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/macrocalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/macrocalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/macrocalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/macrocalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"calories":"Calories quotidiennes","goal":"Objectif diététique","balanced":"Équilibré","lowCarb":"Faible teneur en glucides","highProtein":"Riche en protéines","keto":"Céto","calculate":"Calculer"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/macrocalc.js" defer></script>
+</body>
+</html>

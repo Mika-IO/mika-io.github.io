@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de jubilación: ¿cuánto ahorrará?</title>
+<meta name="description" content="Calculadora de jubilación gratuita. Calcule sus ahorros para la jubilación en función de las contribuciones mensuales, el rendimiento esperado y los años hasta la jubilación.">
+<link rel="canonical" href="https://mikaio.dev/es/retirementcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/retirementcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/retirementcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/retirementcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/retirementcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/retirementcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/retirementcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/retirementcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/retirementcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/retirementcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/retirementcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/retirementcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de jubilación: ¿cuánto ahorrará?">
+<meta property="og:description" content="Calculadora de jubilación gratuita. Calcule sus ahorros para la jubilación en función de las contribuciones mensuales, el rendimiento esperado y los años hasta la jubilación.">
+<meta property="og:url" content="https://mikaio.dev/es/retirementcalc/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de jubilación: ¿cuánto ahorrará?","url":"https://mikaio.dev/es/retirementcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Calculadora de jubilación gratuita. Calcule sus ahorros para la jubilación en función de las contribuciones mensuales, el rendimiento esperado y los años hasta la jubilación."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Calculadora de ahorro para la jubilación","item":"https://mikaio.dev/es/retirementcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué tasa de interés debo utilizar?","acceptedAnswer":{"@type":"Answer","text":"Los rendimientos históricos del mercado de valores promedian alrededor del 7% anual después de la inflación. Para una estimación conservadora, utilice entre 5% y 6%; para una estimación más optimista utilice entre 8% y 10%."}},{"@type":"Question","name":"¿Esto incluye la contrapartida del empleador?","acceptedAnswer":{"@type":"Answer","text":"No. Agregue la contrapartida de su empleador al monto de su contribución mensual para incluirla."}},{"@type":"Question","name":"¿Qué pasa con la inflación?","acceptedAnswer":{"@type":"Answer","text":"El uso del 7% supone rendimientos después de la inflación (rendimientos reales). Si utiliza rendimientos nominales (por ejemplo, 10%), el poder adquisitivo del resultado será menor."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/retirementcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/retirementcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/retirementcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/retirementcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/retirementcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/retirementcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/retirementcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/retirementcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/retirementcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/retirementcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Calculadora de ahorro para la jubilación</span></nav>
+  <h1>Calculadora de ahorro para la jubilación</h1>
+  <p class="lead">Ingrese su edad, edad objetivo de jubilación, ahorros mensuales y rendimiento esperado para estimar su fondo de jubilación.</p>
+  <section class="widget" id="tool"><form id="rc-form"><div class="row"><div class="field"><label for="rc-age">Edad actual</label><input type="number" id="rc-age" value="30" min="1" max="100" step="1" inputmode="numeric"></div><div class="field"><label for="rc-retire">Edad de jubilación</label><input type="number" id="rc-retire" value="65" min="1" max="100" step="1" inputmode="numeric"></div><div class="field"><label for="rc-save">Ahorro mensual</label><input type="number" id="rc-save" value="500" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="rc-rate">% de rentabilidad anual</label><input type="number" id="rc-rate" value="7" step="any" min="0" inputmode="decimal"></div></div><div class="result"><span class="hint">Ahorro estimado al jubilarse: </span><span class="big" id="rc-out">—</span></div><div id="rc-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Calcula cuánto tendrás cuando te jubiles</h2>
+<p>La planificación de la jubilación comienza con una simple pregunta: si ahorro una determinada cantidad cada mes, ¿cuánto tendré cuando deje de trabajar? Esta calculadora le brinda ese número en función de su edad actual, su edad de jubilación objetivo, sus ahorros mensuales y el rendimiento anual esperado de sus inversiones.</p>
+<h2>Cómo funciona el cálculo</h2>
+<p>La fórmula para el valor futuro de una contribución mensual regular es:</p>
+<p>FV = PAGO × [(1 + r)^n − 1] / r</p>
+<p>Donde PMT es el pago mensual, r es la tasa de interés mensual (tasa anual ÷ 12) y n es el número total de meses (años × 12).</p>
+<p>Este es el valor futuro estándar de una fórmula de anualidad. Se supone que usted realiza contribuciones mensuales constantes y que los rendimientos se componen mensualmente.</p>
+<h2>El poder del tiempo</h2>
+<p>El tiempo es la variable más importante en el ahorro para la jubilación. Comenzar antes tiene un efecto dramáticamente mayor que aumentar las contribuciones más tarde.</p>
+<p>Ejemplo: Ahorro de $500/mes con un rendimiento anual del 7%:</p>
+<ul>
+<li>A partir de los 25 años (40 años): $1.327.000</li>
+<li>A partir de los 35 años (30 años): $600.000</li>
+<li>A partir de los 45 años (20 años): $247,000</li>
+</ul>
+<p>La persona que empieza a los 25 acumula más del doble que la que empieza a los 35, a pesar de que sólo cotiza 10 años más.</p>
+<h2>¿Qué tasa de interés usar?</h2>
+<p>La elección del rendimiento esperado afecta significativamente el resultado:</p>
+<ul>
+<li>5%: estimación conservadora, apropiada para una cartera con muchos bonos</li>
+<li>7%: la regla general tradicional para una cartera diversificada de acciones y bonos (rendimiento real ajustado a la inflación)</li>
+<li>10%: rendimiento nominal histórico aproximado del mercado de valores de EE. UU. (antes de inflación)</li>
+</ul>
+<p>El uso de rendimientos reales (después de la inflación) hace que el resultado sea más fácil de interpretar en dólares actuales. El uso de rendimientos nominales requiere descontar el resultado para la inflación futura.</p>
+<h2>Lo que esta calculadora no tiene en cuenta</h2>
+<p>Esta proyección supone una contribución mensual constante y un rendimiento anual constante, lo que es una simplificación de la vida real. No modela la volatilidad del mercado año tras año, los cambios en el monto de su contribución a lo largo del tiempo, los impuestos sobre los retiros ni las fuentes de ingresos adicionales como una pensión estatal. Trate el resultado como una estimación útil de orden de magnitud para fines de planificación, en lugar de como un resultado garantizado, y revise las cifras periódicamente a medida que su tasa de ahorro real y el rendimiento de su inversión se vuelvan más claros en los próximos años.</p>
+<h2>Mejorar el resultado de su jubilación</h2>
+<p>Varias palancas aumentan los ahorros para la jubilación:</p>
+<ul>
+<li><strong>Empezar antes</strong>: Cada año antes tiene un efecto compuesto.</li>
+<li><strong>Ahorre más</strong>: Incluso los pequeños aumentos se acumulan significativamente a lo largo de décadas.</li>
+<li><strong>Optimizar la asignación de activos</strong>: Históricamente, una mayor asignación de acciones produce mayores rendimientos a largo plazo, con mayor volatilidad a corto plazo.</li>
+<li><strong>Reducir las tarifas</strong>: Las tarifas de inversión del 1 % al 2 % anual reducen el patrimonio para la jubilación entre un 20 % y un 40 % en 30 años.</li>
+<li><strong>Cuentas con ventajas fiscales</strong>: 401(k), IRA, Roth IRA (EE. UU.), ISA (Reino Unido) y cuentas similares protegen el crecimiento de los impuestos.</li>
+</ul>
+<h2>¿Cuánto necesitas para jubilarte?</h2>
+<p>Una regla general común es la regla del 4%: puedes retirar de manera sostenible el 4% de tu cartera por año sin quedarte sin dinero durante una jubilación de 30 años. Entonces, para gastar $40,000 por año necesitas $1,000,000 ahorrados. Para gastar $60.000 al año necesitas $1.500.000.</p>
+<p>Utilice esta calculadora para estimar lo que tendrá y luego compárelo con el objetivo de la regla del 4% para su gasto anual deseado.</p>
+<h2>Cómo usar la calculadora</h2>
+<p>Ingrese su edad actual, su edad objetivo de jubilación, cuánto planea ahorrar cada mes y la tasa de rendimiento anual que espera de sus inversiones. El saldo proyectado al momento de la jubilación aparece inmediatamente y cada cifra se vuelve a calcular en el instante en que cambia cualquier dato, lo que simplifica probar cómo jubilarse cinco años después, ahorrar un poco más cada mes o asumir un rendimiento más conservador cambiaría su resultado.</p>
+<h2>Por qué la capitalización recompensa la paciencia</h2>
+<p>La fórmula de valor futuro detrás de esta calculadora es un cálculo de interés compuesto, y la capitalización es poderosa precisamente porque los rendimientos de cada mes se calculan no sólo sobre sus contribuciones originales sino sobre todo el crecimiento que esas contribuciones ya han producido. En los primeros años de ahorro, este efecto apenas se nota: la mayor parte del saldo sigue siendo de sus propias contribuciones. Pero en las últimas décadas de un largo horizonte de ahorro, el crecimiento acumulado en sí comienza a generar más crecimiento que sus contribuciones mensuales, que es exactamente la razón por la cual comenzar una década antes tiende a importar más que ahorrar el doble por mes comenzando más tarde. No hay forma de fabricar esos años adicionales después del hecho, que es el argumento más fuerte para comenzar a ahorrar lo antes posible, incluso con una cantidad pequeña.</p>
+<h2>Ajustar su plan a medida que cambian las circunstancias</h2>
+<p>Pocas personas fijan una cantidad de ahorro una vez y la dejan intacta durante cuarenta años: los ingresos aumentan, las prioridades cambian y un plan sólo es útil si se revisa periódicamente. Debido a que cada campo de esta calculadora se recalcula instantáneamente, funciona bien como herramienta de control: ejecute sus números una vez al año con su edad actual, su contribución mensual actual y una suposición de rendimiento realista, y compare la nueva proyección con la del año anterior. Un pequeño aumento redirigido íntegramente a ahorros para la jubilación, o una decisión de retrasar la edad de jubilación prevista un par de años, se manifiestan inmediatamente como un cambio en el saldo final, lo que hace que las compensaciones involucradas en cada decisión sean concretas en lugar de abstractas.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todos los cálculos se ejecutan completamente en su navegador utilizando la fórmula estándar del valor futuro de una anualidad, por lo que las proyecciones se actualizan instantáneamente a medida que ajusta cualquier entrada y ninguna cifra financiera que ingresa se envía a un servidor, se registra o se comparte.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre la calculadora de jubilación</h2><dl><dt>¿Qué tasa de interés debo utilizar?</dt><dd>Los rendimientos históricos del mercado de valores promedian alrededor del 7% anual después de la inflación. Para una estimación conservadora, utilice entre 5% y 6%; para una estimación más optimista utilice entre 8% y 10%.</dd><dt>¿Esto incluye la contrapartida del empleador?</dt><dd>No. Agregue la contrapartida de su empleador al monto de su contribución mensual para incluirla.</dd><dt>¿Qué pasa con la inflación?</dt><dd>El uso del 7% supone rendimientos después de la inflación (rendimientos reales). Si utiliza rendimientos nominales (por ejemplo, 10%), el poder adquisitivo del resultado será menor.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/retirementcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/retirementcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/retirementcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/retirementcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/retirementcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/retirementcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/retirementcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/retirementcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/retirementcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/retirementcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"current_age":"Edad actual","retire_age":"Edad de jubilación","monthly_save":"Ahorro mensual","rate":"% de rentabilidad anual","at_retirement":"Ahorro estimado al jubilarse"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/retirementcalc.js" defer></script>
+</body>
+</html>

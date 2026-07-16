@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Minifier &amp; Formatter: comprime o embellece JSON en línea</title>
+<meta name="description" content="Minificador y formateador JSON gratuito. Elimine los espacios en blanco para comprimir JSON o formatee JSON minimizado con la sangría adecuada para facilitar la lectura.">
+<link rel="canonical" href="https://mikaio.dev/es/jsonminifier/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/jsonminifier/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/jsonminifier/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/jsonminifier/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/jsonminifier/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/jsonminifier/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/jsonminifier/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/jsonminifier/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/jsonminifier/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/jsonminifier/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/jsonminifier/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/jsonminifier/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON Minifier &amp; Formatter: comprime o embellece JSON en línea">
+<meta property="og:description" content="Minificador y formateador JSON gratuito. Elimine los espacios en blanco para comprimir JSON o formatee JSON minimizado con la sangría adecuada para facilitar la lectura.">
+<meta property="og:url" content="https://mikaio.dev/es/jsonminifier/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Minifier & Formatter: comprime o embellece JSON en línea","url":"https://mikaio.dev/es/jsonminifier/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Minificador y formateador JSON gratuito. Elimine los espacios en blanco para comprimir JSON o formatee JSON minimizado con la sangría adecuada para facilitar la lectura."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Minimizador y formateador JSON","item":"https://mikaio.dev/es/jsonminifier/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué hace la minificación JSON?","acceptedAnswer":{"@type":"Answer","text":"La minificación elimina todos los espacios en blanco (espacios, tabulaciones, nuevas líneas) que no están dentro de los valores de cadena. Un archivo JSON minimizado tiene datos idénticos al original, pero requiere menos espacio para transferirse a través de la red."}},{"@type":"Question","name":"¿Es válido JSON minificado?","acceptedAnswer":{"@type":"Answer","text":"Sí. La sintaxis JSON no requiere espacios en blanco. JSON minimizado analiza exactamente igual que JSON formateado en cualquier analizador JSON."}},{"@type":"Question","name":"¿Cuándo debo formatear JSON?","acceptedAnswer":{"@type":"Answer","text":"Formatee JSON cuando necesite leerlo o depurarlo. JSON formateado con sangría hace que las estructuras anidadas sean inmediatamente visibles. La mayoría de los navegadores formatean JSON automáticamente cuando navega a una URL .json."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/jsonminifier/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/jsonminifier/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/jsonminifier/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/jsonminifier/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/jsonminifier/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/jsonminifier/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/jsonminifier/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/jsonminifier/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/jsonminifier/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/jsonminifier/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Minimizador y formateador JSON</span></nav>
+  <h1>Minimizador y formateador JSON</h1>
+  <p class="lead">Pegue JSON y haga clic en Minimizar para comprimirlo o en Formatear para embellecerlo con sangría.</p>
+  <section class="widget" id="tool"><div id="jm-app"><div class="field"><label for="jm-in">Entrada JSON</label><textarea id="jm-in" rows="8" placeholder='{ "key": "value" }' style="width:100%;resize:vertical;padding:0.75rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font-family:monospace;font-size:0.875rem"></textarea></div><div class="row" style="gap:0.5rem"><button class="btn" id="jm-min">Minimizar</button><button class="btn" id="jm-fmt">Formato</button><button class="btn" id="jm-copy">Copiar</button></div><div id="jm-stats" style="opacity:0.7;font-size:0.85rem;margin:0.5rem 0"></div><div class="field"><label for="jm-out">Salida</label><textarea id="jm-out" rows="6" readonly style="width:100%;resize:vertical;padding:0.75rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font-family:monospace;font-size:0.875rem"></textarea></div></div></section>
+  <article class="content">
+    <h2>Para qué sirve JSON Minifier &amp; Formatter</h2>
+<p>Pegue JSON y haga clic en Minimizar para comprimirlo o en Formatear para embellecerlo con sangría.</p>
+<p>Esta es la versión corta, y para muchos visitantes es la única parte que necesitan: la herramienta se encuentra en la parte superior de esta página, funciona de inmediato y no es necesario leer nada a continuación. El resto de esta página está aquí para aquellos momentos en los que la respuesta por sí sola no es suficiente: cuando desea saber cómo se realiza realmente la transformación, dónde deja de ser confiable y qué hacer con el resultado una vez que lo tenga.</p>
+<h2>como usarlo</h2>
+<p>Los controles son deliberadamente pocos. Verás 5 controles:</p>
+<ul>
+<li><strong>Entrada JSON</strong></li>
+<li><strong>Minimizar</strong></li>
+<li><strong>Formato</strong></li>
+<li><strong>Copiar</strong></li>
+<li><strong>Salida</strong></li>
+</ul>
+<p>Complete lo que se aplica a usted y las actualizaciones de resultados. Nada es obligatorio en el sentido de enviarlo a ninguna parte; si cambia de opinión, edite el valor y lea la nueva respuesta. No hay un paso para guardar, ni un cuadro de diálogo de confirmación y no hay forma de equivocarse permanentemente, por lo que probar varias variaciones para ver cómo se mueve el resultado no solo está permitido, sino que suele ser la forma más informativa de utilizar una herramienta como esta.</p>
+<p>Todo se ejecuta dentro de tu propio navegador. Nada de lo que usted escribe se carga, nada se almacena entre visitas, no hay ninguna cuenta que crear y no hay ningún seguimiento que rechazar. Una vez que esta página se ha cargado, no necesita la red nuevamente, por lo que sigue funcionando si se corta la conexión.</p>
+<h2>¿Por qué existe una página como esta?</h2>
+<p>La alternativa a una pequeña herramienta enfocada suele ser pegar lo que estás depurando en un sitio web aleatorio, que es la forma en que los tokens internos, los registros de clientes y las cargas útiles no publicadas terminan en el servidor de otra persona. Una herramienta local elimina esa decisión por completo: no hay ningún servidor al que filtrar.</p>
+<p>La web está llena de herramientas que resuelven un problema de treinta segundos exigiendo primero una dirección de correo electrónico, una decisión sobre cookies y cuatro segundos de publicidad. Ese intercambio tenía sentido para alguien, pero no tenía sentido para la persona que sólo quería el número. Esta página adopta la posición opuesta: sin registro, sin intersticiales, sin ventas adicionales y sin motivo para irse una vez que tenga lo que vino a buscar.</p>
+<h2>Lo que te dice y lo que no te dice el resultado</h2>
+<p>Esto se ejecuta como JavaScript simple del lado del cliente, sin pasos de compilación, sin dependencias ni llamadas de red. Puede abrir la fuente de la página y leer exactamente lo que hace, que es el único tipo de reclamo de privacidad que es realmente verificable.</p>
+<p>Vale la pena ser explícito acerca de los límites, porque habitualmente se confía en las herramientas más allá del punto en que lo merecen. Este es honesto en sus entradas: dale valores precisos y te dará una transformación precisa. No puede decirle si los valores que le dio fueron los correctos, si hizo la pregunta correcta o si el contexto al que está aplicando la respuesta tiene algo importante que las entradas nunca capturaron. Ese juicio permanece contigo y es la parte que realmente importa.</p>
+<h2>Dónde encaja en un flujo de trabajo real</h2>
+<p>Herramientas como esta rara vez son todo el trabajo. Más a menudo, json minifier &amp; formatter es un paso en medio de algo más grande: necesitabas esta figura para poder continuar con lo que realmente estabas haciendo. Eso da forma a cómo se construye la página. Se abre rápido, no interrumpe, no te pide que te comprometas con nada y se quita de en medio en el momento en que tienes lo que viniste a buscar.</p>
+<p>También significa que debes sentirte libre de usarlo repetidamente en lugar de hacerlo con cuidado. Un segundo intento no tiene ningún costo ni penalización por una primera suposición incorrecta, por lo que la ruta más rápida hacia una buena respuesta suele ser probar una respuesta aproximada, observar el resultado y ajustar. La gente tiende a tratar las herramientas como si cada uso fuera costoso, lo cual es un hábito heredado del software que las encareció. Éste no.</p>
+<h2>Errores comunes que vale la pena evitar</h2>
+<p>La primera es confiar en un resultado cuya entrada no verificaste. Una herramienta no puede saber que usted quiso escribir un número y escribió otro, y presentará la respuesta incorrecta con exactamente la misma confianza que la correcta. Lea sus entradas antes de confiar en la salida: tarda dos segundos y detecta la mayor parte de lo que sale mal.</p>
+<p>El segundo es tratar un número como respuesta a una pregunta que nunca se hizo. Cada transformación en esta página responde a algo limitado y específico. Aplicarlo a una pregunta cercana pero diferente es la forma más común en que las personas terminan engañadas por una herramienta que estuvo funcionando perfectamente todo el tiempo. Si no está seguro de que la pregunta que tiene coincide con la pregunta que responde la herramienta, esa incertidumbre es una señal útil, no un obstáculo.</p>
+<p>Las preguntas frecuentes a continuación cubren los casos que surgen con mayor frecuencia, incluidos aquellos en los que la respuesta honesta es que esta no es la herramienta adecuada para lo que está tratando de hacer.</p>
+<h2>Trabajar sin conexión y en cualquier dispositivo</h2>
+<p>La página es un documento único e independiente. No hay marco para descargar, no hay fuentes obtenidas de un tercero y no hay balizas de análisis activadas en segundo plano, razón por la cual se carga rápidamente con una mala conexión y por qué no cuesta nada mantenerla abierta en una pestaña a la que regresa ocasionalmente. Funciona igual en un teléfono, una tableta y una computadora de escritorio; el diseño se adapta, el comportamiento no.</p>
+<p>Debido a que no hay ningún servidor involucrado en el trabajo real, tampoco hay ningún servicio que dejar de funcionar, ningún límite de velocidad que alcanzar y ningún cambio silencioso en el comportamiento impulsado desde algún otro lugar. Lo que cargaste es lo que se ejecuta. Si quiere estar seguro de eso, abra la fuente de la página: toda la implementación está ahí en forma legible, lo cual es una afirmación que muy pocas herramientas de este tipo pueden hacer.</p>
+<h2>Una nota sobre la precisión</h2>
+<p>Los resultados se calculan con aritmética estándar de doble precisión y se muestran en un número razonable de lugares en lugar de en cada dígito que el hardware puede producir. Una cifra mostrada con dos decimales no pretende ser exacta con dos decimales; afirma que los datos que usted proporcionó, tomados al pie de la letra, producen esa cifra. La precisión en la visualización y la precisión en el mundo real son cosas diferentes, y combinarlas es la forma más común en que una herramienta correcta produce una decisión equivocada.</p>
+<p>Si un resultado parece incorrecto, verifique las entradas antes de dudar de la aritmética. En la práctica, la inmensa mayoría de las respuestas sorprendentes provienen de un valor ingresado en una unidad incorrecta, un separador decimal leído de manera diferente a la prevista o un campo que se dejó en su valor predeterminado cuando debería haberse cambiado. Esto no es una crítica a nadie; es simplemente dónde residen los errores, y saber dónde buscar primero ahorra la mayor parte del tiempo.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre el minificador JSON</h2><dl><dt>¿Qué hace la minificación JSON?</dt><dd>La minificación elimina todos los espacios en blanco (espacios, tabulaciones, nuevas líneas) que no están dentro de los valores de cadena. Un archivo JSON minimizado tiene datos idénticos al original, pero requiere menos espacio para transferirse a través de la red.</dd><dt>¿Es válido JSON minificado?</dt><dd>Sí. La sintaxis JSON no requiere espacios en blanco. JSON minimizado analiza exactamente igual que JSON formateado en cualquier analizador JSON.</dd><dt>¿Cuándo debo formatear JSON?</dt><dd>Formatee JSON cuando necesite leerlo o depurarlo. JSON formateado con sangría hace que las estructuras anidadas sean inmediatamente visibles. La mayoría de los navegadores formatean JSON automáticamente cuando navega a una URL .json.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/jsonminifier/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/jsonminifier/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/jsonminifier/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/jsonminifier/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/jsonminifier/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/jsonminifier/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/jsonminifier/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/jsonminifier/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/jsonminifier/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/jsonminifier/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"input":"Entrada JSON","minify":"Minimizar","format":"Formato","copy":"Copiar","output":"Salida"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/jsonminifier.js" defer></script>
+</body>
+</html>

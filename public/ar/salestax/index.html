@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sales Tax Calculator — add or remove VAT from any price</title>
-<meta name="description" content="Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.">
+<title>حاسبة ضريبة المبيعات - إضافة أو إزالة ضريبة القيمة المضافة من أي سعر</title>
+<meta name="description" content="حاسبة ضريبة المبيعات المجانية. أدخل السعر ومعدل الضريبة لإضافة الضريبة إلى السعر الصافي أو استخراجها من السعر الإجمالي. يعمل لضريبة القيمة المضافة، ضريبة السلع والخدمات، وأي نسبة.">
 <link rel="canonical" href="https://mikaio.dev/ar/salestax/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/salestax/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/salestax/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/salestax/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/salestax/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/salestax/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/salestax/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/salestax/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/salestax/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/salestax/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/salestax/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/salestax/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sales Tax Calculator — add or remove VAT from any price">
-<meta property="og:description" content="Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage.">
+<meta property="og:title" content="حاسبة ضريبة المبيعات - إضافة أو إزالة ضريبة القيمة المضافة من أي سعر">
+<meta property="og:description" content="حاسبة ضريبة المبيعات المجانية. أدخل السعر ومعدل الضريبة لإضافة الضريبة إلى السعر الصافي أو استخراجها من السعر الإجمالي. يعمل لضريبة القيمة المضافة، ضريبة السلع والخدمات، وأي نسبة.">
 <meta property="og:url" content="https://mikaio.dev/ar/salestax/">
 <meta property="og:locale" content="ar">
 <meta name="twitter:card" content="summary">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Sales Tax Calculator — add or remove VAT from any price","url":"https://mikaio.dev/ar/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"Free sales tax calculator. Enter a price and a tax rate to add tax to a net price or extract it from a gross price. Works for VAT, GST, and any percentage."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"Sales Tax Calculator","item":"https://mikaio.dev/ar/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between adding and extracting tax?","acceptedAnswer":{"@type":"Answer","text":"Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was."}},{"@type":"Question","name":"What tax rates should I use?","acceptedAnswer":{"@type":"Answer","text":"Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign."}},{"@type":"Question","name":"Is anything I type uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة ضريبة المبيعات - إضافة أو إزالة ضريبة القيمة المضافة من أي سعر","url":"https://mikaio.dev/ar/salestax/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"حاسبة ضريبة المبيعات المجانية. أدخل السعر ومعدل الضريبة لإضافة الضريبة إلى السعر الصافي أو استخراجها من السعر الإجمالي. يعمل لضريبة القيمة المضافة، ضريبة السلع والخدمات، وأي نسبة."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة ضريبة المبيعات","item":"https://mikaio.dev/ar/salestax/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما الفرق بين إضافة واستخراج الضريبة؟","acceptedAnswer":{"@type":"Answer","text":"تأخذ إضافة الضريبة السعر الصافي - السعر قبل الضريبة - وتحسب السعر الإجمالي الذي تدفعه. استخراج الضريبة يؤدي إلى العكس: تقوم بإدخال السعر الإجمالي بما في ذلك الضريبة بالفعل وتقوم الآلة الحاسبة بتحديد مقدار الضريبة منه وما هو المبلغ قبل الضريبة."}},{"@type":"Question","name":"ما هي معدلات الضرائب التي يجب أن أستخدمها؟","acceptedAnswer":{"@type":"Answer","text":"استخدم أي سعر ينطبق في بلدك أو منطقتك. تشمل الأمثلة الشائعة ضريبة القيمة المضافة بنسبة 20% في المملكة المتحدة، و19% في ألمانيا، و10% ضريبة السلع والخدمات في أستراليا، ومعدلات ضريبة المبيعات المتفاوتة حسب الولاية الأمريكية. أدخل الرقم بدون علامة النسبة المئوية."}},{"@type":"Question","name":"هل تم تحميل أي شيء أكتبه؟","acceptedAnswer":{"@type":"Answer","text":"لا، كل شيء يعمل في متصفحك دون الحاجة إلى خادم. الأرقام التي تدخلها تختفي عند إغلاق الصفحة."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ar/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="التنقل في الموقع">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>Sales Tax Calculator</span></nav>
-  <h1>Sales Tax Calculator</h1>
-  <p class="lead">Enter the amount and the tax rate, then choose whether to add tax to a net price or extract it from a gross amount. All three figures — net, tax, and gross — update as you type.</p>
-  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">Amount</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">Tax rate %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">Mode</label><select id="tax-mode"><option value="add">Add tax to price</option><option value="remove">Extract tax from price</option></select></div></div><div class="result"><span class="hint">Net (pre-tax): </span><b id="tax-net">—</b> · <span class="hint">Tax amount: </span><b id="tax-tax">—</b> · <span class="hint">Gross (total): </span><span class="big" id="tax-gross">—</span></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة ضريبة المبيعات</span></nav>
+  <h1>حاسبة ضريبة المبيعات</h1>
+  <p class="lead">أدخل المبلغ ومعدل الضريبة، ثم اختر ما إذا كنت تريد إضافة الضريبة إلى السعر الصافي أو استخراجها من المبلغ الإجمالي. يتم تحديث الأرقام الثلاثة - الصافي والضريبة والإجمالي - أثناء الكتابة.</p>
+  <section class="widget" id="tool"><form id="tax"><div class="row"><div class="field"><label for="tax-amt">المبلغ</label><input type="number" id="tax-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-rate">معدل الضريبة %</label><input type="number" id="tax-rate" value="10" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tax-mode">الوضع</label><select id="tax-mode"><option value="add">أضف الضريبة إلى السعر</option><option value="remove">استخراج الضريبة من السعر</option></select></div></div><div class="result"><span class="hint">صافي (قبل الضريبة): </span><b id="tax-net">—</b> · <span class="hint">مبلغ الضريبة: </span><b id="tax-tax">—</b> · <span class="hint">الإجمالي (الإجمالي): </span><span class="big" id="tax-gross">—</span></div></form></section>
   <article class="content">
     <h2>أضف الضريبة إلى سعر أو استخرجها من إجمالي</h2>
 <p>ضريبة المبيعات أو ضريبة القيمة المضافة أو ضريبة السلع والخدمات — مهما كان اسمها في بلدك — فإن الحساب دائماً أحد عمليتين: إما إضافة نسبة الضريبة إلى سعر صافٍ للحصول على المبلغ الإجمالي الذي يدفعه المشتري، أو العمل بالعكس من سعر إجمالي لمعرفة كم منه يمثل ضريبة. تتولى هذه الحاسبة كلا الأمرين فوراً. أدخل المبلغ ونسبة الضريبة واختر الوضع؛ فيتحديث الصافي ومبلغ الضريبة والإجمالي أثناء الكتابة.</p>
@@ -144,13 +150,14 @@ textarea{min-height:120px;resize:vertical}
 <h2>خصوصية وفورية ومجانية</h2>
 <p>لا تُرسَل أي بيانات تدخلها إلى أي مكان. الحاسبة هي قطعة صغيرة من جافاسكريبت تعمل بالكامل على جهازك. تعمل دون اتصال وتستجيب فوراً ولا تتطلب أي حساب أو تسجيل. أغلق علامة التبويب وكل رقم كتبته سيختفي.</p>
 <p>استخدم هذه الأداة كلما سعَّرت منتجاً أو طابقت إيصالاً أو احتجت لفصل مكون الضريبة من إجمالي. المخرجات الثلاث — الصافي والضريبة والإجمالي — تمنحك الصورة الكاملة في عرض واحد.</p>
-    <section class="faq"><h2>Sales tax calculator FAQ</h2><dl><dt>What is the difference between adding and extracting tax?</dt><dd>Adding tax takes a net price — the price before tax — and calculates the gross price you pay. Extracting tax does the reverse: you enter the gross price already including tax and the calculator works out how much of it is tax and what the pre-tax amount was.</dd><dt>What tax rates should I use?</dt><dd>Use whatever rate applies in your country or region. Common examples include 20% VAT in the UK, 19% in Germany, 10% GST in Australia, and varying sales tax rates by US state. Enter the number without the percent sign.</dd><dt>Is anything I type uploaded?</dt><dd>No. Everything runs in your browser with no server involved. The figures you enter disappear when you close the page.</dd></dl></section>
+    <section class="faq"><h2>الأسئلة الشائعة حول حاسبة ضريبة المبيعات</h2><dl><dt>ما الفرق بين إضافة واستخراج الضريبة؟</dt><dd>تأخذ إضافة الضريبة السعر الصافي - السعر قبل الضريبة - وتحسب السعر الإجمالي الذي تدفعه. استخراج الضريبة يؤدي إلى العكس: تقوم بإدخال السعر الإجمالي بما في ذلك الضريبة بالفعل وتقوم الآلة الحاسبة بتحديد مقدار الضريبة منه وما هو المبلغ قبل الضريبة.</dd><dt>ما هي معدلات الضرائب التي يجب أن أستخدمها؟</dt><dd>استخدم أي سعر ينطبق في بلدك أو منطقتك. تشمل الأمثلة الشائعة ضريبة القيمة المضافة بنسبة 20% في المملكة المتحدة، و19% في ألمانيا، و10% ضريبة السلع والخدمات في أستراليا، ومعدلات ضريبة المبيعات المتفاوتة حسب الولاية الأمريكية. أدخل الرقم بدون علامة النسبة المئوية.</dd><dt>هل تم تحميل أي شيء أكتبه؟</dt><dd>لا، كل شيء يعمل في متصفحك دون الحاجة إلى خادم. الأرقام التي تدخلها تختفي عند إغلاق الصفحة.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/salestax/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/salestax/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/salestax/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/salestax/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/salestax/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/salestax/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/salestax/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/salestax/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/salestax/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/salestax/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/salestax/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
-  <p><a href="/glossary.html">كل الأدوات</a></p></footer>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"amount":"المبلغ","rate":"معدل الضريبة %","mode":"الوضع","add_tax":"أضف الضريبة إلى السعر","remove_tax":"استخراج الضريبة من السعر","net":"صافي (قبل الضريبة)","tax":"مبلغ الضريبة","gross":"الإجمالي (الإجمالي)"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/salestax.js" defer></script>
 </body>
 </html>

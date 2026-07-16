@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>यूनिक्स टाइमस्टैम्प कन्वर्टर - युग के समय को तारीख में बदलें</title>
+<meta name="description" content="मुफ़्त यूनिक्स टाइमस्टैम्प कनवर्टर। यूनिक्स युग के समय को मानव-पठनीय दिनांक और समय में परिवर्तित करें, या किसी भी दिनांक को यूनिक्स टाइमस्टैम्प में परिवर्तित करें। आपके ब्राउज़र में तुरंत काम करता है.">
+<link rel="canonical" href="https://mikaio.dev/hi/unixepoch/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/unixepoch/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/unixepoch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/unixepoch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/unixepoch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/unixepoch/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/unixepoch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/unixepoch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/unixepoch/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/unixepoch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/unixepoch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/unixepoch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="यूनिक्स टाइमस्टैम्प कन्वर्टर - युग के समय को तारीख में बदलें">
+<meta property="og:description" content="मुफ़्त यूनिक्स टाइमस्टैम्प कनवर्टर। यूनिक्स युग के समय को मानव-पठनीय दिनांक और समय में परिवर्तित करें, या किसी भी दिनांक को यूनिक्स टाइमस्टैम्प में परिवर्तित करें। आपके ब्राउज़र में तुरंत काम करता है.">
+<meta property="og:url" content="https://mikaio.dev/hi/unixepoch/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"यूनिक्स टाइमस्टैम्प कन्वर्टर - युग के समय को तारीख में बदलें","url":"https://mikaio.dev/hi/unixepoch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त यूनिक्स टाइमस्टैम्प कनवर्टर। यूनिक्स युग के समय को मानव-पठनीय दिनांक और समय में परिवर्तित करें, या किसी भी दिनांक को यूनिक्स टाइमस्टैम्प में परिवर्तित करें। आपके ब्राउज़र में तुरंत काम करता है."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"यूनिक्स टाइमस्टैम्प कनवर्टर","item":"https://mikaio.dev/hi/unixepoch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"यूनिक्स टाइमस्टैम्प क्या है?","acceptedAnswer":{"@type":"Answer","text":"यूनिक्स टाइमस्टैम्प एक संख्या है जो 1 जनवरी 1970 से 00:00:00 यूटीसी (यूनिक्स युग) पर बीते सेकंडों की संख्या को दर्शाती है। समयक्षेत्र अस्पष्टता के बिना समय में बिंदुओं का प्रतिनिधित्व करने के लिए कंप्यूटिंग में इसका उपयोग सार्वभौमिक रूप से किया जाता है।"}},{"@type":"Question","name":"वर्ष 2038 की समस्या क्या है?","acceptedAnswer":{"@type":"Answer","text":"पुराने सिस्टम जो यूनिक्स टाइमस्टैम्प को 32-बिट हस्ताक्षरित पूर्णांक के रूप में संग्रहीत करते हैं, वे केवल 19 जनवरी, 2038 तक की तारीखों का प्रतिनिधित्व कर सकते हैं। आधुनिक 64-बिट सिस्टम में यह सीमा नहीं है।"}},{"@type":"Question","name":"मैं मिलीसेकंड को कैसे परिवर्तित करूं?","acceptedAnswer":{"@type":"Answer","text":"कुछ सिस्टम सेकंड के बजाय मिलीसेकंड का उपयोग करते हैं। इसे यहां दर्ज करने से पहले इसे सेकंड में बदलने के लिए मिलीसेकंड टाइमस्टैम्प को 1000 से विभाजित करें।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>यूनिक्स टाइमस्टैम्प कनवर्टर</span></nav>
+  <h1>यूनिक्स टाइमस्टैम्प कनवर्टर</h1>
+  <p class="lead">इसे पढ़ने योग्य तारीख में बदलने के लिए यूनिक्स टाइमस्टैम्प दर्ज करें, या इसे यूनिक्स टाइमस्टैम्प में बदलने के लिए एक तारीख चुनें।</p>
+  <section class="widget" id="tool"><div id="ue-app"><div class="row"><div class="field"><label for="ue-ts">यूनिक्स टाइमस्टैम्प (सेकंड)</label><input type="number" id="ue-ts" placeholder="e.g. 1700000000" inputmode="numeric"></div></div><div class="result"><span class="hint">यूटीसी दिनांक एवं समय: </span><b id="ue-utc">—</b></div><div class="result"><span class="hint">आपका स्थानीय समय: </span><b id="ue-local">—</b></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="ue-dt">दिनांक को टाइमस्टैम्प में कनवर्ट करें</label><input type="datetime-local" id="ue-dt"></div><div class="result"><span class="hint">यूनिक्स टाइमस्टैम्प: </span><span class="big" id="ue-tsout">—</span></div></div></section>
+  <article class="content">
+    <h2>यूनिक्स टाइमस्टैम्प को मानव-पठनीय तिथियों में परिवर्तित करें</h2>
+<p>डेवलपर्स, डेटाबेस प्रशासक, और लॉग फ़ाइलों या एपीआई के साथ काम करने वाले किसी भी व्यक्ति को नियमित रूप से यूनिक्स टाइमस्टैम्प का सामना करना पड़ता है - 170000000000 जैसी लंबी संख्या जो समय में एक पल का प्रतिनिधित्व करती है। कनवर्टर के बिना, ये संख्याएँ अधिकांश लोगों के लिए अर्थहीन हैं। यह उपकरण किसी भी यूनिक्स टाइमस्टैम्प को तुरंत पढ़ने योग्य दिनांक और समय में परिवर्तित करता है, और किसी भी दिनांक को उसके यूनिक्स टाइमस्टैम्प में भी परिवर्तित करता है।</p>
+<h2>यूनिक्स टाइमस्टैम्प क्या है?</h2>
+<p>यूनिक्स टाइमस्टैम्प 1 जनवरी, 1970 की आधी रात के बाद से समन्वित यूनिवर्सल टाइम (यूटीसी) में बीते सेकंड की संख्या की गणना करता है। इस क्षण, जिसे यूनिक्स युग कहा जाता है, को संदर्भ बिंदु के रूप में चुना गया था जब यूनिक्स ऑपरेटिंग सिस्टम विकसित किए जा रहे थे। प्रत्येक बीतता हुआ सेकंड गिनती में एक जोड़ता है। टाइमस्टैम्प 0 1 जनवरी 1970 यूटीसी की ठीक आधी रात को दर्शाता है। टाइमस्टैम्प 1700000000 14 नवंबर, 2023 को 22:13:20 UTC को दर्शाता है।</p>
+<p>यूनिक्स टाइमस्टैम्प की खूबी यह है कि वे टाइमज़ोन-अज्ञेयवादी हैं। टाइमस्टैम्प बिल्कुल उसी समय का प्रतिनिधित्व करता है, भले ही आप दुनिया में कहीं भी हों। जब स्थानीय समय में परिवर्तित किया जाता है, तो एक ही टाइमस्टैम्प टोक्यो और न्यूयॉर्क में अलग-अलग घड़ी रीडिंग उत्पन्न करता है, लेकिन वे एक ही भौतिक क्षण को संदर्भित करते हैं।</p>
+<h2>कनवर्टर का उपयोग कैसे करें</h2>
+<p>टाइमस्टैम्प को दिनांक में बदलने के लिए, टाइमस्टैम्प नंबर को ऊपरी फ़ील्ड में चिपकाएँ। यूटीसी दिनांक और समय और आपका स्थानीय समकक्ष दोनों तुरंत दिखाई देंगे। किसी दिनांक को टाइमस्टैम्प में बदलने के लिए, निचले भाग में दिनांक पिकर का उपयोग करें और संबंधित टाइमस्टैम्प तुरंत दिखाई देता है।</p>
+<h2>मिलीसेकंड बनाम सेकंड</h2>
+<p>कुछ सिस्टम, विशेष रूप से वेब ब्राउज़र और जावास्क्रिप्ट एप्लिकेशन, अपने टाइमस्टैम्प के लिए सेकंड के बजाय मिलीसेकंड का उपयोग करते हैं। एक JavaScript Date.now() कॉल कुछ इस तरह लौटाती है 170000000000000 - एक संख्या जो सेकंड में समतुल्य यूनिक्स टाइमस्टैम्प से लगभग 1000 गुना बड़ी है। यदि आपके पास जो संख्या है वह लगभग तेरह अंक लंबी है, तो यह संभवतः मिलीसेकंड में है: 1000 से विभाजित करें और परिणाम दर्ज करें।</p>
+<h2>वर्ष 2038 की समस्या</h2>
+<p>प्रारंभिक यूनिक्स सिस्टम ने टाइमस्टैम्प को 32-बिट हस्ताक्षरित पूर्णांक के रूप में संग्रहीत किया, जो 2,147,483,647 तक मान रख सकता है। वह अधिकतम मान 19 जनवरी 2038 को 03:14:07 यूटीसी से मेल खाता है। सिस्टम जो टाइमस्टैम्प को 32-बिट पूर्णांकों में संग्रहीत करते हैं, उस तिथि पर ओवरफ़्लो हो जाएंगे, एक समस्या जिसे कभी-कभी Y2K38 कहा जाता है। आधुनिक 64-बिट सिस्टम टाइमस्टैम्प को वर्ष 292 बिलियन से कहीं अधिक संग्रहीत कर सकते हैं, जिससे यह केवल पुराने सॉफ़्टवेयर के लिए एक समस्या बन जाती है जिसे अद्यतन नहीं किया गया है।</p>
+<h2>सामान्य उपयोग</h2>
+<p>टाइमस्टैम्प लॉग फ़ाइलों, डेटाबेस रिकॉर्ड, एपीआई प्रतिक्रियाओं, कैश हेडर, क्रिप्टोग्राफ़िक प्रमाणपत्र और अनगिनत अन्य संदर्भों में दिखाई देते हैं। उन्हें पढ़ने योग्य तिथियों में परिवर्तित करने से डिबगिंग, डेटा विश्लेषण, अनुपालन ऑडिटिंग और किसी भी स्थिति में मदद मिलती है जहां आपको यह समझने की आवश्यकता होती है कि कुछ कब हुआ था।</p>
+<h2>1970 को शुरुआती बिंदु के रूप में क्यों चुना गया?</h2>
+<p>1 जनवरी, 1970 का चुनाव अपने आप में एक सार्थक तारीख के बजाय अनिवार्य रूप से एक व्यावहारिक तारीख थी। यूनिक्स को 1960 के दशक के अंत और 1970 के दशक की शुरुआत में बेल लैब्स में विकसित किया जा रहा था, और डिजाइनरों को संख्याओं को प्रबंधनीय रखने के लिए एक संदर्भ बिंदु की आवश्यकता थी, लेकिन ऑपरेटिंग सिस्टम के संभावित जीवनकाल को कवर करने के लिए पर्याप्त प्रारंभिक बिंदु की आवश्यकता थी। 1970 की शुरुआत तक पहुंचना बिल्कुल सुविधाजनक था। दशकों बाद, वह मनमाना विकल्प गहराई से अंतर्निहित हो गया है: यह इस बात पर आधारित है कि लगभग हर प्रोग्रामिंग भाषा, डेटाबेस और ऑपरेटिंग सिस्टम आंतरिक रूप से समय का प्रतिनिधित्व करते हैं, भले ही अधिकांश प्रोग्रामर को कभी भी इसके बारे में सीधे सोचने की आवश्यकता नहीं होती है।</p>
+<h2>कनवर्टर के बिना टाइमस्टैम्प पढ़ना</h2>
+<p>थोड़े से अभ्यास से आप अपने दिमाग में टाइमस्टैम्प की विवेक-जांच कर सकते हैं। 31,536,000 (एक सामान्य वर्ष में सेकंड की संख्या) से विभाजित करने पर 1970 के बाद से वर्षों की एक अनुमानित संख्या मिलती है - 1.7 से शुरू होने वाला दस अंकों का टाइमस्टैम्प मोटे तौर पर वर्ष 2023 से मेल खाता है, उदाहरण के लिए, 1970 के बाद से और लगभग 53-54 वर्ष वहां मौजूद हैं। यह मोटा मानसिक अनुमान स्पष्ट रूप से गलत टाइमस्टैम्प का पता लगाने का एक उपयोगी तरीका है, जैसे कि 1000 के कारक से बंद किया गया क्योंकि यह वास्तव में मिलीसेकंड में था, आपके कैलकुलेटर तक पहुंचने से पहले।</p>
+<h2>नकारात्मक टाइमस्टैम्प</h2>
+<p>क्योंकि यूनिक्स टाइमस्टैम्प केवल युग से सेकंड की एक हस्ताक्षरित गिनती है, 1 जनवरी, 1970 से पहले की तारीखों को असमर्थित होने के बजाय नकारात्मक संख्याओं के रूप में दर्शाया जाता है। उदाहरण के लिए, -86400 का टाइमस्टैम्प, युग से ठीक एक दिन पहले का प्रतिनिधित्व करता है: 31 दिसंबर, 1969। यह कनवर्टर नकारात्मक मानों को सकारात्मक मानों की तरह ही संभालता है, जो ऐतिहासिक रिकॉर्ड या डेटा के साथ काम करने के लिए उपयोगी है जो कंप्यूटिंग युग से पहले का है लेकिन अभी भी यूनिक्स-टाइमस्टैम्प रूप में संग्रहीत है।</p>
+<h2>टाइमस्टैम्प टाइमज़ोन-अज्ञेयवादी क्यों हैं?</h2>
+<p>किसी क्षण को स्वरूपित दिनांक स्ट्रिंग के बजाय यूनिक्स टाइमस्टैम्प के रूप में संग्रहीत करने का सबसे बड़ा लाभ यह है कि यह भंडारण और गणना के दौरान समयक्षेत्रों को पूरी तरह से दरकिनार कर देता है। एक टाइमस्टैम्प बिल्कुल एक भौतिक क्षण का प्रतिनिधित्व करता है, और जब यह किसी व्यक्ति को प्रदर्शित किया जाता है तो केवल स्थानीय कैलेंडर दिनांक और घड़ी के समय में अनुवादित होता है। यही कारण है कि डेटाबेस, एपीआई और लॉग फ़ाइलें पूर्व-स्वरूपित स्थानीय तिथियों के बजाय टाइमस्टैम्प को अत्यधिक संग्रहीत करती हैं: अलग-अलग टाइमज़ोन में दो सर्वर पूरे आत्मविश्वास के साथ टाइमस्टैम्प के बीच अंतर की तुलना, सॉर्ट और गणना कर सकते हैं, और केवल अंतिम चरण में मानव-पठनीय स्थानीय समय में कनवर्ट करने की आवश्यकता होती है, ठीक उसी तरह जैसे यह कनवर्टर तब करता है जब यह यूटीसी और आपके स्थानीय समकक्ष दोनों को साथ-साथ दिखाता है।</p>
+<h2>टाइमस्टैम्प के साथ डिबगिंग</h2>
+<p>डिबगिंग के दौरान डेवलपर्स लगातार इस तरह के कनवर्टर तक पहुंचते हैं। 1700000000 अंकित सर्वर त्रुटि लॉग एक नज़र में अर्थहीन है, लेकिन इसे तुरंत परिवर्तित करने से आपको पता चलता है कि क्या त्रुटि व्यावसायिक घंटों के दौरान हुई, रात भर में, या ठीक उसी समय हुई जब कोई तैनाती हुई थी - अक्सर बग रिपोर्ट को उस परिवर्तन के साथ सहसंबंधित करने का सबसे तेज़ तरीका जिसके कारण यह हुआ। एपीआई प्रतिक्रियाएं, डेटाबेस ऑडिट कॉलम और कैश एक्सपायरी हेडर सभी आम तौर पर स्वरूपित तिथियों के बजाय टाइमस्टैम्प को स्टोर करते हैं, इसी कारण से स्टोरेज इंजन उन्हें पसंद करते हैं: एक सादा संख्या बिना किसी स्थान या प्रारूप अस्पष्टता के सही ढंग से क्रमबद्ध, तुलना और गणना करती है, और केवल अंतिम प्रदर्शन चरण में मानव-अनुकूल तारीख में अनुवाद करने की आवश्यकता होती है, जो कि यह उपकरण वास्तव में काम करता है।</p>
+<h2>निजी</h2>
+<p>सब कुछ आपके ब्राउज़र में जावास्क्रिप्ट के अंतर्निहित दिनांक ऑब्जेक्ट का उपयोग करके चलता है, इसलिए रूपांतरण दोनों दिशाओं में तुरंत होता है और आपके द्वारा दर्ज किया गया कोई भी टाइमस्टैम्प या दिनांक कभी भी सर्वर पर नहीं भेजा जाता है, लॉग इन किया जाता है या साझा किया जाता है।</p>
+    <section class="faq"><h2>यूनिक्स टाइमस्टैम्प अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>यूनिक्स टाइमस्टैम्प क्या है?</dt><dd>यूनिक्स टाइमस्टैम्प एक संख्या है जो 1 जनवरी 1970 से 00:00:00 यूटीसी (यूनिक्स युग) पर बीते सेकंडों की संख्या को दर्शाती है। समयक्षेत्र अस्पष्टता के बिना समय में बिंदुओं का प्रतिनिधित्व करने के लिए कंप्यूटिंग में इसका उपयोग सार्वभौमिक रूप से किया जाता है।</dd><dt>वर्ष 2038 की समस्या क्या है?</dt><dd>पुराने सिस्टम जो यूनिक्स टाइमस्टैम्प को 32-बिट हस्ताक्षरित पूर्णांक के रूप में संग्रहीत करते हैं, वे केवल 19 जनवरी, 2038 तक की तारीखों का प्रतिनिधित्व कर सकते हैं। आधुनिक 64-बिट सिस्टम में यह सीमा नहीं है।</dd><dt>मैं मिलीसेकंड को कैसे परिवर्तित करूं?</dt><dd>कुछ सिस्टम सेकंड के बजाय मिलीसेकंड का उपयोग करते हैं। इसे यहां दर्ज करने से पहले इसे सेकंड में बदलने के लिए मिलीसेकंड टाइमस्टैम्प को 1000 से विभाजित करें।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"timestamp":"यूनिक्स टाइमस्टैम्प (सेकंड)","utc":"यूटीसी दिनांक एवं समय","local":"आपका स्थानीय समय","date_to_ts":"दिनांक को टाइमस्टैम्प में कनवर्ट करें","ts_out":"यूनिक्स टाइमस्टैम्प","utcnote":"यूटीसी","invalid":"अमान्य"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/unixepoch.js" defer></script>
+</body>
+</html>

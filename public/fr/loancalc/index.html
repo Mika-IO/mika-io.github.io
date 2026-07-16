@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Loan Calculator — monthly payment and total interest</title>
-<meta name="description" content="Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans.">
+<title>Calculateur de prêt – paiement mensuel et intérêts totaux</title>
+<meta name="description" content="Calculateur de prêt gratuit. Entrez le montant du prêt, le taux d&#39;intérêt et la durée pour voir votre paiement mensuel et le total des intérêts payés. Fonctionne pour les hypothèques, les prêts automobiles et les prêts personnels.">
 <link rel="canonical" href="https://mikaio.dev/fr/loancalc/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/loancalc/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/loancalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/loancalc/">
   <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/loancalc/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/loancalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/loancalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/loancalc/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/loancalc/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/loancalc/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/loancalc/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/loancalc/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Loan Calculator — monthly payment and total interest">
-<meta property="og:description" content="Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans.">
+<meta property="og:title" content="Calculateur de prêt – paiement mensuel et intérêts totaux">
+<meta property="og:description" content="Calculateur de prêt gratuit. Entrez le montant du prêt, le taux d&#39;intérêt et la durée pour voir votre paiement mensuel et le total des intérêts payés. Fonctionne pour les hypothèques, les prêts automobiles et les prêts personnels.">
 <meta property="og:url" content="https://mikaio.dev/fr/loancalc/">
 <meta property="og:locale" content="fr">
 <meta name="twitter:card" content="summary">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -111,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Loan Calculator — monthly payment and total interest","url":"https://mikaio.dev/fr/loancalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Free loan calculator. Enter the loan amount, interest rate, and term to see your monthly payment and total interest paid. Works for mortgages, car loans, and personal loans."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Loan Calculator","item":"https://mikaio.dev/fr/loancalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What formula is used?","acceptedAnswer":{"@type":"Answer","text":"Monthly payment = P × [r(1+r)^n] / [(1+r)^n - 1], where P is the loan amount, r is the monthly interest rate (annual / 12), and n is the number of months."}},{"@type":"Question","name":"What types of loans can I calculate?","acceptedAnswer":{"@type":"Answer","text":"The formula applies to any standard amortising loan: mortgages, car loans, personal loans, student loans. For interest-only or balloon loans the formula differs."}},{"@type":"Question","name":"Does this include fees or insurance?","acceptedAnswer":{"@type":"Answer","text":"No, this calculates only the principal and interest payment. Your actual monthly payment may be higher if it includes property tax, insurance, or other fees."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de prêt – paiement mensuel et intérêts totaux","url":"https://mikaio.dev/fr/loancalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur de prêt gratuit. Entrez le montant du prêt, le taux d'intérêt et la durée pour voir votre paiement mensuel et le total des intérêts payés. Fonctionne pour les hypothèques, les prêts automobiles et les prêts personnels."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de prêt","item":"https://mikaio.dev/fr/loancalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle formule est utilisée ?","acceptedAnswer":{"@type":"Answer","text":"Paiement mensuel = P × [r(1+r)^n] / [(1+r)^n - 1], où P est le montant du prêt, r est le taux d'intérêt mensuel (annuel / 12) et n est le nombre de mois."}},{"@type":"Question","name":"Quels types de prêts puis-je calculer ?","acceptedAnswer":{"@type":"Answer","text":"La formule s’applique à tout prêt amortissable standard : crédit immobilier, prêt automobile, prêt personnel, prêt étudiant. Pour les prêts à intérêt uniquement ou les prêts forfaitaires, la formule diffère."}},{"@type":"Question","name":"Est-ce que cela inclut les frais ou l'assurance ?","acceptedAnswer":{"@type":"Answer","text":"Non, cela calcule uniquement le paiement du principal et des intérêts. Votre paiement mensuel réel peut être plus élevé s’il comprend la taxe foncière, l’assurance ou d’autres frais."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/fr/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Navigation du site">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/loancalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/loancalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/loancalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/loancalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/loancalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Loan Calculator</span></nav>
-  <h1>Loan Calculator</h1>
-  <p class="lead">Enter the loan amount, annual interest rate, and term in years to calculate your monthly payment.</p>
-  <section class="widget" id="tool"><form id="loan-form"><div class="row"><div class="field"><label for="loan-amt">Loan amount</label><input type="number" id="loan-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-rate">Annual interest rate %</label><input type="number" id="loan-rate" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-years">Term (years)</label><input type="number" id="loan-years" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="hint">Monthly payment: </span><span class="big" id="loan-monthly">—</span></div><div id="loan-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur de prêt</span></nav>
+  <h1>Calculateur de prêt</h1>
+  <p class="lead">Entrez le montant du prêt, le taux d&#39;intérêt annuel et la durée en années pour calculer votre paiement mensuel.</p>
+  <section class="widget" id="tool"><form id="loan-form"><div class="row"><div class="field"><label for="loan-amt">Montant du prêt</label><input type="number" id="loan-amt" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-rate">Taux d&#39;intérêt annuel %</label><input type="number" id="loan-rate" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="loan-years">Durée (années)</label><input type="number" id="loan-years" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="hint">Paiement mensuel: </span><span class="big" id="loan-monthly">—</span></div><div id="loan-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
   <article class="content">
     <h2>Calculez votre mensualité de prêt avant d&#39;emprunter</h2>
 <p>Avant de contracter n&#39;importe quel prêt — immobilier, automobile, personnel ou étudiant —, connaître la mensualité et le coût total en intérêts aide à prendre une décision éclairée. Ce calculateur utilise la formule standard d&#39;amortissement pour vous montrer exactement ce que vous paierez chaque mois et combien le prêt vous coûtera au total.</p>
@@ -177,13 +183,14 @@ textarea{min-height:120px;resize:vertical}
 <p>L&#39;usage le plus utile de ce calculateur est peut-être de comparer comment un même montant emprunté se comporte selon différentes durées. Une durée plus courte signifie toujours une mensualité plus élevée mais un coût total en intérêts plus faible, car le capital se rembourse plus vite et a moins de temps pour accumuler des intérêts. Une durée plus longue étale le même montant sur des mensualités plus petites, ce qui peut rendre un achat abordable au mois le mois, mais au prix d&#39;un coût global bien plus élevé. Faire passer le même capital et le même taux dans ce calculateur sur, disons, 15 ans puis 25 ans côte à côte rend concret plutôt qu&#39;abstrait le compromis entre abordabilité mensuelle et coût total, exactement la comparaison qu&#39;il vaut la peine de faire avant de signer n&#39;importe quel contrat de prêt à long terme.</p>
 <h2>Privé et instantané</h2>
 <p>Tous les calculs s&#39;exécutent entièrement dans votre navigateur à l&#39;aide de la formule d&#39;amortissement standard, si bien que les résultats se mettent à jour instantanément dès que vous ajustez une donnée, et qu&#39;aucun montant, taux ou durée de prêt que vous saisissez n&#39;est jamais envoyé à un serveur, enregistré ou partagé.</p>
-    <section class="faq"><h2>Loan calculator FAQ</h2><dl><dt>What formula is used?</dt><dd>Monthly payment = P × [r(1+r)^n] / [(1+r)^n - 1], where P is the loan amount, r is the monthly interest rate (annual / 12), and n is the number of months.</dd><dt>What types of loans can I calculate?</dt><dd>The formula applies to any standard amortising loan: mortgages, car loans, personal loans, student loans. For interest-only or balloon loans the formula differs.</dd><dt>Does this include fees or insurance?</dt><dd>No, this calculates only the principal and interest payment. Your actual monthly payment may be higher if it includes property tax, insurance, or other fees.</dd></dl></section>
+    <section class="faq"><h2>FAQ sur le calculateur de prêt</h2><dl><dt>Quelle formule est utilisée ?</dt><dd>Paiement mensuel = P × [r(1+r)^n] / [(1+r)^n - 1], où P est le montant du prêt, r est le taux d&#39;intérêt mensuel (annuel / 12) et n est le nombre de mois.</dd><dt>Quels types de prêts puis-je calculer ?</dt><dd>La formule s’applique à tout prêt amortissable standard : crédit immobilier, prêt automobile, prêt personnel, prêt étudiant. Pour les prêts à intérêt uniquement ou les prêts forfaitaires, la formule diffère.</dd><dt>Est-ce que cela inclut les frais ou l&#39;assurance ?</dt><dd>Non, cela calcule uniquement le paiement du principal et des intérêts. Votre paiement mensuel réel peut être plus élevé s’il comprend la taxe foncière, l’assurance ou d’autres frais.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/loancalc/">Français</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/loancalc/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/loancalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/loancalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/loancalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/loancalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/loancalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/loancalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/loancalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/loancalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/loancalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/loancalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
-  <p><a href="/glossary.html">Tous les outils</a></p></footer>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"amount":"Montant du prêt","rate":"Taux d'intérêt annuel %","term":"Durée (années)","monthly":"Paiement mensuel","total_paid":"Total payé","total_interest":"Intérêt total"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/loancalc.js" defer></script>
 </body>
 </html>

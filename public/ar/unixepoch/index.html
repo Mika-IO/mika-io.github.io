@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unix Timestamp Converter - تحويل الوقت إلى تاريخ</title>
+<meta name="description" content="محول الطابع الزمني Unix المجاني. قم بتحويل وقت عصر Unix إلى تاريخ ووقت يمكن قراءته بواسطة الإنسان، أو قم بتحويل أي تاريخ مرة أخرى إلى طابع زمني Unix. يعمل على الفور في متصفحك.">
+<link rel="canonical" href="https://mikaio.dev/ar/unixepoch/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/unixepoch/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/unixepoch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/unixepoch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/unixepoch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/unixepoch/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/unixepoch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/unixepoch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/unixepoch/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/unixepoch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/unixepoch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/unixepoch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Unix Timestamp Converter - تحويل الوقت إلى تاريخ">
+<meta property="og:description" content="محول الطابع الزمني Unix المجاني. قم بتحويل وقت عصر Unix إلى تاريخ ووقت يمكن قراءته بواسطة الإنسان، أو قم بتحويل أي تاريخ مرة أخرى إلى طابع زمني Unix. يعمل على الفور في متصفحك.">
+<meta property="og:url" content="https://mikaio.dev/ar/unixepoch/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Unix Timestamp Converter - تحويل الوقت إلى تاريخ","url":"https://mikaio.dev/ar/unixepoch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"محول الطابع الزمني Unix المجاني. قم بتحويل وقت عصر Unix إلى تاريخ ووقت يمكن قراءته بواسطة الإنسان، أو قم بتحويل أي تاريخ مرة أخرى إلى طابع زمني Unix. يعمل على الفور في متصفحك."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"محول الطابع الزمني يونكس","item":"https://mikaio.dev/ar/unixepoch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هو الطابع الزمني يونكس؟","acceptedAnswer":{"@type":"Answer","text":"الطابع الزمني لنظام Unix هو رقم يمثل عدد الثواني المنقضية منذ 1 يناير 1970، الساعة 00:00:00 بالتوقيت العالمي (عصر Unix). يتم استخدامه عالميًا في الحوسبة لتمثيل النقاط الزمنية دون غموض المنطقة الزمنية."}},{"@type":"Question","name":"ما هي مشكلة عام 2038؟","acceptedAnswer":{"@type":"Answer","text":"الأنظمة القديمة التي تخزن الطوابع الزمنية لنظام Unix كأعداد صحيحة موقعة 32 بت يمكنها فقط تمثيل التواريخ حتى 19 يناير 2038. لا تحتوي أنظمة 64 بت الحديثة على هذا القيد."}},{"@type":"Question","name":"كيف أقوم بتحويل ميلي ثانية؟","acceptedAnswer":{"@type":"Answer","text":"تستخدم بعض الأنظمة المللي ثانية بدلاً من الثواني. اقسم الطابع الزمني بالمللي ثانية على 1000 لتحويله إلى ثوانٍ قبل إدخاله هنا."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>محول الطابع الزمني يونكس</span></nav>
+  <h1>محول الطابع الزمني يونكس</h1>
+  <p class="lead">أدخل طابعًا زمنيًا لـ Unix لتحويله إلى تاريخ قابل للقراءة، أو اختر تاريخًا لتحويله إلى طابع زمني لـ Unix.</p>
+  <section class="widget" id="tool"><div id="ue-app"><div class="row"><div class="field"><label for="ue-ts">الطابع الزمني لنظام التشغيل Unix (بالثواني)</label><input type="number" id="ue-ts" placeholder="e.g. 1700000000" inputmode="numeric"></div></div><div class="result"><span class="hint">التاريخ والوقت بالتوقيت العالمي المنسق: </span><b id="ue-utc">—</b></div><div class="result"><span class="hint">التوقيت المحلي الخاص بك: </span><b id="ue-local">—</b></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="ue-dt">تحويل التاريخ إلى الطابع الزمني</label><input type="datetime-local" id="ue-dt"></div><div class="result"><span class="hint">الطابع الزمني ليونكس: </span><span class="big" id="ue-tsout">—</span></div></div></section>
+  <article class="content">
+    <h2>تحويل الطوابع الزمنية لنظام Unix إلى تواريخ يمكن قراءتها بواسطة الإنسان</h2>
+<p>يواجه المطورون ومسؤولو قواعد البيانات وأي شخص يعمل مع ملفات السجل أو واجهات برمجة التطبيقات (APIs) بانتظام طوابع زمنية لنظام Unix - أرقام طويلة مثل 1700000000 تمثل لحظة من الزمن. بدون محول، هذه الأرقام لا معنى لها بالنسبة لمعظم الناس. تقوم هذه الأداة بتحويل أي طابع زمني لنظام Unix على الفور إلى تاريخ ووقت يمكن قراءته، كما تقوم أيضًا بتحويل أي تاريخ مرة أخرى إلى الطابع الزمني لنظام Unix الخاص به.</p>
+<h2>ما هو الطابع الزمني يونكس؟</h2>
+<p>يقوم الطابع الزمني لنظام Unix بحساب عدد الثواني المنقضية منذ منتصف ليل 1 يناير 1970، بالتوقيت العالمي المنسق (UTC). تم اختيار هذه اللحظة، التي تسمى عصر يونكس، كنقطة مرجعية عند تطوير أنظمة تشغيل يونكس. كل ثانية تمر تضيف واحدة إلى العدد. يمثل الطابع الزمني 0 منتصف الليل تمامًا في 1 يناير 1970 بالتوقيت العالمي المنسق. يمثل الطابع الزمني 1700000000 14 نوفمبر 2023 الساعة 22:13:20 بالتوقيت العالمي المنسق.</p>
+<p>يكمن جمال الطوابع الزمنية لنظام Unix في أنها لا تتوافق مع المنطقة الزمنية. يمثل الطابع الزمني نفس اللحظة الزمنية تمامًا بغض النظر عن مكان وجودك في العالم. عند التحويل إلى التوقيت المحلي، ينتج نفس الطابع الزمني قراءات مختلفة للساعة في طوكيو ونيويورك، ولكنها تشير إلى نفس اللحظة الفعلية.</p>
+<h2>كيفية استخدام المحول</h2>
+<p>لتحويل طابع زمني إلى تاريخ، قم بلصق رقم الطابع الزمني في الحقل العلوي. يظهر التاريخ والوقت بالتوقيت العالمي المنسق (UTC) والمعادل المحلي لديك على الفور. لتحويل تاريخ إلى طابع زمني، استخدم منتقي التاريخ في القسم السفلي وسيظهر الطابع الزمني المقابل على الفور.</p>
+<h2>ميلي ثانية مقابل ثانية</h2>
+<p>تستخدم بعض الأنظمة، وخاصة متصفحات الويب وتطبيقات JavaScript، المللي ثانية بدلاً من الثواني للطوابع الزمنية الخاصة بها. يُرجع استدعاء JavaScript Date.now() شيئًا مثل 1700000000000 — وهو رقم أكبر بحوالي 1000 مرة من الطابع الزمني المكافئ لنظام Unix بالثواني. إذا كان الرقم الذي لديك يتكون من ثلاثة عشر رقمًا تقريبًا، فمن المحتمل أن يكون بالمللي ثانية: اقسم على 1000 وأدخل النتيجة.</p>
+<h2>مشكلة عام 2038</h2>
+<p>قامت أنظمة يونكس المبكرة بتخزين الطوابع الزمنية كأعداد صحيحة موقعة 32 بت، والتي يمكن أن تحتوي على قيم تصل إلى 2,147,483,647. تتوافق هذه القيمة القصوى مع 19 يناير 2038 الساعة 03:14:07 بالتوقيت العالمي المنسق. ستتجاوز الأنظمة التي تخزن الطوابع الزمنية بأعداد صحيحة 32 بت في ذلك التاريخ، وهي مشكلة تسمى أحيانًا Y2K38. يمكن لأنظمة 64 بت الحديثة تخزين طوابع زمنية تتجاوز بكثير عام 292 مليارًا، مما يجعل هذه مشكلة فقط للبرامج القديمة التي لم يتم تحديثها.</p>
+<h2>الاستخدامات الشائعة</h2>
+<p>تظهر الطوابع الزمنية في ملفات السجل، وسجلات قاعدة البيانات، واستجابات واجهة برمجة التطبيقات (API)، ورؤوس ذاكرة التخزين المؤقت، وشهادات التشفير، وسياقات أخرى لا حصر لها. يساعد تحويلها إلى تواريخ قابلة للقراءة في تصحيح الأخطاء وتحليل البيانات وتدقيق الامتثال وأي موقف تحتاج إلى فهمه عند حدوث شيء ما.</p>
+<h2>لماذا تم اختيار عام 1970 كنقطة انطلاق؟</h2>
+<p>كان اختيار الأول من كانون الثاني (يناير) 1970 اختيارًا عمليًا في الأساس وليس تاريخًا ذا معنى في حد ذاته. تم تطوير يونكس في أواخر الستينيات وأوائل السبعينيات في مختبرات بيل، وكان المصممون بحاجة إلى نقطة مرجعية حديثة بما يكفي لإبقاء الأرقام قابلة للتحكم ولكن في وقت مبكر بما يكفي لتغطية العمر المحتمل لنظام التشغيل. كان التقريب إلى بداية عام 1970 أمرًا مريحًا بكل بساطة. وبعد عقود، أصبح هذا الاختيار الاعتباطي متأصلًا بعمق: فهو يكمن وراء كيفية تمثيل كل لغة برمجة وقاعدة بيانات ونظام تشغيل للوقت داخليًا، على الرغم من أن معظم المبرمجين لا يحتاجون أبدًا إلى التفكير في الأمر بشكل مباشر.</p>
+<h2>قراءة الطابع الزمني دون محول</h2>
+<p>مع القليل من الممارسة، يمكنك التحقق من الطابع الزمني في رأسك. القسمة على 31,536,000 (عدد الثواني في السنة العادية) تعطي عددًا تقريبيًا للسنوات منذ عام 1970 - طابع زمني مكون من عشرة أرقام يبدأ بـ 1.7 يتوافق تقريبًا مع عام 2023، على سبيل المثال، منذ عام 1970 بالإضافة إلى حوالي 53-54 عامًا يصل إلى هناك. يعد هذا التقدير الذهني التقريبي طريقة مفيدة لاكتشاف الطابع الزمني الخاطئ بشكل واضح، مثل الطابع الذي يكون مخالفًا بعامل 1000 لأنه كان في الواقع بالمللي ثانية، حتى قبل أن تصل إلى الآلة الحاسبة.</p>
+<h2>الطوابع الزمنية السلبية</h2>
+<p>نظرًا لأن الطابع الزمني لنظام Unix هو مجرد عدد موقع للثواني من العصر، يتم تمثيل التواريخ قبل 1 يناير 1970 كأرقام سالبة بدلاً من كونها غير مدعومة. على سبيل المثال، يمثل الطابع الزمني -86400 يومًا واحدًا بالضبط قبل العصر: 31 ديسمبر 1969. يتعامل هذا المحول مع القيم السالبة بنفس طريقة التعامل مع القيم الإيجابية، وهو أمر مفيد للعمل مع السجلات التاريخية أو البيانات التي تسبق عصر الحوسبة ولكنها لا تزال مخزنة في نموذج طابع زمني يونكس.</p>
+<h2>لماذا الطوابع الزمنية لا تتوافق مع المنطقة الزمنية؟</h2>
+<p>أكبر ميزة منفردة لتخزين اللحظة كطابع زمني لنظام Unix بدلاً من سلسلة تاريخ منسقة هي أنها تتجنب المناطق الزمنية بالكامل أثناء التخزين والحساب. يمثل الطابع الزمني لحظة فعلية واحدة بالضبط، ولا تتم ترجمته إلا إلى تاريخ التقويم المحلي ووقت الساعة في اللحظة التي يتم عرضها فيها على الشخص. ولهذا السبب تقوم قواعد البيانات وواجهات برمجة التطبيقات وملفات السجل بتخزين الطوابع الزمنية بشكل كبير بدلاً من التواريخ المحلية المنسقة مسبقًا: يمكن لخادمين في مناطق زمنية مختلفة مقارنة الاختلافات بين الطوابع الزمنية وفرزها وحسابها بثقة تامة، ويحتاجان فقط إلى التحويل إلى توقيت محلي يمكن قراءته بواسطة الإنسان في الخطوة الأخيرة، تمامًا كما يفعل هذا المحول عندما يعرض كلاً من التوقيت العالمي المنسق (UTC) والمعادل المحلي الخاص بك جنبًا إلى جنب.</p>
+<h2>التصحيح مع الطوابع الزمنية</h2>
+<p>يلجأ المطورون إلى محول مثل هذا باستمرار أثناء تصحيح الأخطاء. إن سجل أخطاء الخادم المختوم بالرقم 1700000000 لا معنى له في لمحة واحدة، ولكن تحويله يخبرك على الفور بما إذا كان الخطأ قد حدث أثناء ساعات العمل، أو بين عشية وضحاها، أو في اللحظة المحددة لانطلاق عملية النشر - غالبًا ما تكون أسرع طريقة لربط تقرير الخطأ بالتغيير الذي تسبب فيه. استجابات واجهة برمجة التطبيقات (API)، وأعمدة تدقيق قاعدة البيانات، ورؤوس انتهاء صلاحية ذاكرة التخزين المؤقت، جميعها تقوم عادةً بتخزين الطوابع الزمنية بدلاً من التواريخ المنسقة لنفس السبب الذي يجعل محركات التخزين تفضلها: حيث يقوم عدد عادي بفرز الأرقام ومقارنتها وحسابها بشكل صحيح دون أي غموض في اللغة أو التنسيق، ويحتاج فقط إلى ترجمته إلى تاريخ مناسب للإنسان في خطوة العرض النهائية، وهي بالضبط المهمة التي تقوم بها هذه الأداة.</p>
+<h2>خاص</h2>
+<p>يتم تشغيل كل شيء في متصفحك باستخدام كائن التاريخ المدمج في JavaScript، بحيث يكون التحويل فوريًا في كلا الاتجاهين ولا يتم إرسال أي طابع زمني أو تاريخ تدخله إلى الخادم، أو تسجيله أو مشاركته.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول الطابع الزمني لنظام Unix</h2><dl><dt>ما هو الطابع الزمني يونكس؟</dt><dd>الطابع الزمني لنظام Unix هو رقم يمثل عدد الثواني المنقضية منذ 1 يناير 1970، الساعة 00:00:00 بالتوقيت العالمي (عصر Unix). يتم استخدامه عالميًا في الحوسبة لتمثيل النقاط الزمنية دون غموض المنطقة الزمنية.</dd><dt>ما هي مشكلة عام 2038؟</dt><dd>الأنظمة القديمة التي تخزن الطوابع الزمنية لنظام Unix كأعداد صحيحة موقعة 32 بت يمكنها فقط تمثيل التواريخ حتى 19 يناير 2038. لا تحتوي أنظمة 64 بت الحديثة على هذا القيد.</dd><dt>كيف أقوم بتحويل ميلي ثانية؟</dt><dd>تستخدم بعض الأنظمة المللي ثانية بدلاً من الثواني. اقسم الطابع الزمني بالمللي ثانية على 1000 لتحويله إلى ثوانٍ قبل إدخاله هنا.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"timestamp":"الطابع الزمني لنظام التشغيل Unix (بالثواني)","utc":"التاريخ والوقت بالتوقيت العالمي المنسق","local":"التوقيت المحلي الخاص بك","date_to_ts":"تحويل التاريخ إلى الطابع الزمني","ts_out":"الطابع الزمني ليونكس","utcnote":"التوقيت العالمي المنسق","invalid":"غير صالح"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/unixepoch.js" defer></script>
+</body>
+</html>

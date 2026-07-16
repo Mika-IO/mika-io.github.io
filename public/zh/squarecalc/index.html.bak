@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>平方根计算器 — 求任意数字的平方根</title>
+<meta name="description" content="免费平方根计算器。立即找到任何正数的平方根。还显示平方 (n²)。在您的浏览器中工作，无需注册。">
+<link rel="canonical" href="https://mikaio.dev/zh/squarecalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/squarecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/squarecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/squarecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/squarecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/squarecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/squarecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/squarecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/squarecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/squarecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/squarecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/squarecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="平方根计算器 — 求任意数字的平方根">
+<meta property="og:description" content="免费平方根计算器。立即找到任何正数的平方根。还显示平方 (n²)。在您的浏览器中工作，无需注册。">
+<meta property="og:url" content="https://mikaio.dev/zh/squarecalc/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"平方根计算器 — 求任意数字的平方根","url":"https://mikaio.dev/zh/squarecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费平方根计算器。立即找到任何正数的平方根。还显示平方 (n²)。在您的浏览器中工作，无需注册。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"平方根计算器","item":"https://mikaio.dev/zh/squarecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"什么是平方根？","acceptedAnswer":{"@type":"Answer","text":"数字 n 的平方根是一个与其自身相乘得到 n 的值。例如，√9 = 3，因为 3 × 3 = 9。每个正数都有两个平方根：一个正数和一个负数。"}},{"@type":"Question","name":"负数呢？","acceptedAnswer":{"@type":"Answer","text":"负数的平方根不是实数，而是虚数。例如，复数系中的√(-1) = i。"}},{"@type":"Question","name":"什么是完全平方数？","acceptedAnswer":{"@type":"Answer","text":"完全平方是平方根为整数的数字：1、4、9、16、25、36、49、64、81、100...都是完全平方。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>平方根计算器</span></nav>
+  <h1>平方根计算器</h1>
+  <p class="lead">输入一个数字以求其平方根。还显示数字的平方。</p>
+  <section class="widget" id="tool"><form id="sq-form"><div class="row"><div class="field"><label for="sq-n">数量</label><input type="number" id="sq-n" step="any" min="0" inputmode="decimal"></div></div><div class="result"><span class="hint">√ = </span><span class="big" id="sq-out">—</span></div><div class="result" style="opacity:0.7;font-size:0.9rem"><span>n² = </span><span id="sq-sq">—</span></div></form></section>
+  <article class="content">
+    <h2>即时求任意数字的平方根</h2>
+<p>平方根是最常用的数学运算之一。从勾股定理到标准差，从二次方程到金融公式，平方根无处不在。输入任意非负数，其平方根会立即显示，同时显示平方值（n²）以供参考。</p>
+<h2>什么是平方根？</h2>
+<p>一个数 n 的平方根是这样一个值：它与自身相乘等于 n。写作 √n 或 n^(1/2)。例如：</p>
+<ul>
+<li>√9 = 3，因为 3 × 3 = 9</li>
+<li>√25 = 5，因为 5 × 5 = 25</li>
+<li>√2 ≈ 1.4142135...（一个无理数）</li>
+<li>√100 = 10</li>
+</ul>
+<p>每个正数都有两个平方根：一个正数和一个负数。正数根称为主平方根。零的平方根是零。</p>
+<h2>完全平方数</h2>
+<p>完全平方数是指有整数平方根的数：</p>
+<ul>
+<li>1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225...</li>
+</ul>
+<p>在算术、几何和代数中识别完全平方数很有用。</p>
+<h2>无理数平方根</h2>
+<p>大多数数没有精确的整数平方根。√2、√3、√5、√6、√7 以及许多其他的数都是无理数——它们的小数展开是无穷且不循环的。这些值在几何学中很重要：一个单位正方形的对角线长度为 √2 ≈ 1.41421356...</p>
+<h2>应用领域</h2>
+<p><strong>勾股定理</strong>：直角三角形的斜边 c 满足 c = √(a² + b²)。计算时需要取平方根。</p>
+<p><strong>标准差</strong>：一个数据集的标准差是其方差的平方根。取平方根使度量回到数据的原始单位。</p>
+<p><strong>求根公式</strong>：方程 ax² + bx + c = 0 的解为 x = (-b ± √(b² - 4ac)) / 2a。平方根下的判别式 b² - 4ac 决定了解是否为实数。</p>
+<p><strong>距离公式</strong>：两点 (x₁, y₁) 和 (x₂, y₂) 之间的距离为 √((x₂-x₁)² + (y₂-y₁)²)。</p>
+<p><strong>金融模型</strong>：收益率的标准差衡量投资风险。投资组合数学大量使用平方根。</p>
+<p><strong>物理学</strong>：波动方程、能量计算以及许多物理关系都涉及平方根。</p>
+<h2>负数与虚数</h2>
+<p>负数的平方根不是实数。在复数系统中，√(-1) 被定义为虚数单位 i。复数的形式为 a + bi，广泛应用于电气工程、量子力学和许多其他领域。</p>
+<h2>计算方法</h2>
+<p>本计算器使用 JavaScript 的 Math.sqrt() 函数，该函数实现了 IEEE 754 双精度浮点平方根算法。结果精确到约 15-16 位有效数字。</p>
+<h2>如何使用本计算器</h2>
+<p>在输入框中输入任意非负数，其平方根和平方值会立刻出现，并随输入实时更新。没有按钮需要按，也没有什么需要配置。并排试几个数字是建立直觉的快速方法——注意小于 1 的数的平方根实际上大于这个数本身（√0.25 = 0.5），很多人第一次看到时会感到惊讶，而大于 1 的数的平方根则始终小于这个数本身。</p>
+<h2>用手估算平方根</h2>
+<p>在拿起计算器之前，了解如何粗略估算平方根很有帮助。找到离你数字最近的两个完全平方数：对于 √50，最近的完全平方数是 49（√49 = 7）和 64（√64 = 8），所以答案一定在 7 和 8 之间，而且由于 50 更接近 49，答案应该接近 7 但稍高一些——真值 7.07 证实了这个直觉。这种夹逼技巧是一种有用的验证手段，当你想确认计算器的结果大致正确时很方便，也正是心算和初等代数课程旨在培养的那种估算能力。</p>
+<h2>牛顿法——幕后的算法</h2>
+<p>现代计算机不是通过查表来求平方根的；它们使用快速迭代方法来计算，其中最著名的是牛顿法（也称巴比伦法，因为古代巴比伦数学家就已经知道了它的一个版本）。从一个粗略的猜测开始，每一步都使用公式来精炼估计：下一个猜测 = (猜测 + 数值 / 猜测) / 2。用于从初始猜测 3 开始求 √10：(3 + 10/3)/2 ≈ 3.1667，然后 (3.1667 + 10/3.1667)/2 ≈ 3.1623，这已经非常接近真值 3.16228。每次迭代大约将正确位数翻倍，这就是为什么现代处理器只需几步就能以满精度计算平方根。</p>
+<h2>平方与平方根作为互逆运算</h2>
+<p>平方和取平方根互为逆运算，这就是为什么本计算器同时显示两者：n² 的平方根返回 n（对于非负 n），√n 的平方返回 n。这种互逆关系在整个代数中都是基础性的——这正是涉及平方项的方程（如二次公式或勾股定理）通过在适当时机两边取平方根来求解的原理。</p>
+<h2>隐私与即时性</h2>
+<p>计算完全在你的浏览器中使用标准双精度算术运行，精确到大约十五位有效数字，结果即时出现，你输入的任何数字都不会被上传、记录或共享。</p>
+    <section class="faq"><h2>平方根常见问题解答</h2><dl><dt>什么是平方根？</dt><dd>数字 n 的平方根是一个与其自身相乘得到 n 的值。例如，√9 = 3，因为 3 × 3 = 9。每个正数都有两个平方根：一个正数和一个负数。</dd><dt>负数呢？</dt><dd>负数的平方根不是实数，而是虚数。例如，复数系中的√(-1) = i。</dd><dt>什么是完全平方数？</dt><dd>完全平方是平方根为整数的数字：1、4、9、16、25、36、49、64、81、100...都是完全平方。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/squarecalc/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/squarecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/squarecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/squarecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/squarecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/squarecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/squarecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/squarecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/squarecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/squarecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/squarecalc.js" defer></script>
+</body>
+</html>

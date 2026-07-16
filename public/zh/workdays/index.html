@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作日计算器 — 计算两个日期之间的工作日</title>
+<meta name="description" content="免费工作日计算器。计算任意两个日期之间的工作日数（周一至周五），不包括周末。浏览器中即时显示结果。">
+<link rel="canonical" href="https://mikaio.dev/zh/workdays/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/workdays/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/workdays/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/workdays/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/workdays/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/workdays/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/workdays/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/workdays/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/workdays/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/workdays/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/workdays/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/workdays/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="工作日计算器 — 计算两个日期之间的工作日">
+<meta property="og:description" content="免费工作日计算器。计算任意两个日期之间的工作日数（周一至周五），不包括周末。浏览器中即时显示结果。">
+<meta property="og:url" content="https://mikaio.dev/zh/workdays/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"工作日计算器 — 计算两个日期之间的工作日","url":"https://mikaio.dev/zh/workdays/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费工作日计算器。计算任意两个日期之间的工作日数（周一至周五），不包括周末。浏览器中即时显示结果。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"工作日计算器","item":"https://mikaio.dev/zh/workdays/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"这包括公众假期吗？","acceptedAnswer":{"@type":"Answer","text":"不。此计算器仅排除周末（周六和周日）。公共假期因国家/地区而异，在不知道您所在位置的情况下无法自动确定。"}},{"@type":"Question","name":"是否包括开始日期和结束日期？","acceptedAnswer":{"@type":"Answer","text":"是的，如果开始日期和结束日期是工作日，则都包括在内。"}},{"@type":"Question","name":"我可以计算过去的工作日吗？","acceptedAnswer":{"@type":"Answer","text":"是的，以任意顺序输入任意两个日期，计算器就会返回正确的计数。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/workdays/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/workdays/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/workdays/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/workdays/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/workdays/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/workdays/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/workdays/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/workdays/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>工作日计算器</span></nav>
+  <h1>工作日计算器</h1>
+  <p class="lead">选择开始日期和结束日期以计算它们之间的工作日（不包括周末）。</p>
+  <section class="widget" id="tool"><form id="wd-form"><div class="row"><div class="field"><label for="wd-from">开始日期</label><input type="date" id="wd-from"></div><div class="field"><label for="wd-to">结束日期</label><input type="date" id="wd-to"></div></div><div class="result"><span class="hint">工作日: </span><span class="big" id="wd-out">—</span></div><div id="wd-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>计算任意两个日期之间的工作日</h2>
+<p>并非所有日子都是工作日。周末会中断业务流程，了解两个日期之间存在多少实际工作日对于项目规划、合同管理、发票条款、法定期限和人力资源计算至关重要。此计算器计算任何开始日期和结束日期之间的周一到周五的天数，不包括周六和周日。</p>
+<h2>工作日与日历日</h2>
+<p>日历日从开始到结束每天都计算，包括周末。工作日（也称为工作日或工作日）不包括星期六和星期日。在以下情况下，差异很重要：</p>
+<ul>
+<li>合同规定了“30 个工作日”的交付窗口——这是六个日历周，而不是 30 天。</li>
+<li>法定截止日期是事件发生后 10 个工作日 - 错过日历日期将是一个错误。</li>
+<li>付款期限为“净 30 天”——这通常意味着 30 个日历日，但某些司法管辖区将其解释为工作日。</li>
+<li>雇佣通知期为 2 周——即 10 个工作日。</li>
+</ul>
+<h2>计算器的工作原理</h2>
+<p>计算器会迭代两个日期之间的每一天，并仅计算星期一、星期二、星期三、星期四或星期五的日期。如果开始日期和结束日期是工作日，则都包括在内。总计还显示细分：日历日、工作日和周末。</p>
+<h2>项目策划</h2>
+<p>项目经理经常使用工作日计算。包含 20 项任务（每项任务需要 2 个工作日）的项目计划至少需要 40 个工作日（即 8 个日历周）。添加缓冲区、依赖关系和审核周期需要准确了解给定日历范围内有多少个工作日。</p>
+<p>软件开发中的冲刺计划通常使用两周的冲刺，其中包含 10 个工作日。了解更长的路线图范围内的工作日有助于估计从现在到主要里程碑之间适合多少个冲刺。</p>
+<h2>发票和付款条件</h2>
+<p>Net 30、Net 60 和 Net 90 付款条件几乎总是以日历日为单位。然而，某些行业和合同使用工作日，因此区分很重要。周一开具的净 30 个日历日发票将在 30 个日历日后到期，无论中间有多少个周末。 30 个工作日的期限明显晚于 6 个日历周结束。</p>
+<h2>就业与人力资源</h2>
+<p>终止雇佣关系的通知期通常以周或工作日为单位指定。从周二开始的两周通知期于两周后的周一（10 个工作日）结束。年假权利通常以每年的工作日为单位。人力资源系统跟踪休假请求和批准的工作日余额。</p>
+<h2>公众假期</h2>
+<p>该计算器仅排除周末。公共假期因国家、地区、州甚至行业的不同而有很大差异，并且在没有附加信息的情况下无法自动确定。对于必须排除特定节假日的计算，请使用此计算器的结果作为起点，然后手动减去日期范围内的相关节假日。</p>
+<h2>如何使用计算器</h2>
+<p>选择开始日期和结束日期，它们之间的总工作日数会立即显示，并与日历天数和该范围内的周末天数一起细分。因为这两个数字会一起更新，所以您可以一目了然地看到给定日历范围内有多少个周末——每当截止日期在日历天数中听起来很慷慨，但一旦减去周末就会变得很紧张时，这是有用的背景。</p>
+<h2>为什么这种区别会让人们感到困惑</h2>
+<p>工作日和日历日之间的混淆是合同和项目规划中最常见的小误解之一，正是因为两者都使用相同的日常用语“天”来描述，而没有内置信号。无论是指十个日历日还是十个工作日，“10 天”周转时间听起来都是一样的，但两者可能相差四天，具体取决于中间有多少个周末，这正是导致关于是否实际遵守最后期限的真正争议的那种含糊不清。仔细阅读合同或项目计划，了解哪一天是指哪一天，并使用像这样的计算器在两者之​​间进行转换，可以在出现分歧之前消除歧义。</p>
+<h2>SLA 和周转保证</h2>
+<p>服务级别协议经常承诺在固定的工作日内做出响应或解决方案，例如“在 2 个工作日内回复支持票证”。计算是否实际满足 SLA 需要精确地执行该工具执行的工作日算术：周五下午 4 点提交并在周一早上得到答复的票证在技术上已在下一个工作日得到答复，即使已经过去了近三个日历日，而反向混淆（假设周五到周一的差距违反了“1 个工作日”SLA）是不必要的客户投诉的常见来源。</p>
+<h2>从截止日期开始倒推工作</h2>
+<p>该计算器还可以反向用于计划目的：如果您知道交付成果在特定日期到期，并且知道工作需要多少个工作日，您可以从截止日期开始倒数，找到最新的安全开始日期。从最后期限中减去工作日而不是日历天正是阻止项目计划默默地假设工作发生在周末的原因——一旦有人考虑到实际嵌入其中的四个周末，这个错误就会把舒适的两周时间表变成匆忙的时间表。</p>
+<h2>私密且即时</h2>
+<p>所有计算完全在您的浏览器中运行，因此计数会在您选择日期时立即显示，并且您输入的任何日期都不会发送到服务器、记录或共享。</p>
+    <section class="faq"><h2>工作日常见问题解答</h2><dl><dt>这包括公众假期吗？</dt><dd>不。此计算器仅排除周末（周六和周日）。公共假期因国家/地区而异，在不知道您所在位置的情况下无法自动确定。</dd><dt>是否包括开始日期和结束日期？</dt><dd>是的，如果开始日期和结束日期是工作日，则都包括在内。</dd><dt>我可以计算过去的工作日吗？</dt><dd>是的，以任意顺序输入任意两个日期，计算器就会返回正确的计数。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/workdays/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/workdays/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/workdays/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/workdays/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/workdays/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/workdays/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/workdays/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/workdays/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"from_date":"开始日期","to_date":"结束日期","workdays":"工作日"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/workdays.js" defer></script>
+</body>
+</html>

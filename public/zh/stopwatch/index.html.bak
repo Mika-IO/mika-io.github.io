@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stopwatch Online — 带单圈时间的免费浏览器秒表</title>
+<meta name="description" content="免费在线秒表，精度为毫秒。开始、暂停、记录单圈时间和重置。无需下载。完全在您的浏览器中运行。">
+<link rel="canonical" href="https://mikaio.dev/zh/stopwatch/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/stopwatch/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/stopwatch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/stopwatch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/stopwatch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/stopwatch/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/stopwatch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/stopwatch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/stopwatch/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/stopwatch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/stopwatch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/stopwatch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stopwatch Online — 带单圈时间的免费浏览器秒表">
+<meta property="og:description" content="免费在线秒表，精度为毫秒。开始、暂停、记录单圈时间和重置。无需下载。完全在您的浏览器中运行。">
+<meta property="og:url" content="https://mikaio.dev/zh/stopwatch/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch Online — 带单圈时间的免费浏览器秒表","url":"https://mikaio.dev/zh/stopwatch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费在线秒表，精度为毫秒。开始、暂停、记录单圈时间和重置。无需下载。完全在您的浏览器中运行。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"秒表","item":"https://mikaio.dev/zh/stopwatch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"浏览器秒表的准确度如何？","acceptedAnswer":{"@type":"Answer","text":"秒表使用浏览器的高分辨率性能计时器，在正常情况下精确到毫秒以下。对于需要精确度的官方计时，请使用经过认证的计时设备。"}},{"@type":"Question","name":"如果我切换标签，它会停止吗？","acceptedAnswer":{"@type":"Answer","text":"浏览器可能会限制后台选项卡中的 JavaScript，如果您切换离开，这可能会影响准确性。保持秒表选项卡处于活动状态以获得最佳结果。"}},{"@type":"Question","name":"我可以在手机上使用这个吗？","acceptedAnswer":{"@type":"Answer","text":"是的，秒表完全兼容触摸，适用于智能手机和平板电脑。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>秒表</span></nav>
+  <h1>秒表</h1>
+  <p class="lead">按开始开始计时。按圈可不间断地记录分段时间。按重置清除所有内容。</p>
+  <section class="widget" id="tool"><div id="sw-app" style="text-align:center"><div id="sw-display" style="font-size:3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:0.05em;margin:1rem 0">00:00.000</div><div class="row" style="justify-content:center;gap:0.5rem"><button id="sw-start" class="btn">开始</button><button id="sw-lap" class="btn secondary" disabled>圈</button><button id="sw-reset" class="btn secondary" disabled>重置</button></div><ol id="sw-laps" style="text-align:left;margin-top:1rem;list-style:none;padding:0"></ol></div></section>
+  <article class="content">
+    <h2>一款精确的秒表，就在你的浏览器中</h2>
+<p>准确计时曾经意味着需要随身带一个专用秒表。现在，任何带有浏览器的设备都可以胜任这个工作。这款在线秒表完全在你的浏览器中使用高精度计时器运行，支持记录分段成绩，并以分钟、秒和毫秒显示经过的时间。无需下载或安装任何东西。</p>
+<h2>如何使用</h2>
+<p>按下开始按钮开始计时。显示画面会实时展示分钟、秒和千分之一秒。在秒表运行时，按分段按钮可以记录当前经过的时间。分段记录列表会累积显示在画面下方，编号排列以便比较。按停止按钮暂停秒表，不会丢失已记录的时间或分段记录。再按开始按钮可以从暂停处继续。按重置按钮清除所有数据并归零。</p>
+<h2>精度与浏览器计时器</h2>
+<p>现代浏览器通过 Performance API 提供了高精度计时器，可以以毫秒的分数来测量时间。这比旧版 Date.now() 方法的 1 毫秒分辨率精确得多。实际上，在大多数设备上，计时器的精度远优于 1 毫秒，对于运动计时、烹饪、演讲或任何日常使用来说绰绰有余。如需在竞赛中使用法律认证的计时，请始终使用批准的专用计时设备。</p>
+<p>一个值得了解的局限性是：如果你切换到其他浏览器标签页，浏览器可能会在后台限制 JavaScript 的运行以节省资源。这可能导致秒表略微落后于实际经过的时间。保持秒表标签页处于活动状态以获得最佳精度。</p>
+<h2>常见用途</h2>
+<p>运动员使用秒表来为跑步、游泳圈数、自行车间歇或任何需要比较分段成绩的重复性运动计时。分段记录帮助你查看自己是在保持配速、进步还是在掉速。教练可以为多名运动员依次计时并比较结果。</p>
+<p>在厨房里，当你同时在处理多道需要不同时间的菜品时，秒表比倒计时器更灵活。你在每道菜入锅时开始计时，记下分段时间来了解每道菜已经烹饪了多久。</p>
+<p>演讲和演示也会受益于一个运行中的计时器。准确地知道你已进行了四分三十秒，可以帮助你判断是扩展还是压缩某个部分以达到目标时长。</p>
+<p>科学家和学生在实验中利用分段功能记录数据点，而不必为下一次试验重新启动计时器。</p>
+<h2>触屏与键盘友好</h2>
+<p>开始、分段和重置按钮支持鼠标点击和手指触控。布局在手机和平板电脑上也能清晰展示。</p>
+<h2>为什么浏览器秒表真的够精确</h2>
+<p>值得理解为什么一个运行在网页中的免费工具可以被信任用于不仅仅是随意的计时。现代浏览器通过 Performance API 提供了高精度计时器，区别于老旧、粗糙的 Date.now() 方法，能够以毫秒的分数而非整毫秒来测量时间。在实际使用中，这意味着计时器在一次普通计时过程中的漂移远小于 1 毫秒，足以满足运动、烹饪、演讲和实验室工作——唯一需要注意的是，浏览器会故意减慢后台标签页中的 JavaScript 以节省电池和 CPU，所以保持秒表标签页处于活动状态是保持其精度的唯一习惯。</p>
+<h2>分段成绩与圈速的区别</h2>
+<p>计时爱好者有时区分&quot;圈速&quot;（仅该段的独立耗时）和&quot;分段成绩&quot;（从开始到该检查点的累计经过时间）。本工具记录的是分段成绩——每条记录的时间是你按下分段按钮时的累计总时间——这在休闲计时中是更常见的惯例，也符合大多数人在看一眼运行中的秒表时期望看到的内容。如果你需要单圈耗时而非累计分段成绩，将每条记录的时间减去前一条即可。</p>
+<h2>秒表与手机内置计时器</h2>
+<p>每部现代智能手机都自带秒表应用，所以有人会问为什么还要使用基于浏览器的秒表。坦诚的答案是便利性而非更高的精度：在共享电脑上、在视频通话中、或者在一个已经运行在浏览器标签页的工作流中，打开一个网页比解锁手机并找到正确的应用更快，而且来自 Performance API 的底层计时精度与原生应用在非竞赛的日常使用中达到的水平相当。</p>
+<h2>同时为多项活动计时</h2>
+<p>某些情况需要同时跟踪多件事——多道以不同开始时间烹饪的菜品，或者一场接力赛中的多个赛段。由于本秒表维护一个运行总计加一个分段列表，同时处理多项活动的实用方法是在不同的浏览器标签页中分别打开工具，每个对应一项活动，各自在对应活动开始时独立启动。</p>
+<h2>中途重置</h2>
+<p>如果你在保存所需的分段成绩之前不小心按了重置，没有撤销功能——计数会立即归零。对于分段记录确实很重要的任何场景，值得在产生的同时记下关键的分段成绩，而不是完全依赖屏幕上的列表保留到最后。</p>
+<h2>隐私与随时可用</h2>
+<p>任何数据都不会被发送到任何地方，秒表完全在你的浏览器中运行，页面加载完成后即可离线工作，无需账户——随时重新加载页面即可将一切重置为零。</p>
+    <section class="faq"><h2>秒表常见问题解答</h2><dl><dt>浏览器秒表的准确度如何？</dt><dd>秒表使用浏览器的高分辨率性能计时器，在正常情况下精确到毫秒以下。对于需要精确度的官方计时，请使用经过认证的计时设备。</dd><dt>如果我切换标签，它会停止吗？</dt><dd>浏览器可能会限制后台选项卡中的 JavaScript，如果您切换离开，这可能会影响准确性。保持秒表选项卡处于活动状态以获得最佳结果。</dd><dt>我可以在手机上使用这个吗？</dt><dd>是的，秒表完全兼容触摸，适用于智能手机和平板电脑。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/stopwatch/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/stopwatch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/stopwatch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/stopwatch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/stopwatch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/stopwatch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/stopwatch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/stopwatch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/stopwatch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/stopwatch/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/glossary.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/stopwatch.js" defer></script>
+</body>
+</html>

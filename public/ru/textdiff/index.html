@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Инструмент Text Diff Tool — сравните два текста рядом.</title>
+<meta name="description" content="Бесплатный инструмент для сравнения текста. Сравните два текста и выделите различия между ними. Мгновенно находите добавленные, удаленные и измененные слова.">
+<link rel="canonical" href="https://mikaio.dev/ru/textdiff/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/textdiff/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/textdiff/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/textdiff/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/textdiff/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/textdiff/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/textdiff/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/textdiff/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/textdiff/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/textdiff/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/textdiff/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/textdiff/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Инструмент Text Diff Tool — сравните два текста рядом.">
+<meta property="og:description" content="Бесплатный инструмент для сравнения текста. Сравните два текста и выделите различия между ними. Мгновенно находите добавленные, удаленные и измененные слова.">
+<meta property="og:url" content="https://mikaio.dev/ru/textdiff/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Инструмент Text Diff Tool — сравните два текста рядом.","url":"https://mikaio.dev/ru/textdiff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный инструмент для сравнения текста. Сравните два текста и выделите различия между ними. Мгновенно находите добавленные, удаленные и измененные слова."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Инструмент «Различие текста»","item":"https://mikaio.dev/ru/textdiff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как работает дифференциал?","acceptedAnswer":{"@type":"Answer","text":"Инструмент сравнивает два текста слово за словом. Слова, присутствующие в B, но отсутствующие в A, показаны зеленым цветом (добавлены). Слова в A, но не в B, показаны красным (удалены)."}},{"@type":"Question","name":"Это настоящая разница, такая как git diff?","acceptedAnswer":{"@type":"Answer","text":"Это простая разница на уровне слов для быстрого сравнения. Для различий на уровне символов или строк, используемых в программировании, более подходящими являются специальные инструменты, такие как git diff или diff(1)."}},{"@type":"Question","name":"Сохраняется ли мой текст?","acceptedAnswer":{"@type":"Answer","text":"Нет. Сравнение выполняется полностью в вашем браузере. Ничего не отправляется ни на один сервер."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Инструмент «Различие текста»</span></nav>
+  <h1>Инструмент «Различие текста»</h1>
+  <p class="lead">Вставьте две версии текста в поля ниже, чтобы увидеть, что изменилось между ними.</p>
+  <section class="widget" id="tool"><div id="td-app"><div class="row"><div class="field"><label for="td-a">Исходный текст</label><textarea id="td-a" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Вставьте сюда исходный текст…"></textarea></div><div class="field"><label for="td-b">Новый текст</label><textarea id="td-b" rows="5" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.9rem" placeholder="Вставьте сюда новый или исправленный текст…"></textarea></div></div><div id="td-out" style="margin-top:1rem;font-family:monospace;font-size:0.85rem;padding:0.75rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);white-space:pre-wrap;line-height:1.7"></div></div></section>
+  <article class="content">
+    <h2>Сравните два текста и найдите различия.</h2>
+<p>Независимо от того, корректируете ли вы исправленный документ, проверяете, что изменилось в контракте, сравниваете две версии эссе или проверяете точность копирования, инструмент сравнения текста экономит время, выделяя именно то, что изменилось. Вставьте исходный текст в первое поле и новую версию во второе, и различия будут отмечены мгновенно.</p>
+<h2>Как работает разница на уровне слов</h2>
+<p>Инструмент использует алгоритм самой длинной общей подпоследовательности (LCS) — тот же алгоритм, который лежит в основе команды Unix diff и git diff. Он находит наибольшую последовательность слов, которые встречаются в обоих текстах в одном и том же порядке, а затем помечает все, что находится за пределами этой последовательности, как добавленное или удаленное.</p>
+<p>Слова, выделенные красным и зачеркнутые, есть в оригинале, но отсутствуют в новой версии (удалены). Слова, выделенные зеленым, есть в новой версии, но не в оригинальной (добавленной). Неизмененные слова отображаются в обычном тексте.</p>
+<h2>Распространенное использование сравнения текста</h2>
+<p><strong>Редакции документа</strong>. Когда соавтор возвращает исправленный документ, вы можете быстро увидеть, какие именно слова или предложения были изменены, не читая обе версии полностью.</p>
+<p><strong>Просмотр контракта</strong>. Юристы используют разницу для отслеживания изменений между версиями контракта. Документ с «красной чертой» или «разметкой» по сути представляет собой разницу, примененную к юридическому тексту.</p>
+<p><strong>Академическая корректура</strong>: сравните первый черновик с исправленным черновиком, чтобы убедиться, что предполагаемые правки были внесены правильно и не было внесено никаких непреднамеренных изменений.</p>
+<p><strong>Проверка кода</strong>. Хотя различия кода лучше всего обрабатывать с помощью таких инструментов, как git diff (который работает построчно), сравнение на уровне слов может помочь при просмотре документации или комментариев.</p>
+<p><strong>Проверка на плагиат</strong>. Сравните отправленный текст с оригиналом, чтобы обнаружить перефразирование — переупорядоченные или замененные слова, сохраняющие то же значение.</p>
+<p><strong>Проверка перевода</strong>: сравните исходный текст с его переводом дословно, чтобы убедиться в полноте (хотя это приблизительное значение из-за различий в естественном языке).</p>
+<h2>Ограничения различий на уровне слов</h2>
+<p>Этот инструмент сравнивает слова без понимания семантики. Предложение, полностью переписанное с тем же смыслом, будет полностью удалено и добавлено. Для понимания семантического сходства необходимы инструменты обработки естественного языка.</p>
+<p>При сравнении также не различаются форматирование, использование заглавных букв и пунктуация в словах, если они не являются частью словесного токена. «Привет» и «привет» рассматриваются как разные слова.</p>
+<h2>Как использовать инструмент</h2>
+<p>Вставьте исходный текст в первое поле, а исправленную версию — во второе, и сравнение появится сразу же ниже, при этом удаления будут зачеркнуты красным, а дополнения выделены зеленым. Для запуска сравнения нет кнопки — оно обновляется в реальном времени, поэтому вы можете вставить новую версию в любое время и сразу увидеть, чем она отличается от предыдущей.</p>
+<h2>Почему сравнение на уровне слов, а не на уровне символов</h2>
+<p>Инструмент сравнения теоретически мог бы сравнивать символы по символам, а не по словам, но такой подход дает результаты, которые технически точны и практически бесполезны: исправление единственной опечатки в середине длинного предложения покажет почти всю остальную часть предложения измененной, потому что каждый символ после исправления меняет положение. Вместо этого сравнение на уровне слов означает, что одно исправленное слово отображается как одно удаление и одно добавление, в то время как все остальное в предложении, которое на самом деле не изменилось, правильно остается в покое — гораздо более полезный сигнал для человека, пытающегося понять, что на самом деле было отредактировано, а это именно тот уровень детализации, который важен для большинства реальных задач редактирования и корректуры.</p>
+<h2>Эффективное чтение различий</h2>
+<p>При просмотре длительного сравнения полезно сканировать кластеры цветов, а не читать каждое слово: плотное скопление красного и зеленого рядом друг с другом обычно указывает на небольшое изменение формулировки, а длинный непрерывный переход одного цвета указывает на действительно новый или удаленный отрывок, а не на редактирование. Овладение этим подходом сканирования шаблонов позволяет опытным редакторам и юридическим рецензентам обрабатывать многостраничную пометку за несколько минут, а не перечитывать весь документ построчно.</p>
+<h2>Инструменты сравнения в программном обеспечении и в прозе</h2>
+<p>Программисты постоянно используют инструменты построчного сравнения, такие как git diff, и стоит понять, почему сравнение на уровне слов, подобное этому, является другим, дополнительным инструментом, а не заменой. Исходный код естественным образом организован в отдельные строки, поэтому сравнение построчно — это правильная степень детализации — измененная строка — это измененная единица логики. Проза не имеет таких естественных границ строк; одно предложение может переноситься на несколько строк в зависимости от ширины окна, и значимой единицей изменения является слово или фраза, а не место разрыва строки. Именно поэтому сравнение прозы требует подхода на уровне слов, а не повторного использования ориентированного на код инструмента сравнения строк.</p>
+<h2>Сравнение черновиков перевода</h2>
+<p>Двуязычные редакторы и переводчики иногда используют разницу на уровне слов для сравнения двух версий перевода одного и того же исходного текста — например, черновика переводчика-человека с версией, переведенной компьютером, или двух последовательных редакций одного и того же абзаца — чтобы быстро определить, где именно выбор слов расходится, без необходимости перечитывать весь отрывок в поисках разницы.</p>
+<h2>Быстрая проверка работоспособности, прежде чем полагаться на разницу</h2>
+<p>Прежде чем доверять результату сравнения чего-то важного — юридического документа, оцениваемого задания — сначала вставьте небольшое известное изменение в два поля и убедитесь, что инструмент выделяет именно это изменение и ничего больше, так же, как вы тестируете новые кухонные весы с известным весом, прежде чем доверять им рецепт.</p>
+<h2>Частный и мгновенный</h2>
+<p>Все сравнения выполняются полностью в вашем браузере с использованием алгоритма самой длинной общей подпоследовательности, поэтому результаты появляются мгновенно, и никакой вставляемый вами текст никогда не отправляется на какой-либо сервер, ни в журнал, ни в общий доступ.</p>
+    <section class="faq"><h2>Текстовые различия: часто задаваемые вопросы</h2><dl><dt>Как работает дифференциал?</dt><dd>Инструмент сравнивает два текста слово за словом. Слова, присутствующие в B, но отсутствующие в A, показаны зеленым цветом (добавлены). Слова в A, но не в B, показаны красным (удалены).</dd><dt>Это настоящая разница, такая как git diff?</dt><dd>Это простая разница на уровне слов для быстрого сравнения. Для различий на уровне символов или строк, используемых в программировании, более подходящими являются специальные инструменты, такие как git diff или diff(1).</dd><dt>Сохраняется ли мой текст?</dt><dd>Нет. Сравнение выполняется полностью в вашем браузере. Ничего не отправляется ни на один сервер.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/textdiff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/textdiff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/textdiff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/textdiff/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/textdiff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/textdiff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/textdiff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/textdiff/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/textdiff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/textdiff/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"text_a":"Исходный текст","text_b":"Новый текст","placeholder_a":"Вставьте сюда исходный текст…","placeholder_b":"Вставьте сюда новый или исправленный текст…"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/textdiff.js" defer></script>
+</body>
+</html>

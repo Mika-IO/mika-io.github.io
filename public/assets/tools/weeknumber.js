@@ -22,7 +22,7 @@
     if (!inp.value) { weekEl.textContent = '—'; return; }
     var d = new Date(inp.value);
     var w = isoWeek(d);
-    weekEl.textContent = 'Week ' + w;
+    weekEl.textContent = T('weeklabel','Week ') + w;
     if (detail) {
       var ws = weekStart(inp.value);
       var we = new Date(ws); we.setDate(ws.getDate()+6);

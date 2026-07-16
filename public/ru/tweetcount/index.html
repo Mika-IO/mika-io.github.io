@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Счетчик символов Twitter / X — подсчитайте длину вашего твита</title>
+<meta name="description" content="Бесплатный счетчик символов Twitter/X. Подсчитывает длину твита с нормализацией URL-адресов (каждый URL-адрес = 23 символа). Цветной индикатор ограничения длины в 280 символов.">
+<link rel="canonical" href="https://mikaio.dev/ru/tweetcount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tweetcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tweetcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tweetcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tweetcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tweetcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tweetcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tweetcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tweetcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tweetcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tweetcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tweetcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Счетчик символов Twitter / X — подсчитайте длину вашего твита">
+<meta property="og:description" content="Бесплатный счетчик символов Twitter/X. Подсчитывает длину твита с нормализацией URL-адресов (каждый URL-адрес = 23 символа). Цветной индикатор ограничения длины в 280 символов.">
+<meta property="og:url" content="https://mikaio.dev/ru/tweetcount/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Счетчик символов Twitter / X — подсчитайте длину вашего твита","url":"https://mikaio.dev/ru/tweetcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный счетчик символов Twitter/X. Подсчитывает длину твита с нормализацией URL-адресов (каждый URL-адрес = 23 символа). Цветной индикатор ограничения длины в 280 символов."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Twitter / Счетчик символов X","item":"https://mikaio.dev/ru/tweetcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Почему Twitter считает URL-адреса длиной 23 символа?","acceptedAnswer":{"@type":"Answer","text":"Twitter автоматически оборачивает каждый URL-адрес через свой сокращатель t.co, который создает ссылки длиной всегда 23 символа. Таким образом, независимо от того, состоит ли ваш URL-адрес из 10 символов или из 200 символов, он учитывается ровно как 23 по отношению к вашему лимиту в 280 символов."}},{"@type":"Question","name":"Каков лимит символов Twitter/X?","acceptedAnswer":{"@type":"Answer","text":"Стандартный лимит символов для одного твита или X-поста составляет 280 символов. Подписчикам Twitter Blue/X Premium могут быть доступны более длинные посты (до 25 000 символов), однако бесплатный лимит составляет 280."}},{"@type":"Question","name":"Считаются ли смайлы одним символом?","acceptedAnswer":{"@type":"Answer","text":"Большинство стандартных смайлов в системе подсчета Twitter считаются двумя символами, поскольку они используют суррогатные пары Unicode. В этом счетчике используется длина строки JavaScript, которая может немного отличаться от точного подсчета Twitter для определенных комбинаций смайлов."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Twitter / Счетчик символов X</span></nav>
+  <h1>Twitter / Счетчик символов X</h1>
+  <p class="lead">Введите или вставьте свой твит ниже. URL-адреса автоматически учитываются по 23 символа каждый, что соответствует поведению Twitter по сокращению ссылок t.co.</p>
+  <section class="widget" id="tool"><form id="tweet-form"><div class="field"><label for="tweet-text">Текст твита/публикации</label><textarea id="tweet-text" rows="5" placeholder="Что происходит?"></textarea></div><div class="result" id="tweet-out" style="text-align:left"></div></form></section>
+  <article class="content">
+    <h2>Подсчитайте длину вашего поста так, как ее на самом деле считает X.</h2>
+<p>Ограничение в 280 символов звучит просто, пока вы не начнете писать и не поймете, что эмодзи, ссылки и некоторые символы с акцентом не учитываются так, как вы ожидаете. Этот счетчик отражает фактические правила подсчета X (ранее Twitter) настолько точно, насколько это возможно в браузерном инструменте, включая особую обработку URL-адресов платформой, поэтому число, которое вы видите здесь, соответствует тому, что вы видите в поле для создания сообщения, а не наивному подсчету символов, который заставляет вас гадать, подойдет ли сообщение на самом деле.</p>
+<h2>Как его использовать</h2>
+<p>Введите или вставьте свое сообщение в поле, и сразу под ним появится количество символов, отображаемое на фоне ограничения в 280 символов с цветовой полосой, которая меняется от зеленого через желтый и оранжевый к красному по мере приближения к лимиту, а затем его превышения. Любой URL-адрес, который вы включаете, автоматически обнаруживается и учитывается как ровно 23 символа, что соответствует поведению платформы по сокращению ссылок, независимо от того, какой длины фактическая ссылка. Остальные обновления допустимого количества символов обновляются по мере ввода, поэтому вы можете обрезать или расширять формулировку, наблюдая за числом, а не составлять вслепую и проверять только в конце.</p>
+<h2>Почему URL-адреса всегда имеют длину 23 символа</h2>
+<p>X автоматически оборачивает каждую ссылку, публикуемую через его систему, собственной службой сокращения t.co, и каждая ссылка, независимо от того, насколько длинным или коротким является исходный адрес, становится ссылкой t.co точно такой же фиксированной длины. Вот почему сообщение, содержащее ссылку на короткий, чистый адрес, и сообщение, содержащее ссылку на огромный URL-адрес, наполненный параметрами отслеживания, обходятся автору одинаковое количество символов — 23 в настоящее время — против бюджета в 280 символов. Этот инструмент повторяет это поведение, обнаруживая URL-адреса в вашем тексте и подсчитывая каждый из них как 23 символа, а не как его буквальную длину, поэтому счетчик, который вы видите здесь, соответствует тому, что на самом деле происходит, когда вы публикуете сообщение.</p>
+<h2>Эмодзи и причуда суррогатной пары</h2>
+<p>Эмодзи усложняют подсчет символов из-за того, как они хранятся внутри. Большинство современных эмодзи, особенно новых и более сложных, представлены с использованием так называемой суррогатной пары — двух основных кодовых единиц, а не одной — что означает, что они часто считаются двумя символами, а не одним в системах, которые измеряют длину строки так, как это делает JavaScript и многие другие языки. Собственная система подсчета X имеет здесь свои особые правила, которые иногда могут немного отличаться от собственных вычислений длины строки браузера для необычных комбинаций смайлов, последовательностей флагов или смайлов с модификаторами, такими как селекторы цвета кожи. Для подавляющего большинства повседневных постов эта разница незаметна, но если вы находитесь на грани лимита и используете несколько смайлов, стоит оставить небольшой буфер, а не доверять обратный отсчет до точного конечного символа.</p>
+<h2>Эволюция лимита символов</h2>
+<p>Twitter был запущен с ограничением в 140 символов, цифра выбрана намеренно, чтобы уместить твит и имя пользователя в пределах 160 символов для одного текстового сообщения SMS, поскольку изначально служба была разработана для работы как с текстовыми сообщениями, так и с Интернетом. В 2017 году лимит увеличился вдвое до 280 символов после того, как данные показали, что многим пользователям, особенно тем, кто пишет на языках, которым требуется больше символов для выражения одной и той же идеи, постоянно не хватает места. Более высокие ограничения на количество символов для платных подписчиков появились позже, но бесплатный лимит в 280 символов, против которого действует этот счетчик, остается стандартом, для которого пишется большинство сообщений.</p>
+<h2>Пишите плотно, в пределах 280 символов.</h2>
+<p>Поскольку каждый символ учитывается при жестком ограничении, авторы, которые регулярно публикуют сообщения, вырабатывают привычку обрезать, не теряя при этом смысла: заменять «потому что» на «bc» или «&amp;» на «и» только тогда, когда тон соответствует этому, сокращать слова-вставки, которые ничего не добавляют, и перемещать ссылку или хэштег в самый конец, чтобы это было первое, что нужно вырезать, если потребуется окончательная обрезка. Наблюдение за подсчетом в реальном времени, пока вы пишете, вместо того, чтобы сначала составить всю мысль, а потом обнаружить, что она на сорок символов слишком длинна, делает такое тщательное редактирование гораздо менее утомительным, поскольку вы можете точно увидеть, сколько места на самом деле экономит переформулирование, прежде чем приступить к нему.</p>
+<h2>Темы и черновики нескольких сообщений</h2>
+<p>Когда одна мысль не умещается в 280 символов, обычный подход состоит в том, чтобы разбить ее на цепочку связанных сообщений, а не объединять все в одно. Сначала создайте ветку в другом месте и пропустите каждое запланированное сообщение через этот счетчик индивидуально - это надежный способ проверить, что каждая часть ветки умещается удобно, включая несколько запасных символов для префикса нумерации в стиле «1/», если вы его используете, прежде чем начать публиковать их одно за другим, вместо того, чтобы обнаружить в середине ветки, что одно сообщение нуждается в неудобной обрезке в последнюю секунду после того, как вы уже начали публиковать предыдущие.</p>
+<h2>Частный и мгновенный</h2>
+<p>Все запускается в вашем браузере по мере того, как вы вводите текст, поэтому ваш черновик сообщения никогда не загружается, не регистрируется и не передается кому-либо, и ничего не сохраняется, когда вы уходите со страницы. Он работает в автономном режиме после загрузки и готов к работе, когда вам понадобится быстрая и точная проверка символов перед публикацией.</p>
+    <section class="faq"><h2>Часто задаваемые вопросы по счетчику символов в Твиттере</h2><dl><dt>Почему Twitter считает URL-адреса длиной 23 символа?</dt><dd>Twitter автоматически оборачивает каждый URL-адрес через свой сокращатель t.co, который создает ссылки длиной всегда 23 символа. Таким образом, независимо от того, состоит ли ваш URL-адрес из 10 символов или из 200 символов, он учитывается ровно как 23 по отношению к вашему лимиту в 280 символов.</dd><dt>Каков лимит символов Twitter/X?</dt><dd>Стандартный лимит символов для одного твита или X-поста составляет 280 символов. Подписчикам Twitter Blue/X Premium могут быть доступны более длинные посты (до 25 000 символов), однако бесплатный лимит составляет 280.</dd><dt>Считаются ли смайлы одним символом?</dt><dd>Большинство стандартных смайлов в системе подсчета Twitter считаются двумя символами, поскольку они используют суррогатные пары Unicode. В этом счетчике используется длина строки JavaScript, которая может немного отличаться от точного подсчета Twitter для определенных комбинаций смайлов.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"text":"Текст твита/публикации","whatshappening":"Что происходит?"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tweetcount.js" defer></script>
+</body>
+</html>

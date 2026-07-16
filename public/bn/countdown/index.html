@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>কাউন্টডাউন টাইমার - যেকোনো তারিখ বা ইভেন্টের জন্য গণনা করুন</title>
+<meta name="description" content="বিনামূল্যে গণনা টাইমার. ভবিষ্যতের যেকোনো তারিখ লিখুন এবং ঠিক কত দিন, ঘন্টা, মিনিট এবং সেকেন্ড বাকি আছে তা দেখুন। আপনার ব্রাউজারে কাজ করে, সাইন আপের প্রয়োজন নেই।">
+<link rel="canonical" href="https://mikaio.dev/bn/countdown/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/countdown/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/countdown/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/countdown/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/countdown/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/countdown/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/countdown/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/countdown/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/countdown/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/countdown/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/countdown/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/countdown/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="কাউন্টডাউন টাইমার - যেকোনো তারিখ বা ইভেন্টের জন্য গণনা করুন">
+<meta property="og:description" content="বিনামূল্যে গণনা টাইমার. ভবিষ্যতের যেকোনো তারিখ লিখুন এবং ঠিক কত দিন, ঘন্টা, মিনিট এবং সেকেন্ড বাকি আছে তা দেখুন। আপনার ব্রাউজারে কাজ করে, সাইন আপের প্রয়োজন নেই।">
+<meta property="og:url" content="https://mikaio.dev/bn/countdown/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"কাউন্টডাউন টাইমার - যেকোনো তারিখ বা ইভেন্টের জন্য গণনা করুন","url":"https://mikaio.dev/bn/countdown/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে গণনা টাইমার. ভবিষ্যতের যেকোনো তারিখ লিখুন এবং ঠিক কত দিন, ঘন্টা, মিনিট এবং সেকেন্ড বাকি আছে তা দেখুন। আপনার ব্রাউজারে কাজ করে, সাইন আপের প্রয়োজন নেই।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"কাউন্টডাউন টাইমার","item":"https://mikaio.dev/bn/countdown/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"আমি কি একটি তারিখে একটি নির্দিষ্ট সময় গণনা করতে পারি?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ। তারিখ এবং সময় বাছাইকারী আপনাকে সঠিক ঘন্টা এবং মিনিট সেট করতে দেয়, তাই কাউন্টডাউন দ্বিতীয়টির জন্য সঠিক।"}},{"@type":"Question","name":"কাউন্টডাউন শূন্যে পৌঁছালে কী হবে?","acceptedAnswer":{"@type":"Answer","text":"ডিসপ্লে দেখায় যে ইভেন্ট এসেছে। আপনি একটি নতুন কাউন্টডাউন শুরু করতে চাইলে পৃষ্ঠাটি পুনরায় লোড করুন৷"}},{"@type":"Question","name":"আমি ব্রাউজার বন্ধ করলে কি কাউন্টডাউন সংরক্ষিত হয়?","acceptedAnswer":{"@type":"Answer","text":"না। আপনার লেখা তারিখটি কোথাও সংরক্ষিত নেই। আপনি যদি পৃষ্ঠাটি পুনরায় লোড করেন তবে আপনাকে এটি পুনরায় প্রবেশ করতে হবে৷"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/countdown/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/countdown/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/countdown/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/countdown/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/countdown/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/countdown/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/countdown/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/countdown/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/countdown/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/countdown/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>কাউন্টডাউন টাইমার</span></nav>
+  <h1>কাউন্টডাউন টাইমার</h1>
+  <p class="lead">একটি টার্গেট তারিখ এবং সময় বেছে নিন, ঐচ্ছিকভাবে ইভেন্টের নাম দিন এবং প্রতি সেকেন্ডে কাউন্টডাউন আপডেট দেখুন।</p>
+  <section class="widget" id="tool"><div id="cd-app"><div class="row"><div class="field"><label for="cd-date">লক্ষ্য তারিখ এবং সময়</label><input type="datetime-local" id="cd-date"></div><div class="field"><label for="cd-label">ইভেন্টের নাম (ঐচ্ছিক)</label><input type="text" id="cd-label" maxlength="60" placeholder="যেমন আমার জন্মদিন"></div></div><div id="cd-out" class="result" style="font-size:1.5rem;font-weight:700;min-height:2.5rem">—</div></div></section>
+  <article class="content">
+    <h2>গুরুত্বপূর্ণ যে কোনো মুহূর্তে গণনা করুন</h2>
+<p>একটি কাউন্টডাউন টাইমার একটি বিমূর্ত ভবিষ্যতের তারিখকে ভিসারাল কিছুতে পরিণত করে — একটি লাইভ, টিকিং নম্বর যা ইভেন্টটিকে বাস্তব এবং আসন্ন মনে করে। আপনি একটি জন্মদিন, একটি ট্রিপ, একটি পণ্য লঞ্চ, একটি পরীক্ষা, একটি ছুটির, বা কোনো ব্যক্তিগত মাইলফলক গণনা করা হোক না কেন, এই টুলটি আপনাকে ঠিক কত দিন, ঘন্টা, মিনিট এবং সেকেন্ড বাকি আছে তা দেখায়৷</p>
+<h2>কাউন্টডাউন টাইমার কিভাবে ব্যবহার করবেন</h2>
+<p>তারিখ এবং সময় পিকার খুলুন এবং আপনার টার্গেট তারিখ নির্বাচন করুন। বাছাইকারী ভবিষ্যতের যেকোন তারিখ এবং সময় গ্রহণ করে, যাতে আপনি মিনিটে সুনির্দিষ্ট হতে পারেন। আপনি যদি চান, লেবেল ক্ষেত্রে ইভেন্টের জন্য একটি নাম টাইপ করুন — &quot;বিবাহ,&quot; &quot;ম্যারাথন,&quot; &quot;নতুন বছর&quot; — এবং এটি কাউন্টডাউনের উপরে প্রদর্শিত হবে। আপনি তারিখ নির্বাচন করার মুহূর্ত থেকে, কাউন্টডাউন স্বয়ংক্রিয়ভাবে চলে, মুহূর্তটি না আসা পর্যন্ত একবারে এক সেকেন্ড বিয়োগ করে।</p>
+<h2>কেন গণনা কাজ</h2>
+<p>মনোবিজ্ঞানীরা দীর্ঘদিন ধরে লক্ষ্য করেছেন যে একটি লক্ষ্য নির্দিষ্ট এবং সময়-সীমাবদ্ধ করা প্রেরণা বাড়ায়। যখন আপনি দেখতে পাবেন যে আপনার সময়সীমা পর্যন্ত আপনার কাছে বিয়াল্লিশ দিন, সাত ঘন্টা এবং চৌদ্দ মিনিট আছে, তখন বিমূর্ত ভবিষ্যত এমন কিছুতে স্ফটিক হয়ে যায় যা আপনি পরিকল্পনা করতে পারেন। কাউন্টডাউন টাইমারগুলি ঠিক এই কারণেই বিপণনে ব্যবহৃত হয় — বিক্রয়ের সময় একটি টিক টিক ক্লক জরুরিতা তৈরি করে — কিন্তু একই প্রভাব ব্যক্তিগত লক্ষ্যগুলিতে প্রযোজ্য।</p>
+<p>ক্রীড়াবিদরা তাদের প্রশিক্ষণের গতি বাড়াতে রেসের দিন গণনা করে। শিক্ষার্থীরা তাদের পুনর্বিবেচনার সময়সূচী গঠনের জন্য পরীক্ষার তারিখ গণনা করে। ইভেন্ট আয়োজকরা দিন দেখানোর জন্য গণনা করে। শিশুদের জন্য উত্তেজনা তৈরি করতে পরিবারগুলি ছুটির দিন গণনা করে।</p>
+<h2>নির্ভুলতা</h2>
+<p>কাউন্টডাউন ব্রাউজারের অন্তর্নির্মিত তারিখ গাণিতিক ব্যবহার করে, যা মিলিসেকেন্ডের জন্য সঠিক। প্রদর্শিত সময় আপনার ডিভাইসের সিস্টেম ঘড়ি উপর ভিত্তি করে. যদি আপনার ডিভাইসের ঘড়ি সঠিকভাবে সিঙ্ক্রোনাইজ করা হয় - যা এটি বেশিরভাগ স্মার্টফোন এবং কম্পিউটারে ডিফল্টভাবে থাকে - কাউন্টডাউন দ্বিতীয়টির জন্য সঠিক হবে।</p>
+<p>সময় প্রতি সেকেন্ডে রিয়েল টাইমে গণনা করা হয়, তাই কোন প্রবাহ নেই। আপনি যদি ট্যাবটি রাতারাতি খোলা রেখে সকালে ফিরে আসেন, তাহলে প্রদর্শিত সময়টি প্রকৃত অতিবাহিত সময়কে সঠিকভাবে প্রতিফলিত করবে।</p>
+<h2>টাইমজোন জুড়ে গণনা করা হচ্ছে</h2>
+<p>কাউন্টডাউন আপনার স্থানীয় সময় ব্যবহার করে, যা আপনার ডিভাইস সেট করা সময়। আপনি যদি সাও পাওলোতে থাকেন লন্ডনে মধ্যরাতে শুরু হওয়া একটি নতুন বছরের ইভেন্টের গণনা, মধ্যরাতের লন্ডন সময় লিখুন, যা আপনার ব্রাউজার আপনার স্থানীয় সমতুল্য রূপান্তর করবে যখন আপনি তারিখের ইনপুট সেট করবেন।</p>
+<h2>ইভেন্ট বড় এবং ছোট</h2>
+<p>কাউন্টডাউনগুলি খেলাধুলার ফাইনাল, নির্বাচন, বা মহাকাশ লঞ্চের মতো পাবলিক ইভেন্টগুলির জন্য কাজ করে — এমন মুহূর্ত যেখানে সবাই এক তাত্ক্ষণিক সম্মত হয়। তারা গভীর ব্যক্তিগত মাইলফলকগুলির জন্যও কাজ করে: বিবাহ বার্ষিকী, স্নাতক, একটি শিশুর নির্ধারিত তারিখ, বা আপনি মিস করেন এমন কারো সাথে পুনর্মিলন কত দিন বা তার আগ পর্যন্ত। একটি সংখ্যা একা একটি ইভেন্টের আবেগ ক্যাপচার করতে পারে না, তবে এটি সেই ইভেন্টটিকে কংক্রিট এবং কাছাকাছি অনুভব করতে পারে।</p>
+<h2>ব্যক্তিগত এবং সবসময় টিকিং</h2>
+<p>আপনি যা প্রবেশ করেন তা কোনো সার্ভারে পাঠানো হয় না। লক্ষ্য তারিখ এবং ইভেন্টের নাম সম্পূর্ণরূপে আপনার ব্রাউজারে থাকে। কোনো অ্যাকাউন্ট নেই, কোনো লগইন নেই এবং কোনো ট্র্যাকিং নেই। ট্যাব বন্ধ করুন এবং সবকিছু চলে গেছে।</p>
+<p>আপনার তারিখ লিখুন, সেকেন্ড কাউন্ট ডাউন দেখুন, এবং প্রত্যাশা তৈরি করতে দিন।</p>
+<h2>একটি কাউন্টডাউন টাইমারের জন্য ব্যবহার করে</h2>
+<p>কাউন্টডাউন টাইমারগুলি দৈনন্দিন জীবন এবং পেশাদার সেটিংসে অনেক উদ্দেশ্যে কাজ করে। প্রোডাক্টিভিটি অনুশীলনকারীরা সেগুলোকে পোমোডোরো টেকনিকের জন্য ব্যবহার করে — ফোকাসড 25-মিনিট ব্লকে কাজ করে যার মধ্যে 5-মিনিটের বিরতি রয়েছে। বাবুর্চিরা ডিম সেদ্ধ, মাংস ভাজা বা রুটির ময়দা প্রমাণ করার জন্য এগুলি ব্যবহার করে। শিক্ষকরা এগুলিকে সময়মতো পরীক্ষা, কার্যকলাপ এবং শ্রেণীকক্ষের অংশগুলির মধ্যে পরিবর্তনের জন্য ব্যবহার করেন। মিটিং ফ্যাসিলিটেটররা সময়সূচীতে উপস্থাপনা এবং আলোচনা রাখতে টাইমার ব্যবহার করে।</p>
+<h2>কাউন্টডাউনের মনোবিজ্ঞান</h2>
+<p>মনোবিজ্ঞানের গবেষণা দেখায় যে দৃশ্যমান গণনা টাইমার আচরণ পরিবর্তন করে। যখন লোকেরা দেখতে পায় অবশিষ্ট সময় কমছে, তখন তারা আরও দক্ষতার সাথে কাজ করার প্রবণতা রাখে, একটি সীমানা পন্থা জেনে। এই কারণেই আংশিকভাবে পোমোডোরো টেকনিক কার্যকর — দৃশ্যমান শেষ বিন্দু মৃদু জরুরিতা তৈরি করে। বিপরীতভাবে, উপভোগ্য অভিজ্ঞতার জন্য গণনা (একটি ছুটি, একটি ঘটনা) প্রত্যাশা এবং ইতিবাচক প্রত্যাশা তৈরি করে।</p>
+<h2>কাউন্টডাউন বনাম স্টপওয়াচ</h2>
+<p>একটি স্টপওয়াচ শূন্য থেকে গণনা করে, অতিবাহিত সময় পরিমাপ করে। একটি কাউন্টডাউন টাইমার একটি নির্দিষ্ট সময়কাল থেকে শুরু হয় এবং শূন্য পর্যন্ত গণনা করে। উভয়ই সময় পরিমাপ করে, কিন্তু তারা বিভিন্ন জ্ঞানীয় উদ্দেশ্যে কাজ করে: একটি স্টপওয়াচ উত্তর দেয় &quot;কতদিন হয়েছে?&quot; যখন একটি কাউন্টডাউন উত্তর দেয় &quot;কত সময় বাকি?&quot;</p>
+<h2>অ্যালার্ম এবং বিজ্ঞপ্তি</h2>
+<p>যখন কাউন্টডাউন শূন্যে পৌঁছায়, এই টুলটি একটি ভিজ্যুয়াল সতর্কতা চালায়। ব্রাউজার নিরাপত্তা প্রয়োজনীয়তা মানে যে অডিও অ্যালার্মগুলি চালানোর আগে ব্যবহারকারীর ইন্টারঅ্যাকশন (একটি ক্লিক) প্রয়োজন - যদি আপনার একটি অডিও সতর্কতার প্রয়োজন হয়, তাহলে নিশ্চিত করুন যে আপনি এটি লোড করার পরে পৃষ্ঠাটির সাথে ইন্টারঅ্যাক্ট করেছেন৷</p>
+<h2>সময়সীমার জন্য কাউন্টডাউন ব্যবহার করে</h2>
+<p>দীর্ঘ কাউন্টডাউনের জন্য - একটি ইভেন্ট পর্যন্ত দিন, একটি সময়সীমা পর্যন্ত মাসগুলি - কাউন্টডাউন টাইমারটি দিনের সাথে সামঞ্জস্যপূর্ণ ঘন্টাগুলিতে সেট করা যেতে পারে৷ অনেক লোক উপস্থাপনা সফ্টওয়্যারে কাউন্টডাউন টাইমার ব্যবহার করে একটি সেশনে কতটা সময় বাকি আছে তা দেখানোর জন্য বা খেলার ঘড়ি বাকি সময় দেখানোর জন্য।</p>
+<h2>কাউন্টডাউন বনাম স্টপওয়াচ</h2>
+<p>একটি স্টপওয়াচ শূন্য থেকে গণনা করে, অতিবাহিত সময় পরিমাপ করে। একটি কাউন্টডাউন টাইমার একটি নির্দিষ্ট সময়কাল থেকে শুরু হয় এবং শূন্য পর্যন্ত গণনা করে। উভয়ই সময় পরিমাপ করে, কিন্তু তারা বিভিন্ন জ্ঞানীয় উদ্দেশ্যে কাজ করে: একটি স্টপওয়াচ উত্তর দেয় &quot;কতদিন হয়েছে?&quot; যখন একটি কাউন্টডাউন উত্তর দেয় &quot;কত সময় বাকি?&quot;</p>
+<h2>অ্যালার্ম এবং বিজ্ঞপ্তি</h2>
+<p>যখন কাউন্টডাউন শূন্যে পৌঁছায়, এই টুলটি একটি ভিজ্যুয়াল সতর্কতা চালায়। ব্রাউজার নিরাপত্তা প্রয়োজনীয়তা মানে যে অডিও অ্যালার্মগুলি চালানোর আগে ব্যবহারকারীর ইন্টারঅ্যাকশন (একটি ক্লিক) প্রয়োজন - যদি আপনার একটি অডিও সতর্কতার প্রয়োজন হয়, তাহলে নিশ্চিত করুন যে আপনি এটি লোড করার পরে পৃষ্ঠাটির সাথে ইন্টারঅ্যাক্ট করেছেন৷</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>টাইমারটি সম্পূর্ণরূপে আপনার ব্রাউজারে চলে নেটিভ জাভাস্ক্রিপ্ট তারিখের গাণিতিক ব্যবহার করে প্রতি সেকেন্ডে একবার পুনঃগণিত। কোথাও কোনও ডেটা পাঠানো হয় না — আপনি যে টার্গেট তারিখ এবং লেবেলটি প্রবেশ করেন তা কখনই আপনার ডিভাইস থেকে যায় না।</p>
+    <section class="faq"><h2>কাউন্টডাউন FAQ</h2><dl><dt>আমি কি একটি তারিখে একটি নির্দিষ্ট সময় গণনা করতে পারি?</dt><dd>হ্যাঁ। তারিখ এবং সময় বাছাইকারী আপনাকে সঠিক ঘন্টা এবং মিনিট সেট করতে দেয়, তাই কাউন্টডাউন দ্বিতীয়টির জন্য সঠিক।</dd><dt>কাউন্টডাউন শূন্যে পৌঁছালে কী হবে?</dt><dd>ডিসপ্লে দেখায় যে ইভেন্ট এসেছে। আপনি একটি নতুন কাউন্টডাউন শুরু করতে চাইলে পৃষ্ঠাটি পুনরায় লোড করুন৷</dd><dt>আমি ব্রাউজার বন্ধ করলে কি কাউন্টডাউন সংরক্ষিত হয়?</dt><dd>না। আপনার লেখা তারিখটি কোথাও সংরক্ষিত নেই। আপনি যদি পৃষ্ঠাটি পুনরায় লোড করেন তবে আপনাকে এটি পুনরায় প্রবেশ করতে হবে৷</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/countdown/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/countdown/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/countdown/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/countdown/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/countdown/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/countdown/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/countdown/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/countdown/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/countdown/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/countdown/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"target_date":"লক্ষ্য তারিখ এবং সময়","event_name":"ইভেন্টের নাম (ঐচ্ছিক)","eg_birthday":"যেমন আমার জন্মদিন"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/countdown.js" defer></script>
+</body>
+</html>

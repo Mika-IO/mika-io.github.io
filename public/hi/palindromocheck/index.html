@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>पैलिंड्रोम चेकर - क्या आपका शब्द या वाक्यांश एक पैलिंड्रोम है?</title>
+<meta name="description" content="मुफ़्त पैलिंड्रोम चेकर। केस, रिक्त स्थान और विराम चिह्नों को अनदेखा करते हुए, तुरंत परीक्षण करें कि कोई शब्द, वाक्यांश या संख्या आगे और पीछे समान रूप से पढ़ती है या नहीं।">
+<link rel="canonical" href="https://mikaio.dev/hi/palindromocheck/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/palindromocheck/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/palindromocheck/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/palindromocheck/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/palindromocheck/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/palindromocheck/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/palindromocheck/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/palindromocheck/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/palindromocheck/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/palindromocheck/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/palindromocheck/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/palindromocheck/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="पैलिंड्रोम चेकर - क्या आपका शब्द या वाक्यांश एक पैलिंड्रोम है?">
+<meta property="og:description" content="मुफ़्त पैलिंड्रोम चेकर। केस, रिक्त स्थान और विराम चिह्नों को अनदेखा करते हुए, तुरंत परीक्षण करें कि कोई शब्द, वाक्यांश या संख्या आगे और पीछे समान रूप से पढ़ती है या नहीं।">
+<meta property="og:url" content="https://mikaio.dev/hi/palindromocheck/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"पैलिंड्रोम चेकर - क्या आपका शब्द या वाक्यांश एक पैलिंड्रोम है?","url":"https://mikaio.dev/hi/palindromocheck/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त पैलिंड्रोम चेकर। केस, रिक्त स्थान और विराम चिह्नों को अनदेखा करते हुए, तुरंत परीक्षण करें कि कोई शब्द, वाक्यांश या संख्या आगे और पीछे समान रूप से पढ़ती है या नहीं।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"पैलिंड्रोम चेकर","item":"https://mikaio.dev/hi/palindromocheck/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"पलिंड्रोम क्या है?","acceptedAnswer":{"@type":"Answer","text":"पैलिंड्रोम एक शब्द, वाक्यांश, संख्या या अनुक्रम है जो आगे और पीछे समान रूप से पढ़ता है, जैसे 'स्तर', 'रेस कार' या 'एक आदमी, एक योजना, एक नहर: पनामा'।"}},{"@type":"Question","name":"क्या यह रिक्त स्थान और विराम चिह्नों की गिनती करता है?","acceptedAnswer":{"@type":"Answer","text":"नहीं, चेकर बड़े अक्षरों, रिक्त स्थान और विराम चिह्नों को अनदेखा करता है, इसलिए 'क्या यह एक कार थी या एक बिल्ली जो मैंने देखी थी?' पैलिंड्रोम के रूप में सही ढंग से पहचाना जाता है। यह केवल अक्षरों और अंकों की तुलना करता है।"}},{"@type":"Question","name":"क्या मेरा पाठ कहीं भेजा गया है?","acceptedAnswer":{"@type":"Answer","text":"नहीं, चेक आपके ब्राउज़र में तुरंत होता है, इसलिए आपके द्वारा टाइप किया गया कुछ भी अपलोड, संग्रहीत या साझा नहीं किया जाता है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/palindromocheck/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/palindromocheck/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/palindromocheck/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/palindromocheck/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/palindromocheck/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/palindromocheck/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/palindromocheck/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/palindromocheck/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/palindromocheck/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/palindromocheck/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>पैलिंड्रोम चेकर</span></nav>
+  <h1>पैलिंड्रोम चेकर</h1>
+  <p class="lead">कोई शब्द, वाक्यांश या संख्या टाइप करें और तुरंत पता लगाएं कि क्या यह पैलिंड्रोम है। रिक्त स्थान, बड़े अक्षरों और विराम चिह्नों को नजरअंदाज कर दिया जाता है।</p>
+  <section class="widget" id="tool"><div id="pal" data-yes="यह एक पैलिंड्रोम है!" data-no="पैलिंड्रोम नहीं" data-empty="पाठ की प्रतीक्षा की जा रही है"><div class="field"><label for="pal-input">शब्द या वाक्यांश</label><textarea id="pal-input" placeholder="&#39;रेस कार&#39; जैसा कुछ लिखें..."></textarea></div><div class="result"><span class="big" id="pal-out">—</span></div></div></section>
+  <article class="content">
+    <h2>यदि कोई चीज़ पलिंड्रोम है तो तुरंत पता लगाएं</h2>
+<p>पैलिंड्रोम एक शब्द या वाक्यांश है जो आगे और पीछे समान पढ़ता है, जैसे &quot;स्तर&quot;, &quot;दोपहर&quot; या &quot;रेस कार&quot;। वे भाषा की सबसे संतोषजनक विचित्रताओं में से एक हैं, और एक अच्छी विशेषता का पता लगाना एक छिपे हुए पैटर्न को खोजने जैसा लगता है। लेकिन हाथ से यह जांचना कि क्या एक लंबा वाक्यांश वास्तव में एक पैलिंड्रोम है, बेतुका है - आपको रिक्त स्थान और विराम चिह्नों को हटाना होगा, बड़े अक्षरों को अनदेखा करना होगा, और फिर अपना स्थान खोए बिना दोनों सिरों से अंदर की ओर अक्षरों की तुलना करनी होगी। जैसे ही आप टाइप करते हैं यह चेकर आपके लिए वह सब करता है। एक शब्द, एक वाक्यांश या यहां तक ​​कि एक संख्या दर्ज करें और यह आपको तुरंत बता देगा कि यह एक पैलिंड्रोम है या नहीं। सब कुछ आपके ब्राउज़र में चलता है, इसलिए उत्तर तत्काल होता है और आपके द्वारा टाइप किया गया कुछ भी अपलोड नहीं किया जाता है।</p>
+<p>दबाने के लिए कुछ भी नहीं है और स्थापित करने के लिए कुछ भी नहीं है। जैसे ही आप बॉक्स में टाइप करते हैं, टूल लगातार आपके टेक्स्ट की जांच करता है और एक स्पष्ट परिणाम दिखाता है: यदि यह पैलिंड्रोम है तो हरे रंग की पुष्टि, या यदि यह नहीं है तो लाल नोट। उस लाइव फीडबैक से प्रयोग करना, किसी वाक्यांश में बदलाव करना या एक के बाद एक उम्मीदवारों की सूची का परीक्षण करना आसान हो जाता है।</p>
+<h2>चेक कैसे काम करता है</h2>
+<p>पैलिंड्रोम जाँच का चतुर हिस्सा यह तय करना है कि किसकी तुलना की जाए। केवल बड़े अक्षर आर और बीच में खाली जगह के कारण कोई भी यह नहीं कहेगा कि &quot;रेस कार&quot; एक पैलिंड्रोम नहीं है, इसलिए एक अच्छा चेकर ऐसी किसी भी चीज़ को अनदेखा कर देता है जो अक्षर या संख्या नहीं है। यह टूल पहले रिक्त स्थान, विराम चिह्न और अन्य प्रतीकों को हटा देता है, और केवल आवश्यक अक्षरों और अंकों को छोड़कर, सब कुछ को लोअरकेस में बदल देता है। यह उच्चारण को भी हटा देता है ताकि किसी अक्षर के उच्चारण वाले और बिना उच्चारण वाले संस्करणों को एक समान माना जाए। फिर यह बस उस साफ-सुथरे अनुक्रम की तुलना अपने स्वयं के विपरीत से करता है: यदि दोनों बिल्कुल मेल खाते हैं, तो आपके पास एक पैलिंड्रोम है।</p>
+<p>यही कारण है कि ऐसे वाक्यांश जो पहली नज़र में पैलिंड्रोम की तरह नहीं दिखते - रिक्त स्थान, अल्पविराम और बड़े अक्षरों से भरे हुए - सही ढंग से पहचाने जाते हैं। प्रसिद्ध पंक्ति &quot;ए मैन, ए प्लान, ए कैनाल: पनामा&quot; एक बार साफ होने के बाद &quot;अमानप्लानाकैनलपनामा&quot; बन जाती है, जो दोनों दिशाओं में समान रूप से पढ़ी जाती है। केवल अक्षरों और संख्याओं पर ध्यान केंद्रित करके, चेकर फ़ॉर्मेटिंग में उलझने के बजाय लोगों के स्वाभाविक रूप से पैलिंड्रोम के बारे में सोचने के तरीके से मेल खाता है।</p>
+<h2>शब्द, वाक्यांश और संख्याएँ</h2>
+<p>पैलिंड्रोम कई स्वादों में आते हैं, और यह उपकरण उन सभी को संभालता है। सबसे सरल एकल शब्द हैं जिनकी वर्तनी दोनों तरह से समान है, जैसे &quot;सिविक&quot;, &quot;रडार&quot;, &quot;कयाक&quot; और &quot;रोटर&quot;। फिर वाक्यांश या वाक्य पैलिंड्रोम होते हैं, जहां रिक्त स्थान और विराम चिह्नों को अनदेखा करने पर पूरा वाक्य एक ही जैसा दिखता है - &quot;क्या यह एक कार थी या एक बिल्ली जो मैंने देखी थी?&quot; एक उत्कृष्ट उदाहरण है. संख्याएं पलिंड्रोम भी हो सकती हैं: 1221 और 90109 को उल्टा पढ़ा जाता है, और मनोरंजक गणित और पहेलियों में पलिंड्रोमिक संख्याएं दिखाई देती हैं। क्योंकि चेकर अक्षर और अंक दोनों को देखता है, यह संख्यात्मक पैलिंड्रोम के लिए उतना ही अच्छा काम करता है जितना कि शब्दाडंबर के लिए।</p>
+<p>आप इसका उपयोग निकट-चूकों का परीक्षण करने के लिए भी कर सकते हैं। एक वाक्यांश टाइप करें जिसके बारे में आपको संदेह है कि वह करीब है, और तत्काल लाल या हरा परिणाम आपको बताता है कि क्या एक छोटा सा बदलाव - एक शब्द की अदला-बदली या एक पत्र छोड़ना - इसे एक वास्तविक पैलिंड्रोम में बदल देगा। यह पैलिंड्रोम को तैयार करने के परीक्षण और त्रुटि को त्वरित और मनोरंजक चीज़ में बदल देता है।</p>
+<h2>पैलिंड्रोम मज़ेदार और उपयोगी क्यों हैं?</h2>
+<p>अधिकांश लोग पैलिंड्रोम को शब्द-क्रीड़ा के एक भाग के रूप में देखते हैं, और यहीं उनका आकर्षण निहित है। वे पहेलियों, पहेलियों, क्रॉसवर्ड और शब्द खेलों में दिखाई देते हैं, और एक लंबे, सार्थक पैलिंड्रोम के साथ आना रचनात्मकता की एक वास्तविक उपलब्धि है जिसका लेखकों ने सदियों से आनंद लिया है। शिक्षक इनका उपयोग वर्तनी और पढ़ने को मनोरंजक बनाने के लिए करते हैं, क्योंकि किसी शब्द को पीछे की ओर पढ़ने से आपको प्रत्येक अक्षर को ध्यान से देखने पर मजबूर होना पड़ता है। बच्चे अक्सर अपने स्वयं के नाम या छोटे शब्द पाते हैं जो कि पलिंड्रोम होते हैं, जो एक छोटी सी खुशी होती है।</p>
+<p>मौज-मस्ती के अलावा, पैलिंड्रोम का विचार अधिक गंभीर स्थानों पर दिखाई देता है। कंप्यूटर विज्ञान में, यह जाँचना कि कोई अनुक्रम एक पैलिंड्रोम है या नहीं, एक क्लासिक शुरुआती अभ्यास है जो सिखाता है कि किसी सूची के दोनों सिरों से वस्तुओं की तुलना कैसे की जाए। जीव विज्ञान में, आनुवंशिक सामग्री को पढ़ने और काटने के तरीके में डीएनए के पैलिंड्रोमिक अनुक्रमों का वास्तविक महत्व है। यहां आप जिस रोजमर्रा के संस्करण का परीक्षण कर रहे हैं वह एक ही मूल विचार है - समरूपता जो दोनों दिशाओं में समान पढ़ती है - जो इस बात का हिस्सा है कि यह इतनी संतोषजनक अवधारणा क्यों है।</p>
+<h2>निजी, तत्काल और मुफ़्त</h2>
+<p>इसमें कोई साइन-अप नहीं है, कोई लागत नहीं है और रास्ते में कोई विज्ञापन नहीं है। संपूर्ण चेकर कोड का एक छोटा टुकड़ा है जो आपके अपने डिवाइस पर चलता है, यही कारण है कि यह आपके टाइप करते ही तुरंत प्रतिक्रिया देता है और बिना इंटरनेट कनेक्शन के काम करता रहता है। आपके द्वारा दर्ज किया गया कुछ भी अपलोड, संग्रहीत या साझा नहीं किया जाता है; आपका टेक्स्ट केवल आपकी स्क्रीन पर मौजूद होता है और जब आप पृष्ठ को पुनः लोड करते हैं तो गायब हो जाता है।</p>
+<p>इसका उपयोग करने के लिए, बस एक शब्द, वाक्यांश या संख्या को बॉक्स में टाइप या पेस्ट करें और परिणाम पढ़ें। क्योंकि रिक्त स्थान, बड़े अक्षर और विराम चिह्न सभी को नजरअंदाज कर दिया जाता है, आप पाठ को बिल्कुल वैसे ही दर्ज कर सकते हैं जैसे वह लिखा गया है और उत्तर पर भरोसा कर सकते हैं। किसी भी समय पाठ बदलें और निर्णय तुरंत अपडेट हो जाता है, ताकि आप जितने चाहें उतने शब्दों और वाक्यांशों का परीक्षण कर सकें और अपने दिल की सामग्री के लिए पैलिंड्रोम की खोज कर सकें। चाहे आप किसी पेचीदा वाक्यांश के बारे में मैत्रीपूर्ण बहस निपटा रहे हों, उसे लिखने के अपने प्रयास की जाँच कर रहे हों, या किसी ऐसे शब्द के बारे में उत्सुक हों जिसने आपका ध्यान खींचा हो, उत्तर हमेशा एक नज़र दूर होता है।</p>
+    <section class="faq"><h2>पैलिंड्रोम चेकर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>पलिंड्रोम क्या है?</dt><dd>पैलिंड्रोम एक शब्द, वाक्यांश, संख्या या अनुक्रम है जो आगे और पीछे समान रूप से पढ़ता है, जैसे &#39;स्तर&#39;, &#39;रेस कार&#39; या &#39;एक आदमी, एक योजना, एक नहर: पनामा&#39;।</dd><dt>क्या यह रिक्त स्थान और विराम चिह्नों की गिनती करता है?</dt><dd>नहीं, चेकर बड़े अक्षरों, रिक्त स्थान और विराम चिह्नों को अनदेखा करता है, इसलिए &#39;क्या यह एक कार थी या एक बिल्ली जो मैंने देखी थी?&#39; पैलिंड्रोम के रूप में सही ढंग से पहचाना जाता है। यह केवल अक्षरों और अंकों की तुलना करता है।</dd><dt>क्या मेरा पाठ कहीं भेजा गया है?</dt><dd>नहीं, चेक आपके ब्राउज़र में तुरंत होता है, इसलिए आपके द्वारा टाइप किया गया कुछ भी अपलोड, संग्रहीत या साझा नहीं किया जाता है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/palindromocheck/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/palindromocheck/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/palindromocheck/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/palindromocheck/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/palindromocheck/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/palindromocheck/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/palindromocheck/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/palindromocheck/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/palindromocheck/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/palindromocheck/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"input":"शब्द या वाक्यांश","placeholder":"'रेस कार' जैसा कुछ लिखें...","yes":"यह एक पैलिंड्रोम है!","no":"पैलिंड्रोम नहीं","empty":"पाठ की प्रतीक्षा की जा रही है"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/palindromocheck.js" defer></script>
+</body>
+</html>

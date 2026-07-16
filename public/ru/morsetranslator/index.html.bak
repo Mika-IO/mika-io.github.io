@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Переводчик азбуки Морзе — конвертируйте текст в азбуку Морзе и обратно</title>
+<meta name="description" content="Бесплатный переводчик азбуки Морзе. Преобразуйте любой текст в точки и тире азбуки Морзе или декодируйте азбуку Морзе обратно в текст. Включает воспроизведение звука. Работает полностью в вашем браузере.">
+<link rel="canonical" href="https://mikaio.dev/ru/morsetranslator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/morsetranslator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/morsetranslator/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/morsetranslator/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/morsetranslator/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/morsetranslator/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/morsetranslator/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/morsetranslator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/morsetranslator/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/morsetranslator/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/morsetranslator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/morsetranslator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Переводчик азбуки Морзе — конвертируйте текст в азбуку Морзе и обратно">
+<meta property="og:description" content="Бесплатный переводчик азбуки Морзе. Преобразуйте любой текст в точки и тире азбуки Морзе или декодируйте азбуку Морзе обратно в текст. Включает воспроизведение звука. Работает полностью в вашем браузере.">
+<meta property="og:url" content="https://mikaio.dev/ru/morsetranslator/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Переводчик азбуки Морзе — конвертируйте текст в азбуку Морзе и обратно","url":"https://mikaio.dev/ru/morsetranslator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный переводчик азбуки Морзе. Преобразуйте любой текст в точки и тире азбуки Морзе или декодируйте азбуку Морзе обратно в текст. Включает воспроизведение звука. Работает полностью в вашем браузере."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Переводчик азбуки Морзе","item":"https://mikaio.dev/ru/morsetranslator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что такое азбука Морзе?","acceptedAnswer":{"@type":"Answer","text":"Азбука Морзе — это система кодирования букв, цифр и знаков препинания в виде последовательностей точек и тире (или коротких и длинных сигналов). Он был разработан в 1830-х и 1840-х годах для использования с электрическим телеграфом. Каждый символ имеет уникальную последовательность точек и тире."}},{"@type":"Question","name":"Как разделить буквы в азбуке Морзе?","acceptedAnswer":{"@type":"Answer","text":"Буквы разделяются одним пробелом. Слова разделяются косой чертой/или тремя пробелами. Декодер принимает оба соглашения."}},{"@type":"Question","name":"Воспроизведение звука работает?","acceptedAnswer":{"@type":"Answer","text":"Да. Инструмент использует API веб-аудио для генерации тонов, соответствующих точкам и тире. Точки — короткие тона, тире — в три раза длиннее. Убедитесь, что на вашем устройстве включена громкость."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Переводчик азбуки Морзе</span></nav>
+  <h1>Переводчик азбуки Морзе</h1>
+  <p class="lead">Введите текст, чтобы увидеть его перевод на азбуку Морзе. Вставьте код Морзе, чтобы расшифровать его обратно в текст. Нажмите «Воспроизвести», чтобы прослушать код в аудиоформате.</p>
+  <section class="widget" id="tool"><div id="morse-app"><div class="field"><label for="morse-in">Текст для кодирования</label><textarea id="morse-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Введите здесь свое сообщение…"></textarea></div><div class="result"><span class="hint">Азбука Морзе: </span><span id="morse-out" style="word-break:break-all;letter-spacing:0.1em">—</span></div><button id="morse-play" class="btn secondary" style="margin-top:0.5rem">▶ Воспроизвести аудио</button><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="morse-decode-in">Азбука Морзе для расшифровки</label><textarea id="morse-decode-in" rows="2" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="e.g. .... . .-.. .-.. ---"></textarea></div><div class="result"><span class="hint">Раскодированный текст: </span><span id="morse-decoded">—</span></div></div></section>
+  <article class="content">
+    <h2>Переводите между текстом и азбукой Морзе</h2>
+<p>Азбука Морзе — одна из самых узнаваемых систем кодирования в истории. Её характерные точки и тире передавали сообщения через континенты и океаны задолго до того, как стала возможна голосовая связь. Сегодня она используется в любительской радиосвязи, авиации, устройствах для людей с ограниченными возможностями и в поп-культуре. Этот переводчик мгновенно превращает любой текст в код Морзе, воспроизводит его как звук и расшифровывает азбуку Морзе обратно в обычный текст.</p>
+<h2>Работа с переводчиком</h2>
+<p>Введите сообщение в поле кодирования, и перевод в азбуку Морзе появится сразу под ним, с точками и тире, где буквы разделены одним пробелом, а слова — косой чертой, точно по стандартному письменному соглашению для Морзе. Нажмите воспроизведение, чтобы услышать код в виде звуковых сигналов, генерируемых прямо в вашем браузере, — это по-настоящему полезный способ тренировать распознавание Морзе на слух, а не только зрительно. Чтобы пойти в обратную сторону, вставьте точки и тире в поле декодирования, соблюдая те же разделители букв и слов, и эквивалент на обычном языке появится мгновенно.</p>
+<h2>История азбуки Морзе</h2>
+<p>Сэмюэл Морзе и Альфред Вейл разработали азбуку Морзе в 1830–1840-х годах для использования с электрическим телеграфом, который мог передавать сигналы в виде импульсов по длинным медным проводам. Код присваивал каждой букве и цифре уникальный узор из коротких сигналов (точек) и длинных сигналов (тире). Исходный код, теперь называемый американской азбукой Морзе, позже был доработан в международную азбуку Морзе, которая стандартизировала временные соотношения и расширила набор символов. Международная азбука Морзе — это версия, используемая сегодня во всём мире.</p>
+<p>Знаменитый сигнал бедствия SOS — три точки, три тире, три точки (··· ─── ···) — был выбран за свою простоту и симметрию, что делает его лёгким для передачи даже в стрессовой ситуации.</p>
+<h2>Заметка об изучении Морзе на слух</h2>
+<p>Опытные радисты вовсе не считают точки и тире сознательно — с достаточной практикой каждая буква мгновенно распознаётся как отдельный ритмический узор, точно так же, как опытный читатель узнаёт целое слово с одного взгляда, а не разбирает его по буквам. Многократное прослушивание аудио-воспроизведения из этого инструмента, начиная с коротких, распространённых слов, — куда более эффективный способ выработать это ритмическое узнавание, чем заучивание письменной таблицы точек и тире, поэтому серьёзным ученикам азбуки Морзе почти всегда советуют тренировать сначала уши, а потом глаза.</p>
+<h2>Как работает азбука Морзе</h2>
+<p>У каждой буквы, цифры и распространённого знака препинания есть уникальная последовательность точек и тире. Буква E — это всего одна точка, а буква T — одно тире: самые частые буквы английского алфавита получили самые короткие коды. Буквы разделяются паузой, равной трём длительностям точки. Слова разделяются паузой, равной семи длительностям точки. Именно эта временная структура позволяет передавать Морзе на слух, светом или механически.</p>
+<p>Стандартные временные соотношения:</p>
+<ul>
+<li>Точка: 1 единица</li>
+<li>Тире: 3 единицы</li>
+<li>Пауза между элементами одной буквы: 1 единица</li>
+<li>Пауза между буквами: 3 единицы</li>
+<li>Пауза между словами: 7 единиц</li>
+</ul>
+<h2>Где азбука Морзе используется до сих пор</h2>
+<p>Радиолюбители по всему миру до сих пор используют азбуку Морзе для дальней связи, особенно при плохих условиях прохождения сигнала. Морзе пробивается сквозь помехи, которые сделали бы голосовую связь невозможной. Международные экзамены на лицензию радиолюбителя во многих странах до сих пор включают раздел по азбуке Морзе.</p>
+<p>Авиация использует азбуку Морзе для навигационных радиомаяков: передатчики VOR (всенаправленный УКВ-радиомаяк) и ILS (система посадки по приборам) транслируют свой идентификатор Морзе через регулярные интервалы, позволяя пилотам убедиться, что они используют правильное навигационное средство.</p>
+<p>Технологии для людей с ограниченными возможностями иногда используют азбуку Морзе как способ ввода для людей с ограниченной подвижностью. Одна кнопка или переключатель может передавать точки и тире, позволяя вводить полноценный текст со скоростью, которую опытные операторы Морзе способны сделать удивительно высокой.</p>
+<h2>Почему код был устроен именно так</h2>
+<p>Гениальность исходного замысла заключается в том, что длина кода подобрана в соответствии с частотой букв: поскольку Сэмюэл Морзе и Альфред Вейл изучили, какие буквы чаще всего встречаются в английском тексте, самой распространённой букве, E, был присвоен кратчайший возможный сигнал — одна точка, а T, следующей по частоте, досталось одно тире. Редким буквам вроде Q, X и Z были даны более длинные, сложные узоры, поскольку общей целью было минимизировать среднее время, необходимое для передачи обычного текста, а не сделать каждую букву одинаково быстрой. Этот же принцип — давать более короткие коды более частым символам — вновь появляется больше века спустя в современных алгоритмах сжатия данных, что делает азбуку Морзе неожиданным, но настоящим предком идей, используемых сегодня в вычислительной технике.</p>
+<h2>Пунктуация и просигналы</h2>
+<p>Помимо букв и цифр, стандартная азбука Морзе также определяет узоры для распространённых знаков препинания, таких как точка, запятая и вопросительный знак, поэтому этот переводчик способен обрабатывать целые предложения, а не только отдельные слова. Радиолюбители дополнительно используют специальные объединённые последовательности, называемые просигналами, для управления ходом разговора в эфире — например, последовательность, означающую &quot;конец сообщения&quot;, или означающую &quot;приглашение к передаче&quot;, — которые передаются как единая непрерывная строка из точек и тире, а не как отдельные буквы; этот слой соглашений инструмент не пытается расшифровывать автоматически, но полезно знать о его существовании, если вы с ним столкнётесь.</p>
+<h2>Приватно и мгновенно</h2>
+<p>Весь перевод происходит полностью в вашем браузере, поэтому кодирование и декодирование мгновенны, а никакой введённый вами текст никогда не отправляется ни на какой сервер, не логируется и не передаётся кому-либо ещё.</p>
+    <section class="faq"><h2>Часто задаваемые вопросы по азбуке Морзе</h2><dl><dt>Что такое азбука Морзе?</dt><dd>Азбука Морзе — это система кодирования букв, цифр и знаков препинания в виде последовательностей точек и тире (или коротких и длинных сигналов). Он был разработан в 1830-х и 1840-х годах для использования с электрическим телеграфом. Каждый символ имеет уникальную последовательность точек и тире.</dd><dt>Как разделить буквы в азбуке Морзе?</dt><dd>Буквы разделяются одним пробелом. Слова разделяются косой чертой/или тремя пробелами. Декодер принимает оба соглашения.</dd><dt>Воспроизведение звука работает?</dt><dd>Да. Инструмент использует API веб-аудио для генерации тонов, соответствующих точкам и тире. Точки — короткие тона, тире — в три раза длиннее. Убедитесь, что на вашем устройстве включена громкость.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/morsetranslator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/morsetranslator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/morsetranslator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/morsetranslator/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/morsetranslator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/morsetranslator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/morsetranslator/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/glossary.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script src="/assets/tools/morsetranslator.js" defer></script>
+</body>
+</html>

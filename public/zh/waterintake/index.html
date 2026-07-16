@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>饮水量计算器 — 您每天应该喝多少水？</title>
+<meta name="description" content="免费饮水量计算器。根据您的体重和活动水平准确找出您每天应该喝多少水。浏览器中即时显示结果。">
+<link rel="canonical" href="https://mikaio.dev/zh/waterintake/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/waterintake/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/waterintake/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/waterintake/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/waterintake/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/waterintake/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/waterintake/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/waterintake/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/waterintake/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/waterintake/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/waterintake/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/waterintake/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="饮水量计算器 — 您每天应该喝多少水？">
+<meta property="og:description" content="免费饮水量计算器。根据您的体重和活动水平准确找出您每天应该喝多少水。浏览器中即时显示结果。">
+<meta property="og:url" content="https://mikaio.dev/zh/waterintake/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"饮水量计算器 — 您每天应该喝多少水？","url":"https://mikaio.dev/zh/waterintake/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费饮水量计算器。根据您的体重和活动水平准确找出您每天应该喝多少水。浏览器中即时显示结果。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"每日饮水量计算器","item":"https://mikaio.dev/zh/waterintake/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"饮水量是如何计算的？","acceptedAnswer":{"@type":"Answer","text":"计算器使用每公斤体重约 35 毫升作为基准，然后向上调整活动水平。由于汗水流失，运动员和高度活跃的人通常需要更多。"}},{"@type":"Question","name":"咖啡或茶算吗？","acceptedAnswer":{"@type":"Answer","text":"尽管是温和的利尿剂，但研究表明，习惯性饮用含咖啡因饮料仍然有助于每日液体摄入量。然而，白开水是保持水分最有效的方法。"}},{"@type":"Question","name":"天热时应该多喝水吗？","acceptedAnswer":{"@type":"Answer","text":"是的。计算器给出正常条件下的基线建议。在炎热的天气、发烧期间或在高海拔地区，您的水分需求会增加。解渴时喝水并注意尿液颜色——浅黄色是理想的。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/waterintake/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/waterintake/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/waterintake/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/waterintake/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/waterintake/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/waterintake/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/waterintake/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/waterintake/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/waterintake/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/waterintake/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>每日饮水量计算器</span></nav>
+  <h1>每日饮水量计算器</h1>
+  <p class="lead">输入您的体重和活动水平，查看您建议的每日饮水量。</p>
+  <section class="widget" id="tool"><form id="water-form"><div class="row"><div class="field"><label for="water-weight">体重</label><input type="number" id="water-weight" step="any" min="1" inputmode="decimal"></div><div class="field"><label for="water-unit">单位</label><select id="water-unit"><option value="kg">kg</option><option value="lb">lb</option></select></div><div class="field"><label for="water-activity">活动水平</label><select id="water-activity"><option value="low">久坐（办公室工作）</option><option value="mod">适度活跃</option><option value="high">非常活跃/运动员</option></select></div></div><div class="result"><span class="hint">每日饮水量: </span><span class="big" id="water-out">—</span></div></form></section>
+  <article class="content">
+    <h2>你每天应该喝多少水？</h2>
+<p>水是最重要的营养素。体内的每个细胞、组织和器官都依赖于水才能正常运作。它通过出汗调节体温，在血液中输送营养物质和氧气，通过尿液清除废物，缓冲关节并保持器官功能。尽管如此，许多人长期消耗的水量仍少于身体所需的水量，而他们往往没有意识到这一点。</p>
+<p>该计算器根据您的体重和活动水平为您提供个性化的每日饮水量建议。结果是一个基线指南——个人需求因气候、饮食、健康状况和许多其他因素而异——但它提供了一个具体的努力目标。</p>
+<h2>推荐值是如何计算的</h2>
+<p>最广泛使用的估计每日需水量的公式是基于体重的建议。营养师和运动医学专业人士使用的通用指南是，久坐的成年人每天每公斤体重大约 35 毫升。这相当于 70 公斤重的人约 2.4 升。</p>
+<p>活动水平是仅次于体重的最大变量。即使是中等强度的运动也会通过出汗增加水分流失，剧烈运动每小时会流失 0.5 至 2 升水分，具体取决于强度和环境温度。计算器会向上调整对适度活跃和非常活跃的人的建议，以补偿这些损失。</p>
+<h2>每天 8 杯的神话</h2>
+<p>人们经常重复的建议“每天喝 8 杯水”是一种简化的启发式方法，对于温带气候下的普通成年人来说相当有效，但它没有基于任何具体的科学证据，并且忽略了个体差异。在凉爽气候下从事办公桌工作的小个子女性与在炎热气候下从事户外劳动的大个子男性的需求截然不同。基于体重的建议更加准确。</p>
+<h2>一个有效的例子</h2>
+<p>考虑一个体重 70 公斤、生活方式久坐的成年人。按每公斤约 35 毫升计算，基线建议约为每天 2.45 升，接近通常引用的普通成年人 2.4 升的数字。如果同一个人在大多数日子里增加一小时的中等强度运动，计算器会向上调整目标，以考虑到该运动期间因出汗而流失的额外液体，根据强度、持续时间和环境的热度，这可以轻松地增加数百毫升到一升。这正是为什么像“八杯”这样的单一数字无法很好地为不同的人服务的原因：正确的目标在很大程度上取决于身体尺寸以及一个人在某一天的实际活跃程度，而不是一刀切的规则。</p>
+<h2>口渴并不总是可靠的</h2>
+<p>许多人大部分时间处于轻度脱水状态，并不感到口渴，因为口渴机制适应了慢性轻度脱水。尤其是老年人，口渴反应减弱，需要更加谨慎地饮酒。实际检查是尿液颜色：浅黄色表示水合良好，深黄色或琥珀色表示脱水，接近无色可能表示水合过度。</p>
+<h2>食物中的水</h2>
+<p>每日水摄入量的很大一部分来自食物而不是饮料。水果和蔬菜的含水量很高——黄瓜和西瓜的含水量超过95%，而大多数水果的含水量为80-90%。富含新鲜农产品的饮食有助于补充水分。该计算器的建议是指所有来源的总液体摄入量，因此如果您估计的话，您可以减去食物中的液体摄入量。</p>
+<h2>什么时候多喝水</h2>
+<ul>
+<li><strong>炎热天气</strong>：高于舒适环境温度的每一度都会增加汗液流失。</li>
+<li><strong>运动</strong>：在体育活动之前、期间和之后喝水。</li>
+<li><strong>疾病</strong>：发烧、呕吐和腹泻都会急剧增加体液流失。</li>
+<li><strong>怀孕和哺乳</strong>：两者都会大大增加水的需求。</li>
+<li><strong>高海拔</strong>：身体在高海拔地区呼吸频率增加，失去更多水分。</li>
+</ul>
+<h2>如何使用计算器</h2>
+<p>输入您的体重并选择您的典型活动水平，每日液体目标会立即出现，对于经常锻炼的人会向上调整，以考虑因出汗而产生的额外损失。将这个数字视为一个合理的起点，而不是一个严格的处方，并根据气候、健康状况或特定的医疗建议进一步调整它，因为该计算器无法了解这些个人情况。</p>
+<h2>养成习惯而不是沉迷于它</h2>
+<p>对于大多数人来说，达到每日饮水目标不在于精确测量，而在于养成一些可靠的习惯：全天将水瓶放在触手可及的地方，每顿饭喝一杯水，在运动前后准备好水，而不是在已经明显口渴时才伸手去喝水。像这样的计算器得出的粗略目标最有用，可以作为偶尔检查的基准——将典型一天的实际饮酒量与建议量进行比较——而不是每天追踪到毫升。</p>
+<h2>您的目标可能需要调整的迹象</h2>
+<p>除了尿液颜色之外，其他一些日常信号表明您当前的摄入量可能不符合您身体的需求：持续性头痛或疲劳在喝更多水后会有所改善，排尿异常黑或不频繁，整天反复出现口干或嘴唇干燥，或者在喝水后不久感到口渴。这些本身都不是诊断性的，但与此计算器中的合理基线目标结合起来，它们为您提供了一种实用、省力的方法来注意到您的摄入量何时低于您身体在某一天的实际需要量。</p>
+<h2>私密且即时</h2>
+<p>计算完全在您的浏览器中运行，因此建议会立即出现，并且您的个人体重或活动信息不会发送到服务器、记录或共享。一旦加载，它就可以离线工作，并且不会保留您在两次访问之间输入的任何内容的历史记录，因此您可以在完全隐私的情况下随时检查您的目标。</p>
+    <section class="faq"><h2>饮水常见问题解答</h2><dl><dt>饮水量是如何计算的？</dt><dd>计算器使用每公斤体重约 35 毫升作为基准，然后向上调整活动水平。由于汗水流失，运动员和高度活跃的人通常需要更多。</dd><dt>咖啡或茶算吗？</dt><dd>尽管是温和的利尿剂，但研究表明，习惯性饮用含咖啡因饮料仍然有助于每日液体摄入量。然而，白开水是保持水分最有效的方法。</dd><dt>天热时应该多喝水吗？</dt><dd>是的。计算器给出正常条件下的基线建议。在炎热的天气、发烧期间或在高海拔地区，您的水分需求会增加。解渴时喝水并注意尿液颜色——浅黄色是理想的。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/waterintake/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/waterintake/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/waterintake/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/waterintake/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/waterintake/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/waterintake/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/waterintake/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/waterintake/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/waterintake/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/waterintake/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"weight":"体重","unit":"单位","activity":"活动水平","sedentary":"久坐（办公室工作）","moderate":"适度活跃","active":"非常活跃/运动员","daily_water":"每日饮水量"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/waterintake.js" defer></script>
+</body>
+</html>

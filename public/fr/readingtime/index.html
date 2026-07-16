@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de temps de lecture - combien de temps faut-il lire n&#39;importe quel texte</title>
+<meta name="description" content="Calculateur de temps de lecture gratuit. Collez n&#39;importe quel texte pour voir instantanément le nombre de mots, le temps de lecture estimé et le temps de parole estimé. Aucune inscription nécessaire.">
+<link rel="canonical" href="https://mikaio.dev/fr/readingtime/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/readingtime/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/readingtime/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/readingtime/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/readingtime/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/readingtime/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/readingtime/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/readingtime/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/readingtime/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/readingtime/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/readingtime/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/readingtime/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculateur de temps de lecture - combien de temps faut-il lire n&#39;importe quel texte">
+<meta property="og:description" content="Calculateur de temps de lecture gratuit. Collez n&#39;importe quel texte pour voir instantanément le nombre de mots, le temps de lecture estimé et le temps de parole estimé. Aucune inscription nécessaire.">
+<meta property="og:url" content="https://mikaio.dev/fr/readingtime/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de temps de lecture - combien de temps faut-il lire n'importe quel texte","url":"https://mikaio.dev/fr/readingtime/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur de temps de lecture gratuit. Collez n'importe quel texte pour voir instantanément le nombre de mots, le temps de lecture estimé et le temps de parole estimé. Aucune inscription nécessaire."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de temps de lecture","item":"https://mikaio.dev/fr/readingtime/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle vitesse de lecture la calculatrice prend-elle en compte ?","acceptedAnswer":{"@type":"Answer","text":"La calculatrice utilise 238 mots par minute, ce qui, selon les recherches, est la vitesse moyenne de lecture silencieuse pour les adultes lisant de la prose anglaise non technique. La vitesse réelle varie selon la personne, la complexité du texte et le but de la lecture."}},{"@type":"Question","name":"Quelle vitesse de parole est utilisée ?","acceptedAnswer":{"@type":"Answer","text":"Le temps de parole est estimé à 150 mots par minute, ce qui constitue un rythme de parole naturel et confortable. Les présentateurs et les podcasteurs ciblent souvent 130 à 160 WPM pour plus de clarté."}},{"@type":"Question","name":"Est-ce que ça compte exactement les mots ?","acceptedAnswer":{"@type":"Answer","text":"Le nombre de mots est divisé en espaces et filtre les segments vides, ce qui est la méthode standard. Il correspond à la plupart des traitements de texte pour la prose simple. Les mots coupés comptent pour un seul mot."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur de temps de lecture</span></nav>
+  <h1>Calculateur de temps de lecture</h1>
+  <p class="lead">Collez ou tapez votre texte ci-dessous. Le nombre de mots, le temps de lecture et le temps de parole sont mis à jour instantanément.</p>
+  <section class="widget" id="tool"><div id="rt-app"><textarea id="rt-text" rows="8" style="width:100%;box-sizing:border-box;resize:vertical;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="Collez ou tapez votre texte ici…"></textarea><div id="rt-results" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">Mots</div><div class="big" id="rt-words">0</div></div><div><div class="hint">Temps de lecture</div><div class="big" id="rt-time">0 min</div></div><div><div class="hint">Temps de parole</div><div class="big" id="rt-speak">0 min</div></div></div></div></section>
+  <article class="content">
+    <h2>Sachez exactement combien de temps il faudra pour lire votre contenu</h2>
+<p>Avant de publier un article, de préparer un discours ou d’estimer le temps de révision d’un document, il est utile de connaître le temps de lecture. Les lecteurs apprécient de savoir à quoi ils s&#39;engagent : les articles de blog qui affichent des temps de lecture estimés montrent systématiquement un engagement plus élevé. Les orateurs doivent savoir si leur texte correspondra au temps qui leur est imparti. Cet outil vous donne instantanément le temps de lecture et le temps de parole, en fonction de votre nombre de mots.</p>
+<h2>Comment le temps de lecture est calculé</h2>
+<p>La vitesse moyenne de lecture par un adulte d’une prose non technique est d’environ 238 mots par minute. Ce chiffre provient d’études sur la lecture silencieuse chez des adultes dans des conditions normales. La vitesse réelle varie considérablement : un lecteur expérimenté de fiction légère peut lire 350 mots par minute, tandis qu&#39;un étudiant en droit travaillant sur une loi dense peut lire 100 mots par minute ou moins. L&#39;estimation fournie par cet outil constitue une base de référence fiable pour le contenu standard.</p>
+<p>La formule est simple : le temps de lecture en minutes est égal au nombre de mots divisé par 238. Un article de blog de 1 000 mots prend environ 4 minutes à lire. Un article de 2 500 mots prend environ 10 minutes. Un roman de 60 000 mots prend environ 250 minutes, soit plus de quatre heures – c&#39;est pourquoi la progression chapitre par chapitre semble significative.</p>
+<h2>Temps de parole</h2>
+<p>L&#39;estimation du temps de parole utilise 150 mots par minute, ce qui représente un rythme de présentation confortable et clair. Les orateurs professionnels et les radiodiffuseurs ciblent souvent 130 à 160 mots par minute car c&#39;est suffisamment rapide pour retenir l&#39;attention mais suffisamment lent pour être facilement compris. Un discours très rapide – au-dessus de 180 mots par minute – commence à paraître précipité. Le discours conversationnel se situe généralement entre 120 et 180 mots par minute selon la personne et le contexte.</p>
+<p>Si vous préparez un discours, une présentation ou un script de podcast, le temps de parole vous aide à juger si votre contenu correspond à votre plage horaire. Un créneau de 10 minutes permet d&#39;écrire environ 1 500 mots. Une conférence de style TED de 20 minutes contient environ 3 000 mots lorsqu&#39;elle est prononcée à un rythme naturel avec des pauses appropriées.</p>
+<h2>Temps de lecture dans la publication de contenu</h2>
+<p>Les publications qui ajoutent des estimations du temps de lecture aux articles — « 5 minutes de lecture », « 12 minutes de lecture » — le font parce que les recherches sur l&#39;engagement des lecteurs montrent que connaître le temps consacré réduit la vitesse à laquelle les lecteurs abandonnent prématurément un article. Lorsque les lecteurs savent qu’ils lisent une lecture de 3 minutes, ils sont plus susceptibles de s’engager à la terminer. Lorsqu’ils se retrouvent inopinément plongés dans un morceau beaucoup plus long, la frustration face à la longueur inattendue peut les pousser à partir.</p>
+<p>Pour les newsletters email, connaître le temps de lecture permet de calibrer la bonne longueur. Un e-mail dont la lecture prend plus de 3 à 4 minutes sollicite beaucoup l&#39;attention du destinataire et peut entraîner des taux d&#39;achèvement inférieurs. Un courrier électronique plus court est souvent préférable.</p>
+<h2>Le nombre de mots comme signal de qualité</h2>
+<p>Le nombre de mots à lui seul est une mesure couramment utilisée à mauvais escient. Un article de 2 000 mots n&#39;est pas intrinsèquement meilleur qu&#39;un article de 500 mots : la bonne longueur est tout ce qu&#39;il faut pour couvrir entièrement le sujet sans remplissage. Cela dit, à des fins de référencement, les articles qui couvrent en profondeur un sujet ont tendance à être plus longs simplement parce que couvrir un sujet en profondeur nécessite plus de contenu. Le temps de lecture et le nombre de mots aident les écrivains à évaluer s&#39;ils en ont dit assez.</p>
+<h2>Comment utiliser la calculatrice</h2>
+<p>Collez votre texte dans la zone et les deux chiffres (temps de lecture et temps de parole) apparaîtront immédiatement, mis à jour en direct au fur et à mesure que vous modifiez. Cela permet de voir facilement l&#39;effet d&#39;une coupure en temps réel : coupez un paragraphe lent et regardez l&#39;estimation baisser, plutôt que d&#39;avoir à coller le tout dans un compteur séparé après chaque révision.</p>
+<h2>Pourquoi deux vitesses différentes sont importantes</h2>
+<p>L’écart entre le chiffre de 238 mots par minute en lecture et le chiffre de 150 mots par minute en parole n’est pas une erreur : il reflète une véritable différence entre la façon dont l’œil traite le texte écrit et la façon dont la bouche produit les mots parlés. La lecture silencieuse permet à l&#39;œil d&#39;avancer, de survoler des phrases familières et de traiter plusieurs mots en un seul coup d&#39;œil, tandis que la parole est liée au rythme physique consistant à former chaque mot à voix haute, un à la fois. C’est exactement pourquoi un script qui se lit confortablement dans votre tête peut s’avérer beaucoup plus long que prévu une fois que vous vous levez et le livrez – les deux estimations sur cette page existent spécifiquement pour détecter cette inadéquation avant qu’elle ne devienne un problème sur scène.</p>
+<h2>S&#39;adapter à votre audience réelle</h2>
+<p>La base de référence de 238 mots par minute est une moyenne pour les lecteurs adultes de prose générale non technique, mais votre public réel peut lire plus vite ou plus lentement en fonction de ce que vous écrivez. Les écrits universitaires denses, les textes juridiques ou les contenus remplis de jargon et de termes techniques inconnus ralentissent considérablement la plupart des lecteurs – parfois jusqu&#39;à la moitié de la vitesse de base – car les mots inconnus et les structures de phrases complexes nécessitent un traitement cognitif plus important par mot. À l’inverse, un article de blog informel rédigé en phrases courtes et simples peut être lu plus rapidement que la ligne de base par un lecteur expérimenté qui parcourt les points principaux. Si vous connaissez bien votre public, considérez l&#39;estimation donnée par cet outil comme un point de départ et ajustez mentalement en fonction du degré de technicité ou de désinvolture de votre écriture réelle.</p>
+<h2>Stratégie de temps de lecture et de longueur du contenu</h2>
+<p>Les stratèges de contenu traitent de plus en plus le temps de lecture comme une contrainte de conception plutôt que comme une réflexion après coup. Une page de destination bénéficie d&#39;un temps de lecture inférieur à une minute, car les visiteurs décident de rester en quelques secondes et un long mur de texte se lit comme un effort plutôt que comme une valeur. Un guide technique approfondi, en revanche, peut confortablement durer jusqu&#39;à 15 ou 20 minutes, car un lecteur qui s&#39;est engagé dans ce type de contenu recherche la rigueur et non la brièveté, et un traitement étrangement court d&#39;un sujet complexe peut en fait saper la confiance dans l&#39;exhaustivité du contenu.</p>
+<h2>Privé et instantané</h2>
+<p>Votre texte ne quitte jamais votre navigateur : le comptage des mots et le calcul du temps s&#39;effectuent entièrement localement, de sorte qu&#39;aucun contenu que vous collez n&#39;est jamais téléchargé, stocké ou analysé par un serveur.</p>
+    <section class="faq"><h2>FAQ sur le temps de lecture</h2><dl><dt>Quelle vitesse de lecture la calculatrice prend-elle en compte ?</dt><dd>La calculatrice utilise 238 mots par minute, ce qui, selon les recherches, est la vitesse moyenne de lecture silencieuse pour les adultes lisant de la prose anglaise non technique. La vitesse réelle varie selon la personne, la complexité du texte et le but de la lecture.</dd><dt>Quelle vitesse de parole est utilisée ?</dt><dd>Le temps de parole est estimé à 150 mots par minute, ce qui constitue un rythme de parole naturel et confortable. Les présentateurs et les podcasteurs ciblent souvent 130 à 160 WPM pour plus de clarté.</dd><dt>Est-ce que ça compte exactement les mots ?</dt><dd>Le nombre de mots est divisé en espaces et filtre les segments vides, ce qui est la méthode standard. Il correspond à la plupart des traitements de texte pour la prose simple. Les mots coupés comptent pour un seul mot.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"paste_text":"Collez ou tapez votre texte ici…","words":"Mots","reading_time":"Temps de lecture","speaking_time":"Temps de parole","min":"min"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/readingtime.js" defer></script>
+</body>
+</html>

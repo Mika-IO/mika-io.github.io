@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unix Timestamp Converter — конвертирует время эпохи в дату</title>
+<meta name="description" content="Бесплатный конвертер временных меток Unix. Преобразуйте время эпохи Unix в удобочитаемую дату и время или преобразуйте любую дату обратно в временную метку Unix. Работает мгновенно в вашем браузере.">
+<link rel="canonical" href="https://mikaio.dev/ru/unixepoch/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/unixepoch/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/unixepoch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/unixepoch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/unixepoch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/unixepoch/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/unixepoch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/unixepoch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/unixepoch/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/unixepoch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/unixepoch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/unixepoch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Unix Timestamp Converter — конвертирует время эпохи в дату">
+<meta property="og:description" content="Бесплатный конвертер временных меток Unix. Преобразуйте время эпохи Unix в удобочитаемую дату и время или преобразуйте любую дату обратно в временную метку Unix. Работает мгновенно в вашем браузере.">
+<meta property="og:url" content="https://mikaio.dev/ru/unixepoch/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Unix Timestamp Converter — конвертирует время эпохи в дату","url":"https://mikaio.dev/ru/unixepoch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный конвертер временных меток Unix. Преобразуйте время эпохи Unix в удобочитаемую дату и время или преобразуйте любую дату обратно в временную метку Unix. Работает мгновенно в вашем браузере."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Конвертер временных меток Unix","item":"https://mikaio.dev/ru/unixepoch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что такое временная метка Unix?","acceptedAnswer":{"@type":"Answer","text":"Временная метка Unix — это число, обозначающее количество секунд, прошедших с 1 января 1970 года в 00:00:00 UTC (эпоха Unix). Он повсеместно используется в вычислениях для представления моментов времени без двусмысленности часового пояса."}},{"@type":"Question","name":"В чем проблема 2038 года?","acceptedAnswer":{"@type":"Answer","text":"Старые системы, которые хранят временные метки Unix в виде 32-битных целых чисел со знаком, могут представлять даты только до 19 января 2038 года. Современные 64-битные системы не имеют этого ограничения."}},{"@type":"Question","name":"Как мне преобразовать миллисекунды?","acceptedAnswer":{"@type":"Answer","text":"Некоторые системы используют миллисекунды вместо секунд. Разделите метку времени в миллисекундах на 1000, чтобы преобразовать ее в секунды, прежде чем вводить ее здесь."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Конвертер временных меток Unix</span></nav>
+  <h1>Конвертер временных меток Unix</h1>
+  <p class="lead">Введите временную метку Unix, чтобы преобразовать ее в читаемую дату, или выберите дату, чтобы преобразовать ее в временную метку Unix.</p>
+  <section class="widget" id="tool"><div id="ue-app"><div class="row"><div class="field"><label for="ue-ts">Временная метка Unix (секунды)</label><input type="number" id="ue-ts" placeholder="e.g. 1700000000" inputmode="numeric"></div></div><div class="result"><span class="hint">Дата и время по всемирному координированному времени: </span><b id="ue-utc">—</b></div><div class="result"><span class="hint">Ваше местное время: </span><b id="ue-local">—</b></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="ue-dt">Преобразование даты в метку времени</label><input type="datetime-local" id="ue-dt"></div><div class="result"><span class="hint">Временная метка Unix: </span><span class="big" id="ue-tsout">—</span></div></div></section>
+  <article class="content">
+    <h2>Преобразование временных меток Unix в удобочитаемые даты.</h2>
+<p>Разработчики, администраторы баз данных и все, кто работает с файлами журналов или API, регулярно сталкиваются с метками времени Unix — длинными числами, такими как 1700000000, которые представляют момент времени. Без конвертера эти цифры бессмысленны для большинства людей. Этот инструмент мгновенно преобразует любую временную метку Unix в читаемую дату и время, а также преобразует любую дату обратно в ее временную метку Unix.</p>
+<h2>Что такое временная метка Unix?</h2>
+<p>Временная метка Unix подсчитывает количество секунд, прошедших с полуночи 1 января 1970 года по всемирному координированному времени (UTC). Этот момент, названный эпохой Unix, был выбран в качестве точки отсчета при разработке операционных систем Unix. Каждая прошедшая секунда добавляет единицу к счету. Временная метка 0 представляет собой ровно полночь 1 января 1970 года по всемирному координированному времени. Временная метка 1700000000 соответствует 14 ноября 2023 года в 22:13:20 UTC.</p>
+<p>Прелесть временных меток Unix в том, что они не зависят от часового пояса. Временная метка представляет собой один и тот же момент времени, независимо от того, в какой точке мира вы находитесь. При преобразовании в местное время одна и та же временная метка дает разные показания часов в Токио и Нью-Йорке, но они относятся к одному и тому же физическому моменту.</p>
+<h2>Как использовать конвертер</h2>
+<p>Чтобы преобразовать временную метку в дату, вставьте номер временной метки в верхнее поле. Дата и время UTC, а также местный эквивалент отображаются сразу. Чтобы преобразовать дату в метку времени, используйте средство выбора даты в нижней части, и соответствующая метка времени появится мгновенно.</p>
+<h2>Миллисекунды против секунд</h2>
+<p>Некоторые системы, особенно веб-браузеры и приложения JavaScript, используют для своих временных меток миллисекунды, а не секунды. Вызов Date.now() в JavaScript возвращает что-то вроде 1700000000000 — число примерно в 1000 раз больше, чем эквивалентная временная метка Unix в секундах. Если у вас есть число примерно из тринадцати цифр, вероятно, оно выражено в миллисекундах: разделите его на 1000 и введите результат.</p>
+<h2>Проблема 2038 года</h2>
+<p>Ранние системы Unix хранили временные метки в виде 32-битных целых чисел со знаком, которые могли содержать значения до 2 147 483 647. Это максимальное значение соответствует 19 января 2038 года в 03:14:07 UTC. Системы, которые хранят временные метки в 32-битных целых числах, в этот день переполнятся — проблема, которую иногда называют Y2K38. Современные 64-битные системы могут хранить временные метки далеко за пределами 292 миллиардов лет, что делает эту проблему только для устаревшего программного обеспечения, которое не обновлялось.</p>
+<h2>Обычное использование</h2>
+<p>Временные метки появляются в файлах журналов, записях базы данных, ответах API, заголовках кэша, криптографических сертификатах и ​​множестве других контекстов. Преобразование их в читаемые даты помогает при отладке, анализе данных, аудите соответствия и в любой ситуации, когда вам нужно понять, когда что-то произошло.</p>
+<h2>Почему 1970 год был выбран в качестве отправной точки</h2>
+<p>Выбор 1 января 1970 года был по существу практическим, а не значимой датой сам по себе. Unix разрабатывалась в конце 1960-х и начале 1970-х годов в Bell Labs, и разработчикам требовалась достаточно свежая точка отсчета, чтобы цифры были управляемыми, но достаточно ранние, чтобы охватить вероятный срок службы операционной системы. Округление до начала 1970 года было просто удобным. Спустя десятилетия этот произвольный выбор глубоко укоренился: он лежит в основе того, как почти каждый язык программирования, база данных и операционная система внутренне представляют время, хотя большинству программистов никогда не приходится думать об этом напрямую.</p>
+<h2>Чтение временной метки без конвертера</h2>
+<p>Немного попрактиковавшись, вы сможете проверить в уме временную метку. Деление на 31 536 000 (количество секунд в обычном году) дает примерное количество лет с 1970 года — десятизначная временная метка, начинающаяся с 1,7, соответствует примерно 2023 году, например, с 1970 года плюс около 53-54 лет. Эта приблизительная мысленная оценка — полезный способ обнаружить явно неверную временную метку, например, отклоняющуюся в 1000 раз, потому что на самом деле она была в миллисекундах, прежде чем вы даже доберетесь до калькулятора.</p>
+<h2>Отрицательные временные метки</h2>
+<p>Поскольку временная метка Unix представляет собой просто знак секунды от эпохи, даты до 1 января 1970 года представляются как отрицательные числа, а не являются неподдерживаемыми. Например, временная метка -86400 соответствует ровно одному дню до начала эпохи: 31 декабря 1969 года. Этот преобразователь обрабатывает отрицательные значения так же, как и положительные, что полезно для работы с историческими записями или данными, которые предшествовали компьютерной эпохе, но все еще хранятся в форме временной метки Unix.</p>
+<h2>Почему временные метки не зависят от часового пояса</h2>
+<p>Единственное самое большое преимущество хранения момента в виде временной метки Unix, а не в виде форматированной строки даты, заключается в том, что он полностью игнорирует часовые пояса во время хранения и вычислений. Временная метка представляет собой ровно один физический момент и переводится в дату и время местного календаря только в тот момент, когда она отображается человеку. Вот почему базы данных, API и файлы журналов в подавляющем большинстве хранят временные метки, а не предварительно отформатированные локальные даты: два сервера в разных часовых поясах могут с полной уверенностью сравнивать, сортировать и вычислять различия между временными метками, и им нужно только преобразовать в удобочитаемое местное время на самом последнем этапе, точно так же, как это делает этот конвертер, когда он показывает одновременно UTC и ваш местный эквивалент.</p>
+<h2>Отладка с метками времени</h2>
+<p>Разработчики постоянно используют такой конвертер во время отладки. Журнал ошибок сервера с пометкой 1700000000 на первый взгляд бессмысленен, но его преобразование мгновенно сообщает вам, произошла ли ошибка в рабочее время, ночью или в тот самый момент, когда было завершено развертывание — часто это самый быстрый способ сопоставить отчет об ошибке с изменением, которое его вызвало. Ответы API, столбцы аудита базы данных и заголовки истечения срока действия кэша обычно хранят метки времени, а не форматированные даты по той же причине, по которой механизмы хранения предпочитают их: простое число правильно сортирует, сравнивает и вычисляет без двусмысленности языкового стандарта или формата, и его требуется только перевести в удобную для человека дату на последнем этапе отображения, что и делает этот инструмент.</p>
+<h2>Частный</h2>
+<p>Все выполняется в вашем браузере с использованием встроенного в JavaScript объекта Date, поэтому преобразование происходит мгновенно в обоих направлениях, и никакая введенная вами метка времени или дата никогда не отправляется на сервер, не регистрируется и не передается.</p>
+    <section class="faq"><h2>Часто задаваемые вопросы о временных метках Unix</h2><dl><dt>Что такое временная метка Unix?</dt><dd>Временная метка Unix — это число, обозначающее количество секунд, прошедших с 1 января 1970 года в 00:00:00 UTC (эпоха Unix). Он повсеместно используется в вычислениях для представления моментов времени без двусмысленности часового пояса.</dd><dt>В чем проблема 2038 года?</dt><dd>Старые системы, которые хранят временные метки Unix в виде 32-битных целых чисел со знаком, могут представлять даты только до 19 января 2038 года. Современные 64-битные системы не имеют этого ограничения.</dd><dt>Как мне преобразовать миллисекунды?</dt><dd>Некоторые системы используют миллисекунды вместо секунд. Разделите метку времени в миллисекундах на 1000, чтобы преобразовать ее в секунды, прежде чем вводить ее здесь.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"timestamp":"Временная метка Unix (секунды)","utc":"Дата и время по всемирному координированному времени","local":"Ваше местное время","date_to_ts":"Преобразование даты в метку времени","ts_out":"Временная метка Unix","utcnote":"UTC","invalid":"Недействительный"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/unixepoch.js" defer></script>
+</body>
+</html>

@@ -3,18 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prime Number Checker — is this number prime?</title>
-<meta name="description" content="Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization.">
+<title>پرائم نمبر چیکر - کیا یہ نمبر پرائم ہے؟</title>
+<meta name="description" content="مفت پرائم نمبر چیکر۔ فوری طور پر معلوم کرنے کے لیے کوئی بھی مثبت عدد درج کریں کہ آیا یہ پرائم ہے۔ تمام تقسیم کار اور بنیادی فیکٹرائزیشن بھی دکھاتا ہے۔">
 <link rel="canonical" href="https://mikaio.dev/ur/primechecker/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/primechecker/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/primechecker/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/primechecker/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/primechecker/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/primechecker/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/primechecker/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/primechecker/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/primechecker/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/primechecker/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/primechecker/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/primechecker/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Prime Number Checker — is this number prime?">
-<meta property="og:description" content="Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization.">
+<meta property="og:title" content="پرائم نمبر چیکر - کیا یہ نمبر پرائم ہے؟">
+<meta property="og:description" content="مفت پرائم نمبر چیکر۔ فوری طور پر معلوم کرنے کے لیے کوئی بھی مثبت عدد درج کریں کہ آیا یہ پرائم ہے۔ تمام تقسیم کار اور بنیادی فیکٹرائزیشن بھی دکھاتا ہے۔">
 <meta property="og:url" content="https://mikaio.dev/ur/primechecker/">
 <meta property="og:locale" content="ur">
 <meta name="twitter:card" content="summary">
@@ -62,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -108,18 +117,18 @@ textarea{min-height:120px;resize:vertical}
 .glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
 .glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
 </style>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Prime Number Checker — is this number prime?","url":"https://mikaio.dev/ur/primechecker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"Free prime number checker. Enter any positive integer to instantly find out if it is prime. Also shows all divisors and the prime factorization."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"Prime Number Checker","item":"https://mikaio.dev/ur/primechecker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a prime number?","acceptedAnswer":{"@type":"Answer","text":"A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by modern convention."}},{"@type":"Question","name":"What is prime factorization?","acceptedAnswer":{"@type":"Answer","text":"Every integer greater than 1 can be expressed as a product of prime numbers in exactly one way (the Fundamental Theorem of Arithmetic). For example, 60 = 2 × 2 × 3 × 5."}},{"@type":"Question","name":"How large a number can I check?","acceptedAnswer":{"@type":"Answer","text":"The tool works efficiently for numbers up to about 10 million using trial division. Very large numbers may take a moment to process."}}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"پرائم نمبر چیکر - کیا یہ نمبر پرائم ہے؟","url":"https://mikaio.dev/ur/primechecker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"مفت پرائم نمبر چیکر۔ فوری طور پر معلوم کرنے کے لیے کوئی بھی مثبت عدد درج کریں کہ آیا یہ پرائم ہے۔ تمام تقسیم کار اور بنیادی فیکٹرائزیشن بھی دکھاتا ہے۔"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"پرائم نمبر چیکر","item":"https://mikaio.dev/ur/primechecker/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"بنیادی نمبر کیا ہے؟","acceptedAnswer":{"@type":"Answer","text":"بنیادی نمبر 1 سے بڑا مثبت عدد ہے جس میں 1 اور خود کے علاوہ کوئی مثبت تقسیم نہیں ہوتا ہے۔ پہلے پرائمز 2، 3، 5، 7، 11، 13، 17، 19، 23 اور 29 ہیں۔ جدید کنونشن کے مطابق نمبر 1 کو پرائم نہیں سمجھا جاتا ہے۔"}},{"@type":"Question","name":"پرائم فیکٹرائزیشن کیا ہے؟","acceptedAnswer":{"@type":"Answer","text":"1 سے بڑے ہر عدد کو بالکل ایک طریقے سے بنیادی اعداد کی پیداوار کے طور پر ظاہر کیا جا سکتا ہے (ریاضی کا بنیادی نظریہ)۔ مثال کے طور پر، 60 = 2 × 2 × 3 × 5۔"}},{"@type":"Question","name":"میں کتنی بڑی تعداد کو چیک کر سکتا ہوں؟","acceptedAnswer":{"@type":"Answer","text":"یہ آلہ آزمائشی ڈویژن کا استعمال کرتے ہوئے تقریباً 10 ملین تک کی تعداد کے لیے مؤثر طریقے سے کام کرتا ہے۔ بہت بڑی تعداد پر کارروائی میں کچھ لمحہ لگ سکتا ہے۔"}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/ur/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="سائٹ نیویگیشن">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/primechecker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/primechecker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/primechecker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/primechecker/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/primechecker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/primechecker/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/primechecker/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>Prime Number Checker</span></nav>
-  <h1>Prime Number Checker</h1>
-  <p class="lead">Enter a positive integer to check if it is prime and see its divisors and prime factorization.</p>
-  <section class="widget" id="tool"><form id="prime-form"><div class="row"><div class="field"><label for="prime-n">Number</label><input type="number" id="prime-n" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="big" id="prime-out">—</span></div><div id="prime-factors" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>پرائم نمبر چیکر</span></nav>
+  <h1>پرائم نمبر چیکر</h1>
+  <p class="lead">یہ چیک کرنے کے لیے ایک مثبت عدد درج کریں کہ آیا یہ پرائم ہے اور اس کے تقسیم اور بنیادی فیکٹرائزیشن دیکھیں۔</p>
+  <section class="widget" id="tool"><form id="prime-form"><div class="row"><div class="field"><label for="prime-n">نمبر</label><input type="number" id="prime-n" step="1" min="1" inputmode="numeric"></div></div><div class="result"><span class="big" id="prime-out">—</span></div><div id="prime-factors" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
   <article class="content">
     <h2>کیا یہ عدد مفرد ہے؟</h2>
 <p>مفرد عدد ریاضی کے سب سے بنیادی تصورات میں سے ایک ہے — ایک ایسا مثبت عدد صحیح جو 1 سے بڑا ہو اور جسے 1 اور خود اپنے سوا کسی اور عدد سے پوری طرح تقسیم نہ کیا جا سکے۔ کوئی دیا گیا عدد مفرد ہے یا نہیں، یہ سوال ہزاروں سال سے ریاضی دانوں کو مسحور کیے ہوئے ہے اور آج کی خفیہ کاری (کرپٹوگرافی) میں بھی اس کی عملی اہمیت برقرار ہے۔ یہ ٹول آپ کے درج کردہ کسی بھی عدد کا جواب فوراً دیتا ہے، اور ساتھ ہی اس کے تمام تقسیم کاروں کی مکمل فہرست اور اس کا جزوی تجزیہ بھی دکھاتا ہے۔</p>
@@ -145,13 +154,14 @@ textarea{min-height:120px;resize:vertical}
 <p>اقلیدس نے دو ہزار سال سے زیادہ عرصہ پہلے ثابت کر دیا تھا کہ کوئی سب سے بڑا مفرد عدد نہیں ہے — یہ فہرست ہمیشہ کے لیے چلتی رہتی ہے۔ ان کا ثبوت قدیم منطق کا ایک خوبصورت نمونہ ہے: فرض کریں کہ صرف محدود تعداد میں مفرد اعداد ہوتے، ان سب کو آپس میں ضرب دیں اور اس میں ایک جمع کر دیں۔ حاصل ہونے والا نیا عدد فہرست کے کسی بھی مفرد عدد سے مکمل تقسیم نہیں ہو سکتا، کیونکہ ان میں سے کسی سے بھی تقسیم کرنے پر ہمیشہ باقی ایک بچتا ہے، تو یا تو یہ نیا عدد خود مفرد ہے، یا اس کا کوئی اور مفرد عامل ہے جو فرضی مکمل فہرست میں شامل نہیں تھا — دونوں صورتوں میں یہ اس مفروضے سے متصادم ہے کہ فہرست مکمل تھی۔ یہ نفیس دلیل، جس میں کسی اعلیٰ ریاضی کی ضرورت نہیں، آج بھی اس موضوع کی تاریخ کے سب سے معتبر ثبوتوں میں سے ایک ہے۔</p>
 <h2>نجی اور فوری</h2>
 <p>یہ حساب مکمل طور پر آپ کے براؤزر میں چلتا ہے، اس لیے آپ کے لکھتے ہی نتیجہ فوراً سامنے آ جاتا ہے، اور آپ کا درج کردہ کوئی بھی عدد کسی سرور کو نہیں بھیجا جاتا، نہ ریکارڈ کیا جاتا ہے اور نہ کہیں شیئر ہوتا ہے۔</p>
-    <section class="faq"><h2>Prime checker FAQ</h2><dl><dt>What is a prime number?</dt><dd>A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. The first primes are 2, 3, 5, 7, 11, 13, 17, 19, 23, and 29. The number 1 is not considered prime by modern convention.</dd><dt>What is prime factorization?</dt><dd>Every integer greater than 1 can be expressed as a product of prime numbers in exactly one way (the Fundamental Theorem of Arithmetic). For example, 60 = 2 × 2 × 3 × 5.</dd><dt>How large a number can I check?</dt><dd>The tool works efficiently for numbers up to about 10 million using trial division. Very large numbers may take a moment to process.</dd></dl></section>
+    <section class="faq"><h2>پرائم چیکر FAQ</h2><dl><dt>بنیادی نمبر کیا ہے؟</dt><dd>بنیادی نمبر 1 سے بڑا مثبت عدد ہے جس میں 1 اور خود کے علاوہ کوئی مثبت تقسیم نہیں ہوتا ہے۔ پہلے پرائمز 2، 3، 5، 7، 11، 13، 17، 19، 23 اور 29 ہیں۔ جدید کنونشن کے مطابق نمبر 1 کو پرائم نہیں سمجھا جاتا ہے۔</dd><dt>پرائم فیکٹرائزیشن کیا ہے؟</dt><dd>1 سے بڑے ہر عدد کو بالکل ایک طریقے سے بنیادی اعداد کی پیداوار کے طور پر ظاہر کیا جا سکتا ہے (ریاضی کا بنیادی نظریہ)۔ مثال کے طور پر، 60 = 2 × 2 × 3 × 5۔</dd><dt>میں کتنی بڑی تعداد کو چیک کر سکتا ہوں؟</dt><dd>یہ آلہ آزمائشی ڈویژن کا استعمال کرتے ہوئے تقریباً 10 ملین تک کی تعداد کے لیے مؤثر طریقے سے کام کرتا ہے۔ بہت بڑی تعداد پر کارروائی میں کچھ لمحہ لگ سکتا ہے۔</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/primechecker/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/primechecker/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/primechecker/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/primechecker/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/primechecker/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/primechecker/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/primechecker/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/primechecker/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/primechecker/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/primechecker/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/primechecker/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
-  <p><a href="/glossary.html">تمام ٹولز</a></p></footer>
+  <p><a href="/freetools.html">تمام ٹولز</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ur";window.__T={"number":"نمبر"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/primechecker.js" defer></script>
 </body>
 </html>

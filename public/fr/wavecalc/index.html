@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de propriétés d&#39;onde</title>
+<meta name="description" content="Calculez la fréquence, la longueur d’onde et la vitesse des vagues en utilisant v = f x longueur d’onde.">
+<link rel="canonical" href="https://mikaio.dev/fr/wavecalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/wavecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/wavecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/wavecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/wavecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/wavecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/wavecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/wavecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/wavecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/wavecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/wavecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/wavecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculateur de propriétés d&#39;onde">
+<meta property="og:description" content="Calculez la fréquence, la longueur d’onde et la vitesse des vagues en utilisant v = f x longueur d’onde.">
+<meta property="og:url" content="https://mikaio.dev/fr/wavecalc/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de propriétés d'onde","url":"https://mikaio.dev/fr/wavecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculez la fréquence, la longueur d’onde et la vitesse des vagues en utilisant v = f x longueur d’onde."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de propriétés d'onde","item":"https://mikaio.dev/fr/wavecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle est l’équation des vagues ?","acceptedAnswer":{"@type":"Answer","text":"v = f x longueur d'onde. Vitesse des vagues (m/s) = fréquence (Hz) x longueur d'onde (m). Pour le son à 20 C : v = 343 m/s. Pour la lumière : v = 299 792 458 m/s."}},{"@type":"Question","name":"Qu'est-ce que la longueur d'onde de la lumière visible ?","acceptedAnswer":{"@type":"Answer","text":"380-700 nm. Violet : 380-450 nm, Bleu : 450-495 nm, Vert : 495-570 nm, Jaune : 570-590 nm, Rouge : 620-700 nm."}},{"@type":"Question","name":"Fréquence et énergie ?","acceptedAnswer":{"@type":"Answer","text":"E = hf où h est la constante de Planck. Fréquence plus élevée = longueur d'onde plus courte = plus d'énergie par photon."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wavecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wavecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wavecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wavecalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/wavecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wavecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/wavecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wavecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wavecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wavecalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur de propriétés d&#39;onde</span></nav>
+  <h1>Calculateur de propriétés d&#39;onde</h1>
+  <p class="lead">Entrez deux valeurs parmi la fréquence, la longueur d&#39;onde et la vitesse de l&#39;onde pour calculer la troisième en utilisant v = f fois la longueur d&#39;onde.</p>
+  <section class="widget" id="tool"><form id="wc-form"><p style="opacity:0.7;font-size:0.875rem">Entrez 2 valeurs pour calculer la 3ème. Vitesse du son = 343 m/s, vitesse de la lumière = 3e8 m/s.</p><div class="row"><div class="field"><label for="wc-f">Fréquence (Hz)</label><input type="number" id="wc-f" step="any" placeholder="laisser vide" inputmode="decimal"></div><div class="field"><label for="wc-l">Longueur d&#39;onde (m)</label><input type="number" id="wc-l" step="any" placeholder="laisser vide" inputmode="decimal"></div><div class="field"><label for="wc-v">Vitesse des vagues (m/s)</label><input type="number" id="wc-v" step="any" value="343" inputmode="decimal"></div></div><button class="btn" type="submit">Calculer</button></form><div id="wc-out" hidden class="result" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.5rem"></div></section>
+  <article class="content">
+    <h2>À quoi sert le calculateur de propriétés d&#39;onde</h2>
+<p>Entrez deux valeurs parmi la fréquence, la longueur d&#39;onde et la vitesse de l&#39;onde pour calculer la troisième en utilisant v = f fois la longueur d&#39;onde.</p>
+<p>Il s&#39;agit de la version courte, et pour de nombreux visiteurs, c&#39;est la seule partie dont ils ont besoin : l&#39;outil se trouve en haut de cette page, il fonctionne immédiatement et rien en dessous n&#39;est obligatoire. Le reste de cette page est là pour les moments où la réponse seule ne suffit pas : lorsque vous voulez savoir comment le calcul est réellement effectué, où il cesse d&#39;être fiable et que faire du résultat une fois que vous l&#39;avez.</p>
+<h2>Comment l&#39;utiliser</h2>
+<p>Les contrôles sont volontairement peu nombreux. Vous verrez 5 contrôles :</p>
+<ul>
+<li><strong>Fréquence</strong></li>
+<li><strong>Longueur d&#39;onde</strong></li>
+<li><strong>Vitesse des vagues</strong></li>
+<li><strong>laisser vide</strong></li>
+<li><strong>Calculer</strong></li>
+</ul>
+<p>Remplissez ce qui s&#39;applique à vous et les résultats sont mis à jour. Rien n&#39;est obligatoire dans le sens d&#39;être soumis n&#39;importe où — si vous changez d&#39;avis, modifiez la valeur et lisez la nouvelle réponse. Il n&#39;y a pas d&#39;étape de sauvegarde, pas de boîte de dialogue de confirmation et aucun moyen de se tromper de façon permanente, donc essayer plusieurs variantes pour voir comment le résultat évolue n&#39;est pas seulement autorisé, c&#39;est généralement la manière la plus informative d&#39;utiliser un outil comme celui-ci.</p>
+<p>Tout se déroule dans votre propre navigateur. Rien de ce que vous saisissez n&#39;est téléchargé, rien n&#39;est stocké entre les visites, il n&#39;y a aucun compte à créer et il n&#39;y a aucun suivi à refuser. Une fois cette page chargée, elle n&#39;a plus besoin du réseau, elle continue donc à fonctionner si votre connexion est interrompue.</p>
+<h2>Pourquoi une page comme celle-ci existe</h2>
+<p>Travailler une formule à la main est la façon dont vous l’apprenez ; le travailler à la main sous la pression du temps est la raison pour laquelle vous vous trompez. Avoir une implémentation de référence à vérifier signifie qu&#39;un désaccord entre votre réponse et l&#39;outil devient une information - l&#39;un de vous a fait une erreur et découvre quelle est la partie utile.</p>
+<p>Le Web regorge d&#39;outils qui résolvent un problème de trente secondes en exigeant d&#39;abord une adresse e-mail, une décision en matière de cookie et quatre secondes de publicité. Cet échange avait du sens pour quelqu&#39;un, mais il n&#39;avait pas de sens pour celui qui voulait simplement obtenir le numéro. Cette page prend la position opposée : pas d&#39;inscription, pas d&#39;interstitiel, pas de vente incitative et aucune raison de partir une fois que vous avez ce que vous êtes venu chercher.</p>
+<h2>Ce que le résultat vous dit et ne vous dit pas</h2>
+<p>Les constantes utilisent des valeurs standard acceptées et les unités sont indiquées explicitement plutôt que supposées, car la plupart des erreurs dans ce type de travail sont des erreurs d&#39;unité plutôt que des erreurs arithmétiques. Si votre résultat est erroné d&#39;un facteur suspect, les unités sont la première chose à vérifier.</p>
+<p>Il vaut la peine d’être explicite quant aux limites, car les outils sont généralement fiables au-delà du point où ils le méritent. Celui-ci est honnête dans ses entrées : donnez-lui des valeurs précises et il vous donne un calcul précis. Il ne peut pas vous dire si les valeurs que vous lui avez données étaient les bonnes, si vous avez posé la bonne question ou si le contexte auquel vous appliquez la réponse a quelque chose d&#39;important que les entrées n&#39;ont jamais capturé. Ce jugement reste avec vous, et c’est la partie qui compte réellement.</p>
+<h2>Où cela s&#39;intègre-t-il dans un véritable flux de travail</h2>
+<p>Des outils comme celui-ci font rarement tout le travail. Le plus souvent, le calculateur de propriétés des vagues n&#39;est qu&#39;une étape au milieu de quelque chose de plus grand : vous aviez besoin de ce chiffre pour pouvoir continuer ce que vous faisiez réellement. Cela façonne la façon dont la page est construite. Il s&#39;ouvre rapidement, il n&#39;interrompt pas, il ne vous demande pas de vous engager sur quoi que ce soit et il s&#39;écarte dès que vous avez ce que vous êtes venu chercher.</p>
+<p>Cela signifie également que vous devriez vous sentir libre de l’utiliser à plusieurs reprises plutôt qu’avec précaution. Il n&#39;y a aucun coût pour une deuxième tentative et aucune pénalité pour une première réponse erronée, donc le chemin le plus rapide vers une bonne réponse est généralement d&#39;essayer une réponse approximative, d&#39;examiner le résultat et de l&#39;ajuster. Les gens ont tendance à traiter les outils comme si chaque utilisation était coûteuse, ce qui est une habitude héritée des logiciels qui les rendent coûteux. Celui-ci ne le fait pas.</p>
+<h2>Erreurs courantes à éviter</h2>
+<p>La première consiste à faire confiance à un résultat dont vous n’avez pas vérifié l’entrée. Un outil ne peut pas savoir que vous vouliez saisir un chiffre et en saisir un autre, et il présentera la mauvaise réponse avec exactement la même confiance que la bonne. Relisez vos entrées avant de vous fier à la sortie : cela prend deux secondes et détecte la plupart de ce qui ne va pas.</p>
+<p>La seconde consiste à traiter un chiffre comme une réponse à une question qui n’a jamais été posée. Chaque calcul sur cette page répond à quelque chose de précis et précis. L’appliquer à une question proche mais différente est la manière la plus courante pour les gens de se laisser tromper par un outil qui fonctionnait parfaitement tout le temps. Si vous n&#39;êtes pas sûr que la question que vous vous posez correspond à la question à laquelle l&#39;outil répond, cette incertitude est un signal utile et non un obstacle.</p>
+<p>Les questions fréquemment posées ci-dessous couvrent les cas qui reviennent le plus souvent, y compris ceux pour lesquels la réponse honnête est que ce n&#39;est pas le bon outil pour ce que vous essayez de faire.</p>
+<h2>Travailler hors ligne et sur n&#39;importe quel appareil</h2>
+<p>La page est un seul document autonome. Il n&#39;y a pas de framework à télécharger, pas de polices récupérées auprès d&#39;un tiers et pas de balise d&#39;analyse se déclenchant en arrière-plan, c&#39;est pourquoi il se charge rapidement sur une mauvaise connexion et pourquoi il ne coûte rien de rester ouvert dans un onglet auquel vous revenez occasionnellement. Cela fonctionne de la même manière sur un téléphone, une tablette et un ordinateur de bureau ; la mise en page s&#39;adapte, le comportement non.</p>
+<p>Puisqu&#39;aucun serveur n&#39;est impliqué dans le travail proprement dit, il n&#39;y a pas non plus de service à arrêter, aucune limite de débit à atteindre et aucun changement de comportement discret poussé d&#39;ailleurs. Ce que vous avez chargé est ce qui fonctionne. Si vous voulez en être certain, ouvrez la source de la page – toute l’implémentation est là sous une forme lisible, ce que très peu d’outils de ce type peuvent affirmer.</p>
+<h2>Une note sur l&#39;exactitude</h2>
+<p>Les résultats sont calculés avec une arithmétique standard à double précision et affichés dans un nombre raisonnable de positions plutôt que dans chaque chiffre que le matériel peut produire. Un chiffre affiché à deux décimales près ne prétend pas être précis à deux décimales près – il prétend que les entrées que vous avez fournies, prises à leur valeur nominale, produisent ce chiffre. La précision de l&#39;affichage et la précision dans le monde réel sont des choses différentes, et leur confusion est la manière la plus courante pour un outil correct de prendre une mauvaise décision.</p>
+<p>Si un résultat semble erroné, vérifiez les entrées avant de douter de l&#39;arithmétique. En pratique, l&#39;écrasante majorité des réponses surprenantes proviennent d&#39;une valeur saisie dans la mauvaise unité, d&#39;un séparateur décimal lu différemment de ce que vous souhaitiez, ou d&#39;un champ laissé par défaut alors qu&#39;il aurait dû être modifié. Ce n’est une critique envers personne – c’est simplement là où se trouvent les erreurs, et savoir où chercher en premier permet de gagner le plus de temps.</p>
+    <section class="faq"><h2>FAQ sur les vagues</h2><dl><dt>Quelle est l’équation des vagues ?</dt><dd>v = f x longueur d&#39;onde. Vitesse des vagues (m/s) = fréquence (Hz) x longueur d&#39;onde (m). Pour le son à 20 C : v = 343 m/s. Pour la lumière : v = 299 792 458 m/s.</dd><dt>Qu&#39;est-ce que la longueur d&#39;onde de la lumière visible ?</dt><dd>380-700 nm. Violet : 380-450 nm, Bleu : 450-495 nm, Vert : 495-570 nm, Jaune : 570-590 nm, Rouge : 620-700 nm.</dd><dt>Fréquence et énergie ?</dt><dd>E = hf où h est la constante de Planck. Fréquence plus élevée = longueur d&#39;onde plus courte = plus d&#39;énergie par photon.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/wavecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/wavecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/wavecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/wavecalc/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/wavecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/wavecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/wavecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/wavecalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/wavecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/wavecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"instruction":"Entrez 2 valeurs pour calculer la 3ème. Vitesse du son = 343 m/s, vitesse de la lumière = 3e8 m/s.","freq":"Fréquence","wavelength":"Longueur d'onde","speed":"Vitesse des vagues","leave":"laisser vide","calculate":"Calculer"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/wavecalc.js" defer></script>
+</body>
+</html>

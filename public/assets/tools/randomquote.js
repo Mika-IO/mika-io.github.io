@@ -5,7 +5,7 @@
     {t:'In the middle of every difficulty lies opportunity.',a:'Albert Einstein'},
     {t:'It does not matter how slowly you go as long as you do not stop.',a:'Confucius'},
     {t:'The future belongs to those who believe in the beauty of their dreams.',a:'Eleanor Roosevelt'},
-    {t:'It always seems impossible until it's done.',a:'Nelson Mandela'},
+    {t:'It always seems impossible until it\'s done.',a:'Nelson Mandela'},
     {t:'Success is not final, failure is not fatal: it is the courage to continue that counts.',a:'Winston Churchill'},
     {t:'The only limit to our realization of tomorrow will be our doubts of today.',a:'Franklin D. Roosevelt'},
     {t:'Do what you can, with what you have, where you are.',a:'Theodore Roosevelt'},

@@ -9,8 +9,11 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/roundingcalc/">
   <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/roundingcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/roundingcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/roundingcalc/">
   <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/roundingcalc/">
   <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/roundingcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/roundingcalc/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/roundingcalc/">
   <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/roundingcalc/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/roundingcalc/">
@@ -65,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -114,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Rounding Calculator — round numbers to any decimal place","url":"https://mikaio.dev/en/roundingcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free rounding calculator. Round any number to a chosen number of decimal places, or round up or down, instantly and precisely in your browser."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Rounding Calculator","item":"https://mikaio.dev/en/roundingcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do the decimal places mean?","acceptedAnswer":{"@type":"Answer","text":"The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred."}},{"@type":"Question","name":"What is the difference between the three methods?","acceptedAnswer":{"@type":"Answer","text":"Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes."}},{"@type":"Question","name":"How are exact halves handled?","acceptedAnswer":{"@type":"Answer","text":"When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Site navigation">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Rounding Calculator</span></nav>
@@ -144,11 +150,12 @@ textarea{min-height:120px;resize:vertical}
 <p>To use it, enter your number, set the decimal places, choose a method, and read the rounded result. Change any input at any time and the answer keeps pace, so you can round a single figure or explore how different settings affect the same number as often as you like.</p>
     <section class="faq"><h2>Rounding calculator FAQ</h2><dl><dt>What do the decimal places mean?</dt><dd>The number of decimal places is how many digits to keep after the decimal point. Enter 2 to round to hundredths, 0 to round to a whole number, or a negative number such as -2 to round to the nearest hundred.</dd><dt>What is the difference between the three methods?</dt><dd>Round to nearest goes to whichever value is closer, up or down. Round up (ceiling) always goes to the higher value, and round down (floor) always goes to the lower value, which matters for things like pricing or fitting items into boxes.</dd><dt>How are exact halves handled?</dt><dd>When a value sits exactly halfway, round to nearest goes to the higher number, the most familiar everyday rule. Choose round up or round down explicitly if you need to control that.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/roundingcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/roundingcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/roundingcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/roundingcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/roundingcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/roundingcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/roundingcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/roundingcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/roundingcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/roundingcalc/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
-  <p><a href="/glossary.html">All tools</a></p></footer>
+  <p><a href="/freetools.html">All tools</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="en";window.__T={"number":"Number","places":"Decimal places","mode":"Method","nearest":"Round to nearest","up":"Round up","down":"Round down","result":"Rounded"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/roundingcalc.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор времени — слагайте и вычитайте часы, минуты и секунды.</title>
+<meta name="description" content="Бесплатный калькулятор времени. Легко добавляйте или вычитайте часы, минуты и секунды. Отлично подходит для расчета общего рабочего времени, времени в пути и продолжительности.">
+<link rel="canonical" href="https://mikaio.dev/ru/timecalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/timecalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/timecalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/timecalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/timecalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/timecalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/timecalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/timecalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/timecalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/timecalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/timecalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/timecalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Калькулятор времени — слагайте и вычитайте часы, минуты и секунды.">
+<meta property="og:description" content="Бесплатный калькулятор времени. Легко добавляйте или вычитайте часы, минуты и секунды. Отлично подходит для расчета общего рабочего времени, времени в пути и продолжительности.">
+<meta property="og:url" content="https://mikaio.dev/ru/timecalc/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Калькулятор времени — слагайте и вычитайте часы, минуты и секунды.","url":"https://mikaio.dev/ru/timecalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный калькулятор времени. Легко добавляйте или вычитайте часы, минуты и секунды. Отлично подходит для расчета общего рабочего времени, времени в пути и продолжительности."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Калькулятор времени","item":"https://mikaio.dev/ru/timecalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Могу ли я ввести более 24 часов?","acceptedAnswer":{"@type":"Answer","text":"Да. Поле часов принимает любое положительное целое число, поэтому вы можете подсчитать общее количество отработанных часов за несколько дней."}},{"@type":"Question","name":"Что делать, если результат отрицательный?","acceptedAnswer":{"@type":"Answer","text":"Если вычитание дает отрицательный результат, калькулятор показывает его со знаком минус."}},{"@type":"Question","name":"Как посчитать общее количество рабочих часов?","acceptedAnswer":{"@type":"Answer","text":"Введите время начала как Время A (часы от полуночи, например 9 часов 0 минут для 9 утра), время окончания как Время B и выберите «Вычесть». Результат — ваши отработанные часы."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/timecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timecalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Калькулятор времени</span></nav>
+  <h1>Калькулятор времени</h1>
+  <p class="lead">Введите две продолжительности времени и выберите их добавление или вычитание.</p>
+  <section class="widget" id="tool"><form id="tc-form"><div class="row"><div class="field"><label for="tc-h1">Время А</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h1" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m1" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s1" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div><div class="field" style="align-self:flex-end;padding-bottom:0.5rem"><select id="tc-op"><option value="+">+</option><option value="-">−</option></select></div><div class="field"><label for="tc-h2">Время Б</label><div style="display:flex;gap:0.25rem;align-items:center"><input type="number" id="tc-h2" min="0" step="1" style="width:60px" placeholder="h"> : <input type="number" id="tc-m2" min="0" max="59" step="1" style="width:60px" placeholder="m"> : <input type="number" id="tc-s2" min="0" max="59" step="1" style="width:60px" placeholder="s"></div></div></div><div class="result"><span class="hint">Результат: </span><span class="big" id="tc-out">—</span></div></form></section>
+  <article class="content">
+    <h2>Легко добавлять и вычитать продолжительность времени</h2>
+<p>Сложение или вычитание времени кажется простым, пока вы не разберетесь в арифметике. Часы, минуты и секунды используют систему счисления по основанию 60, а не по основанию 10, что означает, что обычная ментальная арифметика не применима напрямую. Прибавление 2 часов 45 минут к 1 часу 30 минут дает 4 часа 15 минут, а не 4:75. Этот калькулятор автоматически выполняет преобразование — введите часы, минуты и секунды для каждой продолжительности, выберите «сложить» или «вычесть», и мгновенно появится правильно отформатированный результат.</p>
+<h2>Частое использование калькулятора времени</h2>
+<p><strong>Общее рабочее время</strong>. Если вы работали с 8:30 до 12:15, а затем с 13:00 до 17:45, сложите два сеанса, чтобы получить общее количество. Введите 3 часа 45 минут утром и 4 часа 45 минут днем; Итого 8 часов 30 минут.</p>
+<p><strong>Время в пути</strong>. Часто к общему времени в пути добавляются сегменты вождения, ходьбы и транзита. Три отдельных этапа по 45 минут, 20 минут и 1 час 10 минут в сумме дают 2 часа 15 минут.</p>
+<p><strong>Отслеживание проектов</strong>: суммирование времени, потраченного на выполнение различных задач в течение дня или недели, дает общее количество оплачиваемых часов. Фрилансеры и подрядчики часто отслеживают время в часах и минутах, и им приходится суммировать несколько записей.</p>
+<p><strong>Спорт и соревнования</strong>: сравнение времени прохождения круга, суммирование времени на этапах в гонке или расчет времени, которое участнику нужно наверстать.</p>
+<p><strong>Приготовление</strong>: можно отслеживать несколько блюд с разным временем приготовления, начиная с разных моментов, добавляя прошедшее время.</p>
+<h2>Система Base-60</h2>
+<p>Время использует шестидесятеричную арифметику (по основанию 60), унаследованную от древней вавилонской математики. В минуте 60 секунд, а в часе 60 минут, поэтому перенос секунд в минуты происходит через 60, а не через 100. Вот почему простое десятичное сложение дает неправильные результаты для времени: 45 минут + 30 минут = 75 минут = 1 час 15 минут, а не 0,75 часа.</p>
+<p>Калькулятор преобразует все входные данные в общее количество секунд, выполняет арифметические действия в секундах, а затем преобразует обратно в часы, минуты и секунды для отображения. Этот подход корректно обрабатывает все переносы и заимствования независимо от введенных значений.</p>
+<h2>Отрицательные результаты</h2>
+<p>Если при вычитании время A меньше времени B, результат будет отрицательным — например, если вы вычтете 3 часа из 1 часа, вы получите минус 2 часа. Калькулятор отображает абсолютное значение со знаком минус. Это может быть полезно для понимания того, насколько вы превысили бюджет или цель.</p>
+<h2>Часы после 24</h2>
+<p>В отличие от часов, поле часов принимает любое неотрицательное целое число, поэтому вы можете работать с продолжительностью 48 часов, 100 часов или более. Это полезно для отслеживания многодневных проектов, общего времени марафона или любой другой крупномасштабной арифметики времени.</p>
+<h2>Как пользоваться калькулятором</h2>
+<p>Введите часы, минуты и секунды для первой продолжительности, выберите, добавить или вычесть, затем введите вторую длительность таким же образом. Результат появляется сразу в правильно просчитанных часах, минутах и ​​секундах — вам никогда не придется вручную вычислять, что 75 минут должны отображаться как 1 час 15 минут, поскольку калькулятор всегда нормирует результат за вас.</p>
+<h2>Почему простое сложение идет не так</h2>
+<p>Корень путаницы в том, что продолжительность вроде «1 час 45 минут» на самом деле не является числом 1,45 — это 1 час плюс 45 из 60 минут, значение со смешанной базой, для прямой обработки которого десятичная арифметика никогда не предназначалась. Если вы попытаетесь сложить 1:45 и 0:30, просто сложив цифры, вы получите 1:75, что вообще не является допустимым временем. Калькулятор полностью обходит это, преобразуя все в одну единицу — общее количество секунд — выполняя сложение или вычитание как обычную арифметику для этого одного числа и конвертируя обратно в часы, минуты и секунды только для окончательного отображения. Этот шаблон «преобразовать в одну единицу, вычислить, преобразовать обратно» является стандартным и надежным способом правильной обработки любой арифметики по основанию 60, и это именно то, что происходит за кулисами каждый раз, когда вы нажимаете кнопку «Рассчитать».</p>
+<h2>Спорт и кулинария</h2>
+<p>Сравнение времени прохождения круга, суммирование времени этапов в многоэтапной гонке или определение того, сколько времени участнику нужно, чтобы наверстать упущенное на оставшейся дистанции, — все это распространенные способы использования в спорте. На кухне отслеживать несколько блюд с разным временем приготовления, начавшихся в разные моменты, проще, если вы можете напрямую складывать и вычитать прошедшее время, а не смотреть на несколько отдельных таймеров и выполнять арифметические действия в уме.</p>
+<h2>Общее количество отработанных часов</h2>
+<p>Если вы работали с 8:30 до 12:15, а затем снова с 13:00 до 17:45, подсчет общего количества часов в день означает добавление двух отдельных продолжительностей: 3 часа 45 минут для утреннего сеанса и 4 часа 45 минут для дневного сеанса. В сумме получается 8 часов 30 минут, а не 8:90, которые можно получить при небрежном сложении десятичных дробей. Фрилансеры, подрядчики и все, кто выставляет почасовые счета, регулярно выполняют этот точный расчет, часто суммируя несколько таких сеансов в течение недели, чтобы получить итоговую сумму для счета, и небольшие арифметические ошибки быстро накапливаются, если они выполняются вручную по множеству записей.</p>
+<h2>Частный и мгновенный</h2>
+<p>Все расчеты выполняются полностью в вашем браузере, конвертируясь в общее количество секунд и обратно для корректного отображения результатов, поэтому ничего, что вы вводите, никогда не отправляется на сервер, не регистрируется и не передается другим. Он работает в автономном режиме после загрузки и не ведет учет рассчитанной вами продолжительности.</p>
+    <section class="faq"><h2>Калькулятор времени: часто задаваемые вопросы</h2><dl><dt>Могу ли я ввести более 24 часов?</dt><dd>Да. Поле часов принимает любое положительное целое число, поэтому вы можете подсчитать общее количество отработанных часов за несколько дней.</dd><dt>Что делать, если результат отрицательный?</dt><dd>Если вычитание дает отрицательный результат, калькулятор показывает его со знаком минус.</dd><dt>Как посчитать общее количество рабочих часов?</dt><dd>Введите время начала как Время A (часы от полуночи, например 9 часов 0 минут для 9 утра), время окончания как Время B и выберите «Вычесть». Результат — ваши отработанные часы.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timecalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timecalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timecalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timecalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/timecalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timecalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timecalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timecalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/timecalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timecalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"time_a":"Время А","time_b":"Время Б","result":"Результат"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/timecalc.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الٹی گنتی کا ٹائمر - کسی بھی تاریخ یا ایونٹ کے لئے کاؤنٹ ڈاؤن</title>
+<meta name="description" content="مفت الٹی گنتی ٹائمر۔ مستقبل کی کوئی بھی تاریخ درج کریں اور دیکھیں کہ کتنے دن، گھنٹے، منٹ اور سیکنڈ باقی ہیں۔ آپ کے براؤزر میں کام کرتا ہے، سائن اپ کی ضرورت نہیں ہے۔">
+<link rel="canonical" href="https://mikaio.dev/ur/countdown/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/countdown/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/countdown/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/countdown/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/countdown/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/countdown/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/countdown/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/countdown/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/countdown/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/countdown/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/countdown/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/countdown/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="الٹی گنتی کا ٹائمر - کسی بھی تاریخ یا ایونٹ کے لئے کاؤنٹ ڈاؤن">
+<meta property="og:description" content="مفت الٹی گنتی ٹائمر۔ مستقبل کی کوئی بھی تاریخ درج کریں اور دیکھیں کہ کتنے دن، گھنٹے، منٹ اور سیکنڈ باقی ہیں۔ آپ کے براؤزر میں کام کرتا ہے، سائن اپ کی ضرورت نہیں ہے۔">
+<meta property="og:url" content="https://mikaio.dev/ur/countdown/">
+<meta property="og:locale" content="ur">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"الٹی گنتی کا ٹائمر - کسی بھی تاریخ یا ایونٹ کے لئے کاؤنٹ ڈاؤن","url":"https://mikaio.dev/ur/countdown/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ur","description":"مفت الٹی گنتی ٹائمر۔ مستقبل کی کوئی بھی تاریخ درج کریں اور دیکھیں کہ کتنے دن، گھنٹے، منٹ اور سیکنڈ باقی ہیں۔ آپ کے براؤزر میں کام کرتا ہے، سائن اپ کی ضرورت نہیں ہے۔"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ur/"},{"@type":"ListItem","position":2,"name":"الٹی گنتی ٹائمر","item":"https://mikaio.dev/ur/countdown/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"کیا میں کسی تاریخ پر کسی مخصوص وقت تک گنتی کر سکتا ہوں؟","acceptedAnswer":{"@type":"Answer","text":"جی ہاں تاریخ اور وقت چننے والا آپ کو صحیح گھنٹہ اور منٹ سیٹ کرنے دیتا ہے، اس لیے الٹی گنتی دوسرے کے لیے درست ہے۔"}},{"@type":"Question","name":"جب الٹی گنتی صفر تک پہنچ جاتی ہے تو کیا ہوتا ہے؟","acceptedAnswer":{"@type":"Answer","text":"ڈسپلے سے پتہ چلتا ہے کہ ایونٹ آچکا ہے۔ اگر آپ نیا الٹی گنتی شروع کرنا چاہتے ہیں تو صفحہ کو دوبارہ لوڈ کریں۔"}},{"@type":"Question","name":"اگر میں براؤزر بند کرتا ہوں تو کیا الٹی گنتی محفوظ ہو جاتی ہے؟","acceptedAnswer":{"@type":"Answer","text":"نہیں، آپ کی درج کردہ تاریخ کہیں محفوظ نہیں ہے۔ اگر آپ صفحہ کو دوبارہ لوڈ کرتے ہیں تو آپ کو اسے دوبارہ درج کرنے کی ضرورت ہوگی۔"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ur/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="سائٹ نیویگیشن">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/countdown/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/countdown/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/countdown/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/countdown/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/countdown/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/countdown/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/countdown/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/countdown/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/countdown/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/countdown/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ur/">ہوم</a> › <span>الٹی گنتی ٹائمر</span></nav>
+  <h1>الٹی گنتی ٹائمر</h1>
+  <p class="lead">ایک ہدف کی تاریخ اور وقت چنیں، اختیاری طور پر ایونٹ کو نام دیں، اور ہر سیکنڈ میں الٹی گنتی اپ ڈیٹ دیکھیں۔</p>
+  <section class="widget" id="tool"><div id="cd-app"><div class="row"><div class="field"><label for="cd-date">ہدف کی تاریخ اور وقت</label><input type="datetime-local" id="cd-date"></div><div class="field"><label for="cd-label">ایونٹ کا نام (اختیاری)</label><input type="text" id="cd-label" maxlength="60" placeholder="جیسے میری سالگرہ"></div></div><div id="cd-out" class="result" style="font-size:1.5rem;font-weight:700;min-height:2.5rem">—</div></div></section>
+  <article class="content">
+    <h2>کسی بھی لمحے کا شمار کریں جو اہم ہے۔</h2>
+<p>الٹی گنتی کا ٹائمر مستقبل کی ایک تجریدی تاریخ کو کسی چیز میں بدل دیتا ہے — ایک زندہ، ٹک ٹک نمبر جو واقعہ کو حقیقی اور آسنن محسوس کرتا ہے۔ چاہے آپ سالگرہ، ٹرپ، پروڈکٹ لانچ، امتحان، چھٹی، یا کوئی ذاتی سنگ میل گن رہے ہوں، یہ ٹول آپ کو دکھاتا ہے کہ کتنے دن، گھنٹے، منٹ اور سیکنڈ باقی ہیں۔</p>
+<h2>الٹی گنتی ٹائمر کا استعمال کیسے کریں۔</h2>
+<p>تاریخ اور وقت چننے والا کھولیں اور اپنی ہدف کی تاریخ منتخب کریں۔ چننے والا مستقبل کی کسی بھی تاریخ اور وقت کو قبول کرتا ہے، تاکہ آپ منٹ کے عین مطابق ہو سکیں۔ اگر آپ چاہیں تو، لیبل فیلڈ میں ایونٹ کا نام ٹائپ کریں — &quot;شادی،&quot; &quot;میراتھن،&quot; &quot;نیا سال&quot; — اور یہ الٹی گنتی کے اوپر ظاہر ہوتا ہے۔ جس لمحے سے آپ تاریخ کا انتخاب کرتے ہیں، الٹی گنتی خود بخود چلتی ہے، لمحہ آنے تک ایک وقت میں ایک سیکنڈ کو گھٹا دیتا ہے۔</p>
+<h2>الٹی گنتی کیوں کام کرتی ہے۔</h2>
+<p>ماہرین نفسیات نے طویل عرصے سے نوٹ کیا ہے کہ ایک مقصد کو ٹھوس اور وقت کے پابند بنانے سے حوصلہ بڑھتا ہے۔ جب آپ بالکل دیکھ سکتے ہیں کہ آپ کے پاس اپنی آخری تاریخ تک بیالیس دن، سات گھنٹے اور چودہ منٹ ہیں، تو مستقبل کا خلاصہ کسی ایسی چیز میں بدل جاتا ہے جس کے خلاف آپ منصوبہ بنا سکتے ہیں۔ کاؤنٹ ڈاؤن ٹائمر مارکیٹنگ میں بالکل اسی وجہ سے استعمال کیے جاتے ہیں — فروخت پر ٹک ٹک گھڑی فوری ضرورت پیدا کرتی ہے — لیکن وہی اثر ذاتی اہداف پر لاگو ہوتا ہے۔</p>
+<p>ایتھلیٹس اپنی تربیت کو تیز کرنے کے لیے ریس کے دن تک گنتی کرتے ہیں۔ طلباء اپنے نظرثانی کے نظام الاوقات کو تشکیل دینے کے لیے امتحان کی تاریخوں میں شمار کرتے ہیں۔ ایونٹ کے منتظمین دن دکھانے کے لیے گنتی کرتے ہیں۔ بچوں کے لیے جوش و خروش پیدا کرنے کے لیے خاندان تعطیلات کا حساب لگاتے ہیں۔</p>
+<h2>درستگی</h2>
+<p>الٹی گنتی میں براؤزر کی بلٹ ان تاریخ ریاضی کا استعمال کیا گیا ہے، جو کہ ملی سیکنڈ تک درست ہے۔ ظاہر ہونے والا وقت آپ کے آلے کی سسٹم کلاک پر مبنی ہے۔ اگر آپ کے آلے کی گھڑی درست طریقے سے مطابقت پذیر ہے — جو کہ یہ زیادہ تر اسمارٹ فونز اور کمپیوٹرز پر ڈیفالٹ کے طور پر ہوتی ہے — الٹی گنتی دوسری گھڑی تک درست ہوگی۔</p>
+<p>وقت کا حساب ہر سیکنڈ میں حقیقی وقت میں کیا جاتا ہے، اس لیے کوئی بڑھوتری نہیں ہوتی۔ اگر آپ ٹیب کو رات بھر کھلا چھوڑ دیتے ہیں اور صبح واپس آتے ہیں، تو دکھایا گیا وقت اصل گزرے ہوئے وقت کی صحیح عکاسی کرے گا۔</p>
+<h2>ٹائم زونز میں گنتی ہو رہی ہے۔</h2>
+<p>الٹی گنتی آپ کے مقامی وقت کا استعمال کرتی ہے، یہ وہ وقت ہے جس پر آپ کا آلہ سیٹ کیا گیا ہے۔ اگر آپ ساؤ پالو میں ہیں تو لندن میں آدھی رات کو شروع ہونے والے نئے سال کے ایونٹ کے لیے گنتی گنوائیں، آدھی رات کا لندن کا وقت درج کریں، جسے آپ کا براؤزر آپ کے مقامی مساوی میں تبدیل کر دے گا جب آپ ڈیٹ ٹائم ان پٹ سیٹ کریں گے۔</p>
+<h2>بڑے اور چھوٹے واقعات</h2>
+<p>الٹی گنتی عوامی تقریبات جیسے کھیلوں کے فائنلز، انتخابات، یا خلائی لانچوں کے لیے کام کرتی ہے — ایسے لمحات جہاں ہر کوئی ایک ہی لمحے پر متفق ہوتا ہے۔ وہ گہرے ذاتی سنگ میلوں کے لیے بھی کام کرتے ہیں: شادی کی سالگرہ، گریجویشن، بچے کی مقررہ تاریخ، یا کسی ایسے شخص کے ساتھ دوبارہ ملنا جس کی آپ کو یاد آتی ہے۔ اکیلے نمبر ایک واقعہ کے جذبات کو نہیں پکڑ سکتا، لیکن یہ اس واقعہ کو ٹھوس اور قریب محسوس کر سکتا ہے۔</p>
+<h2>نجی اور ہمیشہ ٹک ٹک</h2>
+<p>آپ جو کچھ بھی داخل کرتے ہیں اسے کسی بھی سرور کو نہیں بھیجا جاتا ہے۔ ہدف کی تاریخ اور ایونٹ کا نام مکمل طور پر آپ کے براؤزر میں رہتا ہے۔ کوئی اکاؤنٹ، کوئی لاگ ان، اور کوئی ٹریکنگ نہیں ہے۔ ٹیب بند کریں اور سب کچھ ختم ہو گیا۔</p>
+<p>اپنی تاریخ درج کریں، سیکنڈوں کی گنتی دیکھیں، اور توقعات کو بڑھنے دیں۔</p>
+<h2>الٹی گنتی ٹائمر کے لیے استعمال کرتا ہے۔</h2>
+<p>الٹی گنتی ٹائمر روزمرہ کی زندگی اور پیشہ ورانہ ترتیبات میں بہت سے مقاصد کو پورا کرتے ہیں۔ پروڈکٹیویٹی پریکٹیشنرز انہیں پومودورو تکنیک کے لیے استعمال کرتے ہیں - جس کے درمیان 5 منٹ کے وقفے کے ساتھ 25 منٹ کے بلاکس میں کام کرنا۔ باورچی انہیں انڈے ابالنے، گوشت بھوننے، یا روٹی کا آٹا ثابت کرنے کے لیے استعمال کرتے ہیں۔ اساتذہ انہیں وقتی ٹیسٹوں، سرگرمیوں، اور کلاس روم کے حصوں کے درمیان منتقلی کے لیے استعمال کرتے ہیں۔ میٹنگ کے سہولت کار پریزنٹیشنز اور بات چیت کو شیڈول پر رکھنے کے لیے ٹائمر استعمال کرتے ہیں۔</p>
+<h2>الٹی گنتی کی نفسیات</h2>
+<p>نفسیات میں تحقیق سے پتہ چلتا ہے کہ مرئی الٹی گنتی ٹائمر رویے کو تبدیل کرتے ہیں۔ جب لوگ بقیہ وقت کو کم ہوتے دیکھ سکتے ہیں، تو وہ حد کے نقطہ نظر کو جانتے ہوئے زیادہ مؤثر طریقے سے کام کرتے ہیں۔ جزوی طور پر یہی وجہ ہے کہ پومودورو تکنیک موثر ہے - نظر آنے والا اختتامی نقطہ نرمی کی فوری ضرورت پیدا کرتا ہے۔ اس کے برعکس، خوشگوار تجربات کے لیے الٹی گنتی (چھٹی، ایک تقریب) امید اور مثبت توقع پیدا کرتی ہے۔</p>
+<h2>الٹی گنتی بمقابلہ اسٹاپ واچ</h2>
+<p>ایک سٹاپ واچ صفر سے گنتی ہے، گزرے ہوئے وقت کی پیمائش کرتی ہے۔ الٹی گنتی کا ٹائمر ایک مخصوص مدت سے شروع ہوتا ہے اور صفر تک گنتی ہے۔ دونوں وقت کی پیمائش کرتے ہیں، لیکن وہ مختلف علمی مقاصد کو پورا کرتے ہیں: ایک سٹاپ واچ جواب دیتی ہے &quot;کتنا عرصہ ہو گیا ہے؟&quot; جبکہ الٹی گنتی جواب دیتی ہے &quot;کتنا وقت باقی ہے؟&quot;</p>
+<h2>الارم اور اطلاع</h2>
+<p>جب الٹی گنتی صفر تک پہنچ جاتی ہے، تو یہ ٹول بصری الرٹ ادا کرتا ہے۔ براؤزر کے حفاظتی تقاضوں کا مطلب ہے کہ آڈیو الارم کو چلانے سے پہلے صارف کی بات چیت (ایک کلک) کی ضرورت ہوتی ہے — اگر آپ کو آڈیو الرٹ کی ضرورت ہے، تو یقینی بنائیں کہ آپ نے صفحہ لوڈ کرنے کے بعد اس کے ساتھ تعامل کیا ہے۔</p>
+<h2>ڈیڈ لائن کے لیے الٹی گنتی کا استعمال</h2>
+<p>طویل الٹی گنتی کے لیے — کسی واقعے تک کے دن، مہینوں کی آخری تاریخ تک — الٹی گنتی کا ٹائمر دنوں کے مطابق گھنٹوں پر سیٹ کیا جا سکتا ہے۔ بہت سے لوگ پریزنٹیشن سافٹ ویئر میں کاؤنٹ ڈاؤن ٹائمر استعمال کرتے ہیں تاکہ یہ ظاہر کیا جا سکے کہ سیشن میں کتنا وقت باقی ہے، یا کھیلوں میں گیم کلاک کا باقی وقت دکھانے کے لیے۔</p>
+<h2>الٹی گنتی بمقابلہ اسٹاپ واچ</h2>
+<p>ایک سٹاپ واچ صفر سے گنتی ہے، گزرے ہوئے وقت کی پیمائش کرتی ہے۔ الٹی گنتی کا ٹائمر ایک مخصوص مدت سے شروع ہوتا ہے اور صفر تک گنتی ہے۔ دونوں وقت کی پیمائش کرتے ہیں، لیکن وہ مختلف علمی مقاصد کو پورا کرتے ہیں: ایک سٹاپ واچ جواب دیتی ہے &quot;کتنا عرصہ ہو گیا ہے؟&quot; جبکہ الٹی گنتی جواب دیتی ہے &quot;کتنا وقت باقی ہے؟&quot;</p>
+<h2>الارم اور اطلاع</h2>
+<p>جب الٹی گنتی صفر تک پہنچ جاتی ہے، تو یہ ٹول بصری الرٹ ادا کرتا ہے۔ براؤزر کے حفاظتی تقاضوں کا مطلب ہے کہ آڈیو الارم کو چلانے سے پہلے صارف کی بات چیت (ایک کلک) کی ضرورت ہوتی ہے — اگر آپ کو آڈیو الرٹ کی ضرورت ہے، تو یقینی بنائیں کہ آپ نے صفحہ لوڈ کرنے کے بعد اس کے ساتھ تعامل کیا ہے۔</p>
+<h2>نجی اور فوری</h2>
+<p>ٹائمر مکمل طور پر آپ کے براؤزر میں مقامی JavaScript تاریخ ریاضی کا استعمال کرتے ہوئے چلتا ہے جو فی سیکنڈ میں ایک بار دوبارہ گنتی ہے۔ کہیں بھی کوئی ڈیٹا نہیں بھیجا جاتا ہے — جو ہدف کی تاریخ اور لیبل آپ درج کرتے ہیں وہ کبھی بھی آپ کے آلے کو نہیں چھوڑتے ہیں۔</p>
+    <section class="faq"><h2>الٹی گنتی اکثر پوچھے گئے سوالات</h2><dl><dt>کیا میں کسی تاریخ پر کسی مخصوص وقت تک گنتی کر سکتا ہوں؟</dt><dd>جی ہاں تاریخ اور وقت چننے والا آپ کو صحیح گھنٹہ اور منٹ سیٹ کرنے دیتا ہے، اس لیے الٹی گنتی دوسرے کے لیے درست ہے۔</dd><dt>جب الٹی گنتی صفر تک پہنچ جاتی ہے تو کیا ہوتا ہے؟</dt><dd>ڈسپلے سے پتہ چلتا ہے کہ ایونٹ آچکا ہے۔ اگر آپ نیا الٹی گنتی شروع کرنا چاہتے ہیں تو صفحہ کو دوبارہ لوڈ کریں۔</dd><dt>اگر میں براؤزر بند کرتا ہوں تو کیا الٹی گنتی محفوظ ہو جاتی ہے؟</dt><dd>نہیں، آپ کی درج کردہ تاریخ کہیں محفوظ نہیں ہے۔ اگر آپ صفحہ کو دوبارہ لوڈ کرتے ہیں تو آپ کو اسے دوبارہ درج کرنے کی ضرورت ہوگی۔</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/countdown/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/countdown/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/countdown/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/countdown/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/countdown/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/countdown/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/countdown/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/countdown/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/countdown/">Русский</a></li><li><a hreflang="ur" lang="ur" aria-current="true" href="/ur/countdown/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>مفت، تیز اور نجی براؤزر ٹولز · © 2026</p>
+  <p><a href="/freetools.html">تمام ٹولز</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ur";window.__T={"target_date":"ہدف کی تاریخ اور وقت","event_name":"ایونٹ کا نام (اختیاری)","eg_birthday":"جیسے میری سالگرہ"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/countdown.js" defer></script>
+</body>
+</html>

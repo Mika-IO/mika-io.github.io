@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小费计算器 — 计算小费并分摊账单</title>
+<meta name="description" content="免费小费计算器。输入账单和小费百分比以查看小费金额和总额，然后将其平均分配给任意数量的人。即时且私密。">
+<link rel="canonical" href="https://mikaio.dev/zh/tipcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tipcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tipcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tipcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tipcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tipcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tipcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tipcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tipcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tipcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tipcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tipcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小费计算器 — 计算小费并分摊账单">
+<meta property="og:description" content="免费小费计算器。输入账单和小费百分比以查看小费金额和总额，然后将其平均分配给任意数量的人。即时且私密。">
+<meta property="og:url" content="https://mikaio.dev/zh/tipcalc/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"小费计算器 — 计算小费并分摊账单","url":"https://mikaio.dev/zh/tipcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费小费计算器。输入账单和小费百分比以查看小费金额和总额，然后将其平均分配给任意数量的人。即时且私密。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"小费计算器","item":"https://mikaio.dev/zh/tipcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"我应该给多少小费？","acceptedAnswer":{"@type":"Answer","text":"在许多国家，餐厅为获得良好的服务而支付账单 15% 至 20% 的小费是很常见的，上面的快速按钮可设置为 10%、15%、18% 和 20%。各个国家/地区的风俗习惯差异很大，因此请使用适合您所在地区的金额。"}},{"@type":"Question","name":"我应该给税前还是税后总额小费？","acceptedAnswer":{"@type":"Answer","text":"两者都可以接受，并且差异通常很小。如果您想要精确，请输入税前账单金额，因为小费是为了奖励服务而不是税收。"}},{"@type":"Question","name":"我输入的内容是否已保存？","acceptedAnswer":{"@type":"Answer","text":"不会。计算完全在您的浏览器中运行，因此您输入的账单金额永远不会上传、存储或共享。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tipcalc/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/tipcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tipcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tipcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tipcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tipcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tipcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tipcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tipcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>小费计算器</span></nav>
+  <h1>小费计算器</h1>
+  <p class="lead">输入您的账单和小费百分比，即可立即查看小费和总额。设置人数以平均分摊账单。</p>
+  <section class="widget" id="tool"><form id="tip"><div class="row"><div class="field"><label for="tip-bill">账单金额</label><input type="number" id="tip-bill" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-pct">小费%</label><input type="number" id="tip-pct" value="15" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-people">分割之间</label><input type="number" id="tip-people" value="1" min="1" step="1"></div></div><div class="cc-btns row"><button type="button" class="btn secondary" data-tip="10">10%</button><button type="button" class="btn secondary" data-tip="15">15%</button><button type="button" class="btn secondary" data-tip="18">18%</button><button type="button" class="btn secondary" data-tip="20">20%</button></div><div class="result"><span class="hint">提示: </span><span class="big" id="tip-amount">—</span></div><div class="result"><span class="hint">总计: </span><b id="tip-total">—</b> · <span class="hint">每个人: </span><b id="tip-each">—</b></div></form></section>
+  <article class="content">
+    <h2>计算出小费并分摊账单，无需进行尴尬的数学计算</h2>
+<p>一顿美餐的结束不应该变成一场数学考试。在脑子里计算出小费，将其添加到账单中，然后将整个小费分配给餐桌上的每个人，这正是一种很容易出错的快速算术，尤其是在喝了一杯酒之后。这个小费计算器可以一次性为您完成所有这些工作。输入账单，选择小费百分比，说出有多少人分摊，它就会显示小费、新的总额和每个人欠的金额——在您输入时立即更新。一切都在您的浏览器中运行，因此速度快、私密，即使在餐厅没有信号的情况下也能正常工作。</p>
+<p>最常见的小费率有快速按钮，只需轻按一下即可设置 10%、15%、18% 或 20%，而且您始终可以输入自己的精确数字。更改任何数字，每个结果都会立即重新计算，这使得您可以轻松尝试几个提示级别，并在做出决定之前看看它们真正产生了多大的差异。</p>
+<h2>如何使用</h2>
+<p>首先在第一个框中输入账单总额。然后通过点击预设按钮之一或输入您自己的数字来设置小费百分比。最后，如果您要分摊费用，请设置分担费用的人数。计算器显示三项内容：小费本身的金额、包括小费的总计以及平均分配总额时每个人支付的份额。如果您独自用餐，请将人数保留为一人，忽略每人的数字。</p>
+<p>由于结果实时更新，因此无需按下任何按钮，也无需重置。将小费从 15% 调整到 18%，观察数字的变化；将一个人添加到拆分中并查看每个份额的下降。它旨在快速回答人们在餐桌上提出的真正问题，以便您可以安定下来并继续前进。</p>
+<h2>小费是如何计算的</h2>
+<p>小费只是账单的百分比。为了手动计算，您可以将小费百分比除以 100，然后乘以账单：50 份账单上的 20% 小费为 0.20 × 50 = 10。您实际支付的总额是账单加上小费，因此 50 + 10 = 60。当您分摊账单时，您将最终总数除以人数，因此共享 60 份账单的四位用餐者每人支付 15。计算器完全遵循这些步骤，这就是为什么每人的数字已经包括每个人的小费份额，而不仅仅是食物。</p>
+<p>对于粗略的提示，一个有用的心理捷径是取百分之十——将小数点向左移动一位——然后从那里进行调整。 50 的百分之十等于 5，所以百分之十五的小费大约是 5 加 5 的一半，即 7.50，而百分之二十只是百分之十的两倍，即 10。计算器会为您提供准确的数字，但这些技巧对于快速进行合理性检查非常方便。</p>
+<h2>给多少小费</h2>
+<p>世界各地的小费习惯差异很大，没有单一的正确答案。在美国，人们普遍认为餐厅的餐桌服务小费为税前账单的 15% 至 20%，小费是许多工人收入的重要组成部分。在欧洲大部分地区，服务费通常已包含在内，较小的小费或简单地四舍五入是正常的。在一些国家，给小费并不常见，甚至不鼓励给小费。该计算器上的快速按钮涵盖了常见的 10% 到 20% 范围，但最好的指南始终是您就餐地点的当地习俗。</p>
+<p>还值得考虑一下您要给小费的目的。传统上，小费是对服务质量的奖励，因此许多人会因服务周到、友好而多付一点小费，而当服务质量不够时则少付一点。对于较大的团体，餐厅有时会自动添加服务费，在这种情况下，可能不需要额外的小费 - 在添加更多服务之前总是值得检查账单。</p>
+<h2>超越餐厅</h2>
+<p>尽管它与外出就餐最相关，但同样的计算适用于任何基于百分比的小费或小费。它同样适用于出租车或拼车费用、理发、送餐、酒店服务或酒吧账单。任何地方，只要您想在基本金额上加上一个百分比，或者将结果分给几个人，该工具都可以完成这项工作。因为您完全控制百分比，所以它还可以作为将任何百分比添加到数字并拆分它的快速方法，无论是否涉及小费。</p>
+<h2>私密、即时且免费</h2>
+<p>无需注册，无需付费，也没有广告干扰。整个计算器是在您自己的设备上运行的一小段代码，因此它会在您键入时做出响应，并在没有互联网连接的情况下继续工作 - 在信号微弱的繁忙餐厅中非常有用。您输入的任何金额都不会被上传、记录或共享；它们仅存在于您的屏幕上，并在您关闭页面时消失。</p>
+<p>要使用它，请输入您的账单，选择小费百分比，设置分摊人数，然后读取小费、总额和每人份额。随时调整任何事情，数字保持同步，因此您每次都能快速、公平地结账。</p>
+    <section class="faq"><h2>小费计算器常见问题解答</h2><dl><dt>我应该给多少小费？</dt><dd>在许多国家，餐厅为获得良好的服务而支付账单 15% 至 20% 的小费是很常见的，上面的快速按钮可设置为 10%、15%、18% 和 20%。各个国家/地区的风俗习惯差异很大，因此请使用适合您所在地区的金额。</dd><dt>我应该给税前还是税后总额小费？</dt><dd>两者都可以接受，并且差异通常很小。如果您想要精确，请输入税前账单金额，因为小费是为了奖励服务而不是税收。</dd><dt>我输入的内容是否已保存？</dt><dd>不会。计算完全在您的浏览器中运行，因此您输入的账单金额永远不会上传、存储或共享。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tipcalc/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/tipcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tipcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tipcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tipcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tipcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tipcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tipcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tipcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"bill":"账单金额","tip_pct":"小费%","people":"分割之间","tip_amount":"提示","total":"总计","each":"每个人"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tipcalc.js" defer></script>
+</body>
+</html>

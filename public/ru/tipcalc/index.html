@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор чаевых — подсчитайте чаевые и разделите счет</title>
+<meta name="description" content="Бесплатный калькулятор чаевых. Введите счет и процент чаевых, чтобы увидеть сумму и общую сумму чаевых, а затем разделите их поровну между любым количеством людей. Мгновенно и конфиденциально.">
+<link rel="canonical" href="https://mikaio.dev/ru/tipcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tipcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tipcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tipcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tipcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tipcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tipcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tipcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tipcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tipcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tipcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tipcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Калькулятор чаевых — подсчитайте чаевые и разделите счет">
+<meta property="og:description" content="Бесплатный калькулятор чаевых. Введите счет и процент чаевых, чтобы увидеть сумму и общую сумму чаевых, а затем разделите их поровну между любым количеством людей. Мгновенно и конфиденциально.">
+<meta property="og:url" content="https://mikaio.dev/ru/tipcalc/">
+<meta property="og:locale" content="ru">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Калькулятор чаевых — подсчитайте чаевые и разделите счет","url":"https://mikaio.dev/ru/tipcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ru","description":"Бесплатный калькулятор чаевых. Введите счет и процент чаевых, чтобы увидеть сумму и общую сумму чаевых, а затем разделите их поровну между любым количеством людей. Мгновенно и конфиденциально."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ru/"},{"@type":"ListItem","position":2,"name":"Калькулятор чаевых","item":"https://mikaio.dev/ru/tipcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Сколько я должен дать чаевых?","acceptedAnswer":{"@type":"Answer","text":"Во многих странах за хорошее обслуживание в ресторане принято давать чаевые в размере от 15% до 20% от суммы счета, при этом с помощью кнопок быстрого доступа выше можно установить чаевые в размере 10, 15, 18 и 20 процентов. Таможенные правила сильно различаются в зависимости от страны, поэтому используйте ту сумму, которая соответствует вашему местоположению."}},{"@type":"Question","name":"Должен ли я давать чаевые в размере суммы до уплаты налогов или после уплаты налогов?","acceptedAnswer":{"@type":"Answer","text":"Оба варианта приемлемы, и разница обычно невелика. Если вы хотите быть точным, введите сумму счета до уплаты налогов, поскольку чаевые предназначены для вознаграждения за обслуживание, а не налог."}},{"@type":"Question","name":"Сохраняется ли что-нибудь, что я печатаю?","acceptedAnswer":{"@type":"Answer","text":"Нет. Расчет полностью выполняется в вашем браузере, поэтому введенные вами суммы счетов никогда не загружаются, не сохраняются и не передаются."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ru/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Навигация по сайту">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tipcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tipcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tipcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tipcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tipcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tipcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tipcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/tipcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tipcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a> › <span>Калькулятор чаевых</span></nav>
+  <h1>Калькулятор чаевых</h1>
+  <p class="lead">Введите свой счет и процент чаевых, чтобы сразу увидеть чаевые и их общую сумму. Установите количество человек, чтобы разделить счет поровну.</p>
+  <section class="widget" id="tool"><form id="tip"><div class="row"><div class="field"><label for="tip-bill">Сумма счета</label><input type="number" id="tip-bill" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-pct">Чаевые %</label><input type="number" id="tip-pct" value="15" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-people">Разделить между</label><input type="number" id="tip-people" value="1" min="1" step="1"></div></div><div class="cc-btns row"><button type="button" class="btn secondary" data-tip="10">10%</button><button type="button" class="btn secondary" data-tip="15">15%</button><button type="button" class="btn secondary" data-tip="18">18%</button><button type="button" class="btn secondary" data-tip="20">20%</button></div><div class="result"><span class="hint">Совет: </span><span class="big" id="tip-amount">—</span></div><div class="result"><span class="hint">Итого: </span><b id="tip-total">—</b> · <span class="hint">Каждый человек: </span><b id="tip-each">—</b></div></form></section>
+  <article class="content">
+    <h2>Определите чаевые и разделите счет без неудобных математических вычислений.</h2>
+<p>Конец хорошей еды не должен превращаться в контрольную по математике. Придумать чаевые в уме, добавить их к счету, а затем разделить всю сумму между всеми за столом — это именно тот вид быстрой арифметики, в которой легко ошибиться, особенно после бокала вина. Этот калькулятор чаевых сделает все это за вас сразу. Введите счет, выберите процент чаевых, скажите, сколько человек его разделят, и он покажет чаевые, новую общую сумму и сумму, которую должен каждый человек — мгновенно обновляясь по мере ввода. Все работает в вашем браузере, поэтому он работает быстро, конфиденциально и работает даже тогда, когда в ресторане нет сигнала.</p>
+<p>Есть быстрые кнопки для наиболее распространенных ставок чаевых, поэтому одним нажатием можно установить 10, 15, 18 или 20 процентов, и вместо этого вы всегда можете ввести точную цифру самостоятельно. Измените любое число, и каждый результат будет немедленно пересчитан, что позволяет легко попробовать несколько уровней подсказок и посмотреть, насколько они действительно важны, прежде чем принять решение.</p>
+<h2>Как его использовать</h2>
+<p>Начните с ввода суммы счета в первое поле. Затем установите процент чаевых, нажав одну из предустановленных кнопок или введя свой собственный номер. Наконец, если вы разделяете расходы, укажите, сколько людей разделят их. Калькулятор показывает три вещи: сумму чаевых, общую сумму, включая чаевые, и долю, которую платит каждый человек, если сумма делится поровну. Если вы ужинаете один, просто оставьте количество людей равным одному и не обращайте внимания на цифру на человека.</p>
+<p>Поскольку результаты обновляются в реальном времени, нет необходимости нажимать кнопку и нечего сбрасывать. Отрегулируйте наконечник от 15 до 18 процентов и наблюдайте, как меняются цифры; добавьте человека в разделение и наблюдайте за каждым падением доли. Он предназначен для быстрого ответа на реальные вопросы, которые возникают у людей за столом, чтобы вы могли успокоиться и двигаться дальше.</p>
+<h2>Как рассчитываются чаевые</h2>
+<p>Чаевые — это просто процент от суммы счета. Чтобы найти их вручную, вы делите процент чаевых на сто и умножаете на счет: чаевые в размере 20% на счет в 50 человек составляют 0,20 × 50 = 10. Сумма, которую вы фактически платите, равна счету плюс чаевые, то есть 50 + 10 = 60. Когда вы делите счет, вы делите окончательную сумму на количество человек, поэтому четыре посетителя, делящие общую сумму в 60 человек, платят по 15 каждый. Калькулятор выполняет именно эти шаги, поэтому в расчет на человека уже включены чаевые, а не только еда.</p>
+<p>Полезный мысленный ярлык для грубого совета — взять десять процентов — переместить десятичную запятую на один знак влево — и затем отрегулировать оттуда. Десять процентов от 50 — это 5, поэтому чаевые в пятнадцать процентов — это примерно 5 плюс половина от 5, что составляет 7,50, а двадцать процентов — это просто удвоение десяти процентов, или 10. Калькулятор дает точную цифру, но эти приемы полезны для быстрой проверки здравомыслия.</p>
+<h2>Сколько давать чаевых</h2>
+<p>Обычаи давать чаевые сильно различаются по всему миру, и единого правильного ответа не существует. В Соединенных Штатах за обслуживание столиков в ресторане широко ожидаются чаевые в размере от 15 до 20 процентов от суммы счета до уплаты налогов, а чаевые составляют значительную часть дохода многих работников. В большинстве стран Европы плата за обслуживание часто уже включена, и чаевые меньшего размера или просто округление в большую сторону являются нормой. В некоторых странах чаевые оставляют редко или даже не одобряются. Кнопки быстрого доступа на этом калькуляторе охватывают обычный диапазон от 10 до 20 процентов, но лучшим ориентиром всегда являются местные обычаи того места, где вы едите.</p>
+<p>Также стоит подумать о том, за что вы даете чаевые. Чаевые традиционно вознаграждают за качество обслуживания, поэтому многие люди дают немного больше чаевых за внимательное и дружелюбное обслуживание и немного меньше, если оно не соответствует действительности. Для больших групп рестораны иногда автоматически добавляют плату за обслуживание, и в этом случае дополнительных чаевых можно не ожидать — всегда стоит проверить счет, прежде чем добавлять больше.</p>
+<h2>Помимо ресторанов</h2>
+<p>Хотя это больше всего ассоциируется с ужином вне дома, тот же расчет применим везде, где речь идет о чаевых или вознаграждении в процентах. Это одинаково хорошо работает для такси или совместного проезда, стрижки, доставки еды, гостиничного обслуживания или счета в баре. Везде, где вы хотите добавить процент к базовой сумме и, возможно, разделить результат между несколькими людьми, инструмент выполнит свою работу. Поскольку вы полностью контролируете процент, это также является быстрым способом добавить любой процент к числу и разделить его, независимо от того, используются ли чаевые.</p>
+<h2>Частный, мгновенный и бесплатный</h2>
+<p>Никакой регистрации, никаких затрат и никакой рекламы, которая вам не помешает. Весь калькулятор представляет собой небольшой фрагмент кода, который запускается на вашем устройстве, поэтому он реагирует в тот момент, когда вы вводите текст, и продолжает работать без подключения к Интернету, что действительно полезно в оживленном ресторане со слабым сигналом. Ни одна из введенных вами сумм не загружается, не регистрируется и не передается; они существуют только на вашем экране и исчезают, когда вы закрываете страницу.</p>
+<p>Чтобы использовать его, введите свой счет, выберите процент чаевых, установите количество людей, если вы разделяете их, и зачитайте чаевые, общую сумму и долю на человека. Отрегулируйте что-либо в любое время, и цифры будут идти в ногу со временем, поэтому вы всегда сможете быстро и справедливо оплатить счет.</p>
+    <section class="faq"><h2>Калькулятор чаевых: часто задаваемые вопросы</h2><dl><dt>Сколько я должен дать чаевых?</dt><dd>Во многих странах за хорошее обслуживание в ресторане принято давать чаевые в размере от 15% до 20% от суммы счета, при этом с помощью кнопок быстрого доступа выше можно установить чаевые в размере 10, 15, 18 и 20 процентов. Таможенные правила сильно различаются в зависимости от страны, поэтому используйте ту сумму, которая соответствует вашему местоположению.</dd><dt>Должен ли я давать чаевые в размере суммы до уплаты налогов или после уплаты налогов?</dt><dd>Оба варианта приемлемы, и разница обычно невелика. Если вы хотите быть точным, введите сумму счета до уплаты налогов, поскольку чаевые предназначены для вознаграждения за обслуживание, а не налог.</dd><dt>Сохраняется ли что-нибудь, что я печатаю?</dt><dd>Нет. Расчет полностью выполняется в вашем браузере, поэтому введенные вами суммы счетов никогда не загружаются, не сохраняются и не передаются.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tipcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tipcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tipcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tipcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tipcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tipcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tipcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li><li><a hreflang="ru" lang="ru" aria-current="true" href="/ru/tipcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tipcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Бесплатные, быстрые и приватные инструменты в браузере · © 2026</p>
+  <p><a href="/freetools.html">Все инструменты</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ru";window.__T={"bill":"Сумма счета","tip_pct":"Чаевые %","people":"Разделить между","tip_amount":"Совет","total":"Итого","each":"Каждый человек"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tipcalc.js" defer></script>
+</body>
+</html>

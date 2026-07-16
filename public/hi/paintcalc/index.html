@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>पेंट कैलकुलेटर - आपको कितने पेंट की आवश्यकता है?</title>
+<meta name="description" content="निःशुल्क पेंट कैलकुलेटर. आपको कितने लीटर पेंट की आवश्यकता है, इसकी गणना करने के लिए अपनी दीवार के आयाम, कोट की संख्या और पेंट कवरेज दर्ज करें।">
+<link rel="canonical" href="https://mikaio.dev/hi/paintcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/paintcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/paintcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/paintcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/paintcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/paintcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/paintcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/paintcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/paintcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/paintcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/paintcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/paintcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="पेंट कैलकुलेटर - आपको कितने पेंट की आवश्यकता है?">
+<meta property="og:description" content="निःशुल्क पेंट कैलकुलेटर. आपको कितने लीटर पेंट की आवश्यकता है, इसकी गणना करने के लिए अपनी दीवार के आयाम, कोट की संख्या और पेंट कवरेज दर्ज करें।">
+<meta property="og:url" content="https://mikaio.dev/hi/paintcalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"पेंट कैलकुलेटर - आपको कितने पेंट की आवश्यकता है?","url":"https://mikaio.dev/hi/paintcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"निःशुल्क पेंट कैलकुलेटर. आपको कितने लीटर पेंट की आवश्यकता है, इसकी गणना करने के लिए अपनी दीवार के आयाम, कोट की संख्या और पेंट कवरेज दर्ज करें।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"पेंट कैलकुलेटर","item":"https://mikaio.dev/hi/paintcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"मुझे किस कवरेज दर का उपयोग करना चाहिए?","acceptedAnswer":{"@type":"Answer","text":"अधिकांश मानक आंतरिक दीवार पेंट पहले कोट के लिए प्रति लीटर 10-12 वर्ग मीटर को कवर करता है। प्रीमियम पेंट अधिक कवर कर सकते हैं। निर्माता द्वारा बताई गई कवरेज के लिए पेंट टिन की जाँच करें।"}},{"@type":"Question","name":"क्या मुझे बर्बादी के लिए अतिरिक्त जोड़ना चाहिए?","acceptedAnswer":{"@type":"Answer","text":"हाँ। ऑफकट्स, स्पिल और टच-अप के लिए 10-15% जोड़ें। कैलकुलेटर सैद्धांतिक न्यूनतम देता है; वास्तविक उपयोग हमेशा थोड़ा अधिक होता है।"}},{"@type":"Question","name":"दरवाज़ों और खिड़कियों के बारे में क्या?","acceptedAnswer":{"@type":"Answer","text":"इसमें प्रवेश करने से पहले कुल दीवार क्षेत्र से दरवाजे और खिड़कियों के क्षेत्र को घटा दें, या परिणाम को थोड़े अधिक अनुमान के रूप में उपयोग करें जो उपयोगी बफर प्रदान करता है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/paintcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/paintcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/paintcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/paintcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/paintcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/paintcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/paintcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/paintcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/paintcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/paintcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>पेंट कैलकुलेटर</span></nav>
+  <h1>पेंट कैलकुलेटर</h1>
+  <p class="lead">यह देखने के लिए कि आपको कितने पेंट की आवश्यकता है, दीवार के आयाम, दीवारों की संख्या, कोट और पेंट कवरेज दर दर्ज करें।</p>
+  <section class="widget" id="tool"><form id="paint-form"><div class="row"><div class="field"><label for="paint-w">चौड़ाई</label><input type="number" id="paint-w" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="paint-h">ऊंचाई</label><input type="number" id="paint-h" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="paint-unit">इकाई</label><select id="paint-unit"><option value="m">m</option><option value="ft">ft</option></select></div><div class="field"><label for="paint-walls">दीवारों की संख्या</label><input type="number" id="paint-walls" step="1" min="1" value="1" inputmode="numeric"></div><div class="field"><label for="paint-coats">कोट</label><input type="number" id="paint-coats" step="1" min="1" value="2" inputmode="numeric"></div><div class="field"><label for="paint-cov">कवरेज (एम²/लीटर)</label><input type="number" id="paint-cov" step="any" min="0" value="10" inputmode="decimal"></div></div><div class="result"><span class="hint">पेंट की जरूरत: </span><span class="big" id="paint-out">—</span></div></form></section>
+  <article class="content">
+    <h2>ठीक-ठीक गणना करें कि आपको कितने पेंट की आवश्यकता है</h2>
+<p>बहुत कम पेंट खरीदने का मतलब है प्रोजेक्ट के बीच में हार्डवेयर स्टोर तक की निराशाजनक यात्रा, और इस बात की कोई गारंटी नहीं है कि नया बैच रंग में पूरी तरह से मेल खाएगा। बहुत अधिक खरीदने से पैसे की बर्बादी होती है और निपटान की समस्याएँ पैदा होती हैं। यह पेंट कैलकुलेटर आपको दीवार के आकार, कोट की संख्या और आपके पेंट की कवरेज दर को ध्यान में रखकर किसी भी पेंटिंग प्रोजेक्ट के लिए खरीदने के लिए सही राशि देता है।</p>
+<h2>गणना कैसे काम करती है</h2>
+<p>सूत्र सीधा है: कुल क्षेत्रफल = चौड़ाई × ऊँचाई × दीवारों की संख्या। कुल आवश्यक पेंट = कुल क्षेत्रफल × कोट की संख्या ÷ कवरेज दर प्रति लीटर। एक मानक इंटीरियर पेंट प्रति कोट लगभग 10-12 वर्ग मीटर प्रति लीटर कवर करता है। अधिकांश कमरों को पेशेवर दिखने के लिए दो कोटों की आवश्यकता होती है।</p>
+<p>उदाहरण: 4 दीवारों वाला एक कमरा, प्रत्येक 4 मीटर चौड़ा और 2.5 मीटर ऊंचा, जिसमें प्रति लीटर 10 वर्ग मीटर के पेंट के 2 कोट की आवश्यकता होती है:</p>
+<ul>
+<li>कुल क्षेत्रफल = 4 × (4 × 2.5) = 40 वर्ग मीटर</li>
+<li>पेंट की आवश्यकता = 40 × 2 ÷ 10 = 8 लीटर</li>
+</ul>
+<h2>एक कार्यशील उदाहरण, विस्तारित</h2>
+<p>पिछले उदाहरण से एक ही कमरा लें - चार दीवारें, प्रत्येक 4 मीटर चौड़ी और 2.5 मीटर ऊंची, दो कोट की जरूरत है - लेकिन अब 10 वर्ग मीटर प्रति लीटर को कवर करने वाले मानक इमल्शन से 14 वर्ग मीटर प्रति लीटर को कवर करने वाले प्रीमियम इमल्शन पर स्विच करें। कुल दीवार क्षेत्र किसी भी तरह से 40 वर्ग मीटर रहता है, लेकिन पेंट की आवश्यकता 40 × 2 ÷ 10 = 8 लीटर से घटकर 40 × 2 ÷ 14 ≈ 5.7 लीटर हो जाती है, जो बेहतर कवरिंग उत्पाद चुनने से पूरी तरह से दो लीटर से अधिक की बचत होती है। क्या वह बचत प्रीमियम पेंट की प्रति लीटर ऊंची कीमत को उचित ठहराती है, यह एक गणना है जिसे यह उपकरण अनुमान लगाने के बजाय सीधे जांचना आसान बनाता है।</p>
+<h2>पेंट प्रकार के अनुसार कवरेज दरें</h2>
+<p>कवरेज पेंट के प्रकार और गुणवत्ता के अनुसार काफी भिन्न होता है:</p>
+<ul>
+<li><strong>बजट इंटीरियर इमल्शन</strong>: 8-10 वर्ग मीटर प्रति लीटर</li>
+<li><strong>मानक आंतरिक इमल्शन</strong>: 10-12 वर्ग मीटर प्रति लीटर</li>
+<li><strong>प्रीमियम इंटीरियर इमल्शन</strong>: 12-14 वर्ग मीटर प्रति लीटर</li>
+<li><strong>बाहरी पेंट</strong>: 8-12 वर्ग मीटर प्रति लीटर (सतहें कम चिकनी होने के कारण कम)</li>
+<li><strong>अंडरकोट/प्राइमर</strong>: 10-12 वर्ग मीटर प्रति लीटर</li>
+<li><strong>ग्लॉस/सैटिनवुड (लकड़ी का काम)</strong>: 16-20 वर्ग मीटर प्रति लीटर (चिकनी सतह कम अवशोषित करती है)</li>
+</ul>
+<p>हमेशा पेंट टिन पर निर्माता के बताए गए कवरेज की जांच करें, क्योंकि यह उस विशिष्ट उत्पाद के लिए सबसे विश्वसनीय आंकड़ा है।</p>
+<h2>कोट की संख्या</h2>
+<p>अधिकांश दीवार पेंटिंग परियोजनाओं के लिए, दो कोट सर्वोत्तम परिणाम देते हैं। एक कोट पूर्ण, समान कवरेज प्रदान नहीं कर सकता है - आप पतले धब्बों के माध्यम से मूल रंग या प्राइमर देख सकते हैं। बहुत गहरे रंग से बहुत हल्के रंग में जाते समय, या लाल या पीला (बेहद कम अस्पष्टता वाले रंग) लगाते समय कभी-कभी तीन कोट की आवश्यकता होती है।</p>
+<p>छत को आम तौर पर सीलिंग पेंट के साथ एक कोट की आवश्यकता होती है (जो उच्च कवरेज और ड्रिप प्रतिरोध के लिए तैयार किया जाता है) या बहुत ताज़ा, उज्ज्वल उपस्थिति के लिए दो कोट की आवश्यकता होती है।</p>
+<h2>दरवाज़ों, खिड़कियों और कचरे का हिसाब-किताब</h2>
+<p>कैलकुलेटर खुलेपन को घटाए बिना सकल दीवार क्षेत्र की गणना करता है। नियोजन उद्देश्यों के लिए, आमतौर पर सकल क्षेत्र का उपयोग करना और अतिरिक्त पेंट को बफर के रूप में मानना स्वीकार्य है:</p>
+<ul>
+<li>खुले स्थान (दरवाजे और खिड़कियाँ) जिन्हें दीवार के रंग से नहीं रंगा जाएगा</li>
+<li>रोलर या ब्रश लोड करने से होने वाला अपशिष्ट</li>
+<li>छलकता और टपकता है</li>
+<li>टच-अप कार्य</li>
+</ul>
+<p>यदि आप अधिक सटीक गणना चाहते हैं, तो अपने दरवाजे और खिड़की के क्षेत्रों को मापें और दीवार के आयाम दर्ज करने से पहले उन्हें घटा दें।</p>
+<h2>पेंट की मात्रा चुनना</h2>
+<p>पेंट आमतौर पर 1-लीटर, 2.5-लीटर, 5-लीटर और 10-लीटर टिन में बेचा जाता है। हमेशा अगले उपलब्ध टिन आकार तक गोल करें। उदाहरण के लिए, यदि गणना 8.2 लीटर दिखाती है, तो 5-लीटर टिन और चार 1-लीटर टिन के बजाय दो 5-लीटर टिन (कुल 10 लीटर) खरीदें, जो प्रति लीटर अधिक महंगा है। अगर ठीक से सील किया जाए तो बचे हुए पेंट को टच-अप के लिए संग्रहीत किया जा सकता है।</p>
+<h2>कैलकुलेटर का उपयोग कैसे करें</h2>
+<p>प्रत्येक दीवार की चौड़ाई और ऊंचाई, या औसत दीवार का आकार और दीवारों की संख्या, साथ ही आप कितने कोट लगाने की योजना बना रहे हैं और आपके पेंट की बताई गई कवरेज दर दर्ज करें। आवश्यक कुल लीटर तुरंत दिखाई देता है, और किसी भी मूल्य को समायोजित करने से तुरंत इसकी पुनर्गणना हो जाती है, जिससे यह तुलना करना आसान हो जाता है कि बजट पेंट से बेहतर कवरेज वाले प्रीमियम पेंट पर स्विच करने से आपको कितना खरीदने की आवश्यकता होगी।</p>
+<h2>अगले टिन आकार तक पूर्णांकन क्यों मायने रखता है</h2>
+<p>क्योंकि पेंट सटीक लीटर के बजाय निश्चित टिन आकारों में बेचा जाता है, &quot;मुझे कितना चाहिए&quot; का व्यावहारिक उत्तर हमेशा गणना किए गए आंकड़े से अगला टिन आकार होता है, न कि स्वयं आंकड़ा। उदाहरण के लिए, 8.2-लीटर की आवश्यकता को पूरा करने के लिए 5-लीटर टिन और 1-लीटर टिन खरीदना आमतौर पर प्रति लीटर अधिक महंगा होता है और दो 5-लीटर टिन खरीदने की तुलना में अधिक बेकार होता है, क्योंकि बड़े टिन लगभग हमेशा प्रति लीटर बेहतर कीमत देते हैं और बचा हुआ पेंट वास्तव में भविष्य के टच-अप के लिए उपयोगी होता है अगर ठीक से संग्रहीत किया जाए। सटीक लक्ष्य के बजाय कैलकुलेटर के आउटपुट को न्यूनतम मानने और उदारतापूर्वक गोल करने से, पेंट खरीदने की सबसे आम गलती से बचा जा सकता है: एक दीवार के साथ भाग जाना और पहले से ही खुले, आंशिक रूप से उपयोग किए गए बैच के सटीक रंग से मेल खाने में असमर्थ होना।</p>
+<h2>निजी और तत्काल</h2>
+<p>सभी गणनाएँ पूरी तरह से आपके ब्राउज़र में चलती हैं, इसलिए जैसे ही आप किसी भी इनपुट को समायोजित करते हैं तो परिणाम तुरंत अपडेट हो जाता है और आपके द्वारा दर्ज किया गया कोई भी माप कभी भी सर्वर पर नहीं भेजा जाता है, लॉग इन किया जाता है या साझा किया जाता है, और पेज लोड होने के बाद यह ऑफ़लाइन काम करता है, जब भी आप पेंट के गलियारे में खड़े होकर यह तय करने की कोशिश कर रहे होते हैं कि कितने टिन लेने हैं।</p>
+    <section class="faq"><h2>पेंट कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>मुझे किस कवरेज दर का उपयोग करना चाहिए?</dt><dd>अधिकांश मानक आंतरिक दीवार पेंट पहले कोट के लिए प्रति लीटर 10-12 वर्ग मीटर को कवर करता है। प्रीमियम पेंट अधिक कवर कर सकते हैं। निर्माता द्वारा बताई गई कवरेज के लिए पेंट टिन की जाँच करें।</dd><dt>क्या मुझे बर्बादी के लिए अतिरिक्त जोड़ना चाहिए?</dt><dd>हाँ। ऑफकट्स, स्पिल और टच-अप के लिए 10-15% जोड़ें। कैलकुलेटर सैद्धांतिक न्यूनतम देता है; वास्तविक उपयोग हमेशा थोड़ा अधिक होता है।</dd><dt>दरवाज़ों और खिड़कियों के बारे में क्या?</dt><dd>इसमें प्रवेश करने से पहले कुल दीवार क्षेत्र से दरवाजे और खिड़कियों के क्षेत्र को घटा दें, या परिणाम को थोड़े अधिक अनुमान के रूप में उपयोग करें जो उपयोगी बफर प्रदान करता है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/paintcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/paintcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/paintcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/paintcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/paintcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/paintcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/paintcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/paintcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/paintcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/paintcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"width":"चौड़ाई","height":"ऊंचाई","unit":"इकाई","walls":"दीवारों की संख्या","coats":"कोट","coverage":"कवरेज (एम²/लीटर)","result":"पेंट की जरूरत"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/paintcalc.js" defer></script>
+</body>
+</html>

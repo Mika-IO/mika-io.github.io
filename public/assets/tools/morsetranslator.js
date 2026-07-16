@@ -16,7 +16,7 @@
     }).filter(function(c,i,a){return c!==''||a[i-1]!=='';}).join(' ');
   }
   function decode(m){
-    return m.split(/s*/s*|s{3,}/).map(function(word){
+    return m.split(/\s*\/\s*|\s{3,}/).map(function(word){
       return word.trim().split(/s+/).map(function(sym){return DECODE[sym]||'?';}).join('');
     }).join(' ');
   }

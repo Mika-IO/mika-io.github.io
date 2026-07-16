@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>পিথাগোরিয়ান থিওরেম ক্যালকুলেটর — একটি সমকোণী ত্রিভুজের অনুপস্থিত দিক খুঁজুন</title>
+<meta name="description" content="বিনামূল্যে পিথাগোরিয়ান উপপাদ্য ক্যালকুলেটর। তৃতীয়টি খুঁজে পেতে একটি সমকোণী ত্রিভুজের যেকোনো দুটি বাহু লিখুন। কর্ণ বা উভয় পায়ের জন্য কাজ করে। তাত্ক্ষণিক এবং সঠিক।">
+<link rel="canonical" href="https://mikaio.dev/bn/pythagorean/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/pythagorean/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/pythagorean/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/pythagorean/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/pythagorean/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/pythagorean/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/pythagorean/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/pythagorean/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/pythagorean/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/pythagorean/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/pythagorean/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/pythagorean/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="পিথাগোরিয়ান থিওরেম ক্যালকুলেটর — একটি সমকোণী ত্রিভুজের অনুপস্থিত দিক খুঁজুন">
+<meta property="og:description" content="বিনামূল্যে পিথাগোরিয়ান উপপাদ্য ক্যালকুলেটর। তৃতীয়টি খুঁজে পেতে একটি সমকোণী ত্রিভুজের যেকোনো দুটি বাহু লিখুন। কর্ণ বা উভয় পায়ের জন্য কাজ করে। তাত্ক্ষণিক এবং সঠিক।">
+<meta property="og:url" content="https://mikaio.dev/bn/pythagorean/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"পিথাগোরিয়ান থিওরেম ক্যালকুলেটর — একটি সমকোণী ত্রিভুজের অনুপস্থিত দিক খুঁজুন","url":"https://mikaio.dev/bn/pythagorean/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে পিথাগোরিয়ান উপপাদ্য ক্যালকুলেটর। তৃতীয়টি খুঁজে পেতে একটি সমকোণী ত্রিভুজের যেকোনো দুটি বাহু লিখুন। কর্ণ বা উভয় পায়ের জন্য কাজ করে। তাত্ক্ষণিক এবং সঠিক।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"পিথাগোরিয়ান থিওরেম ক্যালকুলেটর","item":"https://mikaio.dev/bn/pythagorean/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"পিথাগোরিয়ান উপপাদ্য কি?","acceptedAnswer":{"@type":"Answer","text":"পা a এবং b এবং কর্ণ সি সহ একটি সমকোণী ত্রিভুজের জন্য, উপপাদ্যটি বলে যে a² + b² = c²। কর্ণ সর্বদা সমকোণের বিপরীত দিক এবং সর্বদা দীর্ঘতম দিক।"}},{"@type":"Question","name":"যদি আমি কর্ণ এবং অন্য পা জানি তবে আমি কি একটি পা খুঁজে পেতে পারি?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ। আপনি যদি c এবং a জানেন, তাহলে b = √(c² − a²)। c এবং a তে মান লিখুন এবং b ফাঁকা রাখুন।"}},{"@type":"Question","name":"আমি কি ইউনিট ব্যবহার করতে পারি?","acceptedAnswer":{"@type":"Answer","text":"যেকোনো সামঞ্জস্যপূর্ণ একক: মিটার, ফুট, সেন্টিমিটার, ইঞ্চি। ফলাফল ইনপুট হিসাবে একই ইউনিট."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pythagorean/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/pythagorean/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/pythagorean/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/pythagorean/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/pythagorean/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/pythagorean/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/pythagorean/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/pythagorean/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/pythagorean/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/pythagorean/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>পিথাগোরিয়ান থিওরেম ক্যালকুলেটর</span></nav>
+  <h1>পিথাগোরিয়ান থিওরেম ক্যালকুলেটর</h1>
+  <p class="lead">একটি সমকোণী ত্রিভুজের যেকোনো দুটি বাহু লিখুন এবং তৃতীয়টি ফাঁকা রাখুন। অনুপস্থিত দিক স্বয়ংক্রিয়ভাবে গণনা করা হয়.</p>
+  <section class="widget" id="tool"><form id="pyth-form"><div class="row"><div class="field"><label for="pyth-a">পার্শ্ব a</label><input type="number" id="pyth-a" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="pyth-b">পাশ খ</label><input type="number" id="pyth-b" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="pyth-c">হাইপোটেনাস গ</label><input type="number" id="pyth-c" step="any" min="0" inputmode="decimal"></div></div><div class="result"><span class="hint">অনুপস্থিত দিক: </span><span class="big" id="pyth-out">—</span></div><p style="font-size:0.85rem;opacity:0.6;margin-top:0.5rem">একটি ক্ষেত্র খালি রাখুন - এটি অন্য দুটি থেকে গণনা করা হবে।</p></form></section>
+  <article class="content">
+    <h2>অবিলম্বে একটি সমকোণী ত্রিভুজের যেকোনো বাহু খুঁজুন</h2>
+<p>পীথাগোরিয়ান উপপাদ্য হল গণিতের সবথেকে উপযোগী এবং বহুল পরিচিত ফলাফলগুলির মধ্যে একটি। যেকোনো সমকোণী ত্রিভুজের জন্য—একটি ত্রিভুজ যার একটি কোণ ঠিক 90 ডিগ্রির সমান—কর্ণের বর্গটি অন্য দুটি বাহুর বর্গক্ষেত্রের সমষ্টির সমান। এই ক্যালকুলেটরটি আপনাকে তিনটি দিকের যেকোনো একটি খুঁজে বের করতে দেয় যখন আপনি অন্য দুটি জানেন।</p>
+<h2>নেভিগেশন এবং মৃত হিসাব</h2>
+<p>স্যাটেলাইট পজিশনিং বিদ্যমান থাকার আগে, নেভিগেটররা ডেড রেকনিং-এর উপর নির্ভর করত - একটি পরিচিত প্রারম্ভিক বিন্দু, শিরোনাম, গতি এবং অতিবাহিত সময় থেকে একটি বর্তমান অবস্থান গণনা করা। একটি জাহাজ বা বিমান একই সাথে উত্তর এবং পূর্বে ভ্রমণ করে একটি তির্যক পথ জুড়ে, এবং প্রকৃতপক্ষে পৃথক উত্তর এবং পূর্ব উপাদানগুলি থেকে আচ্ছাদিত সরলরেখার দূরত্ব খুঁজে বের করা এখানে ব্যবহৃত একই উপপাদ্যের একটি প্রত্যক্ষ, বাস্তব প্রয়োগ।</p>
+<h2>সূত্র</h2>
+<p>ক্লাসিক স্টেটমেন্ট হল a² + b² = c², যেখানে a এবং b হল দুটি ছোট বাহু (যাকে পা বলা হয়) এবং c হল কর্ণিক — ডান কোণের বিপরীত দিক এবং সর্বদা দীর্ঘতম দিক। কর্ণ খুঁজে বের করতে: c = √(a² + b²)। একটি পা খুঁজে পেতে: a = √(c² − b²)।</p>
+<h2>কিভাবে ক্যালকুলেটর ব্যবহার করবেন</h2>
+<p>তিনটি মানের যে কোনো দুটি লিখুন — পার্শ্ব a, পার্শ্ব b, এবং কর্ণ c — এবং তৃতীয়টি ফাঁকা রাখুন। টুলটি সনাক্ত করে কোন মান অনুপস্থিত এবং এটি স্বয়ংক্রিয়ভাবে গণনা করে। উদাহরণস্বরূপ, a পাশে 3 এবং b পাশে 4 লিখুন, এবং ক্যালকুলেটর অবিলম্বে কর্ণের জন্য 5 প্রদান করে, বিখ্যাত 3-4-5 সমকোণী ত্রিভুজ নিশ্চিত করে। অথবা কর্ণে 5 এবং a পাশে 3 লিখুন এবং এটি পাশে b এর জন্য 4 প্রদান করে।</p>
+<h2>কেন এটি শুধুমাত্র সমকোণী ত্রিভুজের জন্য কাজ করে</h2>
+<p>সমকোণী ত্রিভুজগুলিতে উপপাদ্যের সীমাবদ্ধতা একটি ছোটখাট প্রযুক্তিগততা নয় - এটি সম্পূর্ণ কারণ সম্পর্কটি এত পরিষ্কার। অন্য যেকোন ত্রিভুজের জন্য, তিনটি বাহুর মধ্যে সম্পর্ক একটি কোণের কোসাইনকে জড়িত করে, একটি আরও সাধারণ ফলাফল যাকে কোসাইনের সূত্র বলা হয়, যা কেবলমাত্র বিশেষ ক্ষেত্রে যেখানে সেই কোণটি ঠিক 90 ডিগ্রি এবং এর কোসাইন তাই শূন্যের ক্ষেত্রে সাধারণ পিথাগোরিয়ান সূত্রে হ্রাস পায়। এই ক্যালকুলেটরটি এমন একটি ত্রিভুজে প্রয়োগ করার চেষ্টা করার আগে যা প্রকৃতপক্ষে একটি সমকোণী ত্রিভুজ নয়, এটি জানা মূল্যবান, কারণ এটি করা একটি সহায়ক সতর্কতার পরিবর্তে নীরবে একটি অর্থহীন সংখ্যা তৈরি করবে।</p>
+<h2>ব্যবহারিক অ্যাপ্লিকেশন</h2>
+<p><strong>নির্মাণ এবং কাঠমিস্ত্রি</strong>: একটি কোণা বর্গাকার (একটি সত্য সমকোণ) নিশ্চিত করা হল শারীরিক কাজে পিথাগোরিয়ান উপপাদ্যের সবচেয়ে সাধারণ ব্যবহারগুলির মধ্যে একটি। ক্লাসিক 3-4-5 পদ্ধতি — এক প্রাচীর বরাবর 3 ইউনিট পরিমাপ করা, সংলগ্ন প্রাচীর বরাবর 4 ইউনিট, এবং তির্যক পরিমাপ 5 ইউনিট পরীক্ষা করা — হাজার হাজার বছর ধরে নির্মাতারা ব্যবহার করে আসছে। ক্যালকুলেটর যেকোনো পরিমাপের জন্য এটিকে সাধারণীকরণ করে।</p>
+<p><strong>স্ক্রিন এবং ডিসপ্লের মাপ</strong>: নির্মাতারা যখন তির্যক স্ক্রীনের আকার অনুসারে টেলিভিশন বা মনিটরের বিজ্ঞাপন দেয়, তখন তারা পর্দার প্রস্থ এবং উচ্চতা দ্বারা গঠিত আয়তক্ষেত্রের কর্ণ দেয়। আপনি যদি তির্যক এবং আকৃতির অনুপাত জানেন তবে পিথাগোরিয়ান উপপাদ্য আপনাকে প্রকৃত প্রস্থ এবং উচ্চতা খুঁজে পেতে দেয়।</p>
+<p><strong>দূরত্ব গণনা</strong>: একটি সমতল পৃষ্ঠে, স্থানাঙ্ক (x₁, y₁) এবং (x₂, y₂) সহ দুটি বিন্দুর মধ্যে সরলরেখার দূরত্ব হল √((x₂−x₁)² + (y₂−y₁)²), উপপাদ্যটির সরাসরি প্রয়োগ।</p>
+<p><strong>ইঞ্জিনিয়ারিং এবং জরিপ</strong>: একটি তির্যক বন্ধনীর দৈর্ঘ্য গণনা করা, একটি ঢালু ছাদ রেখা, বা বিভিন্ন উচ্চতায় দুটি বিন্দুর মধ্যে একটি কেবল চালানো সবই একই সমকোণী-ত্রিভুজ সম্পর্ককে হ্রাস করে, যা উপপাদ্যটিকে কাঠামোগত পরিকল্পনায় সর্বাধিক ব্যবহৃত সরঞ্জামগুলির মধ্যে একটি করে তোলে৷</p>
+<h2>পর্দার আকার, কাজের উদাহরণ</h2>
+<p>যখন একটি প্রস্তুতকারক একটি &quot;55-ইঞ্চি টেলিভিশন&quot; বিজ্ঞাপন দেয়, তখন সেই সংখ্যাটি হয় তির্যক - পর্দার প্রস্থ এবং উচ্চতা দ্বারা গঠিত আয়তক্ষেত্রের কর্ণ - একা প্রস্থ বা উচ্চতা নয়, যা প্রথমবারের ক্রেতাদের জন্য বিভ্রান্তির একটি সাধারণ উৎস। ডিসপ্লের আকৃতির অনুপাতের সাথে মিলিত হয়ে, আধুনিক টেলিভিশনের জন্য সাধারণত 16:9, পাইথাগোরিয়ান উপপাদ্য আপনাকে প্রকৃত প্রস্থ এবং উচ্চতা পুনরুদ্ধার করতে দেয়: একটি 16:9 স্ক্রীনের জন্য, প্রস্থ এবং উচ্চতা একই 16:9 অনুপাতে থাকে, তাই একটি 55-ইঞ্চি তির্যক চওড়া এবং 72 ইঞ্চি চওড়াভাবে কাজ করে। ক্রয় করার আগে আপনার উপলব্ধ প্রাচীর বা ক্যাবিনেটের জায়গার বিপরীতে পরীক্ষা করার মূল্যের পরিসংখ্যানগুলি একা তির্যকটিকে পুরো গল্প বলে ধরে নেওয়ার পরিবর্তে।</p>
+<h2>ঐতিহাসিক প্রেক্ষাপট</h2>
+<p>উপপাদ্যটির নামকরণ করা হয়েছে সামোসের পিথাগোরাসের নামে, যিনি প্রাচীন গ্রীক গণিতবিদ এবং দার্শনিক যিনি 570-495 খ্রিস্টপূর্বাব্দে বসবাস করতেন, যদিও সম্পর্কটি ব্যাবিলনীয় এবং ভারতীয় গণিতবিদদের মধ্যে বহু শতাব্দী আগে পরিচিত ছিল। প্রায় 1800 খ্রিস্টপূর্বাব্দের ব্যাবিলনীয় ট্যাবলেটগুলি পিথাগোরিয়ান ট্রিপলের তালিকা করে — তিনটি পূর্ণ সংখ্যার সেট যা উপপাদ্যকে সন্তুষ্ট করে — পিথাগোরাসের জন্মের অনেক আগে।</p>
+<h2>পিথাগোরিয়ান ট্রিপল</h2>
+<p>তিনটি পূর্ণ সংখ্যার কিছু সেট a² + b² = c² ঠিক পূরণ করে, কোনো বৃত্তাকার ছাড়াই, এবং এগুলিকে পিথাগোরিয়ান ট্রিপল বলা হয়। 3-4-5 ত্রিভুজটি সবচেয়ে ছোট এবং সবচেয়ে বিখ্যাত, তবে আরও অনেকগুলি অসীম রয়েছে: 5-12-13, 8-15-17 এবং 7-24-25 সবই সমানভাবে বৈধ পূর্ণ-সংখ্যার সমকোণী ত্রিভুজ৷ একটি পরিচিত ট্রিপলের প্রতিটি পাশকে একই গুণক দ্বারা গুণ করলে আরেকটি বৈধ ট্রিপল তৈরি হয় — 3-4-5 2 দ্বারা স্কেল করলে 6-8-10 পাওয়া যায় — ঠিক এই কারণেই ক্লাসিক 3-4-5 ছুতার পদ্ধতি এখনও যে কোনও স্কেলে কাজ করে, আপনি একটি ছোট শেলফ বা পুরো বিল্ডিংয়ের কোণে স্কোয়ার করছেন না কেন।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>সমস্ত গণনা সম্পূর্ণরূপে আপনার ব্রাউজারে চলে, তাই আপনি অন্য দুটিতে প্রবেশ করার সাথে সাথে অনুপস্থিত দিকটি উপস্থিত হয় এবং আপনার টাইপ করা কোনো পরিমাপ কখনও সার্ভারে পাঠানো হয় না, লগ করা বা ভাগ করা হয় এবং পৃষ্ঠাটি লোড হয়ে গেলে এটি অফলাইনে কাজ করে।</p>
+    <section class="faq"><h2>পিথাগোরিয়ান উপপাদ্য FAQ</h2><dl><dt>পিথাগোরিয়ান উপপাদ্য কি?</dt><dd>পা a এবং b এবং কর্ণ সি সহ একটি সমকোণী ত্রিভুজের জন্য, উপপাদ্যটি বলে যে a² + b² = c²। কর্ণ সর্বদা সমকোণের বিপরীত দিক এবং সর্বদা দীর্ঘতম দিক।</dd><dt>যদি আমি কর্ণ এবং অন্য পা জানি তবে আমি কি একটি পা খুঁজে পেতে পারি?</dt><dd>হ্যাঁ। আপনি যদি c এবং a জানেন, তাহলে b = √(c² − a²)। c এবং a তে মান লিখুন এবং b ফাঁকা রাখুন।</dd><dt>আমি কি ইউনিট ব্যবহার করতে পারি?</dt><dd>যেকোনো সামঞ্জস্যপূর্ণ একক: মিটার, ফুট, সেন্টিমিটার, ইঞ্চি। ফলাফল ইনপুট হিসাবে একই ইউনিট.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pythagorean/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/pythagorean/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/pythagorean/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/pythagorean/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/pythagorean/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/pythagorean/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/pythagorean/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/pythagorean/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/pythagorean/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/pythagorean/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"side_a":"পার্শ্ব a","side_b":"পাশ খ","hypotenuse":"হাইপোটেনাস গ","missing":"অনুপস্থিত দিক","hint":"একটি ক্ষেত্র খালি রাখুন - এটি অন্য দুটি থেকে গণনা করা হবে।"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/pythagorean.js" defer></script>
+</body>
+</html>

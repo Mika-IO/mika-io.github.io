@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>भिन्न कैलकुलेटर - भिन्नों को जोड़ें, घटाएं, गुणा करें और सरल बनाएं</title>
+<meta name="description" content="मुफ़्त भिन्न कैलकुलेटर. किन्हीं दो भिन्नों को जोड़ें, घटाएं, गुणा करें या विभाजित करें और तुरंत सरलीकृत परिणाम प्राप्त करें। दशमलव समतुल्य भी दर्शाता है।">
+<link rel="canonical" href="https://mikaio.dev/hi/fractioncalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/fractioncalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/fractioncalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/fractioncalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/fractioncalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/fractioncalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/fractioncalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/fractioncalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/fractioncalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/fractioncalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/fractioncalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/fractioncalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="भिन्न कैलकुलेटर - भिन्नों को जोड़ें, घटाएं, गुणा करें और सरल बनाएं">
+<meta property="og:description" content="मुफ़्त भिन्न कैलकुलेटर. किन्हीं दो भिन्नों को जोड़ें, घटाएं, गुणा करें या विभाजित करें और तुरंत सरलीकृत परिणाम प्राप्त करें। दशमलव समतुल्य भी दर्शाता है।">
+<meta property="og:url" content="https://mikaio.dev/hi/fractioncalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"भिन्न कैलकुलेटर - भिन्नों को जोड़ें, घटाएं, गुणा करें और सरल बनाएं","url":"https://mikaio.dev/hi/fractioncalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त भिन्न कैलकुलेटर. किन्हीं दो भिन्नों को जोड़ें, घटाएं, गुणा करें या विभाजित करें और तुरंत सरलीकृत परिणाम प्राप्त करें। दशमलव समतुल्य भी दर्शाता है।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"भिन्न कैलकुलेटर","item":"https://mikaio.dev/hi/fractioncalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"परिणाम कैसे सरलीकृत किये जाते हैं?","acceptedAnswer":{"@type":"Answer","text":"भिन्न को सरलतम रूप में उत्पन्न करने के लिए कैलकुलेटर अंश और हर को उनके सबसे बड़े सामान्य भाजक (जीसीडी) से विभाजित करता है। उदाहरण के लिए, 4/8 को 1/2 तक सरल बनाया गया है।"}},{"@type":"Question","name":"क्या मैं ऋणात्मक भिन्न दर्ज कर सकता हूँ?","acceptedAnswer":{"@type":"Answer","text":"हाँ, एक ऋणात्मक अंश दर्ज करें. उदाहरण के लिए -3/4 नकारात्मक तीन तिमाहियों का प्रतिनिधित्व करता है।"}},{"@type":"Question","name":"यदि हर शून्य है तो क्या होगा?","acceptedAnswer":{"@type":"Answer","text":"शून्य से विभाजन अपरिभाषित है. यदि आप शून्य का हर दर्ज करते हैं तो परिणाम एक त्रुटि दिखाएगा।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/fractioncalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/fractioncalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/fractioncalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/fractioncalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/fractioncalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/fractioncalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/fractioncalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/fractioncalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/fractioncalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/fractioncalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>भिन्न कैलकुलेटर</span></nav>
+  <h1>भिन्न कैलकुलेटर</h1>
+  <p class="lead">दो भिन्न दर्ज करें, एक ऑपरेशन चुनें, और सरलीकृत परिणाम और उसका दशमलव मान देखें।</p>
+  <section class="widget" id="tool"><form id="frac-form"><div class="row"><div class="field" style="max-width:200px"><label>अंश ए</label><div style="display:flex;align-items:center;gap:0.25rem"><input type="number" id="frac-a-num" step="1" placeholder="संख्या" style="width:60px"> / <input type="number" id="frac-a-den" step="1" min="1" placeholder="मांद" style="width:60px"></div></div><div class="field" style="max-width:60px;align-self:flex-end;padding-bottom:0.5rem"><select id="frac-op"><option value="+">+</option><option value="-">−</option><option value="*">×</option><option value="/">÷</option></select></div><div class="field" style="max-width:200px"><label>अंश बी</label><div style="display:flex;align-items:center;gap:0.25rem"><input type="number" id="frac-b-num" step="1" placeholder="संख्या" style="width:60px"> / <input type="number" id="frac-b-den" step="1" min="1" placeholder="मांद" style="width:60px"></div></div></div><div class="result"><span class="hint">नतीजा: </span><span class="big" id="frac-out">—</span></div><div id="frac-decimal" style="opacity:0.7;font-size:0.9rem"></div></form></section>
+  <article class="content">
+    <h2>कलम और कागज के बिना भिन्नों के साथ कार्य करें</h2>
+<p>भिन्न गणित, खाना पकाने, बढ़ईगीरी, इंजीनियरिंग और कई रोजमर्रा की स्थितियों में मौलिक हैं, फिर भी उनके संयोजन के नियमों को मिश्रण करना आसान है। दो भिन्नों को जोड़ने पर एक उभयनिष्ठ हर की आवश्यकता होती है; गुणा करना नहीं है. विभाजन पलटता है और कई गुना बढ़ जाता है। परिणाम को सरल बनाने का अर्थ है सबसे बड़े सामान्य भाजक को खोजना और विभाजित करना। यह कैलकुलेटर उन सभी चरणों को स्वचालित रूप से संभालता है। दो भिन्न दर्ज करें, अपना ऑपरेशन चुनें, और सरलीकृत परिणाम तुरंत दिखाई देगा।</p>
+<h2>भिन्न संक्रियाएँ कैसे कार्य करती हैं</h2>
+<p><strong>जोड़ और घटाव</strong> के लिए एक सामान्य हर की आवश्यकता होती है। 1/3 और 1/4 को जोड़ने के लिए, 3 और 4 का लघुत्तम समापवर्त्य ज्ञात कीजिए, जो कि 12 है। दोनों भिन्नों को रूपांतरित करें: 1/3 4/12 बन जाता है और 1/4 3/12 बन जाता है। अब अंशों को जोड़ें: 7/12. घटाव के लिए भी यही तर्क लागू होता है: एक सामान्य हर में बदलें, फिर अंशों को घटाएँ।</p>
+<p><strong>गुणा</strong> सरल है: अंशों को एक साथ और हर को एक साथ गुणा करें। एक चौथाई का एक तिहाई गुना 3×4 पर 1×1 है, जो 1/12 है। सामान्य विभाजक की कोई आवश्यकता नहीं है।</p>
+<p><strong>विभाजन</strong> दूसरे अंश के व्युत्क्रम से गुणा करके काम करता है। एक तिहाई को एक चौथाई से विभाजित करने पर एक तिहाई गुणा चार बटा एक के बराबर होता है, जो 4/3 है।</p>
+<h2>सरलीकरण</h2>
+<p>किसी भी ऑपरेशन के बाद परिणाम को उसके सरलतम रूप में घटा दिया जाता है। कैलकुलेटर यूक्लिडियन एल्गोरिथ्म का उपयोग करके अंश और हर के सबसे बड़े सामान्य भाजक की गणना करता है और दोनों को इसके द्वारा विभाजित करता है। यदि परिणाम का हर 1 है, तो भिन्न को पूर्ण संख्या के रूप में प्रदर्शित किया जाता है।</p>
+<h2>मिश्रित संख्याएँ और अनुचित भिन्न</h2>
+<p>एक अनुचित भिन्न का अंश उसके हर से बड़ा होता है, जैसे 7/4। यह मिश्रित संख्या 1¾ के बराबर है। कैलकुलेटर सीधे अनुचित भिन्नों के साथ काम करता है - अंश के रूप में 7 और हर के रूप में 4 दर्ज करें। दिखाया गया दशमलव समतुल्य आपको परिणाम की भयावहता को समझने में मदद करता है।</p>
+<h2>भिन्नों को सीखना और सिखाना</h2>
+<p>भिन्न कैलकुलेटर पहली बार नियम सीखने वाले छात्रों के बीच लोकप्रिय हैं। अपने हाथ से गणना किए गए उत्तर को तुरंत जांचने में सक्षम होने से समझ विकसित होती है और त्रुटियों को जल्दी पकड़ लिया जाता है। दशमलव समकक्ष के साथ सरलीकृत परिणाम देखने से भिन्न प्रतिनिधित्व और वास्तविक मान के बीच संबंध मजबूत होता है।</p>
+<p>शिक्षक उदाहरण तैयार करने और समाधानों को शीघ्रता से सत्यापित करने के लिए भिन्न कैलकुलेटर का उपयोग करते हैं। चरण-दर-चरण तर्क - सामान्य हर, अंश जोड़ें, सरलीकरण - वही है चाहे हाथ से किया जाए या कैलकुलेटर से; उपकरण बस अंकगणित को स्वचालित करता है।</p>
+<h2>पाक कला और व्यंजन विधि</h2>
+<p>कई पारंपरिक व्यंजनों में अंशों का उपयोग किया जाता है: आधा कप, तीन चौथाई चम्मच, दो तिहाई पाउंड। किसी रेसिपी को ऊपर या नीचे स्केल करने के लिए स्केलिंग कारक द्वारा सामग्री की मात्रा को गुणा करने की आवश्यकता होती है। यदि किसी रेसिपी में 3/4 कप आटे की आवश्यकता होती है और आप उस रेसिपी से ढाई गुना आटा बनाना चाहते हैं, तो आपको 3/4 × 5/2 = 15/8 = 1 और 7/8 कप की आवश्यकता होगी। कैलकुलेटर इसे सीधे संभालता है।</p>
+<h2>कैलकुलेटर का उपयोग कैसे करें</h2>
+<p>अपने पहले अंश का अंश और हर दर्ज करें, एक ऑपरेशन चुनें - जोड़ें, घटाएं, गुणा करें या विभाजित करें - फिर दूसरा अंश दर्ज करें। परिणाम तुरंत दिखाई देता है, पहले से ही दशमलव समकक्ष के साथ सबसे कम शब्दों में सरलीकृत किया जाता है, ताकि आप एक नज़र में परिमाण की जांच कर सकें। पहले स्वयं एक सामान्य विभाजक खोजने की आवश्यकता नहीं है; आप चाहे जो भी हर दर्ज करें, कैलकुलेटर जोड़ और घटाव को सही ढंग से संभालता है।</p>
+<h2>एक सामान्य विभाजक ढूंढना क्यों काम करता है</h2>
+<p>सामान्य-भाजक चरण को केवल याद रखने के बजाय यह समझना महत्वपूर्ण है कि सामान्य-भाजक कदम क्यों आवश्यक है। 1/3 जैसा अंश और 1/4 जैसा अंश सीधे नहीं जोड़ा जा सकता क्योंकि वे विभिन्न आकार के टुकड़ों का वर्णन करते हैं - किसी चीज़ का एक तिहाई एक ही चीज़ के एक चौथाई से भिन्न आकार का टुकड़ा होता है। दोनों भिन्नों को पहले बारहवें (4/12 और 3/12) में परिवर्तित करने से उन्हें एक समान आकार के टुकड़े के रूप में फिर से लिखा जाता है, इसलिए अंशों को जोड़ने से यह एक सरल गिनती बन जाती है कि आपके पास कुल मिलाकर उन समान टुकड़ों में से कितने हैं: 7/12। गुणन में यह समस्या नहीं होती है क्योंकि भिन्नों को गुणा करना एक भिन्न का अंश लेने का प्रतिनिधित्व करता है, एक अलग ऑपरेशन जो हर की परवाह किए बिना सफाई से जोड़ता है।</p>
+<h2>बढ़ईगीरी और माप</h2>
+<p>शाही माप का उपयोग करने वाले देशों में बढ़ईगीरी और निर्माण में एक इंच के अंश मानक हैं - एक बोर्ड को 3/4 इंच मोटाई के रूप में निर्दिष्ट किया जा सकता है, जिसमें कटौती और जोड़ों को एक इंच के निकटतम 1/16 या 1/32 तक चिह्नित करने की आवश्यकता होती है। कुल लंबाई की जांच करने के लिए कई भिन्नात्मक मापों को जोड़ना, या दो मापों के बीच अंतर निकालना, ठीक उसी तरह की गणना है जो यह उपकरण स्वचालित करता है, जबकि आपके एक हाथ में टेप माप होने पर आपको सामान्य-भाजक अंकगणित से बचा जाता है।</p>
+<h2>किसी रेसिपी को ऊपर या नीचे स्केल करना</h2>
+<p>कई पारंपरिक व्यंजनों में अंशों का उपयोग किया जाता है: आधा कप, तीन चौथाई चम्मच, दो तिहाई पाउंड। किसी रेसिपी को ऊपर या नीचे स्केल करने के लिए प्रत्येक घटक की मात्रा को समान स्केलिंग कारक से गुणा करने की आवश्यकता होती है, और गुणा अक्सर एक अजीब अंश उत्पन्न करता है जिसे सरल बनाने की आवश्यकता होती है। यदि किसी रेसिपी में 3/4 कप आटे की आवश्यकता होती है और आप बैच का ढाई गुना बनाना चाहते हैं, तो गणना 3/4 × 5/2 = 15/8 है, जो 1 और 7/8 कप तक सरल हो जाती है - एक ऐसी गणना जिसे रसोई के समय के दबाव में हाथ से गलत करना आसान है, और यह कैलकुलेटर एक सेकंड के एक अंश में संभाल लेता है।</p>
+<h2>निजी और तत्काल</h2>
+<p>परिणामों को सरल बनाने के लिए सभी गणनाएं पूरी तरह से यूक्लिडियन एल्गोरिदम का उपयोग करके आपके ब्राउज़र में चलती हैं, इसलिए उत्तर तुरंत दिखाई देता है और आपके द्वारा दर्ज किया गया कोई भी नंबर कभी भी सर्वर पर नहीं भेजा जाता है, लॉग इन किया जाता है या साझा किया जाता है। विज़िट के बीच कुछ भी संग्रहीत नहीं किया जाता है, और पृष्ठ लोड होने के बाद टूल ऑफ़लाइन काम करता है, जब भी कोई भिन्न समस्या अप्रत्याशित रूप से आती है तो तैयार हो जाता है।</p>
+    <section class="faq"><h2>भिन्न कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>परिणाम कैसे सरलीकृत किये जाते हैं?</dt><dd>भिन्न को सरलतम रूप में उत्पन्न करने के लिए कैलकुलेटर अंश और हर को उनके सबसे बड़े सामान्य भाजक (जीसीडी) से विभाजित करता है। उदाहरण के लिए, 4/8 को 1/2 तक सरल बनाया गया है।</dd><dt>क्या मैं ऋणात्मक भिन्न दर्ज कर सकता हूँ?</dt><dd>हाँ, एक ऋणात्मक अंश दर्ज करें. उदाहरण के लिए -3/4 नकारात्मक तीन तिमाहियों का प्रतिनिधित्व करता है।</dd><dt>यदि हर शून्य है तो क्या होगा?</dt><dd>शून्य से विभाजन अपरिभाषित है. यदि आप शून्य का हर दर्ज करते हैं तो परिणाम एक त्रुटि दिखाएगा।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/fractioncalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/fractioncalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/fractioncalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/fractioncalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/fractioncalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/fractioncalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/fractioncalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/fractioncalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/fractioncalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/fractioncalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"fraction_a":"अंश ए","fraction_b":"अंश बी","num":"संख्या","den":"मांद","result":"नतीजा"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/fractioncalc.js" defer></script>
+</body>
+</html>

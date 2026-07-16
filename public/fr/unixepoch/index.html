@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unix Timestamp Converter - convertir l&#39;heure de l&#39;époque en date</title>
+<meta name="description" content="Convertisseur d&#39;horodatage Unix gratuit. Convertissez l&#39;heure d&#39;époque Unix en une date et une heure lisibles par l&#39;homme, ou reconvertissez n&#39;importe quelle date en un horodatage Unix. Fonctionne instantanément dans votre navigateur.">
+<link rel="canonical" href="https://mikaio.dev/fr/unixepoch/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/unixepoch/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/unixepoch/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/unixepoch/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/unixepoch/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/unixepoch/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/unixepoch/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/unixepoch/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/unixepoch/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/unixepoch/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/unixepoch/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/unixepoch/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Unix Timestamp Converter - convertir l&#39;heure de l&#39;époque en date">
+<meta property="og:description" content="Convertisseur d&#39;horodatage Unix gratuit. Convertissez l&#39;heure d&#39;époque Unix en une date et une heure lisibles par l&#39;homme, ou reconvertissez n&#39;importe quelle date en un horodatage Unix. Fonctionne instantanément dans votre navigateur.">
+<meta property="og:url" content="https://mikaio.dev/fr/unixepoch/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Unix Timestamp Converter - convertir l'heure de l'époque en date","url":"https://mikaio.dev/fr/unixepoch/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Convertisseur d'horodatage Unix gratuit. Convertissez l'heure d'époque Unix en une date et une heure lisibles par l'homme, ou reconvertissez n'importe quelle date en un horodatage Unix. Fonctionne instantanément dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Convertisseur d'horodatage Unix","item":"https://mikaio.dev/fr/unixepoch/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu’est-ce qu’un horodatage Unix ?","acceptedAnswer":{"@type":"Answer","text":"Un horodatage Unix est un nombre qui représente le nombre de secondes écoulées depuis le 1er janvier 1970 à 00:00:00 UTC (l'époque Unix). Il est utilisé universellement en informatique pour représenter des moments précis sans ambiguïté de fuseau horaire."}},{"@type":"Question","name":"Quel est le problème de l’année 2038 ?","acceptedAnswer":{"@type":"Answer","text":"Les systèmes plus anciens qui stockent les horodatages Unix sous forme d'entiers signés 32 bits ne peuvent représenter que des dates allant jusqu'au 19 janvier 2038. Les systèmes 64 bits modernes n'ont pas cette limitation."}},{"@type":"Question","name":"Comment convertir des millisecondes ?","acceptedAnswer":{"@type":"Answer","text":"Certains systèmes utilisent des millisecondes au lieu de secondes. Divisez l'horodatage en millisecondes par 1 000 pour le convertir en secondes avant de le saisir ici."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Convertisseur d&#39;horodatage Unix</span></nav>
+  <h1>Convertisseur d&#39;horodatage Unix</h1>
+  <p class="lead">Entrez un horodatage Unix pour le convertir en une date lisible, ou choisissez une date pour la convertir en un horodatage Unix.</p>
+  <section class="widget" id="tool"><div id="ue-app"><div class="row"><div class="field"><label for="ue-ts">Horodatage Unix (secondes)</label><input type="number" id="ue-ts" placeholder="e.g. 1700000000" inputmode="numeric"></div></div><div class="result"><span class="hint">Date et heure UTC: </span><b id="ue-utc">—</b></div><div class="result"><span class="hint">Votre heure locale: </span><b id="ue-local">—</b></div><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="ue-dt">Convertir la date en horodatage</label><input type="datetime-local" id="ue-dt"></div><div class="result"><span class="hint">Horodatage Unix: </span><span class="big" id="ue-tsout">—</span></div></div></section>
+  <article class="content">
+    <h2>Convertir les horodatages Unix en dates lisibles par l&#39;homme</h2>
+<p>Les développeurs, les administrateurs de bases de données et toute personne travaillant avec des fichiers journaux ou des API rencontrent régulièrement des horodatages Unix – des nombres longs comme 1700000000 qui représentent un instant dans le temps. Sans convertisseur, ces chiffres n’ont aucun sens pour la plupart des gens. Cet outil convertit instantanément n&#39;importe quel horodatage Unix en une date et une heure lisibles, et reconvertit également n&#39;importe quelle date en son horodatage Unix.</p>
+<h2>Qu’est-ce qu’un horodatage Unix ?</h2>
+<p>Un horodatage Unix compte le nombre de secondes écoulées depuis minuit le 1er janvier 1970, temps universel coordonné (UTC). Ce moment, appelé l&#39;époque Unix, a été choisi comme point de référence lors du développement des systèmes d&#39;exploitation Unix. Chaque seconde qui passe en ajoute une au décompte. L&#39;horodatage 0 représente exactement minuit le 1er janvier 1970 UTC. L&#39;horodatage 1700000000 représente le 14 novembre 2023 à 22:13:20 UTC.</p>
+<p>La beauté des horodatages Unix est qu’ils sont indépendants du fuseau horaire. Un horodatage représente exactement le même moment, quel que soit l’endroit où vous vous trouvez dans le monde. Lorsqu&#39;il est converti en heure locale, le même horodatage produit des lectures d&#39;horloge différentes à Tokyo et à New York, mais ils font référence au même instant physique.</p>
+<h2>Comment utiliser le convertisseur</h2>
+<p>Pour convertir un horodatage en date, collez le numéro d&#39;horodatage dans le champ supérieur. La date et l&#39;heure UTC ainsi que votre équivalent local apparaissent immédiatement. Pour convertir une date en horodatage, utilisez le sélecteur de date dans la section inférieure et l&#39;horodatage correspondant apparaît instantanément.</p>
+<h2>Millisecondes vs secondes</h2>
+<p>Certains systèmes, en particulier les navigateurs Web et les applications JavaScript, utilisent des millisecondes au lieu de secondes pour leurs horodatages. Un appel JavaScript Date.now() renvoie quelque chose comme 1700000000000 – un nombre environ 1 000 fois plus grand que l&#39;horodatage Unix équivalent en secondes. Si le nombre que vous avez comporte environ treize chiffres, il est probablement exprimé en millisecondes : divisez par 1 000 et saisissez le résultat.</p>
+<h2>Le problème de l’année 2038</h2>
+<p>Les premiers systèmes Unix stockaient les horodatages sous forme d&#39;entiers signés 32 bits, pouvant contenir des valeurs allant jusqu&#39;à 2 147 483 647. Cette valeur maximale correspond au 19 janvier 2038 à 03:14:07 UTC. Les systèmes qui stockent les horodatages sous forme d&#39;entiers de 32 bits déborderont à cette date, un problème parfois appelé Y2K38. Les systèmes 64 bits modernes peuvent stocker des horodatages bien au-delà de 292 milliards d&#39;années, ce qui pose problème uniquement pour les logiciels existants qui n&#39;ont pas été mis à jour.</p>
+<h2>Utilisations courantes</h2>
+<p>Les horodatages apparaissent dans les fichiers journaux, les enregistrements de bases de données, les réponses API, les en-têtes de cache, les certificats cryptographiques et dans d&#39;innombrables autres contextes. Leur conversion en dates lisibles facilite le débogage, l&#39;analyse des données, l&#39;audit de conformité et toute situation dans laquelle vous devez comprendre quand quelque chose s&#39;est produit.</p>
+<h2>Pourquoi 1970 a été choisie comme point de départ</h2>
+<p>Le choix du 1er janvier 1970 était essentiellement une décision pratique plutôt qu’une date significative en soi. Unix était développé à la fin des années 1960 et au début des années 1970 aux Bell Labs, et les concepteurs avaient besoin d&#39;un point de référence suffisamment récent pour que les chiffres restent gérables, mais suffisamment précoce pour couvrir la durée de vie probable du système d&#39;exploitation. Arrondir au début des années 1970 était tout simplement pratique. Des décennies plus tard, ce choix arbitraire est devenu profondément ancré : il sous-tend la façon dont presque tous les langages de programmation, bases de données et systèmes d’exploitation représentent le temps en interne, même si la plupart des programmeurs n’ont jamais besoin d’y penser directement.</p>
+<h2>Lire un horodatage sans convertisseur</h2>
+<p>Avec un peu de pratique, vous pouvez vérifier un horodatage dans votre tête. En divisant par 31 536 000 (le nombre de secondes dans une année ordinaire), on obtient un nombre approximatif d’années depuis 1970 – un horodatage à dix chiffres commençant par 1,7 correspond à peu près à l’année 2023, par exemple, puisque 1970 plus environ 53 à 54 ans y atterrissent. Cette estimation mentale approximative est un moyen utile de repérer un horodatage manifestement erroné, comme celui qui est décalé d&#39;un facteur 1 000 parce qu&#39;il était en réalité en millisecondes, avant même que vous n&#39;utilisiez une calculatrice.</p>
+<h2>Horodatages négatifs</h2>
+<p>Étant donné qu&#39;un horodatage Unix est simplement un décompte signé de secondes à partir de l&#39;époque, les dates antérieures au 1er janvier 1970 sont représentées sous forme de nombres négatifs plutôt que d&#39;être non prises en charge. Un horodatage de -86400, par exemple, représente exactement un jour avant l&#39;époque : le 31 décembre 1969. Ce convertisseur gère les valeurs négatives de la même manière que les positives, ce qui est utile pour travailler avec des enregistrements historiques ou des données antérieures à l&#39;ère informatique mais qui sont toujours stockées sous forme d&#39;horodatage Unix.</p>
+<h2>Pourquoi les horodatages sont indépendants du fuseau horaire</h2>
+<p>Le plus grand avantage du stockage d&#39;un moment sous forme d&#39;horodatage Unix plutôt que sous forme de chaîne de date formatée est qu&#39;il contourne complètement les fuseaux horaires pendant le stockage et le calcul. Un horodatage représente exactement un instant physique et n&#39;est traduit en date et en heure du calendrier local qu&#39;au moment où il est affiché à une personne. C&#39;est pourquoi les bases de données, les API et les fichiers journaux stockent majoritairement des horodatages plutôt que des dates locales préformatées : deux serveurs situés dans des fuseaux horaires différents peuvent comparer, trier et calculer les différences entre les horodatages en toute confiance, et n&#39;ont besoin de convertir en une heure locale lisible par l&#39;homme qu&#39;à la toute dernière étape, exactement comme le fait ce convertisseur lorsqu&#39;il affiche côte à côte l&#39;heure UTC et votre équivalent local.</p>
+<h2>Débogage avec horodatages</h2>
+<p>Les développeurs recherchent constamment un convertisseur comme celui-ci lors du débogage. Un journal d&#39;erreurs de serveur estampillé 1700000000 n&#39;a aucun sens en un coup d&#39;œil, mais sa conversion vous indique instantanément si l&#39;erreur s&#39;est produite pendant les heures de bureau, pendant la nuit ou au moment exact d&#39;un déploiement - souvent le moyen le plus rapide de corréler un rapport de bogue avec le changement qui l&#39;a provoqué. Les réponses d&#39;API, les colonnes d&#39;audit de base de données et les en-têtes d&#39;expiration du cache stockent tous généralement des horodatages plutôt que des dates formatées pour la même raison que les moteurs de stockage les préfèrent : un nombre simple trie, compare et calcule correctement sans ambiguïté de paramètres régionaux ou de format, et n&#39;a besoin d&#39;être traduit en une date conviviale qu&#39;à l&#39;étape d&#39;affichage finale, ce qui est exactement le travail que fait cet outil.</p>
+<h2>Privé</h2>
+<p>Tout s&#39;exécute dans votre navigateur à l&#39;aide de l&#39;objet Date intégré de JavaScript, de sorte que la conversion est instantanée dans les deux sens et aucun horodatage ou date que vous saisissez n&#39;est jamais envoyé à un serveur, enregistré ou partagé.</p>
+    <section class="faq"><h2>FAQ sur l&#39;horodatage Unix</h2><dl><dt>Qu’est-ce qu’un horodatage Unix ?</dt><dd>Un horodatage Unix est un nombre qui représente le nombre de secondes écoulées depuis le 1er janvier 1970 à 00:00:00 UTC (l&#39;époque Unix). Il est utilisé universellement en informatique pour représenter des moments précis sans ambiguïté de fuseau horaire.</dd><dt>Quel est le problème de l’année 2038 ?</dt><dd>Les systèmes plus anciens qui stockent les horodatages Unix sous forme d&#39;entiers signés 32 bits ne peuvent représenter que des dates allant jusqu&#39;au 19 janvier 2038. Les systèmes 64 bits modernes n&#39;ont pas cette limitation.</dd><dt>Comment convertir des millisecondes ?</dt><dd>Certains systèmes utilisent des millisecondes au lieu de secondes. Divisez l&#39;horodatage en millisecondes par 1 000 pour le convertir en secondes avant de le saisir ici.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unixepoch/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unixepoch/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unixepoch/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unixepoch/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/unixepoch/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unixepoch/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unixepoch/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unixepoch/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unixepoch/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unixepoch/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"timestamp":"Horodatage Unix (secondes)","utc":"Date et heure UTC","local":"Votre heure locale","date_to_ts":"Convertir la date en horodatage","ts_out":"Horodatage Unix","utcnote":"UTC","invalid":"Invalide"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/unixepoch.js" defer></script>
+</body>
+</html>

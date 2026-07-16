@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de días laborables: cuente los días laborables entre dos fechas</title>
+<meta name="description" content="Calculadora de días laborales gratis. Cuente el número de días hábiles (de lunes a viernes) entre dos fechas cualesquiera, excluyendo los fines de semana. Resultados instantáneos en tu navegador.">
+<link rel="canonical" href="https://mikaio.dev/es/workdays/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/workdays/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/workdays/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/workdays/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/workdays/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/workdays/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/workdays/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/workdays/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/workdays/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/workdays/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/workdays/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/workdays/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de días laborables: cuente los días laborables entre dos fechas">
+<meta property="og:description" content="Calculadora de días laborales gratis. Cuente el número de días hábiles (de lunes a viernes) entre dos fechas cualesquiera, excluyendo los fines de semana. Resultados instantáneos en tu navegador.">
+<meta property="og:url" content="https://mikaio.dev/es/workdays/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de días laborables: cuente los días laborables entre dos fechas","url":"https://mikaio.dev/es/workdays/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Calculadora de días laborales gratis. Cuente el número de días hábiles (de lunes a viernes) entre dos fechas cualesquiera, excluyendo los fines de semana. Resultados instantáneos en tu navegador."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Calculadora de días laborables","item":"https://mikaio.dev/es/workdays/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Esto incluye los días festivos?","acceptedAnswer":{"@type":"Answer","text":"No. Esta calculadora excluye únicamente los fines de semana (sábado y domingo). Los días festivos varían según el país y no se pueden determinar automáticamente sin conocer su ubicación."}},{"@type":"Question","name":"¿Están incluidas las fechas de inicio y finalización?","acceptedAnswer":{"@type":"Answer","text":"Sí, se incluyen tanto la fecha de inicio como la de finalización si caen en día laborable."}},{"@type":"Question","name":"¿Puedo calcular los días laborables del pasado?","acceptedAnswer":{"@type":"Answer","text":"Sí, ingrese dos fechas cualesquiera en cualquier orden y la calculadora arrojará el recuento correcto."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/workdays/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/workdays/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/workdays/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/workdays/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/workdays/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/workdays/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/workdays/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/workdays/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Calculadora de días laborables</span></nav>
+  <h1>Calculadora de días laborables</h1>
+  <p class="lead">Seleccione una fecha de inicio y finalización para contar los días hábiles entre ellas, excluyendo los fines de semana.</p>
+  <section class="widget" id="tool"><form id="wd-form"><div class="row"><div class="field"><label for="wd-from">Fecha de inicio</label><input type="date" id="wd-from"></div><div class="field"><label for="wd-to">Fecha de finalización</label><input type="date" id="wd-to"></div></div><div class="result"><span class="hint">Días laborables: </span><span class="big" id="wd-out">—</span></div><div id="wd-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>Cuente los días hábiles entre dos fechas cualesquiera</h2>
+<p>No todos los días son laborables. Los fines de semana interrumpen el flujo de negocios y saber cuántos días hábiles reales existen entre dos fechas es esencial para la planificación de proyectos, la gestión de contratos, los términos de facturación, los plazos legales y los cálculos de recursos humanos. Esta calculadora cuenta los días de lunes a viernes entre cualquier fecha de inicio y finalización, excluyendo sábados y domingos.</p>
+<h2>Días hábiles versus días calendario</h2>
+<p>Los días calendario cuentan todos los días de principio a fin, incluidos los fines de semana. Los días hábiles (también llamados días laborables o entre semana) excluyen sábados y domingos. La diferencia importa cuando:</p>
+<ul>
+<li>Un contrato especifica un período de entrega de &quot;30 días hábiles&quot;: seis semanas calendario, no 30 días.</li>
+<li>Una fecha límite legal es de 10 días hábiles a partir de un evento; omitir la fecha del calendario sería un error.</li>
+<li>Un pago vence &quot;30 días netos&quot;; esto generalmente significa 30 días calendario, pero algunas jurisdicciones lo interpretan como días hábiles.</li>
+<li>Un período de notificación de empleo de 2 semanas, es decir, 10 días hábiles.</li>
+</ul>
+<h2>Cómo funciona la calculadora</h2>
+<p>La calculadora recorre todos los días entre las dos fechas y cuenta solo los que caen en lunes, martes, miércoles, jueves o viernes. Se incluyen tanto la fecha de inicio como la fecha de finalización si son días laborables. El total también muestra el desglose: días naturales, días laborables y días de fin de semana.</p>
+<h2>Planificación de proyectos</h2>
+<p>Los directores de proyectos utilizan constantemente cálculos de días hábiles. Un plan de proyecto con 20 tareas, cada una de las cuales demora 2 días hábiles, abarca un mínimo de 40 días hábiles (8 semanas calendario). Agregar buffers, dependencias y ciclos de revisión requiere saber exactamente cuántos días hábiles caben en un lapso de calendario determinado.</p>
+<p>La planificación de sprints en el desarrollo de software normalmente utiliza sprints de 2 semanas, que contienen 10 días hábiles. Conocer los días hábiles en un horizonte de hoja de ruta más largo ayuda a estimar cuántos sprints caben entre ahora y un hito importante.</p>
+<h2>Condiciones de facturación y pago.</h2>
+<p>Los términos de pago neto 30, neto 60 y neto 90 casi siempre se expresan en días calendario. Sin embargo, algunas industrias y contratos utilizan días hábiles, lo que hace que la distinción sea importante. Una factura neta de 30 días calendario emitida un lunes vence 30 días calendario después, independientemente de cuántos fines de semana haya entre medio. Un plazo de 30 días hábiles finaliza mucho más tarde: más de seis semanas calendario.</p>
+<h2>Empleo y RRHH</h2>
+<p>Los plazos de preaviso para la terminación del empleo se especifican frecuentemente en semanas o días hábiles. Un período de aviso de 2 semanas que comienza un martes finaliza el lunes dos semanas después: 10 días hábiles. Los derechos a vacaciones anuales suelen expresarse en días laborables al año. Los sistemas de recursos humanos rastrean los saldos de los días laborales para solicitudes y aprobaciones de licencias.</p>
+<h2>Días festivos</h2>
+<p>Esta calculadora excluye únicamente los fines de semana. Los días festivos varían enormemente según el país, la región, el estado e incluso la industria, y no pueden determinarse automáticamente sin información adicional. Para cálculos que deben excluir días festivos específicos, utilice el resultado de esta calculadora como punto de partida y reste manualmente los días festivos relevantes que se encuentren dentro del rango de fechas.</p>
+<h2>Cómo usar la calculadora</h2>
+<p>Elija una fecha de inicio y una fecha de finalización, y el número total de días hábiles entre ellas aparecerá inmediatamente, desglosado junto con el recuento de días calendario y el número de días de fin de semana que se encuentran dentro del rango. Debido a que ambas cifras se actualizan juntas, puede ver de un vistazo exactamente cuántos fines de semana se consumen en un período de calendario determinado: contexto útil cuando una fecha límite parece generosa en días calendario pero resulta ajustada una vez que se restan los fines de semana.</p>
+<h2>Por qué la distinción hace tropezar a la gente</h2>
+<p>La confusión entre días hábiles y días naturales es uno de los pequeños malentendidos más comunes en los contratos y la planificación de proyectos, precisamente porque ambos se describen utilizando la misma palabra cotidiana &quot;días&quot; sin ninguna señal incorporada a qué se refieren. Un plazo de &quot;10 días&quot; suena idéntico ya sea que signifique diez días calendario o diez días hábiles, pero los dos pueden diferir hasta en cuatro días dependiendo de cuántos fines de semana haya entre medio, que es exactamente el tipo de ambigüedad que causa disputas genuinas sobre si realmente se cumplió un plazo. Leer un contrato o un plan de proyecto con suficiente atención para saber a qué tipo de día se refiere y usar una calculadora como esta para convertir entre los dos elimina la ambigüedad antes de que se convierta en un desacuerdo.</p>
+<h2>SLA y garantías de respuesta</h2>
+<p>Los acuerdos de nivel de servicio frecuentemente prometen una respuesta o resolución dentro de un número fijo de días hábiles; por ejemplo, &quot;tickets de soporte respondidos dentro de 2 días hábiles&quot;. Calcular si realmente se ha cumplido un SLA requiere exactamente la aritmética de días hábiles que realiza esta herramienta: un ticket presentado a las 4 p. m. de un viernes y respondido el lunes por la mañana técnicamente ha sido respondido el siguiente día hábil, a pesar de que han pasado casi tres días calendario, y la confusión inversa (asumiendo que una brecha de viernes a lunes viola un SLA de &quot;1 día hábil&quot;) es una fuente común de quejas innecesarias de los clientes.</p>
+<h2>Trabajando hacia atrás desde una fecha límite</h2>
+<p>La calculadora también funciona a la inversa para fines de planificación: si sabe que una entrega vence en una fecha específica y sabe cuántos días hábiles llevará el trabajo, puede contar hacia atrás desde la fecha límite para encontrar la última fecha de inicio segura. Restar los días hábiles en lugar de los días calendario de una fecha límite es exactamente lo que impide que un plan de proyecto asuma silenciosamente que el trabajo se realiza los fines de semana, un error que convierte un cómodo cronograma de dos semanas en uno apresurado una vez que alguien toma en cuenta los cuatro días de fin de semana realmente incluidos en él.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todos los cálculos se ejecutan completamente en su navegador, por lo que el recuento aparece en el instante en que elige sus fechas y ninguna de las fechas que ingresa se envía a un servidor, se registra o se comparte.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre días laborables</h2><dl><dt>¿Esto incluye los días festivos?</dt><dd>No. Esta calculadora excluye únicamente los fines de semana (sábado y domingo). Los días festivos varían según el país y no se pueden determinar automáticamente sin conocer su ubicación.</dd><dt>¿Están incluidas las fechas de inicio y finalización?</dt><dd>Sí, se incluyen tanto la fecha de inicio como la de finalización si caen en día laborable.</dd><dt>¿Puedo calcular los días laborables del pasado?</dt><dd>Sí, ingrese dos fechas cualesquiera en cualquier orden y la calculadora arrojará el recuento correcto.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/workdays/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/workdays/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/workdays/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/workdays/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/workdays/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/workdays/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/workdays/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/workdays/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/workdays/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/workdays/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"from_date":"Fecha de inicio","to_date":"Fecha de finalización","workdays":"Días laborables"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/workdays.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convertisseur d&#39;unités : convertissez la longueur, le poids, la température, etc.</title>
+<meta name="description" content="Convertisseur d&#39;unités gratuit. Convertissez instantanément entre mètres et pieds, kilogrammes et livres, Celsius et Fahrenheit, litres et gallons, et bien d&#39;autres unités dans votre navigateur.">
+<link rel="canonical" href="https://mikaio.dev/fr/unitconverter/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/unitconverter/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/unitconverter/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/unitconverter/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/unitconverter/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/unitconverter/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/unitconverter/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/unitconverter/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/unitconverter/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/unitconverter/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/unitconverter/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/unitconverter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Convertisseur d&#39;unités : convertissez la longueur, le poids, la température, etc.">
+<meta property="og:description" content="Convertisseur d&#39;unités gratuit. Convertissez instantanément entre mètres et pieds, kilogrammes et livres, Celsius et Fahrenheit, litres et gallons, et bien d&#39;autres unités dans votre navigateur.">
+<meta property="og:url" content="https://mikaio.dev/fr/unitconverter/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Convertisseur d'unités : convertissez la longueur, le poids, la température, etc.","url":"https://mikaio.dev/fr/unitconverter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Convertisseur d'unités gratuit. Convertissez instantanément entre mètres et pieds, kilogrammes et livres, Celsius et Fahrenheit, litres et gallons, et bien d'autres unités dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Convertisseur d'unités","item":"https://mikaio.dev/fr/unitconverter/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quels systèmes d’unités sont couverts ?","acceptedAnswer":{"@type":"Answer","text":"Le convertisseur couvre les unités métriques (SI), les unités usuelles américaines et les unités impériales britanniques pour chaque catégorie. Les unités communes sont incluses pour la longueur, le poids, la température, le volume, la surface et la vitesse."}},{"@type":"Question","name":"En quoi la conversion de température est-elle différente des autres conversions ?","acceptedAnswer":{"@type":"Answer","text":"La conversion de température n’est pas une simple multiplication : elle implique un décalage. La conversion de Celsius en Fahrenheit multiplie par 9/5 et ajoute 32. La calculatrice gère cela automatiquement."}},{"@type":"Question","name":"Les conversions sont-elles exactes ?","acceptedAnswer":{"@type":"Answer","text":"Les facteurs utilisés sont les valeurs exactes ou très précises convenues au niveau international. Pour des raisons pratiques, tous les résultats sont précis à de nombreux chiffres significatifs."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unitconverter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unitconverter/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unitconverter/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unitconverter/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/unitconverter/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unitconverter/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unitconverter/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unitconverter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unitconverter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unitconverter/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Convertisseur d&#39;unités</span></nav>
+  <h1>Convertisseur d&#39;unités</h1>
+  <p class="lead">Choisissez une catégorie, entrez une valeur, sélectionnez les unités de et vers lesquelles convertir et lisez le résultat instantanément.</p>
+  <section class="widget" id="tool"><div id="uc-app"><div class="row"><div class="field"><label for="uc-cat">Catégorie</label><select id="uc-cat"><option value="length">Longueur</option><option value="weight">Poids / Masse</option><option value="temp">Température</option><option value="volume">Volume</option><option value="area">Zone</option><option value="speed">Vitesse</option></select></div></div><div class="row"><div class="field"><label for="uc-val">Valeur</label><input type="number" id="uc-val" step="any" inputmode="decimal"></div><div class="field"><label for="uc-from">De</label><select id="uc-from"></select></div><div class="field"><label for="uc-to">À</label><select id="uc-to"></select></div></div><div class="result"><span class="hint">Résultat: </span><span class="big" id="uc-out">—</span></div></div></section>
+  <article class="content">
+    <h2>Convertissez instantanément n’importe quelle mesure entre les systèmes d’unités</h2>
+<p>Chaque jour, les gens doivent traduire des mesures d&#39;un système à un autre. Une recette demande des onces liquides, mais votre pichet doseur indique des millilitres. Les dimensions d&#39;un produit sont indiquées en pouces mais vous travaillez en centimètres. Les prévisions météo sur un site Web étranger indiquent Fahrenheit et vous pensez en Celsius. La consommation de carburant d&#39;une voiture est indiquée en miles par gallon, mais vous connaissez les litres aux cent kilomètres. Ce convertisseur d&#39;unité gère tout cela et bien plus encore en un seul endroit.</p>
+<h2>Catégories couvertes</h2>
+<p><strong>Longueur</strong> : mètres, centimètres, millimètres, kilomètres, pouces, pieds, yards, milles et milles marins. Utile pour la construction, la géographie, le sport et les mesures quotidiennes.</p>
+<p><strong>Poids et masse</strong> : kilogrammes, grammes, milligrammes, tonnes, livres, onces et tonnes américaines. Indispensable pour la cuisine, l&#39;expédition, le fitness et le travail scientifique.</p>
+<p><strong>Température</strong> : Celsius, Fahrenheit et Kelvin. La conversion la plus couramment nécessaire dans le monde, puisque les États-Unis utilisent Fahrenheit tandis que la plupart des autres pays utilisent Celsius.</p>
+<p><strong>Volume</strong> : litres, millilitres, mètres cubes, centimètres cubes, gallons américains, onces liquides américaines, tasses américaines, gallons britanniques et onces liquides britanniques. Vital pour la cuisine, la chimie et la mesure du carburant.</p>
+<p><strong>Superficie</strong> : mètres carrés, kilomètres carrés, centimètres carrés, pouces carrés, pieds carrés, yards carrés, miles carrés et acres. Utilisé dans l&#39;immobilier, l&#39;agriculture et la construction.</p>
+<p><strong>Vitesse</strong> : mètres par seconde, kilomètres par heure, miles par heure, nœuds et pieds par seconde. Pertinent pour les voyages, la physique et les performances sportives.</p>
+<h2>La fracture métrique et impériale</h2>
+<p>La majeure partie du monde utilise le Système international d&#39;unités (SI), familièrement appelé système métrique, car il est basé sur des puissances de dix et ne nécessite aucune mémorisation de facteurs de conversion arbitraires. Les États-Unis sont l’un des trois pays (avec le Libéria et le Myanmar) qui n’ont pas officiellement adopté le système métrique comme système de mesure principal, c’est pourquoi les conversions des États-Unis en système métrique restent si fréquemment nécessaires.</p>
+<p>Le système impérial britannique se situe entre les deux : le Royaume-Uni utilise officiellement le système métrique dans la plupart des cas, mais les unités impériales persistent dans le langage courant : les gens parlent de leur taille en pieds et en pouces, de leur poids en pierre et en livres, des distances routières en miles et de la bière en pintes.</p>
+<h2>Température : la conversion la plus demandée</h2>
+<p>Celsius en Fahrenheit est l&#39;une des conversions d&#39;unités les plus recherchées sur Internet, et pour cause : les températures sont indiquées à différentes échelles selon les pays et comprendre la différence est essentiel pour voyager, cuisiner et interpréter les prévisions météorologiques. Une référence rapide : 0°C = 32°F (congélation), 20°C = 68°F (température ambiante agréable), 37°C = 98,6°F (température corporelle normale), 100°C = 212°F (eau bouillante au niveau de la mer).</p>
+<h2>Comment fonctionne la conversion</h2>
+<p>Chaque catégorie utilise une unité de base. Pour la longueur, la base est le mètre. Toutes les autres unités sont définies par leur relation exacte avec le mètre. La conversion de n’importe quelle unité vers n’importe quelle autre unité passe par la base : valeur → unité de base → unité cible. Pour la température, la formule spéciale de décalage est appliquée directement.</p>
+<p>Tous les facteurs de conversion utilisés sont des définitions exactes ou très précises convenues au niveau international. Le résultat est précis à de nombreux chiffres significatifs, plus que suffisant pour toute utilisation pratique.</p>
+<h2>Comment utiliser le convertisseur</h2>
+<p>Choisissez une catégorie (longueur, poids, température, volume, surface ou vitesse), puis choisissez votre unité source, saisissez une valeur et sélectionnez l&#39;unité vers laquelle vous souhaitez convertir. Le résultat apparaît immédiatement et la modification de l&#39;un des trois paramètres est recalculée instantanément, de sorte que comparer plusieurs unités côte à côte ne prend que quelques clics plutôt que plusieurs recherches distinctes.</p>
+<h2>Pourquoi l&#39;approche par unité de base garantit la précision de chaque conversion</h2>
+<p>Plutôt que de stocker un facteur de conversion distinct pour chaque paire d&#39;unités possible, ce qui nécessiterait des centaines de relations individuelles et serait une source courante de petites erreurs, ce convertisseur définit chaque unité d&#39;une catégorie par rapport à une seule unité de base : le mètre pour la longueur, le kilogramme pour le poids, le litre pour le volume, etc. La conversion d&#39;une unité à une autre s&#39;effectue donc toujours en deux étapes claires : votre entrée est convertie en unité de base, et la valeur de l&#39;unité de base est ensuite convertie en votre unité cible. C’est exactement ainsi que les logiciels de mesure professionnels et les calculatrices scientifiques gèrent en interne la conversion des unités, et cela garantit qu’une conversion entre deux unités obscures est exactement aussi précise qu’une conversion entre deux unités communes, puisque les deux itinéraires passent par la même base bien définie.</p>
+<h2>Cuisiner à travers les systèmes de mesure</h2>
+<p>Peu de situations rendent la division métrique-impérial plus frustrante que de suivre une recette écrite dans l’autre système. Les recettes américaines mesurent en volume – tasses, cuillères à soupe, onces liquides – tandis qu&#39;une grande partie du reste du monde mesure en poids en grammes, ce qui est en fait l&#39;approche la plus précise puisqu&#39;une tasse de farine bien tassée pèse sensiblement plus qu&#39;une cuillère lâche. La conversion des volumes d&#39;une recette en millilitres ou de ses tasses en grammes pour un ingrédient spécifique supprime complètement cette ambiguïté et constitue l&#39;une des raisons quotidiennes les plus courantes pour lesquelles les gens recourent à un convertisseur d&#39;unités plutôt que de deviner et d&#39;espérer que le plat se révélera correct.</p>
+<h2>Un convertisseur pour chaque catégorie</h2>
+<p>Plutôt que de mettre en signet un outil distinct pour la température, un autre pour la longueur et un troisième pour le volume, avoir chaque catégorie au même endroit signifie que la même interface familière gère toutes les mesures suivantes, sans avoir besoin de se rappeler quel site spécialisé visiter pour chacune d&#39;entre elles.</p>
+<h2>Privé et instantané</h2>
+<p>Le convertisseur s&#39;exécute entièrement dans votre navigateur en utilisant des définitions de conversion très précises et reconnues au niveau international, de sorte qu&#39;aucune donnée n&#39;est envoyée à un serveur et les résultats apparaissent dès que vous tapez. Il fonctionne hors ligne une fois la page chargée, prête pour la prochaine mesure à traduire.</p>
+    <section class="faq"><h2>FAQ sur le convertisseur d&#39;unités</h2><dl><dt>Quels systèmes d’unités sont couverts ?</dt><dd>Le convertisseur couvre les unités métriques (SI), les unités usuelles américaines et les unités impériales britanniques pour chaque catégorie. Les unités communes sont incluses pour la longueur, le poids, la température, le volume, la surface et la vitesse.</dd><dt>En quoi la conversion de température est-elle différente des autres conversions ?</dt><dd>La conversion de température n’est pas une simple multiplication : elle implique un décalage. La conversion de Celsius en Fahrenheit multiplie par 9/5 et ajoute 32. La calculatrice gère cela automatiquement.</dd><dt>Les conversions sont-elles exactes ?</dt><dd>Les facteurs utilisés sont les valeurs exactes ou très précises convenues au niveau international. Pour des raisons pratiques, tous les résultats sont précis à de nombreux chiffres significatifs.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/unitconverter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/unitconverter/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/unitconverter/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/unitconverter/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/unitconverter/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/unitconverter/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/unitconverter/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/unitconverter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/unitconverter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/unitconverter/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"category":"Catégorie","length":"Longueur","weight":"Poids / Masse","temperature":"Température","volume":"Volume","area":"Zone","speed":"Vitesse","value":"Valeur","from":"De","to":"À","result":"Résultat"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/unitconverter.js" defer></script>
+</body>
+</html>

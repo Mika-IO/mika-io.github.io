@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pomodoro Timer - مؤقت تركيز مدته 25 دقيقة للدراسة والعمل</title>
+<meta name="description" content="مؤقت بومودورو مجاني. جلسات تركيز مدتها 25 دقيقة، تتخللها فترات راحة قصيرة مدتها 5 دقائق، وفترات راحة طويلة مدتها 15 دقيقة. لا حاجة للتسجيل. يعمل في متصفحك مع التنبيهات الصوتية.">
+<link rel="canonical" href="https://mikaio.dev/ar/pomodoro/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/pomodoro/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/pomodoro/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/pomodoro/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/pomodoro/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/pomodoro/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/pomodoro/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/pomodoro/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/pomodoro/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/pomodoro/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/pomodoro/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/pomodoro/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pomodoro Timer - مؤقت تركيز مدته 25 دقيقة للدراسة والعمل">
+<meta property="og:description" content="مؤقت بومودورو مجاني. جلسات تركيز مدتها 25 دقيقة، تتخللها فترات راحة قصيرة مدتها 5 دقائق، وفترات راحة طويلة مدتها 15 دقيقة. لا حاجة للتسجيل. يعمل في متصفحك مع التنبيهات الصوتية.">
+<meta property="og:url" content="https://mikaio.dev/ar/pomodoro/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Pomodoro Timer - مؤقت تركيز مدته 25 دقيقة للدراسة والعمل","url":"https://mikaio.dev/ar/pomodoro/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"مؤقت بومودورو مجاني. جلسات تركيز مدتها 25 دقيقة، تتخللها فترات راحة قصيرة مدتها 5 دقائق، وفترات راحة طويلة مدتها 15 دقيقة. لا حاجة للتسجيل. يعمل في متصفحك مع التنبيهات الصوتية."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"مؤقت بومودورو","item":"https://mikaio.dev/ar/pomodoro/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هي تقنية البومودورو؟","acceptedAnswer":{"@type":"Answer","text":"تم تطوير تقنية بومودورو على يد فرانشيسكو سيريلو في أواخر الثمانينات، وهي عبارة عن جلسات عمل مركزة مدتها 25 دقيقة مع فترات راحة قصيرة. بعد أربع جلسات يتم أخذ استراحة أطول. الاسم يأتي من مؤقت المطبخ على شكل الطماطم."}},{"@type":"Question","name":"هل يمكنني تغيير فترات الموقت؟","acceptedAnswer":{"@type":"Answer","text":"يستخدم هذا التنفيذ الفترات الكلاسيكية: 25 دقيقة من التركيز، وفترات راحة قصيرة مدتها 5 دقائق، واستراحة طويلة مدتها 15 دقيقة بعد كل أربع جلسات. هذه الفترات مدعومة بالأدلة للحفاظ على الاهتمام على مدى فترات العمل الطويلة."}},{"@type":"Question","name":"هل سأسمع صوتًا عندما ينتهي المؤقت؟","acceptedAnswer":{"@type":"Answer","text":"نعم، يقوم المؤقت بتشغيل تنبيه صوتي قصير باستخدام Web Audio API. تأكد من تشغيل مستوى صوت جهازك."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pomodoro/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/pomodoro/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/pomodoro/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/pomodoro/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/pomodoro/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/pomodoro/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/pomodoro/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/pomodoro/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/pomodoro/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/pomodoro/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>مؤقت بومودورو</span></nav>
+  <h1>مؤقت بومودورو</h1>
+  <p class="lead">انقر فوق &quot;ابدأ&quot; لبدء جلسة تركيز مدتها 25 دقيقة. يتم تشغيل الصوت عند انتهاء الوقت ويتحول المؤقت تلقائيًا إلى استراحة مدتها 5 دقائق. وبعد أربع جلسات، يتم تقديم استراحة أطول مدتها 15 دقيقة.</p>
+  <section class="widget" id="tool"><div id="pom-app" style="text-align:center"><div id="pom-phase" style="font-size:1rem;margin-bottom:0.5rem;opacity:0.7">جاهز للتركيز</div><div id="pom-display" style="font-size:4rem;font-weight:700;font-variant-numeric:tabular-nums">25:00</div><div style="margin:1rem 0;display:flex;gap:0.5rem;justify-content:center"><button id="pom-start" class="btn">ابدأ</button><button id="pom-reset" class="btn secondary">إعادة تعيين</button></div><div id="pom-count" style="opacity:0.6;font-size:0.9rem"></div></div></section>
+  <article class="content">
+    <h2>تقنية التركيز لمدة 25 دقيقة التي غيرت طريقة عمل الملايين</h2>
+<p>تعد تقنية البومودورو واحدة من أكثر أساليب إدارة الوقت استخدامًا في العالم. قام فرانشيسكو سيريلو، الذي طوره فرانشيسكو سيريلو في أواخر الثمانينات، وسمي على اسم مؤقت المطبخ على شكل حبة الطماطم، بالعمل على رؤية بسيطة: يحافظ الدماغ البشري على التركيز العميق بشكل أفضل في دفعات أقصر منه في فترات طويلة متواصلة. ومن خلال العمل على فترات منتظمة مدتها 25 دقيقة مفصولة بفترات راحة قصيرة، يمكنك الحفاظ على تركيز عالٍ طوال يوم طويل دون الإرهاق الذهني الذي يأتي من الطحن المستمر.</p>
+<h2>كيف يعمل مؤقت بومودورو</h2>
+<p>انقر فوق &quot;ابدأ&quot; لبدء جلسة تركيز مدتها 25 دقيقة - بومودورو واحد. خلال هذا الوقت، اعمل على مهمة واحدة وتجنب كل عوامل التشتيت. عند انتهاء مدة الـ 25 دقيقة، يصدر صوت ويتحول المؤقت تلقائيًا إلى استراحة قصيرة مدتها 5 دقائق. استخدم هذه الاستراحة للوقوف أو التمدد أو إراحة عينيك. بعد أربع بومودوروس، يتم تقديم استراحة أطول مدتها 15 دقيقة للسماح لعقلك بتعزيز ما قام بمعالجته.</p>
+<h2>علم الاهتمام والراحة</h2>
+<p>تظهر الأبحاث حول الأداء المعرفي باستمرار أن الاهتمام المستمر يتدهور بمرور الوقت. وبعد حوالي 25 إلى 30 دقيقة من العمل المركّز، تبدأ معدلات الخطأ في الارتفاع وتنخفض الإنتاجية حتى لو شعر الشخص أنه لا يزال يركز. تعمل فترات الراحة القصيرة والمتعمدة على مكافحة هذا التأثير من خلال منح قشرة الفص الجبهي وقتًا لتجميع المعلومات وإعادة ضبط الانتباه. تعمل تقنية بومودورو على إضفاء الطابع الرسمي على ذلك في شكل روتين بحيث تحدث فترات الراحة بشكل موثوق وليس فقط عندما تكون متعبًا للغاية بالفعل.</p>
+<p>تستخدم هذه التقنية أيضًا سيكولوجية الالتزام. إن معرفة أنك تحتاج إلى الاستمرار في التركيز لمدة 25 دقيقة فقط - وليس طوال الصباح - يقلل من طاقة التنشيط المطلوبة لبدء مهمة صعبة. غالبًا ما تأتي المماطلة من ضخامة الوظيفة؛ تقسيمها إلى أجزاء مدتها 25 دقيقة يجعلها قابلة للتتبع.</p>
+<h2>تتبع جلساتك مع مرور الوقت</h2>
+<p>بعيدًا عن أي يوم واحد، يجد العديد من ممارسي البومودورو قيمة حقيقية في تتبع عدد الجلسات التي يكملونها على مدار أسابيع وأشهر، حيث يصبح العد نفسه مقياسًا بسيطًا وصادقًا للجهد المركز الذي يصعب خداع نفسك به أكثر من الشعور الغامض بـ &quot;لقد عملت بجد اليوم&quot;. إن رؤية سلسلة من أربعة أو خمسة بومودوروس مكتملة في يوم صعب، حتى لو كانت المهمة الأساسية لا تزال غير مكتملة، هو تذكير ملموس بحدوث جهد حقيقي ومستدام، وهو أمر مهم بشكل خاص بالنسبة للعمل الإبداعي أو البحثي المفتوح حيث يمكن أن يكون المنتج النهائي على بعد أيام أو أسابيع، ويكون من الصعب رؤية التقدم اليومي.</p>
+<h2>نصائح عملية لجلسات البومودورو الفعالة</h2>
+<p>قبل بدء المؤقت، اكتب ما ستعمل عليه. إن النية الواضحة خلال الـ 25 دقيقة القادمة تزيل عملية اتخاذ القرار من الجلسة نفسها. إذا ظهرت فكرة مشتتة للانتباه خلال فترة بومودورو، قم بتدوينها على المفكرة والعودة إليها بعد انتهاء الجلسة بدلاً من التصرف بناءً عليها على الفور.</p>
+<p>اجعل فترة الاستراحة صارمة لمدة خمس دقائق. الرغبة في تمديدها أمر طبيعي ولكنها تقوض الإيقاع. بعد أربع جلسات، تعتبر الاستراحة لمدة 15 دقيقة وقتًا مناسبًا للذهاب في نزهة قصيرة أو تناول وجبة، مما يساعد على تعزيز الذاكرة واستعادة اليقظة للكتلة التالية من الجلسات.</p>
+<p>تعمل هذه التقنية بشكل أفضل مع المهام التي تتطلب تركيزًا مستمرًا: الكتابة، أو البرمجة، أو الدراسة، أو القراءة، أو أعمال التصميم، أو أي شكل من أشكال الجهد الإبداعي أو التحليلي العميق. وهو أقل ملاءمة للعمل التعاوني للغاية حيث تكون الانقطاعات متأصلة.</p>
+<h2>الطلاب والمتعلمين</h2>
+<p>غالبًا ما يعتمد الطلاب الذين يستعدون للامتحانات تقنية بومودورو لأنها توفر هيكلًا ملموسًا لجلسات المراجعة. فبدلاً من الجلوس على مكتب لمدة ثلاث ساعات غير محددة وفقدان التركيز تدريجيًا، يعمل الطالب لمدة 25 دقيقة، ويستريح لمدة 5 دقائق، ويتتبع جلساته. تمثل ثماني ساعات من البومودوروس في اليوم أربع ساعات من الدراسة المركزة الحقيقية، وهي أكثر فعالية بكثير من ثماني ساعات من نصف الاهتمام المتفرق.</p>
+<h2>كيفية استخدام الموقت</h2>
+<p>اضغط على زر البدء لبدء مجموعة تركيز مدتها 25 دقيقة، ثم قم ببساطة بالعمل حتى يتم تشغيل الصوت. لا يوجد شيء آخر لتكوينه ولا يوجد حساب لإنشاءه - ينقلك المؤقت تلقائيًا إلى استراحة قصيرة، ثم يعود إلى كتلة تركيز أخرى، ويتنقل عبر النمط حتى تقرر التوقف، مع استراحة أطول يتم تقديمها تلقائيًا بعد كل جلسة رابعة.</p>
+<h2>تكييف التقنية مع إيقاعك الخاص</h2>
+<p>في حين أن 25 دقيقة من التركيز و5 دقائق من الراحة هي النسبة الكلاسيكية التي استقر عليها سيريلو، فإن الكثير من الأشخاص يكيفون التوقيت ليناسب مدى انتباههم وطبيعة عملهم: يجد البعض فترات تركيز مدتها 50 دقيقة مع فترات راحة مدتها 10 دقائق أكثر ملاءمة للعمل الإبداعي العميق وغير المنقطع، في حين يفضل آخرون الذين يقومون بمهام مجزأة فترات زمنية أقصر مدتها 15 دقيقة. المبدأ الأساسي الذي يهم أكثر من الأرقام الدقيقة هو الانضباط في العمل في كتلة واحدة غير مشتتة يتبعها استراحة حقيقية ومتعمدة - النسبة المحددة هي نقطة بداية لضبطها بمجرد أن تشعر بكيفية تصرف تركيزك فعليًا.</p>
+<h2>حيث تقصر التقنية</h2>
+<p>تقنية البومودورو ليست دواءً عالميًا لكل أنواع العمل. إن المهام التعاونية للغاية حيث تكون الانقطاعات جزءًا متأصلًا ولا يمكن تجنبه من الوظيفة - دعم العملاء، واستكشاف الأخطاء وإصلاحها بشكل مباشر، والبرمجة الثنائية ذات الخطة المفتوحة - لا تتلاءم تمامًا مع الكتل الصارمة التي تبلغ مدتها 25 دقيقة، كما أن فرض الهيكل عليها يمكن أن يخلق احتكاكًا أكثر من التركيز. كما أنه يعمل بشكل أفضل مع المهام التي يمكنك البدء بها وإيقافها بشكل هادف؛ إن حالة التدفق الإبداعي غير المنقطع حقًا والتي تقطع صفارة مدتها 25 دقيقة منتصف التفكير قد تكون أفضل من خلال فترة زمنية أطول وأكثر مرونة. إن معرفة متى لا تستخدم هذه التقنية مفيد مثل معرفة كيفية استخدامها بشكل جيد.</p>
+<h2>خاص وجاهز دائمًا</h2>
+<p>يعمل هذا المؤقت بالكامل في متصفحك، لذلك لا يوجد حساب ولا تتبع ولا يتم إرسال أي بيانات إلى أي مكان - قم بتحديث الصفحة في أي وقت لبدء دورة جديدة.</p>
+    <section class="faq"><h2>الأسئلة الشائعة عن بومودورو</h2><dl><dt>ما هي تقنية البومودورو؟</dt><dd>تم تطوير تقنية بومودورو على يد فرانشيسكو سيريلو في أواخر الثمانينات، وهي عبارة عن جلسات عمل مركزة مدتها 25 دقيقة مع فترات راحة قصيرة. بعد أربع جلسات يتم أخذ استراحة أطول. الاسم يأتي من مؤقت المطبخ على شكل الطماطم.</dd><dt>هل يمكنني تغيير فترات الموقت؟</dt><dd>يستخدم هذا التنفيذ الفترات الكلاسيكية: 25 دقيقة من التركيز، وفترات راحة قصيرة مدتها 5 دقائق، واستراحة طويلة مدتها 15 دقيقة بعد كل أربع جلسات. هذه الفترات مدعومة بالأدلة للحفاظ على الاهتمام على مدى فترات العمل الطويلة.</dd><dt>هل سأسمع صوتًا عندما ينتهي المؤقت؟</dt><dd>نعم، يقوم المؤقت بتشغيل تنبيه صوتي قصير باستخدام Web Audio API. تأكد من تشغيل مستوى صوت جهازك.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/pomodoro/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/pomodoro/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/pomodoro/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/pomodoro/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/pomodoro/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/pomodoro/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/pomodoro/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/pomodoro/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/pomodoro/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/pomodoro/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"start":"ابدأ","reset":"إعادة تعيين","ready":"جاهز للتركيز","focus":"وقت التركيز","short_break":"استراحة قصيرة","long_break":"استراحة طويلة","sessions":"اكتملت الجلسات"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/pomodoro.js" defer></script>
+</body>
+</html>

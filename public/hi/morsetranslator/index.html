@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>मोर्स कोड ट्रांसलेटर - टेक्स्ट को मोर्स कोड में बदलें और वापस लौटें</title>
+<meta name="description" content="मुफ़्त मोर्स कोड अनुवादक। किसी भी टेक्स्ट को मोर्स कोड डॉट्स और डैश में बदलें, या मोर्स कोड को वापस टेक्स्ट में डीकोड करें। ऑडियो प्लेबैक शामिल है. पूरी तरह से आपके ब्राउज़र में काम करता है.">
+<link rel="canonical" href="https://mikaio.dev/hi/morsetranslator/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/morsetranslator/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/morsetranslator/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/morsetranslator/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/morsetranslator/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/morsetranslator/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/morsetranslator/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/morsetranslator/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/morsetranslator/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/morsetranslator/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/morsetranslator/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/morsetranslator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="मोर्स कोड ट्रांसलेटर - टेक्स्ट को मोर्स कोड में बदलें और वापस लौटें">
+<meta property="og:description" content="मुफ़्त मोर्स कोड अनुवादक। किसी भी टेक्स्ट को मोर्स कोड डॉट्स और डैश में बदलें, या मोर्स कोड को वापस टेक्स्ट में डीकोड करें। ऑडियो प्लेबैक शामिल है. पूरी तरह से आपके ब्राउज़र में काम करता है.">
+<meta property="og:url" content="https://mikaio.dev/hi/morsetranslator/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"मोर्स कोड ट्रांसलेटर - टेक्स्ट को मोर्स कोड में बदलें और वापस लौटें","url":"https://mikaio.dev/hi/morsetranslator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"मुफ़्त मोर्स कोड अनुवादक। किसी भी टेक्स्ट को मोर्स कोड डॉट्स और डैश में बदलें, या मोर्स कोड को वापस टेक्स्ट में डीकोड करें। ऑडियो प्लेबैक शामिल है. पूरी तरह से आपके ब्राउज़र में काम करता है."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"मोर्स कोड अनुवादक","item":"https://mikaio.dev/hi/morsetranslator/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"मोर्स कोड क्या है?","acceptedAnswer":{"@type":"Answer","text":"मोर्स कोड अक्षरों, अंकों और विराम चिह्नों को बिंदुओं और डैश (या छोटे और लंबे संकेतों) के अनुक्रम के रूप में एन्कोड करने की एक प्रणाली है। इसे 1830 और 1840 के दशक में विद्युत टेलीग्राफ के उपयोग के लिए विकसित किया गया था। प्रत्येक चरित्र में एक अद्वितीय डॉट-डैश अनुक्रम होता है।"}},{"@type":"Question","name":"मैं मोर्स कोड में अक्षरों को कैसे अलग करूं?","acceptedAnswer":{"@type":"Answer","text":"अक्षरों को एक ही स्थान से अलग किया जाता है। शब्दों को एक स्लैश/या तीन स्थानों द्वारा अलग किया जाता है। डिकोडर दोनों सम्मेलनों को स्वीकार करता है।"}},{"@type":"Question","name":"क्या ऑडियो प्लेबैक काम करता है?","acceptedAnswer":{"@type":"Answer","text":"हाँ। टूल डॉट्स और डैश से मेल खाने वाले टोन उत्पन्न करने के लिए वेब ऑडियो एपीआई का उपयोग करता है। बिंदु छोटे स्वर हैं, डैश तीन गुना लंबे हैं। सुनिश्चित करें कि आपका डिवाइस वॉल्यूम चालू है।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/morsetranslator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/morsetranslator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/morsetranslator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/morsetranslator/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/morsetranslator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/morsetranslator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/morsetranslator/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>मोर्स कोड अनुवादक</span></nav>
+  <h1>मोर्स कोड अनुवादक</h1>
+  <p class="lead">मोर्स कोड में अनुवादित देखने के लिए टेक्स्ट टाइप करें। इसे टेक्स्ट में वापस डिकोड करने के लिए मोर्स कोड चिपकाएँ। कोड को ऑडियो के रूप में सुनने के लिए प्ले पर क्लिक करें।</p>
+  <section class="widget" id="tool"><div id="morse-app"><div class="field"><label for="morse-in">एन्कोड करने के लिए पाठ</label><textarea id="morse-in" rows="3" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="अपना संदेश यहां टाइप करें..."></textarea></div><div class="result"><span class="hint">मोर्स कोड: </span><span id="morse-out" style="word-break:break-all;letter-spacing:0.1em">—</span></div><button id="morse-play" class="btn secondary" style="margin-top:0.5rem">▶ ऑडियो चलाएं</button><hr style="margin:1rem 0;opacity:0.3"><div class="field"><label for="morse-decode-in">डिकोड करने के लिए मोर्स कोड</label><textarea id="morse-decode-in" rows="2" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="e.g. .... . .-.. .-.. ---"></textarea></div><div class="result"><span class="hint">डिकोड किया गया पाठ: </span><span id="morse-decoded">—</span></div></div></section>
+  <article class="content">
+    <h2>टेक्स्ट और मोर्स कोड के बीच अनुवाद करें</h2>
+<p>मोर्स कोड इतिहास में सबसे अधिक पहचाने जाने योग्य एन्कोडिंग प्रणालियों में से एक है। इसके विशिष्ट बिंदु और डैश ध्वनि प्रसारण संभव होने से बहुत पहले महाद्वीपों और महासागरों में संदेश संचारित करते थे। आज इसका उपयोग शौकिया रेडियो, विमानन, पहुंच उपकरणों और लोकप्रिय संस्कृति में किया जाता है। यह अनुवादक किसी भी टेक्स्ट को तुरंत मोर्स कोड में बदल देता है, कोड को ऑडियो के रूप में चलाता है, और मोर्स कोड को वापस सादे टेक्स्ट में डीकोड कर देता है।</p>
+<h2>अनुवादक का उपयोग करना</h2>
+<p>अपना संदेश एन्कोडिंग बॉक्स में टाइप करें और मोर्स अनुवाद उसके ठीक नीचे दिखाई देता है, जिसमें डॉट्स और डैश का उपयोग करके अक्षरों को एक स्थान से अलग किया जाता है और शब्दों को स्लैश से अलग किया जाता है, जो मोर्स के लिए मानक लिखित सम्मेलन से बिल्कुल मेल खाता है। कोड को सीधे आपके ब्राउज़र में उत्पन्न ऑडियो टोन के रूप में सुनने के लिए प्ले दबाएँ, जो मोर्स को केवल देखने के बजाय कान से पहचानने का अभ्यास करने का एक वास्तव में उपयोगी तरीका है। दूसरे रास्ते पर जाने के लिए, समान अक्षर और शब्द विभाजक का अनुसरण करते हुए, डिकोडिंग बॉक्स में बिंदु और डैश चिपकाएँ, और सादा पाठ समतुल्य तुरंत दिखाई देता है।</p>
+<h2>मोर्स कोड का इतिहास</h2>
+<p>सैमुअल मोर्स और अल्फ्रेड वेल ने 1830 और 1840 के दशक में इलेक्ट्रिक टेलीग्राफ के उपयोग के लिए मोर्स कोड विकसित किया, जो लंबे तांबे के तारों पर पल्स के रूप में सिग्नल भेज सकता था। कोड ने प्रत्येक अक्षर और अंक को छोटे सिग्नल (डॉट्स) और लंबे सिग्नल (डैश) का एक अनूठा पैटर्न सौंपा। मूल कोड, जिसे अब अमेरिकन मोर्स कोड कहा जाता है, को बाद में अंतर्राष्ट्रीय मोर्स कोड में परिष्कृत किया गया, जिसने समय अनुपात को मानकीकृत किया और वर्ण सेट को बढ़ाया। अंतर्राष्ट्रीय मोर्स कोड आज दुनिया भर में उपयोग किया जाने वाला संस्करण है।</p>
+<p>प्रसिद्ध एसओएस संकट संकेत - तीन बिंदु, तीन डैश, तीन बिंदु (··· ───·····) - को इसकी सादगी और समरूपता के लिए चुना गया था, जिससे तनाव में भी संचारित करना आसान हो गया।</p>
+<h2>कान से मोर्स सीखने पर एक नोट</h2>
+<p>कुशल मोर्स ऑपरेटर सचेत रूप से डॉट्स और डैश को बिल्कुल भी नहीं गिनते हैं - पर्याप्त अभ्यास के साथ, प्रत्येक अक्षर को एक अलग लयबद्ध पैटर्न के रूप में तुरंत पहचाना जाता है, उसी तरह एक धाराप्रवाह पाठक प्रत्येक अक्षर को सुनने के बजाय एक नज़र में पूरे शब्द को पहचान लेता है। इस टूल से ऑडियो प्लेबैक को बार-बार सुनना, छोटे, सामान्य शब्दों से शुरू करना, बिंदुओं और डैश की एक लिखित तालिका को याद करने की तुलना में उस लयबद्ध पहचान को बनाने का कहीं अधिक प्रभावी तरीका है, यही कारण है कि गंभीर मोर्स सीखने वालों को लगभग सार्वभौमिक रूप से सलाह दी जाती है कि वे अपनी आंखों के सामने अपने कानों को प्रशिक्षित करें।</p>
+<h2>मोर्स कोड कैसे काम करता है</h2>
+<p>प्रत्येक अक्षर, अंक और सामान्य विराम चिह्न में बिंदुओं और डैश का एक अद्वितीय क्रम होता है। अक्षर E केवल एक बिंदु है, जबकि अक्षर T एक एकल डैश है - अंग्रेजी के सबसे सामान्य अक्षरों को सबसे छोटे कोड मिलते हैं। अक्षरों को तीन बिंदु लंबाई के बराबर विराम द्वारा अलग किया जाता है। शब्दों को सात बिंदु लंबाई के बराबर विराम द्वारा अलग किया जाता है। यह समय संरचना ही मोर्स को श्रव्य रूप से, प्रकाश द्वारा, या यंत्रवत् प्रसारित करने की अनुमति देती है।</p>
+<p>मानक समय है:</p>
+<ul>
+<li>डॉट: 1 इकाई</li>
+<li>डैश: 3 इकाइयाँ</li>
+<li>एक ही अक्षर के तत्वों के बीच का अंतर: 1 इकाई</li>
+<li>अक्षरों के बीच का अंतर: 3 इकाइयाँ</li>
+<li>शब्दों के बीच का अंतर: 7 इकाइयाँ</li>
+</ul>
+<h2>जहां आज भी मोर्स कोड का प्रयोग किया जाता है</h2>
+<p>दुनिया भर में एमेच्योर (हैम) रेडियो ऑपरेटर अभी भी लंबी दूरी के संचार के लिए मोर्स कोड का उपयोग करते हैं, खासकर जब प्रसार की स्थिति खराब होती है। मोर्स कोड हस्तक्षेप को भेदता है जिससे ध्वनि संचार असंभव हो जाता है। कई देशों में अंतर्राष्ट्रीय शौकिया रेडियो लाइसेंस परीक्षाओं में अभी भी मोर्स कोड घटक शामिल है।</p>
+<p>विमानन नेविगेशन बीकन के लिए मोर्स कोड का उपयोग करता है: वीओआर (वीएचएफ सर्वदिशात्मक रेंज) और आईएलएस (इंस्ट्रूमेंट लैंडिंग सिस्टम) ट्रांसमीटर नियमित अंतराल पर मोर्स में अपने पहचानकर्ता को प्रसारित करते हैं, जिससे पायलटों को यह सत्यापित करने की अनुमति मिलती है कि वे सही नेवाइड का उपयोग कर रहे हैं।</p>
+<p>एक्सेसिबिलिटी तकनीक कभी-कभी सीमित गतिशीलता वाले लोगों के लिए इनपुट पद्धति के रूप में मोर्स कोड का उपयोग करती है। एक एकल बटन या स्विच डॉट्स और डैश संचारित कर सकता है, जिससे पूर्ण पाठ इनपुट को उस गति से इनपुट करने की अनुमति मिलती है जो कुशल मोर्स ऑपरेटर आश्चर्यजनक रूप से तेज कर सकते हैं।</p>
+<h2>कोड को इस तरह क्यों डिज़ाइन किया गया था?</h2>
+<p>मूल डिज़ाइन की प्रतिभा कोड लंबाई को अक्षर आवृत्ति से मिलान करने में निहित है: क्योंकि सैमुअल मोर्स और अल्फ्रेड वेल ने अध्ययन किया कि कौन से अक्षर अंग्रेजी पाठ में सबसे अधिक बार दिखाई देते हैं, एकल सबसे आम अक्षर, ई को सबसे छोटा संभव संकेत, एक एकल बिंदु सौंपा गया था, जबकि टी, अगला सबसे आम, एक एकल डैश मिला। Q, यही सिद्धांत - अधिक लगातार प्रतीकों को छोटे कोड दें - आधुनिक डेटा संपीड़न एल्गोरिदम में एक सदी से भी अधिक समय बाद फिर से प्रकट होता है, जिससे मोर्स कोड आज कंप्यूटिंग में उपयोग किए जाने वाले विचारों का एक अप्रत्याशित लेकिन वास्तविक पूर्वज बन गया है।</p>
+<h2>विराम चिह्न और संकेत</h2>
+<p>अक्षरों और अंकों से परे, मानक मोर्स कोड पूर्ण विराम, अल्पविराम और प्रश्न चिह्न जैसे सामान्य विराम चिह्नों के पैटर्न को भी परिभाषित करता है, यही कारण है कि यह अनुवादक एकल शब्दों के बजाय पूरे वाक्यों को संभाल सकता है। एमेच्योर रेडियो ऑपरेटर हवा में बातचीत के प्रवाह को नियंत्रित करने के लिए अतिरिक्त रूप से विशेष संयुक्त अनुक्रमों का उपयोग करते हैं, जिन्हें प्रोसाइन कहा जाता है - एक अनुक्रम जिसका अर्थ है &quot;संदेश का अंत&quot;, उदाहरण के लिए, या एक जिसका अर्थ है &quot;संचारित करने के लिए निमंत्रण&quot; - जो अलग-अलग अक्षरों के बजाय बिंदुओं और डैश की एक अखंड स्ट्रिंग के रूप में भेजे जाते हैं, सम्मेलन की एक परत यह उपकरण स्वचालित रूप से डीकोड करने का प्रयास नहीं करता है, लेकिन यदि आप इसका सामना करते हैं तो यह जानने लायक है।</p>
+<h2>निजी और तत्काल</h2>
+<p>सभी अनुवाद पूरी तरह से आपके ब्राउज़र में होता है, इसलिए एन्कोडिंग और डिकोडिंग तुरंत होती है और आपके द्वारा टाइप किया गया कोई भी टेक्स्ट कभी भी किसी सर्वर पर भेजा, लॉग या साझा नहीं किया जाता है।</p>
+    <section class="faq"><h2>मोर्स कोड अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>मोर्स कोड क्या है?</dt><dd>मोर्स कोड अक्षरों, अंकों और विराम चिह्नों को बिंदुओं और डैश (या छोटे और लंबे संकेतों) के अनुक्रम के रूप में एन्कोड करने की एक प्रणाली है। इसे 1830 और 1840 के दशक में विद्युत टेलीग्राफ के उपयोग के लिए विकसित किया गया था। प्रत्येक चरित्र में एक अद्वितीय डॉट-डैश अनुक्रम होता है।</dd><dt>मैं मोर्स कोड में अक्षरों को कैसे अलग करूं?</dt><dd>अक्षरों को एक ही स्थान से अलग किया जाता है। शब्दों को एक स्लैश/या तीन स्थानों द्वारा अलग किया जाता है। डिकोडर दोनों सम्मेलनों को स्वीकार करता है।</dd><dt>क्या ऑडियो प्लेबैक काम करता है?</dt><dd>हाँ। टूल डॉट्स और डैश से मेल खाने वाले टोन उत्पन्न करने के लिए वेब ऑडियो एपीआई का उपयोग करता है। बिंदु छोटे स्वर हैं, डैश तीन गुना लंबे हैं। सुनिश्चित करें कि आपका डिवाइस वॉल्यूम चालू है।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/morsetranslator/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/morsetranslator/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/morsetranslator/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/morsetranslator/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/morsetranslator/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/morsetranslator/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/morsetranslator/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/morsetranslator/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/morsetranslator/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/morsetranslator/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"text_input":"एन्कोड करने के लिए पाठ","text_placeholder":"अपना संदेश यहां टाइप करें...","morse":"मोर्स कोड","play_audio":"▶ ऑडियो चलाएं","morse_input":"डिकोड करने के लिए मोर्स कोड","morse_placeholder":"e.g. .... . .-.. .-.. ---","decoded":"डिकोड किया गया पाठ"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/morsetranslator.js" defer></script>
+</body>
+</html>

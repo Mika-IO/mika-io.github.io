@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حاسبة GCD — القاسم المشترك الأكبر لأرقام متعددة</title>
+<meta name="description" content="آلة حاسبة GCD مجانية. ابحث عن القاسم المشترك الأكبر (GCD/GCF/HCF) لأي مجموعة من الأرقام. يظهر أيضًا LCM. نتائج فورية في متصفحك.">
+<link rel="canonical" href="https://mikaio.dev/ar/gcdcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gcdcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gcdcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/gcdcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gcdcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gcdcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/gcdcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/gcdcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gcdcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gcdcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/gcdcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gcdcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حاسبة GCD — القاسم المشترك الأكبر لأرقام متعددة">
+<meta property="og:description" content="آلة حاسبة GCD مجانية. ابحث عن القاسم المشترك الأكبر (GCD/GCF/HCF) لأي مجموعة من الأرقام. يظهر أيضًا LCM. نتائج فورية في متصفحك.">
+<meta property="og:url" content="https://mikaio.dev/ar/gcdcalc/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"حاسبة GCD — القاسم المشترك الأكبر لأرقام متعددة","url":"https://mikaio.dev/ar/gcdcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"آلة حاسبة GCD مجانية. ابحث عن القاسم المشترك الأكبر (GCD/GCF/HCF) لأي مجموعة من الأرقام. يظهر أيضًا LCM. نتائج فورية في متصفحك."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"حاسبة GCD","item":"https://mikaio.dev/ar/gcdcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هو GCD؟","acceptedAnswer":{"@type":"Answer","text":"القاسم المشترك الأكبر (GCD)، ويسمى أيضًا العامل المشترك الأكبر (GCF) أو العامل المشترك الأعلى (HCF)، هو أكبر عدد صحيح موجب يقسم جميع الأرقام المعطاة دون باقي. جي سي دي (12، 18) = 6."}},{"@type":"Question","name":"ما هو استخدام GCD؟","acceptedAnswer":{"@type":"Answer","text":"يتم استخدام GCD لتبسيط الكسور — قسمة البسط والمقام على GCD الخاص بهما. كما أنها تستخدم في التشفير، وخوارزميات علوم الكمبيوتر، وتحديد درجة أسنان التروس في الهندسة."}},{"@type":"Question","name":"ماذا لو لم يكن للأرقام أي عامل مشترك؟","acceptedAnswer":{"@type":"Answer","text":"إذا لم يشترك رقمان في عامل مشترك آخر غير 1، فإن GCD الخاص بهما هو 1 ويطلق عليهما اسم coprime أو أولي نسبيًا."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gcdcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/gcdcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/gcdcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gcdcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>حاسبة GCD</span></nav>
+  <h1>حاسبة GCD</h1>
+  <p class="lead">أدخل رقمين أو أكثر مفصولين بفواصل للعثور على القاسم المشترك الأكبر لهم.</p>
+  <section class="widget" id="tool"><form id="gcd-form"><div class="field"><label for="gcd-nums">الأرقام (مفصولة بفواصل)</label><input type="text" id="gcd-nums" placeholder="e.g. 48, 36, 24" inputmode="numeric"></div><div class="result"><span class="hint">جي سي دي: </span><span class="big" id="gcd-out">—</span></div><div id="gcd-lcm-out" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>أوجد القاسم المشترك الأكبر لأي رقم</h2>
+<p>القاسم المشترك الأكبر (GCD) - ويسمى أيضًا العامل المشترك الأكبر (GCF) أو العامل المشترك الأعلى (HCF) - هو أكبر رقم يقسم جميع الأرقام المعطاة دون ترك باقي. أدخل رقمين أو أكثر مفصولين بفواصل وسيتم حساب GCD على الفور باستخدام الخوارزمية الإقليدية.</p>
+<h2>التعريف والأمثلة</h2>
+<ul>
+<li>GCD(12, 18) = 6 — لأن 6 هو أكبر رقم يقسم كلا من 12 و18.</li>
+<li>GCD(48, 36, 24) = 12 — أكبر عدد يقسم الثلاثة.</li>
+<li>GCD(7, 13) = 1 — هذه هي coprime (لا يوجد عامل مشترك غير 1).</li>
+</ul>
+<h2>الخوارزمية الإقليدية</h2>
+<p>الطريقة الأكثر شهرة لحساب GCD هي الخوارزمية الإقليدية، التي وصفها إقليدس حوالي 300 قبل الميلاد في كتابه العناصر. تنص الخوارزمية على أن GCD(a, b) = GCD(b, a mod b)، وتتكرر حتى b = 0. على سبيل المثال: GCD(48, 36) → GCD(36, 12) → GCD(12, 0) = 12.</p>
+<h2>تبسيط الكسور</h2>
+<p>الاستخدام اليومي الأكثر شيوعًا لـ GCD هو تبسيط الكسور إلى أدنى الحدود. لتبسيط 48/72، احسب GCD(48, 72) = 24، ثم اقسم كليهما على 24: 2/3. تم تقليل النتيجة بالكامل لأن البسط والمقام أصبحا الآن أوليين.</p>
+<h2>التشفير</h2>
+<p>يعتمد تشفير RSA، وهو الخوارزمية التي تؤمن معظم اتصالات الإنترنت، بشكل أساسي على نظرية الأعداد التي تتضمن أرقام GCD وأرقام coprime. تتطلب خوارزمية إنشاء مفتاح RSA اختيار رقمين أوليين كبيرين، يكونان دائمًا أوليين لبعضهما البعض ولمنتجاتهما.</p>
+<h2>تقسيم الأشياء إلى مجموعات متساوية</h2>
+<p>الاستخدام العملي للغاية لـ GCD هو تقسيم المجموعات ذات الأحجام المختلفة إلى أكبر عدد ممكن من المجموعات المتماثلة دون ترك أي شيء. إذا كان لديك 48 تفاحة و36 برتقالة وتريد عمل سلال فواكه متطابقة باستخدام كل الفاكهة دون بقايا طعام، فإن أكبر عدد من السلال التي يمكنك صنعها هو GCD(48, 36) = 12، تحتوي كل منها على 4 تفاحات و3 برتقالات. وينطبق هذا المنطق نفسه على قطع أطوال القماش أو الخشب إلى قطع متساوية، أو ترتيب الكراسي في صفوف متساوية عبر غرف ذات أحجام مختلفة، أو تقسيم الميزانية عبر الأقسام بأكبر أقساط متساوية ممكنة.</p>
+<h2>الهندسة</h2>
+<p>في الهندسة الميكانيكية، يحدد عدد الأسنان GCD على ترسين عدد مرات التقاء نفس زوج الأسنان. إذا كان الترس A به 48 سنًا والترس B به 36 سنًا، فإن GCD(48, 36) = 12، مما يعني أن كل 12 سنًا على الترس A مع كل 12 سنًا على الترس B.</p>
+<h2>كيفية استخدام الآلة الحاسبة</h2>
+<p>اكتب أرقامك في المربع المفصول بفواصل — رقمين، أو أي عدد تريده. اضغط على &quot;حساب&quot; وسيظهر GCD للمجموعة بأكملها على الفور، جنبًا إلى جنب مع الاختزال الإقليدي خطوة بخطوة حتى تتمكن من رؤية كيفية الوصول إلى الإجابة بالضبط بدلاً من التعامل معها كمربع أسود. يتم التعامل مع إدخال رقم واحد، أو أرقام لا تشترك في أي عامل مشترك يتجاوز 1، بأمان: تقوم الأداة ببساطة بالإبلاغ عن GCD بقيمة 1 في الحالة الأخيرة، مما يؤكد أن الأرقام هي coprime.</p>
+<h2>لماذا تعتبر الخوارزمية الإقليدية فعالة جدًا؟</h2>
+<p>قبل طريقة إقليدس، كان العثور على GCD يعني إدراج كل عامل من كل رقم واختيار أكبر عامل مشترك بينهما - وهو أمر عملي بالنسبة للأعداد الصغيرة ولكنه بطيء للغاية بالنسبة للأعداد الكبيرة. بدلًا من ذلك، تقوم الخوارزمية الإقليدية باستبدال الرقم الأكبر بشكل متكرر بباقي عملية القسمة على الرقم الأصغر، مما يؤدي إلى تقليص المشكلة بسرعة. بالنسبة لرقمين من أي حجم واقعي، يتم الانتهاء عادةً في أقل من خمسين خطوة، ولهذا السبب تظل الطريقة القياسية التي يتم تدريسها اليوم والطريقة المضمنة في كل آلة حاسبة ووظيفة جدول بيانات ومكتبة لغة برمجة تقريبًا تحسب GCD.</p>
+<h2>يمتد إلى أكثر من رقمين</h2>
+<p>عند إدخال ثلاثة أرقام أو أكثر، لا تحتاج الآلة الحاسبة إلى خوارزمية جديدة - فهي ببساطة تطبق حالة الرقمين بشكل متكرر. GCD لقائمة كاملة يساوي GCD للرقمين الأولين مجتمعين مع الرقم الثالث، وهكذا: GCD(a, b, c) = GCD(GCD(a, b), c). يعمل هذا لأن أي رقم يقسم كل من a وb وc يجب أن يقسم GCD لأي زوج منهم أولاً، لذا فإن تقليل القائمة اثنين في كل مرة لا يفقد المعلومات أبدًا. إنه مثال جيد لكيفية تحجيم كتلة بناء بسيطة - GCD المكونة من رقمين - بشكل نظيف للتعامل مع قائمة طويلة بشكل تعسفي.</p>
+<h2>أرقام Coprime وما يخبرك به GCD من 1</h2>
+<p>عندما تشير الآلة الحاسبة إلى أن GCD يساوي 1، فإن الأرقام التي أدخلتها تسمى coprime، أو أولية نسبيًا، مما يعني أنها لا تشترك في أي عامل أكبر من 1 على الرغم من أن كل منها قد يحتوي على العديد من العوامل بشكل فردي. على سبيل المثال، 8 و15 هما كوبريم على الرغم من أن 8 = 2×2×2 و15 = 3×5 - إلا أنهما ببساطة لا يشتركان في نفس وحدات البناء الأولية. تظهر الأولوية المشتركة باستمرار في نظرية الأعداد والتشفير، لأن العديد من الخوارزميات تعتمد على اختيار الأرقام التي تضمن عدم مشاركة البنية المشتركة المخفية.</p>
+<h2>مثال عملي، خطوة بخطوة</h2>
+<p>شاهد الخوارزمية الإقليدية أثناء عملها لـ GCD(48, 18). أولاً، 48 = 2×18 + 12، وبالتالي تصبح المشكلة GCD(18, 12). بعد ذلك، 18 = 1×12 + 6، فيصبح GCD(12, 6). وأخيرًا، 12 = 2×6 + 0، وبالتالي يصل الباقي إلى الصفر وآخر باقي غير الصفر، 6، هو GCD. تعمل كل خطوة من خطوات الخوارزمية على تقليص الأرقام المعنية بسرعة، ولهذا السبب بالضبط تنتهي في عدد قليل من الخطوات حتى بالنسبة للأعداد الكبيرة جدًا، على عكس إدراج كل عامل، والذي يتباطأ بسرعة مع نمو الأرقام.</p>
+<h2>خاصة وفورية</h2>
+<p>يتم تشغيل جميع الحسابات بالكامل في متصفحك باستخدام الخوارزمية الإقليدية، بحيث تظهر النتيجة فورًا التي تكتبها ولا يتم إرسال أي أرقام تدخلها إلى الخادم أو تسجيلها أو مشاركتها. إنه يعمل دون اتصال بمجرد تحميل الصفحة، ويتم تجاهل كل عملية حسابية بمجرد إغلاق علامة التبويب أو إعادة تحميلها.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول حاسبة GCD</h2><dl><dt>ما هو GCD؟</dt><dd>القاسم المشترك الأكبر (GCD)، ويسمى أيضًا العامل المشترك الأكبر (GCF) أو العامل المشترك الأعلى (HCF)، هو أكبر عدد صحيح موجب يقسم جميع الأرقام المعطاة دون باقي. جي سي دي (12، 18) = 6.</dd><dt>ما هو استخدام GCD؟</dt><dd>يتم استخدام GCD لتبسيط الكسور — قسمة البسط والمقام على GCD الخاص بهما. كما أنها تستخدم في التشفير، وخوارزميات علوم الكمبيوتر، وتحديد درجة أسنان التروس في الهندسة.</dd><dt>ماذا لو لم يكن للأرقام أي عامل مشترك؟</dt><dd>إذا لم يشترك رقمان في عامل مشترك آخر غير 1، فإن GCD الخاص بهما هو 1 ويطلق عليهما اسم coprime أو أولي نسبيًا.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gcdcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gcdcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gcdcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gcdcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gcdcalc/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/gcdcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/gcdcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gcdcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gcdcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gcdcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"numbers":"الأرقام (مفصولة بفواصل)","placeholder":"e.g. 48, 36, 24","gcd":"جي سي دي:"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/gcdcalc.js" defer></script>
+</body>
+</html>

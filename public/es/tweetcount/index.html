@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contador de caracteres Twitter/X: cuenta la longitud de tu tweet</title>
+<meta name="description" content="Contador de caracteres Twitter/X gratuito. Cuenta la longitud del tweet con normalización de URL (cada URL = 23 caracteres). Indicador de límite codificado por colores para el límite de 280 caracteres.">
+<link rel="canonical" href="https://mikaio.dev/es/tweetcount/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tweetcount/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tweetcount/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tweetcount/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tweetcount/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tweetcount/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tweetcount/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tweetcount/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tweetcount/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tweetcount/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tweetcount/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tweetcount/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contador de caracteres Twitter/X: cuenta la longitud de tu tweet">
+<meta property="og:description" content="Contador de caracteres Twitter/X gratuito. Cuenta la longitud del tweet con normalización de URL (cada URL = 23 caracteres). Indicador de límite codificado por colores para el límite de 280 caracteres.">
+<meta property="og:url" content="https://mikaio.dev/es/tweetcount/">
+<meta property="og:locale" content="es">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Contador de caracteres Twitter/X: cuenta la longitud de tu tweet","url":"https://mikaio.dev/es/tweetcount/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"es","description":"Contador de caracteres Twitter/X gratuito. Cuenta la longitud del tweet con normalización de URL (cada URL = 23 caracteres). Indicador de límite codificado por colores para el límite de 280 caracteres."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/es/"},{"@type":"ListItem","position":2,"name":"Twitter / Contador de caracteres X","item":"https://mikaio.dev/es/tweetcount/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Por qué Twitter cuenta las URL como 23 caracteres?","acceptedAnswer":{"@type":"Answer","text":"Twitter ajusta automáticamente cada URL a través de su acortador t.co, que produce enlaces que siempre tienen 23 caracteres. Entonces, ya sea que su URL tenga 10 o 200 caracteres, cuenta exactamente como 23 para su límite de 280 caracteres."}},{"@type":"Question","name":"¿Cuál es el límite de caracteres de Twitter/X?","acceptedAnswer":{"@type":"Answer","text":"El límite de caracteres estándar para un solo tweet o publicación X es de 280 caracteres. Los suscriptores de Twitter Blue/X Premium pueden tener acceso a publicaciones más largas (hasta 25.000 caracteres), pero el límite gratuito es 280."}},{"@type":"Question","name":"¿Los emojis cuentan como un carácter?","acceptedAnswer":{"@type":"Answer","text":"La mayoría de los emojis estándar cuentan como 2 caracteres en el sistema de conteo de Twitter porque usan pares sustitutos Unicode. Este contador utiliza la longitud de la cadena de JavaScript, que puede diferir ligeramente del conteo exacto de Twitter para ciertas combinaciones de emoji."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/es/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navegación del sitio">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a> › <span>Twitter / Contador de caracteres X</span></nav>
+  <h1>Twitter / Contador de caracteres X</h1>
+  <p class="lead">Escribe o pega tu tweet a continuación. Las URL se cuentan automáticamente como 23 caracteres cada una, lo que coincide con el comportamiento de acortamiento de enlaces de t.co de Twitter.</p>
+  <section class="widget" id="tool"><form id="tweet-form"><div class="field"><label for="tweet-text">Tuitear/publicar texto</label><textarea id="tweet-text" rows="5" placeholder="¿Lo que está sucediendo?"></textarea></div><div class="result" id="tweet-out" style="text-align:left"></div></form></section>
+  <article class="content">
+    <h2>Cuente la longitud de su publicación de la forma en que X realmente la cuenta</h2>
+<p>Un límite de 280 caracteres suena simple hasta que empiezas a escribir y te das cuenta de que los emoji, los enlaces y ciertos caracteres acentuados no cuentan como cabría esperar. Este contador refleja las reglas de conteo reales de X (anteriormente Twitter) tan fielmente como lo puede hacer una herramienta de navegador, incluido el tratamiento distintivo de las URL de la plataforma, por lo que el número que ve aquí coincide con lo que vería en el cuadro de redacción en lugar de un recuento ingenuo de caracteres que lo deja adivinando si una publicación realmente encajará.</p>
+<h2>como usarlo</h2>
+<p>Escriba o pegue su publicación en el cuadro y el recuento de caracteres aparecerá inmediatamente debajo, mostrado contra el límite de 280 caracteres con una barra codificada por colores que cambia de verde a ámbar y de naranja a rojo a medida que se acerca y luego excede el límite. Cualquier URL que incluya se detecta automáticamente y se cuenta como exactamente 23 caracteres, lo que coincide con el comportamiento de acortamiento de enlaces de la plataforma, independientemente de la longitud del enlace real. El resto de la asignación de caracteres se actualiza a medida que escribe, por lo que puede recortar o ampliar su redacción mientras observa el número en lugar de redactar a ciegas y verificar solo al final.</p>
+<h2>Por qué las URL siempre cuentan como 23 caracteres</h2>
+<p>X envuelve automáticamente cada enlace publicado a través de su sistema con su propio servicio de acortamiento t.co, y cada enlace, sin importar cuán larga o corta sea la dirección original, se convierte en un enlace t.co de exactamente la misma longitud fija. Esta es la razón por la que una publicación que contiene un enlace a una dirección corta y limpia y una publicación que contiene un enlace a una URL enorme repleta de parámetros de seguimiento le cuesta al autor exactamente la misma cantidad de caracteres (23, actualmente) frente al presupuesto de 280 caracteres. Esta herramienta replica ese comportamiento al detectar URL en su texto y contar cada una como 23 caracteres en lugar de su longitud literal, por lo que el recuento que ve aquí coincide con lo que realmente sucede cuando publica.</p>
+<h2>Emoji y la peculiaridad de la pareja sustituta</h2>
+<p>Los emoji añaden un toque genuino al conteo de caracteres debido a cómo se almacenan internamente. La mayoría de los emoji modernos, particularmente los más nuevos o más complejos, se representan usando lo que se llama un par sustituto (dos unidades de código subyacentes en lugar de una), lo que significa que con frecuencia cuentan como dos caracteres en lugar de uno en sistemas que miden la longitud de las cadenas como lo hacen JavaScript y muchos otros lenguajes. El propio sistema de conteo de X tiene aquí sus propias reglas específicas que ocasionalmente pueden diferir ligeramente del cálculo de longitud de cadena nativa de un navegador para combinaciones inusuales de emoji, secuencias de banderas o emoji con modificadores como selectores de tono de piel. Para la inmensa mayoría de las publicaciones cotidianas, esta diferencia es invisible, pero si estás justo al borde del límite y usas varios emoji, vale la pena dejar un pequeño búfer en lugar de confiar en la cuenta regresiva hasta el carácter final exacto.</p>
+<h2>La evolución del límite de caracteres.</h2>
+<p>Twitter se lanzó con un límite de 140 caracteres, una cifra elegida deliberadamente para incluir un tweet más un nombre de usuario dentro del límite de 160 caracteres de un solo mensaje de texto SMS, ya que el servicio fue diseñado originalmente para funcionar tanto con mensajes de texto como con la web. El límite se duplicó a 280 caracteres en 2017 después de que los datos mostraran que muchos usuarios, particularmente aquellos que escriben en idiomas que requieren más caracteres para expresar la misma idea, se estaban quedando constantemente sin espacio. Los límites de caracteres más altos para los suscriptores de pago llegaron más tarde, pero el límite gratuito de 280 caracteres contra el cual esta contramedida sigue siendo el estándar para el que se escriben la mayoría de las publicaciones.</p>
+<h2>Escribir con precisión dentro de los 280 caracteres</h2>
+<p>Debido a que cada carácter cuenta contra un límite estricto, los escritores que publican regularmente desarrollan hábitos para recortar sin perder significado: reemplazar &quot;porque&quot; con &quot;bc&quot; o &quot;&amp;&quot; por &quot;y&quot; solo cuando el tono le conviene, eliminar palabras de relleno que no agregan nada y mover un enlace o un hashtag hasta el final para que sea lo primero que se debe cortar si es necesario un recorte final. Ver el conteo en vivo mientras escribes, en lugar de componer todo el pensamiento primero y descubrir después que son cuarenta caracteres demasiado largos, hace que este tipo de edición estricta sea mucho menos frustrante, ya que puedes ver exactamente cuánto espacio ahorra realmente una nueva redacción antes de comprometerte con ella.</p>
+<h2>Hilos y borradores de publicaciones múltiples.</h2>
+<p>Cuando un solo pensamiento no cabe en 280 caracteres, el enfoque habitual es dividirlo en un hilo de publicaciones conectadas en lugar de forzar que todo esté en uno. Redactar primero un hilo en otro lugar y ejecutar cada publicación planificada a través de este contador individualmente es una forma confiable de verificar que cada parte del hilo encaje cómodamente, incluidos algunos caracteres de repuesto para un prefijo de numeración de estilo &quot;1/&quot; si usa uno, antes de comenzar a publicarlos uno tras otro, en lugar de descubrir a mitad del hilo que una publicación necesita un incómodo recorte de último segundo después de haber comenzado a publicar las anteriores.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todo se ejecuta en su propio navegador a medida que escribe, por lo que su borrador de publicación nunca se carga, registra ni comparte con nadie, y no se guarda nada una vez que sale de la página. Funciona sin conexión una vez cargado y está listo cuando necesites una verificación de caracteres rápida y precisa antes de publicar.</p>
+    <section class="faq"><h2>Preguntas frecuentes sobre el contador de caracteres de Twitter</h2><dl><dt>¿Por qué Twitter cuenta las URL como 23 caracteres?</dt><dd>Twitter ajusta automáticamente cada URL a través de su acortador t.co, que produce enlaces que siempre tienen 23 caracteres. Entonces, ya sea que su URL tenga 10 o 200 caracteres, cuenta exactamente como 23 para su límite de 280 caracteres.</dd><dt>¿Cuál es el límite de caracteres de Twitter/X?</dt><dd>El límite de caracteres estándar para un solo tweet o publicación X es de 280 caracteres. Los suscriptores de Twitter Blue/X Premium pueden tener acceso a publicaciones más largas (hasta 25.000 caracteres), pero el límite gratuito es 280.</dd><dt>¿Los emojis cuentan como un carácter?</dt><dd>La mayoría de los emojis estándar cuentan como 2 caracteres en el sistema de conteo de Twitter porque usan pares sustitutos Unicode. Este contador utiliza la longitud de la cadena de JavaScript, que puede diferir ligeramente del conteo exacto de Twitter para ciertas combinaciones de emoji.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tweetcount/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tweetcount/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tweetcount/">हिन्दी</a></li><li><a hreflang="es" lang="es" aria-current="true" href="/es/tweetcount/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tweetcount/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tweetcount/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/tweetcount/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tweetcount/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tweetcount/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tweetcount/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Herramientas de navegador gratuitas, rápidas y privadas · © 2026</p>
+  <p><a href="/freetools.html">Todas las herramientas</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="es";window.__T={"text":"Tuitear/publicar texto","whatshappening":"¿Lo que está sucediendo?"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tweetcount.js" defer></script>
+</body>
+</html>

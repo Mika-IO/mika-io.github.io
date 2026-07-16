@@ -8,7 +8,14 @@
 <link rel="canonical" href="https://mikaio.dev/en/weeknumber/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/weeknumber/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/weeknumber/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/weeknumber/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/weeknumber/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/weeknumber/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/weeknumber/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/weeknumber/">
   <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/weeknumber/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/weeknumber/">
   <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/weeknumber/">
   <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/weeknumber/">
 <meta property="og:type" content="website">
@@ -61,9 +68,12 @@ input,select,textarea,button{font:inherit;color:inherit}
 input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
   width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
 textarea{min-height:120px;resize:vertical}
-.row{display:flex;gap:.8rem;flex-wrap:wrap}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
 .row>.field{flex:1;min-width:140px}
 .btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
 .btn:hover{filter:brightness(1.05)}
 .btn.secondary{background:var(--accent);color:var(--ink)}
 .result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
@@ -110,9 +120,9 @@ textarea{min-height:120px;resize:vertical}
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Week Number Calculator — what week of the year is it?","url":"https://mikaio.dev/en/weeknumber/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free week number calculator. Find the ISO week number for any date. See what week of the year it is today or for any date you choose."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Week Number","item":"https://mikaio.dev/en/weeknumber/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the ISO week number?","acceptedAnswer":{"@type":"Answer","text":"ISO 8601 defines a week as starting on Monday. Week 1 is the week that contains the first Thursday of the year, which means the first days of January may belong to week 52 or 53 of the previous year."}},{"@type":"Question","name":"Why does week 1 sometimes start in December?","acceptedAnswer":{"@type":"Answer","text":"Because ISO weeks start on Monday, some years have a Thursday in early January that pushes week 1 to start in late December of the previous year."}},{"@type":"Question","name":"How many weeks are in a year?","acceptedAnswer":{"@type":"Answer","text":"Most years have 52 ISO weeks. Some years have 53 weeks when the year starts or ends on a Thursday."}}]}]</script>
 </head>
 <body>
-<header class="site-head"><a class="brand" href="/en/">mikaio.dev</a>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev/freetools</a>
   <nav class="site-nav" aria-label="Site navigation">
-    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/">اردو</a></li></ul>
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/weeknumber/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/weeknumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/weeknumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/weeknumber/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/weeknumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/weeknumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/weeknumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/weeknumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/weeknumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/weeknumber/">اردو</a></li></ul>
   </nav></header>
 <main class="tool-main">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Week Number</span></nav>
@@ -148,11 +158,12 @@ textarea{min-height:120px;resize:vertical}
 <p>The tool uses only your browser&#39;s local date computation, based on the same ISO 8601 rules described above, so nothing about the dates you check is ever sent to a server, logged or shared.</p>
     <section class="faq"><h2>Week number FAQ</h2><dl><dt>What is the ISO week number?</dt><dd>ISO 8601 defines a week as starting on Monday. Week 1 is the week that contains the first Thursday of the year, which means the first days of January may belong to week 52 or 53 of the previous year.</dd><dt>Why does week 1 sometimes start in December?</dt><dd>Because ISO weeks start on Monday, some years have a Thursday in early January that pushes week 1 to start in late December of the previous year.</dd><dt>How many weeks are in a year?</dt><dd>Most years have 52 ISO weeks. Some years have 53 weeks when the year starts or ends on a Thursday.</dd></dl></section>
   </article>
-  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/weeknumber/">English</a></li><li><a hreflang="pt" lang="pt" href="/pt/weeknumber/">Português</a></li><li><a hreflang="ur" lang="ur" href="/ur/weeknumber/">اردو</a></li></ul></nav>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/weeknumber/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/weeknumber/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/weeknumber/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/weeknumber/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/weeknumber/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/weeknumber/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/weeknumber/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/weeknumber/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/weeknumber/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/weeknumber/">اردو</a></li></ul></nav>
 </main>
 <footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
-  <p><a href="/glossary.html">All tools</a></p></footer>
+  <p><a href="/freetools.html">All tools</a></p></footer>
 <script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="en";window.__T={"date":"Date","week_label":"Week number","weeklabel":"Week "};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
 <script src="/assets/tools/weeknumber.js" defer></script>
 </body>
 </html>

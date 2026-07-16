@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>सेवानिवृत्ति कैलकुलेटर - आप कितना बचाएंगे?</title>
+<meta name="description" content="नि:शुल्क सेवानिवृत्ति कैलकुलेटर. मासिक योगदान, अपेक्षित रिटर्न और सेवानिवृत्ति के वर्षों के आधार पर अपनी सेवानिवृत्ति बचत का अनुमान लगाएं।">
+<link rel="canonical" href="https://mikaio.dev/hi/retirementcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/retirementcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/retirementcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/retirementcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/retirementcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/retirementcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/retirementcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/retirementcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/retirementcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/retirementcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/retirementcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/retirementcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="सेवानिवृत्ति कैलकुलेटर - आप कितना बचाएंगे?">
+<meta property="og:description" content="नि:शुल्क सेवानिवृत्ति कैलकुलेटर. मासिक योगदान, अपेक्षित रिटर्न और सेवानिवृत्ति के वर्षों के आधार पर अपनी सेवानिवृत्ति बचत का अनुमान लगाएं।">
+<meta property="og:url" content="https://mikaio.dev/hi/retirementcalc/">
+<meta property="og:locale" content="hi">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"सेवानिवृत्ति कैलकुलेटर - आप कितना बचाएंगे?","url":"https://mikaio.dev/hi/retirementcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"hi","description":"नि:शुल्क सेवानिवृत्ति कैलकुलेटर. मासिक योगदान, अपेक्षित रिटर्न और सेवानिवृत्ति के वर्षों के आधार पर अपनी सेवानिवृत्ति बचत का अनुमान लगाएं।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/hi/"},{"@type":"ListItem","position":2,"name":"सेवानिवृत्ति बचत कैलकुलेटर","item":"https://mikaio.dev/hi/retirementcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"मुझे किस ब्याज दर का उपयोग करना चाहिए?","acceptedAnswer":{"@type":"Answer","text":"मुद्रास्फीति के बाद ऐतिहासिक शेयर बाजार का औसत रिटर्न लगभग 7% सालाना है। रूढ़िवादी अनुमान के लिए 5-6% का उपयोग करें; अधिक आशावादी अनुमान के लिए 8-10% का उपयोग करें।"}},{"@type":"Question","name":"क्या इसमें नियोक्ता मिलान शामिल है?","acceptedAnswer":{"@type":"Answer","text":"नहीं, इसे शामिल करने के लिए अपने नियोक्ता मिलान को अपनी मासिक अंशदान राशि में जोड़ें।"}},{"@type":"Question","name":"महंगाई के बारे में क्या?","acceptedAnswer":{"@type":"Answer","text":"7% का उपयोग मुद्रास्फीति के बाद रिटर्न (वास्तविक रिटर्न) मानता है। यदि आप नाममात्र रिटर्न (जैसे 10%) का उपयोग करते हैं, तो परिणाम की क्रय शक्ति कम होगी।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/hi/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="साइट नेविगेशन">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/retirementcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/retirementcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/retirementcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/retirementcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/retirementcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/retirementcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/retirementcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/retirementcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/retirementcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/retirementcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/hi/">मुख्य पृष्ठ</a> › <span>सेवानिवृत्ति बचत कैलकुलेटर</span></nav>
+  <h1>सेवानिवृत्ति बचत कैलकुलेटर</h1>
+  <p class="lead">अपनी सेवानिवृत्ति निधि का अनुमान लगाने के लिए अपनी आयु, लक्षित सेवानिवृत्ति आयु, मासिक बचत और अपेक्षित रिटर्न दर्ज करें।</p>
+  <section class="widget" id="tool"><form id="rc-form"><div class="row"><div class="field"><label for="rc-age">वर्तमान आयु</label><input type="number" id="rc-age" value="30" min="1" max="100" step="1" inputmode="numeric"></div><div class="field"><label for="rc-retire">सेवानिवृत्ति की आयु</label><input type="number" id="rc-retire" value="65" min="1" max="100" step="1" inputmode="numeric"></div><div class="field"><label for="rc-save">मासिक बचत</label><input type="number" id="rc-save" value="500" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="rc-rate">वार्षिक रिटर्न %</label><input type="number" id="rc-rate" value="7" step="any" min="0" inputmode="decimal"></div></div><div class="result"><span class="hint">सेवानिवृत्ति पर अनुमानित बचत: </span><span class="big" id="rc-out">—</span></div><div id="rc-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></form></section>
+  <article class="content">
+    <h2>अनुमान लगाएं कि जब आप सेवानिवृत्त होंगे तो आपके पास कितना होगा</h2>
+<p>सेवानिवृत्ति योजना एक सरल प्रश्न से शुरू होती है: यदि मैं हर महीने एक निश्चित राशि बचाता हूं, तो जब मैं काम करना बंद कर दूंगा तो मेरे पास कितनी राशि बचेगी? यह कैलकुलेटर आपको आपकी वर्तमान आयु, आपकी लक्षित सेवानिवृत्ति की आयु, आपकी मासिक बचत और आपके निवेश पर अपेक्षित वार्षिक रिटर्न के आधार पर वह संख्या देता है।</p>
+<h2>गणना कैसे काम करती है</h2>
+<p>नियमित मासिक योगदान के भविष्य के मूल्य का सूत्र है:</p>
+<p>एफवी = पीएमटी × [(1 + आर)^एन - 1] / आर</p>
+<p>जहां पीएमटी मासिक भुगतान है, आर मासिक ब्याज दर (वार्षिक दर ÷ 12) है, और एन महीनों की कुल संख्या (वर्ष × 12) है।</p>
+<p>यह वार्षिकी फॉर्मूला का मानक भविष्य मूल्य है। यह माना जाता है कि आप लगातार मासिक योगदान करते हैं और उस पर मासिक चक्रवृद्धि रिटर्न मिलता है।</p>
+<h2>समय की शक्ति</h2>
+<p>सेवानिवृत्ति बचत में समय सबसे महत्वपूर्ण चर है। पहले शुरू करने से बाद में योगदान बढ़ाने की तुलना में नाटकीय रूप से बड़ा प्रभाव पड़ता है।</p>
+<p>उदाहरण: 7% वार्षिक रिटर्न पर $500/माह की बचत:</p>
+<ul>
+<li>25 वर्ष (40 वर्ष) की आयु से प्रारंभ: $1,327,000</li>
+<li>35 (30 वर्ष) की उम्र से शुरू: $600,000</li>
+<li>45 (20 वर्ष) की उम्र से शुरू: $247,000</li>
+</ul>
+<p>जो व्यक्ति 25 साल की उम्र में शुरुआत करता है वह 35 साल की उम्र में शुरुआत करने वाले व्यक्ति की तुलना में दोगुना से अधिक जमा करता है, बावजूद इसके कि वह केवल 10 और वर्षों तक योगदान देता है।</p>
+<h2>किस ब्याज दर का उपयोग करें</h2>
+<p>अपेक्षित रिटर्न का चुनाव परिणाम को महत्वपूर्ण रूप से प्रभावित करता है:</p>
+<ul>
+<li>5%: रूढ़िवादी अनुमान, बांड-भारी पोर्टफोलियो के लिए उपयुक्त</li>
+<li>7%: विविध स्टॉक-एंड-बॉन्ड पोर्टफोलियो के लिए पारंपरिक नियम (वास्तविक, मुद्रास्फीति-समायोजित रिटर्न)</li>
+<li>10%: अनुमानित ऐतिहासिक नाममात्र अमेरिकी शेयर बाजार रिटर्न (मुद्रास्फीति से पहले)</li>
+</ul>
+<p>वास्तविक रिटर्न (मुद्रास्फीति के बाद) का उपयोग करने से आज के डॉलर में परिणाम की व्याख्या करना आसान हो जाता है। नाममात्र रिटर्न का उपयोग करने के लिए भविष्य की मुद्रास्फीति के लिए परिणाम में छूट की आवश्यकता होती है।</p>
+<h2>यह कैलकुलेटर किस चीज़ का हिसाब नहीं देता</h2>
+<p>यह प्रक्षेपण निरंतर मासिक योगदान और निरंतर वार्षिक रिटर्न मानता है, जो वास्तविक जीवन का सरलीकरण है। यह साल-दर-साल बाजार की अस्थिरता, समय के साथ आपके योगदान राशि में बदलाव, निकासी पर कर, या राज्य पेंशन जैसे अतिरिक्त आय स्रोतों का मॉडल नहीं बनाता है। परिणाम को एक गारंटीकृत परिणाम के बजाय योजना उद्देश्यों के लिए एक उपयोगी, परिमाण के क्रम के अनुमान के रूप में मानें, और समय-समय पर संख्याओं पर दोबारा गौर करें क्योंकि आपकी वास्तविक बचत दर और निवेश रिटर्न आने वाले वर्षों में स्पष्ट हो जाते हैं।</p>
+<h2>आपके सेवानिवृत्ति परिणाम में सुधार</h2>
+<p>कई लीवर सेवानिवृत्ति बचत बढ़ाते हैं:</p>
+<ul>
+<li><strong>पहले शुरू करें</strong>: हर साल पहले का एक चक्रवृद्धि प्रभाव होता है।</li>
+<li><strong>अधिक बचत करें</strong>: यहां तक ​​कि छोटी वृद्धि भी दशकों में महत्वपूर्ण रूप से बढ़ती है।</li>
+<li><strong>परिसंपत्ति आवंटन को अनुकूलित करें</strong>: उच्च इक्विटी आवंटन ऐतिहासिक रूप से उच्च अल्पकालिक अस्थिरता के साथ उच्च दीर्घकालिक रिटर्न उत्पन्न करता है।</li>
+<li><strong>फीस कम करें</strong>: प्रति वर्ष 1-2% निवेश शुल्क 30 वर्षों में सेवानिवृत्ति धन को 20-40% तक कम कर देता है।</li>
+<li><strong>कर-सुविधाजनक खाते</strong>: 401(के), आईआरए, रोथ आईआरए (यूएस), आईएसए (यूके), और इसी तरह के खाते करों से वृद्धि को आश्रय देते हैं।</li>
+</ul>
+<h2>आपको रिटायर होने के लिए कितना चाहिए?</h2>
+<p>अंगूठे का एक सामान्य नियम 4% नियम है: आप 30 साल की सेवानिवृत्ति के दौरान पैसे खत्म हुए बिना प्रति वर्ष अपने पोर्टफोलियो का 4% लगातार निकाल सकते हैं। तो प्रति वर्ष $40,000 खर्च करने के लिए आपको $1,000,000 बचाने की आवश्यकता है। प्रति वर्ष $60,000 खर्च करने के लिए आपको $1,500,000 की आवश्यकता है।</p>
+<p>आपके पास क्या होगा इसका अनुमान लगाने के लिए इस कैलकुलेटर का उपयोग करें, फिर इसकी तुलना अपने वांछित वार्षिक खर्च के लिए 4% नियम लक्ष्य से करें।</p>
+<h2>कैलकुलेटर का उपयोग कैसे करें</h2>
+<p>अपनी वर्तमान आयु, अपनी लक्षित सेवानिवृत्ति की आयु, आप हर महीने कितनी बचत करने की योजना बनाते हैं, और अपने निवेश से अपेक्षित वार्षिक रिटर्न दर दर्ज करें। सेवानिवृत्ति पर अनुमानित शेष तुरंत दिखाई देता है, और प्रत्येक आंकड़ा आपके द्वारा किसी भी इनपुट को बदलने पर तुरंत पुनर्गणना करता है, जिससे यह परीक्षण करना आसान हो जाता है कि पांच साल बाद सेवानिवृत्त होने, हर महीने थोड़ी अधिक बचत करने, या अधिक रूढ़िवादी रिटर्न मानने से आपका परिणाम कैसे बदल जाएगा।</p>
+<h2>क्यों कंपाउंडिंग धैर्य का प्रतिफल देती है?</h2>
+<p>इस कैलकुलेटर के पीछे भविष्य-मूल्य सूत्र एक चक्रवृद्धि ब्याज गणना है, और चक्रवृद्धि सटीक रूप से शक्तिशाली है क्योंकि प्रत्येक महीने के रिटर्न की गणना न केवल आपके मूल योगदान पर की जाती है, बल्कि उन सभी वृद्धि पर की जाती है जो उन योगदानों ने पहले ही उत्पन्न की हैं। बचत के शुरुआती वर्षों में, यह प्रभाव बमुश्किल ध्यान देने योग्य होता है - शेष राशि का अधिकांश हिस्सा अभी भी आपका अपना योगदान है। लेकिन लंबे बचत क्षितिज के बाद के दशकों तक, संचित वृद्धि स्वयं आपके मासिक योगदान की तुलना में अधिक वृद्धि उत्पन्न करना शुरू कर देती है, यही कारण है कि एक दशक पहले शुरू करना बाद में शुरू करने से प्रति माह दोगुनी बचत करने से अधिक मायने रखता है। इस तथ्य के बाद उन अतिरिक्त वर्षों का निर्माण करने का कोई तरीका नहीं है, जो कि जल्द से जल्द बचत शुरू करने का सबसे मजबूत तर्क है, यहां तक ​​​​कि थोड़ी सी राशि के साथ भी।</p>
+<h2>परिस्थितियाँ बदलने पर अपनी योजना को समायोजित करना</h2>
+<p>कुछ लोग एक बार बचत राशि निर्धारित करते हैं और इसे चालीस वर्षों तक अछूता छोड़ देते हैं - आय बढ़ती है, प्राथमिकताएँ बदलती हैं, और एक योजना केवल तभी उपयोगी होती है जब उस पर समय-समय पर दोबारा विचार किया जाता है। क्योंकि इस कैलकुलेटर में प्रत्येक फ़ील्ड तुरंत पुनर्गणना करता है, यह एक चेक-इन टूल के रूप में अच्छी तरह से काम करता है: अपनी वर्तमान आयु, वर्तमान मासिक योगदान और यथार्थवादी रिटर्न धारणा के साथ वर्ष में एक बार अपने नंबर चलाएं, और पिछले वर्ष के साथ नए प्रक्षेपण की तुलना करें। एक छोटी वृद्धि पूरी तरह से सेवानिवृत्ति बचत में पुनर्निर्देशित, या लक्ष्य सेवानिवृत्ति की आयु को कुछ साल पीछे धकेलने का निर्णय, दोनों तुरंत एक बदले हुए अंतिम शेष के रूप में दिखाई देते हैं, जो प्रत्येक निर्णय में शामिल व्यापार-बंद को अमूर्त के बजाय ठोस बनाता है।</p>
+<h2>निजी और तत्काल</h2>
+<p>सभी गणनाएं पूरी तरह से आपके ब्राउज़र में वार्षिकी के मानक भविष्य-मूल्य फॉर्मूला का उपयोग करके चलती हैं, इसलिए जैसे ही आप किसी भी इनपुट को समायोजित करते हैं तो अनुमान तुरंत अपडेट हो जाते हैं और आपके द्वारा दर्ज किए गए कोई भी वित्तीय आंकड़े कभी भी सर्वर पर नहीं भेजे जाते हैं, लॉग इन किए जाते हैं या साझा किए जाते हैं।</p>
+    <section class="faq"><h2>सेवानिवृत्ति कैलकुलेटर अक्सर पूछे जाने वाले प्रश्न</h2><dl><dt>मुझे किस ब्याज दर का उपयोग करना चाहिए?</dt><dd>मुद्रास्फीति के बाद ऐतिहासिक शेयर बाजार का औसत रिटर्न लगभग 7% सालाना है। रूढ़िवादी अनुमान के लिए 5-6% का उपयोग करें; अधिक आशावादी अनुमान के लिए 8-10% का उपयोग करें।</dd><dt>क्या इसमें नियोक्ता मिलान शामिल है?</dt><dd>नहीं, इसे शामिल करने के लिए अपने नियोक्ता मिलान को अपनी मासिक अंशदान राशि में जोड़ें।</dd><dt>महंगाई के बारे में क्या?</dt><dd>7% का उपयोग मुद्रास्फीति के बाद रिटर्न (वास्तविक रिटर्न) मानता है। यदि आप नाममात्र रिटर्न (जैसे 10%) का उपयोग करते हैं, तो परिणाम की क्रय शक्ति कम होगी।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/retirementcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/retirementcalc/">中文</a></li><li><a hreflang="hi" lang="hi" aria-current="true" href="/hi/retirementcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/retirementcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/retirementcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/retirementcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/retirementcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/retirementcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/retirementcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/retirementcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>मुफ़्त, तेज़ और निजी ब्राउज़र टूल · © 2026</p>
+  <p><a href="/freetools.html">सभी टूल</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="hi";window.__T={"current_age":"वर्तमान आयु","retire_age":"सेवानिवृत्ति की आयु","monthly_save":"मासिक बचत","rate":"वार्षिक रिटर्न %","at_retirement":"सेवानिवृत्ति पर अनुमानित बचत"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/retirementcalc.js" defer></script>
+</body>
+</html>

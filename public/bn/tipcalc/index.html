@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>টিপ ক্যালকুলেটর - টিপ কাজ করুন এবং বিল ভাগ করুন</title>
+<meta name="description" content="বিনামূল্যে টিপ ক্যালকুলেটর. টিপের পরিমাণ এবং মোট দেখতে বিল এবং টিপের শতাংশ লিখুন, তারপর এটিকে যেকোন সংখ্যক মানুষের মধ্যে সমানভাবে ভাগ করুন। তাত্ক্ষণিক এবং ব্যক্তিগত।">
+<link rel="canonical" href="https://mikaio.dev/bn/tipcalc/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/tipcalc/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/tipcalc/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/tipcalc/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/tipcalc/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/tipcalc/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/tipcalc/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/tipcalc/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/tipcalc/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/tipcalc/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/tipcalc/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/tipcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="টিপ ক্যালকুলেটর - টিপ কাজ করুন এবং বিল ভাগ করুন">
+<meta property="og:description" content="বিনামূল্যে টিপ ক্যালকুলেটর. টিপের পরিমাণ এবং মোট দেখতে বিল এবং টিপের শতাংশ লিখুন, তারপর এটিকে যেকোন সংখ্যক মানুষের মধ্যে সমানভাবে ভাগ করুন। তাত্ক্ষণিক এবং ব্যক্তিগত।">
+<meta property="og:url" content="https://mikaio.dev/bn/tipcalc/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"টিপ ক্যালকুলেটর - টিপ কাজ করুন এবং বিল ভাগ করুন","url":"https://mikaio.dev/bn/tipcalc/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"বিনামূল্যে টিপ ক্যালকুলেটর. টিপের পরিমাণ এবং মোট দেখতে বিল এবং টিপের শতাংশ লিখুন, তারপর এটিকে যেকোন সংখ্যক মানুষের মধ্যে সমানভাবে ভাগ করুন। তাত্ক্ষণিক এবং ব্যক্তিগত।"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"টিপ ক্যালকুলেটর","item":"https://mikaio.dev/bn/tipcalc/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"আমি কত টিপ করা উচিত?","acceptedAnswer":{"@type":"Answer","text":"অনেক দেশে একটি রেস্তোরাঁর টিপ 15% থেকে 20% বিলের ভাল পরিষেবার জন্য সাধারণ, উপরের দ্রুত বোতামগুলি 10, 15, 18 এবং 20 শতাংশ সেট করে৷ কাস্টমস দেশ অনুসারে ব্যাপকভাবে পরিবর্তিত হয়, তাই আপনি যেখানে আছেন সেখানে মানানসই পরিমাণ ব্যবহার করুন।"}},{"@type":"Question","name":"আমার কি প্রি-ট্যাক্স বা ট্যাক্স-পরবর্তী মোটের উপর টিপ দেওয়া উচিত?","acceptedAnswer":{"@type":"Answer","text":"হয় গ্রহণযোগ্য এবং পার্থক্য সাধারণত ছোট। আপনি যদি সুনির্দিষ্ট হতে চান, প্রি-ট্যাক্স বিলের পরিমাণ লিখুন, কারণ টিপটি ট্যাক্সের পরিবর্তে পরিষেবাকে পুরস্কৃত করার জন্য।"}},{"@type":"Question","name":"আমি টাইপ কিছু সংরক্ষিত?","acceptedAnswer":{"@type":"Answer","text":"না। গণনা সম্পূর্ণরূপে আপনার ব্রাউজারে চলে, তাই আপনি যে বিলের পরিমাণ লিখবেন তা কখনই আপলোড, সংরক্ষণ বা ভাগ করা হয় না।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tipcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tipcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tipcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tipcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tipcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tipcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/tipcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tipcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tipcalc/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>টিপ ক্যালকুলেটর</span></nav>
+  <h1>টিপ ক্যালকুলেটর</h1>
+  <p class="lead">একবারে টিপ এবং মোট দেখতে আপনার বিল এবং একটি টিপ শতাংশ লিখুন। বিলটি সমানভাবে ভাগ করতে লোকের সংখ্যা সেট করুন।</p>
+  <section class="widget" id="tool"><form id="tip"><div class="row"><div class="field"><label for="tip-bill">বিলের পরিমাণ</label><input type="number" id="tip-bill" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-pct">টিপ %</label><input type="number" id="tip-pct" value="15" step="any" min="0" inputmode="decimal"></div><div class="field"><label for="tip-people">মধ্যে বিভক্ত</label><input type="number" id="tip-people" value="1" min="1" step="1"></div></div><div class="cc-btns row"><button type="button" class="btn secondary" data-tip="10">10%</button><button type="button" class="btn secondary" data-tip="15">15%</button><button type="button" class="btn secondary" data-tip="18">18%</button><button type="button" class="btn secondary" data-tip="20">20%</button></div><div class="result"><span class="hint">টিপ: </span><span class="big" id="tip-amount">—</span></div><div class="result"><span class="hint">মোট: </span><b id="tip-total">—</b> · <span class="hint">প্রতিটি ব্যক্তি: </span><b id="tip-each">—</b></div></form></section>
+  <article class="content">
+    <h2>টিপ কাজ করুন এবং বিশ্রী গণিত ছাড়াই বিল ভাগ করুন</h2>
+<p>একটি ভাল খাবারের সমাপ্তি গণিত পরীক্ষায় পরিণত হওয়া উচিত নয়। আপনার মাথায় একটি টিপ তৈরি করা, এটিকে বিলে যোগ করা এবং তারপরে টেবিলে থাকা প্রত্যেকের মধ্যে পুরো জিনিসটি ভাগ করা ঠিক এমন দ্রুত পাটিগণিত যা সামান্য ভুল হওয়া সহজ, বিশেষ করে এক গ্লাস ওয়াইনের পরে। এই টিপ ক্যালকুলেটর একবারে আপনার জন্য এটি সব করে। বিল লিখুন, একটি টিপ শতাংশ চয়ন করুন, বলুন কতজন লোক এটিকে বিভক্ত করছে এবং এটি টিপ, নতুন মোট এবং প্রতিটি ব্যক্তির পাওনা পরিমাণ দেখায় — আপনি টাইপ করার সাথে সাথে তাত্ক্ষণিকভাবে আপডেট করুন৷ সবকিছু আপনার ব্রাউজারে চলে, তাই এটি দ্রুত, ব্যক্তিগত এবং রেস্তোরাঁর কোনো সংকেত না থাকলেও কাজ করে।</p>
+<p>সবচেয়ে সাধারণ টিপ রেটগুলির জন্য দ্রুত বোতাম রয়েছে, তাই একটি একক ট্যাপ 10, 15, 18 বা 20 শতাংশ সেট করে এবং আপনি সর্বদা পরিবর্তে আপনার নিজের একটি সঠিক চিত্র টাইপ করতে পারেন। যেকোনো সংখ্যা পরিবর্তন করুন এবং প্রতিটি ফলাফল অবিলম্বে পুনরায় গণনা করে, যা আপনাকে কয়েকটি টিপ স্তর চেষ্টা করা সহজ করে তোলে এবং আপনি সিদ্ধান্ত নেওয়ার আগে তারা সত্যিই কতটা পার্থক্য তৈরি করে তা দেখুন।</p>
+<h2>কিভাবে এটি ব্যবহার করতে হয়</h2>
+<p>প্রথম বক্সে মোট বিল টাইপ করে শুরু করুন। তারপরে টিপ শতাংশ সেট করুন, হয় প্রিসেট বোতামগুলির একটিতে ট্যাপ করে বা আপনার নিজের নম্বর প্রবেশ করান৷ অবশেষে, আপনি যদি খরচ ভাগ করে নিচ্ছেন, কতজন লোক এটি ভাগ করছে তা নির্ধারণ করুন। ক্যালকুলেটর তিনটি জিনিস দেখায়: টিপের পরিমাণ নিজেই, টিপ সহ মোট মোট এবং মোট ভাগ সমানভাবে ভাগ করা হলে প্রতিটি ব্যক্তি যে ভাগ দেয়। আপনি যদি একাই খাবার খাচ্ছেন, শুধু একজনের সংখ্যা ছেড়ে দিন এবং প্রতি-ব্যক্তির চিত্রটিকে উপেক্ষা করুন।</p>
+<p>ফলাফল লাইভ আপডেট হওয়ার কারণে, প্রেস করার জন্য কোনও বোতাম নেই এবং রিসেট করার মতো কিছুই নেই। টিপটি 15 থেকে 18 শতাংশ পর্যন্ত সামঞ্জস্য করুন এবং সংখ্যাগুলি সরানো দেখুন; বিভাজনে একজন ব্যক্তিকে যুক্ত করুন এবং প্রতিটি শেয়ার ড্রপ দেখুন। এটি টেবিলে লোকেদের আসল প্রশ্নগুলির দ্রুত উত্তর দেওয়ার জন্য ডিজাইন করা হয়েছে, যাতে আপনি সেট আপ করতে এবং এগিয়ে যেতে পারেন।</p>
+<h2>কিভাবে একটি টিপ গণনা করা হয়</h2>
+<p>একটি টিপ হল বিলের একটি শতাংশ। এটি হাতে খুঁজে বের করতে, আপনি টিপের শতাংশকে একশ দিয়ে ভাগ করুন এবং বিল দিয়ে গুণ করুন: একটি 50 বিলের 20% টিপ হল 0.20 × 50 = 10। আপনি যে মোট অর্থ প্রদান করেন তা হল বিল এবং সেই টিপটি, তাই 50 + 10 = 60। আপনি যখন বিলটি ভাগ করবেন, তখন আপনি মোট লোককে ভাগ করবেন, মোট চারটি রিং 5 দিন 0. প্রতিটি ক্যালকুলেটর ঠিক এই ধাপগুলি অনুসরণ করে, যে কারণে প্রতি-ব্যক্তি চিত্রে ইতিমধ্যেই কেবল খাবারের পরিবর্তে টিপের প্রত্যেকের অংশ অন্তর্ভুক্ত রয়েছে।</p>
+<p>একটি রুক্ষ টিপের জন্য একটি দরকারী মানসিক শর্টকাট হল দশ শতাংশ নেওয়া — দশমিক বিন্দুকে এক জায়গায় বাম দিকে নিয়ে যাওয়া — এবং তারপর সেখান থেকে সামঞ্জস্য করুন। 50-এর দশ শতাংশ হল 5, তাই একটি পনের শতাংশ টিপ হল প্রায় 5 যোগ 5 এর অর্ধেক, যা 7.50, এবং বিশ শতাংশ হল কেবল দশ শতাংশের দ্বিগুণ, বা 10৷ ক্যালকুলেটর আপনাকে সঠিক অঙ্ক দেয়, তবে এই কৌশলগুলি দ্রুত বিবেক পরীক্ষা করার জন্য কার্যকর৷</p>
+<h2>কত টিপ দিতে হবে</h2>
+<p>টিপিং কাস্টমস বিশ্বজুড়ে ব্যাপকভাবে পরিবর্তিত হয় এবং কোন একক সঠিক উত্তর নেই। মার্কিন যুক্তরাষ্ট্রে, একটি রেস্তোরাঁর টিপ প্রাক-ট্যাক্স বিলের 15 থেকে 20 শতাংশ টেবিল পরিষেবার জন্য ব্যাপকভাবে প্রত্যাশিত, এবং টিপিং অনেক কর্মীদের আয়ের একটি উল্লেখযোগ্য অংশ। বেশিরভাগ ইউরোপে একটি পরিষেবা চার্জ প্রায়ই ইতিমধ্যে অন্তর্ভুক্ত করা হয়, এবং একটি ছোট টিপ বা কেবল রাউন্ডিং করা স্বাভাবিক। কিছু দেশে টিপ দেওয়া অস্বাভাবিক বা এমনকি নিরুৎসাহিত করা হয়। এই ক্যালকুলেটরের দ্রুত বোতামগুলি সাধারণ 10 থেকে 20 শতাংশ পরিসীমা কভার করে, তবে সর্বোত্তম গাইড হল সর্বদা আপনি যেখানেই খাচ্ছেন সেখানকার স্থানীয় রীতি।</p>
+<p>আপনি কি জন্য টিপ করছেন সে সম্পর্কে চিন্তা করাও মূল্যবান। একটি টিপ ঐতিহ্যগতভাবে পরিষেবার গুণমানকে পুরস্কৃত করে, তাই অনেক লোক মনোযোগী, বন্ধুত্বপূর্ণ পরিষেবার জন্য একটু বেশি টিপ দেয় এবং যখন এটি কম হয় তখন একটু কম৷ বৃহত্তর গোষ্ঠীগুলির জন্য, রেস্তোরাঁগুলি কখনও কখনও স্বয়ংক্রিয়ভাবে একটি পরিষেবা চার্জ যোগ করে, এই ক্ষেত্রে একটি অতিরিক্ত টিপ আশা করা যায় না — আরও যোগ করার আগে এটি সর্বদা বিল পরীক্ষা করা মূল্যবান।</p>
+<h2>রেস্তোরাঁর বাইরে</h2>
+<p>যদিও এটি ডাইনিং আউটের সাথে সবচেয়ে বেশি যুক্ত, একই গণনা যেখানে শতাংশ-ভিত্তিক টিপ বা গ্র্যাচুইটি আসে সেখানে প্রযোজ্য। এটি একটি ট্যাক্সি বা রাইড-শেয়ার ভাড়া, একটি চুল কাটা, একটি খাবার বিতরণ, একটি হোটেল পরিষেবা বা একটি বার ট্যাবের জন্য ঠিক একইভাবে কাজ করে৷ যে কোন জায়গায় আপনি একটি বেস পরিমাণে শতাংশ যোগ করতে চান এবং সম্ভবত কয়েক জনের মধ্যে ফলাফল ভাগ করতে চান, টুলটি কাজ করে। যেহেতু আপনি শতাংশকে সম্পূর্ণরূপে নিয়ন্ত্রণ করেন, এটি একটি সংখ্যায় শতাংশ যোগ করার এবং এটিকে বিভক্ত করার দ্রুত উপায় হিসাবে দ্বিগুণ হয়, একটি টিপ জড়িত থাকুক বা না থাকুক।</p>
+<h2>ব্যক্তিগত, তাত্ক্ষণিক এবং বিনামূল্যে</h2>
+<p>কোনো সাইন-আপ নেই, কোনো খরচ নেই এবং কোনো বিজ্ঞাপন আপনার পথে বাধা নেই। পুরো ক্যালকুলেটর হল কোডের একটি ছোট অংশ যা আপনার নিজের ডিভাইসে চলে, তাই এটি আপনার টাইপ করার মুহুর্তে সাড়া দেয় এবং ইন্টারনেট সংযোগ ছাড়াই কাজ করতে থাকে — একটি ব্যস্ত রেস্তোরাঁয় যেখানে সিগন্যাল দুর্বল থাকে সেখানে সত্যিকার অর্থে উপযোগী৷ আপনি যে পরিমাণগুলি লিখছেন তার কোনটিই আপলোড, লগ বা ভাগ করা হয় না; এগুলি শুধুমাত্র আপনার স্ক্রিনে বিদ্যমান এবং আপনি যখন পৃষ্ঠাটি বন্ধ করেন তখন অদৃশ্য হয়ে যায়৷</p>
+<p>এটি ব্যবহার করতে, আপনার বিল লিখুন, একটি টিপ শতাংশ বাছাই করুন, যদি আপনি বিভক্ত হয়ে থাকেন তবে লোকেদের সংখ্যা সেট করুন এবং টিপ পড়ুন, মোট এবং প্রতি-ব্যক্তি ভাগ। যেকোনো সময় যেকোনো কিছু সামঞ্জস্য করুন এবং পরিসংখ্যানের গতি বজায় রাখুন, যাতে আপনি প্রতিবার দ্রুত এবং ন্যায্যভাবে বিল নিষ্পত্তি করতে পারেন।</p>
+    <section class="faq"><h2>টিপ ক্যালকুলেটর FAQ</h2><dl><dt>আমি কত টিপ করা উচিত?</dt><dd>অনেক দেশে একটি রেস্তোরাঁর টিপ 15% থেকে 20% বিলের ভাল পরিষেবার জন্য সাধারণ, উপরের দ্রুত বোতামগুলি 10, 15, 18 এবং 20 শতাংশ সেট করে৷ কাস্টমস দেশ অনুসারে ব্যাপকভাবে পরিবর্তিত হয়, তাই আপনি যেখানে আছেন সেখানে মানানসই পরিমাণ ব্যবহার করুন।</dd><dt>আমার কি প্রি-ট্যাক্স বা ট্যাক্স-পরবর্তী মোটের উপর টিপ দেওয়া উচিত?</dt><dd>হয় গ্রহণযোগ্য এবং পার্থক্য সাধারণত ছোট। আপনি যদি সুনির্দিষ্ট হতে চান, প্রি-ট্যাক্স বিলের পরিমাণ লিখুন, কারণ টিপটি ট্যাক্সের পরিবর্তে পরিষেবাকে পুরস্কৃত করার জন্য।</dd><dt>আমি টাইপ কিছু সংরক্ষিত?</dt><dd>না। গণনা সম্পূর্ণরূপে আপনার ব্রাউজারে চলে, তাই আপনি যে বিলের পরিমাণ লিখবেন তা কখনই আপলোড, সংরক্ষণ বা ভাগ করা হয় না।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/tipcalc/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/tipcalc/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/tipcalc/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/tipcalc/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/tipcalc/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/tipcalc/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/tipcalc/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/tipcalc/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/tipcalc/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/tipcalc/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"bill":"বিলের পরিমাণ","tip_pct":"টিপ %","people":"মধ্যে বিভক্ত","tip_amount":"টিপ","total":"মোট","each":"প্রতিটি ব্যক্তি"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/tipcalc.js" defer></script>
+</body>
+</html>

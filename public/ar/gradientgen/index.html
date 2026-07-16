@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Gradient Generator - إنشاء تدرجات CSS جميلة</title>
+<meta name="description" content="مولد التدرج المجاني CSS. قم بإنشاء تدرجات خطية وشعاعية بأي لون واحصل على كود CSS على الفور. لا حاجة للتسجيل.">
+<link rel="canonical" href="https://mikaio.dev/ar/gradientgen/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/gradientgen/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/gradientgen/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/gradientgen/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/gradientgen/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/gradientgen/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/gradientgen/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/gradientgen/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/gradientgen/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/gradientgen/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/gradientgen/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/gradientgen/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSS Gradient Generator - إنشاء تدرجات CSS جميلة">
+<meta property="og:description" content="مولد التدرج المجاني CSS. قم بإنشاء تدرجات خطية وشعاعية بأي لون واحصل على كود CSS على الفور. لا حاجة للتسجيل.">
+<meta property="og:url" content="https://mikaio.dev/ar/gradientgen/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"CSS Gradient Generator - إنشاء تدرجات CSS جميلة","url":"https://mikaio.dev/ar/gradientgen/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"مولد التدرج المجاني CSS. قم بإنشاء تدرجات خطية وشعاعية بأي لون واحصل على كود CSS على الفور. لا حاجة للتسجيل."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"مولد التدرج CSS","item":"https://mikaio.dev/ar/gradientgen/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هو التدرج CSS؟","acceptedAnswer":{"@type":"Answer","text":"تدرج CSS هو انتقال سلس بين لونين أو أكثر، يتم تعريفه باستخدام خلفية CSS أو خاصية صورة الخلفية دون أي ملف صورة."}},{"@type":"Question","name":"ما هو الفرق بين الخطي والشعاعي؟","acceptedAnswer":{"@type":"Answer","text":"انتقالات التدرج الخطي في خط مستقيم بزاوية معينة. يشع التدرج الشعاعي إلى الخارج من نقطة مركزية في أشكال دائرية أو بيضاوية."}},{"@type":"Question","name":"هل يمكنني استخدام أكثر من لونين؟","acceptedAnswer":{"@type":"Answer","text":"نعم، يدعم CSS التوقفات اللونية المتعددة. يستخدم هذا المولد لونين؛ للحصول على تدرجات أكثر تعقيدًا، أضف توقفات لونية إضافية يدويًا في كود CSS."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gradientgen/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gradientgen/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gradientgen/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gradientgen/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gradientgen/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/gradientgen/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/gradientgen/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gradientgen/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gradientgen/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gradientgen/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>مولد التدرج CSS</span></nav>
+  <h1>مولد التدرج CSS</h1>
+  <p class="lead">اختر لونين، واختر نوع التدرج والزاوية، وانسخ كود CSS لمشروعك.</p>
+  <section class="widget" id="tool"><div id="grad-app"><div class="row"><div class="field"><label for="grad-c1">اللون 1</label><input type="color" id="grad-c1" value="#667eea" style="width:60px;height:44px;border:none;background:none;cursor:pointer"></div><div class="field"><label for="grad-c2">اللون 2</label><input type="color" id="grad-c2" value="#764ba2" style="width:60px;height:44px;border:none;background:none;cursor:pointer"></div><div class="field"><label for="grad-type">اكتب</label><select id="grad-type"><option value="linear">خطي</option><option value="radial">شعاعي</option></select></div><div class="field"><label for="grad-angle">الزاوية (°)</label><input type="number" id="grad-angle" value="135" min="0" max="360" step="1"></div></div><div id="grad-preview" style="height:120px;border-radius:0.75rem;margin-top:1rem;background:linear-gradient(135deg,#667eea,#764ba2)"></div><div id="grad-css" style="margin-top:0.75rem;font-family:monospace;font-size:0.85rem;padding:0.5rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);word-break:break-all"></div><button id="grad-copy" class="btn secondary" style="margin-top:0.5rem">انسخ CSS</button></div></section>
+  <article class="content">
+    <h2>قم بإنشاء تدرجات CSS مذهلة بدون أي أدوات تصميم</h2>
+<p>تعد التدرجات إحدى أكثر الطرق فعالية لإضافة العمق البصري والجماليات الحديثة إلى موقع الويب. لا تتطلب تدرجات CSS أي ملفات صور ويتم تحميلها على الفور لأنها يتم إنشاؤها بواسطة المتصفح. يتيح لك هذا المولد تصميم تدرج بصريًا عن طريق اختيار الألوان وضبط الزاوية، ثم نسخ كود CSS الدقيق الذي تحتاجه لاستخدامه.</p>
+<h2>أنواع تدرجات CSS</h2>
+<p><strong>التدرجات الخطية</strong> الانتقال في خط مستقيم من لون إلى آخر. تحدد الزاوية الاتجاه: 0 درجة من الأسفل إلى الأعلى، و90 درجة من اليسار إلى اليمين، و180 درجة من الأعلى إلى الأسفل، و270 درجة من اليمين إلى اليسار. الزوايا الأكثر شيوعًا للتصميم هي 135 درجة (قطريًا) و90 درجة (أفقيًا). أي زاوية بين 0° و360° صالحة.</p>
+<p>CSS: التدرج الخطي (135deg، #667eea، #764ba2)</p>
+<p><strong>التدرجات الشعاعية</strong> تنبثق إلى الخارج من نقطة مركزية في أشكال دائرية أو بيضاوية. وهي مفيدة لتأثيرات الأضواء وحالات تمرير الزر والعناصر البؤرية المركزية.</p>
+<p>CSS: التدرج الشعاعي (دائرة، #667eea، #764ba2)</p>
+<h2>دعم التدرجات في كل متصفح حديث</h2>
+<p>يتم دعم التدرجات الخطية والشعاعية في جميع المتصفحات الحديثة دون أي بادئة بائع. كانت الإصدارات الأقدم من Safari وChrome تتطلب في السابق بادئة -webkit- لعرض التدرجات بشكل صحيح، وهي بقايا من الأيام الأولى عندما كانت بنية تدرج CSS لا تزال قيد توحيدها، ولكن لم يكن هذا ضروريًا لأي متصفح شائع الاستخدام لسنوات عديدة حتى الآن، وبالتالي فإن البنية البسيطة غير المسبقة التي ينتجها هذا المولد تعمل في كل مكان دون تعديل.</p>
+<h2>إضافة المزيد من التوقفات اللونية</h2>
+<p>يستخدم المولد لونين، لكن تدرجات CSS تدعم أي عدد من توقفات الألوان في أي موضع. لإضافة لون ثالث في منتصف الطريق:</p>
+<p>التدرج الخطي (135 درجة، #667eea 0%، #ff6b6b 50%، #764ba2 100%)</p>
+<p>يمكنك أيضًا تحديد نقاط التوقف عند نسب مئوية محددة للتحكم في مكان حدوث التحولات:</p>
+<p>التدرج الخطي (90 درجة، #000000 0%، #000000 50%، #ff0000 50%، #ff0000 100%)</p>
+<p>يؤدي هذا إلى إنشاء انقسام حاد بدلاً من التدرج — وهو مفيد لبعض تأثيرات التصميم.</p>
+<h2>لوحات التدرج الشعبية</h2>
+<p>بعض مجموعات التدرج المحبوبة:</p>
+<ul>
+<li><strong>المحيط</strong>: #2193b0 → #6dd5ed</li>
+<li><strong>غروب الشمس</strong>: #FF512F → #DD2476</li>
+<li><strong>الغابة</strong>: #134E5E → #71B280</li>
+<li><strong>الحلم الأرجواني</strong>: #667eea → #764ba2</li>
+<li><strong>النار</strong>: #f7971e → #ffd200</li>
+<li><strong>سماء الليل</strong>: #0f0c29 → #302b63 → #24243e</li>
+</ul>
+<h2>استخدام التدرجات في CSS</h2>
+<p>تقبل خاصية اختصار الخلفية أو خاصية صورة الخلفية وظائف التدرج مباشرة:</p>
+<p>.الرأس {</p>
+<p>الخلفية: تدرج خطي (135 درجة، #667eea، #764ba2)؛</p>
+<p>}</p>
+<p>يمكن أيضًا تطبيق التدرجات على النص والحدود وطبقات القناع باستخدام تقنيات CSS المتقدمة.</p>
+<h2>الجمع بين التدرجات مع الصور</h2>
+<p>يسمح CSS بدمج التدرج مع صورة الخلفية باستخدام طبقات خلفية متعددة:</p>
+<p>.البطل {</p>
+<p>الخلفية: تدرج خطي (rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(&#39;photo.jpg&#39;) center/cover;</p>
+<p>}</p>
+<p>يؤدي هذا إلى تراكب تدرج داكن شبه شفاف فوق الصورة، مما يحسن إمكانية قراءة النص في الأقسام الرئيسية.</p>
+<h2>كيفية استخدام المولد</h2>
+<p>اختر اللونين باستخدام منتقيات الألوان، واضبط شريط تمرير الزاوية لتعيين اتجاه الانتقال، ويتم تحديث المعاينة مباشرة حتى تتمكن من رؤية كيف يبدو التدرج بالضبط قبل استخدامه في أي مكان. بمجرد أن يبدو الأمر صحيحًا، انسخ كود CSS الذي تم إنشاؤه بنقرة واحدة وألصقه مباشرة في ورقة الأنماط الخاصة بك - لا توجد خطوة تصدير، ولا توجد صورة لتنزيلها، ولا تتضمن أي عملية إنشاء.</p>
+<h2>لماذا تتفوق تدرجات CSS على تدرجات الصورة</h2>
+<p>قبل أن يتم دعم تدرجات CSS بشكل جيد، كان على المصممين تصدير التدرج كملف صورة PNG أو JPEG لاستخدامه على موقع ويب، مما أضاف ملفًا إضافيًا للتنزيل، وزيادة في وزن الصفحة، وبدا ضبابيًا أو مخططًا على الشاشات عالية الدقة ما لم يتم تصدير الصورة بعناية بحجم كبير. يتم حساب تدرج CSS بواسطة المتصفح نفسه بأي دقة تتطلبها الشاشة، لذلك يكون دائمًا واضحًا تمامًا، ويمكن تغيير حجمه إلى أي حجم دون أي ملف إضافي، ويمكن تغييره على الفور عن طريق تحرير بضعة أحرف من التعليمات البرمجية بدلاً من إعادة تصدير صورة. ولهذا السبب يستخدم كل موقع ويب حديث تقريبًا تدرجات CSS بدلاً من ملفات الصور لهذا النوع من التأثير.</p>
+<h2>اختيار الألوان التي تعمل بشكل جيد معًا</h2>
+<p>يُقرأ التدرج على أنه مصقول عندما يشترك اللونان في بعض المنطق البصري بدلاً من التصادم بشكل تعسفي. تتمثل الطريقة الشائعة والموثوقة في اختيار لونين قريبين من بعضهما البعض على عجلة الألوان (زوج متماثل، مثل انتقال اللون الأزرق إلى اللون الأرجواني) للحصول على شعور هادئ ومتماسك، أو لونين متقابلين تقريبًا (زوج مكمل، مثل اللون البرتقالي إلى الأزرق) للحصول على مظهر أكثر جرأة وأعلى تباينًا. إن الحفاظ على تشابه خفة اللونين بشكل معقول يميل إلى إنتاج انتقال أكثر سلاسة، في حين أن الاختلاف الكبير في الخفة - على سبيل المثال، الأزرق الداكن الداكن إلى الأصفر الباهت - يخلق تدرجًا أكثر دراماتيكية وأعلى طاقة. تعد التجربة المباشرة في المعاينة المباشرة أسرع من التفكير في نظرية الألوان بشكل مجرد، حيث يمكنك أن ترى على الفور ما إذا كان الاقتران مناسبًا لتصميمك المحدد.</p>
+<h2>التدرجات على النص والعناصر الأخرى</h2>
+<p>بالإضافة إلى الخلفيات البسيطة، يمكن تطبيق التدرجات على النص نفسه باستخدام مزيج من <code>background-clip: text</code> ولون نص شفاف، وهو تأثير شائع للعناوين والشعارات التي تريد معالجة ملونة وملفتة للنظر دون اللجوء إلى ملف صورة. تعمل نفس بنية التدرج الأساسي أيضًا على الحدود ويمكن دمجها مع أقنعة CSS للحصول على تأثيرات شكل أكثر تقدمًا، على الرغم من أن هذه التقنيات تتطلب دعم CSS أكثر قليلاً مما يتطلبه تدرج الخلفية العادي. بمجرد حصولك على التدرج الذي يعجبك من هذا المولد، فمن الجدير معرفة أنه يمكن إعادة استخدام توقفات اللون نفسها عبر العديد من هذه التأثيرات المختلفة لتصميم متسق بصريًا.</p>
+<h2>خاصة وفورية</h2>
+<p>يتم تشغيل كل شيء بالكامل في متصفحك، بحيث يتم تحديث المعاينة على الفور أثناء قيامك بضبط الألوان أو الزاوية، ولا يتم إرسال أي شيء يتعلق بالتدرج الذي تصممه إلى الخادم، أو يتم تسجيله أو مشاركته.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول مولد التدرج</h2><dl><dt>ما هو التدرج CSS؟</dt><dd>تدرج CSS هو انتقال سلس بين لونين أو أكثر، يتم تعريفه باستخدام خلفية CSS أو خاصية صورة الخلفية دون أي ملف صورة.</dd><dt>ما هو الفرق بين الخطي والشعاعي؟</dt><dd>انتقالات التدرج الخطي في خط مستقيم بزاوية معينة. يشع التدرج الشعاعي إلى الخارج من نقطة مركزية في أشكال دائرية أو بيضاوية.</dd><dt>هل يمكنني استخدام أكثر من لونين؟</dt><dd>نعم، يدعم CSS التوقفات اللونية المتعددة. يستخدم هذا المولد لونين؛ للحصول على تدرجات أكثر تعقيدًا، أضف توقفات لونية إضافية يدويًا في كود CSS.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/gradientgen/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/gradientgen/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/gradientgen/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/gradientgen/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/gradientgen/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/gradientgen/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/gradientgen/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/gradientgen/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/gradientgen/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/gradientgen/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"color1":"اللون 1","color2":"اللون 2","type":"اكتب","linear":"خطي","radial":"شعاعي","angle":"الزاوية (°)","copy_css":"انسخ CSS","copied":"منسوخ!","copycss":"انسخ CSS"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/gradientgen.js" defer></script>
+</body>
+</html>

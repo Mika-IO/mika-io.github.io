@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de différence de fuseau horaire - heures entre deux fuseaux horaires</title>
+<meta name="description" content="Calculateur gratuit de différence de fuseau horaire. Trouvez le décalage horaire exact entre deux villes ou fuseaux horaires dans le monde. Résultats instantanés dans votre navigateur.">
+<link rel="canonical" href="https://mikaio.dev/fr/timezonediff/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/timezonediff/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/timezonediff/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/timezonediff/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/timezonediff/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/timezonediff/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/timezonediff/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/timezonediff/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/timezonediff/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/timezonediff/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/timezonediff/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/timezonediff/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculateur de différence de fuseau horaire - heures entre deux fuseaux horaires">
+<meta property="og:description" content="Calculateur gratuit de différence de fuseau horaire. Trouvez le décalage horaire exact entre deux villes ou fuseaux horaires dans le monde. Résultats instantanés dans votre navigateur.">
+<meta property="og:url" content="https://mikaio.dev/fr/timezonediff/">
+<meta property="og:locale" content="fr">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur de différence de fuseau horaire - heures entre deux fuseaux horaires","url":"https://mikaio.dev/fr/timezonediff/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"fr","description":"Calculateur gratuit de différence de fuseau horaire. Trouvez le décalage horaire exact entre deux villes ou fuseaux horaires dans le monde. Résultats instantanés dans votre navigateur."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de différence de fuseau horaire","item":"https://mikaio.dev/fr/timezonediff/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"L’heure d’été affecte-t-elle le résultat ?","acceptedAnswer":{"@type":"Answer","text":"Oui. La différence est calculée à l'aide des décalages UTC actuels, qui incluent déjà tous les ajustements actifs de l'heure d'été."}},{"@type":"Question","name":"Pourquoi la différence change-t-elle au cours de l’année ?","acceptedAnswer":{"@type":"Answer","text":"Lorsqu'une zone observe l'heure d'été et une autre non, ou lorsqu'elles changent à des dates différentes, le décalage entre elles est décalé d'une heure."}},{"@type":"Question","name":"Et si les deux villes sont dans le même fuseau horaire ?","acceptedAnswer":{"@type":"Answer","text":"La différence sera de 0 heure."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/fr/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Navigation du site">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timezonediff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timezonediff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timezonediff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timezonediff/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/timezonediff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timezonediff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timezonediff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timezonediff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timezonediff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timezonediff/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Accueil</a> › <span>Calculateur de différence de fuseau horaire</span></nav>
+  <h1>Calculateur de différence de fuseau horaire</h1>
+  <p class="lead">Sélectionnez deux fuseaux horaires pour voir la différence d’heure actuelle entre eux.</p>
+  <section class="widget" id="tool"><div id="tzd-app"><div class="row"><div class="field"><label for="tzd-tz1">Fuseau horaire 1</label><select id="tzd-tz1"></select></div><div class="field"><label for="tzd-tz2">Fuseau horaire 2</label><select id="tzd-tz2"></select></div></div><div class="result"><span class="hint">Différence: </span><span class="big" id="tzd-out">—</span></div><div id="tzd-detail" style="opacity:0.7;font-size:0.9rem;margin-top:0.5rem"></div></div></section>
+  <article class="content">
+    <h2>Calculer le décalage horaire entre deux villes</h2>
+<p>Que vous organisiez un appel international, suiviez un événement mondial ou que vous soyez simplement curieux de savoir combien d&#39;heures séparent deux villes, un calculateur de décalage horaire vous donne la réponse instantanément. Sélectionnez deux emplacements et l&#39;outil affiche le décalage actuel entre eux en heures, en tenant compte de toute heure d&#39;été actuellement en vigueur.</p>
+<h2>Pourquoi les différences de fuseau horaire changent</h2>
+<p>Le monde est divisé en environ 40 fuseaux horaires distincts, chacun défini par son décalage par rapport au temps universel coordonné (UTC). La plupart des décalages sont des heures entières, bien que certains pays utilisent des décalages d&#39;une demi-heure ou d&#39;un quart d&#39;heure : l&#39;Inde est UTC+5h30, le Népal est UTC+5h45 et plusieurs États australiens utilisent UTC+9h30 et UTC+10h30.</p>
+<p>L’heure d’été (DST) complique encore les choses. Lorsqu&#39;un emplacement observe l&#39;heure d&#39;été et un autre non, le décalage effectif entre eux change. Les États-Unis et une grande partie de l&#39;Europe observent tous deux l&#39;heure d&#39;été, mais ils changent à des dates différentes : les États-Unis changent en mars et novembre tandis que l&#39;Europe change fin mars et octobre. Pendant la période comprise entre ces dates de changement, le décalage entre les États-Unis et l’Europe est différent d’une heure par rapport au reste de l’année.</p>
+<h2>Utilisations pratiques pour les voyageurs</h2>
+<p>Avant un voyage international, connaître le décalage horaire permet de se préparer mentalement au décalage horaire et de planifier ses premiers jours. Un voyageur voyageant de New York à Londres gagne 5 heures (ou 6 heures pendant certaines parties de l&#39;année selon l&#39;heure d&#39;été). Planifier d&#39;appeler chez soi pendant le voyage nécessite de savoir quand il s&#39;agit d&#39;une heure raisonnable aux deux endroits simultanément.</p>
+<h2>Travail à distance et équipes mondiales</h2>
+<p>Les équipes distantes couvrent de plus en plus plusieurs fuseaux horaires, ce qui rend la sensibilisation au décalage essentielle. De nombreuses équipes établissent une fenêtre de chevauchement principale : les heures pendant lesquelles la plupart des membres travaillent simultanément pendant les heures normales de travail. Une différence de 5 heures peut toujours permettre une fenêtre de chevauchement de 2 à 3 heures ; un décalage de 12 heures nécessite que quelqu&#39;un soit en marge de sa journée de travail.</p>
+<p>Les outils de planification, les applications de calendrier et les plateformes de gestion de projet gèrent tous automatiquement les fuseaux horaires, mais comprendre le décalage sous-jacent vous aide à raisonner sur la planification sans recourir à un logiciel.</p>
+<h2>Marchés financiers</h2>
+<p>Les bourses fonctionnent dans des fuseaux horaires locaux spécifiques : la Bourse de New York ouvre à 9h30, heure de l&#39;Est, la Bourse de Londres à 8h00 GMT et la Bourse de Tokyo à 9h00 JST. Les traders des autres fuseaux horaires doivent savoir ce que ces heures d&#39;ouverture signifient localement, en particulier pour les marchés à terme et des changes qui fonctionnent presque continuellement.</p>
+<h2>Aéronautique et logistique</h2>
+<p>Les compagnies aériennes publient leurs horaires en heure locale dans les aéroports de départ et d&#39;arrivée, ce qui signifie qu&#39;un vol au départ de New York à 23 heures et arrivant à Londres à 11 heures le lendemain prend 7 heures, et non 12 heures. La logistique du fret nécessite également une connaissance des fuseaux horaires pour les documents douaniers, le suivi des marchandises périssables et les fenêtres de livraison juste à temps.</p>
+<h2>La ligne de date internationale</h2>
+<p>Un cas extrême de différences de fuseaux horaires est la ligne de date internationale dans l’océan Pacifique. Le traverser vers l’est vous fait reculer d’un jour calendaire ; le traverser vers l&#39;ouest vous fait avancer un jour. Certaines nations insulaires proches de la ligne de date ont des décalages inhabituels : Kiribati (UTC+14) a 26 heures d&#39;avance sur les Samoa américaines (UTC-12), même si elles sont géographiquement relativement proches.</p>
+<h2>Comment utiliser la calculatrice</h2>
+<p>Sélectionnez deux emplacements dans les listes déroulantes et le décalage actuel entre eux apparaît immédiatement, tenant déjà compte des règles d&#39;heure d&#39;été actuellement applicables à chaque lieu. Étant donné que le calcul est basé sur la date d&#39;aujourd&#39;hui, revisitez-le à une autre partie de l&#39;année si un endroit observe l&#39;heure d&#39;été, car le décalage entre deux villes spécifiques peut varier d&#39;une heure en fonction de la saison, même lorsque l&#39;horloge d&#39;aucune des deux villes ne change.</p>
+<h2>Planifier une réunion sur plusieurs fuseaux horaires</h2>
+<p>La coordination d&#39;une seule heure de réunion sur trois fuseaux horaires ou plus est l&#39;une des utilisations pratiques les plus courantes d&#39;un calculateur de fuseau horaire. L&#39;approche générale consiste à trouver le chevauchement le plus étroit d&#39;heures de travail raisonnables dans l&#39;emplacement de chaque participant, puis à vérifier ce chevauchement par rapport à l&#39;heure d&#39;été actuelle de chaque région, car une heure qui fonctionne en janvier peut décaler d&#39;une heure par rapport à l&#39;horaire d&#39;un partenaire d&#39;ici juillet si les deux sites changent d&#39;horloge à des dates différentes ou si l&#39;un d&#39;entre eux n&#39;observe pas du tout l&#39;heure d&#39;été. Les équipes qui se réunissent régulièrement sur plusieurs fuseaux horaires choisissent souvent une heure UTC fixe pour les réunions récurrentes, spécifiquement afin d&#39;éviter cette dérive saisonnière, laissant le logiciel de calendrier de chaque participant gérer automatiquement la conversion locale.</p>
+<h2>Décalages d&#39;une demi-heure et d&#39;un quart d&#39;heure</h2>
+<p>La plupart des fuseaux horaires du monde se situent à des décalages d&#39;heures entières par rapport à UTC, c&#39;est pourquoi la conversion entre la plupart des paires de villes est une simple arithmétique horaire. Une poignée de régions brisent ce modèle pour des raisons historiques ou politiques plutôt que pour des raisons géographiques : le décalage UTC+5 : 30 de l&#39;Inde a été choisi lors de l&#39;indépendance en partie pour se situer à un moment unique à peu près à mi-chemin de la vaste étendue est-ouest du pays, le décalage UTC+5 :45 du Népal est souvent cité comme un choix délibéré pour se distinguer de l&#39;heure de l&#39;Inde voisine, et Terre-Neuve au Canada utilise UTC-3 : 30, un décalage d&#39;une demi-heure par rapport au reste du Canada atlantique. Ces décalages fractionnaires sont exactement la raison pour laquelle un outil de fuseau horaire fiable doit gérer les minutes ainsi que les heures plutôt que de supposer que chaque décalage est un nombre rond.</p>
+<h2>Privé et instantané</h2>
+<p>L&#39;outil utilise l&#39;API Intl intégrée de votre navigateur pour déterminer les décalages UTC actuels, de sorte que les résultats apparaissent instantanément et qu&#39;aucune donnée sur les emplacements que vous vérifiez n&#39;est jamais envoyée, enregistrée ou partagée.</p>
+    <section class="faq"><h2>FAQ sur les fuseaux horaires</h2><dl><dt>L’heure d’été affecte-t-elle le résultat ?</dt><dd>Oui. La différence est calculée à l&#39;aide des décalages UTC actuels, qui incluent déjà tous les ajustements actifs de l&#39;heure d&#39;été.</dd><dt>Pourquoi la différence change-t-elle au cours de l’année ?</dt><dd>Lorsqu&#39;une zone observe l&#39;heure d&#39;été et une autre non, ou lorsqu&#39;elles changent à des dates différentes, le décalage entre elles est décalé d&#39;une heure.</dd><dt>Et si les deux villes sont dans le même fuseau horaire ?</dt><dd>La différence sera de 0 heure.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/timezonediff/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/timezonediff/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/timezonediff/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/timezonediff/">Español</a></li><li><a hreflang="fr" lang="fr" aria-current="true" href="/fr/timezonediff/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/timezonediff/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/timezonediff/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/timezonediff/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/timezonediff/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/timezonediff/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Des outils de navigateur gratuits, rapides et privés · © 2026</p>
+  <p><a href="/freetools.html">Tous les outils</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="fr";window.__T={"zone1":"Fuseau horaire 1","zone2":"Fuseau horaire 2","difference":"Différence"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/timezonediff.js" defer></script>
+</body>
+</html>

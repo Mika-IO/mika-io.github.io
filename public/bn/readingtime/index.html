@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>পড়ার সময় ক্যালকুলেটর - কোন পাঠ্য কতক্ষণ পড়তে হবে</title>
+<meta name="description" content="ফ্রি পড়ার সময় ক্যালকুলেটর। শব্দ সংখ্যা, আনুমানিক পড়ার সময় এবং আনুমানিক কথা বলার সময় তাত্ক্ষণিকভাবে দেখতে যেকোনো পাঠ্য আটকান। কোন সাইন আপ প্রয়োজন.">
+<link rel="canonical" href="https://mikaio.dev/bn/readingtime/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/readingtime/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/readingtime/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/readingtime/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/readingtime/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/readingtime/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/readingtime/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/readingtime/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/readingtime/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/readingtime/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/readingtime/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/readingtime/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="পড়ার সময় ক্যালকুলেটর - কোন পাঠ্য কতক্ষণ পড়তে হবে">
+<meta property="og:description" content="ফ্রি পড়ার সময় ক্যালকুলেটর। শব্দ সংখ্যা, আনুমানিক পড়ার সময় এবং আনুমানিক কথা বলার সময় তাত্ক্ষণিকভাবে দেখতে যেকোনো পাঠ্য আটকান। কোন সাইন আপ প্রয়োজন.">
+<meta property="og:url" content="https://mikaio.dev/bn/readingtime/">
+<meta property="og:locale" content="bn">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"পড়ার সময় ক্যালকুলেটর - কোন পাঠ্য কতক্ষণ পড়তে হবে","url":"https://mikaio.dev/bn/readingtime/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"bn","description":"ফ্রি পড়ার সময় ক্যালকুলেটর। শব্দ সংখ্যা, আনুমানিক পড়ার সময় এবং আনুমানিক কথা বলার সময় তাত্ক্ষণিকভাবে দেখতে যেকোনো পাঠ্য আটকান। কোন সাইন আপ প্রয়োজন."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/bn/"},{"@type":"ListItem","position":2,"name":"পড়ার সময় ক্যালকুলেটর","item":"https://mikaio.dev/bn/readingtime/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ক্যালকুলেটর কি পড়ার গতি ধরে নেয়?","acceptedAnswer":{"@type":"Answer","text":"ক্যালকুলেটরটি প্রতি মিনিটে 238 শব্দ ব্যবহার করে, যা গবেষণার পরামর্শ দেয় যে প্রাপ্তবয়স্কদের জন্য অ-প্রযুক্তিগত ইংরেজি গদ্য পড়ার গড় নীরব পড়ার গতি। প্রকৃত গতি ব্যক্তি, পাঠ্য জটিলতা এবং পড়ার উদ্দেশ্য অনুসারে পরিবর্তিত হয়।"}},{"@type":"Question","name":"কোন কথা বলার গতি ব্যবহৃত হয়?","acceptedAnswer":{"@type":"Answer","text":"কথা বলার সময় প্রতি মিনিটে 150 শব্দ অনুমান করা হয়, যা একটি আরামদায়ক স্বাভাবিক কথা বলার গতি। উপস্থাপক এবং পডকাস্টার প্রায়ই স্পষ্টতার জন্য 130-160 WPM লক্ষ্য করে।"}},{"@type":"Question","name":"এটা ঠিক শব্দ গণনা?","acceptedAnswer":{"@type":"Answer","text":"শব্দ গণনা হোয়াইটস্পেসে বিভক্ত হয় এবং খালি অংশগুলিকে ফিল্টার করে, যা আদর্শ পদ্ধতি। এটি সাধারণ গদ্যের জন্য বেশিরভাগ শব্দ প্রসেসরের সাথে মেলে। হাইফেনযুক্ত শব্দগুলিকে একটি শব্দ হিসাবে গণনা করা হয়।"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/bn/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="সাইট নেভিগেশন">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/bn/">হোম</a> › <span>পড়ার সময় ক্যালকুলেটর</span></nav>
+  <h1>পড়ার সময় ক্যালকুলেটর</h1>
+  <p class="lead">নীচে আপনার পাঠ্য পেস্ট করুন বা টাইপ করুন। শব্দ গণনা, পড়ার সময় এবং কথা বলার সময় তাত্ক্ষণিকভাবে আপডেট হয়।</p>
+  <section class="widget" id="tool"><div id="rt-app"><textarea id="rt-text" rows="8" style="width:100%;box-sizing:border-box;resize:vertical;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:1rem" placeholder="এখানে আপনার পাঠ্য পেস্ট বা টাইপ করুন..."></textarea><div id="rt-results" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem"><div><div class="hint">শব্দ</div><div class="big" id="rt-words">0</div></div><div><div class="hint">পড়ার সময়</div><div class="big" id="rt-time">0 মিনিট</div></div><div><div class="hint">কথা বলার সময়</div><div class="big" id="rt-speak">0 মিনিট</div></div></div></div></section>
+  <article class="content">
+    <h2>আপনার বিষয়বস্তু পড়তে ঠিক কতক্ষণ সময় লাগবে তা জানুন</h2>
+<p>একটি নিবন্ধ প্রকাশ করার আগে, একটি বক্তৃতা প্রস্তুত করা, বা একটি দস্তাবেজ পর্যালোচনা করতে কতক্ষণ সময় লাগবে তা অনুমান করার আগে, পড়ার সময় জেনে রাখা দরকারী। পাঠকরা তারা কী করতে প্রতিশ্রুতিবদ্ধ তা জেনে প্রশংসা করেন — ব্লগ পোস্টগুলি যা পড়ার আনুমানিক সময়গুলি ধারাবাহিকভাবে উচ্চতর ব্যস্ততা দেখায়। বক্তাদের জানতে হবে তাদের স্ক্রিপ্ট তাদের বরাদ্দকৃত সময়ের সাথে মানানসই হবে কিনা। আপনার শব্দ সংখ্যার উপর ভিত্তি করে এই টুলটি আপনাকে তাৎক্ষণিকভাবে পড়ার সময় এবং কথা বলার সময় উভয়ই দেয়।</p>
+<h2>পড়ার সময় কিভাবে গণনা করা হয়</h2>
+<p>অ-প্রযুক্তিগত গদ্যের জন্য গড় প্রাপ্তবয়স্কদের পড়ার গতি প্রতি মিনিটে প্রায় 238 শব্দ। এই পরিসংখ্যানটি স্বাভাবিক অবস্থায় প্রাপ্তবয়স্কদের নীরব পাঠের গবেষণা থেকে এসেছে। প্রকৃত গতি যথেষ্ট পরিবর্তিত হয়: হালকা কথাসাহিত্যের একজন দক্ষ পাঠক প্রতি মিনিটে 350 শব্দ পরিচালনা করতে পারে, যখন একটি ঘন আইনের মাধ্যমে কাজ করা আইনের ছাত্র প্রতি মিনিটে 100 শব্দ বা তার কম সময়ে পড়তে পারে। এই টুলটি যে অনুমানটি প্রদান করে তা মানক বিষয়বস্তুর জন্য একটি নির্ভরযোগ্য বেসলাইন।</p>
+<p>সূত্রটি সোজা: মিনিটে পড়ার সময় শব্দ সংখ্যাকে 238 দিয়ে ভাগ করলে সমান হয়। একটি 1,000-শব্দের ব্লগ পোস্ট পড়তে প্রায় 4 মিনিট সময় নেয়। একটি 2,500-শব্দের নিবন্ধটি প্রায় 10 মিনিট সময় নেয়। একটি 60,000-শব্দ-উপন্যাস প্রায় 250 মিনিট, বা চার ঘন্টার বেশি সময় নেয় - যে কারণে অধ্যায়-দ্বারা-অধ্যায় অগ্রগতি অর্থবহ বোধ করে।</p>
+<h2>কথা বলার সময়</h2>
+<p>কথা বলার সময় অনুমান প্রতি মিনিটে 150 শব্দ ব্যবহার করে, যা একটি আরামদায়ক, স্পষ্ট উপস্থাপনার গতি উপস্থাপন করে। পেশাদার স্পিকার এবং রেডিও সম্প্রচারকারীরা প্রায়শই প্রতি মিনিটে 130 থেকে 160 শব্দ লক্ষ্য করে কারণ এটি মনোযোগ ধরে রাখতে যথেষ্ট দ্রুত কিন্তু সহজে বোঝার জন্য যথেষ্ট ধীর। খুব দ্রুত বক্তৃতা - প্রতি মিনিটে 180 শব্দের উপরে - তাড়াহুড়ো অনুভব করতে শুরু করে। কথোপকথনমূলক বক্তৃতা সাধারণত ব্যক্তি এবং প্রসঙ্গের উপর নির্ভর করে প্রতি মিনিটে 120 থেকে 180 শব্দের মধ্যে পড়ে।</p>
+<p>আপনি যদি একটি বক্তৃতা, উপস্থাপনা, বা পডকাস্ট স্ক্রিপ্ট প্রস্তুত করেন, তাহলে কথা বলার সময় আপনাকে আপনার বিষয়বস্তু আপনার টাইম স্লটের সাথে খাপ খায় কিনা তা বিচার করতে সাহায্য করে। একটি 10-মিনিটের স্লট প্রায় 1,500 শব্দের জন্য অনুমতি দেয়। একটি 20-মিনিটের TED-স্টাইল টক যখন উপযুক্ত বিরতির সাথে স্বাভাবিক গতিতে বিতরণ করা হয় তখন প্রায় 3,000 শব্দ মিটমাট করে।</p>
+<h2>বিষয়বস্তু প্রকাশে পড়ার সময়</h2>
+<p>যে প্রকাশনাগুলি নিবন্ধগুলিতে পড়ার সময় অনুমান যুক্ত করে — &quot;5 মিনিট পড়া,&quot; &quot;12 মিনিট পড়া&quot; — তা করে কারণ পাঠকের ব্যস্ততা গবেষণা দেখায় যে সময়ের প্রতিশ্রুতি জানার ফলে পাঠকরা সময়ের আগে একটি নিবন্ধ পরিত্যাগ করার হারকে হ্রাস করে৷ পাঠকরা যখন জানেন যে তারা 3-মিনিটের পড়া দেখছেন, তখন তারা এটি শেষ করার প্রতিশ্রুতিবদ্ধ হওয়ার সম্ভাবনা বেশি। যখন তারা অপ্রত্যাশিতভাবে নিজেকে অনেক দীর্ঘ অংশের গভীরে খুঁজে পায়, তখন অপ্রত্যাশিত দৈর্ঘ্যে হতাশা তাদের চলে যেতে পারে।</p>
+<p>ইমেল নিউজলেটারের জন্য, পড়ার সময় জেনে রাখা সঠিক দৈর্ঘ্যকে ক্যালিব্রেট করতে সাহায্য করে। একটি ইমেল যা পড়তে 3 থেকে 4 মিনিটের বেশি সময় নেয় তা প্রাপকের মনোযোগের একটি উল্লেখযোগ্য পরিমাণ জিজ্ঞাসা করে এবং কম সমাপ্তির হার দেখতে পারে। ইমেলের জন্য ছোট প্রায়ই ভাল।</p>
+<h2>একটি মান সংকেত হিসাবে শব্দ গণনা</h2>
+<p>শুধুমাত্র শব্দ গণনা একটি সাধারণভাবে অপব্যবহৃত মেট্রিক। একটি 2,000-শব্দের নিবন্ধটি 500-শব্দের চেয়ে সহজাতভাবে ভাল নয় — সঠিক দৈর্ঘ্যটি প্যাডিং ছাড়াই বিষয়টিকে সম্পূর্ণরূপে কভার করতে যা লাগে। এটি বলেছে, SEO উদ্দেশ্যে, যে নিবন্ধগুলি একটি বিষয়কে পুঙ্খানুপুঙ্খভাবে কভার করে সেগুলি দীর্ঘতর হতে থাকে কারণ একটি বিষয় পুঙ্খানুপুঙ্খভাবে কভার করার জন্য আরও সামগ্রীর প্রয়োজন হয়৷ পড়ার সময় এবং শব্দের গণনা একসাথে লেখকদের পরিমাপ করতে সাহায্য করে যে তারা যথেষ্ট বলেছে কিনা।</p>
+<h2>কিভাবে ক্যালকুলেটর ব্যবহার করবেন</h2>
+<p>আপনার পাঠ্য বাক্সে আটকান এবং উভয় পরিসংখ্যান — পড়ার সময় এবং কথা বলার সময় — অবিলম্বে প্রদর্শিত হবে, আপনি সম্পাদনা করার সাথে সাথে লাইভ আপডেট করুন৷ এটি রিয়েল টাইমে একটি কাটার প্রভাব দেখতে সহজ করে তোলে: একটি ধীর অনুচ্ছেদ ছাঁটাই করুন, এবং প্রতিটি সংশোধনের পরে সম্পূর্ণ জিনিসটিকে একটি পৃথক কাউন্টারে পেস্ট করার পরিবর্তে অনুমান ড্রপ দেখুন৷</p>
+<h2>কেন দুটি ভিন্ন গতি গুরুত্বপূর্ণ</h2>
+<p>প্রতি মিনিটে 238-শব্দ-পড়ার চিত্র এবং 150-শব্দ-প্রতি-মিনিটে কথা বলার চিত্রের মধ্যে ব্যবধানটি কোনও ত্রুটি নয় - এটি কীভাবে চোখ লিখিত পাঠ্য প্রক্রিয়া করে এবং মুখ কীভাবে উচ্চারিত শব্দ তৈরি করে তার মধ্যে একটি আসল পার্থক্য প্রতিফলিত করে। নীরব পাঠ চোখকে এড়িয়ে যেতে দেয়, পরিচিত শব্দগুচ্ছকে এড়িয়ে যেতে দেয় এবং এক নজরে বেশ কয়েকটি শব্দ প্রক্রিয়া করতে দেয়, যখন বক্তৃতা প্রতিটি শব্দকে এক সময়ে উচ্চস্বরে গঠন করার শারীরিক গতিতে আবদ্ধ থাকে। ঠিক এই কারণেই একটি স্ক্রিপ্ট যা আপনার মাথায় স্বাচ্ছন্দ্যের সাথে পড়ে তা প্রত্যাশিত থেকে অনেক বেশি সময় ধরে চলতে পারে একবার আপনি উঠে দাঁড়ান এবং এটি সরবরাহ করলে — এই পৃষ্ঠায় দুটি অনুমান বিশেষভাবে উপস্থিত রয়েছে যেটি মঞ্চে সমস্যা হওয়ার আগে সেই অমিল ধরার জন্য।</p>
+<h2>আপনার প্রকৃত দর্শকদের জন্য সামঞ্জস্য করা</h2>
+<p>238 শব্দ-প্রতি-মিনিট বেসলাইন সাধারণ অ-প্রযুক্তিগত গদ্যের প্রাপ্তবয়স্ক পাঠকদের মধ্যে একটি গড়, তবে আপনি যা লিখছেন তার উপর নির্ভর করে আপনার প্রকৃত শ্রোতা দ্রুত বা ধীরে পড়তে পারে। ঘন একাডেমিক লেখা, আইনি টেক্সট, বা অপরিচিত শব্দগুচ্ছ এবং প্রযুক্তিগত পদে পরিপূর্ণ বিষয়বস্তু বেশিরভাগ পাঠককে উল্লেখযোগ্যভাবে কমিয়ে দেয় — কখনও কখনও বেসলাইন গতির অর্ধেক পর্যন্ত — কারণ অপরিচিত শব্দ এবং জটিল বাক্য গঠনের জন্য প্রতি শব্দে আরও জ্ঞানীয় প্রক্রিয়াকরণের প্রয়োজন হয়। বিপরীতভাবে, সংক্ষিপ্ত, সাধারণ বাক্যে লেখা একটি নৈমিত্তিক ব্লগ পোস্ট মূল পয়েন্টগুলির জন্য অভিজ্ঞ পাঠক দ্বারা বেসলাইনের চেয়ে দ্রুত পড়া যেতে পারে। আপনি যদি আপনার শ্রোতাদের ভালভাবে জানেন, তাহলে এই টুলটি যে অনুমানটি দেয় সেটিকে প্রারম্ভিক পয়েন্ট হিসাবে বিবেচনা করুন এবং আপনার প্রকৃত লেখা কতটা প্রযুক্তিগত বা কতটা নৈমিত্তিক তার উপর ভিত্তি করে মানসিকভাবে সামঞ্জস্য করুন।</p>
+<h2>পড়ার সময় এবং বিষয়বস্তুর দৈর্ঘ্য কৌশল</h2>
+<p>বিষয়বস্তু কৌশলবিদরা ক্রমবর্ধমানভাবে পড়ার সময়কে পরবর্তী চিন্তার পরিবর্তে ডিজাইনের সীমাবদ্ধতা হিসাবে বিবেচনা করেন। একটি ল্যান্ডিং পৃষ্ঠা এক মিনিটের কম পড়ার সময় থেকে উপকৃত হয়, কারণ দর্শকরা সিদ্ধান্ত নেয় সেকেন্ডের মধ্যে থাকবে কি না এবং পাঠ্যের দীর্ঘ দেয়ালটি মূল্যের পরিবর্তে প্রচেষ্টা হিসাবে পাঠ করে। বিপরীতে, একটি গভীর প্রযুক্তিগত নির্দেশিকা স্বাচ্ছন্দ্যে 15 বা 20 মিনিটের জন্য চলতে পারে কারণ যে পাঠক এই ধরনের বিষয়বস্তুর প্রতি প্রতিশ্রুতিবদ্ধ তিনি পুঙ্খানুপুঙ্খতা খুঁজছেন, সংক্ষিপ্ততা নয়, এবং একটি জটিল বিষয়ের সন্দেহজনকভাবে সংক্ষিপ্ত আচরণ প্রকৃতপক্ষে বিষয়বস্তুর সম্পূর্ণতার উপর আস্থা নষ্ট করতে পারে।</p>
+<h2>ব্যক্তিগত এবং তাত্ক্ষণিক</h2>
+<p>আপনার টেক্সট কখনই আপনার ব্রাউজার ছেড়ে যায় না: শব্দ গণনা এবং সময় গণনা সম্পূর্ণরূপে স্থানীয়ভাবে ঘটে, তাই আপনার পেস্ট করা কোনও সামগ্রী কখনও কোনও সার্ভার দ্বারা আপলোড, সংরক্ষণ বা বিশ্লেষণ করা হয় না।</p>
+    <section class="faq"><h2>পড়ার সময় FAQ</h2><dl><dt>ক্যালকুলেটর কি পড়ার গতি ধরে নেয়?</dt><dd>ক্যালকুলেটরটি প্রতি মিনিটে 238 শব্দ ব্যবহার করে, যা গবেষণার পরামর্শ দেয় যে প্রাপ্তবয়স্কদের জন্য অ-প্রযুক্তিগত ইংরেজি গদ্য পড়ার গড় নীরব পড়ার গতি। প্রকৃত গতি ব্যক্তি, পাঠ্য জটিলতা এবং পড়ার উদ্দেশ্য অনুসারে পরিবর্তিত হয়।</dd><dt>কোন কথা বলার গতি ব্যবহৃত হয়?</dt><dd>কথা বলার সময় প্রতি মিনিটে 150 শব্দ অনুমান করা হয়, যা একটি আরামদায়ক স্বাভাবিক কথা বলার গতি। উপস্থাপক এবং পডকাস্টার প্রায়ই স্পষ্টতার জন্য 130-160 WPM লক্ষ্য করে।</dd><dt>এটা ঠিক শব্দ গণনা?</dt><dd>শব্দ গণনা হোয়াইটস্পেসে বিভক্ত হয় এবং খালি অংশগুলিকে ফিল্টার করে, যা আদর্শ পদ্ধতি। এটি সাধারণ গদ্যের জন্য বেশিরভাগ শব্দ প্রসেসরের সাথে মেলে। হাইফেনযুক্ত শব্দগুলিকে একটি শব্দ হিসাবে গণনা করা হয়।</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/readingtime/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/readingtime/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/readingtime/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/readingtime/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/readingtime/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/readingtime/">العربية</a></li><li><a hreflang="bn" lang="bn" aria-current="true" href="/bn/readingtime/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/readingtime/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/readingtime/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/readingtime/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>ফ্রি, দ্রুত ও গোপনীয়তা-বান্ধব ব্রাউজার টুল · © 2026</p>
+  <p><a href="/freetools.html">সব টুল</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="bn";window.__T={"paste_text":"এখানে আপনার পাঠ্য পেস্ট বা টাইপ করুন...","words":"শব্দ","reading_time":"পড়ার সময়","speaking_time":"কথা বলার সময়","min":"মিনিট"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/readingtime.js" defer></script>
+</body>
+</html>

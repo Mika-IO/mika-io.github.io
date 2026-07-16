@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Formatter - تنسيق JSON والتحقق من صحته عبر الإنترنت</title>
+<meta name="description" content="منسق ومدقق JSON مجاني. الصق JSON لتنسيقه بمسافة بادئة مناسبة أو تصغيره أو التحقق من وجود أخطاء. يعمل في متصفحك على الفور.">
+<link rel="canonical" href="https://mikaio.dev/ar/jsonformatter/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/jsonformatter/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/jsonformatter/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/jsonformatter/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/jsonformatter/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/jsonformatter/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/jsonformatter/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/jsonformatter/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/jsonformatter/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/jsonformatter/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/jsonformatter/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/jsonformatter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON Formatter - تنسيق JSON والتحقق من صحته عبر الإنترنت">
+<meta property="og:description" content="منسق ومدقق JSON مجاني. الصق JSON لتنسيقه بمسافة بادئة مناسبة أو تصغيره أو التحقق من وجود أخطاء. يعمل في متصفحك على الفور.">
+<meta property="og:url" content="https://mikaio.dev/ar/jsonformatter/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Formatter - تنسيق JSON والتحقق من صحته عبر الإنترنت","url":"https://mikaio.dev/ar/jsonformatter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"منسق ومدقق JSON مجاني. الصق JSON لتنسيقه بمسافة بادئة مناسبة أو تصغيره أو التحقق من وجود أخطاء. يعمل في متصفحك على الفور."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"JSON المنسق والمدقق","item":"https://mikaio.dev/ar/jsonformatter/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما هو جسون؟","acceptedAnswer":{"@type":"Answer","text":"JSON (JavaScript Object Notation) هو تنسيق خفيف لتبادل البيانات. يستخدم نصًا يمكن قراءته بواسطة الإنسان لتمثيل كائنات البيانات التي تتكون من أزواج ومصفوفات القيمة الرئيسية."}},{"@type":"Question","name":"ماذا يفعل \"التنسيق\"؟","acceptedAnswer":{"@type":"Answer","text":"يضيف التنسيق (يُسمى أيضًا \"الطباعة الجميلة\") مسافة بادئة مناسبة وأسطرًا جديدة لجعل JSON قابلاً للقراءة بواسطة الإنسان. يؤدي التصغير إلى إزالة كل المسافات البيضاء لإنتاج أصغر سلسلة JSON صالحة ممكنة."}},{"@type":"Question","name":"هل يقوم المدقق بإصلاح الأخطاء؟","acceptedAnswer":{"@type":"Answer","text":"لا. تقوم الأداة بتحليل JSON والإبلاغ عن الخطأ إذا كان غير صالح. يتم ترك إصلاح الخطأ للمستخدم."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/jsonformatter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/jsonformatter/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/jsonformatter/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/jsonformatter/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/jsonformatter/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/jsonformatter/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/jsonformatter/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/jsonformatter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/jsonformatter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/jsonformatter/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>JSON المنسق والمدقق</span></nav>
+  <h1>JSON المنسق والمدقق</h1>
+  <p class="lead">الصق ملف JSON الخاص بك في المربع أدناه وانقر فوق &quot;تنسيق&quot; لطباعته بشكل جميل، أو &quot;تصغيره&quot; لضغطه.</p>
+  <section class="widget" id="tool"><div id="jf-app"><textarea id="jf-in" rows="6" style="width:100%;box-sizing:border-box;padding:0.75rem;border-radius:0.5rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:inherit;font-size:0.85rem;font-family:monospace" placeholder="الصق JSON هنا..."></textarea><div style="display:flex;gap:0.5rem;margin-top:0.5rem"><button id="jf-fmt" class="btn">التنسيق</button><button id="jf-min" class="btn secondary">تصغير</button><button id="jf-copy" class="btn secondary">نسخ</button></div><div id="jf-err" style="color:#f87171;font-size:0.85rem;margin-top:0.5rem"></div><pre id="jf-out" style="background:rgba(255,255,255,0.04);border-radius:0.5rem;padding:0.75rem;margin-top:0.5rem;overflow:auto;font-size:0.82rem;max-height:300px;white-space:pre-wrap;word-break:break-word"></pre></div></section>
+  <article class="content">
+    <h2>قم بتنسيق JSON والتحقق من صحته وتصغيره على الفور</h2>
+<p>JSON (JavaScript Object Notation) هو التنسيق القياسي لتبادل البيانات لواجهات برمجة تطبيقات الويب وملفات التكوين وتخزين البيانات. عندما تتلقى JSON خامًا أو مضغوطًا من استجابة واجهة برمجة التطبيقات (API) أو أداة تصحيح الأخطاء، فإن تنسيقها يجعلها قابلة للقراءة بواسطة الإنسان في ثوانٍ. عندما تحتاج إلى إرسال JSON بكفاءة، يؤدي التصغير إلى إزالة جميع المسافات البيضاء غير الضرورية.</p>
+<h2>كيفية استخدام الأداة</h2>
+<p>الصق JSON في مربع الإدخال، ثم اختر التنسيق لمشاهدته مع مسافة بادئة بشكل أنيق وقابل للقراءة، أو قم بتصغيره لإزالة كل مسافة وفاصل أسطر غير ضروريين لأصغر حجم ممكن. إذا احتوى JSON على خطأ، تقوم الأداة بالإبلاغ عن الخطأ الذي حدث بدلاً من الفشل بصمت، وهو عادةً ما يكون أسرع طريقة لاكتشاف فاصلة ضائعة أو شريحة مفقودة مدفونة في كتلة كبيرة تم لصقها من ملف سجل أو استجابة API.</p>
+<h2>ما هو جسون؟</h2>
+<p>JSON هو تنسيق بيانات قائم على النص يمثل البيانات المنظمة كأزواج ذات قيمة رئيسية (كائنات) وقوائم مرتبة (مصفوفات). تم اشتقاقها من بناء جملة كائن JavaScript ولكنها مستقلة عن اللغة - تحتوي كل لغة برمجة تقريبًا على محلل JSON.</p>
+<p>مستند JSON الصالح هو أحد العناصر التالية: كائن، أو مصفوفة، أو سلسلة، أو رقم، أو قيمة منطقية (صواب أو خطأ)، أو خالية.</p>
+<p>مثال على JSON صالح:</p>
+<p>{</p>
+<p>&quot;الاسم&quot;: &quot;أليس&quot;،</p>
+<p>&quot;العمر&quot;: 30،</p>
+<p>&quot;النتائج&quot;: [95، 87، 91]،</p>
+<p>&quot;نشط&quot;: صحيح</p>
+<p>}</p>
+<h2>JSON مقابل XML</h2>
+<p>حل JSON محل XML إلى حد كبير باعتباره تنسيق تبادل البيانات السائد على الويب لأنه أكثر إحكاما وأسهل في القراءة ويرتبط بشكل طبيعي بهياكل البيانات لمعظم لغات البرمجة (الكائنات والمصفوفات).</p>
+<h2>الهياكل المتداخلة في لمحة</h2>
+<p>تظهر القيمة الحقيقية للتنسيق بمجرد أن تبدأ الكائنات والمصفوفات في التداخل داخل بعضها البعض على عدة مستويات، وهو أمر شائع في استجابات واجهة برمجة التطبيقات الحقيقية. يكاد يكون من المستحيل تتبع نقطة JSON المتداخلة بعمق والمصغرة بالعين - فمطابقة قوس الفتح مع قوس الإغلاق الصحيح على بعد عدة أسطر هو بالضبط نوع المهمة الشاقة والمعرضة للخطأ التي يقوم بها الكمبيوتر بشكل أفضل بكثير من الإنسان. يعمل تنسيق JSON المنسق مع مسافة بادئة متسقة على تحويل نفس البنية إلى شيء يمكنك متابعته بصريًا، مستوى تلو الآخر، ولهذا السبب تقريبًا كل أداة مطور تعرض JSON، بدءًا من أدوات تطوير المتصفح إلى عملاء واجهة برمجة التطبيقات (API)، تقوم بتنسيقها افتراضيًا بدلاً من إظهار السلسلة الأولية المضغوطة التي أرسلها الخادم بالفعل.</p>
+<h2>الطباعة الجميلة (التنسيق)</h2>
+<p>لا تحتوي سلسلة JSON &quot;المصغرة&quot; على مسافة بيضاء غير ضرورية:</p>
+<p>{&quot;اسم&quot;: &quot;أليس&quot;، &quot;العمر&quot;: 30، &quot;النتائج&quot;: [95،87،91]، &quot;نشط&quot;: صحيح}</p>
+<p>على الرغم من صحة هذا، إلا أنه من الصعب قراءته. تضيف &quot;الطباعة الجميلة&quot; أو &quot;التنسيق&quot; المسافة البادئة والأسطر الجديدة:</p>
+<p>يتم وضع مسافة بادئة لكل مستوى من مستويات التداخل بمسافتين أو 4 مسافات. وهذا يجعل الهياكل المتداخلة بعمق سهلة التنقل بصريًا.</p>
+<h2>تاريخ موجز لصعود JSON</h2>
+<p>تم نشر JSON في أوائل العقد الأول من القرن الحادي والعشرين على يد دوغلاس كروكفورد، الذي قام بتوثيق وتسمية تنسيق البيانات الذي لاحظ أنه ضمني بالفعل في البنية الحرفية للكائنات الخاصة بجافا سكريبت، بدلاً من اختراع شيء جديد تمامًا. تزامن توقيته مع نمو تطبيقات الويب التي تعتمد على AJAX والتي كانت بحاجة إلى طريقة خفيفة لتبادل البيانات بين المتصفح والخادم دون إعادة تحميل الصفحة بالكامل، كما أن تشابهها الوثيق مع كائنات JavaScript الأصلية يعني أن المتصفحات يمكنها تحليلها مجانًا تقريبًا. هذا المزيج من البساطة والتوقيت الجيد هو إلى حد كبير سبب تفوق JSON على XML الأكثر تفصيلاً كخيار افتراضي لواجهات برمجة تطبيقات الويب في غضون عقد من الزمن تقريبًا.</p>
+<h2>JSON في تطوير الويب</h2>
+<p>تستخدم واجهات برمجة تطبيقات الويب بشكل كبير JSON لهيئات الطلب والاستجابة. يتعامل كل من واجهة برمجة تطبيقات fetch() للمتصفح وXMLHttpRequest مع JSON أصلاً. تقوم اللغات الموجودة على جانب الخادم بتحليل JSON باستخدام المكتبات المضمنة: json في Python، وJSON.parse في JavaScript، وjson_decode في PHP، وGson/Jackson في Java.</p>
+<h2>لماذا يخدم التنسيق والتصغير أغراضًا مختلفة؟</h2>
+<p>توجد هاتان العمليتان لأن JSON تتم قراءته بواسطة جمهورين مختلفين تمامًا. JSON المنسق والمزود بمسافة بادئة مخصص للبشر: يستفيد المطور الذي يقوم بفحص استجابة واجهة برمجة التطبيقات (API)، أو تصحيح أخطاء ملف التكوين، أو مراجعة البيانات أثناء التطوير بشكل كبير من المسافة البادئة الواضحة التي تجعل بنية الكائنات والمصفوفات المتداخلة مرئية في لمحة. Miniified JSON مخصص للأجهزة: يؤدي تجريد كل مساحة وفاصل أسطر غير ضرورية إلى تقليل عدد البايتات التي يلزم نقلها عبر الشبكة أو تخزينها على القرص، وهو أمر مهم عند إرسال حمولة JSON آلاف أو ملايين المرات يوميًا بين الخوادم. لا يعد أي من النموذجين أكثر &quot;صحة&quot; من الآخر - فهما ببساطة يعملان على تحسين القراء المختلفين، ويتحرك سير العمل الجيد بين الاثنين اعتمادًا على ما إذا كان الإنسان أو الآلة هي التي تقوم بالقراءة في تلك اللحظة.</p>
+<h2>أخطاء JSON الشائعة وكيفية اكتشافها</h2>
+<p>تعد الفاصلة اللاحقة بعد العنصر الأخير في كائن أو مصفوفة واحدة من الأخطاء الأكثر شيوعًا، نظرًا لأنها صالحة في القيم الحرفية لكائن JavaScript ولكنها غير مسموح بها بشكل صريح في JSON. يجب أن تكون أسماء الخصائص دائمًا عبارة عن سلاسل ذات علامات اقتباس مزدوجة - تعتبر المفاتيح غير المقتبسة والسلاسل ذات علامات الاقتباس المفردة غير صالحة، على الرغم من أن كلاهما قانوني في JavaScript. التعليقات غير مدعومة على الإطلاق في JSON القياسي، لذا فإن ملف التكوين الذي يحتوي على تعليقات مضمنة مفيدة (مثل تنسيق JSONC الذي يستخدمه VS Code لإعداداته) من الناحية الفنية ليس JSON صالحًا ويتطلب محللًا لأغراض خاصة. نظرًا لأن القواعد النحوية لـ JSON أكثر صرامة من قواعد JavaScript، فإن نسخ كائن JavaScript حرفيًا مباشرةً في حقل JSON يعد مصدرًا شائعًا جدًا لأخطاء بناء الجملة التي تساعدك هذه الأداة على اكتشافها.</p>
+<h2>التحقق من الصحة قبل أن تثق في البيانات</h2>
+<p>بالإضافة إلى جعل JSON قابلاً للقراءة، تقوم هذه الأداة أيضًا بالتحقق من صحته، وهو أمر مهم لأن حرفًا واحدًا في غير مكانه يمكن أن يجعل كتلة JSON ذات المظهر الصحيح غير قابلة للتحليل تمامًا. بدلاً من مسح مئات الأسطر يدويًا بحثًا عن فاصلة مفقودة أو قوس غير مغلق، فإن لصق النص والسماح للمحلل بالإبلاغ عن مكان فشله بالضبط يحول البحث المرئي الممل إلى إجابة فورية ودقيقة، وهو أمر ذو قيمة خاصة عند تصحيح أخطاء ملف التكوين أو استجابة API التي يرفض البرنامج قبولها.</p>
+<h2>خاصة وفورية</h2>
+<p>يتم تشغيل جميع عمليات المعالجة بالكامل في متصفحك، لذلك يتم التنسيق والتصغير على الفور ولا يتم إرسال أي JSON الذي تلصقه إلى أي مكان، أو تسجيله أو مشاركته، ويعمل دون اتصال بمجرد تحميل الصفحة.</p>
+    <section class="faq"><h2>الأسئلة الشائعة حول منسق JSON</h2><dl><dt>ما هو جسون؟</dt><dd>JSON (JavaScript Object Notation) هو تنسيق خفيف لتبادل البيانات. يستخدم نصًا يمكن قراءته بواسطة الإنسان لتمثيل كائنات البيانات التي تتكون من أزواج ومصفوفات القيمة الرئيسية.</dd><dt>ماذا يفعل &quot;التنسيق&quot;؟</dt><dd>يضيف التنسيق (يُسمى أيضًا &quot;الطباعة الجميلة&quot;) مسافة بادئة مناسبة وأسطرًا جديدة لجعل JSON قابلاً للقراءة بواسطة الإنسان. يؤدي التصغير إلى إزالة كل المسافات البيضاء لإنتاج أصغر سلسلة JSON صالحة ممكنة.</dd><dt>هل يقوم المدقق بإصلاح الأخطاء؟</dt><dd>لا. تقوم الأداة بتحليل JSON والإبلاغ عن الخطأ إذا كان غير صالح. يتم ترك إصلاح الخطأ للمستخدم.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/jsonformatter/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/jsonformatter/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/jsonformatter/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/jsonformatter/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/jsonformatter/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/jsonformatter/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/jsonformatter/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/jsonformatter/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/jsonformatter/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/jsonformatter/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"placeholder":"الصق JSON هنا...","format":"التنسيق","minify":"تصغير","copy":"نسخ"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/jsonformatter.js" defer></script>
+</body>
+</html>
