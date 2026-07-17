@@ -15,7 +15,7 @@ High-performance pages, fully optimized for page speed, with impeccable SEO and 
 
 Each tool implemented in the 10 languages.
 
-glossary.html at the root with the list of all pages
+freetools.html at the root with the list of all pages
 
 
 # Top 10 languages in númber of speakers
