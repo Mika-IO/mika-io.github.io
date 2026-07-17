@@ -32,7 +32,7 @@
     {cat:'Tech',text:'The first website went live on August 6, 1991. It explained what the World Wide Web was and how to use it.'},
     {cat:'Tech',text:'Wi-Fi was partly invented in Australia after a failed experiment to detect mini black holes resulted in radio signal-cleaning algorithms.'},
     {cat:'Human',text:'Your body replaces all of its cells approximately every 7–10 years — though neurons and some other cells last much longer.'},
-    {cat:'Human',text:'The human brain uses about 20% of the body's total energy despite being only 2% of body weight.'},
+    {cat:'Human',text:'The human brain uses about 20% of the body\'s total energy despite being only 2% of body weight.'},
     {cat:'Human',text:'Humans are the only animals that blush.'},
     {cat:'Human',text:'Your stomach gets a new lining every 3–4 days to prevent it from digesting itself.'},
   ];

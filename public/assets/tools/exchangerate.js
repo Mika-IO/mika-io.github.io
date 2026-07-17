@@ -1,6 +1,8 @@
 (function(){
-  // Approximate rates relative to USD (as of mid-2024, for demo only)
-  const rates={USD:1,EUR:0.92,GBP:0.79,JPY:157,CHF:0.90,CAD:1.37,AUD:1.52,CNY:7.26,INR:83.5,BRL:5.20,MXN:17.8,SGD:1.35,HKD:7.82,NOK:10.6,SEK:10.7,DKK:6.89,NZD:1.64,ZAR:18.6,KRW:1370,AED:3.67,SAR:3.75,THB:36.5,MYR:4.72,IDR:16250,PHP:58.1,TWD:32.5,PLN:4.0,CZK:23.5,HUF:364,RON:4.69,TRY:32.5,RUB:90,UAH:40,EGP:50,NGN:1500,KES:129,GHS:15.4,MAD:10.0,TND:3.1,ARS:950,CLP:950,COP:4000,PEN:3.77,UYU:39,VES:36};
+  // Offline fallback only — live rates are fetched below and replace these.
+  var SNAPSHOT_DATE='2026-07-17';
+  const rates={"USD":1,"EUR":0.873482,"GBP":0.741467,"JPY":162.330823,"CHF":0.808262,"CAD":1.403662,"AUD":1.428743,"CNY":6.78034,"INR":96.403741,"BRL":5.082509,"MXN":17.423234,"SGD":1.290033,"HKD":7.83962,"NOK":9.666273,"SEK":9.637906,"DKK":6.517061,"NZD":1.711376,"ZAR":16.401155,"KRW":1480.158053,"AED":3.6725,"SAR":3.75,"THB":33.572316,"MYR":4.07241,"IDR":17992.306847,"PHP":61.651002,"TWD":32.247891,"PLN":3.78126,"CZK":21.127001,"HUF":315.09853,"RON":4.569955,"TRY":47.097698,"RUB":77.781843,"UAH":44.645286,"EGP":50.537457,"NGN":1379.635134,"KES":129.304761,"GHS":11.539025,"MAD":9.326951,"TND":2.943976,"ARS":1474.7696,"CLP":924.511391,"COP":3226.083313,"PEN":3.391282,"UYU":40.128299,"VES":732.4787};
+  var live=false;
   const sel_from=document.getElementById('er-from');
   const sel_to=document.getElementById('er-to');
   const keys=Object.keys(rates);
@@ -18,4 +20,27 @@
   sel_from.addEventListener('change',conv);
   sel_to.addEventListener('change',conv);
   conv();
+
+
+  function setNote(){
+    var note=document.getElementById('er-note');
+    if(!note)return;
+    note.textContent=live
+      ? T('liverates','Live rates')+' · '+SNAPSHOT_DATE
+      : T('offlinerates','Offline snapshot — live rates unavailable')+' · '+SNAPSHOT_DATE;
+  }
+  setNote();
+
+  fetch('https://open.er-api.com/v6/latest/USD')
+    .then(function(r){return r.ok?r.json():Promise.reject(new Error(r.status));})
+    .then(function(d){
+      if(!d||d.result!=='success'||!d.rates)throw new Error('bad payload');
+      Object.keys(rates).forEach(function(k){if(typeof d.rates[k]==='number')rates[k]=d.rates[k];});
+      live=true;
+      SNAPSHOT_DATE=(d.time_last_update_utc||'').slice(5,16)||SNAPSHOT_DATE;
+      setNote();
+      var f=document.getElementById('er-from');
+      if(f)f.dispatchEvent(new Event('change'));
+    })
+    .catch(function(){live=false;setNote();});
 })();

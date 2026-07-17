@@ -15,13 +15,6 @@
     }
     document.getElementById('dc-out').innerHTML=html+'</div>';
   };
-  document.getElementById('dc-orig').value='Hello World
-This is line 2
-Same line
-Old content here';
-  document.getElementById('dc-new').value='Hello World
-This is line two
-Same line
-New content here
-New line added';
+  document.getElementById('dc-orig').value='Hello World\nThis is line 2\nSame line\nOld content here';
+  document.getElementById('dc-new').value='Hello World\nThis is line two\nSame line\nNew content here\nNew line added';
 })();
