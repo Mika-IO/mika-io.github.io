@@ -1,22 +1,22 @@
 (function(){
   var tips=[
-    ["USA","Restaurant","15-20%","Expected; 20%+ for good service"],
-    ["USA","Bar","$1-2/drink","Per drink or 15-20% of tab"],
-    ["USA","Taxi","10-15%","Round up to nearest dollar"],
-    ["USA","Hotel porter","$1-2/bag","Standard"],
-    ["Canada","Restaurant","15-20%","Similar to USA"],
-    ["UK","Restaurant","10-12.5%","Often included as service charge"],
-    ["UK","Taxi","10%","Round up"],
-    ["Germany","Restaurant","5-10%","Round up the bill"],
-    ["France","Restaurant","0-5%","Service compris usually included"],
-    ["Italy","Restaurant","0-5%","Cover charge (coperto) is separate"],
-    ["Japan","Restaurant","0%","Tipping is considered rude"],
-    ["Australia","Restaurant","0-10%","Not expected, appreciated for good service"],
-    ["Brazil","Restaurant","10%","Usually added automatically"],
-    ["Mexico","Restaurant","10-15%","Standard"],
-    ["Spain","Restaurant","5-10%","Not required but appreciated"],
-    ["Netherlands","Restaurant","5-10%","Round up is common"],
-    ["UAE","Restaurant","10-15%","Service charge often added"]
+    ["USA",T('restaurant','Restaurant'),"15-20%",T('expected20forgoodservi','Expected; 20%+ for good service')],
+    ["USA",T('bar','Bar'),"$1-2/drink",T('perdrinkor1520oftab','Per drink or 15-20% of tab')],
+    ["USA",T('taxi','Taxi'),"10-15%",T('rounduptonearestdollar','Round up to nearest dollar')],
+    ["USA",T('hotelporter','Hotel porter'),"$1-2/bag",T('standard','Standard')],
+    ["Canada",T('restaurant','Restaurant'),"15-20%",T('similartousa','Similar to USA')],
+    ["UK",T('restaurant','Restaurant'),"10-12.5%",T('oftenincludedasservice','Often included as service charge')],
+    ["UK",T('taxi','Taxi'),"10%",T('roundup','Round up')],
+    ["Germany",T('restaurant','Restaurant'),"5-10%",T('roundupthebill','Round up the bill')],
+    ["France",T('restaurant','Restaurant'),"0-5%",T('servicecomprisusuallyi','Service compris usually included')],
+    ["Italy",T('restaurant','Restaurant'),"0-5%",T('coverchargecopertoisse','Cover charge (coperto) is separate')],
+    ["Japan",T('restaurant','Restaurant'),"0%",T('tippingisconsideredrud','Tipping is considered rude')],
+    ["Australia",T('restaurant','Restaurant'),"0-10%",T('notexpectedappreciated','Not expected, appreciated for good service')],
+    ["Brazil",T('restaurant','Restaurant'),"10%",T('usuallyaddedautomatica','Usually added automatically')],
+    ["Mexico",T('restaurant','Restaurant'),"10-15%",T('standard','Standard')],
+    ["Spain",T('restaurant','Restaurant'),"5-10%",T('notrequiredbutapprecia','Not required but appreciated')],
+    ["Netherlands",T('restaurant','Restaurant'),"5-10%",T('roundupiscommon','Round up is common')],
+    ["UAE",T('restaurant','Restaurant'),"10-15%",T('servicechargeoftenadde','Service charge often added')]
   ];
   function render(q){
     var f=q?tips.filter(function(t){return (t[0]+t[1]).toLowerCase().indexOf(q.toLowerCase())>=0;}):tips;

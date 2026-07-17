@@ -5,7 +5,7 @@
     const out=document.getElementById('jp-out');
     try{
       const obj=JSON.parse(raw);
-      const parts=key.replace(/[(d+)]/g,'.$1').split('.').filter(Boolean);
+      const parts=key.replace(/\[(\d+)\]/g,'.$1').split('.').filter(Boolean);
       let cur=obj;
       for(const part of parts){if(cur===null||cur===undefined){cur=undefined;break;}cur=cur[part];}
       out.textContent=cur===undefined?'undefined':JSON.stringify(cur,null,2);

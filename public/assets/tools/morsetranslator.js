@@ -17,7 +17,7 @@
   }
   function decode(m){
     return m.split(/\s*\/\s*|\s{3,}/).map(function(word){
-      return word.trim().split(/s+/).map(function(sym){return DECODE[sym]||'?';}).join('');
+      return word.trim().split(/\s+/).map(function(sym){return DECODE[sym]||'?';}).join('');
     }).join(' ');
   }
   if(inEl) inEl.addEventListener('input',function(){if(outEl)outEl.textContent=encode(inEl.value)||'—';});

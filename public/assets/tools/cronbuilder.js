@@ -1,7 +1,7 @@
 (function(){
   const fields=['cb-min','cb-hr','cb-dom','cb-mon','cb-dow'];
   function describe(expr){
-    const parts=expr.trim().split(/s+/);
+    const parts=expr.trim().split(/\s+/);
     if(parts.length!==5)return T('invalidexpr','Invalid expression');
     const[min,hr,dom,mon,dow]=parts;
     if(expr==='* * * * *')return 'Every minute';

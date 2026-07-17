@@ -24,13 +24,13 @@
       var msg;
       if (player === cpu) {
         score.d++;
-        msg = emojis[player] + ' vs ' + emojis[cpu] + '<br><strong>It\'s a draw! 🤝</strong>';
+        msg = emojis[player] + ' vs ' + emojis[cpu] + '<br><strong>'+T('draw','It\'s a draw!')+' 🤝</strong>';
       } else if (beats(player, cpu)) {
         score.p++;
-        msg = emojis[player] + ' vs ' + emojis[cpu] + '<br><strong style="color:#22c55e">You win! 🎉</strong>';
+        msg = emojis[player] + ' vs ' + emojis[cpu] + '<br><strong style="color:var(--green,#22c55e)">'+T('youwin','You win!')+' 🎉</strong>';
       } else {
         score.c++;
-        msg = emojis[player] + ' vs ' + emojis[cpu] + '<br><strong style="color:#ef4444">Computer wins 🤖</strong>';
+        msg = emojis[player] + ' vs ' + emojis[cpu] + '<br><strong style="color:var(--red,#ef4444)">'+T('cpuwins','Computer wins')+' 🤖</strong>';
       }
       result.innerHTML = msg;
       pw.textContent = score.p;
