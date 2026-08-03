@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parquet to CSV Converter — offline, in your browser</title>
+<meta name="description" content="Free Parquet to CSV converter that works fully offline. Open a .parquet file, preview the table and download clean CSV. Nothing is uploaded to any server.">
+<link rel="canonical" href="https://mikaio.dev/en/parquettocsv/">
+<link rel="icon" href="/icons/converter.png" type="image/png">
+<link rel="apple-touch-icon" href="/icons/converter.png">
+<link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/parquettocsv/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/parquettocsv/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/parquettocsv/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/parquettocsv/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/parquettocsv/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/parquettocsv/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/parquettocsv/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/parquettocsv/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/parquettocsv/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/parquettocsv/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/parquettocsv/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Parquet to CSV Converter — offline, in your browser">
+<meta property="og:description" content="Free Parquet to CSV converter that works fully offline. Open a .parquet file, preview the table and download clean CSV. Nothing is uploaded to any server.">
+<meta property="og:url" content="https://mikaio.dev/en/parquettocsv/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+  /* Aliases many tool widgets reference. They were never defined, so those tools
+     fell back to hardcoded light colours and broke in dark mode — light text on
+     a light --surface. Defining them here fixes contrast everywhere at once. */
+  --surface:#eef1f6;--text:var(--ink);--red:#dc2626;--green:#16a34a;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;
+    --surface:#222834;--text:#e8eaed;--red:#f87171;--green:#4ade80;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Parquet to CSV Converter — offline, in your browser","url":"https://mikaio.dev/en/parquettocsv/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en","description":"Free Parquet to CSV converter that works fully offline. Open a .parquet file, preview the table and download clean CSV. Nothing is uploaded to any server."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/en/"},{"@type":"ListItem","position":2,"name":"Parquet to CSV Converter","item":"https://mikaio.dev/en/parquettocsv/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my data really never uploaded?","acceptedAnswer":{"@type":"Answer","text":"Correct. The converter is plain JavaScript that reads the bytes you pick with the file field and decodes them in the page. There is no upload, no API call and no analytics on your data. You can disconnect from the internet after the page loads and the tool keeps working, which is the simplest way to prove it to yourself."}},{"@type":"Question","name":"Which Parquet files are supported?","acceptedAnswer":{"@type":"Answer","text":"Flat tables written by common tools such as pandas, PyArrow, Polars, DuckDB and Spark. Uncompressed, Snappy and Gzip pages are decoded, along with PLAIN, dictionary, RLE, delta and byte-stream-split encodings, and both data page v1 and v2. Zstd, Brotli, LZ4 and encrypted files are rejected with a clear message instead of producing wrong output."}},{"@type":"Question","name":"What happens to nested columns?","acceptedAnswer":{"@type":"Answer","text":"They are refused on purpose. A struct, list or map column has no single obvious CSV shape, and silently picking one would corrupt your data. Flatten the nesting first in pandas, Polars or DuckDB, write a flat Parquet file, then convert it here."}},{"@type":"Question","name":"How are dates, timestamps and decimals written?","acceptedAnswer":{"@type":"Answer","text":"Dates become YYYY-MM-DD. Timestamps become YYYY-MM-DD HH:MM:SS in UTC, keeping millisecond, microsecond or nanosecond digits when the column has them. Decimal columns keep their exact scale as text, so 12.30 stays 12.30 and never turns into a rounded float. Nulls become empty fields."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/en/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/parquettocsv/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/parquettocsv/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/parquettocsv/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/parquettocsv/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/parquettocsv/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/parquettocsv/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/parquettocsv/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/parquettocsv/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/parquettocsv/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/parquettocsv/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>Parquet to CSV Converter</span></nav>
+  <h1>Parquet to CSV Converter</h1>
+  <p class="lead">Open an Apache Parquet file and turn it into CSV without installing anything. The file is decoded inside your browser tab — it never leaves your device, so it also works with the network off.</p>
+  <section class="widget" id="tool"><div id="pq-app" data-summary="{rows} rows × {cols} columns" data-preview-note="Preview shows the first {shown} rows. The download contains all {total}." data-working="Reading the file…" data-err-format="This is not a valid Parquet file. Check that the file ends with the PAR1 marker and is not truncated." data-err-nested="This file has nested or repeated columns (structs, lists, maps). Only flat tables can be flattened into CSV here." data-err-codec="Unsupported compression: {codec}. Rewrite the file with Snappy, Gzip or no compression." data-err-encoding="Unsupported column encoding: {encoding}." data-err-corrupt="The file data looks corrupted and could not be decoded." data-err-generic="The file could not be read. It may be corrupted, encrypted or written by an unusual tool."><div class="field"><label for="pq-file">Parquet file (.parquet)</label><input type="file" id="pq-file" accept=".parquet,.parq,.pq"></div><div class="row"><div class="field"><label for="pq-sep">Delimiter</label><select id="pq-sep"><option value=",">Comma (,)</option><option value=";">Semicolon (;)</option><option value="tab">Tab</option></select></div><div class="field"><label for="pq-header">Include header row</label><input type="checkbox" id="pq-header" checked></div></div><p class="hint">Your file is read locally. No upload, no server, no tracking.</p><p class="hint" id="pq-status" aria-live="polite"></p><p class="hint" id="pq-error" role="alert" hidden></p><div class="result" id="pq-result" hidden><span class="big" id="pq-summary"></span><p class="hint" id="pq-note" hidden></p><div class="field"><label for="pq-out">CSV preview</label><textarea id="pq-out" rows="10" readonly></textarea></div><div class="row"><button class="btn" id="pq-download" type="button">Download CSV</button><button class="btn secondary" type="button" data-copy="#pq-out" data-copied="Copied!">Copy preview</button></div></div></div></section>
+  <article class="content">
+    <h2>What this converter does</h2>
+<p>Apache Parquet is the format your data pipeline probably writes: a columnar, compressed binary layout designed for analytics engines. It is excellent for machines and useless for eyeballs. You cannot open it in a text editor, you cannot mail it to a colleague who lives in spreadsheets, and you cannot paste it into a ticket. CSV is the opposite: clumsy for analytics, universally readable everywhere.</p>
+<p>This page bridges the two directions in the simplest possible way. You pick a <code>.parquet</code> file from your disk, the page decodes it, shows you how many rows and columns it found, prints a preview, and hands you a CSV file to download. There is no account, no queue, no upload progress bar, because there is no server involved at any point.</p>
+<p>That last part is the reason this tool exists. Most online Parquet converters are a form that posts your file to a backend. If the file contains customer records, salary data, medical identifiers or anything else covered by a data policy, that upload is the entire problem. Here the conversion is JavaScript running in your tab, reading bytes the browser already gave the page when you chose the file.</p>
+<h2>How to use it in four steps</h2>
+<ol>
+<li>Choose your <code>.parquet</code> file in the file field. Nothing happens until you pick one.</li>
+<li>Pick the delimiter. Comma is the default; semicolon suits spreadsheets configured for locales where the comma is the decimal mark; tab produces a TSV that pastes cleanly into most spreadsheet programs.</li>
+<li>Decide whether the first line should carry the column names. The header checkbox is on by default and toggling it re-renders the output instantly, with no need to reload the file.</li>
+<li>Read the preview, then press <strong>Download CSV</strong>. The preview shows the first 200 rows so the page stays responsive; the downloaded file always contains every row that was in the Parquet file.</li>
+</ol>
+<p>Changing the delimiter or the header switch after a conversion does not re-read the file from disk. The decoded table is kept in memory for the tab, so those switches are instant even for a file with hundreds of thousands of rows.</p>
+<h2>How Parquet stores a table, and why the conversion is not trivial</h2>
+<p>A CSV file is a stream of rows. Parquet is the opposite: it stores each column separately, in blocks called row groups, and inside a row group each column lives in a chunk made of pages. Each page can be compressed, and the values inside can be encoded several different ways.</p>
+<p>Reading it therefore means unwrapping several layers:</p>
+<ul>
+<li>The <strong>footer</strong> holds the schema and the location of every chunk, serialised with Thrift&#39;s compact protocol. The file ends with a four-byte length and the ASCII marker <code>PAR1</code>, which is also written at the very start of the file. If either marker is missing, the file is not Parquet or it was truncated during a copy.</li>
+<li>Each <strong>page</strong> may be compressed. This tool decodes uncompressed pages, Snappy pages and Gzip pages, which together cover the overwhelming majority of files written by pandas, PyArrow, Polars, DuckDB and Spark.</li>
+<li>The values inside a page are <strong>encoded</strong>. Plain layout, dictionary encoding, run-length encoding, the delta family and byte-stream-split are all handled, in both data page v1 and the newer v2 layout.</li>
+<li><strong>Nulls</strong> are not stored as values. Parquet records a definition level per row, and the converter uses those levels to put values back in the right rows and leave the null positions empty.</li>
+</ul>
+<p>None of this matters when it works. It matters when it does not: because the decoder understands each layer, an unsupported file produces a specific message about the codec, the encoding or the nesting, rather than a silently mangled CSV.</p>
+<h2>Worked example: the values you will see</h2>
+<p>Three Parquet types have no direct CSV equivalent, so it is worth knowing exactly what the converter writes.</p>
+<p><strong>A date column.</strong> Parquet&#39;s <code>DATE</code> type stores a plain 32-bit count of days since 1 January 1970. If the stored number is 19723, then 19723 days after the epoch is 1 January 2024, and the CSV cell reads <code>2024-01-01</code>. No timezone is applied, because a date has no time to shift.</p>
+<p><strong>A microsecond timestamp.</strong> A <code>TIMESTAMP</code> column with microsecond precision stores a 64-bit count of microseconds since the epoch. Take the value 1704112215123456. Divide by 1,000,000 to get 1704112215 whole seconds, which is 1 January 2024 at 12:30:15 UTC, and 123456 microseconds are left over. The CSV cell reads <code>2024-01-01 12:30:15.123456</code>. Trailing zeros in the fraction are trimmed, so a timestamp landing exactly on a second is written without a decimal part.</p>
+<p><strong>A decimal column.</strong> A <code>DECIMAL(12,2)</code> column is stored as an integer plus a scale. The integer 1230 with scale 2 means 12.30, and that is written literally as <code>12.30</code>. This is the reason financial columns should never be routed through a float: the text keeps the exact value and the exact number of decimal places the schema promised.</p>
+<p>Booleans are written as <code>true</code> and <code>false</code>, nulls become empty fields, and binary columns that are not valid UTF-8 text are written as base64 so that raw bytes cannot break the CSV structure.</p>
+<h2>Where an offline converter earns its place</h2>
+<p>The obvious case is confidentiality: an export of user records that you need to glance at before it goes anywhere near a shared drive. Nothing leaves the laptop, so no policy is bent.</p>
+<p>The second case is friction. A colleague sends a Parquet extract, you want to check three columns, and installing Python plus PyArrow just to inspect a file you will delete in five minutes is an absurd price. Opening a browser tab is not.</p>
+<p>The third case is a machine that is not yours to configure — a locked-down work laptop, a client&#39;s computer, a lab machine where you cannot install packages. The browser is already there.</p>
+<p>The fourth case is teaching. Watching the same table appear first as an opaque binary blob and then as plain text makes the columnar-versus-row-oriented distinction concrete in a way a diagram rarely does.</p>
+<h2>Common mistakes and how to avoid them</h2>
+<p><strong>Opening the CSV in a spreadsheet and finding one giant column.</strong> Your spreadsheet expects the delimiter of your locale. Regenerate the CSV with the semicolon option, or use the import dialog and state the delimiter explicitly.</p>
+<p><strong>Long numeric identifiers turning into scientific notation.</strong> That is the spreadsheet, not the CSV. The file contains the digits; the program decided to display them as a float. Import the column as text.</p>
+<p><strong>Expecting local time.</strong> Timestamps are written in UTC. Parquet timestamps are usually stored as an instant, and converting them to whatever timezone your machine happens to sit in would silently change every value. Shift them deliberately later if you need local time.</p>
+<p><strong>Feeding it a nested export.</strong> A file with struct, list or map columns is refused. Flatten it first with <code>pandas.json_normalize</code>, Polars&#39; <code>unnest</code>, or a DuckDB query that selects the leaf fields, write a flat Parquet file, and convert that.</p>
+<h2>Limits: when this is not the right tool</h2>
+<p>It reads a whole file into memory, so very large exports — several hundred megabytes and up — are better handled by DuckDB or a small script that streams row groups. Zstd, Brotli and LZ4 compression are rejected rather than half-decoded; rewrite such files with Snappy or Gzip. Encrypted Parquet files are not supported at all, by design. And nested schemas stay out of scope, because collapsing a list column into a CSV cell is a decision about your data that a generic converter has no business making silently.</p>
+<h2>Privacy</h2>
+<p>The page contains no upload code, no analytics on your file, and no network call of any kind during the conversion. Your file is read with the browser&#39;s own file API and decoded in the tab. If you want proof rather than a promise, load the page, disconnect from the internet, and convert a file: it works exactly the same, because there was never anything on the other end of a wire.</p>
+    <section class="faq"><h2>Parquet to CSV FAQ</h2><dl><dt>Is my data really never uploaded?</dt><dd>Correct. The converter is plain JavaScript that reads the bytes you pick with the file field and decodes them in the page. There is no upload, no API call and no analytics on your data. You can disconnect from the internet after the page loads and the tool keeps working, which is the simplest way to prove it to yourself.</dd><dt>Which Parquet files are supported?</dt><dd>Flat tables written by common tools such as pandas, PyArrow, Polars, DuckDB and Spark. Uncompressed, Snappy and Gzip pages are decoded, along with PLAIN, dictionary, RLE, delta and byte-stream-split encodings, and both data page v1 and v2. Zstd, Brotli, LZ4 and encrypted files are rejected with a clear message instead of producing wrong output.</dd><dt>What happens to nested columns?</dt><dd>They are refused on purpose. A struct, list or map column has no single obvious CSV shape, and silently picking one would corrupt your data. Flatten the nesting first in pandas, Polars or DuckDB, write a flat Parquet file, then convert it here.</dd><dt>How are dates, timestamps and decimals written?</dt><dd>Dates become YYYY-MM-DD. Timestamps become YYYY-MM-DD HH:MM:SS in UTC, keeping millisecond, microsecond or nanosecond digits when the column has them. Decimal columns keep their exact scale as text, so 12.30 stays 12.30 and never turns into a rounded float. Nulls become empty fields.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" aria-current="true" href="/en/parquettocsv/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/parquettocsv/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/parquettocsv/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/parquettocsv/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/parquettocsv/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/parquettocsv/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/parquettocsv/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/parquettocsv/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/parquettocsv/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/parquettocsv/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>Free, fast, private browser tools · © 2026</p>
+  <p><a href="/freetools.html">All tools</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="en";window.__T={"fileLabel":"Parquet file (.parquet)","delimiter":"Delimiter","comma":"Comma (,)","semicolon":"Semicolon (;)","tabSep":"Tab","headerLabel":"Include header row","privacy":"Your file is read locally. No upload, no server, no tracking.","outLabel":"CSV preview","download":"Download CSV","copy":"Copy preview","copied":"Copied!","summary":"{rows} rows × {cols} columns","previewNote":"Preview shows the first {shown} rows. The download contains all {total}.","working":"Reading the file…","errFormat":"This is not a valid Parquet file. Check that the file ends with the PAR1 marker and is not truncated.","errNested":"This file has nested or repeated columns (structs, lists, maps). Only flat tables can be flattened into CSV here.","errCodec":"Unsupported compression: {codec}. Rewrite the file with Snappy, Gzip or no compression.","errEncoding":"Unsupported column encoding: {encoding}.","errCorrupt":"The file data looks corrupted and could not be decoded.","errGeneric":"The file could not be read. It may be corrupted, encrypted or written by an unusual tool."};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/parquettocsv.js" defer></script>
+</body>
+</html>

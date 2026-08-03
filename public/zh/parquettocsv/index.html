@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parquet 转 CSV 转换器 — 完全离线运行</title>
+<meta name="description" content="免费的 Parquet 转 CSV 工具，完全离线运行。打开 .parquet 文件即可预览表格并下载干净的 CSV，文件不会上传到任何服务器。">
+<link rel="canonical" href="https://mikaio.dev/zh/parquettocsv/">
+<link rel="icon" href="/icons/converter.png" type="image/png">
+<link rel="apple-touch-icon" href="/icons/converter.png">
+<link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/parquettocsv/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/parquettocsv/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/parquettocsv/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/parquettocsv/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/parquettocsv/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/parquettocsv/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/parquettocsv/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/parquettocsv/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/parquettocsv/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/parquettocsv/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/parquettocsv/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Parquet 转 CSV 转换器 — 完全离线运行">
+<meta property="og:description" content="免费的 Parquet 转 CSV 工具，完全离线运行。打开 .parquet 文件即可预览表格并下载干净的 CSV，文件不会上传到任何服务器。">
+<meta property="og:url" content="https://mikaio.dev/zh/parquettocsv/">
+<meta property="og:locale" content="zh">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+  /* Aliases many tool widgets reference. They were never defined, so those tools
+     fell back to hardcoded light colours and broke in dark mode — light text on
+     a light --surface. Defining them here fixes contrast everywhere at once. */
+  --surface:#eef1f6;--text:var(--ink);--red:#dc2626;--green:#16a34a;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;
+    --surface:#222834;--text:#e8eaed;--red:#f87171;--green:#4ade80;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"Parquet 转 CSV 转换器 — 完全离线运行","url":"https://mikaio.dev/zh/parquettocsv/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"zh","description":"免费的 Parquet 转 CSV 工具，完全离线运行。打开 .parquet 文件即可预览表格并下载干净的 CSV，文件不会上传到任何服务器。"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/zh/"},{"@type":"ListItem","position":2,"name":"Parquet 转 CSV 转换器","item":"https://mikaio.dev/zh/parquettocsv/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"数据真的完全不会被上传吗？","acceptedAnswer":{"@type":"Answer","text":"确实如此。转换器是纯 JavaScript，它读取你在文件框中选择的字节并直接在页面里解码，没有上传、没有接口调用，也不会统计你的数据。页面加载完成后你可以断开网络，工具依旧正常工作——这是最简单的自我验证方式。"}},{"@type":"Question","name":"支持哪些 Parquet 文件？","acceptedAnswer":{"@type":"Answer","text":"支持由 pandas、PyArrow、Polars、DuckDB、Spark 等常用工具写出的扁平表格。可解码未压缩、Snappy 与 Gzip 页面，支持 PLAIN、字典、RLE、delta 与 byte-stream-split 编码，数据页 v1 与 v2 均可。Zstd、Brotli、LZ4 以及加密文件会给出明确提示而不是输出错误结果。"}},{"@type":"Question","name":"嵌套列会怎样处理？","acceptedAnswer":{"@type":"Answer","text":"会被明确拒绝。struct、list、map 列没有唯一合理的 CSV 形式，默默选一种反而会破坏数据。请先在 pandas、Polars 或 DuckDB 中展平结构，写出扁平的 Parquet 文件后再来转换。"}},{"@type":"Question","name":"日期、时间戳和 decimal 如何输出？","acceptedAnswer":{"@type":"Answer","text":"日期输出为 YYYY-MM-DD。时间戳按 UTC 输出为 YYYY-MM-DD HH:MM:SS，并保留列本身的毫秒、微秒或纳秒位。decimal 列以文本保留精确小数位，12.30 依然是 12.30，不会变成四舍五入的浮点数。空值输出为空字段。"}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/zh/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="网站导航">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/parquettocsv/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/parquettocsv/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/parquettocsv/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/parquettocsv/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/parquettocsv/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/parquettocsv/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/parquettocsv/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/parquettocsv/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/parquettocsv/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/parquettocsv/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">首页</a> › <span>Parquet 转 CSV 转换器</span></nav>
+  <h1>Parquet 转 CSV 转换器</h1>
+  <p class="lead">无需安装任何软件，直接打开 Apache Parquet 文件并转换成 CSV。文件在浏览器标签页内解码，不会离开你的设备，断网也照样能用。</p>
+  <section class="widget" id="tool"><div id="pq-app" data-summary="{rows} 行 × {cols} 列" data-preview-note="预览仅显示前 {shown} 行，下载文件包含全部 {total} 行。" data-working="正在读取文件…" data-err-format="这不是有效的 Parquet 文件。请确认文件末尾带有 PAR1 标记且没有被截断。" data-err-nested="该文件含有嵌套或重复列（struct、list、map）。这里只能把扁平表格转成 CSV。" data-err-codec="不支持的压缩格式：{codec}。请改用 Snappy、Gzip 或不压缩重新写出文件。" data-err-encoding="不支持的列编码：{encoding}。" data-err-corrupt="文件数据似乎已损坏，无法解码。" data-err-generic="无法读取该文件，它可能已损坏、被加密，或由不常见的工具写出。"><div class="field"><label for="pq-file">Parquet 文件（.parquet）</label><input type="file" id="pq-file" accept=".parquet,.parq,.pq"></div><div class="row"><div class="field"><label for="pq-sep">分隔符</label><select id="pq-sep"><option value=",">逗号（,）</option><option value=";">分号（;）</option><option value="tab">制表符</option></select></div><div class="field"><label for="pq-header">包含表头行</label><input type="checkbox" id="pq-header" checked></div></div><p class="hint">文件在本地读取：不上传、无服务器、不追踪。</p><p class="hint" id="pq-status" aria-live="polite"></p><p class="hint" id="pq-error" role="alert" hidden></p><div class="result" id="pq-result" hidden><span class="big" id="pq-summary"></span><p class="hint" id="pq-note" hidden></p><div class="field"><label for="pq-out">CSV 预览</label><textarea id="pq-out" rows="10" readonly></textarea></div><div class="row"><button class="btn" id="pq-download" type="button">下载 CSV</button><button class="btn secondary" type="button" data-copy="#pq-out" data-copied="已复制！">复制预览</button></div></div></div></section>
+  <article class="content">
+    <h2>这个转换器做什么</h2>
+<p>Apache Parquet 是如今几乎所有数据管道都会写出的格式：列式、压缩、二进制，为分析引擎而设计。它对机器友好，对人眼无用。你无法用文本编辑器打开它，无法直接发给整天用表格的同事，也无法粘贴进一张工单里。CSV 恰恰相反：做分析笨拙，却在任何地方都能读。</p>
+<p>这个页面用最直接的方式把两端连起来。你从磁盘选一个 <code>.parquet</code> 文件，页面就地解码，告诉你找到了多少行多少列，显示一段预览，并生成可下载的 CSV。没有账号，没有排队，没有上传进度条，因为整个过程根本没有服务器参与。</p>
+<p>最后这一点正是这个工具存在的理由。多数在线 Parquet 转换器不过是一个把文件发往后端的表单。如果文件里装的是客户名单、薪资、病历编号，或任何受数据政策约束的内容，那次上传本身就是问题所在。这里的转换是在你的标签页中运行的 JavaScript，读取的是你选择文件时浏览器已经交给页面的字节。</p>
+<h2>四步用法</h2>
+<ol>
+<li>在文件框中选择 <code>.parquet</code> 文件。在此之前不会发生任何事。</li>
+<li>选择分隔符。默认是逗号；分号适合以逗号作小数点的地区所配置的表格软件；制表符会生成 TSV，粘贴进大多数表格程序都很干净。</li>
+<li>决定第一行是否放列名。表头复选框默认勾选，切换它会立即重排输出，无需重新读取文件。</li>
+<li>看一眼预览，然后点击<strong>下载 CSV</strong>。预览只显示前 200 行以保持页面流畅；下载的文件始终包含 Parquet 中的全部行。</li>
+</ol>
+<p>转换之后再改分隔符或表头开关，不会重新读盘。解码后的表格保存在标签页内存中，因此即使是几十万行，这些切换也是瞬时的。</p>
+<h2>Parquet 如何存放一张表，以及为什么转换并不简单</h2>
+<p>CSV 是一串行的流。Parquet 正好相反：它把每一列分开存放，装进称为 row group 的块里；在一个 row group 内部，一列存在由若干页组成的 chunk 中。每一页都可以被压缩，页内的值还可以用多种不同方式编码。</p>
+<p>因此读取它意味着层层拆解：</p>
+<ul>
+<li><strong>文件尾部</strong>保存 schema 和每个 chunk 的位置，用 Thrift 紧凑协议序列化。文件末尾是四字节长度加上 ASCII 标记 <code>PAR1</code>，同样的标记也写在文件开头。任一标记缺失，说明它不是 Parquet，或者在某次复制中被截断了。</li>
+<li>每一<strong>页</strong>都可能被压缩。本工具解码未压缩页、Snappy 页和 Gzip 页，这三者合起来覆盖了 pandas、PyArrow、Polars、DuckDB 与 Spark 写出的绝大多数文件。</li>
+<li>页内的值是<strong>编码过的</strong>。平铺布局、字典编码、游程编码、delta 系列以及 byte-stream-split 都能处理，数据页 v1 与较新的 v2 布局同样支持。</li>
+<li><strong>空值</strong>并不作为值存储。Parquet 为每一行记录一个定义层级，转换器依据这些层级把值放回正确的行，并让空值位置保持为空。</li>
+</ul>
+<p>一切顺利时这些细节无关紧要；出问题时才重要。正因为解码器理解每一层，遇到不支持的文件时，它给出的是关于压缩、编码或嵌套的具体提示，而不是一份被悄悄弄坏的 CSV。</p>
+<h2>实例演算：你会看到怎样的值</h2>
+<p>有三种 Parquet 类型在 CSV 中没有直接对应，值得说清楚输出到底长什么样。</p>
+<p><strong>日期列。</strong> <code>DATE</code> 类型存的是自 1970 年 1 月 1 日起的 32 位天数。若存储的数字是 19723，那么纪元之后第 19723 天正是 2024 年 1 月 1 日，CSV 单元格写作 <code>2024-01-01</code>。不套用任何时区，因为日期没有可以平移的时间部分。</p>
+<p><strong>微秒时间戳。</strong> 微秒精度的 <code>TIMESTAMP</code> 列存的是自纪元起的 64 位微秒数。取值 1704112215123456，除以 1000000 得到整数秒 1704112215，也就是 2024 年 1 月 1 日 12:30:15 UTC，余下 123456 微秒。单元格写作 <code>2024-01-01 12:30:15.123456</code>。小数末尾的零会被去掉，所以正好落在整秒上的时间戳不带小数部分。</p>
+<p><strong>decimal 列。</strong> <code>DECIMAL(12,2)</code> 列以整数加上一个 scale 存储。整数 1230、scale 为 2，表示 12.30，就原样写成 <code>12.30</code>。这正是财务列绝不该经过浮点数的原因：文本既保住了精确数值，也保住了 schema 承诺的小数位数。</p>
+<p>布尔值写作 <code>true</code> 与 <code>false</code>，空值变成空字段，而不是合法 UTF-8 的二进制列会以 base64 输出，避免原始字节破坏 CSV 的结构。</p>
+<h2>离线转换器的用武之地</h2>
+<p>最明显的场景是保密：一份用户记录导出，你想在它接近共享盘之前先看一眼。数据不出本机，也就没有任何规定被绕开。</p>
+<p>第二个场景是摩擦。同事发来一份 Parquet 抽样，你只想核对三列，为此安装 Python 加 PyArrow，而这个文件五分钟后就会被删掉，代价荒唐；打开一个标签页则不然。</p>
+<p>第三个场景是你无权配置的机器：被锁定的公司笔记本、客户的电脑、不允许装包的实验室机器。浏览器本来就在那里。</p>
+<p>第四个场景是教学。同一张表先呈现为不透明的二进制块，再呈现为纯文本，能让列式存储与行式存储的区别变得具体，这是示意图很难做到的。</p>
+<h2>常见错误与规避方法</h2>
+<p><strong>在表格软件里打开 CSV，只看到一个超宽的列。</strong> 你的软件按本地设置期待某个分隔符。改用分号选项重新生成，或走导入对话框并明确指定分隔符。</p>
+<p><strong>很长的数字编号变成科学计数法。</strong> 那是表格软件所为，不是 CSV 的问题。文件里存的就是那些数字，是程序决定按浮点显示。请把该列按文本导入。</p>
+<p><strong>期待本地时间。</strong> 时间戳按 UTC 输出。Parquet 通常把时间戳存为一个时刻，若擅自转换到你机器恰好所处的时区，会悄悄改变每一个值。若确实需要本地时间，请事后有意识地做偏移。</p>
+<p><strong>丢进嵌套导出文件。</strong> 含 struct、list 或 map 列的文件会被拒绝。请先用 <code>pandas.json_normalize</code>、Polars 的 <code>unnest</code>，或用 DuckDB 查询选出叶子字段来展平，写出扁平的 Parquet，再来转换。</p>
+<h2>局限：什么时候不该用它</h2>
+<p>它会把整个文件读入内存，因此几百兆以上的大导出更适合交给 DuckDB，或用逐个 row group 流式处理的小脚本。Zstd、Brotli 与 LZ4 压缩会被直接拒绝，而不是解码到一半；请用 Snappy 或 Gzip 重新写出。加密的 Parquet 文件按设计完全不支持。嵌套 schema 同样不在范围内，因为把一个列表列塞进 CSV 单元格是关于你的数据的决定，通用转换器不该悄悄替你做主。</p>
+<h2>隐私</h2>
+<p>页面里没有上传代码，不对你的文件做任何统计，转换过程中也不发出任何网络请求。文件由浏览器自带的文件接口读取，并在标签页内解码。如果你想要的是验证而非承诺：加载页面后断开网络，再转换一个文件，结果完全一样——因为线的另一端从来就没有东西。</p>
+    <section class="faq"><h2>Parquet 转 CSV 常见问题</h2><dl><dt>数据真的完全不会被上传吗？</dt><dd>确实如此。转换器是纯 JavaScript，它读取你在文件框中选择的字节并直接在页面里解码，没有上传、没有接口调用，也不会统计你的数据。页面加载完成后你可以断开网络，工具依旧正常工作——这是最简单的自我验证方式。</dd><dt>支持哪些 Parquet 文件？</dt><dd>支持由 pandas、PyArrow、Polars、DuckDB、Spark 等常用工具写出的扁平表格。可解码未压缩、Snappy 与 Gzip 页面，支持 PLAIN、字典、RLE、delta 与 byte-stream-split 编码，数据页 v1 与 v2 均可。Zstd、Brotli、LZ4 以及加密文件会给出明确提示而不是输出错误结果。</dd><dt>嵌套列会怎样处理？</dt><dd>会被明确拒绝。struct、list、map 列没有唯一合理的 CSV 形式，默默选一种反而会破坏数据。请先在 pandas、Polars 或 DuckDB 中展平结构，写出扁平的 Parquet 文件后再来转换。</dd><dt>日期、时间戳和 decimal 如何输出？</dt><dd>日期输出为 YYYY-MM-DD。时间戳按 UTC 输出为 YYYY-MM-DD HH:MM:SS，并保留列本身的毫秒、微秒或纳秒位。decimal 列以文本保留精确小数位，12.30 依然是 12.30，不会变成四舍五入的浮点数。空值输出为空字段。</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/parquettocsv/">English</a></li><li><a hreflang="zh" lang="zh" aria-current="true" href="/zh/parquettocsv/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/parquettocsv/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/parquettocsv/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/parquettocsv/">Français</a></li><li><a hreflang="ar" lang="ar" href="/ar/parquettocsv/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/parquettocsv/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/parquettocsv/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/parquettocsv/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/parquettocsv/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>免费、快速、保护隐私的浏览器工具 · © 2026</p>
+  <p><a href="/freetools.html">全部工具</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="zh";window.__T={"fileLabel":"Parquet 文件（.parquet）","delimiter":"分隔符","comma":"逗号（,）","semicolon":"分号（;）","tabSep":"制表符","headerLabel":"包含表头行","privacy":"文件在本地读取：不上传、无服务器、不追踪。","outLabel":"CSV 预览","download":"下载 CSV","copy":"复制预览","copied":"已复制！","summary":"{rows} 行 × {cols} 列","previewNote":"预览仅显示前 {shown} 行，下载文件包含全部 {total} 行。","working":"正在读取文件…","errFormat":"这不是有效的 Parquet 文件。请确认文件末尾带有 PAR1 标记且没有被截断。","errNested":"该文件含有嵌套或重复列（struct、list、map）。这里只能把扁平表格转成 CSV。","errCodec":"不支持的压缩格式：{codec}。请改用 Snappy、Gzip 或不压缩重新写出文件。","errEncoding":"不支持的列编码：{encoding}。","errCorrupt":"文件数据似乎已损坏，无法解码。","errGeneric":"无法读取该文件，它可能已损坏、被加密，或由不常见的工具写出。"};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/parquettocsv.js" defer></script>
+</body>
+</html>

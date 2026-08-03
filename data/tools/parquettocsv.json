@@ -1,0 +1,479 @@
+{
+  "slug": "parquettocsv",
+  "category": "converter",
+  "icon": "🗄️",
+  "script": "parquettocsv.js",
+  "widget": "<div id=\"pq-app\" data-summary=\"{{ui.summary}}\" data-preview-note=\"{{ui.previewNote}}\" data-working=\"{{ui.working}}\" data-err-format=\"{{ui.errFormat}}\" data-err-nested=\"{{ui.errNested}}\" data-err-codec=\"{{ui.errCodec}}\" data-err-encoding=\"{{ui.errEncoding}}\" data-err-corrupt=\"{{ui.errCorrupt}}\" data-err-generic=\"{{ui.errGeneric}}\"><div class=\"field\"><label for=\"pq-file\">{{ui.fileLabel}}</label><input type=\"file\" id=\"pq-file\" accept=\".parquet,.parq,.pq\"></div><div class=\"row\"><div class=\"field\"><label for=\"pq-sep\">{{ui.delimiter}}</label><select id=\"pq-sep\"><option value=\",\">{{ui.comma}}</option><option value=\";\">{{ui.semicolon}}</option><option value=\"tab\">{{ui.tabSep}}</option></select></div><div class=\"field\"><label for=\"pq-header\">{{ui.headerLabel}}</label><input type=\"checkbox\" id=\"pq-header\" checked></div></div><p class=\"hint\">{{ui.privacy}}</p><p class=\"hint\" id=\"pq-status\" aria-live=\"polite\"></p><p class=\"hint\" id=\"pq-error\" role=\"alert\" hidden></p><div class=\"result\" id=\"pq-result\" hidden><span class=\"big\" id=\"pq-summary\"></span><p class=\"hint\" id=\"pq-note\" hidden></p><div class=\"field\"><label for=\"pq-out\">{{ui.outLabel}}</label><textarea id=\"pq-out\" rows=\"10\" readonly></textarea></div><div class=\"row\"><button class=\"btn\" id=\"pq-download\" type=\"button\">{{ui.download}}</button><button class=\"btn secondary\" type=\"button\" data-copy=\"#pq-out\" data-copied=\"{{ui.copied}}\">{{ui.copy}}</button></div></div></div>",
+  "strings": {
+    "en": {
+      "title": "Parquet to CSV Converter — offline, in your browser",
+      "metaDescription": "Free Parquet to CSV converter that works fully offline. Open a .parquet file, preview the table and download clean CSV. Nothing is uploaded to any server.",
+      "h1": "Parquet to CSV Converter",
+      "intro": "Open an Apache Parquet file and turn it into CSV without installing anything. The file is decoded inside your browser tab — it never leaves your device, so it also works with the network off.",
+      "faq_title": "Parquet to CSV FAQ",
+      "ui": {
+        "fileLabel": "Parquet file (.parquet)",
+        "delimiter": "Delimiter",
+        "comma": "Comma (,)",
+        "semicolon": "Semicolon (;)",
+        "tabSep": "Tab",
+        "headerLabel": "Include header row",
+        "privacy": "Your file is read locally. No upload, no server, no tracking.",
+        "outLabel": "CSV preview",
+        "download": "Download CSV",
+        "copy": "Copy preview",
+        "copied": "Copied!",
+        "summary": "{rows} rows × {cols} columns",
+        "previewNote": "Preview shows the first {shown} rows. The download contains all {total}.",
+        "working": "Reading the file…",
+        "errFormat": "This is not a valid Parquet file. Check that the file ends with the PAR1 marker and is not truncated.",
+        "errNested": "This file has nested or repeated columns (structs, lists, maps). Only flat tables can be flattened into CSV here.",
+        "errCodec": "Unsupported compression: {codec}. Rewrite the file with Snappy, Gzip or no compression.",
+        "errEncoding": "Unsupported column encoding: {encoding}.",
+        "errCorrupt": "The file data looks corrupted and could not be decoded.",
+        "errGeneric": "The file could not be read. It may be corrupted, encrypted or written by an unusual tool."
+      },
+      "faq": [
+        {
+          "q": "Is my data really never uploaded?",
+          "a": "Correct. The converter is plain JavaScript that reads the bytes you pick with the file field and decodes them in the page. There is no upload, no API call and no analytics on your data. You can disconnect from the internet after the page loads and the tool keeps working, which is the simplest way to prove it to yourself."
+        },
+        {
+          "q": "Which Parquet files are supported?",
+          "a": "Flat tables written by common tools such as pandas, PyArrow, Polars, DuckDB and Spark. Uncompressed, Snappy and Gzip pages are decoded, along with PLAIN, dictionary, RLE, delta and byte-stream-split encodings, and both data page v1 and v2. Zstd, Brotli, LZ4 and encrypted files are rejected with a clear message instead of producing wrong output."
+        },
+        {
+          "q": "What happens to nested columns?",
+          "a": "They are refused on purpose. A struct, list or map column has no single obvious CSV shape, and silently picking one would corrupt your data. Flatten the nesting first in pandas, Polars or DuckDB, write a flat Parquet file, then convert it here."
+        },
+        {
+          "q": "How are dates, timestamps and decimals written?",
+          "a": "Dates become YYYY-MM-DD. Timestamps become YYYY-MM-DD HH:MM:SS in UTC, keeping millisecond, microsecond or nanosecond digits when the column has them. Decimal columns keep their exact scale as text, so 12.30 stays 12.30 and never turns into a rounded float. Nulls become empty fields."
+        }
+      ]
+    },
+    "zh": {
+      "title": "Parquet 转 CSV 转换器 — 完全离线运行",
+      "metaDescription": "免费的 Parquet 转 CSV 工具，完全离线运行。打开 .parquet 文件即可预览表格并下载干净的 CSV，文件不会上传到任何服务器。",
+      "h1": "Parquet 转 CSV 转换器",
+      "intro": "无需安装任何软件，直接打开 Apache Parquet 文件并转换成 CSV。文件在浏览器标签页内解码，不会离开你的设备，断网也照样能用。",
+      "faq_title": "Parquet 转 CSV 常见问题",
+      "ui": {
+        "fileLabel": "Parquet 文件（.parquet）",
+        "delimiter": "分隔符",
+        "comma": "逗号（,）",
+        "semicolon": "分号（;）",
+        "tabSep": "制表符",
+        "headerLabel": "包含表头行",
+        "privacy": "文件在本地读取：不上传、无服务器、不追踪。",
+        "outLabel": "CSV 预览",
+        "download": "下载 CSV",
+        "copy": "复制预览",
+        "copied": "已复制！",
+        "summary": "{rows} 行 × {cols} 列",
+        "previewNote": "预览仅显示前 {shown} 行，下载文件包含全部 {total} 行。",
+        "working": "正在读取文件…",
+        "errFormat": "这不是有效的 Parquet 文件。请确认文件末尾带有 PAR1 标记且没有被截断。",
+        "errNested": "该文件含有嵌套或重复列（struct、list、map）。这里只能把扁平表格转成 CSV。",
+        "errCodec": "不支持的压缩格式：{codec}。请改用 Snappy、Gzip 或不压缩重新写出文件。",
+        "errEncoding": "不支持的列编码：{encoding}。",
+        "errCorrupt": "文件数据似乎已损坏，无法解码。",
+        "errGeneric": "无法读取该文件，它可能已损坏、被加密，或由不常见的工具写出。"
+      },
+      "faq": [
+        {
+          "q": "数据真的完全不会被上传吗？",
+          "a": "确实如此。转换器是纯 JavaScript，它读取你在文件框中选择的字节并直接在页面里解码，没有上传、没有接口调用，也不会统计你的数据。页面加载完成后你可以断开网络，工具依旧正常工作——这是最简单的自我验证方式。"
+        },
+        {
+          "q": "支持哪些 Parquet 文件？",
+          "a": "支持由 pandas、PyArrow、Polars、DuckDB、Spark 等常用工具写出的扁平表格。可解码未压缩、Snappy 与 Gzip 页面，支持 PLAIN、字典、RLE、delta 与 byte-stream-split 编码，数据页 v1 与 v2 均可。Zstd、Brotli、LZ4 以及加密文件会给出明确提示而不是输出错误结果。"
+        },
+        {
+          "q": "嵌套列会怎样处理？",
+          "a": "会被明确拒绝。struct、list、map 列没有唯一合理的 CSV 形式，默默选一种反而会破坏数据。请先在 pandas、Polars 或 DuckDB 中展平结构，写出扁平的 Parquet 文件后再来转换。"
+        },
+        {
+          "q": "日期、时间戳和 decimal 如何输出？",
+          "a": "日期输出为 YYYY-MM-DD。时间戳按 UTC 输出为 YYYY-MM-DD HH:MM:SS，并保留列本身的毫秒、微秒或纳秒位。decimal 列以文本保留精确小数位，12.30 依然是 12.30，不会变成四舍五入的浮点数。空值输出为空字段。"
+        }
+      ]
+    },
+    "hi": {
+      "title": "Parquet से CSV कन्वर्टर — पूरी तरह ऑफ़लाइन",
+      "metaDescription": "मुफ़्त Parquet से CSV कन्वर्टर जो पूरी तरह ऑफ़लाइन चलता है। .parquet फ़ाइल खोलें, टेबल देखें और साफ़-सुथरी CSV डाउनलोड करें। कोई फ़ाइल सर्वर पर नहीं जाती।",
+      "h1": "Parquet से CSV कन्वर्टर",
+      "intro": "बिना कुछ इंस्टॉल किए Apache Parquet फ़ाइल खोलें और उसे CSV में बदलें। फ़ाइल आपके ब्राउज़र टैब के भीतर ही पढ़ी जाती है — वह डिवाइस से बाहर नहीं जाती, इसलिए इंटरनेट बंद होने पर भी काम चलता है।",
+      "faq_title": "Parquet से CSV — सामान्य सवाल",
+      "ui": {
+        "fileLabel": "Parquet फ़ाइल (.parquet)",
+        "delimiter": "सेपरेटर",
+        "comma": "कॉमा (,)",
+        "semicolon": "सेमीकोलन (;)",
+        "tabSep": "टैब",
+        "headerLabel": "हेडर पंक्ति शामिल करें",
+        "privacy": "फ़ाइल स्थानीय रूप से पढ़ी जाती है। न अपलोड, न सर्वर, न ट्रैकिंग।",
+        "outLabel": "CSV झलक",
+        "download": "CSV डाउनलोड करें",
+        "copy": "झलक कॉपी करें",
+        "copied": "कॉपी हो गया!",
+        "summary": "{rows} पंक्तियाँ × {cols} कॉलम",
+        "previewNote": "झलक में पहली {shown} पंक्तियाँ दिख रही हैं। डाउनलोड में पूरी {total} पंक्तियाँ रहेंगी।",
+        "working": "फ़ाइल पढ़ी जा रही है…",
+        "errFormat": "यह मान्य Parquet फ़ाइल नहीं है। जाँचें कि फ़ाइल के अंत में PAR1 मार्कर हो और वह अधूरी न हो।",
+        "errNested": "इस फ़ाइल में नेस्टेड या दोहराए गए कॉलम (struct, list, map) हैं। यहाँ केवल सपाट टेबल ही CSV में बदली जा सकती है।",
+        "errCodec": "असमर्थित कंप्रेशन: {codec}। फ़ाइल को Snappy, Gzip या बिना कंप्रेशन के दोबारा लिखें।",
+        "errEncoding": "असमर्थित कॉलम एन्कोडिंग: {encoding}।",
+        "errCorrupt": "फ़ाइल का डेटा खराब लग रहा है और डिकोड नहीं हो सका।",
+        "errGeneric": "फ़ाइल पढ़ी नहीं जा सकी। वह खराब, एन्क्रिप्टेड या किसी असामान्य टूल से लिखी हो सकती है।"
+      },
+      "faq": [
+        {
+          "q": "क्या सचमुच मेरा डेटा कहीं अपलोड नहीं होता?",
+          "a": "हाँ, बिल्कुल। यह कन्वर्टर सादा JavaScript है जो फ़ाइल फ़ील्ड से चुनी गई बाइट्स पढ़कर उसी पेज में डिकोड करता है। कोई अपलोड, कोई API कॉल और आपके डेटा पर कोई एनालिटिक्स नहीं। पेज लोड होने के बाद आप इंटरनेट बंद कर सकते हैं और टूल फिर भी चलेगा — खुद जाँचने का यही सबसे आसान तरीका है।"
+        },
+        {
+          "q": "किस तरह की Parquet फ़ाइलें चलती हैं?",
+          "a": "pandas, PyArrow, Polars, DuckDB और Spark जैसी सामान्य लाइब्रेरियों से लिखी सपाट टेबल। बिना कंप्रेशन, Snappy और Gzip पेज पढ़े जाते हैं, साथ ही PLAIN, डिक्शनरी, RLE, delta और byte-stream-split एन्कोडिंग तथा डेटा पेज v1 व v2। Zstd, Brotli, LZ4 और एन्क्रिप्टेड फ़ाइलें गलत नतीजा देने के बजाय साफ़ संदेश के साथ अस्वीकार होती हैं।"
+        },
+        {
+          "q": "नेस्टेड कॉलम का क्या होता है?",
+          "a": "उन्हें जानबूझकर अस्वीकार किया जाता है। struct, list या map कॉलम का कोई एक स्वाभाविक CSV रूप नहीं होता, और चुपचाप कोई एक चुन लेना आपके डेटा को बिगाड़ देगा। पहले pandas, Polars या DuckDB में नेस्टिंग सपाट करें, सपाट Parquet लिखें, फिर यहाँ बदलें।"
+        },
+        {
+          "q": "तारीख़, टाइमस्टैम्प और decimal कैसे लिखे जाते हैं?",
+          "a": "तारीख़ YYYY-MM-DD में आती है। टाइमस्टैम्प UTC में YYYY-MM-DD HH:MM:SS के रूप में आता है और कॉलम में मौजूद मिलीसेकंड, माइक्रोसेकंड या नैनोसेकंड अंक बने रहते हैं। decimal कॉलम अपनी सटीक दशमलव जगह के साथ टेक्स्ट में रहते हैं, इसलिए 12.30 वैसा ही रहता है, गोल किया हुआ फ़्लोट नहीं बनता। खाली मान खाली फ़ील्ड बनते हैं।"
+        }
+      ]
+    },
+    "es": {
+      "title": "Conversor de Parquet a CSV — 100% sin conexión",
+      "metaDescription": "Conversor gratuito de Parquet a CSV que funciona sin conexión. Abre un archivo .parquet, revisa la tabla y descarga un CSV limpio. Nada se sube a ningún servidor.",
+      "h1": "Conversor de Parquet a CSV",
+      "intro": "Abre un archivo Apache Parquet y conviértelo en CSV sin instalar nada. El archivo se decodifica dentro de la pestaña del navegador: nunca sale de tu equipo, así que también funciona con la red apagada.",
+      "faq_title": "Preguntas frecuentes sobre Parquet a CSV",
+      "ui": {
+        "fileLabel": "Archivo Parquet (.parquet)",
+        "delimiter": "Separador",
+        "comma": "Coma (,)",
+        "semicolon": "Punto y coma (;)",
+        "tabSep": "Tabulación",
+        "headerLabel": "Incluir fila de encabezado",
+        "privacy": "Tu archivo se lee en local. Sin subidas, sin servidor, sin rastreo.",
+        "outLabel": "Vista previa del CSV",
+        "download": "Descargar CSV",
+        "copy": "Copiar vista previa",
+        "copied": "¡Copiado!",
+        "summary": "{rows} filas × {cols} columnas",
+        "previewNote": "La vista previa muestra las primeras {shown} filas. La descarga incluye las {total}.",
+        "working": "Leyendo el archivo…",
+        "errFormat": "Este archivo no es un Parquet válido. Comprueba que termine con el marcador PAR1 y que no esté truncado.",
+        "errNested": "El archivo tiene columnas anidadas o repetidas (structs, listas, mapas). Aquí solo se convierten tablas planas.",
+        "errCodec": "Compresión no compatible: {codec}. Vuelve a escribir el archivo con Snappy, Gzip o sin comprimir.",
+        "errEncoding": "Codificación de columna no compatible: {encoding}.",
+        "errCorrupt": "Los datos del archivo parecen dañados y no se pudieron decodificar.",
+        "errGeneric": "No se pudo leer el archivo. Puede estar dañado, cifrado o escrito por una herramienta poco común."
+      },
+      "faq": [
+        {
+          "q": "¿De verdad no se sube mi información?",
+          "a": "Así es. El conversor es JavaScript puro que lee los bytes del archivo que eliges y los decodifica en la propia página. No hay subida, ni llamadas a una API, ni analítica sobre tus datos. Después de cargar la página puedes desconectar la red y la herramienta seguirá funcionando: es la forma más sencilla de comprobarlo tú mismo."
+        },
+        {
+          "q": "¿Qué archivos Parquet admite?",
+          "a": "Tablas planas escritas por herramientas habituales como pandas, PyArrow, Polars, DuckDB y Spark. Se decodifican páginas sin comprimir, con Snappy y con Gzip, además de las codificaciones PLAIN, diccionario, RLE, delta y byte-stream-split, tanto en páginas de datos v1 como v2. Zstd, Brotli, LZ4 y los archivos cifrados se rechazan con un mensaje claro en lugar de producir resultados erróneos."
+        },
+        {
+          "q": "¿Qué pasa con las columnas anidadas?",
+          "a": "Se rechazan a propósito. Una columna struct, lista o mapa no tiene una forma evidente en CSV, y elegir una en silencio dañaría tus datos. Aplana primero la estructura en pandas, Polars o DuckDB, escribe un Parquet plano y conviértelo aquí."
+        },
+        {
+          "q": "¿Cómo se escriben fechas, marcas de tiempo y decimales?",
+          "a": "Las fechas salen como AAAA-MM-DD. Las marcas de tiempo salen como AAAA-MM-DD HH:MM:SS en UTC y conservan los milisegundos, microsegundos o nanosegundos que tenga la columna. Las columnas decimal mantienen su escala exacta como texto, así 12,30 sigue siendo 12.30 y no se convierte en un float redondeado. Los nulos quedan como campos vacíos."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Convertisseur Parquet vers CSV — 100 % hors ligne",
+      "metaDescription": "Convertisseur Parquet vers CSV gratuit et entièrement hors ligne. Ouvrez un fichier .parquet, prévisualisez la table et téléchargez un CSV propre. Aucun envoi vers un serveur.",
+      "h1": "Convertisseur Parquet vers CSV",
+      "intro": "Ouvrez un fichier Apache Parquet et convertissez-le en CSV sans rien installer. Le fichier est décodé dans l'onglet du navigateur : il ne quitte jamais votre machine, et l'outil fonctionne même sans connexion.",
+      "faq_title": "Questions fréquentes sur Parquet vers CSV",
+      "ui": {
+        "fileLabel": "Fichier Parquet (.parquet)",
+        "delimiter": "Séparateur",
+        "comma": "Virgule (,)",
+        "semicolon": "Point-virgule (;)",
+        "tabSep": "Tabulation",
+        "headerLabel": "Inclure la ligne d'en-tête",
+        "privacy": "Votre fichier est lu en local. Aucun envoi, aucun serveur, aucun pistage.",
+        "outLabel": "Aperçu du CSV",
+        "download": "Télécharger le CSV",
+        "copy": "Copier l'aperçu",
+        "copied": "Copié !",
+        "summary": "{rows} lignes × {cols} colonnes",
+        "previewNote": "L'aperçu affiche les {shown} premières lignes. Le téléchargement contient les {total}.",
+        "working": "Lecture du fichier…",
+        "errFormat": "Ce fichier n'est pas un Parquet valide. Vérifiez qu'il se termine par le marqueur PAR1 et qu'il n'est pas tronqué.",
+        "errNested": "Ce fichier contient des colonnes imbriquées ou répétées (structs, listes, maps). Seules les tables plates peuvent devenir du CSV ici.",
+        "errCodec": "Compression non prise en charge : {codec}. Réécrivez le fichier en Snappy, Gzip ou sans compression.",
+        "errEncoding": "Encodage de colonne non pris en charge : {encoding}.",
+        "errCorrupt": "Les données du fichier semblent corrompues et n'ont pas pu être décodées.",
+        "errGeneric": "Impossible de lire le fichier. Il est peut-être corrompu, chiffré ou écrit par un outil inhabituel."
+      },
+      "faq": [
+        {
+          "q": "Mes données ne sont vraiment jamais envoyées ?",
+          "a": "Exactement. Le convertisseur est du JavaScript simple qui lit les octets du fichier choisi et les décode dans la page. Aucun envoi, aucun appel d'API, aucune mesure d'audience sur vos données. Une fois la page chargée, vous pouvez couper le réseau : l'outil continue de fonctionner, c'est la vérification la plus simple."
+        },
+        {
+          "q": "Quels fichiers Parquet sont pris en charge ?",
+          "a": "Les tables plates écrites par les outils courants : pandas, PyArrow, Polars, DuckDB, Spark. Les pages non compressées, Snappy et Gzip sont décodées, ainsi que les encodages PLAIN, dictionnaire, RLE, delta et byte-stream-split, en pages de données v1 comme v2. Zstd, Brotli, LZ4 et les fichiers chiffrés sont refusés avec un message clair plutôt que de produire un résultat faux."
+        },
+        {
+          "q": "Que deviennent les colonnes imbriquées ?",
+          "a": "Elles sont refusées volontairement. Une colonne struct, liste ou map n'a pas de forme CSV évidente, et en choisir une en silence abîmerait vos données. Aplatissez d'abord la structure dans pandas, Polars ou DuckDB, écrivez un Parquet plat, puis convertissez-le ici."
+        },
+        {
+          "q": "Comment sont écrits les dates, horodatages et décimaux ?",
+          "a": "Les dates sortent en AAAA-MM-JJ. Les horodatages sortent en AAAA-MM-JJ HH:MM:SS en UTC, en gardant les millisecondes, microsecondes ou nanosecondes présentes dans la colonne. Les colonnes decimal conservent leur échelle exacte sous forme de texte : 12.30 reste 12.30 et ne devient jamais un flottant arrondi. Les valeurs nulles deviennent des champs vides."
+        }
+      ]
+    },
+    "ar": {
+      "title": "محوّل Parquet إلى CSV — يعمل دون اتصال",
+      "metaDescription": "محوّل مجاني من Parquet إلى CSV يعمل دون اتصال بالكامل. افتح ملف ‎.parquet‎ وعاين الجدول ونزّل ملف CSV نظيفًا. لا يُرفع أي ملف إلى أي خادم.",
+      "h1": "محوّل Parquet إلى CSV",
+      "intro": "افتح ملف Apache Parquet وحوّله إلى CSV دون تثبيت أي برنامج. يُفكّ ترميز الملف داخل تبويب المتصفح، فلا يغادر جهازك أبدًا، ويظل يعمل حتى مع إيقاف الإنترنت.",
+      "faq_title": "أسئلة شائعة عن تحويل Parquet إلى CSV",
+      "ui": {
+        "fileLabel": "ملف Parquet‏ (.parquet)",
+        "delimiter": "الفاصل",
+        "comma": "فاصلة (,)",
+        "semicolon": "فاصلة منقوطة (;)",
+        "tabSep": "مسافة جدولة",
+        "headerLabel": "تضمين صف العناوين",
+        "privacy": "يُقرأ ملفك محليًا: بلا رفع، بلا خادم، بلا تتبّع.",
+        "outLabel": "معاينة CSV",
+        "download": "تنزيل CSV",
+        "copy": "نسخ المعاينة",
+        "copied": "تم النسخ!",
+        "summary": "{rows} صفوف × {cols} أعمدة",
+        "previewNote": "تعرض المعاينة أول {shown} صف، بينما يحتوي التنزيل على {total} صف كاملة.",
+        "working": "جارٍ قراءة الملف…",
+        "errFormat": "هذا ليس ملف Parquet صالحًا. تأكد أن الملف ينتهي بالعلامة PAR1 وأنه غير مبتور.",
+        "errNested": "يحتوي الملف على أعمدة متداخلة أو متكررة (struct أو list أو map). تُحوَّل هنا الجداول المسطّحة فقط.",
+        "errCodec": "ضغط غير مدعوم: {codec}. أعد كتابة الملف بضغط Snappy أو Gzip أو دون ضغط.",
+        "errEncoding": "ترميز عمود غير مدعوم: {encoding}.",
+        "errCorrupt": "تبدو بيانات الملف تالفة ولم يمكن فك ترميزها.",
+        "errGeneric": "تعذّرت قراءة الملف. قد يكون تالفًا أو مشفّرًا أو مكتوبًا بأداة غير شائعة."
+      },
+      "faq": [
+        {
+          "q": "هل بياناتي لا تُرفع فعلًا؟",
+          "a": "نعم. المحوّل مكتوب بلغة JavaScript بسيطة تقرأ بايتات الملف الذي تختاره وتفك ترميزه داخل الصفحة نفسها. لا رفع ولا استدعاء لواجهة برمجية ولا تحليلات على بياناتك. بعد تحميل الصفحة يمكنك قطع الاتصال بالإنترنت وستستمر الأداة في العمل، وهذه أبسط طريقة للتأكد بنفسك."
+        },
+        {
+          "q": "ما ملفات Parquet المدعومة؟",
+          "a": "الجداول المسطّحة المكتوبة بأدوات شائعة مثل pandas و PyArrow و Polars و DuckDB و Spark. تُفك الصفحات غير المضغوطة وصفحات Snappy و Gzip، إضافة إلى ترميزات PLAIN والقاموس و RLE و delta و byte-stream-split، في صفحات البيانات v1 و v2. أما Zstd و Brotli و LZ4 والملفات المشفّرة فتُرفض برسالة واضحة بدل إنتاج نتائج خاطئة."
+        },
+        {
+          "q": "ماذا يحدث للأعمدة المتداخلة؟",
+          "a": "تُرفض عمدًا. لا يوجد شكل واحد بديهي لتمثيل عمود struct أو list أو map في CSV، واختيار شكل بصمت سيفسد بياناتك. سطّح البنية أولًا في pandas أو Polars أو DuckDB، واكتب ملف Parquet مسطّحًا، ثم حوّله هنا."
+        },
+        {
+          "q": "كيف تُكتب التواريخ والطوابع الزمنية والأرقام العشرية؟",
+          "a": "تظهر التواريخ بصيغة YYYY-MM-DD، وتظهر الطوابع الزمنية بصيغة YYYY-MM-DD HH:MM:SS بتوقيت UTC مع الاحتفاظ بخانات الميلي أو المايكرو أو النانو ثانية الموجودة في العمود. تحتفظ أعمدة decimal بدقتها كنص، فتبقى 12.30 كما هي ولا تتحول إلى عدد عشري مقرَّب. وتصبح القيم الفارغة حقولًا فارغة."
+        }
+      ]
+    },
+    "bn": {
+      "title": "Parquet থেকে CSV কনভার্টার — সম্পূর্ণ অফলাইন",
+      "metaDescription": "বিনামূল্যের Parquet থেকে CSV কনভার্টার, সম্পূর্ণ অফলাইনে চলে। .parquet ফাইল খুলুন, টেবিল দেখে নিন এবং পরিচ্ছন্ন CSV ডাউনলোড করুন। কোনো ফাইল সার্ভারে যায় না।",
+      "h1": "Parquet থেকে CSV কনভার্টার",
+      "intro": "কিছু ইনস্টল না করেই Apache Parquet ফাইল খুলুন এবং CSV-তে রূপান্তর করুন। ফাইলটি ব্রাউজার ট্যাবের ভিতরেই পড়া হয় — এটি আপনার ডিভাইস ছাড়ে না, তাই ইন্টারনেট বন্ধ থাকলেও কাজ চলে।",
+      "faq_title": "Parquet থেকে CSV — সাধারণ প্রশ্ন",
+      "ui": {
+        "fileLabel": "Parquet ফাইল (.parquet)",
+        "delimiter": "বিভাজক",
+        "comma": "কমা (,)",
+        "semicolon": "সেমিকোলন (;)",
+        "tabSep": "ট্যাব",
+        "headerLabel": "হেডার সারি রাখুন",
+        "privacy": "ফাইল স্থানীয়ভাবে পড়া হয়। আপলোড নেই, সার্ভার নেই, ট্র্যাকিং নেই।",
+        "outLabel": "CSV প্রিভিউ",
+        "download": "CSV ডাউনলোড",
+        "copy": "প্রিভিউ কপি করুন",
+        "copied": "কপি হয়েছে!",
+        "summary": "{rows} সারি × {cols} কলাম",
+        "previewNote": "প্রিভিউতে প্রথম {shown} সারি দেখানো হচ্ছে। ডাউনলোডে পুরো {total} সারি থাকবে।",
+        "working": "ফাইল পড়া হচ্ছে…",
+        "errFormat": "এটি বৈধ Parquet ফাইল নয়। দেখুন ফাইলের শেষে PAR1 চিহ্ন আছে কি না এবং ফাইলটি অসম্পূর্ণ কি না।",
+        "errNested": "এই ফাইলে নেস্টেড বা পুনরাবৃত্ত কলাম (struct, list, map) আছে। এখানে কেবল সমতল টেবিল CSV-তে রূপান্তরিত হয়।",
+        "errCodec": "অসমর্থিত কম্প্রেশন: {codec}। ফাইলটি Snappy, Gzip বা কম্প্রেশন ছাড়া আবার লিখুন।",
+        "errEncoding": "অসমর্থিত কলাম এনকোডিং: {encoding}।",
+        "errCorrupt": "ফাইলের ডেটা নষ্ট বলে মনে হচ্ছে, ডিকোড করা যায়নি।",
+        "errGeneric": "ফাইলটি পড়া যায়নি। এটি নষ্ট, এনক্রিপ্টেড বা অস্বাভাবিক কোনো টুল দিয়ে লেখা হতে পারে।"
+      },
+      "faq": [
+        {
+          "q": "আমার ডেটা কি সত্যিই কোথাও যায় না?",
+          "a": "ঠিক তাই। কনভার্টারটি সাধারণ JavaScript, যা ফাইল ফিল্ডে বেছে নেওয়া বাইটগুলো পড়ে পাতার ভিতরেই ডিকোড করে। কোনো আপলোড নেই, কোনো API কল নেই, আপনার ডেটা নিয়ে কোনো অ্যানালিটিক্স নেই। পাতা লোড হওয়ার পর ইন্টারনেট বন্ধ করে দিলেও টুলটি চলবে — নিজে যাচাই করার সবচেয়ে সহজ উপায় এটাই।"
+        },
+        {
+          "q": "কোন ধরনের Parquet ফাইল চলে?",
+          "a": "pandas, PyArrow, Polars, DuckDB ও Spark-এর মতো প্রচলিত টুলে লেখা সমতল টেবিল। কম্প্রেশনবিহীন, Snappy ও Gzip পেজ ডিকোড হয়, সেই সঙ্গে PLAIN, ডিকশনারি, RLE, delta ও byte-stream-split এনকোডিং এবং ডেটা পেজ v1 ও v2। Zstd, Brotli, LZ4 ও এনক্রিপ্ট করা ফাইল ভুল ফল না দিয়ে স্পষ্ট বার্তা দিয়ে বাতিল হয়।"
+        },
+        {
+          "q": "নেস্টেড কলামের কী হয়?",
+          "a": "সেগুলো ইচ্ছাকৃতভাবেই বাতিল করা হয়। struct, list বা map কলামের একক স্বাভাবিক CSV রূপ নেই, আর চুপচাপ একটি বেছে নিলে ডেটা নষ্ট হবে। আগে pandas, Polars বা DuckDB-তে গঠনটি সমতল করুন, সমতল Parquet লিখুন, তারপর এখানে রূপান্তর করুন।"
+        },
+        {
+          "q": "তারিখ, টাইমস্ট্যাম্প ও decimal কীভাবে লেখা হয়?",
+          "a": "তারিখ YYYY-MM-DD আকারে আসে। টাইমস্ট্যাম্প UTC-তে YYYY-MM-DD HH:MM:SS আকারে আসে এবং কলামে থাকা মিলিসেকেন্ড, মাইক্রোসেকেন্ড বা ন্যানোসেকেন্ড অঙ্ক অক্ষুণ্ণ থাকে। decimal কলাম টেক্সট হিসেবে নিজের সঠিক দশমিক ঘর ধরে রাখে, তাই 12.30 ঠিক 12.30-ই থাকে, গোল করা ফ্লোট হয় না। শূন্য মান ফাঁকা ঘর হয়ে যায়।"
+        }
+      ]
+    },
+    "pt": {
+      "title": "Conversor de Parquet para CSV — 100% offline",
+      "metaDescription": "Conversor gratuito de Parquet para CSV que roda totalmente offline. Abra um arquivo .parquet, confira a tabela e baixe um CSV limpo. Nada é enviado para servidor nenhum.",
+      "h1": "Conversor de Parquet para CSV",
+      "intro": "Abra um arquivo Apache Parquet e transforme-o em CSV sem instalar nada. O arquivo é decodificado dentro da aba do navegador — ele nunca sai do seu computador, então a ferramenta funciona até com a internet desligada.",
+      "faq_title": "Perguntas frequentes sobre Parquet para CSV",
+      "ui": {
+        "fileLabel": "Arquivo Parquet (.parquet)",
+        "delimiter": "Separador",
+        "comma": "Vírgula (,)",
+        "semicolon": "Ponto e vírgula (;)",
+        "tabSep": "Tabulação",
+        "headerLabel": "Incluir linha de cabeçalho",
+        "privacy": "Seu arquivo é lido localmente. Sem upload, sem servidor, sem rastreamento.",
+        "outLabel": "Prévia do CSV",
+        "download": "Baixar CSV",
+        "copy": "Copiar prévia",
+        "copied": "Copiado!",
+        "summary": "{rows} linhas × {cols} colunas",
+        "previewNote": "A prévia mostra as primeiras {shown} linhas. O download traz as {total}.",
+        "working": "Lendo o arquivo…",
+        "errFormat": "Este não é um arquivo Parquet válido. Verifique se ele termina com o marcador PAR1 e não está truncado.",
+        "errNested": "Este arquivo tem colunas aninhadas ou repetidas (structs, listas, maps). Aqui só dá para converter tabelas planas.",
+        "errCodec": "Compressão não suportada: {codec}. Regrave o arquivo com Snappy, Gzip ou sem compressão.",
+        "errEncoding": "Codificação de coluna não suportada: {encoding}.",
+        "errCorrupt": "Os dados do arquivo parecem corrompidos e não puderam ser decodificados.",
+        "errGeneric": "Não foi possível ler o arquivo. Ele pode estar corrompido, criptografado ou ter sido gravado por uma ferramenta incomum."
+      },
+      "faq": [
+        {
+          "q": "Meus dados realmente não são enviados para lugar nenhum?",
+          "a": "Exato. O conversor é JavaScript puro: ele lê os bytes do arquivo que você escolhe no campo e decodifica tudo dentro da própria página. Não existe upload, chamada de API nem analytics sobre o seu conteúdo. Depois que a página carregar, você pode desconectar a internet e a ferramenta continua funcionando — é a forma mais simples de conferir isso por conta própria."
+        },
+        {
+          "q": "Quais arquivos Parquet são aceitos?",
+          "a": "Tabelas planas gravadas por ferramentas comuns como pandas, PyArrow, Polars, DuckDB e Spark. São decodificadas páginas sem compressão, com Snappy e com Gzip, além das codificações PLAIN, dicionário, RLE, delta e byte-stream-split, tanto em data page v1 quanto v2. Zstd, Brotli, LZ4 e arquivos criptografados são recusados com mensagem clara, em vez de gerar resultado errado."
+        },
+        {
+          "q": "O que acontece com colunas aninhadas?",
+          "a": "Elas são recusadas de propósito. Uma coluna struct, lista ou map não tem um formato óbvio em CSV, e escolher um em silêncio estragaria os seus dados. Achate a estrutura antes no pandas, Polars ou DuckDB, grave um Parquet plano e converta aqui."
+        },
+        {
+          "q": "Como saem datas, timestamps e decimais?",
+          "a": "Datas saem como AAAA-MM-DD. Timestamps saem como AAAA-MM-DD HH:MM:SS em UTC, preservando os dígitos de milissegundo, microssegundo ou nanossegundo que a coluna tiver. Colunas decimal mantêm a escala exata como texto, então 12.30 continua 12.30 e nunca vira um float arredondado. Valores nulos viram campos vazios."
+        }
+      ]
+    },
+    "ru": {
+      "title": "Конвертер Parquet в CSV — полностью офлайн",
+      "metaDescription": "Бесплатный конвертер Parquet в CSV, работающий полностью офлайн. Откройте файл .parquet, посмотрите таблицу и скачайте аккуратный CSV. Ничего не отправляется на сервер.",
+      "h1": "Конвертер Parquet в CSV",
+      "intro": "Откройте файл Apache Parquet и превратите его в CSV, ничего не устанавливая. Файл разбирается прямо во вкладке браузера — он не покидает ваш компьютер, поэтому инструмент работает и без интернета.",
+      "faq_title": "Вопросы о конвертации Parquet в CSV",
+      "ui": {
+        "fileLabel": "Файл Parquet (.parquet)",
+        "delimiter": "Разделитель",
+        "comma": "Запятая (,)",
+        "semicolon": "Точка с запятой (;)",
+        "tabSep": "Табуляция",
+        "headerLabel": "Добавить строку заголовков",
+        "privacy": "Файл читается локально: без загрузки, без сервера, без слежки.",
+        "outLabel": "Предпросмотр CSV",
+        "download": "Скачать CSV",
+        "copy": "Копировать предпросмотр",
+        "copied": "Скопировано!",
+        "summary": "{rows} строк × {cols} столбцов",
+        "previewNote": "В предпросмотре первые {shown} строк. В скачанном файле — все {total}.",
+        "working": "Читаем файл…",
+        "errFormat": "Это не корректный файл Parquet. Проверьте, что файл заканчивается маркером PAR1 и не обрезан.",
+        "errNested": "В файле есть вложенные или повторяющиеся столбцы (struct, list, map). Здесь в CSV превращаются только плоские таблицы.",
+        "errCodec": "Неподдерживаемое сжатие: {codec}. Перезапишите файл со Snappy, Gzip или без сжатия.",
+        "errEncoding": "Неподдерживаемая кодировка столбца: {encoding}.",
+        "errCorrupt": "Данные файла выглядят повреждёнными, разобрать их не удалось.",
+        "errGeneric": "Не удалось прочитать файл. Возможно, он повреждён, зашифрован или записан нестандартным инструментом."
+      },
+      "faq": [
+        {
+          "q": "Данные действительно никуда не отправляются?",
+          "a": "Именно так. Конвертер — это обычный JavaScript: он читает байты выбранного файла и разбирает их прямо на странице. Нет ни загрузки, ни обращений к API, ни аналитики по вашим данным. После загрузки страницы можно отключить сеть — инструмент продолжит работать, и это самый простой способ убедиться самому."
+        },
+        {
+          "q": "Какие файлы Parquet поддерживаются?",
+          "a": "Плоские таблицы, записанные привычными инструментами: pandas, PyArrow, Polars, DuckDB, Spark. Разбираются страницы без сжатия, со Snappy и с Gzip, а также кодировки PLAIN, словарная, RLE, delta и byte-stream-split, в страницах данных v1 и v2. Zstd, Brotli, LZ4 и зашифрованные файлы отклоняются с понятным сообщением, а не дают неверный результат."
+        },
+        {
+          "q": "Что происходит с вложенными столбцами?",
+          "a": "Они намеренно отклоняются. У столбца типа struct, list или map нет единственного очевидного вида в CSV, и молча выбрать один вариант значило бы испортить данные. Сначала разверните вложенность в pandas, Polars или DuckDB, запишите плоский Parquet, а потом конвертируйте его здесь."
+        },
+        {
+          "q": "Как записываются даты, метки времени и decimal?",
+          "a": "Даты выводятся как ГГГГ-ММ-ДД. Метки времени выводятся как ГГГГ-ММ-ДД ЧЧ:ММ:СС в UTC с сохранением миллисекунд, микросекунд или наносекунд, если они есть в столбце. Столбцы decimal сохраняют точный масштаб в виде текста, поэтому 12.30 остаётся 12.30 и не превращается в округлённое число с плавающей точкой. Пустые значения становятся пустыми полями."
+        }
+      ]
+    },
+    "ur": {
+      "title": "Parquet سے CSV کنورٹر — مکمل آف لائن",
+      "metaDescription": "مفت Parquet سے CSV کنورٹر جو مکمل طور پر آف لائن چلتا ہے۔ ‎.parquet‎ فائل کھولیں، ٹیبل دیکھیں اور صاف ستھری CSV ڈاؤن لوڈ کریں۔ کوئی فائل سرور پر نہیں جاتی۔",
+      "h1": "Parquet سے CSV کنورٹر",
+      "intro": "کچھ انسٹال کیے بغیر Apache Parquet فائل کھولیں اور اسے CSV میں بدلیں۔ فائل براؤزر ٹیب کے اندر ہی پڑھی جاتی ہے — یہ آپ کے آلے سے باہر نہیں جاتی، اس لیے انٹرنیٹ بند ہونے پر بھی کام چلتا ہے۔",
+      "faq_title": "Parquet سے CSV — عام سوالات",
+      "ui": {
+        "fileLabel": "Parquet فائل (.parquet)",
+        "delimiter": "علیحدہ کرنے والا نشان",
+        "comma": "کاما (,)",
+        "semicolon": "سیمی کولن (;)",
+        "tabSep": "ٹیب",
+        "headerLabel": "ہیڈر کی سطر شامل کریں",
+        "privacy": "آپ کی فائل مقامی طور پر پڑھی جاتی ہے: نہ اپ لوڈ، نہ سرور، نہ ٹریکنگ۔",
+        "outLabel": "CSV جھلک",
+        "download": "CSV ڈاؤن لوڈ کریں",
+        "copy": "جھلک کاپی کریں",
+        "copied": "کاپی ہو گیا!",
+        "summary": "{rows} سطریں × {cols} کالم",
+        "previewNote": "جھلک میں پہلی {shown} سطریں دکھائی جا رہی ہیں۔ ڈاؤن لوڈ میں پوری {total} سطریں ہوں گی۔",
+        "working": "فائل پڑھی جا رہی ہے…",
+        "errFormat": "یہ درست Parquet فائل نہیں ہے۔ دیکھیں کہ فائل کے آخر میں PAR1 نشان موجود ہو اور فائل ادھوری نہ ہو۔",
+        "errNested": "اس فائل میں nested یا دہرائے گئے کالم (struct، list، map) ہیں۔ یہاں صرف سادہ ٹیبل ہی CSV میں بدلتی ہے۔",
+        "errCodec": "غیر معاون کمپریشن: {codec}۔ فائل کو Snappy، Gzip یا بغیر کمپریشن دوبارہ لکھیں۔",
+        "errEncoding": "غیر معاون کالم انکوڈنگ: {encoding}۔",
+        "errCorrupt": "فائل کا ڈیٹا خراب لگتا ہے اور اسے پڑھا نہیں جا سکا۔",
+        "errGeneric": "فائل نہیں پڑھی جا سکی۔ یہ خراب، خفیہ کردہ یا کسی غیر معمولی ٹول سے لکھی گئی ہو سکتی ہے۔"
+      },
+      "faq": [
+        {
+          "q": "کیا واقعی میرا ڈیٹا کہیں نہیں بھیجا جاتا؟",
+          "a": "بالکل۔ یہ کنورٹر سادہ JavaScript ہے جو فائل فیلڈ سے منتخب کی گئی بائٹس پڑھ کر اسی صفحے میں انہیں کھولتا ہے۔ نہ کوئی اپ لوڈ، نہ API کال، نہ آپ کے ڈیٹا پر کوئی اینالیٹکس۔ صفحہ لوڈ ہونے کے بعد آپ انٹرنیٹ بند کر سکتے ہیں اور ٹول پھر بھی چلے گا — خود تسلی کرنے کا یہی آسان ترین طریقہ ہے۔"
+        },
+        {
+          "q": "کون سی Parquet فائلیں چلتی ہیں؟",
+          "a": "pandas، PyArrow، Polars، DuckDB اور Spark جیسے عام ٹولز سے لکھی ہوئی سادہ ٹیبلز۔ بغیر کمپریشن، Snappy اور Gzip صفحات پڑھے جاتے ہیں، ساتھ ہی PLAIN، ڈکشنری، RLE، delta اور byte-stream-split انکوڈنگ اور ڈیٹا پیج v1 و v2 بھی۔ Zstd، Brotli، LZ4 اور خفیہ کردہ فائلیں غلط نتیجہ دینے کے بجائے واضح پیغام کے ساتھ مسترد ہوتی ہیں۔"
+        },
+        {
+          "q": "nested کالموں کا کیا بنتا ہے؟",
+          "a": "انہیں جان بوجھ کر مسترد کیا جاتا ہے۔ struct، list یا map کالم کی کوئی ایک واضح CSV شکل نہیں ہوتی، اور خاموشی سے کوئی ایک چن لینا آپ کا ڈیٹا خراب کر دے گا۔ پہلے pandas، Polars یا DuckDB میں ساخت کو سادہ کریں، سادہ Parquet لکھیں، پھر یہاں تبدیل کریں۔"
+        },
+        {
+          "q": "تاریخیں، ٹائم اسٹیمپ اور decimal کیسے لکھے جاتے ہیں؟",
+          "a": "تاریخیں YYYY-MM-DD کی شکل میں آتی ہیں۔ ٹائم اسٹیمپ UTC میں YYYY-MM-DD HH:MM:SS کی شکل میں آتے ہیں اور کالم میں موجود ملی سیکنڈ، مائیکرو سیکنڈ یا نینو سیکنڈ کے ہندسے برقرار رہتے ہیں۔ decimal کالم اپنی درست اعشاریہ جگہ متن کے طور پر رکھتے ہیں، اس لیے 12.30 ویسا ہی رہتا ہے اور گول شدہ float نہیں بنتا۔ خالی اقدار خالی خانے بن جاتی ہیں۔"
+        }
+      ]
+    }
+  }
+}

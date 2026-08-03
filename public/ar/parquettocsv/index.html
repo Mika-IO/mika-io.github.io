@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>محوّل Parquet إلى CSV — يعمل دون اتصال</title>
+<meta name="description" content="محوّل مجاني من Parquet إلى CSV يعمل دون اتصال بالكامل. افتح ملف ‎.parquet‎ وعاين الجدول ونزّل ملف CSV نظيفًا. لا يُرفع أي ملف إلى أي خادم.">
+<link rel="canonical" href="https://mikaio.dev/ar/parquettocsv/">
+<link rel="icon" href="/icons/converter.png" type="image/png">
+<link rel="apple-touch-icon" href="/icons/converter.png">
+<link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" hreflang="en" href="https://mikaio.dev/en/parquettocsv/">
+  <link rel="alternate" hreflang="zh" href="https://mikaio.dev/zh/parquettocsv/">
+  <link rel="alternate" hreflang="hi" href="https://mikaio.dev/hi/parquettocsv/">
+  <link rel="alternate" hreflang="es" href="https://mikaio.dev/es/parquettocsv/">
+  <link rel="alternate" hreflang="fr" href="https://mikaio.dev/fr/parquettocsv/">
+  <link rel="alternate" hreflang="ar" href="https://mikaio.dev/ar/parquettocsv/">
+  <link rel="alternate" hreflang="bn" href="https://mikaio.dev/bn/parquettocsv/">
+  <link rel="alternate" hreflang="pt" href="https://mikaio.dev/pt/parquettocsv/">
+  <link rel="alternate" hreflang="ru" href="https://mikaio.dev/ru/parquettocsv/">
+  <link rel="alternate" hreflang="ur" href="https://mikaio.dev/ur/parquettocsv/">
+  <link rel="alternate" hreflang="x-default" href="https://mikaio.dev/en/parquettocsv/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="محوّل Parquet إلى CSV — يعمل دون اتصال">
+<meta property="og:description" content="محوّل مجاني من Parquet إلى CSV يعمل دون اتصال بالكامل. افتح ملف ‎.parquet‎ وعاين الجدول ونزّل ملف CSV نظيفًا. لا يُرفع أي ملف إلى أي خادم.">
+<meta property="og:url" content="https://mikaio.dev/ar/parquettocsv/">
+<meta property="og:locale" content="ar">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<style>/* mikaio.dev tools — single reusable stylesheet. Logical props for RTL. */
+:root{
+  --bg:#f7f8fa;--card:#fff;--ink:#1a1d24;--muted:#5b6472;--line:#e4e7ec;
+  --brand:#2563eb;--brand-ink:#fff;--ok:#16a34a;--accent:#eef2ff;--radius:12px;
+  --maxw:920px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+  /* Aliases many tool widgets reference. They were never defined, so those tools
+     fell back to hardcoded light colours and broke in dark mode — light text on
+     a light --surface. Defining them here fixes contrast everywhere at once. */
+  --surface:#eef1f6;--text:var(--ink);--red:#dc2626;--green:#16a34a;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1218;--card:#181c24;--ink:#e8eaed;--muted:#9aa4b2;--line:#2a303b;--accent:#1e2637;
+    --surface:#222834;--text:#e8eaed;--red:#f87171;--green:#4ade80;}
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);line-height:1.65;color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.25;color:var(--ink)}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2em 0 .3em}
+h2{font-size:1.35rem;margin:1.6em 0 .5em}
+h3{font-size:1.1rem;margin:1.2em 0 .4em}
+p{margin:.7em 0}
+code{background:var(--accent);padding:.1em .35em;border-radius:5px;font-size:.9em}
+
+/* layout */
+.site-head,.site-foot{max-width:var(--maxw);margin-inline:auto;padding:1rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between}
+.site-foot{display:block;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--ink)}
+.tool-main,.home-main,.glossary-main{max-width:var(--maxw);margin-inline:auto;padding:0 1.1rem 2rem}
+.crumbs{color:var(--muted);font-size:.85rem;margin:.3rem 0 1rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.4rem}
+
+/* language switcher */
+.lang-switch{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;font-size:.85rem}
+.lang-switch a{padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.lang-switch a[aria-current="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.lang-foot{margin-top:2rem}
+
+/* widget / calculator card */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:1.8rem}
+.field{margin:.7rem 0}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=number],input[type=text],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end}
+.row>.field{flex:1;min-width:140px}
+.btn{display:inline-block;cursor:pointer;background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:600}
+/* .field carries .7rem of bottom margin; match it so the button's
+   baseline lands on the input's, instead of stretching the whole row height */
+.row>.btn{align-self:flex-end;margin-bottom:.7rem}
+.btn:hover{filter:brightness(1.05)}
+.btn.secondary{background:var(--accent);color:var(--ink)}
+.result{margin-top:1rem;padding:1rem;background:var(--accent);border-radius:8px;font-size:1.05rem}
+.result .big{font-size:2rem;font-weight:700;display:block}
+.hint{color:var(--muted);font-size:.85rem}
+.copy-ok{color:var(--ok);font-weight:600}
+
+/* content prose */
+.content{font-size:1.02rem}
+.content h2{border-top:1px solid var(--line);padding-top:1.2rem}
+.content ul,.content ol{padding-inline-start:1.4rem}
+.faq dt{font-weight:600;margin-top:1rem}
+.faq dd{margin-inline-start:0;color:var(--muted)}
+
+/* home grid */
+.cat{margin:2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.tool-card{display:flex;flex-direction:column;gap:.25rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;color:var(--ink)}
+.tool-card:hover{border-color:var(--brand);text-decoration:none}
+.tool-ico{font-size:1.4rem}
+.tool-name{font-weight:600}
+.tool-desc{color:var(--muted);font-size:.85rem}
+
+/* coin toss */
+#coin{text-align:center}
+.coin-face{font-size:4.5rem;line-height:1;display:inline-block;margin:.4rem 0}
+.coin-face.spin{animation:coin-spin .6s linear}
+@keyframes coin-spin{0%{transform:rotateX(0)}100%{transform:rotateX(1440deg)}}
+.coin-tally{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;color:var(--muted);font-size:.9rem}
+.coin-tally b{color:var(--ink);font-size:1.2rem;display:block}
+
+/* magic 8 ball */
+#m8{text-align:center}
+#m8-ball{width:150px;height:150px;border-radius:50%;margin:0 auto;background:radial-gradient(circle at 35% 30%,#555,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff}
+#m8-ball.spin{animation:coin-spin .5s linear}
+#m8-ball .win{width:70px;height:70px;border-radius:50%;background:#1e40af;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700}
+#m8-answer{min-height:1.6em;margin-top:1rem;font-weight:600;font-size:1.15rem}
+
+/* glossary table */
+.glossary{width:100%;border-collapse:collapse;font-size:.95rem}
+.glossary th,.glossary td{text-align:start;padding:.55rem .6rem;border-bottom:1px solid var(--line)}
+.glossary .lg a{margin-inline-end:.35rem;font-size:.8rem}
+</style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebApplication","name":"محوّل Parquet إلى CSV — يعمل دون اتصال","url":"https://mikaio.dev/ar/parquettocsv/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"ar","description":"محوّل مجاني من Parquet إلى CSV يعمل دون اتصال بالكامل. افتح ملف ‎.parquet‎ وعاين الجدول ونزّل ملف CSV نظيفًا. لا يُرفع أي ملف إلى أي خادم."},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"mikaio.dev","item":"https://mikaio.dev/ar/"},{"@type":"ListItem","position":2,"name":"محوّل Parquet إلى CSV","item":"https://mikaio.dev/ar/parquettocsv/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل بياناتي لا تُرفع فعلًا؟","acceptedAnswer":{"@type":"Answer","text":"نعم. المحوّل مكتوب بلغة JavaScript بسيطة تقرأ بايتات الملف الذي تختاره وتفك ترميزه داخل الصفحة نفسها. لا رفع ولا استدعاء لواجهة برمجية ولا تحليلات على بياناتك. بعد تحميل الصفحة يمكنك قطع الاتصال بالإنترنت وستستمر الأداة في العمل، وهذه أبسط طريقة للتأكد بنفسك."}},{"@type":"Question","name":"ما ملفات Parquet المدعومة؟","acceptedAnswer":{"@type":"Answer","text":"الجداول المسطّحة المكتوبة بأدوات شائعة مثل pandas و PyArrow و Polars و DuckDB و Spark. تُفك الصفحات غير المضغوطة وصفحات Snappy و Gzip، إضافة إلى ترميزات PLAIN والقاموس و RLE و delta و byte-stream-split، في صفحات البيانات v1 و v2. أما Zstd و Brotli و LZ4 والملفات المشفّرة فتُرفض برسالة واضحة بدل إنتاج نتائج خاطئة."}},{"@type":"Question","name":"ماذا يحدث للأعمدة المتداخلة؟","acceptedAnswer":{"@type":"Answer","text":"تُرفض عمدًا. لا يوجد شكل واحد بديهي لتمثيل عمود struct أو list أو map في CSV، واختيار شكل بصمت سيفسد بياناتك. سطّح البنية أولًا في pandas أو Polars أو DuckDB، واكتب ملف Parquet مسطّحًا، ثم حوّله هنا."}},{"@type":"Question","name":"كيف تُكتب التواريخ والطوابع الزمنية والأرقام العشرية؟","acceptedAnswer":{"@type":"Answer","text":"تظهر التواريخ بصيغة YYYY-MM-DD، وتظهر الطوابع الزمنية بصيغة YYYY-MM-DD HH:MM:SS بتوقيت UTC مع الاحتفاظ بخانات الميلي أو المايكرو أو النانو ثانية الموجودة في العمود. تحتفظ أعمدة decimal بدقتها كنص، فتبقى 12.30 كما هي ولا تتحول إلى عدد عشري مقرَّب. وتصبح القيم الفارغة حقولًا فارغة."}}]}]</script>
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/ar/">mikaio.dev/freetools</a>
+  <nav class="site-nav" aria-label="التنقل في الموقع">
+    <ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/parquettocsv/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/parquettocsv/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/parquettocsv/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/parquettocsv/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/parquettocsv/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/parquettocsv/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/parquettocsv/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/parquettocsv/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/parquettocsv/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/parquettocsv/">اردو</a></li></ul>
+  </nav></header>
+<main class="tool-main">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ar/">الرئيسية</a> › <span>محوّل Parquet إلى CSV</span></nav>
+  <h1>محوّل Parquet إلى CSV</h1>
+  <p class="lead">افتح ملف Apache Parquet وحوّله إلى CSV دون تثبيت أي برنامج. يُفكّ ترميز الملف داخل تبويب المتصفح، فلا يغادر جهازك أبدًا، ويظل يعمل حتى مع إيقاف الإنترنت.</p>
+  <section class="widget" id="tool"><div id="pq-app" data-summary="{rows} صفوف × {cols} أعمدة" data-preview-note="تعرض المعاينة أول {shown} صف، بينما يحتوي التنزيل على {total} صف كاملة." data-working="جارٍ قراءة الملف…" data-err-format="هذا ليس ملف Parquet صالحًا. تأكد أن الملف ينتهي بالعلامة PAR1 وأنه غير مبتور." data-err-nested="يحتوي الملف على أعمدة متداخلة أو متكررة (struct أو list أو map). تُحوَّل هنا الجداول المسطّحة فقط." data-err-codec="ضغط غير مدعوم: {codec}. أعد كتابة الملف بضغط Snappy أو Gzip أو دون ضغط." data-err-encoding="ترميز عمود غير مدعوم: {encoding}." data-err-corrupt="تبدو بيانات الملف تالفة ولم يمكن فك ترميزها." data-err-generic="تعذّرت قراءة الملف. قد يكون تالفًا أو مشفّرًا أو مكتوبًا بأداة غير شائعة."><div class="field"><label for="pq-file">ملف Parquet‏ (.parquet)</label><input type="file" id="pq-file" accept=".parquet,.parq,.pq"></div><div class="row"><div class="field"><label for="pq-sep">الفاصل</label><select id="pq-sep"><option value=",">فاصلة (,)</option><option value=";">فاصلة منقوطة (;)</option><option value="tab">مسافة جدولة</option></select></div><div class="field"><label for="pq-header">تضمين صف العناوين</label><input type="checkbox" id="pq-header" checked></div></div><p class="hint">يُقرأ ملفك محليًا: بلا رفع، بلا خادم، بلا تتبّع.</p><p class="hint" id="pq-status" aria-live="polite"></p><p class="hint" id="pq-error" role="alert" hidden></p><div class="result" id="pq-result" hidden><span class="big" id="pq-summary"></span><p class="hint" id="pq-note" hidden></p><div class="field"><label for="pq-out">معاينة CSV</label><textarea id="pq-out" rows="10" readonly></textarea></div><div class="row"><button class="btn" id="pq-download" type="button">تنزيل CSV</button><button class="btn secondary" type="button" data-copy="#pq-out" data-copied="تم النسخ!">نسخ المعاينة</button></div></div></div></section>
+  <article class="content">
+    <h2>ماذا يفعل هذا المحوّل</h2>
+<p>Apache Parquet هو التنسيق الذي يكتبه اليوم أي خط بيانات تقريبًا: عمودي، مضغوط، ثنائي، مصمَّم لمحركات التحليل. ممتاز للآلة، عديم الفائدة للعين البشرية. لا يمكنك فتحه في محرر نصوص، ولا إرساله إلى زميل يعيش داخل الجداول، ولا لصقه في تذكرة دعم. أما CSV فهو النقيض: أخرق في التحليل، لكنه مقروء في كل مكان.</p>
+<p>هذه الصفحة تصل بين الطرفين بأبسط طريقة ممكنة. تختار ملف <code>.parquet</code> من قرصك، فتفك الصفحة ترميزه، وتخبرك بعدد الصفوف والأعمدة التي وجدتها، وتعرض معاينة، ثم تسلّمك ملف CSV للتنزيل. لا حساب، ولا طابور انتظار، ولا شريط رفع، لأن العملية كلها تجري دون أي خادم.</p>
+<p>هذه النقطة الأخيرة هي سبب وجود الأداة. معظم محوّلات Parquet على الإنترنت ليست سوى نموذج يرسل ملفك إلى خادم خلفي. وإذا كان الملف يحوي سجلات عملاء أو رواتب أو معرّفات مرضى أو أي شيء تحكمه سياسة بيانات، فإن ذلك الإرسال هو المشكلة كلها. هنا التحويل شفرة JavaScript تعمل داخل تبويبك، وتقرأ بايتات سلّمها المتصفح للصفحة أصلًا لحظة اختيارك للملف.</p>
+<h2>الاستخدام في أربع خطوات</h2>
+<ol>
+<li>اختر ملف <code>.parquet</code> من حقل الملفات؛ لا يحدث شيء قبل ذلك.</li>
+<li>اختر الفاصل. الفاصلة هي الافتراضية، والفاصلة المنقوطة تناسب الجداول المضبوطة على لغات تُستخدم فيها الفاصلة كعلامة عشرية، أما مسافة الجدولة فتنتج ملف TSV يُلصق بنظافة في أغلب برامج الجداول.</li>
+<li>قرّر إن كان السطر الأول سيحمل أسماء الأعمدة. مربع العناوين مفعّل مسبقًا، وتبديله يعيد بناء الناتج فورًا دون قراءة الملف من جديد.</li>
+<li>اقرأ المعاينة ثم اضغط <strong>تنزيل CSV</strong>. تعرض المعاينة أول 200 صف كي تبقى الصفحة سريعة، بينما يحتوي الملف المنزَّل دائمًا على كل صفوف ملف Parquet.</li>
+</ol>
+<p>تغيير الفاصل أو خيار العناوين بعد التحويل لا يعيد قراءة القرص. فالجدول المفكوك يبقى في ذاكرة التبويب، ولذلك يستجيب التبديل فورًا حتى مع مئات الآلاف من الصفوف.</p>
+<h2>كيف يخزّن Parquet جدولًا، ولماذا التحويل ليس بسيطًا</h2>
+<p>ملف CSV تدفق من الصفوف، أما Parquet فيفعل العكس: يخزّن كل عمود على حدة داخل كتل تسمى row groups، وداخل كل row group يعيش العمود في chunk مؤلَّف من صفحات. وكل صفحة قد تكون مضغوطة، وقد تُرمَّز القيم داخلها بطرق مختلفة عدة.</p>
+<p>لذلك تعني قراءته تقشير عدة طبقات:</p>
+<ul>
+<li><strong>تذييل الملف</strong> يحوي المخطط وموقع كل chunk، مُسلسلًا ببروتوكول Thrift المضغوط. ينتهي الملف بأربع بايتات للطول ثم العلامة النصية <code>PAR1</code>، وهي العلامة نفسها المكتوبة في بدايته. غياب إحدى العلامتين يعني إما أنه ليس Parquet وإما أنه بُتر أثناء النسخ.</li>
+<li>كل <strong>صفحة</strong> قد تكون مضغوطة. تفك هذه الأداة الصفحات غير المضغوطة وصفحات Snappy وصفحات Gzip، وهي مجتمعة تغطي الغالبية الساحقة من الملفات التي تكتبها pandas و PyArrow و Polars و DuckDB و Spark.</li>
+<li>القيم داخل الصفحة <strong>مُرمَّزة</strong>. التخطيط المسطّح والقاموس و run-length وعائلة delta و byte-stream-split كلها مدعومة، في صفحات البيانات v1 وفي التخطيط الأحدث v2 على السواء.</li>
+<li><strong>القيم الفارغة</strong> لا تُخزَّن كقيم. يسجّل Parquet مستوى تعريف لكل صف، ويستخدم المحوّل تلك المستويات ليعيد كل قيمة إلى صفها الصحيح ويترك مواضع الفراغ خالية.</li>
+</ul>
+<p>لا شيء من هذا يهم حين تنجح العملية، لكنه يهم حين تفشل: لأن فاكّ الترميز يفهم كل طبقة، فإن الملف غير المدعوم ينتج رسالة محددة عن الضغط أو الترميز أو التداخل، بدلًا من ملف CSV مشوَّه بصمت.</p>
+<h2>مثال محلول: ما القيم التي ستراها</h2>
+<p>ثلاثة أنواع في Parquet ليس لها مقابل مباشر في CSV، لذا يستحق الأمر توضيح ما يُكتب بالضبط.</p>
+<p><strong>عمود تاريخ.</strong> يخزّن النوع <code>DATE</code> عدادًا بسيطًا من 32 بت لعدد الأيام منذ 1 يناير 1970. إذا كان الرقم المخزَّن 19723، فإن اليوم رقم 19723 بعد بداية الحقبة هو 1 يناير 2024، وتُكتب الخلية <code>2024-01-01</code>. لا يُطبَّق أي توقيت زمني، لأن التاريخ لا يحمل وقتًا يمكن إزاحته.</p>
+<p><strong>طابع زمني بالميكروثانية.</strong> يخزّن عمود <code>TIMESTAMP</code> بدقة الميكروثانية عدادًا من 64 بت للميكروثواني منذ بداية الحقبة. خذ القيمة 1704112215123456، واقسمها على 1,000,000 لتحصل على 1704112215 ثانية كاملة، أي 1 يناير 2024 عند 12:30:15 بتوقيت UTC، ويتبقى 123456 ميكروثانية. تُكتب الخلية <code>2024-01-01 12:30:15.123456</code>. وتُحذف الأصفار الأخيرة من الكسر، فالطابع الذي يقع على ثانية كاملة يُكتب دون جزء عشري.</p>
+<p><strong>عمود عشري.</strong> يُخزَّن العمود <code>DECIMAL(12,2)</code> كعدد صحيح مع مقياس. العدد 1230 بمقياس 2 يعني 12.30، ويُكتب حرفيًا <code>12.30</code>. لهذا السبب لا ينبغي أبدًا تمرير عمود مالي عبر عدد عائم: النص يحفظ القيمة الدقيقة وعدد المنازل العشرية الذي وعد به المخطط.</p>
+<p>تُكتب القيم المنطقية <code>true</code> و <code>false</code>، وتتحول القيم الفارغة إلى خانات خالية، أما الأعمدة الثنائية التي ليست نصًا صالحًا بترميز UTF-8 فتُكتب بصيغة base64 كي لا تُفسد البايتات الخام بنية الملف.</p>
+<h2>أين يثبت المحوّل غير المتصل جدواه</h2>
+<p>الحالة الأوضح هي السرية: تصدير لسجلات مستخدمين تحتاج إلى إلقاء نظرة عليه قبل أن يقترب من قرص مشترك. لا شيء يغادر الحاسوب، فلا تُلوى أي سياسة.</p>
+<p>الحالة الثانية هي الاحتكاك. يرسل زميل عيّنة Parquet، وتريد التحقق من ثلاثة أعمدة، وتثبيت Python مع PyArrow لفحص ملف ستحذفه بعد خمس دقائق ثمن سخيف. أما فتح تبويب فلا.</p>
+<p>الحالة الثالثة جهاز لا تملك حق تهيئته: حاسوب عمل مقفل، أو جهاز عميل، أو محطة مختبر لا تُثبَّت عليها الحزم. المتصفح موجود هناك أصلًا.</p>
+<p>الحالة الرابعة هي التعليم. رؤية الجدول نفسه أولًا ككتلة ثنائية معتمة ثم كنص صريح تجعل الفرق بين التخزين العمودي والتخزين الصفّي ملموسًا بصورة نادرًا ما يحققها رسم توضيحي.</p>
+<h2>أخطاء شائعة وكيف تتجنبها</h2>
+<p><strong>فتح الملف في برنامج جداول فتظهر كل البيانات في عمود واحد ضخم.</strong> يتوقع برنامجك فاصل لغته المضبوطة. أعد توليد الملف بخيار الفاصلة المنقوطة، أو استخدم نافذة الاستيراد وحدّد الفاصل صراحة.</p>
+<p><strong>تحوّل المعرّفات الرقمية الطويلة إلى صيغة أسّية.</strong> هذا فعل برنامج الجداول لا الملف. الأرقام موجودة كما هي، لكن البرنامج قرر عرضها كعدد عائم. استورد العمود كنص.</p>
+<p><strong>توقّع التوقيت المحلي.</strong> تُكتب الطوابع الزمنية بتوقيت UTC. يخزّن Parquet الطابع عادة كلحظة زمنية، وتحويله إلى المنطقة التي يصادف وجود جهازك فيها كان سيغيّر كل القيم بصمت. أزِح القيم لاحقًا وعن قصد إن احتجت التوقيت المحلي.</p>
+<p><strong>إدخال تصدير متداخل.</strong> يُرفض الملف الذي يحوي أعمدة struct أو list أو map. سطّحه أولًا باستخدام <code>pandas.json_normalize</code> أو <code>unnest</code> في Polars أو استعلام DuckDB يختار الحقول الطرفية، ثم اكتب ملف Parquet مسطّحًا وحوّله هنا.</p>
+<h2>الحدود: متى لا تكون هذه الأداة مناسبة</h2>
+<p>تقرأ الأداة الملف كاملًا في الذاكرة، لذا فإن عمليات التصدير الضخمة — من بضع مئات الميغابايت فصاعدًا — تُعالَج بشكل أفضل عبر DuckDB أو نص برمجي صغير يمرّ على row groups تدفقيًا. ويُرفض ضغط Zstd و Brotli و LZ4 بدل فك ترميزه نصف فكّ؛ أعد كتابة تلك الملفات بضغط Snappy أو Gzip. أما ملفات Parquet المشفّرة فغير مدعومة عن قصد. والمخططات المتداخلة تبقى خارج النطاق، لأن طيّ عمود قائمة داخل خانة CSV قرار يخص بياناتك، ولا يصح لمحوّل عام أن يتخذه بصمت.</p>
+<h2>الخصوصية</h2>
+<p>لا تتضمن الصفحة أي شفرة رفع، ولا تجمع أي تحليلات عن ملفك، ولا تُجري أي اتصال شبكي أثناء التحويل. يُقرأ الملف عبر واجهة الملفات الخاصة بالمتصفح ويُفكّ ترميزه داخل التبويب. وإن أردت دليلًا لا وعدًا: حمّل الصفحة، ثم اقطع الاتصال بالإنترنت، ثم حوّل ملفًا. ستعمل الأداة كما هي تمامًا، لأنه لم يكن هناك يومًا شيء في الطرف الآخر من السلك.</p>
+    <section class="faq"><h2>أسئلة شائعة عن تحويل Parquet إلى CSV</h2><dl><dt>هل بياناتي لا تُرفع فعلًا؟</dt><dd>نعم. المحوّل مكتوب بلغة JavaScript بسيطة تقرأ بايتات الملف الذي تختاره وتفك ترميزه داخل الصفحة نفسها. لا رفع ولا استدعاء لواجهة برمجية ولا تحليلات على بياناتك. بعد تحميل الصفحة يمكنك قطع الاتصال بالإنترنت وستستمر الأداة في العمل، وهذه أبسط طريقة للتأكد بنفسك.</dd><dt>ما ملفات Parquet المدعومة؟</dt><dd>الجداول المسطّحة المكتوبة بأدوات شائعة مثل pandas و PyArrow و Polars و DuckDB و Spark. تُفك الصفحات غير المضغوطة وصفحات Snappy و Gzip، إضافة إلى ترميزات PLAIN والقاموس و RLE و delta و byte-stream-split، في صفحات البيانات v1 و v2. أما Zstd و Brotli و LZ4 والملفات المشفّرة فتُرفض برسالة واضحة بدل إنتاج نتائج خاطئة.</dd><dt>ماذا يحدث للأعمدة المتداخلة؟</dt><dd>تُرفض عمدًا. لا يوجد شكل واحد بديهي لتمثيل عمود struct أو list أو map في CSV، واختيار شكل بصمت سيفسد بياناتك. سطّح البنية أولًا في pandas أو Polars أو DuckDB، واكتب ملف Parquet مسطّحًا، ثم حوّله هنا.</dd><dt>كيف تُكتب التواريخ والطوابع الزمنية والأرقام العشرية؟</dt><dd>تظهر التواريخ بصيغة YYYY-MM-DD، وتظهر الطوابع الزمنية بصيغة YYYY-MM-DD HH:MM:SS بتوقيت UTC مع الاحتفاظ بخانات الميلي أو المايكرو أو النانو ثانية الموجودة في العمود. تحتفظ أعمدة decimal بدقتها كنص، فتبقى 12.30 كما هي ولا تتحول إلى عدد عشري مقرَّب. وتصبح القيم الفارغة حقولًا فارغة.</dd></dl></section>
+  </article>
+  <nav class="lang-foot" aria-label="Languages"><ul class="lang-switch"><li><a hreflang="en" lang="en" href="/en/parquettocsv/">English</a></li><li><a hreflang="zh" lang="zh" href="/zh/parquettocsv/">中文</a></li><li><a hreflang="hi" lang="hi" href="/hi/parquettocsv/">हिन्दी</a></li><li><a hreflang="es" lang="es" href="/es/parquettocsv/">Español</a></li><li><a hreflang="fr" lang="fr" href="/fr/parquettocsv/">Français</a></li><li><a hreflang="ar" lang="ar" aria-current="true" href="/ar/parquettocsv/">العربية</a></li><li><a hreflang="bn" lang="bn" href="/bn/parquettocsv/">বাংলা</a></li><li><a hreflang="pt" lang="pt" href="/pt/parquettocsv/">Português</a></li><li><a hreflang="ru" lang="ru" href="/ru/parquettocsv/">Русский</a></li><li><a hreflang="ur" lang="ur" href="/ur/parquettocsv/">اردو</a></li></ul></nav>
+</main>
+<footer class="site-foot"><p>أدوات متصفح مجانية وسريعة وتحترم الخصوصية · © 2026</p>
+  <p><a href="/freetools.html">كل الأدوات</a></p></footer>
+<script src="/assets/tool-runtime.js" defer></script>
+<script>window.__LANG="ar";window.__T={"fileLabel":"ملف Parquet‏ (.parquet)","delimiter":"الفاصل","comma":"فاصلة (,)","semicolon":"فاصلة منقوطة (;)","tabSep":"مسافة جدولة","headerLabel":"تضمين صف العناوين","privacy":"يُقرأ ملفك محليًا: بلا رفع، بلا خادم، بلا تتبّع.","outLabel":"معاينة CSV","download":"تنزيل CSV","copy":"نسخ المعاينة","copied":"تم النسخ!","summary":"{rows} صفوف × {cols} أعمدة","previewNote":"تعرض المعاينة أول {shown} صف، بينما يحتوي التنزيل على {total} صف كاملة.","working":"جارٍ قراءة الملف…","errFormat":"هذا ليس ملف Parquet صالحًا. تأكد أن الملف ينتهي بالعلامة PAR1 وأنه غير مبتور.","errNested":"يحتوي الملف على أعمدة متداخلة أو متكررة (struct أو list أو map). تُحوَّل هنا الجداول المسطّحة فقط.","errCodec":"ضغط غير مدعوم: {codec}. أعد كتابة الملف بضغط Snappy أو Gzip أو دون ضغط.","errEncoding":"ترميز عمود غير مدعوم: {encoding}.","errCorrupt":"تبدو بيانات الملف تالفة ولم يمكن فك ترميزها.","errGeneric":"تعذّرت قراءة الملف. قد يكون تالفًا أو مشفّرًا أو مكتوبًا بأداة غير شائعة."};window.T=function(k,d){return (window.__T&&window.__T[k])||d};</script>
+<script src="/assets/tools/parquettocsv.js" defer></script>
+</body>
+</html>
